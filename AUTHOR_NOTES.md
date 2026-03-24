@@ -26,15 +26,15 @@ sections/*.md  ──pandoc──►  build/*.tex  ──git push──►  Over
 
 ### Setup TODO (build with Claude Code)
 
-- [ ] Create `Makefile` or `build.sh` with pandoc conversion per section
-- [ ] Create pandoc venue template (`templates/[venue].tex`) with preamble, `\input{}` per section
-- [ ] Create pandoc Lua filter: strip `%% ... %%` markers or convert to `\todo{}`
-- [ ] Create pandoc Lua filter: map `%% @CITE: key %%` to `\cite{key}` where key exists in `.bib`
-- [ ] Create pandoc Lua filter: pass through `\begin{definition}` etc. as raw LaTeX
-- [ ] Create pandoc Lua filter: convert figure metadata blocks to `\begin{figure}...\end{figure}`
+- [x] Create `build.sh` with pandoc conversion per section
+- [x] Create `tex/main.tex` with preamble, `\input{}` per section (adapted from authordraft)
+- [x] Create pandoc Lua filter: strip `%% ... %%` markers or convert to `\todo{}` (`pandoc/filters/markers.lua`)
+- [ ] Create pandoc Lua filter: map `%% @CITE: key %%` to `\cite{key}` where key exists in `.bib` (`pandoc/filters/citations.lua` — stub)
+- [x] Create pandoc Lua filter: pass through `\begin{definition}` etc. as raw LaTeX (handled by pandoc `raw_tex` extension — no filter needed)
+- [ ] Create pandoc Lua filter: convert figure metadata blocks to `\begin{figure}...\end{figure}` (`pandoc/filters/figures.lua` — stub)
 - [ ] Set up Overleaf git remote (requires Overleaf premium or institutional access)
-- [ ] Create `.gitignore` for build artifacts
-- [ ] Test round-trip: Markdown → LaTeX → PDF matches expected output
+- [x] Create `.gitignore` for build artifacts (already existed)
+- [ ] Test round-trip: Markdown → LaTeX → PDF matches expected output (requires pandoc install)
 - [ ] Document any Markdown constructs that pandoc handles poorly (workarounds in this file)
 
 ### Known pandoc considerations

@@ -1,0 +1,113 @@
+%%
+%% main.tex — Root document for MODELS 2026 submission
+%% Adapted from tex/template/sample-sigconf-authordraft.tex
+%%
+%% Compile from project root:
+%%   latexmk -pdf tex/main.tex
+%%
+%% All \input{} paths are relative to the project root.
+%%
+
+%%
+%% Commands for TeXCount
+%TC:macro \cite [option:text,text]
+%TC:macro \citep [option:text,text]
+%TC:macro \citet [option:text,text]
+%TC:envir table 0 1
+%TC:envir table* 0 1
+%TC:envir tabular [ignore] word
+%TC:envir displaymath 0 word
+%TC:envir math 0 word
+%TC:envir comment 0 0
+
+\documentclass[sigconf,anonymous,review]{acmart}
+
+\AtBeginDocument{%
+  \providecommand\BibTeX{{Bib\TeX}}}
+
+%% Custom preamble (packages, blinding toggle, etc.)
+%% Must be before \begin{document} for \usepackage commands.
+\input{tex/preamble}
+
+%% Rights management information.
+\setcopyright{acmlicensed}
+\copyrightyear{2026}
+\acmYear{2026}
+\acmDOI{XXXXXXX.XXXXXXX}
+
+\acmConference[MODELS 2026]{ACM/IEEE 29th International Conference on
+  Model Driven Engineering Languages and Systems}{October 04--09,
+  2026}{Malaga, Spain}
+\acmISBN{978-1-4503-XXXX-X/2026/10}
+
+%%\acmSubmissionID{123-A56-BU3}
+
+%%
+%% end of the preamble, start of the body of the document source.
+\begin{document}
+
+\title{A Layered Metamodel for Verifiable Credential Ecosystem Design}
+
+\input{tex/authors}
+\input{tex/abstract}
+
+%%
+%% CCS codes — generate at https://dl.acm.org/ccs
+\begin{CCSXML}
+<ccs2012>
+ <concept>
+  <concept_id>10011007.10011006.10011008.10011009.10011015</concept_id>
+  <concept_desc>Software and its engineering~Domain specific languages</concept_desc>
+  <concept_significance>500</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10011007.10011006.10011008.10011024.10011028</concept_id>
+  <concept_desc>Software and its engineering~Data types and structures</concept_desc>
+  <concept_significance>300</concept_significance>
+ </concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Software and its engineering~Domain specific languages}
+\ccsdesc[300]{Software and its engineering~Data types and structures}
+
+\keywords{metamodeling, verifiable credentials, design space exploration,
+  partial models, graph constraints}
+
+%% Teaser figure — uncomment when figure is ready
+% \begin{teaserfigure}
+%   \includegraphics[width=\textwidth]{figures/fig_teaser}
+%   \caption{Overview of the three-layer metamodel.}
+%   \Description{Teaser figure description.}
+%   \label{fig:teaser}
+% \end{teaserfigure}
+
+\received{27 March 2026}
+
+\maketitle
+
+%% === Content sections (generated from sections/*.md by build.sh) ===
+%% Uncomment each line as the corresponding section file is created.
+% \input{tex/sections/01_introduction}
+% \input{tex/sections/02_background}
+% \input{tex/sections/03_metamodel}
+% \input{tex/sections/04_constraints}
+% \input{tex/sections/05_evaluation}
+% \input{tex/sections/06_related_work}
+% \input{tex/sections/07_conclusion}
+
+%% Acknowledgments (suppressed in anonymous mode by acmart)
+\begin{acks}
+The work of the first author was supported by the Doctoral Excellence
+Fellowship Programme (DCEP), funded by the National Research Development
+and Innovation Fund of the Ministry of Culture and Innovation and the
+Budapest University of Technology and Economics.
+\end{acks}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+
+%% If your work has an appendix, this is the place to put it.
+% \appendix
+
+\end{document}

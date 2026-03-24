@@ -1,2 +1,7 @@
 \newif\ifunblinded
 \unblindedtrue
+
+\usepackage{todonotes}        % not on ACM approved list — draft only
+
+\usepackage{listings}         % approved
+\usepackage{booktabs} % needed if pandoc-generated tables use \toprule/\midrule/\bottomrule. Not on ACM approved list. Add back when tables appear, or use a Lua filter to emit plain \hline rules instead.
