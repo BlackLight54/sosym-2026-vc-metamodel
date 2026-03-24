@@ -2,21 +2,19 @@
 
 ## Thesis
 
-%% Replace before starting work. %%
-**Core claim:** [ONE SENTENCE — what the paper proves or demonstrates]
-**Mechanism:** [HOW — the technical approach]
-**So-what:** [WHY this matters — the consequence for the field]
+**Core claim:** Verifiable credential ecosystem design requires a multi-layer metamodel to capture constraints that span domain semantics, credential structure, and format-specific capabilities.
+**Mechanism:** Three-layer metamodel (domain-level claim properties, abstract credential schemas, format-specific representations) grounded in W3C VCDM 2.0, with cross-layer constraints formalized as graph predicates in the Refinery partial graph modeling framework.
+**So-what:** Without such a metamodel, credential ecosystems risk deploying designs with cross-layer inconsistencies — governance frameworks (W3C standards, EU regulations, community guidelines) can impose formally conflicting constraints, and design errors spanning multiple layers go undetected by single-layer inspection.
 
 ## Domain
 
-%% Calibrates expertise, register, and domain-specific writing advice. Replace entirely for non-FM papers. %%
-**Primary domain:** Formal methods — security protocol verification, formal modeling, epistemic logic.
-**Adjacent domains:** Decentralized identity (SSI/VC), business process modeling (BPMN).
-**Register:** Mathematical rigor expected. Definitions must be precise. Claims must be formally grounded or explicitly flagged as informal.
+**Primary domain:** Model-driven engineering — metamodeling, partial graph modeling, design space exploration.
+**Adjacent domains:** Decentralized identity (SSI/VC, W3C standards, EU regulatory frameworks), formal constraint specification.
+**Register:** Modeling rigor expected. Metamodel elements, constraints, and transformations must be precisely defined. Claims about expressiveness and coverage must be grounded in the formalization or explicitly flagged as informal.
 
-**Domain-specific writing advice:** Good formal methods writing motivates before it formalizes. The reader should understand *why* a definition is shaped the way it is before seeing it. After the definition, a brief remark or example confirms it captures the intended concept and excludes what it should. Notation is introduced incrementally — never dump a table of symbols on the reader.
+**Domain-specific writing advice:** Good lyered modeling writing motivates the modeling choices before presenting them. The reader should understand *why* a metamodel is layered the way it is before seeing the layer definitions. After each layer or constraint, a brief remark or running example confirms it captures the intended concept. Notation is introduced incrementally. Figures carry the argument — metamodel diagrams, constraint examples, and generated model instances should be self-explanatory.
 
-**Domain assumptions in skills:** Several skills (section_scaffold, claim_evidence_audit, notation_table, running_example guide) assume a formalization-style paper with definitions, proofs, and tool encodings. Papers in adjacent domains (SSI systems, BPM empirical work) may need lighter-touch adaptations — the skills note where.
+**Domain assumptions in skills:** Several skills (section_scaffold, claim_evidence_audit, notation_table, running_example guide) assume a formalization-style paper with definitions, proofs, and tool encodings. This paper uses metamodel definitions and graph predicates rather than theorem-proof structure, but the skills apply with that adaptation.
 
 ## Persona
 
@@ -66,6 +64,7 @@ When you disagree, say so directly with the technical argument. When you are unc
 **Deadline:** Read from VENUE.md at session start. Always report days remaining.
 
 **Time-based behavior:**
+
 - **>30 days to deadline:** Focus on structure, gap analysis, positioning. Exploration is cheap. Challenge the thesis if needed.
 - **15–30 days:** Drafting phase. Flag scope risks early. Do not start new threads without closing old ones.
 - **7–14 days:** Revision and convergence. No new contributions. Focus on claim delivery, coherence, figures.
@@ -100,6 +99,7 @@ See Domain block above for domain-specific writing guidance.
 ### Section files
 
 Section files use **Obsidian Markdown with Mathpix math conventions:**
+
 - Inline math: `$...$`
 - Display math: `$$...$$`
 - LaTeX environments where needed: `\begin{definition}...\end{definition}` (rendered by Mathpix, passthrough to LaTeX)
@@ -129,15 +129,18 @@ See AUTHOR_NOTES.md for the specific conversion setup and Overleaf integration s
 ## Conventions
 
 ### Figures
+
 - Described inline in section files with a metadata block (see `skills/figure_design`).
 - Source files in `figures/`. Filename matches label: `fig_example.svg` → label `fig:example`.
 - Draft captions are part of the section file, near the figure metadata block.
 
 ### Citations
+
 - Managed in Zotero, exported to `.bib`.
 - Unresolved citations flagged: `%% @CITE: description %%`.
 
 ### Formal elements
+
 - Math definitions and notation: LaTeX math mode.
 - Tool encodings: fenced code blocks with language tag. The math-mode definition is authoritative; the code encoding is derived from it.
 
