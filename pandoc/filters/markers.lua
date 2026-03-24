@@ -48,27 +48,27 @@ local function convert_marker(marker_type, content)
 
   content = escape_for_todo(content)
 
-  local todo
+  local cmd
   if marker_type == "TODO" then
-    todo = "\\todo{" .. content .. "}"
+    cmd = "\\fxnote{" .. content .. "}"
   elseif marker_type == "CITE" then
-    todo = "\\todo{cite: " .. content .. "}"
+    cmd = "\\fxnote{cite: " .. content .. "}"
   elseif marker_type == "FORMAL" then
-    todo = "\\todo{formal: " .. content .. "}"
+    cmd = "\\fxwarning{formal: " .. content .. "}"
   elseif marker_type == "FIGURE" then
     local label, desc = content:match("^(.-)%s*|%s*(.+)$")
     if label and desc then
-      todo = "\\todo{figure " .. label .. ": " .. desc .. "}"
+      cmd = "\\fxnote{figure " .. label .. ": " .. desc .. "}"
     else
-      todo = "\\todo{figure: " .. content .. "}"
+      cmd = "\\fxnote{figure: " .. content .. "}"
     end
   elseif marker_type == "COMMENT" then
-    todo = "\\todo{" .. content .. "}"
+    cmd = "\\fxnote{" .. content .. "}"
   else
-    todo = "\\todo{" .. marker_type .. ": " .. content .. "}"
+    cmd = "\\fxnote{" .. marker_type .. ": " .. content .. "}"
   end
 
-  return pandoc.RawBlock("latex", todo)
+  return pandoc.RawBlock("latex", cmd)
 end
 
 --- Split Para inlines on SoftBreak to recover individual source lines.
