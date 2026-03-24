@@ -36,13 +36,29 @@ local function parse_marker(text)
 end
 
 
---- Escape LaTeX special characters for use inside \todo{} text.
+--- Escape LaTeX special characters and Unicode for use inside \todo{} text.
 local function escape_for_todo(s)
   s = s:gsub("\\", "\\textbackslash{}")
   s = s:gsub("#", "\\#")
   s = s:gsub("_", "\\_")
   s = s:gsub("&", "\\&")
   s = s:gsub("%%", "\\%%")
+  -- Unicode → LaTeX
+  s = s:gsub("\xE2\x80\x94", "---")           -- em dash —
+  s = s:gsub("\xE2\x80\x93", "--")            -- en dash –
+  s = s:gsub("\xE2\x80\x99", "'")             -- right single quote '
+  s = s:gsub("\xE2\x80\x98", "`")             -- left single quote '
+  s = s:gsub("\xE2\x80\x9C", "``")            -- left double quote "
+  s = s:gsub("\xE2\x80\x9D", "''")            -- right double quote "
+  s = s:gsub("\xE2\x86\x92", "{\\textrightarrow}")  -- → right arrow
+  s = s:gsub("\xC3\x97", "{\\texttimes}")      -- × multiplication
+  s = s:gsub("\xC3\xBC", "{\\\"u}")            -- ü
+  s = s:gsub("\xC3\x9C", "{\\\"U}")            -- Ü
+  s = s:gsub("\xC3\xA9", "{\\'e}")             -- é
+  s = s:gsub("\xC2\xA0", " ")                 -- non-breaking space → regular space
+  s = s:gsub("\xEF\xBF\xBD", "")              -- U+FFFD replacement char → strip
+  -- Catch-all: strip any remaining non-ASCII bytes
+  s = s:gsub("[\x80-\xFF]+", "")
   return s
 end
 

@@ -1,69 +1,69 @@
 \section{Approach}\label{approach}
 
-\todo[inline]{Draft preamble — introduce the three-layer metamodel structure. Each layer captures a different abstraction level of credential ecosystem design. Cross-layer constraints formalized as Refinery graph predicates.}
+\todo[inline]{Draft preamble --- introduce the three-layer metamodel structure. Each layer captures a different abstraction level of credential ecosystem design. Cross-layer constraints formalized as Refinery graph predicates.}
 
 \subsection{Claim Property Layer}\label{claim-property-layer}
 
 \todo[inline,color=green!20]{formal: Definition of claim property layer metaclasses: Entity, Subject, Value, Prop. Statement predicate: statement(subject, property, value).}
 
-\todo[inline,color=orange!20]{figure fig\_metamodel: Three-layer metamodel class diagram. Show all three layers with metaclasses, relationships, and trace mappings. This is the paper’s central figure.}
+\todo[inline,color=orange!20]{figure fig\_metamodel: Three-layer metamodel class diagram. Show all three layers with metaclasses, relationships, and trace mappings. This is the paper's central figure.}
 
-\todo[inline]{Draft — Entity hierarchy (Subject, Value), Prop with value containment, statement predicate. Formal definition.}
+\todo[inline]{Draft --- Entity hierarchy (Subject, Value), Prop with value containment, statement predicate. Formal definition.}
 
 \todo[inline,color=green!20]{formal: Claim property layer constraints: connectivity, no self-loops, statement well-formedness.}
 
-\todo[inline]{Draft — error predicates and propagation rules for claim layer. Include Refinery code listing.}
+\todo[inline]{Draft --- error predicates and propagation rules for claim layer. Include Refinery code listing.}
 
-\todo[inline]{Draft — Alice example at claim layer. 3 entities, 2 properties. All claim-layer constraints satisfied.}
+\todo[inline]{Draft --- Alice example at claim layer. 3 entities, 2 properties. All claim-layer constraints satisfied.}
 
 \subsection{Credential Schema Layer}\label{credential-schema-layer}
 
-\todo[inline,color=green!20]{formal: Definition of credential schema layer metaclasses: CredEntity, CredentialSubject, CredentialValue, Claim, Credential. Trace mappings: CredEntity::trace → Entity, Prop::trace → Claim.}
+\todo[inline,color=green!20]{formal: Definition of credential schema layer metaclasses: CredEntity, CredentialSubject, CredentialValue, Claim, Credential. Trace mappings: CredEntity::trace {\textrightarrow} Entity, Prop::trace {\textrightarrow} Claim.}
 
-\todo[inline]{Draft — credential layer metaclasses. The trace mapping is the central mechanism for cross-layer consistency. Formal definition.}
+\todo[inline]{Draft --- credential layer metaclasses. The trace mapping is the central mechanism for cross-layer consistency. Formal definition.}
 
-\todo[inline]{Draft — trace mappings as refinement. Subject inference. Propagation rules.}
+\todo[inline]{Draft --- trace mappings as refinement. Subject inference. Propagation rules.}
 
 \todo[inline,color=green!20]{formal: Credential schema layer constraints: credential\_statement, no\_empty\_cred, Root\_cred\_entity.}
 
-\todo[inline]{Draft — credential layer constraints. Include Refinery code listing.}
+\todo[inline]{Draft --- credential layer constraints. Include Refinery code listing.}
 
-\todo[inline]{Draft — Alice example at credential layer. Two credentials. Trace mappings. Entity alignment visible.}
+\todo[inline]{Draft --- Alice example at credential layer. Two credentials. Trace mappings. Entity alignment visible.}
 
 \subsection{Format-Specific Layer}\label{format-specific-layer}
 
 \todo[inline,color=green!20]{formal: Definition of format-specific layer metaclasses: Formatted\_Credential hierarchy.}
 
-\todo[inline]{Draft — format-specific metaclasses. Each credential has format-specific representations.}
+\todo[inline]{Draft --- format-specific metaclasses. Each credential has format-specific representations.}
 
 \todo[inline,color=green!20]{formal: Format-specific constraints (derive from FCA)}
 
-\todo[inline]{IMPORTANT — Surface Martin’s formal concept analysis results here. At least 2-3 constraints derived from FCA to strengthen the three-layer claim.}
+\todo[inline]{IMPORTANT --- Surface Martin's formal concept analysis results here. At least 2-3 constraints derived from FCA to strengthen the three-layer claim.}
 
-\todo[inline]{Draft — format-specific constraints. Diploma example: JSON-LD vs. AnonCreds ZKP capability.}
+\todo[inline]{Draft --- format-specific constraints. Diploma example: JSON-LD vs. AnonCreds ZKP capability.}
 
-\todo[inline]{Draft — format selection for Alice and Diploma examples. Show governance-driven format choice.}
+\todo[inline]{Draft --- format selection for Alice and Diploma examples. Show governance-driven format choice.}
 
 \subsection{Cross-Layer Constraints as Graph Predicates}\label{cross-layer-constraints-as-graph-predicates}
 
-\todo[inline,color=orange!20]{figure fig\_constraint\_taxonomy: Table classifying constraints by source (structural, W3C, EU, community) × scope (intra-layer, cross-layer).}
+\todo[inline,color=orange!20]{figure fig\_constraint\_taxonomy: Table classifying constraints by source (structural, W3C, EU, community) {\texttimes} scope (intra-layer, cross-layer).}
 
-\todo[inline]{Draft — constraint taxonomy. Table format preferred.}
+\todo[inline]{Draft --- constraint taxonomy. Table format preferred.}
 
 \todo[inline,color=green!20]{formal: Trace consistency predicates: prop\_source, prop\_target propagation rules.}
 
-\todo[inline]{Draft — trace consistency. The key insight: propagation rules in Refinery don’t just check — they guide the model generator to maintain consistency. Include Refinery code listing.}
+\todo[inline]{Draft --- trace consistency. The key insight: propagation rules in Refinery don't just check --- they guide the model generator to maintain consistency. Include Refinery code listing.}
 
 \todo[inline,color=green!20]{formal: Entity alignment predicate: aligned\_entities(e1, e2).}
 
-\todo[inline]{Draft — entity alignment. Shadow predicate. Cross-credential subject binding. Alice example: a\_Alice1 and a\_Alice2 are aligned.}
+\todo[inline]{Draft --- entity alignment. Shadow predicate. Cross-credential subject binding. Alice example: a\_Alice1 and a\_Alice2 are aligned.}
 
 \todo[inline,color=green!20]{formal: Anti-pattern error predicates: noSubject, no\_cred\_props\_for\_cred\_entity, root\_ent\_doesnt\_have\_cred, non\_connected, common\_parent.}
 
-\todo[inline]{Draft — anti-pattern catalog. Each predicate catches a specific design error. Brief description + Refinery code.}
+\todo[inline]{Draft --- anti-pattern catalog. Each predicate catches a specific design error. Brief description + Refinery code.}
 
-\todo[inline]{Draft — propagation rules for cross-layer alignment. Distinguish error predicates (checking) from propagation rules (guiding generation). This is a key Refinery mechanism.}
+\todo[inline]{Draft --- propagation rules for cross-layer alignment. Distinguish error predicates (checking) from propagation rules (guiding generation). This is a key Refinery mechanism.}
 
 \todo[inline,color=orange!20]{figure fig\_generated\_model: (Optional) Refinery-generated model instance for the Alice example showing constraint satisfaction.}
 
-\todo[inline]{Draft — full constraint application. Both examples. Generated model output.}
+\todo[inline]{Draft --- full constraint application. Both examples. Generated model output.}
