@@ -52,18 +52,18 @@ local function convert_marker(marker_type, content)
   if marker_type == "TODO" then
     todo = "\\todo{" .. content .. "}"
   elseif marker_type == "CITE" then
-    todo = "\\todo[color=blue!20]{cite: " .. content .. "}"
+    todo = "\\todo{cite: " .. content .. "}"
   elseif marker_type == "FORMAL" then
-    todo = "\\todo[color=green!20]{formal: " .. content .. "}"
+    todo = "\\todo{formal: " .. content .. "}"
   elseif marker_type == "FIGURE" then
     local label, desc = content:match("^(.-)%s*|%s*(.+)$")
     if label and desc then
-      todo = "\\todo[color=orange!20]{figure " .. label .. ": " .. desc .. "}"
+      todo = "\\todo{figure " .. label .. ": " .. desc .. "}"
     else
-      todo = "\\todo[color=orange!20]{figure: " .. content .. "}"
+      todo = "\\todo{figure: " .. content .. "}"
     end
   elseif marker_type == "COMMENT" then
-    todo = "\\todo[color=gray!20]{" .. content .. "}"
+    todo = "\\todo{" .. content .. "}"
   else
     todo = "\\todo{" .. marker_type .. ": " .. content .. "}"
   end

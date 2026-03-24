@@ -1,16 +1,16 @@
 \section{Introduction}\label{introduction}
 
-\todo[color=orange!20]{figure fig_teaser: Teaser figure (full-width, before first column). Split panel: Left — Diploma scenario showing vertical constraint (format→claim ZKP dependency). Right — Alice scenario showing horizontal constraint (cross-credential entity alignment). Both highlight cross-layer errors invisible to single-layer inspection.}
+\todo{figure fig_teaser: Teaser figure (full-width, before first column). Split panel: Left — Diploma scenario showing vertical constraint (format→claim ZKP dependency). Right — Alice scenario showing horizontal constraint (cross-credential entity alignment). Both highlight cross-layer errors invisible to single-layer inspection.}
 
-\todo[color=blue!20]{cite: W3C VCDM 2.0}
+\todo{cite: W3C VCDM 2.0}
 
-\todo[color=blue!20]{cite: eIDAS 2.0 / EU Digital Identity Wallet}
+\todo{cite: eIDAS 2.0 / EU Digital Identity Wallet}
 
-\todo[color=blue!20]{cite: Hyperledger AnonCreds / Aries}
+\todo{cite: Hyperledger AnonCreds / Aries}
 
 Emerging digital credential ecosystems allow persons and organizations to receive, hold, and selectively present cryptographically verifiable claims. Such ecosystems are deployed under diverse governance frameworks --- from government-regulated EU Digital Identity Wallets to community-governed decentralized identity systems. Designing these ecosystems requires satisfying constraints that span multiple abstraction layers --- from domain-level claim properties through credential schema structure to format-specific privacy capabilities --- yet no integrated formal model captures these cross-layer constraints.
 
-\todo[color=blue!20]{cite: existing VC design tools/approaches that are single-layer}
+\todo{cite: existing VC design tools/approaches that are single-layer}
 
 \todo{Verify gap claim — confirm no existing multi-level metamodel for VC ecosystems}
 
@@ -31,10 +31,10 @@ We make the following contributions:
   A \textbf{three-axis validation} demonstrating metamodel coverage against the W3C specification, constraint expressiveness against W3C and EU regulatory sources, and error visibility against known credential design anti-patterns (Section 5).
 \end{enumerate}
 
-\todo[color=blue!20]{cite: Refinery partial graph modeling framework}
+\todo{cite: Refinery partial graph modeling framework}
 
 The metamodel organizes credential ecosystem design into three layers: a \emph{claim property layer} capturing domain-level facts as an information graph, a \emph{credential schema layer} defining how claims are grouped into verifiable credentials with subject bindings and trace mappings, and a \emph{format-specific layer} encoding the capabilities and constraints of concrete credential formats such as AnonCreds and JSON-LD Verifiable Credentials. Cross-layer constraints are formalized as graph predicates in Refinery, which generates diverse model instances satisfying these constraints --- or reveals that no consistent design exists when constraints from different governance frameworks are formally contradictory.
 
-\todo[color=gray!20]{Structure paragraph — regenerate with skills/structure_paragraph when sections change.}
+\todo{Structure paragraph — regenerate with skills/structure_paragraph when sections change.}
 
 Section 2 introduces the W3C Verifiable Credentials Data Model, multi-level modeling concepts, and the Refinery partial graph modeling framework that together ground the formalization. Section 3 motivates the problem through two running examples --- a diploma credential with format-dependent privacy properties and a multi-credential property-identity scenario --- demonstrating that cross-layer design errors are invisible to single-layer inspection. Building on these examples, Section 4 presents the three-layer metamodel and formalizes cross-layer constraints as Refinery graph predicates, including trace consistency, entity alignment, and structural anti-pattern detection. Section 5 validates the approach along three axes: metamodel coverage against the W3C specification, constraint expressiveness against W3C and EU regulatory sources, and error visibility against known credential design anti-patterns. Section 6 positions the contribution against related work in credential ecosystem design, model-driven security, and graph-based design space exploration. Section 7 discusses limitations and identifies directions for extending the formalization.
