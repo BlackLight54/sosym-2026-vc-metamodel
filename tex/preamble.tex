@@ -1,6 +1,9 @@
 %% Lightweight inline TODO — no TikZ, no todonotes (clashes with acmart)
+%% Color coding in Markdown markers (see pandoc/filters/markers.lua):
+%%   @TODO (red) | @CITE (blue) | @FORMAL (green) | @FIGURE (orange) | plain (gray)
+%% All rendered as uniform red in LaTeX to avoid visual clutter.
 \usepackage{xcolor}
-\newcommand{\todo}[2][]{\textcolor{red}{\textbf{[TODO:} #2\textbf{]}}}
+\newcommand{\todo}[2][]{\textcolor{red}{\textbf{[TODO]} #2}}
 
 \usepackage{listings}         % approved
 \usepackage{booktabs} % needed if pandoc-generated tables use \toprule/\midrule/\bottomrule. Not on ACM approved list. Add back when tables appear, or use a Lua filter to emit plain \hline rules instead.
