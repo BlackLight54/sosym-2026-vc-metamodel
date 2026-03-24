@@ -36,8 +36,19 @@ local function parse_marker(text)
 end
 
 
+--- Escape LaTeX special characters for use inside \todo{} text.
+local function escape_for_todo(s)
+  s = s:gsub("\\", "\\textbackslash{}")
+  s = s:gsub("#", "\\#")
+  s = s:gsub("_", "\\_")
+  s = s:gsub("&", "\\&")
+  s = s:gsub("%%", "\\%%")
+  return s
+end
+
 --- Convert a parsed marker to a RawBlock or empty list.
 local function convert_marker(marker_type, content)
+  content = escape_for_todo(content)
   if mode == "submission" then
     return {} -- strip
   end
@@ -46,18 +57,18 @@ local function convert_marker(marker_type, content)
   if marker_type == "TODO" then
     cmd = "\\todo[inline]{" .. content .. "}"
   elseif marker_type == "CITE" then
-    cmd = "\\todo[inline]{cite: " .. content .. "}"
+    cmd = "\\todo[inline,color=blue!20]{cite: " .. content .. "}"
   elseif marker_type == "FORMAL" then
-    cmd = "\\todo[inline]{formal: " .. content .. "}"
+    cmd = "\\todo[inline,color=green!20]{formal: " .. content .. "}"
   elseif marker_type == "FIGURE" then
     local label, desc = content:match("^(.-)%s*|%s*(.+)$")
     if label and desc then
-      cmd = "\\todo[inline]{figure " .. label .. ": " .. desc .. "}"
+      cmd = "\\todo[inline,color=orange!20]{figure " .. label .. ": " .. desc .. "}"
     else
-      cmd = "\\todo[inline]{figure: " .. content .. "}"
+      cmd = "\\todo[inline,color=orange!20]{figure: " .. content .. "}"
     end
   elseif marker_type == "COMMENT" then
-    cmd = "\\todo[inline]{" .. content .. "}"
+    cmd = "\\todo[inline,color=gray!20]{" .. content .. "}"
   else
     cmd = "\\todo[inline]{" .. marker_type .. ": " .. content .. "}"
   end
