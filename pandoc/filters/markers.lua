@@ -35,11 +35,18 @@ local function parse_marker(text)
   return "COMMENT", inner
 end
 
+--- Escape characters that are special inside \todo{} macro arguments.
+local function escape_for_todo(text)
+  return text:gsub("#", "\\#")
+end
+
 --- Convert a parsed marker to a RawBlock or empty list.
 local function convert_marker(marker_type, content)
   if mode == "submission" then
     return {} -- strip
   end
+
+  content = escape_for_todo(content)
 
   local todo
   if marker_type == "TODO" then
