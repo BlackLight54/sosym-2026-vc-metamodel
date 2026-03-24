@@ -71,4 +71,4 @@ fi
 
 echo ""
 echo "Compile (local):  latexmk -pdf tex/main.tex"
-echo "Compile (manual): cd tex && TEXINPUTS=../tex/template//: pdflatex main && bibtex main && pdflatex main && pdflatex main"
+echo "Compile (manual): TEXINPUTS=./tex/template//: pdflatex tex/main && bibtex main && pdflatex tex/main && pdflatex tex/main"
