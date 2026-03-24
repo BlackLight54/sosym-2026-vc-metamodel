@@ -35,35 +35,28 @@ local function parse_marker(text)
   return "COMMENT", inner
 end
 
---- Escape characters that are special inside \todo{} macro arguments.
-local function escape_for_todo(text)
-  return text:gsub("#", "\\#")
-end
-
 --- Convert a parsed marker to a RawBlock or empty list.
 local function convert_marker(marker_type, content)
   if mode == "submission" then
     return {} -- strip
   end
 
-  content = escape_for_todo(content)
-
   local todo
   if marker_type == "TODO" then
     todo = "\\todo{" .. content .. "}"
   elseif marker_type == "CITE" then
-    todo = "\\todo{cite: " .. content .. "}"
+    todo = "\\todo[color=blue!20]{cite: " .. content .. "}"
   elseif marker_type == "FORMAL" then
-    todo = "\\todo{formal: " .. content .. "}"
+    todo = "\\todo[color=green!20]{formal: " .. content .. "}"
   elseif marker_type == "FIGURE" then
     local label, desc = content:match("^(.-)%s*|%s*(.+)$")
     if label and desc then
-      todo = "\\todo{figure " .. label .. ": " .. desc .. "}"
+      todo = "\\todo[color=orange!20]{figure " .. label .. ": " .. desc .. "}"
     else
-      todo = "\\todo{figure: " .. content .. "}"
+      todo = "\\todo[color=orange!20]{figure: " .. content .. "}"
     end
   elseif marker_type == "COMMENT" then
-    todo = "\\todo{" .. content .. "}"
+    todo = "\\todo[color=gray!20]{" .. content .. "}"
   else
     todo = "\\todo{" .. marker_type .. ": " .. content .. "}"
   end
