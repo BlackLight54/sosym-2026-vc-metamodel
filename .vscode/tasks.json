@@ -1,0 +1,43 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "watch: pandoc + latexmk",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "bash build.sh draft && latexmk -pvc -pdf -synctex=1 -interaction=nonstopmode -outdir=build tex/main.tex"
+            ],
+            "group": "build",
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "latexmk",
+                "pattern": {
+                    "regexp": "^!\\s+(.*)$",
+                    "message": 1
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^Latexmk: applying rule",
+                    "endsPattern": "^Latexmk: All targets .* are up-to-date|^Latexmk: Log file says output"
+                }
+            },
+            "presentation": {
+                "reveal": "silent",
+                "panel": "dedicated"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        },
+        {
+            "label": "pandoc: rebuild sections",
+            "type": "shell",
+            "command": "bash",
+            "args": ["build.sh", "draft"],
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}

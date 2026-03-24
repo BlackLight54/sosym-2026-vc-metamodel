@@ -1,4 +1,10 @@
 {
+    // === Environment ===
+    // Ensure pandoc and MiKTeX are on PATH for all terminal/task invocations
+    "terminal.integrated.env.windows": {
+        "PATH": "${env:PATH};C:\\Users\\blacklight\\AppData\\Local\\Pandoc;C:\\Users\\blacklight\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64"
+    },
+
     // === LaTeX Workshop ===
 
     // Root document
@@ -9,10 +15,7 @@
         {
             "name": "pandoc-build",
             "command": "bash",
-            "args": ["build.sh", "draft"],
-            "env": {
-                "PATH": "%PATH%;C:\\Users\\blacklight\\AppData\\Local\\Pandoc"
-            }
+            "args": ["build.sh", "draft"]
         },
         {
             "name": "latexmk",
@@ -23,10 +26,7 @@
                 "-interaction=nonstopmode",
                 "-outdir=build",
                 "tex/main.tex"
-            ],
-            "env": {
-                "TEXINPUTS": "./tex//;"
-            }
+            ]
         }
     ],
 
