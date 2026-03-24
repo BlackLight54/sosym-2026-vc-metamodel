@@ -46,14 +46,12 @@ Each entry has a date, the decision, the rationale, and what it affects. Use thi
 **Affects:** All section files, background section 2.2 (now covers multi-level modeling: Atkinson & Kühne), approach subsection titles, CLAUDE.md thesis.
 **Revisit when:** Never — this is a hard constraint from the advisor.
 
-### 2026-03-24 — Running examples: Diploma + Alice hybrid
+### 2026-03-24 — Running example: simplified CSOK scenario
 
-**Decision:** Two complementary running examples:
-- **Diploma** (vertical constraint): format-layer capability (ZKP) drives claim-level design. Simple — 2 entities, 1 credential. Introduced in Sec 03.
-- **Alice property/identity** (horizontal constraint): cross-credential entity alignment spans layers. From `vc_model.new.problem` (renamed Tom→Alice). Implemented in Refinery. Primary example for Secs 03-04.
-**Rationale:** Diploma is simpler and demonstrates format→claim dependency. Alice is richer and exercises trace consistency, entity alignment, anti-patterns. Together they show both vertical and horizontal cross-layer constraints. CSOK mortgage scenario was rejected as too complex for 10 pages and not formalized.
-**Affects:** Motivation section, approach examples, teaser figure (split panel), evaluation cases.
-**Revisit when:** If a single unified example proves cleaner during drafting.
+**Decision:** Single running example based on the Hungarian CSOK (Családi Otthonteremtési Kedvezmény / Family Housing Subsidy) mortgage scenario, heavily simplified to fit 10 pages. Replaces the Diploma+Alice hybrid (superseded).
+**Rationale:** Advisor (Oszkár) directed use of the CSOK scenario. A real-world example is stronger motivation than synthetic ones. Simplification is key — strip to the minimum entities and credentials that still exercise all three layers and demonstrate both vertical (format→claim) and horizontal (cross-credential alignment) constraints. The prior Diploma+Alice hybrid was rejected by the advisor.
+**Affects:** Motivation section (Sec 03), approach examples (Sec 04), teaser figure, evaluation cases. All section scaffolds referencing Diploma/Alice must be updated.
+**Revisit when:** If the simplified CSOK still does not fit in the page budget during drafting.
 
 ### 2026-03-24 — Motivation section ends with problem statement
 
@@ -62,12 +60,12 @@ Each entry has a date, the decision, the rationale, and what it affects. Use thi
 **Affects:** Section 03 paragraph plan, teaser figure design.
 **Revisit when:** If the introduction feels insufficiently motivated without a concrete payoff preview.
 
-### 2026-03-24 — Teaser figure: split panel running examples
+### 2026-03-24 — Teaser figure: simplified CSOK scenario
 
-**Decision:** ACM sigconf teaser figure (full-width, before first column) shows both running examples side by side. Left: Diploma (vertical constraint, format→claim). Right: Alice (horizontal constraint, cross-credential alignment). Error highlights in both.
-**Rationale:** Communicates the cross-layer problem at first glance. Frees Sec 03 from being figure-heavy. The teaser's job is to show the *shape* of the contribution before the reader commits to reading.
+**Decision:** ACM sigconf teaser figure (full-width, before first column) shows the simplified CSOK scenario across three layers. Must demonstrate both vertical and horizontal cross-layer constraints in a single unified visual.
+**Rationale:** Communicates the cross-layer problem at first glance. Single unified example is cleaner than a split panel.
 **Affects:** Introduction layout, Sec 03 page budget, figure design workflow.
-**Revisit when:** If the split panel is too dense for a teaser; consider simplifying to one example.
+**Revisit when:** If the CSOK scenario requires too much visual space for a teaser.
 
 ## Superseded decisions
 

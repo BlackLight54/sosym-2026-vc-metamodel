@@ -14,6 +14,15 @@
 - [x] Reframe paper as "Multi-level metamodeling" (no MDA) — DECISIONS.md updated, layer names chosen
 - [ ] Remove ifblinded from LaTeX. Anonymization handled by document style properties.
 
+## Pre-drafting (blocks everything)
+
+- [ ] **Design simplified CSOK running example** → `prompts/2026-03-24_06_csok_running_example.md` [CRITICAL PATH — advisor directed, replaces Diploma+Alice]
+  - [ ] Research CSOK eligibility requirements and credential types
+  - [ ] Simplify to 4-5 entities, 2-3 credentials
+  - [ ] Identify governance conflict candidate (binding claim #8)
+  - [ ] Update section scaffolds (Sec 03, 04) to reference CSOK
+- [ ] **Develop cross-governance conflict example** (binding claim #8) [DOES NOT EXIST YET — may emerge from CSOK design]
+
 ## Per-section drafting (priority order)
 
 - [ ] **Draft Section 04 (Approach)** — core contribution, everything depends on it
