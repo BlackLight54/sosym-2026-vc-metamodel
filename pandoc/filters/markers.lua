@@ -35,32 +35,31 @@ local function parse_marker(text)
   return "COMMENT", inner
 end
 
+
 --- Convert a parsed marker to a RawBlock or empty list.
 local function convert_marker(marker_type, content)
   if mode == "submission" then
     return {} -- strip
   end
 
-  content = escape_for_todo(content)
-
   local cmd
   if marker_type == "TODO" then
-    cmd = "\\fxnote{" .. content .. "}"
+    cmd = "\\todo[inline]{" .. content .. "}"
   elseif marker_type == "CITE" then
-    cmd = "\\fxnote{cite: " .. content .. "}"
+    cmd = "\\todo[inline]{cite: " .. content .. "}"
   elseif marker_type == "FORMAL" then
-    cmd = "\\fxwarning{formal: " .. content .. "}"
+    cmd = "\\todo[inline]{formal: " .. content .. "}"
   elseif marker_type == "FIGURE" then
     local label, desc = content:match("^(.-)%s*|%s*(.+)$")
     if label and desc then
-      cmd = "\\fxnote{figure " .. label .. ": " .. desc .. "}"
+      cmd = "\\todo[inline]{figure " .. label .. ": " .. desc .. "}"
     else
-      cmd = "\\fxnote{figure: " .. content .. "}"
+      cmd = "\\todo[inline]{figure: " .. content .. "}"
     end
   elseif marker_type == "COMMENT" then
-    cmd = "\\fxnote{" .. content .. "}"
+    cmd = "\\todo[inline]{" .. content .. "}"
   else
-    cmd = "\\fxnote{" .. marker_type .. ": " .. content .. "}"
+    cmd = "\\todo[inline]{" .. marker_type .. ": " .. content .. "}"
   end
 
   return pandoc.RawBlock("latex", cmd)
