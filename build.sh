@@ -21,6 +21,11 @@ if [[ "$MODE" != "draft" && "$MODE" != "submission" ]]; then
     exit 1
 fi
 
+# --- Ensure pandoc is on PATH (Windows local install may not be) ---
+if ! command -v pandoc &> /dev/null; then
+    export PATH="$PATH:/c/Users/blacklight/AppData/Local/Pandoc"
+fi
+
 # --- Check pandoc ---
 if ! command -v pandoc &> /dev/null; then
     echo "ERROR: pandoc not found."

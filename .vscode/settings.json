@@ -1,0 +1,56 @@
+{
+    // === LaTeX Workshop ===
+
+    // Root document
+    "latex-workshop.latex.rootFile": "tex/main.tex",
+
+    // Custom tools
+    "latex-workshop.latex.tools": [
+        {
+            "name": "pandoc-build",
+            "command": "bash",
+            "args": ["build.sh", "draft"],
+            "env": {
+                "PATH": "%PATH%;C:\\Users\\blacklight\\AppData\\Local\\Pandoc"
+            }
+        },
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-pdf",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-outdir=build",
+                "tex/main.tex"
+            ],
+            "env": {
+                "TEXINPUTS": "./tex//;"
+            }
+        }
+    ],
+
+    // Recipes — pandoc first, then latexmk
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "pandoc + latexmk",
+            "tools": ["pandoc-build", "latexmk"]
+        },
+        {
+            "name": "latexmk only",
+            "tools": ["latexmk"]
+        }
+    ],
+
+    // PDF viewer — use VS Code tab
+    "latex-workshop.view.pdf.viewer": "tab",
+
+    // Point viewer to the build output
+    "latex-workshop.latex.outDir": "build",
+
+    // Auto-build on .tex save (not .md — use Ctrl+Alt+B for that)
+    "latex-workshop.latex.autoBuild.run": "onSave",
+
+    // Don't auto-clean build artifacts
+    "latex-workshop.latex.autoClean.run": "never"
+}
