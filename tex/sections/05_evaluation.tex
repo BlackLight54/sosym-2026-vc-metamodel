@@ -1,0 +1,45 @@
+\section{Evaluation}\label{evaluation}
+
+\todo{Draft preamble — three axes: (1) coverage, (2) expressiveness, (3) error visibility. State scope and limitations upfront.}
+
+\subsection{Metamodel Coverage}\label{metamodel-coverage}
+
+\todo[color=blue!20]{cite: W3C VCDM 2.0 specification — full concept list}
+
+\todo[color=orange!20]{figure fig_coverage_table: Coverage mapping table: VCDM 2.0 concept → metamodel element → layer. Mark in-scope / out-of-scope.}
+
+\todo{Draft — VCDM coverage method. Systematic extraction of concepts from the spec.}
+
+\todo{Draft — coverage results. N/M count. Explicit exclusion list with rationale.}
+
+\todo{Draft — interpretation. Coverage is sufficient for the paper’s claims, not exhaustive.}
+
+\subsection{Constraint Expressiveness}\label{constraint-expressiveness}
+
+\todo[color=blue!20]{cite: W3C VCDM 2.0 — normative requirements}
+
+\todo[color=blue!20]{cite: eIDAS 2.0 implementing regulation}
+
+\todo[color=blue!20]{cite: EU Architecture Reference Framework (ARF)}
+
+\todo{HIGH PRIORITY — Collect constraints from EU sources. Mitigation: representative subset (5-8 key ARF/eIDAS requirements), not exhaustive.}
+
+\todo[color=orange!20]{figure fig_expressiveness_table: Constraint expressiveness table: constraint × source × expressible × predicate.}
+
+\todo{Draft — expressiveness table. Must include constraints from at least two governance sources.}
+
+\todo{CRITICAL PATH — Develop the cross-governance conflict example. Need a specific pair of constraints from W3C and eIDAS/ARF that formally contradict. This is the paper’s headline result and does not yet exist.}
+
+\todo{Draft — cross-governance conflict. Show the two constraints, show why they contradict, show that Refinery cannot generate a valid model satisfying both.}
+
+\todo{Draft — expressiveness limitations. What falls outside the constraint language.}
+
+\subsection{Error Visibility}\label{error-visibility}
+
+\todo[color=orange!20]{figure fig_antipattern_table: Anti-pattern table: name × description × error predicate × layer(s) × detected?}
+
+\todo{Draft — anti-pattern catalog. At least 4 anti-patterns: bad_trace, noSubject/root_ent_doesnt_have_cred, no_cred_props_for_cred_entity, non_connected, common_parent.}
+
+\todo{Draft — detection results per anti-pattern. Construct error variants of Alice example.}
+
+\todo{Draft — multi-layer visibility. The key demonstration: layer-by-layer checks pass, cross-layer check fails. This is the paper’s core argument for why multi-level modeling is necessary.}

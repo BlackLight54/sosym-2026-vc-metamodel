@@ -21,12 +21,13 @@ Each entry has a date, the decision, the rationale, and what it affects. Use thi
 
 %% Add decisions below this line. %%
 
-### 2026-03-24 — Thesis framing: metamodel as headline
+### 2026-03-24 — Thesis framing: modeling-first, not detection-first
 
-**Decision:** Frame the paper's core claim around the metamodel contribution ("VC ecosystem design requires a multi-layer metamodel"), not around conflict detection as the headline. Conflict/error detection is a consequence of modeling correctly — it validates the metamodel, not the other way around.
-**Rationale:** Option B (metamodel-centric) chosen over Option A (conflict-detection-centric) and Option C (balanced). Martin's reasoning: conflict detection is handled by Refinery at the model level; the paper's contribution is the metamodel and its constraint formalization. This framing is also the safest for MODELS Foundations Track reviewers who expect a clean modeling contribution.
-**Affects:** Introduction framing (P1-P3), contribution list, evaluation structure, abstract revision, title.
-**Revisit when:** If reviewers push back that the metamodel alone is insufficient and want stronger empirical/formal validation of the conflict detection capability.
+**Decision:** Frame the paper around multi-level metamodeling as the contribution. Refinery generates diverse graphs from partial metamodels — it does not detect errors algorithmically. Errors "become visible through the integrated formalization" (abstract). The title leads with modeling, not detection.
+**Title:** "Multi-Level Metamodeling for Verifiable Credential Ecosystem Design: Formalizing Cross-Layer Constraints with Graph Predicates"
+**Rationale:** The previous title ("Detecting Cross-Layer Design Errors...") implied an error-detection algorithm. The actual mechanism is constraint formalization in a partial graph model, with Refinery generating model instances. Detection-framing overpromises; modeling-framing matches the actual contribution and is safest for MODELS Foundations Track.
+**Affects:** Introduction framing (P1-P3), contribution list, evaluation structure, abstract revision, title, all section headers.
+**Revisit when:** If reviewers want stronger detection/tooling claims, or if Refinery gains explicit error-reporting capabilities beyond generation.
 
 ### 2026-03-24 — Domain: MDE, not formal methods
 
@@ -34,6 +35,39 @@ Each entry has a date, the decision, the rationale, and what it affects. Use thi
 **Rationale:** The paper uses metamodel definitions and graph predicates, not theorem-proof structure. MODELS is an MDE venue. The domain calibration affects register, explanation floor, and writing advice.
 **Affects:** CLAUDE.md domain block, reviewer persona generation, writing register, background section scope.
 **Revisit when:** If the paper develops substantial theorem-proof content that shifts it toward formal methods.
+
+### 2026-03-24 — Terminology: multi-level metamodeling, no MDA
+
+**Decision:** Do not use MDA-specific terminology (CIM, PIM, PSM, Model-Driven Architecture). Use "multi-level metamodeling" framing. Layer names aligned with abstract phrasing:
+- **Claim Property Layer** — domain-level information graph
+- **Credential Schema Layer** — abstract credential schemas
+- **Format-Specific Layer** — format-specific representations
+**Rationale:** Oszkár's direction. MDA is OMG-branded terminology from 2001; the MODELS community has moved beyond strict MDA. Using CIM/PIM/PSM invites reviewer objections and ties the contribution to an outdated framework.
+**Affects:** All section files, background section 2.2 (now covers multi-level modeling: Atkinson & Kühne), approach subsection titles, CLAUDE.md thesis.
+**Revisit when:** Never — this is a hard constraint from the advisor.
+
+### 2026-03-24 — Running examples: Diploma + Alice hybrid
+
+**Decision:** Two complementary running examples:
+- **Diploma** (vertical constraint): format-layer capability (ZKP) drives claim-level design. Simple — 2 entities, 1 credential. Introduced in Sec 03.
+- **Alice property/identity** (horizontal constraint): cross-credential entity alignment spans layers. From `vc_model.new.problem` (renamed Tom→Alice). Implemented in Refinery. Primary example for Secs 03-04.
+**Rationale:** Diploma is simpler and demonstrates format→claim dependency. Alice is richer and exercises trace consistency, entity alignment, anti-patterns. Together they show both vertical and horizontal cross-layer constraints. CSOK mortgage scenario was rejected as too complex for 10 pages and not formalized.
+**Affects:** Motivation section, approach examples, teaser figure (split panel), evaluation cases.
+**Revisit when:** If a single unified example proves cleaner during drafting.
+
+### 2026-03-24 — Motivation section ends with problem statement
+
+**Decision:** Section 03 ends with the problem statement ("no formal framework for simultaneous multi-layer, multi-source constraint satisfaction"), not with a demonstrated detected error. The actual formalization and its consequences appear in Sections 04-05.
+**Rationale:** Clean separation of motivation and contribution. Detection payoff in motivation risks front-loading results.
+**Affects:** Section 03 paragraph plan, teaser figure design.
+**Revisit when:** If the introduction feels insufficiently motivated without a concrete payoff preview.
+
+### 2026-03-24 — Teaser figure: split panel running examples
+
+**Decision:** ACM sigconf teaser figure (full-width, before first column) shows both running examples side by side. Left: Diploma (vertical constraint, format→claim). Right: Alice (horizontal constraint, cross-credential alignment). Error highlights in both.
+**Rationale:** Communicates the cross-layer problem at first glance. Frees Sec 03 from being figure-heavy. The teaser's job is to show the *shape* of the contribution before the reader commits to reading.
+**Affects:** Introduction layout, Sec 03 page budget, figure design workflow.
+**Revisit when:** If the split panel is too dense for a teaser; consider simplifying to one example.
 
 ## Superseded decisions
 
