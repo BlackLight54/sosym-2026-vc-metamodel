@@ -103,32 +103,18 @@ The domain constraint \(\text{property\_area} \geq \text{min\_area}(\text{num\_c
 
 No deployed credential format supports cross-credential arithmetic predicates in zero-knowledge:
 
-{\def\LTcaptype{none} % do not increment counter
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Format
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Single-cred predicate
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Cross-cred equality
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Cross-cred arithmetic
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-AnonCreds v1 (CL) & Yes (attr ≥ const) & No & \textbf{No} \\
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+Format & Single-cred predicate & Cross-cred equality & Cross-cred arithmetic \\
+\midrule
+AnonCreds v1 (CL) & Yes (attr \(\geq\) const) & No & \textbf{No} \\
 AnonCreds v2 (BBS/PS) & Yes (range proofs) & Yes & \textbf{No} \\
 SD-JWT-VC & No & No & \textbf{No} \\
-SNARK-based \todo[color=blue!20]{cite: zk-creds, IEEE S\&P 2023} & Yes & Yes & Yes (research prototype) \\
-\end{longtable}
-}
+SNARK-based \%\% @CITE: zk-creds, IEEE S\&P 2023 \%\% & Yes & Yes & Yes (research prototype) \\
+\bottomrule
+\end{tabular}
+\end{center}
 
 To verify the floor area constraint, the verifier must see both raw values from two separate credentials, defeating the privacy properties that ZKP-capable formats promise. The metamodel captures this: a claim-property-layer constraint (C4) that spans credentials cannot be enforced privacy-preservingly at the format-specific layer because no deployed format supports cross-credential predicate proofs (C9).
 

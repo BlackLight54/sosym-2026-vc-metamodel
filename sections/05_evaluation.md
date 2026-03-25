@@ -84,7 +84,7 @@ No deployed credential format supports cross-credential arithmetic predicates in
 
 | Format | Single-cred predicate | Cross-cred equality | Cross-cred arithmetic |
 |---|---|---|---|
-| AnonCreds v1 (CL) | Yes (attr ≥ const) | No | **No** |
+| AnonCreds v1 (CL) | Yes (attr $\geq$ const) | No | **No** |
 | AnonCreds v2 (BBS/PS) | Yes (range proofs) | Yes | **No** |
 | SD-JWT-VC | No | No | **No** |
 | SNARK-based %% @CITE: zk-creds, IEEE S&P 2023 %% | Yes | Yes | Yes (research prototype) |

@@ -136,15 +136,15 @@ The following table classifies the constraints exercised in the housing subsidy 
 
 | # | Constraint | Source | Layers | CSOK instance |
 |---|---|---|---|---|
-| C1 | Entity alignment | Structural | CPL↔CSL | $\text{CS\_Applicant}_{1,2,3}$ trace to same Applicant |
-| C2 | Trace consistency | Structural | CPL→CSL | Each Claim traces to exactly one Prop |
-| C3 | No empty credential | Structural | CSL | Each CredentialSubject has ≥1 outgoing Claim |
+| C1 | Entity alignment | Structural | CPL$\leftrightarrow$CSL | $\text{CS\_Applicant}_{1,2,3}$ trace to same Applicant |
+| C2 | Trace consistency | Structural | CPL$\rightarrow$CSL | Each Claim traces to exactly one Prop |
+| C3 | No empty credential | Structural | CSL | Each CredentialSubject has $\geq$1 outgoing Claim |
 | C4 | Cross-credential value dep. | Domain rule | CPL horiz. | $\text{property\_area} \geq f(\text{num\_children})$ |
 | C5 | Format mandate | eIDAS ARF | FSL | EU wallet attestations require SD-JWT-VC |
-| C6 | Predicate proof required | GDPR Art. 5(1)(c) | CPL↔FSL | Income threshold check → predicate proof |
-| C7 | VCDM conformance | W3C VCDM 2.0 | CSL↔FSL | Format must conform to VCDM data model |
-| C8 | **Governance conflict** | eIDAS+GDPR+W3C | FSL | C5∧C6∧C7 unsatisfiable on IncomeCred |
-| C9 | Cross-credential predicate gap | Format limitation | CPL↔FSL | C4 requires cross-credential arithmetic; no deployed format supports it |
+| C6 | Predicate proof required | GDPR Art. 5(1)(c) | CPL$\leftrightarrow$FSL | Income threshold check $\rightarrow$ predicate proof |
+| C7 | VCDM conformance | W3C VCDM 2.0 | CSL$\leftrightarrow$FSL | Format must conform to VCDM data model |
+| C8 | **Governance conflict** | eIDAS+GDPR+W3C | FSL | C5$\wedge$C6$\wedge$C7 unsatisfiable on IncomeCred |
+| C9 | Cross-credential predicate gap | Format limitation | CPL$\leftrightarrow$FSL | C4 requires cross-credential arithmetic; no deployed format supports it |
 
 %% @FIGURE: fig_constraint_taxonomy | The table above, formatted as a figure with caption. %%
 
