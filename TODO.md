@@ -12,7 +12,7 @@
 - [x] Run `skills/section_scaffold` → `prompts/2026-03-24_04_section_scaffold.md`
 - [x] Build pandoc pipeline → `prompts/2026-03-24_05_pandoc_pipeline.md`
 - [x] Reframe paper as "Multi-level metamodeling" (no MDA) — DECISIONS.md updated, layer names chosen
-- [ ] Remove ifblinded from LaTeX. Anonymization handled by document style properties.
+- [x] Remove ifblinded from LaTeX. Anonymization handled by document style properties.
 
 ## Pre-drafting (blocks everything)
 
@@ -61,7 +61,10 @@
 
 - [ ] Confirm VENUE.md exemplar papers → `prompts/2026-03-24_01_exemplar_papers.md`
 - [ ] Run `skills/gap_analysis` → research prompts
-- [ ] Run `skills/related_work_positioning`
+- [x] Run `skills/related_work_positioning` — scaffold updated, re-run after gap analysis + more drafting
+- [ ] **Verify Ding & Sato 2023** — "Model-Driven Security Analysis of SSI Systems" IEEE TrustCom 2023 [found via web search, confirm existence and details]
+- [ ] **Verify Schardong & Custodio 2024** — "RAF Framework for Understanding Digital Identity Models" ER 2024 [found via web search, confirm existence and details]
+- [ ] **Draft Section 06 (Related Work)** using positioning from scaffold — 0.75 pages, 3 groups + synthesis
 - [ ] Run `skills/evaluation_design`
 - [ ] Design teaser figure (split panel: Diploma + Alice)
 - [ ] Design fig_metamodel (three-layer class diagram)
