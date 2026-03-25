@@ -15,7 +15,10 @@
       "Bash(for f:*)",
       "Bash(do echo:*)",
       "Bash(unzip -l \"$f\")",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(docker run:*)",
+      "Bash(bash .claude/skills/refinery/run_refinery.sh check prior_work/dse-vc-refinery/vc_model.new.problem)",
+      "Bash(bash .claude/skills/refinery/run_refinery.sh generate prior_work/dse-vc-refinery/vc_model.new.problem -n 1)"
     ]
   }
 }

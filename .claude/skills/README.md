@@ -50,6 +50,11 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 |-------|---------|-------------|
 | `rebuttal` | "Prepare rebuttal" | Parse reviews, classify points, draft response |
 
+### Reference
+| Skill | Trigger | What it does |
+|-------|---------|-------------|
+| `refinery` | Reading/writing `.problem` files | Refinery language guide, three-layer pattern, examples, CLI script |
+
 ### Infrastructure
 | Skill | Trigger | What it does |
 |-------|---------|-------------|
