@@ -28,7 +28,7 @@ sections/*.md  ──pandoc──►  build/*.tex  ──git push──►  Over
 
 - [x] Create `build.sh` with pandoc conversion per section
 - [x] Create `tex/main.tex` with preamble, `\input{}` per section (adapted from authordraft)
-- [x] Create pandoc Lua filter: strip `%% ... %%` markers or convert to `\todo{}` (`pandoc/filters/markers.lua`)
+- [x] Create pandoc Lua filter: strip `%% ... %%` markers or convert to `\todo{}` (`pandoc/filters/markers.lua`). Handles both standalone markers (→ `\todo[inline]{...}`) and inline markers embedded in prose (→ `\todo{...}` margin notes).
 - [ ] Create pandoc Lua filter: map `%% @CITE: key %%` to `\cite{key}` where key exists in `.bib` (`pandoc/filters/citations.lua` — stub)
 - [x] Create pandoc Lua filter: pass through `\begin{definition}` etc. as raw LaTeX (handled by pandoc `raw_tex` extension — no filter needed)
 - [ ] Create pandoc Lua filter: convert figure metadata blocks to `\begin{figure}...\end{figure}` (`pandoc/filters/figures.lua` — stub)

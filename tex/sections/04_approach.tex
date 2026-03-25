@@ -14,7 +14,29 @@
 
 \todo[inline]{Draft --- error predicates and propagation rules for claim layer. Include Refinery code listing.}
 
-\todo[inline]{Draft --- Alice example at claim layer. 3 entities, 2 properties. All claim-layer constraints satisfied.}
+In the housing subsidy scenario, the claim property layer contains:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Element & Type & Description \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Applicant & Subject & Person applying for subsidy \\
+has\_children & Prop & Family size \\
+num\_children & Value & Number of children \\
+owns\_property & Prop & Property ownership \\
+property\_area & Value & Floor area (m²) \\
+earns & Prop & Employment income \\
+monthly\_income & Value & Monthly net income \\
+\end{longtable}
+}
+
+Three statements capture the domain facts: \(\text{statement}(\text{Applicant}, \text{has\_children}, \text{num\_children})\), \(\text{statement}(\text{Applicant}, \text{owns\_property}, \text{property\_area})\), and \(\text{statement}(\text{Applicant}, \text{earns}, \text{monthly\_income})\). Two domain constraints apply: \(\text{property\_area} \geq \text{min\_area}(\text{num\_children})\) links two properties across what will become separate credentials, and \(\text{monthly\_income} \geq \text{threshold}\) establishes a privacy-sensitive eligibility check. All claim-layer structural constraints (connectivity, no self-loops) are satisfied.
+
+\todo[inline,color=orange!20]{figure fig\_metamodel: Three-layer metamodel class diagram. Show all three layers with metaclasses, relationships, and trace mappings. This is the paper's central figure.}
 
 \subsection{Credential Schema Layer}\label{credential-schema-layer}
 
@@ -28,7 +50,38 @@
 
 \todo[inline]{Draft --- credential layer constraints. Include Refinery code listing.}
 
-\todo[inline]{Draft --- Alice example at credential layer. Two credentials. Trace mappings. Entity alignment visible.}
+In the housing subsidy scenario, three credentials partition the claim-layer facts:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Credential
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+CredentialSubject
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Claim
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+CredentialValue
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Issuer (informal)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+FamilyStatusCred & \(\text{CS\_Applicant}_1\) & \(\text{has\_children}_1\) & \(\text{num\_children}_1\) & Civil registry \\
+PropertyCred & \(\text{CS\_Applicant}_2\) & \(\text{owns\_property}_1\) & \(\text{property\_area}_1\) & Land registry \\
+IncomeCred & \(\text{CS\_Applicant}_3\) & \(\text{earns}_1\) & \(\text{monthly\_income}_1\) & Employer \\
+\end{longtable}
+}
+
+All three credential subjects trace to the same claim-layer entity: \(\text{trace}(\text{CS\_Applicant}_i) = \text{Applicant}\) for \(i \in \{1,2,3\}\). Each claim traces to its corresponding property, and each credential value traces to its corresponding value. Entity alignment holds pairwise: \(\text{aligned}(\text{CS\_Applicant}_i, \text{CS\_Applicant}_j)\) for all \(i \neq j\). The cross-property domain constraint --- minimum floor area as a function of the number of children --- now spans two credentials, requiring the verifier to combine claims from FamilyStatusCred and PropertyCred.
 
 \subsection{Format-Specific Layer}\label{format-specific-layer}
 
@@ -40,15 +93,68 @@
 
 \todo[inline]{IMPORTANT --- Surface Martin's formal concept analysis results here. At least 2-3 constraints derived from FCA to strengthen the three-layer claim.}
 
-\todo[inline]{Draft --- format-specific constraints. Diploma example: JSON-LD vs. AnonCreds ZKP capability.}
+\todo[inline]{Draft --- format-specific constraints. Housing subsidy example: SD-JWT-VC vs. AnonCreds ZKP capability.}
 
-\todo[inline]{Draft --- format selection for Alice and Diploma examples. Show governance-driven format choice.}
+In the housing subsidy scenario, format assignments are governance-driven:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Credential & Format & Governance source & Status \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+FamilyStatusCred & SD-JWT-VC & eIDAS ARF (SHALL) & Valid \\
+PropertyCred & SD-JWT-VC & eIDAS ARF (SHALL) & Valid \\
+IncomeCred & ? & eIDAS + GDPR & \textbf{Conflict} \\
+\end{longtable}
+}
+
+FamilyStatusCred and PropertyCred are straightforward: as EU wallet attestations, the eIDAS Architecture Reference Framework mandates SD-JWT-VC (or mdoc; since both lack predicate proof support, we use SD-JWT-VC without loss of generality \todo[color=blue!20]{cite: eIDAS ARF --- dual format mandate}). IncomeCred is the conflict site: eIDAS requires SD-JWT-VC, but the income threshold check --- verifying \(\text{monthly\_income} \geq \text{threshold}\) without disclosing the exact value --- requires predicate proof capability that SD-JWT-VC does not provide \todo[color=blue!20]{cite: SD-JWT-VC --- hash-based selective disclosure, no predicate proofs}. AnonCreds supports predicate proofs via CL signatures \todo[color=blue!20]{cite: AnonCreds specification} but does not conform to W3C VCDM 2.0 \todo[color=blue!20]{cite: W3C VCDM 2.0 --- AnonCreds v1 non-conformance}.
 
 \subsection{Cross-Layer Constraints as Graph Predicates}\label{cross-layer-constraints-as-graph-predicates}
 
-\todo[inline,color=orange!20]{figure fig\_constraint\_taxonomy: Table classifying constraints by source (structural, W3C, EU, community) {\texttimes} scope (intra-layer, cross-layer).}
+The following table classifies the constraints exercised in the housing subsidy scenario by source and scope:
 
-\todo[inline]{Draft --- constraint taxonomy. Table format preferred.}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\#
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Constraint
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Source
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Layers
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+CSOK instance
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+C1 & Entity alignment & Structural & CPL↔CSL & \(\text{CS\_Applicant}_{1,2,3}\) trace to same Applicant \\
+C2 & Trace consistency & Structural & CPL→CSL & Each Claim traces to exactly one Prop \\
+C3 & No empty credential & Structural & CSL & Each CredentialSubject has ≥1 outgoing Claim \\
+C4 & Cross-credential value dep. & Domain rule & CPL horiz. & \(\text{property\_area} \geq f(\text{num\_children})\) \\
+C5 & Format mandate & eIDAS ARF & FSL & EU wallet attestations require SD-JWT-VC \\
+C6 & Predicate proof required & GDPR Art. 5(1)(c) & CPL↔FSL & Income threshold check → predicate proof \\
+C7 & VCDM conformance & W3C VCDM 2.0 & CSL↔FSL & Format must conform to VCDM data model \\
+C8 & \textbf{Governance conflict} & eIDAS+GDPR+W3C & FSL & C5∧C6∧C7 unsatisfiable on IncomeCred \\
+C9 & Cross-credential predicate gap & Format limitation & CPL↔FSL & C4 requires cross-credential arithmetic; no deployed format supports it \\
+\end{longtable}
+}
+
+\todo[inline,color=orange!20]{figure fig\_constraint\_taxonomy: The table above, formatted as a figure with caption.}
+
+Constraints C1--C3 are structural (metamodel-enforced). C4 is a domain rule grounded in government regulation. C5--C7 each originate from a different governance framework. C8 and C9 are cross-layer results: they emerge only when constraints from multiple sources and layers are checked jointly. Section 5.3 develops C8 and C9 as the paper's headline results.
 
 \todo[inline,color=green!20]{formal: Trace consistency predicates: prop\_source, prop\_target propagation rules.}
 
@@ -56,7 +162,7 @@
 
 \todo[inline,color=green!20]{formal: Entity alignment predicate: aligned\_entities(e1, e2).}
 
-\todo[inline]{Draft --- entity alignment. Shadow predicate. Cross-credential subject binding. Alice example: a\_Alice1 and a\_Alice2 are aligned.}
+\todo[inline]{Draft --- entity alignment. Shadow predicate. Cross-credential subject binding. Housing subsidy: CS\_Applicant and CS\_Applicant are aligned.}
 
 \todo[inline,color=green!20]{formal: Anti-pattern error predicates: noSubject, no\_cred\_props\_for\_cred\_entity, root\_ent\_doesnt\_have\_cred, non\_connected, common\_parent.}
 
@@ -64,6 +170,10 @@
 
 \todo[inline]{Draft --- propagation rules for cross-layer alignment. Distinguish error predicates (checking) from propagation rules (guiding generation). This is a key Refinery mechanism.}
 
-\todo[inline,color=orange!20]{figure fig\_generated\_model: (Optional) Refinery-generated model instance for the Alice example showing constraint satisfaction.}
+\todo[inline,color=orange!20]{figure fig\_generated\_model: (Optional) Refinery-generated model instance for the housing subsidy example showing constraint satisfaction.}
 
-\todo[inline]{Draft --- full constraint application. Both examples. Generated model output.}
+\todo[inline]{Draft --- full constraint application. Housing subsidy example. Generated model output.}
+
+The income threshold check illustrates how format-specific limitations propagate upward through the metamodel. With AnonCreds (CL signatures), the issuer encodes \(\text{monthly\_income}\) as an integer attribute; at verification time, the holder proves \(\text{monthly\_income} \geq \text{threshold}\) via a predicate proof without disclosing the exact value \todo[color=blue!20]{cite: AnonCreds specification --- predicate proofs} --- the claim property layer structure is unchanged. With SD-JWT-VC, no predicate proof mechanism exists \todo[color=blue!20]{cite: SD-JWT-VC --- hash-based selective disclosure only}. The only workaround is for the issuer to pre-compute boolean claims at issuance: \(\text{earns\_above\_200k} \mapsto \text{true}\), \(\text{earns\_above\_300k} \mapsto \text{true}\), and so on. This restructures the claim property layer: the single Prop \(\text{earns} \to \text{monthly\_income}\) (integer) is replaced by multiple Props \(\text{earns\_above\_X} \to \text{boolean}\) for each anticipated threshold. The format-specific limitation has forced a change in the domain-level information model --- a cross-layer constraint propagation that is visible only when both layers are analyzed together.
+
+\todo[inline]{Polish --- this paragraph may need tightening for page budget. The key point is that FSL limitations change CPL structure, which is exactly what the metamodel detects.}

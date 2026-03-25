@@ -21,6 +21,7 @@ Key insight: Refinery *generates* all valid model instances consistent with a pa
 - **Home:** <https://refinery.tools/>
 - **GitHub:** <https://github.com/graphs4value/refinery>
 - **Language reference:** <https://refinery.tools/learn/language/>
+- **CLI reference:** <https://refinery.tools/learn/docker/cli/>
 
 ## `.problem` file syntax
 

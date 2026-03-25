@@ -57,14 +57,45 @@ Dependencies: Section 04 (all metamodel definitions and constraints).
 
 %% @TODO: Draft — expressiveness table. Must include constraints from at least two governance sources. %%
 
-<!-- E6: Cross-governance conflict result — THE HEADLINE RESULT -->
-<!-- Job: Present the specific example of formally contradictory constraints from different governance sources. -->
-<!-- Key content: A specific pair of constraints from different sources that cannot be simultaneously satisfied in the metamodel. The Refinery model generator cannot produce a valid instance under both constraints — demonstrating formal contradiction. -->
-<!-- Binding claims: #8 (formally contradictory cross-framework constraints) — HIGH RISK, DOES NOT EXIST YET. -->
+<!-- E6: Cross-governance conflict results — TWO HEADLINE RESULTS -->
+<!-- Binding claims: #8 (formally contradictory cross-framework constraints), #9 (multi-layer errors invisible to single-layer). -->
 
-%% @TODO: CRITICAL PATH — Develop the cross-governance conflict example. Need a specific pair of constraints from W3C and eIDAS/ARF that formally contradict. This is the paper's headline result and does not yet exist. %%
+### Headline 1: Income governance conflict (vertical)
 
-%% @TODO: Draft — cross-governance conflict. Show the two constraints, show why they contradict, show that Refinery cannot generate a valid model satisfying both. %%
+At the credential schema layer, IncomeCred is well-formed: $\text{CS\_Applicant}_3$ traces to Applicant, $\text{earns}_1$ traces to the $\text{earns}$ property, $\text{monthly\_income}_1$ traces to its value. All structural constraints (C1–C3) are satisfied.
+
+At the format-specific layer, three governance sources impose requirements on IncomeCred:
+
+1. **eIDAS ARF** (normative, SHALL): $\text{format}(\text{IncomeCred}) \in \{\text{SD-JWT-VC}, \text{mdoc}\}$ — neither supports predicate proofs %% @CITE: eIDAS ARF — dual format mandate %%.
+2. **GDPR Art. 5(1)(c)** (operationally binding): the income threshold check requires disclosing only whether $\text{monthly\_income} \geq \text{threshold}$, not the exact value. If data minimization is to be achieved through technical means at the credential layer, this requires predicate proof capability %% @CITE: GDPR Art. 5(1)(c) %%. The Hungarian data protection authority has enforced this interpretation in the housing subsidy context specifically.^[NAIH fined a bank 35M HUF for excessive data collection during CSOK applications.]
+3. **W3C VCDM 2.0**: the credential format must conform to the VCDM data model — AnonCreds v1 does not (no `@context`, no `credentialSubject` structure, CL signatures not a registered proof type) %% @CITE: W3C VCDM 2.0 %% %% @CITE: AnonCreds specification %%.
+
+No format satisfies all three requirements. SD-JWT-VC satisfies (1) and (3) but not (2). AnonCreds satisfies (2) but not (1) or (3). The configuration is unsatisfiable: constraints C5, C6, and C7 cannot be simultaneously satisfied on IncomeCred.
+
+This contradiction is invisible to single-layer inspection. At the credential schema layer alone, IncomeCred is well-formed. At the format-specific layer under eIDAS alone, SD-JWT-VC is compliant. At the format-specific layer under GDPR alone, AnonCreds provides the needed capability. Only the joint, cross-governance, cross-layer analysis reveals the conflict.
+
+%% @TODO: After Refinery formalization (Pass 2) — show the error predicates firing and the model generator producing no valid instance. %%
+
+*Remark.* An issuer-precomputed boolean claim ($\text{income\_above\_threshold}: \text{true}$) can approximate a predicate proof within SD-JWT-VC. However, this workaround requires the issuer to anticipate every verifier threshold at issuance time, produces combinatorial explosion for multi-threshold scenarios, and remains static — a credential issued with threshold $X$ cannot serve a verifier requiring threshold $Y$ without reissuance. As shown in Section 4.4, this workaround restructures the claim property layer — itself a cross-layer propagation that confirms the need for multi-layer analysis.
+
+### Headline 2: Cross-credential predicate gap (horizontal)
+
+The domain constraint $\text{property\_area} \geq \text{min\_area}(\text{num\_children})$ (C4) requires combining values from two credentials issued by independent authorities: $\text{property\_area}$ from PropertyCred (land registry) and $\text{num\_children}$ from FamilyStatusCred (civil registry).
+
+No deployed credential format supports cross-credential arithmetic predicates in zero-knowledge:
+
+| Format | Single-cred predicate | Cross-cred equality | Cross-cred arithmetic |
+|---|---|---|---|
+| AnonCreds v1 (CL) | Yes (attr ≥ const) | No | **No** |
+| AnonCreds v2 (BBS/PS) | Yes (range proofs) | Yes | **No** |
+| SD-JWT-VC | No | No | **No** |
+| SNARK-based %% @CITE: zk-creds, IEEE S&P 2023 %% | Yes | Yes | Yes (research prototype) |
+
+To verify the floor area constraint, the verifier must see both raw values from two separate credentials, defeating the privacy properties that ZKP-capable formats promise. The metamodel captures this: a claim-property-layer constraint (C4) that spans credentials cannot be enforced privacy-preservingly at the format-specific layer because no deployed format supports cross-credential predicate proofs (C9).
+
+This gap is again invisible to single-layer inspection: the claim property layer constraint is well-defined, both credentials are well-formed at the credential schema layer, and each credential's format is individually valid at the format-specific layer. Only the cross-layer analysis — checking whether the CPL constraint can be enforced given the FSL format capabilities — reveals the expressiveness gap.
+
+*Complementarity.* The two results are orthogonal. Headline 1 identifies a *vertical* governance conflict: contradictory requirements on a single credential's format from different regulatory sources. Headline 2 identifies a *horizontal* expressiveness gap: an ecosystem-level constraint spanning credentials that exceeds any single format's capabilities. Together, they demonstrate that multi-layer analysis detects both governance conflicts and format expressiveness gaps invisible to single-layer inspection.
 
 <!-- E7: Limitations of expressiveness -->
 <!-- Job: State what the constraint language cannot express. -->
@@ -85,9 +116,9 @@ Dependencies: Section 04 (all metamodel definitions and constraints).
 
 <!-- E9: Detection results -->
 <!-- Job: For each anti-pattern, show whether the error predicate catches it and demonstrate with the running example. -->
-<!-- Key content: Construct a variant of the Alice example that contains each anti-pattern. Show the Refinery error predicate firing. State which layer the error manifests in and whether single-layer inspection would catch it. -->
+<!-- Key content: Construct a variant of the housing subsidy example that contains each anti-pattern. Show the Refinery error predicate firing. State which layer the error manifests in and whether single-layer inspection would catch it. -->
 
-%% @TODO: Draft — detection results per anti-pattern. Construct error variants of Alice example. %%
+%% @TODO: Draft — detection results per anti-pattern. Construct error variants of housing subsidy example. %%
 
 <!-- E10: The multi-layer visibility argument -->
 <!-- Job: Deliver binding claim #9 — demonstrate a specific error that passes single-layer checks but fails the cross-layer constraint. -->

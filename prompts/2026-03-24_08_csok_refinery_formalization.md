@@ -20,32 +20,54 @@ The existing metamodel at `prior_work/dse-vc-refinery/vc_model.new.problem` prov
 
 ### 1. Evolve the metamodel
 
-Starting from the existing metamodel structure, add or modify what Pass 1 identified as needed. Likely extensions:
+Starting from the existing metamodel structure (`prior_work/dse-vc-refinery/vc_model.new.problem`), add or modify what Pass 1 identified as needed. **Consult Oszkár on encoding choices — the tool has evolved since the prior work.**
 
-- **Governance source annotations:** A way to tag constraints with their governance source (eIDAS, W3C VCDM, Hungarian law). This might be metadata predicates or a separate class hierarchy.
-- **Format capability predicates:** Predicates expressing what each format can do (e.g., `supports_zkp(format)`, `conforms_vcdm(format)`). These enable the governance conflict to surface as a constraint violation.
-- **Issuer constraints:** If the CSOK scenario requires that certain credentials come from specific issuers.
-- **Any structural changes** needed to support the CSOK entity/credential structure.
+#### Required extensions (conceptual — Refinery encoding TBD with Oszkár):
 
-Keep changes minimal. The metamodel should remain generic — CSOK-specific details go in the instance, not the metamodel classes.
+1. **Add `SdJwtVcSchema` class** extending `Formatted_Credential` — the existing `JwtVCCredentialSchema` is not the same as SD-JWT-VC (SD-JWT-VC uses hash-based selective disclosure, distinct from plain JWT-VC).
+2. **Add `MdocSchema` class** extending `Formatted_Credential` — even if simplified away in the running example, the metamodel should support it.
+3. **Format capability predicates:**
+   - `supports_predicate_proof(Formatted_Credential f)` — true only for `AnoncredsCredentialSchema`
+   - `supports_selective_disclosure(Formatted_Credential f)` — true for `SdJwtVcSchema`, `JsonLdCredentialSchema`
+   - `conforms_vcdm(Formatted_Credential f)` — true for `SdJwtVcSchema`, `JsonLdCredentialSchema`, `MdocSchema`; false for `AnoncredsCredentialSchema`
+   - `supports_cross_credential_predicate(Formatted_Credential f)` — false for all deployed formats (only SNARK-based research prototypes support this)
+4. **Governance constraint predicates** (instance-level assertions for CSOK):
+   - `requires_eidas_format(Credential c)` — marks EU wallet attestations
+   - `requires_predicate_proof(Credential c, Claim cl)` — marks privacy-sensitive claims
+5. **Cross-governance conflict error predicate:** fires when a credential requires both an eIDAS-mandated format and predicate proof capability, and no format satisfies both.
+6. **Format containment architecture:** the current model uses `[1]` multiplicity (every credential must have all three formats). CSOK needs selective format assignment. **Ask Oszkár:** change to `[0..1]` with a `no_format_assigned` error predicate, or use an alternative encoding?
+7. **Cross-credential predicate flag:** mechanism to mark that a domain constraint (C4: property_area ≥ f(num_children)) spans credentials and no format supports ZK enforcement — **design question for Oszkár**.
+
+Keep metamodel changes generic — CSOK-specific details go in the instance, not the metamodel classes.
 
 ### 2. Write the CSOK instance
 
-Using the entities, credentials, and format assignments from Pass 1:
+Using the entities, credentials, and format assignments from Pass 1
 
-- Declare CSOK CIM entities (Applicant, etc.) as `Subject`/`Value` instances
-- Assert `statement()` triples for CSOK relationships
-- Set up PIM-level credential structure (or leave for generation, depending on what we want to demonstrate)
-- Assign format-specific schemas
-- Set scope bounds
+**Claim Property Layer (7 elements):**
+- `Subject(Applicant).`
+- `statement(Applicant, has_children, num_children).`
+- `statement(Applicant, owns_property, property_area).`
+- `statement(Applicant, earns, monthly_income).`
 
-### 3. Encode the governance conflict
+**Credential Schema Layer (3 credentials):**
+- FamilyStatusCred: CS_Applicant₁ → has_children₁ → num_children₁
+- PropertyCred: CS_Applicant₂ → owns_property₁ → property_area₁
+- IncomeCred: CS_Applicant₃ → earns₁ → monthly_income₁
+- All CS_Applicantᵢ trace to Applicant (entity alignment)
 
-The format conflict (eIDAS SD-JWT-VC vs. AnonCreds ZKP on IncomeCredential) must be expressible as contradictory constraints in the model. When Refinery attempts to generate, it should either:
-- Produce no valid models (UNSAT — the conflict is real), or
-- Produce models that violate one governance source (showing the trade-off)
+**Format-Specific Layer:**
+- FamilyStatusCred → SD-JWT-VC (eIDAS compliant)
+- PropertyCred → SD-JWT-VC (eIDAS compliant)
+- IncomeCred → conflict site (assign SD-JWT-VC for eIDAS compliance; assert requires_predicate_proof for income claim)
 
-The specific encoding depends on how format capability predicates interact with governance constraints. Design this carefully — it's the paper's headline result.
+**Scope:** `Entity = 4, Prop = 3, Credential = 3` (or as Refinery requires)
+
+### 3. Encode both headline results
+
+**Headline 1 — Income governance conflict (vertical):** The format conflict (eIDAS SD-JWT-VC vs. GDPR predicate proof vs. W3C VCDM conformance on IncomeCred) must be expressible as contradictory constraints. When Refinery attempts to generate with all three governance constraints active, it should either produce no valid models (UNSAT) or produce models that violate at least one governance source. The specific encoding depends on how format capability predicates interact with governance error predicates — **this is the paper's primary headline result**.
+
+**Headline 2 — Cross-credential predicate gap (horizontal):** The constraint `property_area ≥ f(num_children)` spans two credentials. No deployed format supports cross-credential arithmetic predicates in zero-knowledge. Encode this as: a domain constraint (C4) that requires values from two credentials, combined with `supports_cross_credential_predicate(f) = false` for all deployed formats. The metamodel should flag that this constraint cannot be enforced privacy-preservingly at the format-specific layer.
 
 ### 4. Surface Martin's FCA results
 

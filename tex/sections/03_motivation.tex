@@ -1,19 +1,25 @@
 \section{Motivation}\label{motivation}
 
-\todo[inline]{Draft --- Diploma scenario. Student GPA credential. JSON-LD discloses exact value; AnonCreds supports ZKP range proof. If a governance framework requires privacy-preserving verification but the credential format is JSON-LD, the design has a cross-layer inconsistency --- invisible when inspecting any single layer.}
+Consider a government housing subsidy where eligibility requires credentials from three independent authorities: family status from a civil registry, property records from a land registry, and income from an employer.\footnote{Based on the Hungarian Family Housing Subsidy (Családi Otthonteremtési Kedvezmény, CSOK), simplified. Additional credentials required in practice --- tax clearance, criminal record check --- are omitted.} The required property size depends on the number of children --- a constraint that spans two credentials --- and the income check must satisfy both EU format mandates and data protection requirements.
 
-\todo[inline]{Draft --- Alice scenario. Two credentials, shared subject. Entity alignment constraint spans claim{\textrightarrow}credential boundary. Reference teaser figure (right panel).}
+\todo[inline,color=blue!20]{cite: 518/2023. (XI. 30.) Korm. rendelet {\S}9 --- CSOK floor area requirements by number of children}
 
-\todo[inline]{Draft --- single-layer inspection passes in both cases. Cross-layer errors only visible when layers are checked together.}
+At the claim property layer, the applicant's facts --- number of children, property floor area, monthly income --- form an information graph with domain-level constraints: the minimum floor area is a function of the number of children \todo[color=blue!20]{cite: 518/2023 Korm. rendelet {\S}9}, and income must exceed a regulatory threshold. At the credential schema layer, these facts are distributed across three credentials issued by independent authorities, each with its own credential subject. All three subjects must be aligned --- they refer to the same applicant --- and each claim must trace to the corresponding domain-level property. At the format-specific layer, EU regulations mandate specific credential formats for government-issued attestations \todo[color=blue!20]{cite: eIDAS 2.0 ARF --- SD-JWT-VC/mdoc mandate}, while data protection law requires that privacy-sensitive checks --- such as whether income exceeds a threshold --- disclose only the minimum necessary information \todo[color=blue!20]{cite: GDPR Art. 5(1)(c), NAIH enforcement precedent}.
 
-\todo[inline,color=blue!20]{cite: W3C VCDM 2.0 --- structural constraints}
+\todo[inline]{Draft --- single-layer inspection passes at each layer. Cross-layer analysis reveals two distinct problems: (1) the income credential's format cannot simultaneously satisfy eIDAS format mandates and GDPR data minimization --- SD-JWT-VC lacks predicate proofs, AnonCreds lacks VCDM conformance; (2) the floor area constraint requires cross-credential predicate evaluation, which no deployed format supports in zero-knowledge. Both problems are invisible when any single layer is inspected alone.}
 
-\todo[inline,color=blue!20]{cite: eIDAS 2.0 / ARF --- format and disclosure constraints}
+\todo[inline,color=blue!20]{cite: W3C VCDM 2.0 --- structural constraints (credentialSubject, proof types)}
 
-\todo[inline,color=blue!20]{cite: AnonCreds community guidelines}
+\todo[inline,color=blue!20]{cite: eIDAS 2.0 ARF --- format mandate (SD-JWT-VC, mdoc)}
 
-\todo[inline]{Draft --- multiple governance sources, not designed for joint satisfaction. Formal consistency not guaranteed.}
+\todo[inline,color=blue!20]{cite: GDPR Art. 5(1)(c) --- data minimization}
 
-\todo[inline,color=blue!20]{cite: gap claim --- verify no existing multi-level framework for VC ecosystems}
+\todo[inline,color=blue!20]{cite: AnonCreds specification --- CL-signature predicate proofs}
 
-\todo[inline]{Draft --- problem statement. Need formal framework for multi-layer, multi-source constraint satisfaction in VC ecosystems.}
+\todo[inline,color=blue!20]{cite: SD-JWT-VC --- IETF draft, hash-based selective disclosure}
+
+\todo[inline]{Draft --- The constraints originate from governance frameworks that were not designed to be jointly satisfied: W3C VCDM defines structural conformance, eIDAS mandates credential formats, GDPR requires data minimization, and format-specific capabilities (predicate proofs, selective disclosure) vary across implementations. No existing tool or methodology checks whether these constraints can be simultaneously satisfied for a given credential ecosystem design.}
+
+\todo[inline,color=blue!20]{cite: gap claim --- no existing multi-level framework for VC ecosystems (confirmed by gap analysis 2026-03-25)}
+
+\todo[inline]{Draft --- Credential ecosystem design requires a formal framework that captures constraints at multiple abstraction layers and from multiple governance sources, enabling designers to determine whether a given configuration is jointly satisfiable. No existing approach provides this capability.}
