@@ -107,6 +107,12 @@ local function make_todo_cmd(marker_type, content, is_block)
     else
       content = "figure: " .. content
     end
+  elseif marker_type == "SCAFFOLD" then
+    table.insert(opts, "color=purple!15")
+    content = "scaffold: " .. content
+  elseif marker_type == "META" then
+    table.insert(opts, "color=gray!10")
+    content = "meta: " .. content
   elseif marker_type == "COMMENT" then
     table.insert(opts, "color=gray!20")
   elseif marker_type ~= "TODO" then

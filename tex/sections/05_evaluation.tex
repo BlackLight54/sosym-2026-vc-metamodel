@@ -1,8 +1,22 @@
+\todo[inline,color=gray!10]{meta: Dependencies: Section 04 (all metamodel definitions and constraints).}
+
 \section{Evaluation}\label{evaluation}
+
+\todo[inline,color=purple!15]{scaffold: E0 --- Preamble --- evaluation strategy}
+
+\todo[inline,color=purple!15]{scaffold: Job: State the three validation axes and what each demonstrates. Be explicit about what the evaluation does NOT claim (no user study, no runtime performance, no comparison with competing tools).}
 
 \todo[inline]{Draft preamble --- three axes: (1) coverage, (2) expressiveness, (3) error visibility. State scope and limitations upfront.}
 
 \subsection{Metamodel Coverage}\label{metamodel-coverage}
+
+\todo[inline,color=purple!15]{scaffold: E1 --- Method}
+
+\todo[inline,color=purple!15]{scaffold: Job: Describe the systematic mapping of W3C VCDM 2.0 concepts to metamodel elements.}
+
+\todo[inline,color=purple!15]{scaffold: Key content: Take the VCDM 2.0 specification's defined concepts (credential, credentialSubject, issuer, claim, proof, verifiablePresentation, etc.) and map each to a metamodel element or state that it is out of scope. Present as a coverage table.}
+
+\todo[inline,color=purple!15]{scaffold: Binding claims: \#2 (grounding in VCDM 2.0), \#5 (coverage validation).}
 
 \todo[inline,color=blue!20]{cite: W3C VCDM 2.0 specification --- full concept list}
 
@@ -10,11 +24,31 @@
 
 \todo[inline]{Draft --- VCDM coverage method. Systematic extraction of concepts from the spec.}
 
+\todo[inline,color=purple!15]{scaffold: E2 --- Results}
+
+\todo[inline,color=purple!15]{scaffold: Job: State the coverage count and identify what is excluded.}
+
+\todo[inline,color=purple!15]{scaffold: Key content: N of M VCDM concepts mapped. Exclusions: proof mechanisms (out of scope --- we model structure, not cryptography), verifiable presentations (future work), status/revocation.}
+
 \todo[inline]{Draft --- coverage results. N/M count. Explicit exclusion list with rationale.}
+
+\todo[inline,color=purple!15]{scaffold: E3 --- Interpretation}
+
+\todo[inline,color=purple!15]{scaffold: Job: What does coverage mean for the contribution?}
+
+\todo[inline,color=purple!15]{scaffold: Key content: The metamodel captures the structural and semantic core of VCDM 2.0 relevant to credential ecosystem design. It is not a complete formalization of the entire specification --- it covers what is needed for cross-layer constraint checking.}
 
 \todo[inline]{Draft --- interpretation. Coverage is sufficient for the paper's claims, not exhaustive.}
 
 \subsection{Constraint Expressiveness}\label{constraint-expressiveness}
+
+\todo[inline,color=purple!15]{scaffold: E4 --- Method}
+
+\todo[inline,color=purple!15]{scaffold: Job: Describe how constraints were collected from governance sources and classified.}
+
+\todo[inline,color=purple!15]{scaffold: Key content: Collected constraints from W3C VCDM 2.0 spec, EU eIDAS 2.0 implementing regulation, Architecture Reference Framework (ARF). Classified each as: expressible (with predicate name), partially expressible, or not expressible in the constraint language.}
+
+\todo[inline,color=purple!15]{scaffold: Binding claims: \#6 (expressiveness vs. W3C + EU sources) --- HIGH RISK.}
 
 \todo[inline,color=blue!20]{cite: W3C VCDM 2.0 --- normative requirements}
 
@@ -24,9 +58,19 @@
 
 \todo[inline]{HIGH PRIORITY --- Collect constraints from EU sources. Mitigation: representative subset (5-8 key ARF/eIDAS requirements), not exhaustive.}
 
+\todo[inline,color=purple!15]{scaffold: E5 --- Results table}
+
+\todo[inline,color=purple!15]{scaffold: Job: Present the constraint expressiveness results.}
+
+\todo[inline,color=purple!15]{scaffold: Key content: Table with columns: constraint description, source (W3C/EU/community), expressible (yes/partial/no), predicate name if yes. Row count: target 10-15 constraints minimum.}
+
 \todo[inline,color=orange!20]{figure fig\_expressiveness\_table: Constraint expressiveness table: constraint {\texttimes} source {\texttimes} expressible {\texttimes} predicate.}
 
 \todo[inline]{Draft --- expressiveness table. Must include constraints from at least two governance sources.}
+
+\todo[inline,color=purple!15]{scaffold: E6 --- Cross-governance conflict results --- TWO HEADLINE RESULTS}
+
+\todo[inline,color=purple!15]{scaffold: Binding claims: \#8 (formally contradictory cross-framework constraints), \#9 (multi-layer errors invisible to single-layer).}
 
 \subsubsection{Headline 1: Income governance conflict (vertical)}\label{headline-1-income-governance-conflict-vertical}
 
@@ -92,14 +136,40 @@ This gap is again invisible to single-layer inspection: the claim property layer
 
 \emph{Complementarity.} The two results are orthogonal. Headline 1 identifies a \emph{vertical} governance conflict: contradictory requirements on a single credential's format from different regulatory sources. Headline 2 identifies a \emph{horizontal} expressiveness gap: an ecosystem-level constraint spanning credentials that exceeds any single format's capabilities. Together, they demonstrate that multi-layer analysis detects both governance conflicts and format expressiveness gaps invisible to single-layer inspection.
 
+\todo[inline,color=purple!15]{scaffold: E7 --- Limitations of expressiveness}
+
+\todo[inline,color=purple!15]{scaffold: Job: State what the constraint language cannot express.}
+
+\todo[inline,color=purple!15]{scaffold: Key content: Runtime behavioral constraints (e.g., revocation timing), policy-level access control, holder-binding protocols, issuance workflow constraints. The formalization covers structural and semantic constraints, not operational ones.}
+
 \todo[inline]{Draft --- expressiveness limitations. What falls outside the constraint language.}
 
 \subsection{Error Visibility}\label{error-visibility}
+
+\todo[inline,color=purple!15]{scaffold: E8 --- Anti-pattern catalog}
+
+\todo[inline,color=purple!15]{scaffold: Job: List the known credential design anti-patterns and their error predicates.}
+
+\todo[inline,color=purple!15]{scaffold: Key content: 3-5 anti-patterns drawn from the Refinery model. Each has a name, description of the design error, the error predicate that catches it, and which layer(s) it spans.}
+
+\todo[inline,color=purple!15]{scaffold: Binding claims: \#7 (error detection vs. anti-patterns), \#9 (multi-layer errors invisible to single-layer).}
 
 \todo[inline,color=orange!20]{figure fig\_antipattern\_table: Anti-pattern table: name {\texttimes} description {\texttimes} error predicate {\texttimes} layer(s) {\texttimes} detected?}
 
 \todo[inline]{Draft --- anti-pattern catalog. At least 4 anti-patterns: bad\_trace, noSubject/root\_ent\_doesnt\_have\_cred, no\_cred\_props\_for\_cred\_entity, non\_connected, common\_parent.}
 
+\todo[inline,color=purple!15]{scaffold: E9 --- Detection results}
+
+\todo[inline,color=purple!15]{scaffold: Job: For each anti-pattern, show whether the error predicate catches it and demonstrate with the running example.}
+
+\todo[inline,color=purple!15]{scaffold: Key content: Construct a variant of the housing subsidy example that contains each anti-pattern. Show the Refinery error predicate firing. State which layer the error manifests in and whether single-layer inspection would catch it.}
+
 \todo[inline]{Draft --- detection results per anti-pattern. Construct error variants of housing subsidy example.}
+
+\todo[inline,color=purple!15]{scaffold: E10 --- The multi-layer visibility argument}
+
+\todo[inline,color=purple!15]{scaffold: Job: Deliver binding claim \#9 --- demonstrate a specific error that passes single-layer checks but fails the cross-layer constraint.}
+
+\todo[inline,color=purple!15]{scaffold: Key content: Construct a specific model where the claim property layer is valid (connected, well-formed) and the credential schema layer is valid (all credentials have subjects, all claims have source/target), but the trace mapping is inconsistent (a CredentialSubject traces to a Value instead of a Subject). Show that this passes layer-by-layer checks but violates the cross-layer trace consistency constraint.}
 
 \todo[inline]{Draft --- multi-layer visibility. The key demonstration: layer-by-layer checks pass, cross-layer check fails. This is the paper's core argument for why multi-level modeling is necessary.}

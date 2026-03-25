@@ -115,13 +115,15 @@ Markers use Obsidian's native comment syntax (`%%`) with an `@` prefix to distin
 - `%% @FORMAL: description %%` — needs formal definition or proof.
 - `%% @TODO: description %%` — inline reminder (also add to TODO.md).
 - `%% @FIGURE: label | description %%` — figure placeholder.
+- `%% @META: key: value %%` — section metadata (budget, goal, dependencies). Standalone only.
+- `%% @SCAFFOLD: content %%` — paragraph scaffold (label, job, key content, key claim). Standalone only.
 
 Markers can be placed in two ways:
 
 - **Standalone** (own line): the marker is the entire line. Pandoc converts these to block-level `\todo[inline]{...}` annotations.
 - **Inline** (embedded in prose): the marker appears within a sentence, e.g., `...the number of children %% @CITE: source %%, and income...`. Pandoc converts these to margin `\todo{...}` notes that do not break paragraph flow.
 
-`@FIGURE` and `@TODO` markers should be standalone (own line). `@CITE` markers can be either. Do not nest markers.
+`@FIGURE`, `@TODO`, `@META`, and `@SCAFFOLD` markers should be standalone (own line). `@CITE` markers can be either. Do not nest markers. Do not use HTML comments (`<!-- -->`) in section files — use `%%` markers instead.
 
 ### Conversion to LaTeX
 
