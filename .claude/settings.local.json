@@ -18,7 +18,8 @@
       "Bash(done)",
       "Bash(docker run:*)",
       "Bash(bash .claude/skills/refinery/run_refinery.sh check prior_work/dse-vc-refinery/vc_model.new.problem)",
-      "Bash(bash .claude/skills/refinery/run_refinery.sh generate prior_work/dse-vc-refinery/vc_model.new.problem -n 1)"
+      "Bash(bash .claude/skills/refinery/run_refinery.sh generate prior_work/dse-vc-refinery/vc_model.new.problem -n 1)",
+      "Bash(bash .claude/skills/refinery/run_refinery.sh check models/csok.problem)"
     ]
   }
 }

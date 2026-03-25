@@ -1,0 +1,303 @@
+% ============================================================================
+% VC Ecosystem Metamodel — Three-Layer Partial Graph Specification
+% ============================================================================
+% Three-layer metamodel for verifiable credential ecosystem design.
+% Evolved from prior_work/dse-vc-refinery/vc_model.new.problem.
+%
+% Layers:
+%   CPL — Claim Property Layer (domain-level information graph)
+%   CSL — Credential Schema Layer (abstract credential schemas)
+%   FSL — Format-Specific Layer (format classes, capabilities, governance)
+%
+% Changes from prior model:
+%   - Credential.format: single abstract containment [1] (was per-format [1]x3)
+%   - New format classes: SdJwtVcSchema, MdocSchema
+%   - Format capability predicates (derived from class membership)
+%   - FCA-derived propagation rules (narrow format design space)
+%   - GovernanceAnnotation marker classes (generic governance encoding)
+% ============================================================================
+
+
+% =============================================
+% CPL — Claim Property Layer (domain-level information graph)
+% =============================================
+
+shadow pred CPL(e) <-> Entity(e); Prop(e).
+
+abstract class Entity {
+    contains Prop[] property
+}
+
+class Subject extends Entity {
+}
+
+propagation rule root_is_subj(Entity e) <->
+    must !value(_, e)
+    ==>
+    Subject(e).
+
+class Value extends Entity {
+}
+
+pred Leaf(Value e) <-> !property(e, _).
+
+class Prop {
+    contains Value[1] value
+    contains Claim[1] trace
+}
+
+pred statement(Entity subject, Prop property, Entity value) <->
+    subject != value,
+    property(subject, property),
+    value(property, value).
+
+propagation rule statement_rule(Entity subject, Prop property, Entity value) <->
+    must statement(subject, property, value)
+==>
+    Value(value),
+    property(subject, property),
+    value(property, value).
+
+propagation rule statement_rule_bw(Entity subject, Prop property, Entity value) <->
+    must property(subject, property), must value(property, value)
+==>
+    Value(value),
+    statement(subject, property, value).
+
+pred neighbours(Entity s, Entity t) <-> statement(s, _, t); statement(t, _, s).
+
+error non_connected(Entity n, Entity m) <-> n != m, !neighbours+(n, m).
+
+propagation rule no_self_loop(Prop p, Entity e) <->
+    must property(e, p) ==> !value(p, e).
+
+
+% =============================================
+% CSL — Credential Schema Layer (abstract credential schemas)
+% =============================================
+
+shadow pred CSL(e) <-> CredEntity(e); Claim(e); Credential(e).
+
+abstract class CredEntity {
+    Entity[1] trace
+}
+
+class CredentialSubject extends CredEntity {
+    contains Credential[0..1] _ opposite credentialSubject
+}
+
+propagation rule subject_traces_to_subject(CredEntity t) <->
+    must Subject(e), must CredEntity::trace(t, e)
+==>
+    CredentialSubject(t).
+
+class CredentialValue extends CredEntity {
+}
+
+class Claim {
+    contains CredEntity[1] source
+    contains CredentialValue[1] target
+}
+
+pred cred_neighbors(CredEntity s, CredEntity t) <->
+    credential_statement(s, _, t); credential_statement(t, _, s).
+
+propagation rule root_is_cred_subj(CredEntity cs) <->
+    may CredentialSubject(cs), must !Claim::target(_, cs)
+==>
+    CredentialSubject(cs).
+
+error no_empty_cred(CredentialSubject cs) <-> !source(_, cs).
+
+pred credential_statement(CredEntity source, Claim prop, CredEntity target) <->
+    source != target,
+    Claim::source(prop, source),
+    Claim::target(prop, target),
+    CredentialValue(target).
+
+propagation rule credential_statement_rule(CredEntity source, Claim prop, CredEntity target) <->
+    must credential_statement(source, prop, target)
+==>
+    Claim::source(prop, source),
+    Claim::target(prop, target),
+    CredentialValue(target).
+
+propagation rule credential_statement_rule_opp(CredEntity source, Claim prop, CredEntity target) <->
+    must Claim::source(prop, source), must Claim::target(prop, target)
+==>
+    credential_statement(source, prop, target),
+    CredentialValue(target).
+
+% Cross-layer trace consistency: forbid misaligned claim targets
+propagation rule prop_t(Claim c, CredEntity t) <->
+    must Prop::trace(p, c),
+    must Prop::value(p, e),
+    must !CredEntity::trace(t, e),
+    may Claim::target(c, t)
+==>
+    !Claim::target(c, t).
+
+% Cross-layer trace consistency: forbid misaligned claim sources
+propagation rule prop_s(Claim c, CredEntity s) <->
+    must Prop::trace(p, c),
+    must Entity::property(e, p),
+    must !CredEntity::trace(s, e),
+    may Claim::source(c, s)
+==>
+    !Claim::source(c, s).
+
+% Entity alignment: two CredEntities tracing to the same Entity
+pred aligned(CredEntity c_e1, CredEntity c_e2) <->
+    CredEntity::trace(c_e1, e),
+    CredEntity::trace(c_e2, e),
+    c_e1 != c_e2.
+
+% Credential class — evolved: single abstract format containment
+class Credential {
+    container CredentialSubject credentialSubject opposite _
+    contains Formatted_Credential[1] format
+}
+
+% Two Props sharing a credential subject (same parent in credential)
+pred common_parent(Prop p1, Prop p2) <->
+    p1 != p2,
+    Prop::trace(p1, cp1),
+    Prop::trace(p2, cp2),
+    Claim::source(cp1, e1),
+    Claim::source(cp2, e2),
+    e1 == e2.
+
+
+% =============================================
+% FSL — Format-Specific Layer
+% =============================================
+
+shadow pred FSL(e) <-> Formatted_Credential(e); GovernanceAnnotation(e).
+
+abstract class Formatted_Credential {
+}
+
+class AnoncredsCredentialSchema extends Formatted_Credential.
+class JsonLdCredentialSchema extends Formatted_Credential.
+class JwtVCCredentialSchema extends Formatted_Credential.
+class SdJwtVcSchema extends Formatted_Credential.
+class MdocSchema extends Formatted_Credential.
+
+
+% --- Format capability predicates (derived from class membership) ---
+
+% Predicate proof support: only AnonCreds (CL signatures)
+pred supports_predicate_proof(Formatted_Credential f) <->
+    AnoncredsCredentialSchema(f).
+
+% Selective disclosure: SD-JWT-VC (hash-based), JSON-LD (BBS+), AnonCreds, mdoc
+pred supports_selective_disclosure(Formatted_Credential f) <->
+    SdJwtVcSchema(f);
+    JsonLdCredentialSchema(f);
+    AnoncredsCredentialSchema(f);
+    MdocSchema(f).
+
+% W3C VCDM 2.0 conformance: all except AnonCreds v1
+pred conforms_vcdm(Formatted_Credential f) <->
+    SdJwtVcSchema(f);
+    JsonLdCredentialSchema(f);
+    JwtVCCredentialSchema(f);
+    MdocSchema(f).
+
+% ZKP support (FCA Group 1: indistinguishable with predicate_proofs)
+pred supports_zkp(Formatted_Credential f) <->
+    AnoncredsCredentialSchema(f).
+
+% Offline verification capability
+pred supports_offline_verification(Formatted_Credential f) <->
+    AnoncredsCredentialSchema(f);
+    JsonLdCredentialSchema(f);
+    MdocSchema(f).
+
+% Multi-credential proof support (FCA Group 1: co-occurs with predicate_proofs)
+pred supports_multi_credential_proof(Formatted_Credential f) <->
+    AnoncredsCredentialSchema(f).
+
+
+% --- FCA-derived propagation rules ---
+% Source: archive/fca_export.md — Credential Formats formal context
+% Pattern: negative elimination (same as prop_t/prop_s)
+
+% FCA-1: predicate_proofs -> zkp (indistinguishable group, 100%)
+% Formats without ZKP cannot provide predicate proofs.
+% Eliminates SD-JWT-VC, JWT-VC, mdoc when predicate proofs needed.
+propagation rule fca_predicate_not_sdjwt(Formatted_Credential f) <->
+    must supports_predicate_proof(f),
+    may SdJwtVcSchema(f)
+==>
+    !SdJwtVcSchema(f).
+
+propagation rule fca_predicate_not_jwt(Formatted_Credential f) <->
+    must supports_predicate_proof(f),
+    may JwtVCCredentialSchema(f)
+==>
+    !JwtVCCredentialSchema(f).
+
+propagation rule fca_predicate_not_mdoc(Formatted_Credential f) <->
+    must supports_predicate_proof(f),
+    may MdocSchema(f)
+==>
+    !MdocSchema(f).
+
+propagation rule fca_predicate_not_jsonld(Formatted_Credential f) <->
+    must supports_predicate_proof(f),
+    may JsonLdCredentialSchema(f)
+==>
+    !JsonLdCredentialSchema(f).
+
+% FCA-3: offline_verification -> selective_disclosure (67%)
+% Formats lacking offline verification are eliminated when it is required.
+propagation rule fca_offline_not_jwt(Formatted_Credential f) <->
+    must supports_offline_verification(f),
+    may JwtVCCredentialSchema(f)
+==>
+    !JwtVCCredentialSchema(f).
+
+propagation rule fca_offline_not_sdjwt(Formatted_Credential f) <->
+    must supports_offline_verification(f),
+    may SdJwtVcSchema(f)
+==>
+    !SdJwtVcSchema(f).
+
+
+% --- Governance annotation markers ---
+
+abstract class GovernanceAnnotation {
+}
+
+% eIDAS 2.0 ARF: EU wallet attestations must use a mandated format
+class EidasMandate extends GovernanceAnnotation {
+    Credential[1] target
+}
+
+% GDPR Art. 5(1)(c): privacy-sensitive claims require data minimization
+class PrivacyRequirement extends GovernanceAnnotation {
+    Credential[1] target
+}
+
+% W3C VCDM 2.0: credential format must conform to the data model
+class VcdmConformance extends GovernanceAnnotation {
+    Credential[1] target
+}
+
+
+% --- Headline 2: Cross-credential predicate gap (shadow pred) ---
+% Flags credential pairs with aligned subjects where at least one format
+% lacks multi-credential proof support. Since no deployed format supports
+% cross-credential arithmetic predicates, this flags all aligned pairs.
+
+shadow pred cross_cred_predicate_gap(Credential c1, Credential c2) <->
+    c1 != c2,
+    credentialSubject(c1, cs1), credentialSubject(c2, cs2),
+    aligned(cs1, cs2),
+    format(c1, f1), !supports_multi_credential_proof(f1)
+  ;
+    c1 != c2,
+    credentialSubject(c1, cs1), credentialSubject(c2, cs2),
+    aligned(cs1, cs2),
+    format(c2, f2), !supports_multi_credential_proof(f2).

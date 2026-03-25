@@ -30,12 +30,23 @@
   - [x] Document how to write new instances
   - [x] Curate examples from Refinery tutorials (File System, Project Planning, DLT)
   - [x] Create `run_refinery.sh` CLI wrapper (generate, check, concretize commands)
-- [ ] **CSOK Refinery formalization (Pass 2)** → `prompts/2026-03-24_08_csok_refinery_formalization.md` [Depends on Pass 1 + Refinery guide]
-  - [ ] Evolve metamodel (governance annotations, format capability predicates)
-  - [ ] Write CSOK instance on evolved metamodel
-  - [ ] Encode governance conflict (eIDAS SD-JWT-VC vs. AnonCreds ZKP)
-  - [ ] Surface Martin's FCA results for format-specific layer
-  - [ ] Test in Refinery — verify conflict manifests
+- [x] **CSOK Refinery formalization (Pass 2)** → `models/csok.problem` [COMPLETED 2026-03-25]
+  - [x] Evolve metamodel: single abstract format containment, 5 format classes, GovernanceAnnotation markers
+  - [x] Write CSOK instance: 3 credentials, 7 governance markers, format assignments
+  - [x] Encode governance conflict: `governance_conflict` error predicate (Headline 1 → UNSAT)
+  - [x] Encode cross-credential gap: `cross_cred_predicate_gap` shadow pred (Headline 2 → flagged)
+  - [x] Surface FCA results: 3 FCA-derived propagation rules (predicate→ZKP, offline→SD)
+  - [x] **Test in Refinery** — predicate removal evaluation complete
+    - [x] Syntax fixes: qualified `Claim::target`, concrete `!exists` for governance subclasses
+    - [x] Restructured to imports: `vc_metamodel.refinery`, `governance_conflict.refinery`, `csok_instance.refinery`
+    - [x] 4 entry points: `csok.problem` (UNSAT), `csok_no_conflict` / `csok_no_gdpr` / `csok_no_eidas` (all SAT)
+    - [x] `check -k` confirms `governance_conflict(IncomeCred, income_format): error`
+    - [x] `generate` confirms SAT variants produce valid models
+
+- [ ] Claim property layer should be renamed, make claude give suggestions based on prior work
+- [ ] Van-e az ÁRF szektori elvű bukokon kívül más formális vagy felformázott specifikációk? Ami a mi szempontunkból tényleges Governance Framework, és ami constrainteket állít föl nekünk, olyan jellegű constricteket, amikről itt beszélünk.
+- [ ] arf fókuszú gap analyis. 5.3.4
+- [ ] Error detection: concrete model + error edge, DSE: dierse grapg genewration
 
 ## Per-section drafting (priority order)
 
@@ -44,7 +55,7 @@
   - [ ] 4.2 Credential Schema Layer — metaclasses, trace mappings, CSOK CSL example (scaffolded)
   - [ ] 4.3 Format-Specific Layer — metaclasses, FCA-derived constraints, CSOK FSL example (scaffolded)
   - [ ] 4.4 Cross-Layer Constraints — trace consistency, entity alignment, constraint catalog (scaffolded), CPL restructuring worked example (scaffolded)
-  - [ ] Surface Martin's FCA results for format-specific layer constraints
+  - [x] Surface FCA results for format-specific layer constraints (done in `models/csok.problem`)
 - [ ] **Draft Section 03 (Motivation)** — CSOK running example, cross-layer problem
   - [ ] M1-M2: CSOK scenario (scaffolded — needs polish)
   - [ ] M3: Why single-layer inspection fails (TODO marker)
@@ -89,3 +100,4 @@
 | 2026-03-24 | Build pandoc pipeline | `build.sh`, `tex/main.tex`, Lua filters in `pandoc/filters/`. Citations and figures filters are stubs. Needs pandoc install to test. |
 | 2026-03-24 | Run `skills/section_scaffold` | 7 section files created in `sections/`. Intro has P1-P5 skeleton with structure paragraph. All sections have per-paragraph guidance with markers. DECISIONS.md updated with title, framing, terminology, examples, teaser figure decisions. |
 | 2026-03-25 | Run `skills/gap_analysis` | 7 RQs tested. Core novelty CLEAR. C5 corrected (MDE has been applied to SSI — 4 papers). ~20 papers to cite. 5 differentiation arguments. Synthesis in `archive/gap analyis/GAP_ANALYSIS_SYNTHESIS.md`. Sec 06 scaffold updated. |
+| 2026-03-25 | CSOK Refinery formalization (Pass 2) | `models/csok.problem` written. Evolved metamodel: single abstract format containment, 5 format classes, GovernanceAnnotation markers, FCA propagation rules. Two headline results encoded: `governance_conflict` error (UNSAT), `cross_cred_predicate_gap` shadow pred. Awaiting Refinery testing. |

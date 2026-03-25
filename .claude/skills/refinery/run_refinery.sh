@@ -64,5 +64,6 @@ echo "---"
 # MSYS_NO_PATHCONV prevents Git Bash on Windows from mangling /work paths
 MSYS_NO_PATHCONV=1 docker run --rm \
     -v "$HOST_DIR:/work" \
+    -w /work \
     "$REFINERY_IMAGE" \
     "$COMMAND" "/work/$FILE_BASE" "$@"
