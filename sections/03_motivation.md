@@ -11,9 +11,7 @@
 %% @SCAFFOLD: Key content: Government housing subsidy, 3 issuers, cross-credential dependency, privacy-sensitive income check, EU regulatory context. %%
 %% @SCAFFOLD: Key claim: Real credential ecosystems involve constraints from multiple governance sources spanning multiple abstraction layers. %%
 
-Consider a government housing subsidy where eligibility requires credentials from three independent authorities: family status from a civil registry, property records from a land registry, and income from an employer.^[Based on the Hungarian Family Housing Subsidy (Családi Otthonteremtési Kedvezmény, CSOK), simplified. Additional credentials required in practice — tax clearance, criminal record check — are omitted.] The required property size depends on the number of children — a constraint that spans two credentials — and the income check must satisfy both EU format mandates and data protection requirements.
-
-%% @CITE: 518/2023. (XI. 30.) Korm. rendelet §9 — CSOK floor area requirements by number of children %%
+Consider a government housing subsidy where eligibility requires credentials from three independent authorities: family status from a civil registry, property records from a land registry, and income from an employer.^[Based on the Hungarian Family Housing Subsidy (Családi Otthonteremtési Kedvezmény, CSOK), simplified. Additional credentials required in practice — tax clearance, criminal record check — are omitted.] The required property size depends on the number of children %% @CITE: 518/2023. (XI. 30.) Korm. rendelet §9 — CSOK floor area requirements by number of children %% — a constraint that spans two credentials — and the income check must satisfy both EU format mandates and data protection requirements.
 
 %% @SCAFFOLD: M2 — Cross-layer constraints in the scenario %%
 %% @SCAFFOLD: Job: Walk through the scenario showing constraints at each layer and across layers. %%

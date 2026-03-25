@@ -12,21 +12,16 @@
 %% @SCAFFOLD: Key claim: Design constraints span multiple abstraction layers and originate from diverse governance frameworks. %%
 %% @SCAFFOLD: Evidence: W3C VCDM 2.0, eIDAS 2.0, Hyperledger AnonCreds as concrete governance sources. %%
 
-%% @CITE: W3C VCDM 2.0 %%
-%% @CITE: eIDAS 2.0 / EU Digital Identity Wallet %%
-%% @CITE: Hyperledger AnonCreds / Aries %%
-
-Emerging digital credential ecosystems allow persons and organizations to receive, hold, and selectively present cryptographically verifiable claims. Such ecosystems are deployed under diverse governance frameworks — from government-regulated EU Digital Identity Wallets to community-governed decentralized identity systems. Designing these ecosystems requires satisfying constraints that span multiple abstraction layers — from domain-level claim properties through credential schema structure to format-specific privacy capabilities — yet no integrated formal model captures these cross-layer constraints.
+Emerging digital credential ecosystems allow persons and organizations to receive, hold, and selectively present cryptographically verifiable claims %% @CITE: W3C VCDM 2.0 %%. Such ecosystems are deployed under diverse governance frameworks — from government-regulated EU Digital Identity Wallets %% @CITE: eIDAS 2.0 / EU Digital Identity Wallet %% to community-governed decentralized identity systems %% @CITE: Hyperledger AnonCreds / Aries %%. Designing these ecosystems requires satisfying constraints that span multiple abstraction layers — from domain-level claim properties through credential schema structure to format-specific privacy capabilities — yet no integrated formal model captures these cross-layer constraints.
 
 %% @SCAFFOLD: P2 — Gap — what's missing? %%
 %% @SCAFFOLD: Job: Identify the specific gap: no multi-level metamodel formalizes cross-layer constraints jointly. %%
 %% @SCAFFOLD: Key claim: Design errors spanning layers go unnoticed because no model makes them expressible. %%
 %% @SCAFFOLD: Evidence: Show that constraints are scattered across W3C standards, EU regulations, community guidelines. %%
 
-%% @CITE: existing VC design tools/approaches that are single-layer %%
 %% @TODO: Verify gap claim — confirm no existing multi-level metamodel for VC ecosystems %%
 
-These constraints are currently scattered across W3C standards, EU implementing regulations, and community design guidelines, with no formal means to check their consistency. Design errors that span multiple layers go unnoticed — not because they are difficult to detect algorithmically, but because no model makes them expressible in the first place. A credential schema may be well-formed when inspected in isolation, yet violate a cross-layer constraint that links domain-level claim semantics to format-specific privacy capabilities.
+These constraints are currently scattered across W3C standards, EU implementing regulations, and community design guidelines, with no formal means to check their consistency %% @CITE: existing VC design tools/approaches that are single-layer %%. Design errors that span multiple layers go unnoticed — not because they are difficult to detect algorithmically, but because no model makes them expressible in the first place. A credential schema may be well-formed when inspected in isolation, yet violate a cross-layer constraint that links domain-level claim semantics to format-specific privacy capabilities.
 
 %% @SCAFFOLD: P3 — Contribution — numbered list %%
 %% @SCAFFOLD: Job: State exactly what the paper contributes. Each item references its delivering section. %%
@@ -45,9 +40,7 @@ We make the following contributions:
 %% @SCAFFOLD: Job: Give the reader enough to believe the approach works, without detail. %%
 %% @SCAFFOLD: Key content: Three-layer structure, layer names, Refinery as tool, graph predicates as constraint language. %%
 
-%% @CITE: Refinery partial graph modeling framework %%
-
-The metamodel organizes credential ecosystem design into three layers: a *claim property layer* capturing domain-level facts as an information graph, a *credential schema layer* defining how claims are grouped into verifiable credentials with subject bindings and trace mappings, and a *format-specific layer* encoding the capabilities and constraints of concrete credential formats such as SD-JWT-VC and AnonCreds. Cross-layer constraints are formalized as graph predicates in Refinery, which generates diverse model instances satisfying these constraints — or reveals that no consistent design exists when constraints from different governance frameworks are formally contradictory.
+The metamodel organizes credential ecosystem design into three layers: a *claim property layer* capturing domain-level facts as an information graph, a *credential schema layer* defining how claims are grouped into verifiable credentials with subject bindings and trace mappings, and a *format-specific layer* encoding the capabilities and constraints of concrete credential formats such as SD-JWT-VC and AnonCreds. Cross-layer constraints are formalized as graph predicates in Refinery %% @CITE: Refinery partial graph modeling framework %%, which generates diverse model instances satisfying these constraints — or reveals that no consistent design exists when constraints from different governance frameworks are formally contradictory.
 
 %% @SCAFFOLD: P5 — Structure paragraph — argumentative roadmap %%
 %% @SCAFFOLD: Job: Trace the paper's argument through its sections. Not a table of contents. %%
