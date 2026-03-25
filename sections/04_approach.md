@@ -138,7 +138,7 @@ The following table classifies the constraints exercised in the housing subsidy 
 |---|---|---|---|---|
 | C1 | Entity alignment | Structural | CPL$\leftrightarrow$CSL | $\text{CS\_Applicant}_{1,2,3}$ trace to same Applicant |
 | C2 | Trace consistency | Structural | CPL$\rightarrow$CSL | Each Claim traces to exactly one Prop |
-| C3 | No empty credential | Structural | CSL | Each CredentialSubject has $\geq$1 outgoing Claim |
+| C3 | No empty credential | Structural | CSL | Each CredentialSubject has $\geq 1$ outgoing Claim |
 | C4 | Cross-credential value dep. | Domain rule | CPL horiz. | $\text{property\_area} \geq f(\text{num\_children})$ |
 | C5 | Format mandate | eIDAS ARF | FSL | EU wallet attestations require SD-JWT-VC |
 | C6 | Predicate proof required | GDPR Art. 5(1)(c) | CPL$\leftrightarrow$FSL | Income threshold check $\rightarrow$ predicate proof |
