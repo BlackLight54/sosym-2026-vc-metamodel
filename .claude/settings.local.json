@@ -1,7 +1,21 @@
 {
   "permissions": {
     "allow": [
-      "Bash(pandoc --version)"
+      "Bash(pandoc --version)",
+      "WebFetch(domain:refinery.tools)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:hyperledger.github.io)",
+      "WebFetch(domain:eprint.iacr.org)",
+      "WebFetch(domain:anoncreds.github.io)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:ieeexplore.ieee.org)",
+      "WebFetch(domain:arxiv.org)",
+      "WebFetch(domain:ethz.ch)",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Bash(unzip -l \"$f\")",
+      "Bash(done)"
     ]
   }
 }
