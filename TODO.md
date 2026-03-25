@@ -22,6 +22,16 @@
   - [ ] Identify governance conflict candidate (binding claim #8)
   - [ ] Update section scaffolds (Sec 03, 04) to reference CSOK
 - [ ] **Develop cross-governance conflict example** (binding claim #8) [DOES NOT EXIST YET — may emerge from CSOK design]
+- [ ] **Create Refinery language guide** → `prompts/2026-03-24_07_refinery_guide.md` [Blocks Pass 2]
+  - [ ] Document `.problem` file syntax (classes, predicates, propagation rules, scope)
+  - [ ] Document three-layer pattern from existing models
+  - [ ] Document how to write new instances
+- [ ] **CSOK Refinery formalization (Pass 2)** → `prompts/2026-03-24_08_csok_refinery_formalization.md` [Depends on Pass 1 + Refinery guide]
+  - [ ] Evolve metamodel (governance annotations, format capability predicates)
+  - [ ] Write CSOK instance on evolved metamodel
+  - [ ] Encode governance conflict (eIDAS SD-JWT-VC vs. AnonCreds ZKP)
+  - [ ] Surface Martin's FCA results for format-specific layer
+  - [ ] Test in Refinery — verify conflict manifests
 
 ## Per-section drafting (priority order)
 

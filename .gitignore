@@ -16,7 +16,7 @@ build/
 *.vrb
 
 # PDF output (generated, not source)
-*.pdf
+build/**/*.pdf
 # Uncomment if you want to track figure PDFs:
 # !figures/*.pdf
 
