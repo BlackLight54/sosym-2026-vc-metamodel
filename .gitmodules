@@ -1,3 +1,6 @@
 [submodule "prior_work/dse-vc-refinery"]
 	path = prior_work/dse-vc-refinery
 	url = git@github.com:BlackLight54/dse-vc-refinery.git
+[submodule "prior_work/ese-vc-fca"]
+	path = prior_work/ese-vc-fca
+	url = https://github.com/BlackLight54/ese-vc-fca.git
