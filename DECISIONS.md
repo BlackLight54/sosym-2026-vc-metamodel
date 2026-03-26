@@ -38,10 +38,14 @@ Each entry has a date, the decision, the rationale, and what it affects. Use thi
 
 ### 2026-03-24 — Terminology: multi-level metamodeling, no MDA
 
+%% CPL naming partially superseded by "2026-03-26 — Claim Property Layer rename to Domain Concept Layer". The no-MDA constraint remains in force. %%
+
 **Decision:** Do not use MDA-specific terminology (CIM, PIM, PSM, Model-Driven Architecture). Use "multi-level metamodeling" framing. Layer names aligned with abstract phrasing:
-- **Claim Property Layer** — domain-level information graph
+
+- **Claim Property Layer** — domain-level information graph ← *renamed to Domain Concept Layer (DCL), see 2026-03-26 decision*
 - **Credential Schema Layer** — abstract credential schemas
 - **Format-Specific Layer** — format-specific representations
+
 **Rationale:** Oszkár's direction. MDA is OMG-branded terminology from 2001; the MODELS community has moved beyond strict MDA. Using CIM/PIM/PSM invites reviewer objections and ties the contribution to an outdated framework.
 **Affects:** All section files, background section 2.2 (now covers multi-level modeling: Atkinson & Kühne), approach subsection titles, CLAUDE.md thesis.
 **Revisit when:** Never — this is a hard constraint from the advisor.
@@ -115,6 +119,13 @@ Each entry has a date, the decision, the rationale, and what it affects. Use thi
 **Rationale:** The two results are orthogonal — vertical governance conflict vs. horizontal format expressiveness gap. Together they make a stronger case for multi-layer analysis than either alone. Both are grounded in real CSOK requirements (government decrees 16/2016, 17/2016, 518/2023 for floor area; GDPR + eIDAS for income).
 **Affects:** Section 05.3 structure, evaluation scope, abstract claims.
 **Revisit when:** If page budget forces cuts, the cross-credential gap can be shortened to a remark.
+
+### 2026-03-26 — Claim Property Layer rename to Domain Concept Layer
+
+**Decision:** Rename "Claim Property Layer (CPL)" to "Domain Concept Layer (DCL)" throughout the paper. Abbreviation changes from CPL to DCL.
+**Rationale:** Advisor feedback (Imre, 2026-03-25) flagged "Claim Property Layer" as non-standard for MODELS reviewers. Literature review of multi-level modeling terminology (Atkinson & Kühne, Gonzalez-Perez & Henderson-Sellers, de Lara et al., Kühne 2006) found no single canonical term, but "domain concept" is established in multi-level conceptual modeling literature and immediately recognizable to Foundations Track reviewers. The three-layer hierarchy Domain Concept → Credential Schema → Format-Specific reads as a natural abstraction descent. "Domain concept" is not MDA terminology, cannot be attacked as ad-hoc by adversarial reviewers, and works naturally in all compound forms ("at the domain concept layer," "DCL constraints").
+**Affects:** All section files, CLAUDE.md thesis block, DECISIONS.md terminology entry, TODO.md, models/*.problem comments, memory/feedback_no_mda.md. Supersedes the CPL naming in the 2026-03-24 terminology decision.
+**Revisit when:** Never — unless a reviewer explicitly objects to the term.
 
 ## Superseded decisions
 

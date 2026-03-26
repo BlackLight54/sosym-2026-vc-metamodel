@@ -5,7 +5,7 @@
 % Evolved from prior_work/dse-vc-refinery/vc_model.new.problem.
 %
 % Layers:
-%   CPL — Claim Property Layer (domain-level information graph)
+%   DCL — Domain Concept Layer (domain-level information graph)
 %   CSL — Credential Schema Layer (abstract credential schemas)
 %   FSL — Format-Specific Layer (format classes, capabilities, governance)
 %
@@ -19,10 +19,10 @@
 
 
 % =============================================
-% CPL — Claim Property Layer (domain-level information graph)
+% DCL — Domain Concept Layer (domain-level information graph)
 % =============================================
 
-shadow pred CPL(e) <-> Entity(e); Prop(e).
+shadow pred DCL(e) <-> Entity(e); Prop(e).
 
 abstract class Entity {
     contains Prop[] property

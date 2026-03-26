@@ -43,7 +43,7 @@
 %% @CITE: Atkinson & Kühne — multi-level modeling %%
 %% @CITE: potency-based multi-level modeling %%
 
-%% @TODO: Draft — multi-level modeling concepts. Position our three layers (claim property, credential schema, format-specific) as ontological levels. Explain cross-level constraints as the novel element. %%
+%% @TODO: Draft — multi-level modeling concepts. Position our three layers (domain concept, credential schema, format-specific) as ontological levels. Explain cross-level constraints as the novel element. %%
 
 %% @SCAFFOLD: B5 — Metamodeling for this paper %%
 %% @SCAFFOLD: Job: Establish the specific metamodeling concepts used in Section 4. %%

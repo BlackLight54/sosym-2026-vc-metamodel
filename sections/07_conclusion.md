@@ -7,7 +7,7 @@
 
 %% @SCAFFOLD: C1 — Summary %%
 %% @SCAFFOLD: Job: Restate the core contribution in 2-3 sentences. Do not introduce new claims. %%
-%% @SCAFFOLD: Key content: Three-layer metamodel for credential ecosystem design, grounded in VCDM 2.0, with cross-layer constraints formalized as graph predicates in Refinery. Three layers: claim property, credential schema, format-specific. %%
+%% @SCAFFOLD: Key content: Three-layer metamodel for credential ecosystem design, grounded in VCDM 2.0, with cross-layer constraints formalized as graph predicates in Refinery. Three layers: domain concept, credential schema, format-specific. %%
 
 %% @TODO: Draft — contribution summary. Match the contribution list from Section 1. %%
 

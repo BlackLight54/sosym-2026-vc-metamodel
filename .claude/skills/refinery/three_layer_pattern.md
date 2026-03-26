@@ -4,13 +4,13 @@ Project-specific metamodel architecture for the VC ecosystem design space. Defin
 
 **Terminology mapping** (per DECISIONS.md — no MDA terminology in the paper):
 
-| Internal name | Paper name | Purpose |
+| Prior work name | Paper name | Purpose |
 |---|---|---|
-| CIM | Claim Property Layer | Domain-level information graph |
-| PIM | Credential Schema Layer | Abstract credential schemas |
-| PSM | Format-Specific Layer | Format-specific representations |
+| CIM | Domain Concept Layer (DCL) | Domain-level information graph |
+| PIM | Credential Schema Layer (CSL) | Abstract credential schemas |
+| PSM | Format-Specific Layer (FSL) | Format-specific representations |
 
-## Claim Property Layer (internal: CIM)
+## Domain Concept Layer (prior work: CIM)
 
 Domain facts represented as an Entity–Property–Value information graph.
 
@@ -32,7 +32,7 @@ Key propagation rules:
 - `no_self_loop` — a property of an entity cannot have that entity as its value
 - `non_connected` (error) — all entities must be reachable from each other
 
-## Credential Schema Layer (internal: PIM)
+## Credential Schema Layer (prior work: PIM)
 
 Credential abstraction mapping domain claims to credential structure. Each PIM entity traces back to a CIM entity.
 
@@ -59,7 +59,7 @@ Key propagation rules:
 - `root_is_cred_subj` — CredEntities that are not claim targets become `CredentialSubject`
 - `credential_statement_rule` / `credential_statement_rule_opp` — decompose/recompose credential statement triples
 
-## Format-Specific Layer (internal: PSM)
+## Format-Specific Layer (prior work: PSM)
 
 Concrete credential format schemas. Each `Credential` contains one of each format.
 
