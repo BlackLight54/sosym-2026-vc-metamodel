@@ -12,11 +12,10 @@ The W3C Verifiable Credentials Data Model (VCDM) 2.0 \citep{manu_verifiable_2025
 
 VCDM credentials can be secured and serialized in multiple formats with distinct cryptographic foundations and privacy capabilities. SD-JWT-VC \citep{terbu_sd-jwt-based_2026} provides hash-based \emph{selective disclosure}, allowing a holder to reveal a chosen subset of claims while withholding others. AnonCreds \citep{curran2022anoncreds} uses Camenisch--Lysyanskaya signatures to support both selective disclosure and \emph{predicate proofs} --- zero-knowledge proofs that a claim value satisfies a given predicate (e.g., \(\mathit{income} \geq \mathit{threshold}\)) without disclosing the value itself. JSON-LD credentials with Data Integrity Proofs \citep{noauthor_verifiable_nodate} support selective disclosure via the BBS cryptosuite \citep{_bbs_2024} but, as of the current W3C Data Integrity specification, lack predicate proof capability (BBS+ signatures can in principle support predicate proofs, and specification work is ongoing). The ISO 18013-5 mobile document format (mdoc) \citep{_mobile_2021} is mandated alongside SD-JWT-VC by the eIDAS 2.0 Architecture Reference Framework for EU wallet attestations \citep{noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026}; since both formats lack predicate proof support, subsequent sections use SD-JWT-VC as the representative format for the governance conflict analysis. The two formats differ on other capability predicates (notably offline verification); the substitution is without loss of generality only with respect to predicate proof capability.
 
-\begin{cutcandidate}[B3 governance context — cut if over 1.25-page budget; eIDAS/ARF anchor in B2 final sentence suffices]
+
 
 Credential ecosystem design is subject to multiple governance frameworks operating at different levels of abstraction. The eIDAS 2.0 regulation \citep{eidas2} mandates specific credential formats for government-issued attestations, while GDPR Article 5(1)(c) \citep{gdpr} requires data minimization --- operationally creating demand for predicate proof capability when eligibility checks involve privacy-sensitive values. These governance sources were not designed for joint satisfaction; their interaction is a primary motivation for the cross-layer constraint analysis in \autoref{sec:approach}.
 
-\end{cutcandidate}
 
 \subsection{Multi-Level Modeling}\label{multi-level-modeling}
 
