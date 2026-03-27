@@ -4,18 +4,18 @@
     "terminal.integrated.env.windows": {
         "PATH": "${env:PATH};C:\\Users\\blacklight\\AppData\\Local\\Pandoc;C:\\Users\\blacklight\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64"
     },
-
     // === LaTeX Workshop ===
-
     // Root document
     "latex-workshop.latex.rootFile": "tex/main.tex",
-
     // Custom tools
     "latex-workshop.latex.tools": [
         {
             "name": "pandoc-build",
             "command": "bash",
-            "args": ["build.sh", "draft"]
+            "args": [
+                "build.sh",
+                "draft"
+            ]
         },
         {
             "name": "latexmk",
@@ -29,28 +29,36 @@
             ]
         }
     ],
-
     // Recipes — pandoc first, then latexmk
     "latex-workshop.latex.recipes": [
         {
             "name": "pandoc + latexmk",
-            "tools": ["pandoc-build", "latexmk"]
+            "tools": [
+                "pandoc-build",
+                "latexmk"
+            ]
         },
         {
             "name": "latexmk only",
-            "tools": ["latexmk"]
+            "tools": [
+                "latexmk"
+            ]
         }
     ],
-
     // PDF viewer — use VS Code tab
     "latex-workshop.view.pdf.viewer": "tab",
-
     // Point viewer to the build output
     "latex-workshop.latex.outDir": "build",
-
     // Auto-build on .tex save (not .md — use Ctrl+Alt+B for that)
     "latex-workshop.latex.autoBuild.run": "onSave",
-
     // Don't auto-clean build artifacts
-    "latex-workshop.latex.autoClean.run": "never"
+    "latex-workshop.latex.autoClean.run": "never",
+    // === Editor Associations ===
+    // Open Markdown files with Inkdown live editor by default
+    "workbench.editorAssociations": {
+        "*.md": "inkdown.editor",
+        "*.copilotmd": "vscode.markdown.preview.editor",
+        "{hexdiff}:/**/*.*": "hexEditor.hexedit",
+        "*.caff": "default"
+    }
 }
