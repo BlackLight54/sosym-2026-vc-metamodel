@@ -39,9 +39,6 @@
 ### Headline Results
 \label{sec:headlines}
 
-%% @SCAFFOLD: E6 — Cross-governance conflict results — TWO HEADLINE RESULTS %%
-%% @SCAFFOLD: Binding claims: #8 (formally contradictory cross-framework constraints), #9 (multi-layer errors invisible to single-layer). %%
-
 #### Headline 1: Income governance conflict (vertical)
 
 At the credential schema layer, IncomeCred is well-formed: $\text{CS\_Applicant}_3$ traces to Applicant, $\text{earns}_1$ traces to the $\text{earns}$ property, $\text{monthly\_income}_1$ traces to its value. All structural constraints (C1–C3) are satisfied.

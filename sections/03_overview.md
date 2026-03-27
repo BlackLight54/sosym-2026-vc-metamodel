@@ -10,26 +10,11 @@
 ## Motivation
 \label{sec:motivation}
 
-%% @SCAFFOLD: M1 — Housing subsidy scenario setup %%
-%% @SCAFFOLD: Job: Introduce the running example — a real-world multi-issuer credential scenario that exercises all three layers. %%
-%% @SCAFFOLD: Key content: Government housing subsidy, 3 issuers, cross-credential dependency, privacy-sensitive income check, EU regulatory context. %%
-%% @SCAFFOLD: Key claim: Real credential ecosystems involve constraints from multiple governance sources spanning multiple abstraction layers. %%
-
 Consider a government housing subsidy where eligibility requires credentials from three independent authorities: family status from a civil registry, property records from a land registry, and income from an employer.^[Based on the Hungarian Family Housing Subsidy (Családi Otthonteremtési Kedvezmény, CSOK), simplified. Additional credentials required in practice — tax clearance, criminal record check — are omitted.] The required property size depends on the number of children %% @CITE: 518/2023. (XI. 30.) Korm. rendelet §9 — CSOK floor area requirements by number of children %% — a constraint that spans two credentials — and the income check must satisfy both EU format mandates and data protection requirements.
-
-%% @SCAFFOLD: M2 — Cross-layer constraints in the scenario %%
-%% @SCAFFOLD: Job: Walk through the scenario showing constraints at each layer and across layers. %%
-%% @SCAFFOLD: Key content: DCL has cross-property constraint (floor area depends on children). CSL has entity alignment (same Applicant across 3 credentials). FSL has governance conflict (eIDAS vs. GDPR on income credential). %%
 
 At the domain concept layer, the applicant's facts — number of children, property floor area, monthly income — form an information graph with domain-level constraints: the minimum floor area is a function of the number of children %% @CITE: 518/2023 Korm. rendelet §9 %%, and income must exceed a regulatory threshold. At the credential schema layer, these facts are distributed across three credentials issued by independent authorities, each with its own credential subject. All three subjects must be aligned — they refer to the same applicant — and each claim must trace to the corresponding domain-level property. At the format-specific layer, EU regulations mandate specific credential formats for government-issued attestations %% @CITE: eIDAS 2.0 ARF — SD-JWT-VC/mdoc mandate %%, while data protection law requires that privacy-sensitive checks — such as whether income exceeds a threshold — disclose only the minimum necessary information %% @CITE: GDPR Art. 5(1)(c), NAIH enforcement precedent %%.
 
-%% @SCAFFOLD: M3 — Why single-layer inspection fails %%
-%% @SCAFFOLD: Job: Show that each layer is consistent in isolation but cross-layer constraints are violated. %%
-
 Inspected in isolation, each layer is well-formed: the domain properties satisfy their value constraints, the credential schemas conform to VCDM structural rules, and each format meets its own specification. Cross-layer analysis, however, reveals two distinct problems. First, the income credential cannot simultaneously satisfy the eIDAS format mandate (requiring SD-JWT-VC %% @CITE: eIDAS 2.0 ARF — SD-JWT-VC/mdoc mandate %%) and GDPR data minimization (requiring predicate proof capability %% @CITE: GDPR Art. 5(1)(c) %%): SD-JWT-VC supports hash-based selective disclosure but not predicate proofs %% @CITE: SD-JWT-VC — IETF draft, hash-based selective disclosure %%. Second, the floor area constraint — minimum area as a function of number of children — requires cross-credential predicate evaluation spanning the family status and property credentials, which no deployed format supports in zero-knowledge. Neither problem is visible when any single layer is inspected alone.
-
-%% @SCAFFOLD: M4 — Governance framework complication %%
-%% @SCAFFOLD: Job: Show that constraints come from multiple, potentially conflicting governance sources. %%
 
 %% @CITE: W3C VCDM 2.0 — structural constraints (credentialSubject, proof types) %%
 %% @CITE: eIDAS 2.0 ARF — format mandate (SD-JWT-VC, mdoc) %%
@@ -38,11 +23,6 @@ Inspected in isolation, each layer is well-formed: the domain properties satisfy
 %% @CITE: SD-JWT-VC — IETF draft, hash-based selective disclosure %%
 
 The constraints in this scenario originate from governance frameworks that were not designed to be jointly satisfied: W3C VCDM %% @CITE: W3C VCDM 2.0 %% defines structural conformance rules for credentials, eIDAS %% @CITE: eIDAS 2.0 ARF %% mandates specific credential formats for government attestations, GDPR %% @CITE: GDPR Art. 5(1)(c) %% requires data minimization, and format specifications %% @CITE: SD-JWT-VC — IETF draft %% %% @CITE: AnonCreds specification %% define what each format can and cannot express. Unlike hierarchical requirement systems in safety-critical domains, where stakeholders cooperate within a defined authority structure, these governance sources are independent and their design goals may be formally irreconcilable. No existing tool or methodology checks whether their constraints can be simultaneously satisfied for a given credential ecosystem design.
-
-%% @SCAFFOLD: M5 — Problem statement %%
-%% @SCAFFOLD: Job: State the problem that the rest of the paper addresses. End the section. %%
-%% @SCAFFOLD: Key claim: Credential ecosystem design requires a formal framework for simultaneous multi-layer, multi-source constraint satisfaction. No existing approach provides this. %%
-%% @SCAFFOLD: Note: This is where the Motivation subsection ends. The solution comes in Sec 04. Do NOT preview the solution here. %%
 
 %% @CITE: gap claim — no existing multi-level framework for VC ecosystems (confirmed by gap analysis 2026-03-25) %%
 

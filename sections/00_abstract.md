@@ -7,17 +7,6 @@ Emerging digital credential ecosystems allow persons and organizations to receiv
 
 We present a three-layer metamodel for credential ecosystem design, grounded in the W3C Verifiable Credentials Data Model 2.0. The metamodel captures domain-level claim properties as information graphs, abstract credential schemas defining claim grouping and subject binding, and format-specific representations for concrete formats such as AnonCreds and JSON-LD Verifiable Credentials. Cross-layer constraints are formalized as graph predicates in the Refinery partial graph modeling framework, enabling automated consistency checking through design space exploration. We validate metamodel coverage against the W3C specification, constraint expressiveness against W3C and EU regulatory sources, and error detection against known credential design anti-patterns. The formalization reveals that constraints from different governance frameworks can be formally contradictory, and that multi-layer design errors — undetectable by single-layer inspection — become visible through the integrated model. These results establish multi-layer formal modeling as a prerequisite for rigorous credential ecosystem design.
 
-%% @META: == Structure annotation %%
-%% @META: Problem — Para 1, S1–S2 (ecosystems + governance) %%
-%% @META: Gap — Para 1, S3 (emergent interaction, no existing tool) %%
-%% @META: Contribution — Para 2, S1 (three-layer metamodel) %%
-%% @META: Mechanism — Para 2, S2–S3 (layers + Refinery) %%
-%% @META: Evidence — Para 2, S4–S5 (validation + results) %%
-%% @META: Implication — Para 2, S6 (prerequisite) %%
-%% @META: == Self-critique flags %%
-%% @META: 1. "prerequisite" in final sentence may overclaim — consider "effective" if necessity argument is not made in paper %%
-%% @META: 2. Validation sentence (S4) is activity-reporting — convert to results when numbers available %%
-%% @META: 3. ~226 words — within ACM sigconf range (150–250) %%
 %% @META: == Binding claims (paper must deliver) %%
 %% @META: 1. Three-layer metamodel with defined layers %%
 %% @META: 2. Grounding in W3C VCDM 2.0 (mapping) %%

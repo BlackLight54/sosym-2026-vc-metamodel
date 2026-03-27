@@ -21,10 +21,6 @@ The domain concept layer models domain-level facts as a typed information graph.
 
 A credential ecosystem must cover all domain-level facts — an entity unreachable from the rest of the graph represents a fact that no credential path connects to the subject, and therefore cannot be verified. The `non_connected` error predicate enforces this: it flags any pair of entities not transitively reachable through the `neighbours` relation, where two entities are neighbours if a `statement` connects them in either direction. The `no_self_loop` propagation rule prevents an entity from serving as both the owner and the value of the same property — a structurally meaningless configuration that would collapse the subject–value distinction. Together with the $s \neq v$ condition in the `statement` predicate, these constraints ensure that every DCL instance is a connected, acyclic information graph with clear directionality from subjects to values. %% @TODO: Acyclicity constraint (error cyclic) not yet in vc_metamodel.refinery — add before submission. %% In terms of the usage modes (\autoref{sec:functional-overview}), DCL constraints serve error identification: evaluating `non_connected` on a partial specification with an orphaned entity returns $\textbf{NOT\_OK}(\text{non\_connected}(e_1, e_2))$, naming the unreachable pair and indicating where the domain model is incomplete.
 
-%% @SCAFFOLD: A3 — Running example at domain concept layer %%
-%% @SCAFFOLD: Job: Instantiate the housing subsidy example at this layer. %%
-%% @SCAFFOLD: Key content: Applicant (Subject) with three Props. Connected graph. Cross-property domain constraint. Satisfies all claim-layer constraints. %%
-
 In the housing subsidy scenario, the domain concept layer contains:
 
 | Element | Type | Description |
@@ -48,9 +44,6 @@ Trace mappings do more than record provenance — combined with Refinery's propa
 
 Beyond type derivation, the metamodel enforces structural well-formedness through error predicates — graph predicates whose satisfaction marks a partial model as inconsistent. At the CSL, the `credential_statement` predicate mirrors DCL's `statement`: it holds when a `Claim` connects distinct source and target entities with the target typed as `CredentialValue`. The `Root_cred_entity` predicate identifies CredEntities not targeted by any `credential_statement` — these must serve as credential subjects. Two error predicates catch structural violations that would otherwise propagate silently to downstream format assignment: `no_empty_cred` rejects a `CredentialSubject` with no outgoing `Claim`, and `root_ent_doesnt_have_cred` rejects a root entity without an associated `Credential`. When either fires, the framework reports the violation — e.g., $\text{NOT\_OK}(\text{no\_empty\_cred}(cs))$ — before format-specific constraints are even evaluated. The full constraint definitions are provided in the supplementary material.
 
-%% @SCAFFOLD: A7 — Running example at credential schema layer %%
-%% @SCAFFOLD: Job: Instantiate the housing subsidy example at this layer. Show three credentials with trace mappings and entity alignment. %%
-
 In the housing subsidy scenario, three credentials partition the claim-layer facts:
 
 | Credential | CredentialSubject | Claim | CredentialValue | Issuer (informal) |
@@ -68,9 +61,6 @@ The format-specific layer assigns each credential a concrete representation form
 
 The metamodel encodes format capabilities as six derived predicates over the class hierarchy — `supports_predicate_proof`, `supports_selective_disclosure`, `conforms_vcdm`, `supports_zkp`, `supports_offline_verification`, and `supports_multi_credential_proof` — each capturing a functional property that at least one governance framework or domain requirement in the running example imposes (full definitions in the supplementary material). Propagation rules use these predicates to narrow the format design space during generation: when a capability is required, formats lacking it are eliminated. Requiring predicate proof support on IncomeCred eliminates all formats except AnonCreds, which in turn does not conform to W3C VCDM 2.0, setting up the governance conflict in \autoref{sec:headlines}. Three governance annotation classes — `EidasMandate`, `PrivacyRequirement`, `VcdmConformance` — attach regulatory and standards requirements to individual credentials as typed markers. These annotations are the primary input for error identification (flagging format-governance conflicts) and design space exploration (generating only format assignments satisfying all active governance constraints).
 
-%% @SCAFFOLD: A10 — Running example at format-specific layer %%
-%% @SCAFFOLD: Job: Show format assignments for the housing subsidy credentials and the governance conflict site. %%
-
 In the housing subsidy scenario, format assignments are governance-driven:
 
 | Credential | Format | Governance source | Status |
@@ -83,9 +73,6 @@ FamilyStatusCred and PropertyCred are straightforward: as EU wallet attestations
 
 ## Cross-Layer Constraints as Graph Predicates
 \label{sec:cross-layer}
-
-%% @SCAFFOLD: A11 — Constraint taxonomy %%
-%% @SCAFFOLD: Job: Classify constraints by source and scope, instantiated with CSOK. %%
 
 The following table classifies the constraints exercised in the housing subsidy scenario by source and scope:
 
@@ -124,11 +111,6 @@ The housing subsidy scenario demonstrates all three usage modes (Section~\ref{se
 %% @FIGURE: fig_generated_model | (Optional) Refinery-generated model instance for the housing subsidy example showing constraint satisfaction. %%
 
 %% @TODO: A16 — Apply complete constraint set to housing subsidy example. Show which propagation rules fire, generated model output. Cross-layer constraint violation when SD-JWT-VC chosen but predicate proof required. Length: 1 paragraph. %%
-
-%% @SCAFFOLD: A17 — Format-driven DCL restructuring — worked example of cross-layer propagation %%
-%% @SCAFFOLD: Job: Show concretely how FSL limitations propagate upward to DCL, changing the claim structure. %%
-%% @SCAFFOLD: Key content: AnonCreds encodes monthly_income as integer, predicate proof works directly. SD-JWT-VC forces boolean restructuring (income_above_X claims). This is a cross-layer constraint propagation. %%
-%% @SCAFFOLD: Placement: Sec 04.4 worked example (per DECISIONS.md). %%
 
 The income threshold check illustrates how format-specific limitations propagate upward through the metamodel. With AnonCreds (CL signatures), the issuer encodes $\text{monthly\_income}$ as an integer attribute; at verification time, the holder proves $\text{monthly\_income} \geq \text{threshold}$ via a predicate proof without disclosing the exact value %% @CITE: AnonCreds specification — predicate proofs %% — the domain concept layer structure is unchanged. With SD-JWT-VC, no predicate proof mechanism exists %% @CITE: SD-JWT-VC — hash-based selective disclosure only %%. The only workaround is for the issuer to pre-compute boolean claims at issuance: $\text{earns\_above\_200k} \mapsto \text{true}$, $\text{earns\_above\_300k} \mapsto \text{true}$, and so on. This restructures the domain concept layer: the single Prop $\text{earns} \to \text{monthly\_income}$ (integer) is replaced by multiple Props $\text{earns\_above\_X} \to \text{boolean}$ for each anticipated threshold. The format-specific limitation has forced a change in the domain-level information model — a cross-layer constraint propagation that is visible only when both layers are analyzed together.
 
