@@ -57,7 +57,7 @@ At the format-specific layer, three governance sources impose requirements on In
 
 No format satisfies all three requirements. SD-JWT-VC satisfies (1) and (3) but not (2). AnonCreds satisfies (2) but not (1) or (3). The configuration is unsatisfiable: constraints C5, C6, and C7 cannot be simultaneously satisfied on IncomeCred.
 
-This contradiction is invisible to single-layer inspection. At the credential schema layer alone, IncomeCred is well-formed. At the format-specific layer under eIDAS alone, SD-JWT-VC is compliant. At the format-specific layer under GDPR alone, AnonCreds provides the needed capability. Only the joint, cross-governance, cross-layer analysis reveals the conflict.
+This contradiction is invisible to single-layer inspection. At the credential schema layer alone, IncomeCred is well-formed. At the format-specific layer under the eIDAS ARF alone, SD-JWT-VC is compliant. At the format-specific layer under GDPR alone, AnonCreds provides the needed capability. Only the joint, cross-governance, cross-layer analysis reveals the conflict.
 
 %% @TODO: After Refinery formalization (Pass 2) — show the error predicates firing and the model generator producing no valid instance. %%
 
@@ -73,6 +73,9 @@ No deployed credential format (i.e., formats with stable specifications and prod
 |---|---|---|---|
 | AnonCreds v1 (CL) | Yes (attr $\geq$ const) | No | **No** |
 | SD-JWT-VC | No | No | **No** |
+| JSON-LD (BBS+) | No | No | **No** |
+| JWT-VC | No | No | **No** |
+| mdoc (ISO 18013-5) | No | No | **No** |
 | SNARK-based \citep{rosenberg_zk-creds_2023} | Yes | Yes | Yes (research prototype) |
 
 AnonCreds v2 is under development with planned BBS+ signature support and range proof capabilities, but no stable specification is available for independent verification of these claims.
@@ -161,7 +164,7 @@ Table: Constraint sensitivity at $N{=}3$: governance framework power-set. \label
 | G6     |       | x       | x    | TBD    |
 | G7     | x     | x       | x    | TBD    |
 
-The constraint sensitivity experiment confirms that only G7, the conjunction of all three governance frameworks, yields unsatisfiability; all seven proper subsets are satisfiable (\autoref{tab:sensitivity}). This validates the Headline 1 finding (\autoref{sec:headlines}): the income governance conflict requires the simultaneous imposition of eIDAS format mandates [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026], GDPR data minimization requirements [@gdpr], and W3C VCDM conformance [@manu_verifiable_2025]. No proper subset of these three sources produces a conflict. The measurements cover $N$ up to 30 credentials (TBD graph nodes); for reference, the EU Digital Identity Wallet Architecture Reference Framework defines fewer than 10 attestation types in its current version [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026], though future ecosystem growth may increase this number. The contribution is the metamodel and its cross-layer constraint formalization; Refinery serves as the validation vehicle, and absolute performance numbers are tool-specific.
+The constraint sensitivity experiment confirms that only G7, the conjunction of all three governance frameworks, yields unsatisfiability; all seven proper subsets are satisfiable (\autoref{tab:sensitivity}). This validates the Headline 1 finding (\autoref{sec:headlines}): the income governance conflict requires the simultaneous imposition of eIDAS ARF format mandates [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026], GDPR data minimization requirements [@gdpr], and W3C VCDM conformance [@manu_verifiable_2025]. No proper subset of these three sources produces a conflict. The measurements cover $N$ up to 30 credentials (TBD graph nodes); for reference, the EU Digital Identity Wallet Architecture Reference Framework defines fewer than 10 attestation types in its current version [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026], though future ecosystem growth may increase this number. The contribution is the metamodel and its cross-layer constraint formalization; Refinery serves as the validation vehicle, and absolute performance numbers are tool-specific.
 
 ## Threats to Validity
 
