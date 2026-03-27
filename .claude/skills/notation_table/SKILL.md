@@ -1,3 +1,7 @@
+---
+description: Scan all section files for mathematical notation, check consistency across sections, and generate a notation summary table. Use when checking notation consistency, generating a notation table, or listing all symbols.
+---
+
 # Skill: Notation Table
 
 **Purpose:** Scan all section files for mathematical notation, check consistency, and generate a notation summary. Useful during writing as a consistency reference, and required by some venues as a paper element.

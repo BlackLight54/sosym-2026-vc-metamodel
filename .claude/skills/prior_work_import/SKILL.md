@@ -1,3 +1,7 @@
+---
+description: Create structured reference notes from DOIs, BibTeX entries, or paper titles, assess relevance, and propose where to integrate them. Use when importing references, adding papers to the related work, or processing search results.
+---
+
 # Skill: Prior Work Import
 
 **Purpose:** Given DOIs, BibTeX entries, or paper titles, create structured reference notes and assess relevance to the current paper.

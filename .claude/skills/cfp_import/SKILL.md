@@ -1,3 +1,7 @@
+---
+description: Import a Call for Papers from a URL or pasted text and populate CFP.md and VENUE.md with venue details, deadlines, and format requirements. Use when setting up a new venue or importing CFP content.
+---
+
 # Skill: CFP Import and Venue Derivation
 
 **Purpose:** Given a CFP URL or pasted text, populate CFP.md and derive VENUE.md.

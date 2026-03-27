@@ -1,3 +1,7 @@
+---
+description: Generate a structured abstract draft from the thesis. Use when the user wants to draft, scaffold, or plan the abstract section.
+---
+
 # Skill: Abstract Scaffold
 
 **Purpose:** Generate a structured abstract draft from the thesis in CLAUDE.md. The abstract is a contract — it commits to a claim, a method, and a result before the paper is written.

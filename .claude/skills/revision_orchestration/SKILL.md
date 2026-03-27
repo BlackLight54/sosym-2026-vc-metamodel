@@ -1,3 +1,7 @@
+---
+description: Decompose multi-section revisions into ordered, self-contained prompt files ensuring correct change propagation. Use when a change affects multiple sections, propagating revisions across the paper, or planning a cross-cutting revision.
+---
+
 # Skill: Revision Orchestration
 
 **Purpose:** Decompose a revision that touches multiple sections into ordered, self-contained Claude Code prompts. Ensures changes propagate correctly and nothing is missed.

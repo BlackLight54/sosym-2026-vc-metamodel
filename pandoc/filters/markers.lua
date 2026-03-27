@@ -226,13 +226,17 @@ local function process_inline_markers(inlines)
 end
 
 --- Split Para inlines on SoftBreak to recover individual source lines.
+-- Returns a list of { inlines = {pandoc Inline...}, text = "stringified" }.
 local function split_on_softbreak(inlines)
   local lines = {}
   local current = {}
   for _, inline in ipairs(inlines) do
     if inline.t == "SoftBreak" then
       if #current > 0 then
-        table.insert(lines, pandoc.utils.stringify(pandoc.Inlines(current)))
+        table.insert(lines, {
+          inlines = pandoc.List(current),
+          text = pandoc.utils.stringify(pandoc.Inlines(current)),
+        })
         current = {}
       end
     else
@@ -240,7 +244,10 @@ local function split_on_softbreak(inlines)
     end
   end
   if #current > 0 then
-    table.insert(lines, pandoc.utils.stringify(pandoc.Inlines(current)))
+    table.insert(lines, {
+      inlines = pandoc.List(current),
+      text = pandoc.utils.stringify(pandoc.Inlines(current)),
+    })
   end
   return lines
 end
@@ -248,47 +255,77 @@ end
 function Para(el)
   local lines = split_on_softbreak(el.content)
 
-  -- Check if ALL lines are markers (standalone block)
-  local parsed = {}
-  local all_markers = true
+  -- Classify each line as marker or prose
+  local classified = {}
+  local has_marker = false
+  local has_prose = false
   for _, line in ipairs(lines) do
-    local marker_type, content = parse_marker(line)
+    local marker_type, content = parse_marker(line.text)
     if marker_type then
-      table.insert(parsed, { type = marker_type, content = content })
+      table.insert(classified, {
+        kind = "marker", type = marker_type, content = content,
+      })
+      has_marker = true
     else
-      all_markers = false
-      break
+      table.insert(classified, {
+        kind = "prose", inlines = line.inlines,
+      })
+      has_prose = true
     end
   end
 
-  if all_markers and #parsed > 0 then
+  -- All markers: emit block-level \todo[inline]{} for each
+  if has_marker and not has_prose then
     local blocks = {}
-    for _, m in ipairs(parsed) do
-      local block = convert_marker(m.type, m.content)
-      if block then
-        -- convert_marker returns either a RawBlock or empty table
-        if block.t then
-          table.insert(blocks, block)
-        end
+    for _, c in ipairs(classified) do
+      local block = convert_marker(c.type, c.content)
+      if block and block.t then
+        table.insert(blocks, block)
       end
     end
     return blocks
   end
 
-  -- Fallback: check if the whole paragraph is a single marker
-  local text = pandoc.utils.stringify(el)
-  local marker_type, content = parse_marker(text)
-  if marker_type then
-    return convert_marker(marker_type, content)
+  -- Mixed or pure prose: split into blocks per line group
+  if has_marker and has_prose then
+    local blocks = {}
+    local prose_acc = pandoc.List() -- accumulates inlines for consecutive prose lines
+
+    local function flush_prose()
+      if #prose_acc > 0 then
+        local processed = process_inline_markers(prose_acc) or prose_acc
+        table.insert(blocks, pandoc.Para(processed))
+        prose_acc = pandoc.List()
+      end
+    end
+
+    for _, c in ipairs(classified) do
+      if c.kind == "marker" then
+        flush_prose()
+        local block = convert_marker(c.type, c.content)
+        if block and block.t then
+          table.insert(blocks, block)
+        end
+      else
+        -- Insert SoftBreak between consecutive prose lines
+        if #prose_acc > 0 then
+          prose_acc:insert(pandoc.SoftBreak())
+        end
+        prose_acc:extend(c.inlines)
+      end
+    end
+    flush_prose()
+    return blocks
   end
 
-  -- Check for inline markers embedded in prose
+  -- Pure prose (no markers found via line classification):
+  -- still check for inline markers embedded within prose lines
   local new_inlines = process_inline_markers(el.content)
   if new_inlines then
     return pandoc.Para(new_inlines)
   end
 
-  return nil -- not a marker paragraph
+  return nil -- no markers at all
 end
 
 --- Handle Plain blocks (used inside list items, table cells, etc.)

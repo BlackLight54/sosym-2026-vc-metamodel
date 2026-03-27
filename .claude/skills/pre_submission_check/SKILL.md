@@ -1,3 +1,7 @@
+---
+description: Scan all section files for mechanical issues before submission: unresolved markers, broken references, anonymity violations, terminology inconsistencies. Use when checking readiness to submit or running a pre-submission scan.
+---
+
 # Skill: Pre-Submission Check
 
 **Purpose:** Scan all section files for mechanical issues before submission: unresolved markers, broken references, anonymity violations, and other fixable problems.

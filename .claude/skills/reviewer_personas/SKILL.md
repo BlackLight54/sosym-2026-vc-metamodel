@@ -1,3 +1,7 @@
+---
+description: Instantiate four reviewer archetypes (Champion, Mathematician, Business Manager, Adversarial) into paper-specific personas for audience calibration. Use when generating reviewer personas, calibrating the audience, or asking 'who will review this?'
+---
+
 # Skill: Reviewer Personas
 
 **Purpose:** Instantiate the four reviewer archetypes (from `guides/reviewer_archetypes`) into specific personas calibrated to this paper's content, venue, and contribution type. The personas get more precise as more of the paper exists — run early for rough calibration, re-run after drafting for precision.

@@ -1,3 +1,7 @@
+---
+description: Two-level audit that maps contributions to evidence sections and scans every claim for proportional evidence. Use when auditing claims, mapping contributions, or checking for overclaiming/underclaiming.
+---
+
 # Skill: Claim Audit
 
 **Purpose:** Two-level audit. First: verify the numbered contribution list maps to evidence sections (contribution mapping). Second: scan every claim in the paper for proportional evidence. The most common soft rejection at A* venues is a mismatch between claim language and evidence type.

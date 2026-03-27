@@ -1,3 +1,7 @@
+---
+description: Decompose the thesis into searchable research questions and generate agent-ready prompt files to map the landscape and establish novelty. Use when generating research questions, running gap analysis, or checking the novelty claim.
+---
+
 # Skill: Gap Analysis RQ Generation
 
 **Purpose:** Given the thesis and domain, generate concrete research questions that can be given to research agents (Claude research mode, SciSpace, Semantic Scholar, etc.) to map the landscape, establish novelty, and surface threats.

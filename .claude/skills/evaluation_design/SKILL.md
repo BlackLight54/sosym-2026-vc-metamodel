@@ -1,3 +1,7 @@
+---
+description: Map contributions to evaluation questions and select appropriate methods to produce a structured evaluation plan. Use when designing the evaluation section, deciding what experiments are needed, or planning how to validate contributions.
+---
+
 # Skill: Evaluation Design
 
 **Purpose:** Given the contribution list and the venue expectations, design a structured evaluation that answers the right questions with the right methods. The evaluation section is where most A* rejections originate — either the wrong thing is evaluated, the method doesn't match the claim, or the results don't support the contribution language.

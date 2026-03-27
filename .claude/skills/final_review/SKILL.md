@@ -1,3 +1,7 @@
+---
+description: Full-paper review orchestrator that reads sequentially, checks argument coherence, runs champion test, simulates reviewer personas, and identifies critical issues. Use before submission for a comprehensive review, or when asked to read the whole paper and identify problems.
+---
+
 # Skill: Final Review (Orchestrator)
 
 **Purpose:** Full-paper review before submission. This skill orchestrates other skills for mechanical checks and focuses itself on what only a sequential human-like read can catch: argument coherence, champion potential, and aesthetic quality.

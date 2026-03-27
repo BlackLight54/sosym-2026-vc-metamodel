@@ -1,3 +1,7 @@
+---
+description: Resolve @CITE markers to BibTeX keys and manage the citation workflow between Obsidian, Zotero, and Overleaf. Use when resolving citations, fixing CITE markers, or checking which citations are missing.
+---
+
 # Skill: Bibliography Management
 
 **Purpose:** Resolve `%% @CITE: %%` markers to BibTeX keys and manage the citation workflow between Obsidian (authoring), Zotero (reference management), and Overleaf (Zotero import for `.bib`). The goal is to close the loop: every `%% @CITE: %%` marker either becomes a `\cite{key}` or gets a concrete action item.

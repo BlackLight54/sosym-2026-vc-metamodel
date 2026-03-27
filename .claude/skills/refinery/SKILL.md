@@ -1,3 +1,7 @@
+---
+description: Reference guide for writing Refinery .problem files — partial graph specifications with metamodels, constraints, and scenario instances. Use when reading, writing, or modifying .problem files, or when working on the Refinery formalization or code listings.
+---
+
 # Refinery Language Guide
 
 **Purpose:** Reference for writing Refinery `.problem` files — partial graph specifications that define metamodels, constraints, and scenario instances for design space exploration.

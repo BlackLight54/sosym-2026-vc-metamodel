@@ -4,6 +4,19 @@
 \usepackage{todonotes}
 \setuptodonotes{inline}
 
+%% Cut candidates — color tint only, zero geometry change.
+%% Active when \if@ACM@review is true (i.e., review class option is set).
+%% Toggled off automatically when review option is removed for submission.
+\makeatletter
+\if@ACM@review
+  \newenvironment{cutcandidate}[1][]{%
+    \par\begingroup\color{red!50!black}\ignorespaces
+  }{\par\endgroup}
+\else
+  \newenvironment{cutcandidate}[1][]{}{}
+\fi
+\makeatother
+
 %% Pandoc emits \tightlist for compact lists
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 

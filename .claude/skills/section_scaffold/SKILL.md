@@ -1,3 +1,7 @@
+---
+description: Create initial section files in sections/ based on venue format and planned structure, with page budgets and paragraph-level scaffolding. Use when scaffolding the paper, creating section files, or setting up the paper structure for a venue.
+---
+
 # Skill: Section Scaffold
 
 **Purpose:** Create the initial set of section files in `sections/` based on the venue format and the paper's planned structure.

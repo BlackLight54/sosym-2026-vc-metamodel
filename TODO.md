@@ -7,10 +7,10 @@ Full plan: `.claude/plans/linked-petting-prism.md`.
 Pipeline & dependency diagram: `prompts/2026-03-27_consolidation/PIPELINE.md`.
 Critical path: **T00 ✅ → T00b → T01/T02 → T07 → T08 → T09 → T10**
 
-- [ ] **T00b**: Scaffold/placeholder merging — merge `@SCAFFOLD`+`@TODO: PLACEHOLDER` pairs into clean `@TODO` blocks
+- [x] **T00b**: Scaffold/placeholder merging — merge `@SCAFFOLD`+`@TODO: PLACEHOLDER` pairs into clean `@TODO` blocks
 - [ ] **T01**: Sec 04 Preamble + DCL definitions (A1, A2) — [Binding #1, #3]
 - [ ] **T02**: Sec 04 CSL definitions (A4, A5, A6) — [Binding #1, #3]
-- [ ] **T03**: Sec 04 FSL definitions (A8, A9) — [Binding #1]
+- [x] **T03**: Sec 04 FSL definitions (A8, A9) — [Binding #1]
 - [ ] **T04**: Sec 02 Background (B1–B7, all) — [predicate proofs MUST be introduced here]
 - [ ] **T05**: Sec 06 Related Work (R1–R4, all) — [D5 preemption critical]
 - [ ] **T06**: Sec 07 Conclusion (C1–C4, all)
@@ -29,8 +29,8 @@ Pipeline: `prompts/.archive/2026-03-26_pipeline.md` — all phases completed exc
 
 Structure completed ✅ (Elaboration 5.1 + Scalability 5.2 + Threats 5.3). Remaining:
 
-- [ ] Create 2–5 model instances of increasing size in `models/`
-- [ ] Run scalability measurements in Refinery
+- [x] Create 2–5 model instances of increasing size in `models/`
+- [x] Run scalability measurements in Refinery
 - [ ] Design 2 `figure*` scalability diagrams (fig_scalability_validation, fig_scalability_generation)
 - [ ] Draft baseline comparison paragraph
 - [ ] Draft threats to validity subsection

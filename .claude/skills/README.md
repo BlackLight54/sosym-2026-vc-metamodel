@@ -43,6 +43,7 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 ### Revision
 | Skill | Trigger | What it does |
 |-------|---------|-------------|
+| `budget_cut` | "Page budget usage tree" / "We need major reengineering" | Diagnoses page inflation per section; proposes phased cuts with `@CUT-START`/`@CUT-END` markers |
 | `revision_orchestration` | "This change affects multiple sections" | Decomposes cross-cutting changes into ordered prompts |
 
 ### Post-submission

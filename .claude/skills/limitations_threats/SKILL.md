@@ -1,3 +1,7 @@
+---
+description: Derive an honest, structured limitations section from the paper's assumptions, evaluation scope, and model boundaries, ranked by reviewer risk. Use when writing limitations, identifying threats to validity, or checking scope honesty.
+---
+
 # Skill: Limitations and Threats to Validity
 
 **Purpose:** Derive an honest, structured limitations section from the paper's actual assumptions, evaluation scope, and formal model boundaries. A good limitations section is not an afterthought — it pre-empts reviewer objections, demonstrates intellectual honesty, and scopes the contribution precisely. A missing or throwaway limitations section is a red flag at any serious venue.

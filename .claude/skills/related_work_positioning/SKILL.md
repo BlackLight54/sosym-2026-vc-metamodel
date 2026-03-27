@@ -1,3 +1,7 @@
+---
+description: Build a comparison matrix positioning the paper against related work on specific technical dimensions with precise differentiation statements. Use when positioning against related work, building a comparison table, or differentiating from specific papers.
+---
+
 # Skill: Related Work Positioning
 
 **Purpose:** Build a structured comparison matrix that positions the paper against related work on specific technical dimensions. Transforms "X does something different" into "X handles P but not Q; we handle both at the cost of assuming R."

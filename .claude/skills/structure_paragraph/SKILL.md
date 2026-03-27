@@ -1,3 +1,7 @@
+---
+description: Generate or update the introduction's structure paragraph (P5) that maps the paper's organization through its sections. Use when sections change, updating the roadmap paragraph, or when the introduction's structure paragraph needs regeneration.
+---
+
 # Skill: Structure Paragraph
 
 **Purpose:** Generate or update the structure paragraph in the introduction (typically the last paragraph, P5) that maps the paper's organization: "Section 2 presents... Section 3 defines..."

@@ -1,3 +1,7 @@
+---
+description: Lightweight dashboard reporting section maturity, unresolved markers, figure status, TODOs, and time-to-deadline. Use at session start, when asking 'where are we?' or 'what is the status?', or to decide what to work on next.
+---
+
 # Skill: Paper Status Diagnostic
 
 **Purpose:** Lightweight snapshot of where the paper stands. Run at the start of every session and whenever Martin asks "where are we?" Reports section maturity, unresolved markers, figure status, outstanding TODOs, and time-to-deadline — everything needed to decide what to work on next.

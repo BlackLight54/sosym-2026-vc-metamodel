@@ -1,3 +1,7 @@
+---
+description: Audit the paper for figure opportunities, design specs, and draft figures (TikZ, SVG, Mermaid, Excalidraw). Use when proposing a figure for a concept, designing figures for the paper, or iterating on existing figure designs.
+---
+
 # Skill: Figure Design
 
 **Purpose:** Design, propose, track, and iterate paper figures. Figures are the most important element of a well-written paper — a reader who skims only the figures and captions should understand the contribution. This skill structures the process from proposal through refinement.

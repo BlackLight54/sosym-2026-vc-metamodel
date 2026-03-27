@@ -1,3 +1,7 @@
+---
+description: Build LaTeX from Markdown section files using pandoc and push to the Overleaf git remote with pre-flight checks. Use when pushing to Overleaf, updating Overleaf, or building and pushing LaTeX output.
+---
+
 # Skill: Overleaf Push
 
 **Purpose:** Build LaTeX from Markdown section files and push to the Overleaf git remote. This is the bridge between the Markdown authoring environment and the Overleaf collaboration environment.

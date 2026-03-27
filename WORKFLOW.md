@@ -112,9 +112,11 @@ Constraints: [what must not change, terminology to preserve]
 **After:** If significant text removed, move to `archive/` with recovery context. Update TODO.md.
 
 ### Cut to page budget
-**Prompt template:**
+**Skill:** `skills/budget_cut` — measures actual page usage per section against `@META: Budget` allocations. Diagnostic mode: budget tree with over/under status. Prescriptive mode: phased cut plan ranked by argument damage, with `@CUT-START`/`@CUT-END` marker candidates.
+
+For single-section prose trimming without the full diagnostic, use the prompt template:
 ```
-Target: sections/[filename].md (or "all sections")
+Target: sections/[filename].md
 Goal: Identify prose that can be cut without losing argument structure.
 Criteria: filler, redundant transitions, over-explained concepts, stated-but-unused claims.
 Output: Numbered list of candidates with reasoning. Do not apply cuts.

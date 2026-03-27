@@ -1,3 +1,7 @@
+---
+description: Surface cross-cutting decisions from DECISIONS.md and check whether they still serve the paper as it evolved. Use when reviewing early decisions, checking for decision drift, or when something feels structurally off.
+---
+
 # Skill: Prior Decision Audit
 
 **Purpose:** Surface cross-cutting decisions made earlier in the writing process and check whether they still serve the paper. Over weeks of writing, early decisions — threat model scope, which properties to verify, running example choice, contribution framing — may no longer be optimal given how the paper evolved. This skill makes that drift visible before it causes structural problems.

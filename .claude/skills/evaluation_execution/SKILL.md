@@ -1,3 +1,7 @@
+---
+description: Produce a concrete checklist of evaluation items (proofs, tools, case studies) with status, dependencies, and acceptance criteria. Use when tracking what still needs to be run, checking evaluation progress, or asking 'what is blocking the evaluation section?'
+---
+
 # Skill: Evaluation Execution Checklist
 
 **Purpose:** Given an evaluation plan (from `skills/evaluation_design` or an existing evaluation section), produce a concrete checklist of what must be done — proofs to complete, tools to run, case studies to execute, data to collect — with dependencies and acceptance criteria. This is a lightweight tracking tool, not a deep design skill; `skills/evaluation_design` handles the *what* and *why*, this skill handles the *do it and confirm it's done*.

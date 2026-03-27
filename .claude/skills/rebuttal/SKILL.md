@@ -1,3 +1,7 @@
+---
+description: Parse reviewer feedback, classify points by type, identify decision-critical concerns, and draft a structured rebuttal with a revision plan. Use after receiving reviews, when preparing a rebuttal, or responding to reviewer comments.
+---
+
 # Skill: Rebuttal Preparation
 
 **Purpose:** Given reviewer feedback, prepare a structured rebuttal that addresses every point, maximizes chances of acceptance, and identifies which revision promises are feasible within the timeline.
