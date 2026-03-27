@@ -1,0 +1,31 @@
+# Measurement campaign configuration
+# VC Ecosystem Metamodel — MODELS 2026
+
+# Refinery CLI Docker image
+refinery_image: "ghcr.io/graphs4value/refinery-cli:latest"
+
+# Scale points for E1/E2
+scale_points: [1, 3, 5, 10, 15, 20, 30]
+
+# Properties per credential (fixed)
+props_per_credential: 1
+
+# Hyperfine settings
+runs: 10
+warmup: 1
+time_limit: 300  # seconds
+
+# E3: Constraint sensitivity configurations (power-set of governance)
+# Each config lists which governance types are active
+sensitivity_configs:
+  G0: []
+  G1: [eidas]
+  G2: [privacy]
+  G3: [vcdm]
+  G4: [eidas, privacy]
+  G5: [eidas, vcdm]
+  G6: [privacy, vcdm]
+  G7: [eidas, privacy, vcdm]
+
+# E3 uses N=3 (CSOK canonical size)
+sensitivity_n: 3

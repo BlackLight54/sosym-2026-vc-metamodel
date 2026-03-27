@@ -4,27 +4,12 @@
 %% @META: Dependencies: All prior sections. %%
 
 # Conclusion
+\label{sec:conclusion}
 
-%% @SCAFFOLD: C1 — Summary %%
-%% @SCAFFOLD: Job: Restate the core contribution in 2-3 sentences. Do not introduce new claims. %%
-%% @SCAFFOLD: Key content: Three-layer metamodel for credential ecosystem design, grounded in VCDM 2.0, with cross-layer constraints formalized as graph predicates in Refinery. Three layers: domain concept, credential schema, format-specific. %%
+%% @TODO: C1 — Restate core contribution. Three-layer metamodel (DCL, CSL, FSL) grounded in VCDM 2.0, cross-layer constraints as Refinery graph predicates, three usage modes. Must match Intro P3 contribution list exactly. Do not introduce new claims. Length: 2–3 sentences. %%
 
-%% @TODO: Draft — contribution summary. Match the contribution list from Section 1. %%
+%% @TODO: C2 — Key results from evaluation. (1) Metamodel covers N/M VCDM concepts relevant to ecosystem design [from §5.1.1]. (2) Cross-layer constraints from different governance frameworks can be formally contradictory — income credential governance conflict [Headline 1]. (3) Multi-layer design errors invisible to single-layer inspection become visible through integrated formalization — cross-credential predicate gap [Headline 2]. Three sentences, one per evaluation axis. Length: 3 sentences. %%
 
-%% @SCAFFOLD: C2 — Key results %%
-%% @SCAFFOLD: Job: State the headline results from the evaluation. %%
-%% @SCAFFOLD: Key content: (1) Metamodel covers N/M VCDM concepts relevant to ecosystem design. (2) Cross-layer constraints from different governance frameworks can be formally contradictory. (3) Multi-layer design errors invisible to single-layer inspection become visible through the integrated formalization. %%
+%% @TODO: C3 — Honest, specific limitations. (1) FSL less mature — fewer constraints, fewer formats. (2) Constraint catalog representative, not exhaustive — EU regulatory subset. (3) No user study with credential designers. (4) Single tool (Refinery). (5) Design-time only — no runtime/deployment. Each limitation leads to a future work item in C4. Length: 1 paragraph. %%
 
-%% @TODO: Draft — key results. Three sentences matching the three evaluation axes. %%
-
-%% @SCAFFOLD: C3 — Limitations %%
-%% @SCAFFOLD: Job: Honest, specific limitations. Not vague hedging. %%
-%% @SCAFFOLD: Key content: (1) Format-specific layer is less mature — fewer constraints formalized, fewer formats modeled. (2) Constraint catalog is not exhaustive — representative subset of EU regulatory requirements, not complete coverage. (3) No user study or empirical evaluation with credential ecosystem designers. (4) Single tool (Refinery) — results may not generalize to other partial modeling frameworks. (5) No runtime/deployment validation — the metamodel addresses design-time constraints only. %%
-
-%% @TODO: Draft — limitations. Be specific. Each limitation should suggest either future work or a scope boundary. %%
-
-%% @SCAFFOLD: C4 — Future work %%
-%% @SCAFFOLD: Job: Concrete next steps, not vague aspirations. %%
-%% @SCAFFOLD: Key content: (1) Extend format-specific layer with more formats (SD-JWT, mDL) and richer constraints from FCA. (2) Expand constraint catalog with more governance sources (national implementations, sector-specific guidelines). (3) Empirical evaluation: case study with credential ecosystem designers, usability of constraint feedback. (4) Integration with VC deployment toolchains (e.g., generating credential schemas from valid model instances). (5) Explore cross-ecosystem interoperability constraints (multiple ecosystems interacting). %%
-
-%% @TODO: Draft — future work. 3-4 concrete items. Each should follow naturally from a stated limitation. %%
+%% @TODO: C4 — Concrete future work items, each following from a stated limitation. (1) Extend FSL with more formats (SD-JWT, mDL) and richer FCA-derived constraints. (2) Expand constraint catalog with more governance sources (national implementations, sector-specific). (3) Empirical evaluation: case study with credential ecosystem designers. (4) Integration with VC deployment toolchains (generating credential schemas from valid instances). (5) Cross-ecosystem interoperability constraints. Pick 3–4 most concrete. Length: 1 paragraph. %%

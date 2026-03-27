@@ -1,46 +1,26 @@
 \todo[inline,color=gray!10]{meta: Dependencies: Section 02 (Refinery concepts, multi-level modeling), Section 03 (running example).}
 
-\todo[inline,color=gray!10]{meta: Source: prior\_work/dse-vc-refinery/vc\_model.new.problem (newer Refinery model). Internal naming uses CIM/PIM/PSM --- translate to domain concept / credential schema / format-specific layer names.}
+\todo[inline,color=gray!10]{meta: Source: models/vc\_metamodel.refinery. Layers: DCL / CSL / FSL.}
 
 \section{Approach}\label{approach}
 
-\todo[inline,color=purple!15]{scaffold: Preamble --- 1-2 sentences introducing the three-layer structure before diving into subsections.}
+\label{sec:approach}
 
-\todo[inline,color=purple!15]{scaffold: Job: Orient the reader. Name the three layers and their roles. Reference multi-level modeling from Section 2.2.}
-
-\todo[inline]{Draft preamble --- introduce the three-layer metamodel structure. Each layer captures a different abstraction level of credential ecosystem design. Cross-layer constraints formalized as Refinery graph predicates.}
-
-\todo[inline]{Preamble must include forward reference to three usage modes (Section 3.2): consistency checking (OK), error identification (NOT\_OK(errors)), design space exploration (GENERATED / UNVIABLE). State that each mode is demonstrated as layers and constraints are introduced.}
+\todo[inline]{Preamble --- Orient the reader. Name the three layers (domain concept, credential schema, format-specific) and their roles. Cross-layer constraints formalized as Refinery graph predicates. Forward-reference three usage modes from Section 3.2 (consistency checking, error identification, design space exploration). Reference multi-level modeling from Section 2.2. [Binding Claims \#1, \#3]. Length: 2--3 sentences.}
 
 \subsection{Domain Concept Layer}\label{domain-concept-layer}
 
-\todo[inline,color=purple!15]{scaffold: A1 --- Metamodel definition}
-
-\todo[inline,color=purple!15]{scaffold: Job: Define the domain concept layer metaclasses and their relationships.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: Entity (abstract, with Subject and Value subclasses), Prop (property connecting entities), statement predicate (subject, property, value). Root inference: an Entity with no incoming value references is a Subject.}
-
-\todo[inline,color=purple!15]{scaffold: Refinery source: Entity, Subject, Value, Prop, statement/3, root\_is\_subj propagation rule.}
+\label{sec:dcl}
 
 \todo[inline,color=green!20]{formal: Definition of domain concept layer metaclasses: Entity, Subject, Value, Prop. Statement predicate: statement(subject, property, value).}
 
 \todo[inline,color=orange!20]{figure fig\_metamodel: Three-layer metamodel class diagram. Show all three layers with metaclasses, relationships, and trace mappings. This is the paper's central figure.}
 
-\todo[inline]{Draft --- Entity hierarchy (Subject, Value), Prop with value containment, statement predicate. Formal definition.}
-
-\todo[inline,color=purple!15]{scaffold: A2 --- Intra-layer constraints}
-
-\todo[inline,color=purple!15]{scaffold: Job: Define the constraints that apply within the domain concept layer.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: Connectivity (non\_connected error --- all entities must be reachable), no self-loops (no\_self\_loop propagation rule), statement well-formedness (subject  value).}
-
-\todo[inline,color=purple!15]{scaffold: Refinery source: error non\_connected/2, propagation rule no\_self\_loop, statement predicate body.}
+\todo[inline]{A1 --- Define domain concept layer metaclasses and relationships. Entity (abstract, with Subject and Value subclasses), Prop (source{\textrightarrow}Entity, target{\textrightarrow}Entity, value containment), statement(subject, property, value) predicate. Root inference: Entity with no incoming target is Subject. Include Refinery class declaration listing. Formal definition. [Binding Claim \#1]. Length: 1 paragraph.}
 
 \todo[inline,color=green!20]{formal: Domain Concept Layer constraints: connectivity, no self-loops, statement well-formedness.}
 
-\todo[inline]{Draft --- error predicates and propagation rules for claim layer. Include Refinery code listing.}
-
-\todo[inline]{After drafting A2 constraints, add mode annotation: DCL constraints (connectivity, no self-loops) are targets for error identification (Section 3.2) --- evaluating them on a disconnected graph returns NOT\_OK(non\_connected(e1, e2)).}
+\todo[inline]{A2 --- Define intra-layer constraints for DCL. error non\_connected(e1, e2), propagation rule no\_self\_loop, statement well-formedness (subject  value). Include 1 Refinery code listing showing error predicate syntax. After drafting, add mode annotation: DCL constraints are targets for error identification --- NOT\_OK(non\_connected(e1, e2)). [Binding Claim \#3]. Length: 1 paragraph.}
 
 \todo[inline,color=purple!15]{scaffold: A3 --- Running example at domain concept layer}
 
@@ -68,45 +48,19 @@ monthly\_income & Value & Monthly net income \\
 
 Three statements capture the domain facts: \(\text{statement}(\text{Applicant}, \text{has\_children}, \text{num\_children})\), \(\text{statement}(\text{Applicant}, \text{owns\_property}, \text{property\_area})\), and \(\text{statement}(\text{Applicant}, \text{earns}, \text{monthly\_income})\). Two domain constraints apply: \(\text{property\_area} \geq \text{min\_area}(\text{num\_children})\) links two properties across what will become separate credentials, and \(\text{monthly\_income} \geq \text{threshold}\) establishes a privacy-sensitive eligibility check. All claim-layer structural constraints (connectivity, no self-loops) are satisfied.
 
-\todo[inline,color=orange!20]{figure fig\_metamodel: Three-layer metamodel class diagram. Show all three layers with metaclasses, relationships, and trace mappings. This is the paper's central figure.}
-
 \subsection{Credential Schema Layer}\label{credential-schema-layer}
 
-\todo[inline,color=purple!15]{scaffold: A4 --- Metamodel definition}
-
-\todo[inline,color=purple!15]{scaffold: Job: Define the credential schema layer metaclasses and trace mappings from the domain concept layer.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: CredEntity (abstract, with CredentialSubject and CredentialValue subclasses), Claim (with source and target CredEntity references), Credential (contained by CredentialSubject). Trace: CredEntity::trace {\textrightarrow} Entity, Prop::trace {\textrightarrow} Claim.}
-
-\todo[inline,color=purple!15]{scaffold: Refinery source: CredEntity, CredentialSubject, CredentialValue, Claim, Credential, trace references.}
+\label{sec:csl}
 
 \todo[inline,color=green!20]{formal: Definition of credential schema layer metaclasses: CredEntity, CredentialSubject, CredentialValue, Claim, Credential. Trace mappings: CredEntity::trace {\textrightarrow} Entity, Prop::trace {\textrightarrow} Claim.}
 
-\todo[inline]{Draft --- credential layer metaclasses. The trace mapping is the central mechanism for cross-layer consistency. Formal definition.}
+\todo[inline]{A4 --- Define credential schema layer metaclasses and trace mappings from DCL. CredEntity (abstract), CredentialSubject/CredentialValue subclasses, Claim (source{\textrightarrow}CredEntity, target{\textrightarrow}CredEntity), Credential (contained by CredentialSubject). Trace: CredEntity::trace{\textrightarrow}Entity, Prop::trace{\textrightarrow}Claim. Central mechanism: trace mapping grounds credential-layer elements in DCL facts. Formal definition. [Binding Claim \#1]. Length: 1 paragraph.}
 
-\todo[inline,color=purple!15]{scaffold: A5 --- Trace mappings claim{\textrightarrow}credential}
-
-\todo[inline,color=purple!15]{scaffold: Job: Explain how trace relationships connect the two layers.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: Every CredEntity traces to exactly one Entity. Every Claim traces from exactly one Prop. The trace is a refinement mapping: credential-layer elements are grounded in claim-layer facts. Subject inference: a CredEntity tracing to a Subject becomes a CredentialSubject (subject\_traces\_to\_subject propagation rule).}
-
-\todo[inline,color=purple!15]{scaffold: Refinery source: subject\_traces\_to\_subject, root\_is\_cred\_subj propagation rules.}
-
-\todo[inline]{Draft --- trace mappings as refinement. Subject inference. Propagation rules.}
-
-\todo[inline,color=purple!15]{scaffold: A6 --- Intra-layer constraints}
-
-\todo[inline,color=purple!15]{scaffold: Job: Define credential schema layer constraints.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: credential\_statement well-formedness (source  target, proper containment), no\_empty\_cred (CredentialSubject must have at least one outgoing Claim), Root\_cred\_entity (entities not targeted by any Claim are roots --- must have a Credential).}
-
-\todo[inline,color=purple!15]{scaffold: Refinery source: credential\_statement/3, no\_empty\_cred error, Root\_cred\_entity pred, root\_ent\_doesnt\_have\_cred error.}
+\todo[inline]{A5 --- Explain trace relationships connecting DCL and CSL. Every CredEntity traces to exactly one Entity. Subject inference: CredEntity tracing to Subject becomes CredentialSubject (subject\_traces\_to\_subject propagation rule). root\_is\_cred\_subj propagation rule. Include Refinery propagation rule listing. Length: 1 paragraph.}
 
 \todo[inline,color=green!20]{formal: Credential schema layer constraints: credential\_statement, no\_empty\_cred, Root\_cred\_entity.}
 
-\todo[inline]{Draft --- credential layer constraints. Include Refinery code listing.}
-
-\todo[inline]{After drafting A6 constraints, add mode annotation: error identification catches structural violations at this layer --- empty credential triggers NOT\_OK(no\_empty\_cred(cs)) before format assignment begins.}
+\todo[inline]{A6 --- Define credential schema layer constraints. credential\_statement/3 well-formedness (source  target, proper containment), no\_empty\_cred error (CredentialSubject must have 1 outgoing Claim), Root\_cred\_entity predicate, root\_ent\_doesnt\_have\_cred error. Include 1 Refinery listing. After drafting, add mode annotation: error identification catches structural violations at this layer. [Binding Claim \#3]. Length: 1 paragraph.}
 
 \todo[inline,color=purple!15]{scaffold: A7 --- Running example at credential schema layer}
 
@@ -130,35 +84,15 @@ All three credential subjects trace to the same claim-layer entity: \(\text{trac
 
 \subsection{Format-Specific Layer}\label{format-specific-layer}
 
-\todo[inline,color=purple!15]{scaffold: A8 --- Metamodel definition}
-
-\todo[inline,color=purple!15]{scaffold: Job: Define the format-specific layer metaclasses.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: Formatted\_Credential (abstract), AnoncredsCredentialSchema, JsonLdCredentialSchema, JwtVCCredentialSchema. Each Credential contains one instance of each format.}
-
-\todo[inline,color=purple!15]{scaffold: Note: This layer is less mature than the other two. Acknowledge this.}
-
-\todo[inline,color=purple!15]{scaffold: Refinery source: Formatted\_Credential hierarchy, containment in Credential.}
+\label{sec:fsl}
 
 \todo[inline,color=green!20]{formal: Definition of format-specific layer metaclasses: Formatted\_Credential hierarchy.}
 
-\todo[inline]{Draft --- format-specific metaclasses. Each credential has format-specific representations.}
-
-\todo[inline,color=purple!15]{scaffold: A9 --- Format-specific constraints}
-
-\todo[inline,color=purple!15]{scaffold: Job: Define constraints specific to credential formats.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: Surface Martin's FCA results here. Potential constraints: AnonCreds requires single credential definition per schema, JSON-LD requires @context URI, format capabilities (ZKP support, selective disclosure, linked data).}
-
-\todo[inline,color=purple!15]{scaffold: Note: This is where the housing subsidy example is primary --- format choice constrains privacy capabilities.}
+\todo[inline]{A8 --- Define format-specific layer metaclasses. Formatted\_Credential (abstract), concrete subclasses: AnoncredsCredentialSchema, JsonLdCredentialSchema, SdJwtVcCredentialSchema, MdocCredentialSchema. Each Credential contains one Formatted\_Credential. Acknowledge this layer is less mature than DCL/CSL. [Binding Claim \#1]. Length: 1 paragraph (brief).}
 
 \todo[inline,color=green!20]{formal: Format-specific constraints (derive from FCA)}
 
-\todo[inline]{IMPORTANT --- Surface Martin's formal concept analysis results here. At least 2-3 constraints derived from FCA to strengthen the three-layer claim.}
-
-\todo[inline]{Draft --- format-specific constraints. Housing subsidy example: SD-JWT-VC vs. AnonCreds ZKP capability.}
-
-\todo[inline]{After drafting A9 constraints, add mode annotation: governance annotations at this layer are primary input for error identification (format--governance conflicts) and design space exploration (generating valid format assignments).}
+\todo[inline]{A9 --- Define format-specific constraints derived from FCA results. AnonCreds requires single credential definition per schema, JSON-LD requires @context URI. Format capabilities: ZKP support, selective disclosure, linked data. Surface at least 2--3 FCA-derived constraints. Housing subsidy: SD-JWT-VC vs. AnonCreds ZKP capability. After drafting, add mode annotation: governance annotations at this layer are primary input for error identification and design space exploration. Length: 1--2 paragraphs.}
 
 \todo[inline,color=purple!15]{scaffold: A10 --- Running example at format-specific layer}
 
@@ -181,6 +115,8 @@ IncomeCred & ? & eIDAS + GDPR & \textbf{Conflict} \\
 FamilyStatusCred and PropertyCred are straightforward: as EU wallet attestations, the eIDAS Architecture Reference Framework mandates SD-JWT-VC (or mdoc; since both lack predicate proof support, we use SD-JWT-VC without loss of generality \todo[color=blue!20]{cite: eIDAS ARF --- dual format mandate}). IncomeCred is the conflict site: eIDAS requires SD-JWT-VC, but the income threshold check --- verifying \(\text{monthly\_income} \geq \text{threshold}\) without disclosing the exact value --- requires predicate proof capability that SD-JWT-VC does not provide \todo[color=blue!20]{cite: SD-JWT-VC --- hash-based selective disclosure, no predicate proofs}. AnonCreds supports predicate proofs via CL signatures \todo[color=blue!20]{cite: AnonCreds specification} but does not conform to W3C VCDM 2.0 \todo[color=blue!20]{cite: W3C VCDM 2.0 --- AnonCreds v1 non-conformance}.
 
 \subsection{Cross-Layer Constraints as Graph Predicates}\label{cross-layer-constraints-as-graph-predicates}
+
+\label{sec:cross-layer}
 
 \todo[inline,color=purple!15]{scaffold: A11 --- Constraint taxonomy}
 
@@ -208,65 +144,27 @@ C9 & Cross-credential predicate gap & Format limitation & DCL\(\leftrightarrow\)
 
 \todo[inline,color=orange!20]{figure fig\_constraint\_taxonomy: The table above, formatted as a figure with caption.}
 
-Constraints C1--C3 are structural (metamodel-enforced). C4 is a domain rule grounded in government regulation. C5--C7 each originate from a different governance framework. C8 and C9 are cross-layer results: they emerge only when constraints from multiple sources and layers are checked jointly. Section 5.3 develops C8 and C9 as the paper's headline results.
+Constraints C1--C3 are structural (metamodel-enforced). C4 is a domain rule grounded in government regulation. C5--C7 each originate from a different governance framework. C8 and C9 are cross-layer results: they emerge only when constraints from multiple sources and layers are checked jointly. Section\textasciitilde{}\ref{sec:headlines} develops C8 and C9 as the paper's headline results.
 
-The housing subsidy scenario demonstrates all three usage modes (Section 3.2) on the cross-layer constraint set. Running consistency checking on the partial specification --- FamilyStatusCred and PropertyCred assigned to SD-JWT-VC, IncomeCred unassigned --- returns \textbf{OK}: structural constraints C1--C3 and domain constraint C4 hold in the partial model. Assigning IncomeCred to SD-JWT-VC and enforcing all governance constraints triggers error identification: the framework returns \textbf{NOT\_OK(governance\_conflict(IncomeCred, income\_format))}, naming the credential and format slot where C5, C6, and C7 cannot be simultaneously satisfied. Finally, leaving IncomeCred's format open and running design space exploration with the full constraint set (\(\text{C5} \wedge \text{C6} \wedge \text{C7}\)) returns \textbf{UNVIABLE} --- no format assignment satisfies all three governance sources simultaneously. Relaxing C6 (dropping the predicate proof requirement), the framework returns two \textbf{GENERATED} configurations: both assign SD-JWT-VC to all three credentials, differing in selective disclosure granularity.
-
-\todo[inline,color=purple!15]{scaffold: A12 --- Trace consistency constraints}
-
-\todo[inline,color=purple!15]{scaffold: Job: Define the core cross-layer constraint: trace consistency between claim and credential layers.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: prop\_source and prop\_target propagation rules --- a Claim's source/target CredEntity must trace to the same Entity that owns/is the value of the traced Prop. If the trace is inconsistent, the propagation rule eliminates the invalid assignment.}
-
-\todo[inline,color=purple!15]{scaffold: Refinery source: prop\_s, prop\_t propagation rules in vc\_model.new.problem.}
+The housing subsidy scenario demonstrates all three usage modes (Section\textasciitilde{}\ref{sec:functional-overview}) on the cross-layer constraint set. Running consistency checking on the partial specification --- FamilyStatusCred and PropertyCred assigned to SD-JWT-VC, IncomeCred unassigned --- returns \textbf{OK}: structural constraints C1--C3 and domain constraint C4 hold in the partial model. Assigning IncomeCred to SD-JWT-VC and enforcing all governance constraints triggers error identification: the framework returns \textbf{NOT\_OK(governance\_conflict(IncomeCred, income\_format))}, naming the credential and format slot where C5, C6, and C7 cannot be simultaneously satisfied. Finally, leaving IncomeCred's format open and running design space exploration with the full constraint set (\(\text{C5} \wedge \text{C6} \wedge \text{C7}\)) returns \textbf{UNVIABLE} --- no format assignment satisfies all three governance sources simultaneously. Relaxing C6 (dropping the predicate proof requirement), the framework returns two \textbf{GENERATED} configurations: both assign SD-JWT-VC to all three credentials, differing in selective disclosure granularity.
 
 \todo[inline,color=green!20]{formal: Trace consistency predicates: prop\_source, prop\_target propagation rules.}
 
-\todo[inline]{Draft --- trace consistency. The key insight: propagation rules in Refinery don't just check --- they guide the model generator to maintain consistency. Include Refinery code listing.}
-
-\todo[inline,color=purple!15]{scaffold: A13 --- Entity alignment constraints}
-
-\todo[inline,color=purple!15]{scaffold: Job: Define the entity alignment predicate.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: aligned\_entities(e1, e2) holds when two CredEntities trace to the same Entity. This is the formalization of cross-credential subject binding. The aligned predicate is a shadow predicate --- it records derived information without constraining.}
-
-\todo[inline,color=purple!15]{scaffold: Refinery source: aligned/2 in vc\_model.new.problem, aligned\_entites/2 in vc\_model.problem.}
+\todo[inline]{A12 --- Define trace consistency between claim and credential layers. prop\_source and prop\_target propagation rules: a Claim's source/target CredEntity must trace to the same Entity that owns/is the value of the traced Prop. Key insight: propagation rules guide generation, not just validate. Include Refinery code listing. [Binding Claim \#3]. Length: 1 paragraph.}
 
 \todo[inline,color=green!20]{formal: Entity alignment predicate: aligned\_entities(e1, e2).}
 
-\todo[inline]{Draft --- entity alignment. Shadow predicate. Cross-credential subject binding. Housing subsidy: CS\_Applicant and CS\_Applicant are aligned.}
-
-\todo[inline,color=purple!15]{scaffold: A14 --- Structural anti-pattern constraints}
-
-\todo[inline,color=purple!15]{scaffold: Job: Define error predicates that catch specific design anti-patterns.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: noSubject (credential without a subject), no\_source\_or\_target / no\_cred\_props\_for\_cred\_entity (credential entity not participating in any claim), non\_connected (disconnected information graph), multiple\_creds\_point\_to\_same\_fact\_set / common\_parent (two properties sharing a credential subject unexpectedly).}
-
-\todo[inline,color=purple!15]{scaffold: Refinery source: error predicates in both vc\_model.problem and vc\_model.new.problem.}
+\todo[inline]{A13 --- Define entity alignment predicate. aligned\_entities(e1, e2) shadow predicate: holds when two CredEntities trace to the same Entity. Formalizes cross-credential subject binding. CSOK: CS\_Applicant aligned with CS\_Applicant and CS\_Applicant. Shadow predicates record derived info without constraining --- key Refinery mechanism. [Binding Claim \#3]. Length: 1 paragraph.}
 
 \todo[inline,color=green!20]{formal: Anti-pattern error predicates: noSubject, no\_cred\_props\_for\_cred\_entity, root\_ent\_doesnt\_have\_cred, non\_connected, common\_parent.}
 
-\todo[inline]{Draft --- anti-pattern catalog. Each predicate catches a specific design error. Brief description + Refinery code.}
+\todo[inline]{A14 --- Define error predicates catching specific design anti-patterns. noSubject, no\_source\_or\_target / no\_cred\_props\_for\_cred\_entity, non\_connected, common\_parent. Brief description + Refinery code per predicate. Length: 1 paragraph.}
 
-\todo[inline,color=purple!15]{scaffold: A15 --- Propagation rules for cross-layer alignment}
-
-\todo[inline,color=purple!15]{scaffold: Job: Show how propagation rules actively guide model generation, not just validate.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: pim\_and\_cim\_should\_align (commented out in new model but present in old), tracing\_cim\_to\_pim (infers trace mappings from known credential statements). These rules demonstrate that the constraint formalization is generative, not just checking.}
-
-\todo[inline,color=purple!15]{scaffold: Note: Some propagation rules are commented out in vc\_model.new.problem. Discuss which are active and why.}
-
-\todo[inline]{Draft --- propagation rules for cross-layer alignment. Distinguish error predicates (checking) from propagation rules (guiding generation). This is a key Refinery mechanism.}
-
-\todo[inline,color=purple!15]{scaffold: A16 --- Running example: full constraint application}
-
-\todo[inline,color=purple!15]{scaffold: Job: Apply the complete constraint set to the housing subsidy example. Show what the model generator produces.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: Housing subsidy example --- apply all constraints, show which propagation rules fire, show the generated model. Show the cross-layer constraint violation when SD-JWT-VC is chosen but predicate proof is required.}
+\todo[inline]{A15 --- Show how propagation rules actively guide model generation, not just validate. Distinguish error predicates (checking) from propagation rules (guiding generation). pim\_and\_cim\_should\_align, tracing\_cim\_to\_pim rules. Key Refinery mechanism. Discuss which rules are active and why. Length: 1 paragraph.}
 
 \todo[inline,color=orange!20]{figure fig\_generated\_model: (Optional) Refinery-generated model instance for the housing subsidy example showing constraint satisfaction.}
 
-\todo[inline]{Draft --- full constraint application. Housing subsidy example. Generated model output.}
+\todo[inline]{A16 --- Apply complete constraint set to housing subsidy example. Show which propagation rules fire, generated model output. Cross-layer constraint violation when SD-JWT-VC chosen but predicate proof required. Length: 1 paragraph.}
 
 \todo[inline,color=purple!15]{scaffold: A17 --- Format-driven DCL restructuring --- worked example of cross-layer propagation}
 

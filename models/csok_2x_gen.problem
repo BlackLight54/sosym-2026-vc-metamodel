@@ -1,0 +1,49 @@
+% ============================================================================
+% CSOK 2x — No conflict check (generation benchmark)
+% ============================================================================
+% Imports metamodel and 2x instance but NOT governance_conflict.
+% Expected result: SAT (solver assigns formats to open income credentials)
+
+import vc_metamodel.
+import csok_instance_2x.
+
+
+% === Governance markers (all present, but no conflict error to enforce) ===
+
+EidasMandate(eidas_1).
+EidasMandate::target(eidas_1, FamilyStatusCred).
+EidasMandate(eidas_2).
+EidasMandate::target(eidas_2, PropertyCred).
+EidasMandate(eidas_3).
+EidasMandate::target(eidas_3, IncomeCred).
+EidasMandate(eidas_4).
+EidasMandate::target(eidas_4, DependentStatusCred).
+EidasMandate(eidas_5).
+EidasMandate::target(eidas_5, VehicleCred).
+EidasMandate(eidas_6).
+EidasMandate::target(eidas_6, SecondaryIncomeCred).
+
+PrivacyRequirement(privacy_1).
+PrivacyRequirement::target(privacy_1, IncomeCred).
+PrivacyRequirement(privacy_2).
+PrivacyRequirement::target(privacy_2, SecondaryIncomeCred).
+
+VcdmConformance(vcdm_1).
+VcdmConformance::target(vcdm_1, FamilyStatusCred).
+VcdmConformance(vcdm_2).
+VcdmConformance::target(vcdm_2, PropertyCred).
+VcdmConformance(vcdm_3).
+VcdmConformance::target(vcdm_3, IncomeCred).
+VcdmConformance(vcdm_4).
+VcdmConformance::target(vcdm_4, DependentStatusCred).
+VcdmConformance(vcdm_5).
+VcdmConformance::target(vcdm_5, VehicleCred).
+VcdmConformance(vcdm_6).
+VcdmConformance::target(vcdm_6, SecondaryIncomeCred).
+
+% Close governance
+!exists(EidasMandate::new).
+!exists(PrivacyRequirement::new).
+!exists(VcdmConformance::new).
+
+scope node = 57, GovernanceAnnotation = 14.

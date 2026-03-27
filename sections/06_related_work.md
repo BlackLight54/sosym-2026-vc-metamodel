@@ -6,30 +6,12 @@
 %% @META: Source: Gap analysis synthesis (2026-03-25), archive/gap analyis/GAP_ANALYSIS_SYNTHESIS.md %%
 
 # Related Work
+\label{sec:related-work}
 
 ## Credential Ecosystem Design and Formalization
+\label{sec:rw-credential}
 
-%% @SCAFFOLD: R1 — Informal baseline + single-layer formalizations + closest domain neighbors %%
-%% @SCAFFOLD: Job: Position against (a) specifications (informal baseline), (b) single-layer formalizations of VCs, and (c) conceptual models for identity/credential systems. %%
-%% @SCAFFOLD: Informal baseline: W3C VCDM 2.0, EU ARF, Hyperledger AnonCreds spec, ISO mDL — design patterns and specifications without formal cross-layer constraint checking. %%
-%% @SCAFFOLD: Single-layer formalizations (from gap analysis RQ7): %%
-%% @SCAFFOLD: Braun & Kafer 2025 (LNCS): RDF-based semantics for selective disclosure on VCs. Formalizes RDF-level semantics — one layer of representation. Does not address cross-layer constraints or credential structure. %%
-%% @SCAFFOLD: EuroS&PW 2022: Formal LD-VC definition with selective disclosure proofs. Mathematical properties of a single format. %%
-%% @SCAFFOLD: Braun et al. 2024 (WWW): ProVerif verification of assembled SSI protocol. Protocol-level security, not schema-level design. DIFFERENTIATION D3: protocol verification vs. design-time consistency. %%
-%% @SCAFFOLD: Conceptual models: %%
-%% @SCAFFOLD: Ding & Sato 2023 (TrustCom): SecureSSI — model-driven security analysis of SSI architectural patterns. Operates at protocol level, not schema level. DIFFERENTIATION D2. %%
-%% @SCAFFOLD: Tith & Colin 2025 (Procedia CS): Trust policy meta-model for identity systems. Single governance concern (trust policy), no credential structure or format layers. %%
-%% @SCAFFOLD: Schardong & Custodio 2024 (ER): RAF framework — meta-metamodel for comparing identity models. Protocol level, no credential constraints. [VERIFY existence] %%
-%% @SCAFFOLD: Turkanovic et al. 2025 (Mathematics): Delegation semantics for Verifiable Mandates. Single concern within W3C VC. %%
-%% @SCAFFOLD: Garcia-Rodriguez et al. 2021 (ARES): Predicate data model for privacy-preserving VC integration. Single concern. %%
-%% @SCAFFOLD: Informal conflict analyses (from RQ4 — cite for motivation, not related work): %%
-%% @SCAFFOLD: Pattiyanon & Aoki 2022 (ICISSP): Property compilation from standards, surfaces mismatches. Not formal. %%
-%% @SCAFFOLD: Biedermann et al. 2024 (IEEE Blockchain): OIDC/Web3 incompatibility. Informal. %%
-%% @SCAFFOLD: Schwalm & Alamillo-Domingo 2022: SSI-eIDAS contradiction. Informal. %%
-%% @SCAFFOLD: Architectural layers: %%
-%% @SCAFFOLD: ToIP stack (Davie et al. 2019): Four-layer architecture with "governance metamodel." Informal — no formalized cross-layer constraints. DIFFERENTIATION: we formalize what ToIP describes in prose. %%
-%% @SCAFFOLD: Naghmouchi & Laurent 2025 (arXiv): Four-layer privacy framework for SSI. Classification scheme, not metamodel with constraints. %%
-%% @SCAFFOLD: Position: Prior formalizations target individual layers (RDF semantics, protocol security, delegation, trust policy). Specifications and architectural frameworks define layers informally. None formalizes cross-layer constraints spanning domain semantics, credential structure, and format-specific representation. %%
+%% @TODO: R1 — Credential ecosystem design + formalization landscape. (1) Informal baseline: W3C VCDM 2.0, ARF, AnonCreds spec — design patterns without formal cross-layer checking (2 sentences). (2) Single-layer formalizations: Braun & Kafer 2025 (RDF semantics), EuroS&PW 2022 (LD-VC), Braun et al. 2024 (ProVerif protocol verification, D3) — each formalizes one layer or concern (3–4 sentences). (3) Conceptual models: Tith & Colin 2025 (trust policy), Turkanovic et al. 2025 (delegation), ToIP stack (informal layers), Naghmouchi & Laurent 2025 (privacy framework) (2–3 sentences). (4) Gap: none formalizes cross-layer constraints spanning domain semantics, credential structure, and format representation (1 sentence). Length: ~1.5 paragraphs. %%
 
 %% @CITE: W3C VCDM 2.0 working group %%
 %% @CITE: ISO/IEC 18013-5 (mDL) %%
@@ -47,16 +29,8 @@
 %% @CITE: Ding & Sato 2023 — "Model-Driven Security Analysis of Self-Sovereign Identity Systems" — IEEE TrustCom 2023 [VERIFY] %%
 %% @CITE: Schardong & Custodio 2024 — "RAF Framework for Understanding Digital Identity Models" — ER 2024 [VERIFY] %%
 
-%% @TODO: Draft — credential ecosystem design + formalization landscape. ~1.5 paragraphs. Informal baseline (2 sentences), single-layer formalizations (3-4 sentences covering Braun & Kafer, EuroS&PW, Braun et al. protocol verification), conceptual models (2-3 sentences covering Tith & Colin, Turkanovic, ToIP), gap statement (1 sentence). %%
-
 ## Model-Driven Engineering for Security and SSI
-
-%% @SCAFFOLD: R2 — MDE for security (UMLsec, SecureUML) + MDE for SSI (4 papers from gap analysis RQ3) %%
-%% @SCAFFOLD: Job: (a) Cite foundational MDE-security works, (b) cite all 4 MDE-for-SSI works, (c) position all as targeting different problems than cross-layer credential design consistency. %%
-%% @SCAFFOLD: MDE for security: UMLsec (Jürjens 2002/2004) targets confidentiality, integrity, authentication. SecureUML (Basin et al. 2002/2006) targets access control. %%
-%% @SCAFFOLD: MDE for SSI (gap analysis RQ3 — MUST cite all 4, MUST differentiate): ChorSSI (Cippitelli et al. 2023, EMISA/Springer) — BPMN choreography metamodel, D1: choreography vs. credential design space. SecureSSI (Ding & Sato 2023, TrustCom) — custom modeling language + temporal logic, D2: security threats vs. design space. Pattiyanon et al. 2022 (MODELSWARD) — two DSMLs + knowledge graph, D2: weakness detection vs. design consistency. Barclay et al. 2020 (arXiv) — iStar 2.0 actor-based modeling, requirements-level. %%
-%% @SCAFFOLD: Position: MDE has been successfully applied to SSI for security analysis, interaction choreography, weakness detection, and governance modeling. However, none defines a multi-level metamodel for credential design or formalizes cross-layer constraints. %%
-%% @SCAFFOLD: NOTE: This is the corrected C5 claim per DECISIONS.md 2026-03-25. Do NOT claim "MDE has not been applied to SSI." %%
+\label{sec:rw-mde}
 
 %% @CITE: UMLsec — Jürjens, UML 2002 / book 2004 %%
 %% @CITE: SecureUML — Basin, Doser, Lodderstedt, UML 2002 / ACM TOSEM 2006 %%
@@ -65,19 +39,10 @@
 %% @CITE: Barclay et al. 2020 — "Towards a Modelling Framework for SSI Systems" — arXiv %%
 %% @CITE: King, De Vos et al. 2017 — "Automated multi-level governance compliance checking" — AAMAS Journal %%
 
-%% @TODO: Draft — MDE for security + SSI. ~1.5 paragraphs. UMLsec + SecureUML (2 sentences), then ChorSSI + SecureSSI + Pattiyanon + Barclay (4-5 sentences with differentiation), then King et al. for governance compliance (1-2 sentences, differentiate: norms vs. model elements). Gap: none does multi-level metamodel + cross-layer constraints for credential design. %%
+%% @TODO: R2 — MDE for security + SSI. MDE-security foundations: UMLsec (Jürjens), SecureUML (Basin et al.) — target confidentiality/access control, not credential schema design (2 sentences). MDE-for-SSI (MUST cite all 4, MUST differentiate): ChorSSI (D1: choreography vs. credential design), SecureSSI (D2: security threats vs. design space), Pattiyanon (D2: weakness detection), Barclay (requirements-level) (4–5 sentences). King et al. — governance compliance, norms vs. model elements (1–2 sentences). Corrected C5 claim per DECISIONS.md: MDE HAS been applied to SSI, but none defines multi-level metamodel with cross-layer constraints. Length: ~1.5 paragraphs. %%
 
 ## Multi-Level Modeling and Graph-Based Design Space Exploration
-
-%% @SCAFFOLD: R3 — Foundational techniques and tools we build on %%
-%% @SCAFFOLD: Job: Position against (a) multi-level modeling foundations, (b) multi-view consistency, (c) DSE tools. The contribution is the domain-specific formalization, not the technique or tool. %%
-%% @SCAFFOLD: Atkinson & Kühne (2001/2008): Foundational multi-level metamodeling. DIFFERENTIATION D5: our layers are not ontological classification levels. %%
-%% @SCAFFOLD: de Lara & Guerra 2010 (MetaDepth): Tool support for multi-level constraints. %%
-%% @SCAFFOLD: Diskin et al. (2010/2013): Multi-view consistency. We add the governance dimension. %%
-%% @SCAFFOLD: Refinery / Semerath et al. (SoSyM 2017, ICSE 2024): Our solver infrastructure. Contribution is the metamodel, not the solver. %%
-%% @SCAFFOLD: Alloy (Jackson 2012): Alternative solver. Lacks partial model semantics. %%
-%% @SCAFFOLD: CSCS 2024: Own prior work (third person). Extends with cross-layer constraints, governance, validation. %%
-%% @SCAFFOLD: Preempt Reviewer D: Three-point argument from D5 — layers are not instantiation levels, constraints are graph predicates not potency, contribution is governance constraint formalization not layering. %%
+\label{sec:rw-multilevel}
 
 %% @CITE: Atkinson & Kühne — "The Essence of Multilevel Metamodeling" UML 2001; "Reducing accidental complexity" SoSyM 2008 %%
 %% @CITE: de Lara & Guerra 2010 — "Deep meta-modelling with MetaDepth" LNCS %%
@@ -86,11 +51,6 @@
 %% @CITE: Alloy — Jackson, "Software Abstractions" MIT Press 2012 %%
 %% @CITE: CSCS 2024 short paper — third person, double-blind %%
 
-%% @TODO: Draft — multi-level modeling + DSE landscape. ~1 paragraph. Atkinson & Kühne + de Lara & Guerra as foundation (2 sentences), Diskin as structurally related (1 sentence), Refinery as tool (1-2 sentences), own prior work (1 sentence). Include D5 preemption: "Unlike standard multi-level modeling applications where layers represent successive instantiation, the three layers in our metamodel represent independently governed concern spaces connected by coverage and capability constraints — formalized as graph predicates rather than potency annotations." %%
+%% @TODO: R3 — Multi-level modeling + DSE landscape. Atkinson & Kühne + de Lara & Guerra (MetaDepth) as multi-level modeling foundations (2 sentences). Diskin et al. — multi-view consistency, we add governance dimension (1 sentence). Refinery / Semerath et al. — solver infrastructure, third person (1–2 sentences). CSCS 2024 own prior work, third person (1 sentence). D5 PREEMPTION (critical for Reviewer D): layers are not instantiation levels, constraints are graph predicates not potency, contribution is governance constraint formalization not layering technique. Length: ~1 paragraph. %%
 
-%% @SCAFFOLD: R4 — Synthesis (mandatory — closes the section) %%
-%% @SCAFFOLD: Job: One sentence synthesizing the gap across all three bodies of work. %%
-%% @SCAFFOLD: Content: "No prior work combines multi-level metamodeling with formalized cross-layer constraints for verifiable credential ecosystem design under multi-source governance." %%
-%% @SCAFFOLD: NOTE: This is the corrected, defensible version per gap analysis 2026-03-25. %%
-
-%% @TODO: Draft — synthesis sentence closing the section. %%
+%% @TODO: R4 — Synthesis sentence closing the section. "No prior work combines multi-level metamodeling with formalized cross-layer constraints for verifiable credential ecosystem design under multi-source governance." Corrected, defensible version per gap analysis 2026-03-25. Length: 1 sentence. %%

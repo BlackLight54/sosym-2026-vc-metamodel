@@ -2,61 +2,35 @@
 
 \section{Evaluation}\label{evaluation}
 
-\todo[inline,color=purple!15]{scaffold: E0 --- Preamble --- evaluation strategy}
+\label{sec:evaluation}
 
-\todo[inline,color=purple!15]{scaffold: Job: State the two-part evaluation strategy and what each part demonstrates. Elaboration characterizes scope and expressiveness (qualitative). Measurement quantifies scalability (quantitative). Threats to validity addresses limitations. Be explicit about what the evaluation does NOT claim (no user study, no industrial deployment).}
-
-\todo[inline]{Draft preamble --- two parts: (1) elaboration (scope, expressiveness, error visibility), (2) scalability measurement (runtime, model size). State scope and limitations upfront.}
+\todo[inline]{E0 --- State evaluation strategy. Two parts: (1) elaboration (scope, expressiveness, error visibility --- qualitative), (2) scalability measurement (runtime, model size --- quantitative). Threats to validity. Explicit about what evaluation does NOT claim: no user study, no industrial deployment. Length: 2--3 sentences.}
 
 \subsection{Elaboration}\label{elaboration}
 
+\label{sec:elaboration}
+
 \subsubsection{Metamodel Coverage}\label{metamodel-coverage}
 
-\todo[inline,color=purple!15]{scaffold: E1 --- Soundness/completeness characterization}
+\label{sec:coverage}
 
-\todo[inline,color=purple!15]{scaffold: Job: Characterize how far the formalization covers W3C VCDM 2.0. This is elaboration --- ``how far we got in the work'' --- not a measurement. Frame as soundness (every metamodel element traces to a VCDM concept) and completeness (which VCDM concepts are covered vs. excluded).}
-
-\todo[inline,color=purple!15]{scaffold: Key content: Systematic mapping of VCDM 2.0 concepts to metamodel elements. Coverage table: VCDM concept {\textrightarrow} metamodel element {\textrightarrow} layer. Explicit exclusions with rationale (proof mechanisms, verifiable presentations, status/revocation).}
-
-\todo[inline,color=purple!15]{scaffold: Binding claims: \#2 (grounding in VCDM 2.0), \#5 (coverage characterization).}
+\todo[inline]{E1 --- VCDM coverage as soundness/completeness characterization. Soundness: every metamodel element traces to a VCDM concept. Completeness: which VCDM concepts covered vs. excluded. Explicit exclusions with rationale: proof mechanisms (cryptographic, not structural), verifiable presentations (runtime, not design-time), status/revocation (lifecycle, not schema). Brief coverage list by layer. Frame as ``how far we formalized,'' not validation metric. [Binding Claim \#5]. Length: 1 paragraph.}
 
 \todo[inline,color=blue!20]{cite: W3C VCDM 2.0 specification --- full concept list}
 
 \todo[inline,color=orange!20]{figure fig\_coverage\_table: Coverage mapping table: VCDM 2.0 concept {\textrightarrow} metamodel element {\textrightarrow} layer. Mark in-scope / out-of-scope.}
 
-\todo[inline]{Draft --- VCDM coverage as soundness/completeness characterization. N of M VCDM concepts mapped. Explicit exclusion list with rationale. Frame as ``how far we formalized,'' not as a validation metric.}
-
 \subsubsection{Constraint Expressiveness}\label{constraint-expressiveness}
 
-\todo[inline,color=purple!15]{scaffold: E4 --- Method}
+\label{sec:expressiveness}
 
-\todo[inline,color=purple!15]{scaffold: Job: Describe how constraints were collected from governance sources and classified.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: Collected constraints from W3C VCDM 2.0 spec, EU eIDAS 2.0 / Architecture Reference Framework (ARF). Classified each as: expressible (with predicate name), partially expressible, or not expressible in the constraint language.}
-
-\todo[inline,color=purple!15]{scaffold: Binding claims: \#6 (expressiveness vs. W3C + EU sources) --- HIGH RISK.}
+\todo[inline]{E4/E5 --- Constraint expressiveness method and results. 1 paragraph methodology: constraints collected from W3C VCDM 2.0, eIDAS ARF, community specs, classified as expressible/partial/no. Table: ID {\texttimes} constraint {\texttimes} source {\texttimes} expressible {\texttimes} predicate. Feature ARF-C1 (dual format mandate), ARF-C4 (proximity{\textrightarrow}mdoc), ARF-C7 (encoding-independent attributes). Plus paper-internal C1--C3 (structural), C5--C7 (governance). 1 paragraph on partially expressible ARF constraints as scope boundaries. Data source: archive/arf\_5\_3\_4\_gap\_analysis.md. [Binding Claim \#6 --- HIGH RISK]. Length: 2 paragraphs + table.}
 
 \todo[inline,color=blue!20]{cite: W3C VCDM 2.0 --- normative requirements}
 
 \todo[inline,color=blue!20]{cite: eIDAS 2.0 implementing regulation}
 
 \todo[inline,color=blue!20]{cite: EU Architecture Reference Framework (ARF) v2.7.3}
-
-\todo[inline,color=purple!15]{scaffold: E5 --- Results table}
-
-\todo[inline,color=purple!15]{scaffold: Job: Present constraint expressiveness results. Focus on constraints that exercise the three-layer architecture.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: Table with columns: ID, constraint description, source, expressible (yes/partial/no), predicate/mechanism. Feature the ARF constraints that validate the metamodel's capabilities:}
-
-\todo[inline,color=purple!15]{scaffold: --- C1 (PID\_02): Dual format mandate --- PID in both ISO 18013-5 and SD-JWT VC. YES --- EidasMandate + format class.}
-
-\todo[inline,color=purple!15]{scaffold: --- C4 (ARB\_02): Proximity requires mdoc (SD-JWT VC lacks offline protocol). YES --- supports\_offline\_verification.}
-
-\todo[inline,color=purple!15]{scaffold: --- C7 (ARB\_06): Encoding-independent attribute definition, then per-format. YES --- validates three-layer trace architecture.}
-
-\todo[inline,color=purple!15]{scaffold: Plus W3C and community constraints already encoded in the Refinery model (governance\_conflict, cross\_cred\_predicate\_gap, trace consistency).}
-
-\todo[inline,color=purple!15]{scaffold: Passing mention: ARF contains additional constraints (C2, C3, C5, C6, C8) that are partially expressible --- these mark metamodel scope boundaries, not failures. Details reserved for journal version.}
 
 \begin{center}
 \begin{tabular}{lllll}
@@ -70,17 +44,11 @@ ID & Constraint & Source & Expressible & Predicate / Mechanism \\
 
 \todo[inline,color=orange!20]{figure fig\_expressiveness\_table: Constraint expressiveness table: ID {\texttimes} constraint {\texttimes} source {\texttimes} expressible {\texttimes} predicate.}
 
-\todo[inline]{Draft --- expressiveness table. Include ARF constraints C1, C4, C7 (fully expressible) plus W3C/community constraints from the Refinery model. Mention remaining ARF constraints (partially expressible) as scope boundaries in a brief paragraph --- journal material, not individual rows.}
-
-\todo[inline,color=purple!15]{scaffold: E7 --- Limitations of expressiveness}
-
-\todo[inline,color=purple!15]{scaffold: Job: State what the constraint language cannot express.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: Runtime behavioral constraints (e.g., revocation timing), policy-level access control, holder-binding protocols, issuance workflow constraints. The formalization covers structural and semantic constraints, not operational ones. Note: ARF constraints C2, C3, C5, C6, C8 are partially expressible --- attestation qualification hierarchy, per-claim SD annotation, and SD mechanism distinction are metamodel scope choices, not fundamental limitations.}
-
-\todo[inline]{Draft --- expressiveness limitations. What falls outside the constraint language. Briefly note partially expressible ARF constraints as scope boundaries.}
+\todo[inline]{E7 --- State expressiveness limitations. Runtime behavioral constraints (revocation timing), policy-level access control, holder-binding protocols, issuance workflow constraints fall outside the constraint language. Briefly note partially expressible ARF constraints (C2, C3, C5, C6, C8) as scope boundaries --- attestation qualification hierarchy, per-claim SD annotation, SD mechanism distinction are metamodel scope choices, not fundamental limitations. Length: 1 paragraph.}
 
 \subsubsection{Headline Results}\label{headline-results}
+
+\label{sec:headlines}
 
 \todo[inline,color=purple!15]{scaffold: E6 --- Cross-governance conflict results --- TWO HEADLINE RESULTS}
 
@@ -109,7 +77,7 @@ This contradiction is invisible to single-layer inspection. At the credential sc
 
 \todo[inline]{After Refinery formalization (Pass 2) --- show the error predicates firing and the model generator producing no valid instance.}
 
-\emph{Remark.} An issuer-precomputed boolean claim (\(\text{income\_above\_threshold}: \text{true}\)) can approximate a predicate proof within SD-JWT-VC. However, this workaround requires the issuer to anticipate every verifier threshold at issuance time, produces combinatorial explosion for multi-threshold scenarios, and remains static --- a credential issued with threshold \(X\) cannot serve a verifier requiring threshold \(Y\) without reissuance. As shown in Section 4.4, this workaround restructures the domain concept layer --- itself a cross-layer propagation that confirms the need for multi-layer analysis.
+\emph{Remark.} An issuer-precomputed boolean claim (\(\text{income\_above\_threshold}: \text{true}\)) can approximate a predicate proof within SD-JWT-VC. However, this workaround requires the issuer to anticipate every verifier threshold at issuance time, produces combinatorial explosion for multi-threshold scenarios, and remains static --- a credential issued with threshold \(X\) cannot serve a verifier requiring threshold \(Y\) without reissuance. As shown in Section\textasciitilde{}\ref{sec:cross-layer}, this workaround restructures the domain concept layer --- itself a cross-layer propagation that confirms the need for multi-layer analysis.
 
 \paragraph{Headline 2: Cross-credential predicate gap (horizontal)}\label{headline-2-cross-credential-predicate-gap-horizontal}
 
@@ -138,89 +106,51 @@ This gap is again invisible to single-layer inspection: the domain concept layer
 
 \subsubsection{Anti-Pattern Detection}\label{anti-pattern-detection}
 
-\todo[inline,color=purple!15]{scaffold: E8 --- Anti-pattern catalog}
+\label{sec:anti-patterns}
 
-\todo[inline,color=purple!15]{scaffold: Job: List the known credential design anti-patterns and their error predicates.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: 3-5 anti-patterns drawn from the Refinery model. Each has a name, description of the design error, the error predicate that catches it, and which layer(s) it spans.}
-
-\todo[inline,color=purple!15]{scaffold: Binding claims: \#7 (error detection vs. anti-patterns), \#9 (multi-layer errors invisible to single-layer).}
+\todo[inline]{E8 --- Anti-pattern catalog. Table (4--5 rows): anti-pattern name, description, error predicate, layer(s) spanned, detected by Refinery? Candidates: bad\_trace (trace maps subject to value), noSubject/root\_ent\_doesnt\_have\_cred (credential without subject), no\_cred\_props\_for\_cred\_entity (orphaned credential entity), non\_connected (disconnected DCL graph), common\_parent (unintended credential overlap). [Binding Claim \#7]. Length: 1 paragraph + table.}
 
 \todo[inline,color=orange!20]{figure fig\_antipattern\_table: Anti-pattern table: name {\texttimes} description {\texttimes} error predicate {\texttimes} layer(s) {\texttimes} detected?}
 
-\todo[inline]{Draft --- anti-pattern catalog. At least 4 anti-patterns: bad\_trace, noSubject/root\_ent\_doesnt\_have\_cred, no\_cred\_props\_for\_cred\_entity, non\_connected, common\_parent.}
+\todo[inline]{E9 --- Detection results per anti-pattern. Construct error variants of housing subsidy example. For each anti-pattern, show Refinery error predicate firing. State which layer the error manifests in and whether single-layer inspection would catch it. Length: 1 paragraph.}
 
-\todo[inline,color=purple!15]{scaffold: E9 --- Detection results}
-
-\todo[inline,color=purple!15]{scaffold: Job: For each anti-pattern, show whether the error predicate catches it and demonstrate with the running example.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: Construct a variant of the housing subsidy example that contains each anti-pattern. Show the Refinery error predicate firing. State which layer the error manifests in and whether single-layer inspection would catch it.}
-
-\todo[inline]{Draft --- detection results per anti-pattern. Construct error variants of housing subsidy example.}
-
-\todo[inline,color=purple!15]{scaffold: E10 --- The multi-layer visibility argument}
-
-\todo[inline,color=purple!15]{scaffold: Job: Deliver binding claim \#9 --- demonstrate a specific error that passes single-layer checks but fails the cross-layer constraint.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: Construct a specific model where the domain concept layer is valid (connected, well-formed) and the credential schema layer is valid (all credentials have subjects, all claims have source/target), but the trace mapping is inconsistent (a CredentialSubject traces to a Value instead of a Subject). Show that this passes layer-by-layer checks but violates the cross-layer trace consistency constraint.}
-
-\todo[inline]{Draft --- multi-layer visibility. The key demonstration: layer-by-layer checks pass, cross-layer check fails. This is the paper's core argument for why multi-level modeling is necessary.}
+\todo[inline]{E10 --- Multi-layer visibility demonstration. Construct specific bad\_trace example: DCL valid (connected, well-formed), CSL valid (all credentials have subjects, all claims have source/target), but CredentialSubject traces to Value instead of Subject. Layer-by-layer passes, cross-layer trace consistency fails. Core argument for why multi-level modeling is necessary. [Binding Claim \#9]. Length: 1 paragraph.}
 
 \subsubsection{Baseline Comparison}\label{baseline-comparison}
 
-\todo[inline,color=purple!15]{scaffold: E11 --- Baseline comparison}
+\label{sec:baseline}
 
-\todo[inline,color=purple!15]{scaffold: Job: Compare the Refinery-based approach with at least one baseline development tool to justify the tooling choice.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: Select one baseline (OCL on Ecore, Alloy, or manual inspection / spreadsheet-based design review). Compare on at least one axis: expressiveness (what constraints can be stated), automation (what the tool checks vs. what requires manual inspection), error visibility (does the tool surface cross-layer issues). Be honest about Refinery limitations (learning curve, tool maturity, graph-based reasoning overhead).}
-
-\todo[inline,color=purple!15]{scaffold: Binding claims: addresses Reviewer D's ``tool dependency'' attack and Oszkr's ``why Refinery instead of X?'' question.}
-
-\todo[inline]{Draft --- baseline comparison. Select one baseline tool. Compare on expressiveness and/or automation. Acknowledge Refinery limitations honestly.}
+\todo[inline]{E11 --- Baseline comparison. Short comparison (2--3 sentences) of Refinery-based approach vs. one baseline (OCL on Ecore, Alloy, or manual spreadsheet review). Compare on expressiveness or automation. Acknowledge Refinery limitations (learning curve, tool maturity). Addresses Reviewer D ``tool dependency'' attack. Length: 2--3 sentences.}
 
 \subsection{Scalability Measurement}\label{scalability-measurement}
 
-\todo[inline,color=purple!15]{scaffold: S0 --- Preamble}
+\label{sec:scalability}
 
-\todo[inline,color=purple!15]{scaffold: Job: State the measurement objective: quantify how the approach scales with model size. Fixed schema: RQs {\textrightarrow} domains {\textrightarrow} setup {\textrightarrow} results {\textrightarrow} analysis.}
+\todo[inline]{S0 --- State measurement objective: quantify how the approach scales with model size. Fixed structure: RQs {\textrightarrow} domains {\textrightarrow} setup {\textrightarrow} results {\textrightarrow} analysis. Length: 1--2 sentences.}
 
 \subsubsection{Research Questions}\label{research-questions}
 
-\todo[inline,color=purple!15]{scaffold: S1 --- Research questions}
+\label{sec:scalability-rqs}
 
-\todo[inline,color=purple!15]{scaffold: Key content:}
-
-\todo[inline,color=purple!15]{scaffold: RQ1: ``How does constraint validation runtime scale with model size (number of entities and constraints)?''}
-
-\todo[inline,color=purple!15]{scaffold: RQ2: ``How does design space exploration (model generation) runtime scale with model size?''}
-
-\todo[inline]{Draft RQ1 and RQ2. Consider whether a third RQ on error identification time or memory usage adds value.}
-
-\todo[inline]{Placeholder --- additional RQs or metrics may be identified during measurement.}
+\todo[inline]{S1 --- State research questions. RQ1: ``How does constraint validation runtime scale with model size (number of entities and constraints)?'' RQ2: ``How does design space exploration (model generation) runtime scale with model size?'' Consider whether a third RQ on error identification time or memory usage adds value. Length: 2--3 sentences.}
 
 \subsubsection{Selected Domains}\label{selected-domains}
 
-\todo[inline,color=purple!15]{scaffold: S2 --- Model instances}
+\label{sec:scalability-domains}
 
-\todo[inline,color=purple!15]{scaffold: Job: Define 2-5 model instances of increasing size for scalability measurement.}
-
-\todo[inline,color=purple!15]{scaffold: Key content: Based on CSOK variants. E.g., (1) 1-credential minimal, (2) 3-credential CSOK as-is, (3) 5-credential extended (add HealthCred, EmploymentCred), (4) 10-credential synthetic. Justify scaling: each additional credential adds ~N entities (CredentialSchema, CredentialSubject, Claims), ~M trace links, ~K governance annotations.}
-
-\todo[inline]{Create 2--5 model instances of increasing size in models/ for scalability measurement. Base on CSOK variants.}
+\todo[inline]{S2 --- Define 2--5 model instances of increasing size for scalability measurement. Based on CSOK variants: (1) 1-credential minimal, (2) 3-credential CSOK as-is, (3) 5-credential extended, (4) 10-credential synthetic. Each additional credential adds ~N entities, ~M trace links, ~K governance annotations. Create instances in models/. Length: 1 paragraph.}
 
 \subsubsection{Measurement Setup}\label{measurement-setup}
 
-\todo[inline,color=purple!15]{scaffold: S3 --- Environment and methodology}
-
-\todo[inline,color=purple!15]{scaffold: Key content: Refinery version, JVM version, hardware spec (CPU, RAM). Number of repetitions per measurement. Warm-up runs. Metrics: validation time (ms), model generation time (ms), memory usage (MB).}
+\label{sec:scalability-setup}
 
 \todo[inline,color=blue!20]{cite: <> --- Nour's ECMFA paper for measurement methodology inspiration. Martin to provide reference.}
 
-\todo[inline]{Draft measurement setup. Include reproducibility information. Cite Nour's ECMFA paper for methodology.}
-
-\todo[inline]{Placeholder --- additional metrics beyond runtime and memory may be added.}
+\todo[inline]{S3 --- Measurement environment and methodology. Refinery version, JVM version, hardware spec (CPU, RAM). Repetitions, warm-up runs. Metrics: validation time (ms), model generation time (ms), memory usage (MB). Cite Nour's ECMFA paper for methodology. Include reproducibility information. Length: 1 paragraph.}
 
 \subsubsection{Measurement Results}\label{measurement-results}
+
+\label{sec:scalability-results}
 
 \todo[inline,color=orange!20]{figure fig\_scalability\_validation: Validation runtime vs. model size (number of entities/constraints). X-axis: model size. Y-axis: time (ms). Lines for consistency check, error identification. figure* (full-width).}
 
@@ -232,58 +162,34 @@ This gap is again invisible to single-layer inspection: the domain concept layer
 
 \subsubsection{Analysis of Results}\label{analysis-of-results}
 
-\todo[inline,color=purple!15]{scaffold: S4 --- Analysis}
+\label{sec:scalability-analysis}
 
-\todo[inline,color=purple!15]{scaffold: Job: Answer each RQ based on measurement data. Draw conclusions about practical applicability. State limitations of the measurement (single tool, synthetic scaling, no comparison with industrial-scale ecosystems).}
-
-\todo[inline]{Draft analysis --- answer RQ1 and RQ2, state practical implications and measurement limitations.}
+\todo[inline]{S4 --- Answer each RQ based on measurement data. Draw conclusions about practical applicability. State limitations (single tool, synthetic scaling, no comparison with industrial-scale ecosystems). Length: 1--2 paragraphs.}
 
 \subsection{Threats to Validity}\label{threats-to-validity}
 
+\label{sec:threats}
+
 \subsubsection{Internal Validity}\label{internal-validity}
 
-\todo[inline,color=purple!15]{scaffold: T1 --- Internal validity threats}
+\label{sec:threats-internal}
 
-\todo[inline,color=purple!15]{scaffold: Key content:}
-
-\todo[inline,color=purple!15]{scaffold: --- Constraint selection bias: constraints were chosen to demonstrate the metamodel's capabilities, not sampled randomly from governance documents. Mitigation: constraints come from normative sources (ARF, VCDM spec), not invented.}
-
-\todo[inline,color=purple!15]{scaffold: --- Running example design: the CSOK scenario was constructed to exhibit both a vertical governance conflict and a horizontal expressiveness gap. A real-world ecosystem may not exhibit both simultaneously. Mitigation: both conflict types are independently documented in the literature.}
-
-\todo[inline]{Draft internal validity threats.}
+\todo[inline]{T1 --- Internal validity threats. (1) Constraint selection bias: chosen to demonstrate capabilities, not randomly sampled. Mitigation: normative sources. (2) Running example constructed to exhibit both conflict types. Mitigation: independently documented. Length: 1 paragraph.}
 
 \subsubsection{External Validity}\label{external-validity}
 
-\todo[inline,color=purple!15]{scaffold: T2 --- External validity threats}
+\label{sec:threats-external}
 
-\todo[inline,color=purple!15]{scaffold: Key content:}
-
-\todo[inline,color=purple!15]{scaffold: --- Single domain: evaluation uses one running example (Hungarian housing subsidy). Results may not generalize to other credential ecosystems (healthcare, education, travel). Mitigation: the metamodel is defined generically; the CSOK instance demonstrates applicability, not exhausts it.}
-
-\todo[inline,color=purple!15]{scaffold: --- EU regulatory focus: governance constraints drawn primarily from eIDAS/ARF. Other regulatory frameworks (NIST, ISO) may impose different constraint patterns.}
-
-\todo[inline]{Draft external validity threats.}
+\todo[inline]{T2 --- External validity threats. (1) Single domain (Hungarian housing subsidy). Mitigation: metamodel defined generically. (2) EU regulatory focus (eIDAS/ARF). Other frameworks (NIST, ISO) may differ. Length: 1 paragraph.}
 
 \subsubsection{Construct Validity}\label{construct-validity}
 
-\todo[inline,color=purple!15]{scaffold: T3 --- Construct validity threats}
+\label{sec:threats-construct}
 
-\todo[inline,color=purple!15]{scaffold: Key content:}
-
-\todo[inline,color=purple!15]{scaffold: --- Metamodel scope choices: the formalization excludes proof mechanisms, verifiable presentations, status/revocation. These exclusions are deliberate (structural vs. cryptographic concerns) but limit what constraints can be expressed. ARF constraints C2, C3, C5, C6, C8 are partially expressible due to missing attestation qualification hierarchy, per-claim SD annotation, and SD mechanism distinction --- these are scope choices, not fundamental limitations.}
-
-\todo[inline,color=purple!15]{scaffold: --- Expressibility classification: ``partially expressible'' is a judgment call. Different metamodel designs might express the same constraint fully or not at all.}
-
-\todo[inline]{Draft construct validity threats. Include metamodel scope choices from ARF gap analysis.}
+\todo[inline]{T3 --- Construct validity threats. (1) Metamodel scope excludes proof mechanisms, presentations, status/revocation --- deliberate but limits expressible constraints. (2) ARF constraints ARF-C2, ARF-C3, ARF-C5, ARF-C6, ARF-C8 partially expressible --- metamodel scope choices, not fundamental limitations. (3) ``Partially expressible'' is a judgment call. Length: 1 paragraph.}
 
 \subsubsection{Conclusion Validity}\label{conclusion-validity}
 
-\todo[inline,color=purple!15]{scaffold: T4 --- Conclusion validity threats}
+\label{sec:threats-conclusion}
 
-\todo[inline,color=purple!15]{scaffold: Key content:}
-
-\todo[inline,color=purple!15]{scaffold: --- Scalability measurement on synthetic instances: scaling model instances by adding credentials is representative of ecosystem growth, but does not capture complexity growth from richer governance frameworks or cross-ecosystem interoperability.}
-
-\todo[inline,color=purple!15]{scaffold: --- Tool-specific results: Refinery's performance characteristics may not generalize to other graph-based modeling tools. The contribution is the metamodel and constraint formalization, not the tool.}
-
-\todo[inline]{Draft conclusion validity threats.}
+\todo[inline]{T4 --- Conclusion validity threats. (1) Scalability measured on synthetic instances --- representative of ecosystem growth but not richer governance complexity. (2) Tool-specific results: Refinery performance may not generalize. Contribution is the metamodel, not the tool. Length: 1 paragraph.}

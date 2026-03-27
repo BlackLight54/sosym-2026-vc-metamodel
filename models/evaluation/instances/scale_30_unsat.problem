@@ -1,0 +1,680 @@
+% ========================================================================
+% Instance: S30_unsat — N=30 credentials, variant=unsat
+% Governance: eidas, privacy, vcdm
+% Total nodes: 272, GovernanceAnnotation: 61
+% ========================================================================
+
+import vc_metamodel.
+import governance_conflict.
+
+
+% === DCL: domain facts ===
+
+declare Applicant.
+declare prop_1, prop_2, prop_3, prop_4, prop_5, prop_6, prop_7, prop_8, prop_9, prop_10, prop_11, prop_12, prop_13, prop_14, prop_15, prop_16, prop_17, prop_18, prop_19, prop_20, prop_21, prop_22, prop_23, prop_24, prop_25, prop_26, prop_27, prop_28, prop_29, prop_30.
+declare val_1, val_2, val_3, val_4, val_5, val_6, val_7, val_8, val_9, val_10, val_11, val_12, val_13, val_14, val_15, val_16, val_17, val_18, val_19, val_20, val_21, val_22, val_23, val_24, val_25, val_26, val_27, val_28, val_29, val_30.
+
+Subject(Applicant).
+Prop(prop_1).
+Prop(prop_2).
+Prop(prop_3).
+Prop(prop_4).
+Prop(prop_5).
+Prop(prop_6).
+Prop(prop_7).
+Prop(prop_8).
+Prop(prop_9).
+Prop(prop_10).
+Prop(prop_11).
+Prop(prop_12).
+Prop(prop_13).
+Prop(prop_14).
+Prop(prop_15).
+Prop(prop_16).
+Prop(prop_17).
+Prop(prop_18).
+Prop(prop_19).
+Prop(prop_20).
+Prop(prop_21).
+Prop(prop_22).
+Prop(prop_23).
+Prop(prop_24).
+Prop(prop_25).
+Prop(prop_26).
+Prop(prop_27).
+Prop(prop_28).
+Prop(prop_29).
+Prop(prop_30).
+Value(val_1).
+Value(val_2).
+Value(val_3).
+Value(val_4).
+Value(val_5).
+Value(val_6).
+Value(val_7).
+Value(val_8).
+Value(val_9).
+Value(val_10).
+Value(val_11).
+Value(val_12).
+Value(val_13).
+Value(val_14).
+Value(val_15).
+Value(val_16).
+Value(val_17).
+Value(val_18).
+Value(val_19).
+Value(val_20).
+Value(val_21).
+Value(val_22).
+Value(val_23).
+Value(val_24).
+Value(val_25).
+Value(val_26).
+Value(val_27).
+Value(val_28).
+Value(val_29).
+Value(val_30).
+
+property(Applicant, prop_1).
+property(Applicant, prop_2).
+property(Applicant, prop_3).
+property(Applicant, prop_4).
+property(Applicant, prop_5).
+property(Applicant, prop_6).
+property(Applicant, prop_7).
+property(Applicant, prop_8).
+property(Applicant, prop_9).
+property(Applicant, prop_10).
+property(Applicant, prop_11).
+property(Applicant, prop_12).
+property(Applicant, prop_13).
+property(Applicant, prop_14).
+property(Applicant, prop_15).
+property(Applicant, prop_16).
+property(Applicant, prop_17).
+property(Applicant, prop_18).
+property(Applicant, prop_19).
+property(Applicant, prop_20).
+property(Applicant, prop_21).
+property(Applicant, prop_22).
+property(Applicant, prop_23).
+property(Applicant, prop_24).
+property(Applicant, prop_25).
+property(Applicant, prop_26).
+property(Applicant, prop_27).
+property(Applicant, prop_28).
+property(Applicant, prop_29).
+property(Applicant, prop_30).
+value(prop_1, val_1).
+value(prop_2, val_2).
+value(prop_3, val_3).
+value(prop_4, val_4).
+value(prop_5, val_5).
+value(prop_6, val_6).
+value(prop_7, val_7).
+value(prop_8, val_8).
+value(prop_9, val_9).
+value(prop_10, val_10).
+value(prop_11, val_11).
+value(prop_12, val_12).
+value(prop_13, val_13).
+value(prop_14, val_14).
+value(prop_15, val_15).
+value(prop_16, val_16).
+value(prop_17, val_17).
+value(prop_18, val_18).
+value(prop_19, val_19).
+value(prop_20, val_20).
+value(prop_21, val_21).
+value(prop_22, val_22).
+value(prop_23, val_23).
+value(prop_24, val_24).
+value(prop_25, val_25).
+value(prop_26, val_26).
+value(prop_27, val_27).
+value(prop_28, val_28).
+value(prop_29, val_29).
+value(prop_30, val_30).
+
+% Close DCL
+!exists(Subject::new).
+!exists(Value::new).
+!exists(Prop::new).
+
+
+% === CSL: credential decomposition ===
+
+declare cs_1, cs_2, cs_3, cs_4, cs_5, cs_6, cs_7, cs_8, cs_9, cs_10, cs_11, cs_12, cs_13, cs_14, cs_15, cs_16, cs_17, cs_18, cs_19, cs_20, cs_21, cs_22, cs_23, cs_24, cs_25, cs_26, cs_27, cs_28, cs_29, cs_30.
+declare claim_1, claim_2, claim_3, claim_4, claim_5, claim_6, claim_7, claim_8, claim_9, claim_10, claim_11, claim_12, claim_13, claim_14, claim_15, claim_16, claim_17, claim_18, claim_19, claim_20, claim_21, claim_22, claim_23, claim_24, claim_25, claim_26, claim_27, claim_28, claim_29, claim_30.
+declare cv_1, cv_2, cv_3, cv_4, cv_5, cv_6, cv_7, cv_8, cv_9, cv_10, cv_11, cv_12, cv_13, cv_14, cv_15, cv_16, cv_17, cv_18, cv_19, cv_20, cv_21, cv_22, cv_23, cv_24, cv_25, cv_26, cv_27, cv_28, cv_29, cv_30.
+declare cred_1, cred_2, cred_3, cred_4, cred_5, cred_6, cred_7, cred_8, cred_9, cred_10, cred_11, cred_12, cred_13, cred_14, cred_15, cred_16, cred_17, cred_18, cred_19, cred_20, cred_21, cred_22, cred_23, cred_24, cred_25, cred_26, cred_27, cred_28, cred_29, cred_30.
+
+CredentialSubject(cs_1).
+CredentialSubject(cs_2).
+CredentialSubject(cs_3).
+CredentialSubject(cs_4).
+CredentialSubject(cs_5).
+CredentialSubject(cs_6).
+CredentialSubject(cs_7).
+CredentialSubject(cs_8).
+CredentialSubject(cs_9).
+CredentialSubject(cs_10).
+CredentialSubject(cs_11).
+CredentialSubject(cs_12).
+CredentialSubject(cs_13).
+CredentialSubject(cs_14).
+CredentialSubject(cs_15).
+CredentialSubject(cs_16).
+CredentialSubject(cs_17).
+CredentialSubject(cs_18).
+CredentialSubject(cs_19).
+CredentialSubject(cs_20).
+CredentialSubject(cs_21).
+CredentialSubject(cs_22).
+CredentialSubject(cs_23).
+CredentialSubject(cs_24).
+CredentialSubject(cs_25).
+CredentialSubject(cs_26).
+CredentialSubject(cs_27).
+CredentialSubject(cs_28).
+CredentialSubject(cs_29).
+CredentialSubject(cs_30).
+Claim(claim_1).
+Claim(claim_2).
+Claim(claim_3).
+Claim(claim_4).
+Claim(claim_5).
+Claim(claim_6).
+Claim(claim_7).
+Claim(claim_8).
+Claim(claim_9).
+Claim(claim_10).
+Claim(claim_11).
+Claim(claim_12).
+Claim(claim_13).
+Claim(claim_14).
+Claim(claim_15).
+Claim(claim_16).
+Claim(claim_17).
+Claim(claim_18).
+Claim(claim_19).
+Claim(claim_20).
+Claim(claim_21).
+Claim(claim_22).
+Claim(claim_23).
+Claim(claim_24).
+Claim(claim_25).
+Claim(claim_26).
+Claim(claim_27).
+Claim(claim_28).
+Claim(claim_29).
+Claim(claim_30).
+CredentialValue(cv_1).
+CredentialValue(cv_2).
+CredentialValue(cv_3).
+CredentialValue(cv_4).
+CredentialValue(cv_5).
+CredentialValue(cv_6).
+CredentialValue(cv_7).
+CredentialValue(cv_8).
+CredentialValue(cv_9).
+CredentialValue(cv_10).
+CredentialValue(cv_11).
+CredentialValue(cv_12).
+CredentialValue(cv_13).
+CredentialValue(cv_14).
+CredentialValue(cv_15).
+CredentialValue(cv_16).
+CredentialValue(cv_17).
+CredentialValue(cv_18).
+CredentialValue(cv_19).
+CredentialValue(cv_20).
+CredentialValue(cv_21).
+CredentialValue(cv_22).
+CredentialValue(cv_23).
+CredentialValue(cv_24).
+CredentialValue(cv_25).
+CredentialValue(cv_26).
+CredentialValue(cv_27).
+CredentialValue(cv_28).
+CredentialValue(cv_29).
+CredentialValue(cv_30).
+Credential(cred_1).
+Credential(cred_2).
+Credential(cred_3).
+Credential(cred_4).
+Credential(cred_5).
+Credential(cred_6).
+Credential(cred_7).
+Credential(cred_8).
+Credential(cred_9).
+Credential(cred_10).
+Credential(cred_11).
+Credential(cred_12).
+Credential(cred_13).
+Credential(cred_14).
+Credential(cred_15).
+Credential(cred_16).
+Credential(cred_17).
+Credential(cred_18).
+Credential(cred_19).
+Credential(cred_20).
+Credential(cred_21).
+Credential(cred_22).
+Credential(cred_23).
+Credential(cred_24).
+Credential(cred_25).
+Credential(cred_26).
+Credential(cred_27).
+Credential(cred_28).
+Credential(cred_29).
+Credential(cred_30).
+
+% Trace: Prop -> Claim
+Prop::trace(prop_1, claim_1).
+Prop::trace(prop_2, claim_2).
+Prop::trace(prop_3, claim_3).
+Prop::trace(prop_4, claim_4).
+Prop::trace(prop_5, claim_5).
+Prop::trace(prop_6, claim_6).
+Prop::trace(prop_7, claim_7).
+Prop::trace(prop_8, claim_8).
+Prop::trace(prop_9, claim_9).
+Prop::trace(prop_10, claim_10).
+Prop::trace(prop_11, claim_11).
+Prop::trace(prop_12, claim_12).
+Prop::trace(prop_13, claim_13).
+Prop::trace(prop_14, claim_14).
+Prop::trace(prop_15, claim_15).
+Prop::trace(prop_16, claim_16).
+Prop::trace(prop_17, claim_17).
+Prop::trace(prop_18, claim_18).
+Prop::trace(prop_19, claim_19).
+Prop::trace(prop_20, claim_20).
+Prop::trace(prop_21, claim_21).
+Prop::trace(prop_22, claim_22).
+Prop::trace(prop_23, claim_23).
+Prop::trace(prop_24, claim_24).
+Prop::trace(prop_25, claim_25).
+Prop::trace(prop_26, claim_26).
+Prop::trace(prop_27, claim_27).
+Prop::trace(prop_28, claim_28).
+Prop::trace(prop_29, claim_29).
+Prop::trace(prop_30, claim_30).
+
+% Claims: source and target
+Claim::source(claim_1, cs_1).
+Claim::target(claim_1, cv_1).
+Claim::source(claim_2, cs_2).
+Claim::target(claim_2, cv_2).
+Claim::source(claim_3, cs_3).
+Claim::target(claim_3, cv_3).
+Claim::source(claim_4, cs_4).
+Claim::target(claim_4, cv_4).
+Claim::source(claim_5, cs_5).
+Claim::target(claim_5, cv_5).
+Claim::source(claim_6, cs_6).
+Claim::target(claim_6, cv_6).
+Claim::source(claim_7, cs_7).
+Claim::target(claim_7, cv_7).
+Claim::source(claim_8, cs_8).
+Claim::target(claim_8, cv_8).
+Claim::source(claim_9, cs_9).
+Claim::target(claim_9, cv_9).
+Claim::source(claim_10, cs_10).
+Claim::target(claim_10, cv_10).
+Claim::source(claim_11, cs_11).
+Claim::target(claim_11, cv_11).
+Claim::source(claim_12, cs_12).
+Claim::target(claim_12, cv_12).
+Claim::source(claim_13, cs_13).
+Claim::target(claim_13, cv_13).
+Claim::source(claim_14, cs_14).
+Claim::target(claim_14, cv_14).
+Claim::source(claim_15, cs_15).
+Claim::target(claim_15, cv_15).
+Claim::source(claim_16, cs_16).
+Claim::target(claim_16, cv_16).
+Claim::source(claim_17, cs_17).
+Claim::target(claim_17, cv_17).
+Claim::source(claim_18, cs_18).
+Claim::target(claim_18, cv_18).
+Claim::source(claim_19, cs_19).
+Claim::target(claim_19, cv_19).
+Claim::source(claim_20, cs_20).
+Claim::target(claim_20, cv_20).
+Claim::source(claim_21, cs_21).
+Claim::target(claim_21, cv_21).
+Claim::source(claim_22, cs_22).
+Claim::target(claim_22, cv_22).
+Claim::source(claim_23, cs_23).
+Claim::target(claim_23, cv_23).
+Claim::source(claim_24, cs_24).
+Claim::target(claim_24, cv_24).
+Claim::source(claim_25, cs_25).
+Claim::target(claim_25, cv_25).
+Claim::source(claim_26, cs_26).
+Claim::target(claim_26, cv_26).
+Claim::source(claim_27, cs_27).
+Claim::target(claim_27, cv_27).
+Claim::source(claim_28, cs_28).
+Claim::target(claim_28, cv_28).
+Claim::source(claim_29, cs_29).
+Claim::target(claim_29, cv_29).
+Claim::source(claim_30, cs_30).
+Claim::target(claim_30, cv_30).
+
+% Credential containment
+_(cs_1, cred_1).
+_(cs_2, cred_2).
+_(cs_3, cred_3).
+_(cs_4, cred_4).
+_(cs_5, cred_5).
+_(cs_6, cred_6).
+_(cs_7, cred_7).
+_(cs_8, cred_8).
+_(cs_9, cred_9).
+_(cs_10, cred_10).
+_(cs_11, cred_11).
+_(cs_12, cred_12).
+_(cs_13, cred_13).
+_(cs_14, cred_14).
+_(cs_15, cred_15).
+_(cs_16, cred_16).
+_(cs_17, cred_17).
+_(cs_18, cred_18).
+_(cs_19, cred_19).
+_(cs_20, cred_20).
+_(cs_21, cred_21).
+_(cs_22, cred_22).
+_(cs_23, cred_23).
+_(cs_24, cred_24).
+_(cs_25, cred_25).
+_(cs_26, cred_26).
+_(cs_27, cred_27).
+_(cs_28, cred_28).
+_(cs_29, cred_29).
+_(cs_30, cred_30).
+
+% Entity alignment: all credential subjects trace to Applicant
+CredEntity::trace(cs_1, Applicant).
+CredEntity::trace(cs_2, Applicant).
+CredEntity::trace(cs_3, Applicant).
+CredEntity::trace(cs_4, Applicant).
+CredEntity::trace(cs_5, Applicant).
+CredEntity::trace(cs_6, Applicant).
+CredEntity::trace(cs_7, Applicant).
+CredEntity::trace(cs_8, Applicant).
+CredEntity::trace(cs_9, Applicant).
+CredEntity::trace(cs_10, Applicant).
+CredEntity::trace(cs_11, Applicant).
+CredEntity::trace(cs_12, Applicant).
+CredEntity::trace(cs_13, Applicant).
+CredEntity::trace(cs_14, Applicant).
+CredEntity::trace(cs_15, Applicant).
+CredEntity::trace(cs_16, Applicant).
+CredEntity::trace(cs_17, Applicant).
+CredEntity::trace(cs_18, Applicant).
+CredEntity::trace(cs_19, Applicant).
+CredEntity::trace(cs_20, Applicant).
+CredEntity::trace(cs_21, Applicant).
+CredEntity::trace(cs_22, Applicant).
+CredEntity::trace(cs_23, Applicant).
+CredEntity::trace(cs_24, Applicant).
+CredEntity::trace(cs_25, Applicant).
+CredEntity::trace(cs_26, Applicant).
+CredEntity::trace(cs_27, Applicant).
+CredEntity::trace(cs_28, Applicant).
+CredEntity::trace(cs_29, Applicant).
+CredEntity::trace(cs_30, Applicant).
+
+% Value traces
+CredEntity::trace(cv_1, val_1).
+CredEntity::trace(cv_2, val_2).
+CredEntity::trace(cv_3, val_3).
+CredEntity::trace(cv_4, val_4).
+CredEntity::trace(cv_5, val_5).
+CredEntity::trace(cv_6, val_6).
+CredEntity::trace(cv_7, val_7).
+CredEntity::trace(cv_8, val_8).
+CredEntity::trace(cv_9, val_9).
+CredEntity::trace(cv_10, val_10).
+CredEntity::trace(cv_11, val_11).
+CredEntity::trace(cv_12, val_12).
+CredEntity::trace(cv_13, val_13).
+CredEntity::trace(cv_14, val_14).
+CredEntity::trace(cv_15, val_15).
+CredEntity::trace(cv_16, val_16).
+CredEntity::trace(cv_17, val_17).
+CredEntity::trace(cv_18, val_18).
+CredEntity::trace(cv_19, val_19).
+CredEntity::trace(cv_20, val_20).
+CredEntity::trace(cv_21, val_21).
+CredEntity::trace(cv_22, val_22).
+CredEntity::trace(cv_23, val_23).
+CredEntity::trace(cv_24, val_24).
+CredEntity::trace(cv_25, val_25).
+CredEntity::trace(cv_26, val_26).
+CredEntity::trace(cv_27, val_27).
+CredEntity::trace(cv_28, val_28).
+CredEntity::trace(cv_29, val_29).
+CredEntity::trace(cv_30, val_30).
+
+% Close CSL
+!exists(CredentialSubject::new).
+!exists(CredentialValue::new).
+!exists(Claim::new).
+!exists(Credential::new).
+default !CredEntity::trace(*, *).
+
+
+% === FSL: format assignments ===
+
+declare fmt_1, fmt_2, fmt_3, fmt_4, fmt_5, fmt_6, fmt_7, fmt_8, fmt_9, fmt_10, fmt_11, fmt_12, fmt_13, fmt_14, fmt_15, fmt_16, fmt_17, fmt_18, fmt_19, fmt_20, fmt_21, fmt_22, fmt_23, fmt_24, fmt_25, fmt_26, fmt_27, fmt_28, fmt_29, fmt_30.
+
+SdJwtVcSchema(fmt_1).
+format(cred_1, fmt_1).
+SdJwtVcSchema(fmt_2).
+format(cred_2, fmt_2).
+SdJwtVcSchema(fmt_3).
+format(cred_3, fmt_3).
+SdJwtVcSchema(fmt_4).
+format(cred_4, fmt_4).
+SdJwtVcSchema(fmt_5).
+format(cred_5, fmt_5).
+SdJwtVcSchema(fmt_6).
+format(cred_6, fmt_6).
+SdJwtVcSchema(fmt_7).
+format(cred_7, fmt_7).
+SdJwtVcSchema(fmt_8).
+format(cred_8, fmt_8).
+SdJwtVcSchema(fmt_9).
+format(cred_9, fmt_9).
+SdJwtVcSchema(fmt_10).
+format(cred_10, fmt_10).
+SdJwtVcSchema(fmt_11).
+format(cred_11, fmt_11).
+SdJwtVcSchema(fmt_12).
+format(cred_12, fmt_12).
+SdJwtVcSchema(fmt_13).
+format(cred_13, fmt_13).
+SdJwtVcSchema(fmt_14).
+format(cred_14, fmt_14).
+SdJwtVcSchema(fmt_15).
+format(cred_15, fmt_15).
+SdJwtVcSchema(fmt_16).
+format(cred_16, fmt_16).
+SdJwtVcSchema(fmt_17).
+format(cred_17, fmt_17).
+SdJwtVcSchema(fmt_18).
+format(cred_18, fmt_18).
+SdJwtVcSchema(fmt_19).
+format(cred_19, fmt_19).
+SdJwtVcSchema(fmt_20).
+format(cred_20, fmt_20).
+SdJwtVcSchema(fmt_21).
+format(cred_21, fmt_21).
+SdJwtVcSchema(fmt_22).
+format(cred_22, fmt_22).
+SdJwtVcSchema(fmt_23).
+format(cred_23, fmt_23).
+SdJwtVcSchema(fmt_24).
+format(cred_24, fmt_24).
+SdJwtVcSchema(fmt_25).
+format(cred_25, fmt_25).
+SdJwtVcSchema(fmt_26).
+format(cred_26, fmt_26).
+SdJwtVcSchema(fmt_27).
+format(cred_27, fmt_27).
+SdJwtVcSchema(fmt_28).
+format(cred_28, fmt_28).
+SdJwtVcSchema(fmt_29).
+format(cred_29, fmt_29).
+
+% cred_30: format class left open for solver
+Formatted_Credential(fmt_30).
+format(cred_30, fmt_30).
+
+% Close FSL
+!exists(AnoncredsCredentialSchema::new).
+!exists(JsonLdCredentialSchema::new).
+!exists(JwtVCCredentialSchema::new).
+!exists(SdJwtVcSchema::new).
+!exists(MdocSchema::new).
+
+
+% === Governance markers ===
+
+EidasMandate(eidas_1).
+EidasMandate::target(eidas_1, cred_1).
+EidasMandate(eidas_2).
+EidasMandate::target(eidas_2, cred_2).
+EidasMandate(eidas_3).
+EidasMandate::target(eidas_3, cred_3).
+EidasMandate(eidas_4).
+EidasMandate::target(eidas_4, cred_4).
+EidasMandate(eidas_5).
+EidasMandate::target(eidas_5, cred_5).
+EidasMandate(eidas_6).
+EidasMandate::target(eidas_6, cred_6).
+EidasMandate(eidas_7).
+EidasMandate::target(eidas_7, cred_7).
+EidasMandate(eidas_8).
+EidasMandate::target(eidas_8, cred_8).
+EidasMandate(eidas_9).
+EidasMandate::target(eidas_9, cred_9).
+EidasMandate(eidas_10).
+EidasMandate::target(eidas_10, cred_10).
+EidasMandate(eidas_11).
+EidasMandate::target(eidas_11, cred_11).
+EidasMandate(eidas_12).
+EidasMandate::target(eidas_12, cred_12).
+EidasMandate(eidas_13).
+EidasMandate::target(eidas_13, cred_13).
+EidasMandate(eidas_14).
+EidasMandate::target(eidas_14, cred_14).
+EidasMandate(eidas_15).
+EidasMandate::target(eidas_15, cred_15).
+EidasMandate(eidas_16).
+EidasMandate::target(eidas_16, cred_16).
+EidasMandate(eidas_17).
+EidasMandate::target(eidas_17, cred_17).
+EidasMandate(eidas_18).
+EidasMandate::target(eidas_18, cred_18).
+EidasMandate(eidas_19).
+EidasMandate::target(eidas_19, cred_19).
+EidasMandate(eidas_20).
+EidasMandate::target(eidas_20, cred_20).
+EidasMandate(eidas_21).
+EidasMandate::target(eidas_21, cred_21).
+EidasMandate(eidas_22).
+EidasMandate::target(eidas_22, cred_22).
+EidasMandate(eidas_23).
+EidasMandate::target(eidas_23, cred_23).
+EidasMandate(eidas_24).
+EidasMandate::target(eidas_24, cred_24).
+EidasMandate(eidas_25).
+EidasMandate::target(eidas_25, cred_25).
+EidasMandate(eidas_26).
+EidasMandate::target(eidas_26, cred_26).
+EidasMandate(eidas_27).
+EidasMandate::target(eidas_27, cred_27).
+EidasMandate(eidas_28).
+EidasMandate::target(eidas_28, cred_28).
+EidasMandate(eidas_29).
+EidasMandate::target(eidas_29, cred_29).
+EidasMandate(eidas_30).
+EidasMandate::target(eidas_30, cred_30).
+
+PrivacyRequirement(privacy_1).
+PrivacyRequirement::target(privacy_1, cred_30).
+
+VcdmConformance(vcdm_1).
+VcdmConformance::target(vcdm_1, cred_1).
+VcdmConformance(vcdm_2).
+VcdmConformance::target(vcdm_2, cred_2).
+VcdmConformance(vcdm_3).
+VcdmConformance::target(vcdm_3, cred_3).
+VcdmConformance(vcdm_4).
+VcdmConformance::target(vcdm_4, cred_4).
+VcdmConformance(vcdm_5).
+VcdmConformance::target(vcdm_5, cred_5).
+VcdmConformance(vcdm_6).
+VcdmConformance::target(vcdm_6, cred_6).
+VcdmConformance(vcdm_7).
+VcdmConformance::target(vcdm_7, cred_7).
+VcdmConformance(vcdm_8).
+VcdmConformance::target(vcdm_8, cred_8).
+VcdmConformance(vcdm_9).
+VcdmConformance::target(vcdm_9, cred_9).
+VcdmConformance(vcdm_10).
+VcdmConformance::target(vcdm_10, cred_10).
+VcdmConformance(vcdm_11).
+VcdmConformance::target(vcdm_11, cred_11).
+VcdmConformance(vcdm_12).
+VcdmConformance::target(vcdm_12, cred_12).
+VcdmConformance(vcdm_13).
+VcdmConformance::target(vcdm_13, cred_13).
+VcdmConformance(vcdm_14).
+VcdmConformance::target(vcdm_14, cred_14).
+VcdmConformance(vcdm_15).
+VcdmConformance::target(vcdm_15, cred_15).
+VcdmConformance(vcdm_16).
+VcdmConformance::target(vcdm_16, cred_16).
+VcdmConformance(vcdm_17).
+VcdmConformance::target(vcdm_17, cred_17).
+VcdmConformance(vcdm_18).
+VcdmConformance::target(vcdm_18, cred_18).
+VcdmConformance(vcdm_19).
+VcdmConformance::target(vcdm_19, cred_19).
+VcdmConformance(vcdm_20).
+VcdmConformance::target(vcdm_20, cred_20).
+VcdmConformance(vcdm_21).
+VcdmConformance::target(vcdm_21, cred_21).
+VcdmConformance(vcdm_22).
+VcdmConformance::target(vcdm_22, cred_22).
+VcdmConformance(vcdm_23).
+VcdmConformance::target(vcdm_23, cred_23).
+VcdmConformance(vcdm_24).
+VcdmConformance::target(vcdm_24, cred_24).
+VcdmConformance(vcdm_25).
+VcdmConformance::target(vcdm_25, cred_25).
+VcdmConformance(vcdm_26).
+VcdmConformance::target(vcdm_26, cred_26).
+VcdmConformance(vcdm_27).
+VcdmConformance::target(vcdm_27, cred_27).
+VcdmConformance(vcdm_28).
+VcdmConformance::target(vcdm_28, cred_28).
+VcdmConformance(vcdm_29).
+VcdmConformance::target(vcdm_29, cred_29).
+VcdmConformance(vcdm_30).
+VcdmConformance::target(vcdm_30, cred_30).
+
+% Close governance
+!exists(EidasMandate::new).
+!exists(PrivacyRequirement::new).
+!exists(VcdmConformance::new).
+
+
+scope node = 272, GovernanceAnnotation = 61.

@@ -11,7 +11,7 @@ Derived from CFP.md. Contains interpreted, project-specific settings. Populate u
 ## Deadlines
 
 - **Abstract deadline:** 2026-03-20 (AoE) — PASSED
-- **Submission deadline:** 2026-03-27 (AoE)
+- **Submission deadline:** 2026-03-29 (AoE) — 2-day grace period granted; original deadline was 2026-03-27. AoE = UTC-12, so effective local cutoff is Monday 2026-03-30 ~13:00 CET.
 - **Notification:** 2026-06-17
 - **Camera-ready:** 2026-07-31
 - **Rebuttal window:** 2026-05-27 – 2026-05-29 (author response period, only for papers with "sufficient support for potential acceptance")
@@ -52,15 +52,10 @@ Multi-level modeling, OCL constraints, or Alloy-style model finding. Predisposed
 
 ## Exemplar papers
 
-%% 2-3 papers whose writing style the current paper should emulate. Style targets, not content references.
-   Martin: I cannot confidently name specific MODELS papers without risk of fabrication.
-   Please replace these with 2-3 well-written papers from recent MODELS proceedings
-   (2022–2025) whose style you want to emulate. Prioritize papers that:
-   - Are in the Foundations Track
-   - Combine formal modeling with a domain application
-   - Successfully explain formal content to a mixed MDE audience %%
+%% Style targets, not content references. These are papers from Oszkár's group whose writing style the current paper should emulate. PDFs in `references/venue exemplar papers/`. %%
 
-- [Martin to fill — pick 2-3 style models from recent MODELS proceedings]
+1. **Semeráth, Babikian, Li, Marussy, Varró** — "Automated Generation of Consistent Models with Structural and Attribute Constraints" — MODELS 2020. Combines a structural graph solver (partial models) with an SMT-solver for attribute constraints. Style notes: clean formal definitions accessible to mixed MDE audience, running example carried through, evaluation with scalability measurement.
+2. **Semeráth, Horváth, Varró** — "Validation of Derived Features and Well-Formedness Constraints in DSLs: By mapping graph queries to an SMT-solver" — MODELS 2013 (submitted version). Maps EMF metamodels with graph queries to first-order logic for SMT analysis. Style notes: domain application (DSL validation) with formal underpinning, incremental presentation of formal content.
 
 ## Supplementary material strategy
 

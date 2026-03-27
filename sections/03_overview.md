@@ -5,8 +5,10 @@
 %% @META: Note: The teaser figure (fig_teaser) is placed before the introduction in ACM sigconf. This section references it but does not carry the figure burden. %%
 
 # Overview
+\label{sec:overview}
 
 ## Motivation
+\label{sec:motivation}
 
 %% @SCAFFOLD: M1 — Housing subsidy scenario setup %%
 %% @SCAFFOLD: Job: Introduce the running example — a real-world multi-issuer credential scenario that exercises all three layers. %%
@@ -47,6 +49,7 @@ The constraints in this scenario originate from governance frameworks that were 
 Credential ecosystem design requires a formal framework that captures constraints at multiple abstraction layers and from multiple governance sources, enabling designers to determine whether a given configuration is jointly satisfiable. No existing approach provides this capability %% @CITE: gap claim — no existing multi-level framework for VC ecosystems %%.
 
 ## Functional Overview
+\label{sec:functional-overview}
 
 %% @FIGURE: fig_functional_overview | Box/pipeline diagram. Input: partial design specification + constraint set → Processing box (metamodel + graph predicates) → Three output modes: (1) OK — design is consistent, (2) NOT_OK(errors) — specific constraint violations identified, (3) GENERATED(possible_design) or UNVIABLE(reasons) — design space exploration produces valid alternatives or proves none exist. Style: clean box diagram like Imre's BPM paper. Production: Excalidraw → TikZ. %%
 
@@ -55,5 +58,6 @@ The approach takes as input a *partial credential ecosystem design* — entities
 The framework supports three usage modes. In *consistency checking*, the designer submits a complete or partial design and receives confirmation that all constraints are satisfied (**OK**). In *error identification*, the framework evaluates error predicates against the design and returns specific constraint violations (**NOT_OK(errors)**) — for example, identifying that the income credential's format assignment violates a governance constraint. In *design space exploration*, the designer provides a partial specification with open design choices (such as unassigned credential formats) and the framework either generates diverse valid configurations (**GENERATED(possible_design)**) or proves that no configuration satisfying all constraints exists (**UNVIABLE(reasons)**).
 
 ## Usage Workflow
+\label{sec:usage-workflow}
 
 A designer specifies the housing subsidy credential ecosystem: three credentials with their claim mappings, subject bindings, and tentative format assignments. Running error identification reveals a constraint violation on the income credential — the eIDAS format mandate and GDPR data minimization requirement conflict under SD-JWT-VC, which lacks predicate proof capability. The designer adjusts the design — restructuring the income claim as a pre-computed boolean (income above threshold) — and re-checks. Finding the modified design consistent, the designer runs design space exploration with format assignments left open, generating alternative valid configurations. The framework produces two configurations that satisfy all governance constraints, or returns UNVIABLE if the full constraint set — including the original predicate proof requirement — admits no solution.

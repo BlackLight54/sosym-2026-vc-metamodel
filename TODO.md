@@ -1,151 +1,98 @@
 # TODO
 
-## Current focus
+## Current focus — Consolidation workflow (2026-03-27)
 
-- [X] Initialize project: paste CFP, run `skills/cfp_import`, write thesis
-- [X] Submit abstract
-- [X] Run `skills/cfp_import` → derive VENUE.md
-- [X] Write thesis in CLAUDE.md (core claim, mechanism, so-what)
-- [ ] Confirm VENUE.md exemplar papers → `prompts/2026-03-24_01_exemplar_papers.md`
-- [X] Run `skills/reviewer_personas` → `prompts/2026-03-24_02_reviewer_personas.md`
-- [X] Run `skills/abstract_scaffold` → `prompts/2026-03-24_03_abstract_scaffold.md`
-- [X] Run `skills/section_scaffold` → `prompts/2026-03-24_04_section_scaffold.md`
-- [X] Build pandoc pipeline → `prompts/2026-03-24_05_pandoc_pipeline.md`
-- [X] Reframe paper as "Multi-level metamodeling" (no MDA) — DECISIONS.md updated, layer names chosen
-- [X] Remove ifblinded from LaTeX. Anonymization handled by document style properties.
+Plan: `prompts/2026-03-27_consolidation/` — 12 prompt files (T00–T10).
+Full plan: `.claude/plans/linked-petting-prism.md`.
+Pipeline & dependency diagram: `prompts/2026-03-27_consolidation/PIPELINE.md`.
+Critical path: **T00 ✅ → T00b → T01/T02 → T07 → T08 → T09 → T10**
 
-## Pre-drafting (blocks everything)
+- [ ] **T00b**: Scaffold/placeholder merging — merge `@SCAFFOLD`+`@TODO: PLACEHOLDER` pairs into clean `@TODO` blocks
+- [ ] **T01**: Sec 04 Preamble + DCL definitions (A1, A2) — [Binding #1, #3]
+- [ ] **T02**: Sec 04 CSL definitions (A4, A5, A6) — [Binding #1, #3]
+- [ ] **T03**: Sec 04 FSL definitions (A8, A9) — [Binding #1]
+- [ ] **T04**: Sec 02 Background (B1–B7, all) — [predicate proofs MUST be introduced here]
+- [ ] **T05**: Sec 06 Related Work (R1–R4, all) — [D5 preemption critical]
+- [ ] **T06**: Sec 07 Conclusion (C1–C4, all)
+- [ ] **T07**: Sec 04 Cross-layer constraints (A12–A15) — after T01+T02 — [Binding #3 CORE]
+- [ ] **T08**: Sec 05 Elaboration (coverage, expressiveness, anti-patterns, baseline) — after T01-T03+T07 — [Binding #5, #6, #7, #9]
+- [ ] **T09**: Sec 05 Threats + Scalability — after T08 — [scalability data may be interactive]
+- [ ] **T10**: Final polish (eval preamble, Intro P5, abstract numbers) — after T08+T09 — [Binding #10]
 
-- [X] **Design simplified CSOK running example** → `prompts/2026-03-24_06_csok_running_example.md` [COMPLETED 2026-03-24]
-  - [X] Research CSOK eligibility requirements and credential types
-  - [X] Simplify to 4-5 entities, 3 credentials
-  - [X] Identify governance conflict: eIDAS/GDPR/VCDM triple on IncomeCred
-  - [X] Identify cross-credential predicate gap: property_area ≥ f(num_children)
-  - [X] Update section scaffolds (Sec 01, 03, 04, 05) to reference CSOK
-  - [X] Record 5 new decisions in DECISIONS.md (naming, GDPR framing, DCL restructuring, mdoc, two headlines)
-- [X] **Develop cross-governance conflict example** (binding claim #8) [TWO HEADLINE RESULTS DESIGNED]
-- [X] **Create Refinery language guide** → `.claude/skills/refinery/` [Blocks Pass 2]
-  - [X] Document `.problem` file syntax (classes, predicates, propagation rules, scope)
-  - [X] Document three-layer pattern from existing models
-  - [X] Document how to write new instances
-  - [X] Curate examples from Refinery tutorials (File System, Project Planning, DLT)
-  - [X] Create `run_refinery.sh` CLI wrapper (generate, check, concretize commands)
-- [X] **CSOK Refinery formalization (Pass 2)** → `models/csok.problem` [COMPLETED 2026-03-25]
-  - [X] Evolve metamodel: single abstract format containment, 5 format classes, GovernanceAnnotation markers
-  - [X] Write CSOK instance: 3 credentials, 7 governance markers, format assignments
-  - [X] Encode governance conflict: `governance_conflict` error predicate (Headline 1 → UNSAT)
-  - [X] Encode cross-credential gap: `cross_cred_predicate_gap` shadow pred (Headline 2 → flagged)
-  - [X] Surface FCA results: 3 FCA-derived propagation rules (predicate→ZKP, offline→SD)
-  - [X] **Test in Refinery** — predicate removal evaluation complete
-    - [X] Syntax fixes: qualified `Claim::target`, concrete `!exists` for governance subclasses
-    - [X] Restructured to imports: `vc_metamodel.refinery`, `governance_conflict.refinery`, `csok_instance.refinery`
-    - [X] 4 entry points: `csok.problem` (UNSAT), `csok_no_conflict` / `csok_no_gdpr` / `csok_no_eidas` (all SAT)
-    - [X] `check -k` confirms `governance_conflict(IncomeCred, income_format): error`
-    - [X] `generate` confirms SAT variants produce valid models
+## Advisor feedback — remaining work
 
-## Advisor feedback (2026-03-25) — Prompt Pipeline
+Raw notes: `archive/meeting_notes_2026-03-25.md`.
+Prompts archived to `prompts/.archive/2026-03-26_*.md`.
+Pipeline: `prompts/.archive/2026-03-26_pipeline.md` — all phases completed except P06 (below).
 
-Raw notes archived to `archive/meeting_notes_2026-03-25.md`.
-Prompts in `prompts/2026-03-26_01` through `_08`. Execute in phases below.
+### Sec 05 scalability & measurement (from P04)
 
-### Execution pipeline
+Structure completed ✅ (Elaboration 5.1 + Scalability 5.2 + Threats 5.3). Remaining:
 
-```
-Phase 1 (parallel):   P01 DCL rename research     → prompts/2026-03-26_01_cpl_rename_research.md
-                      P02 ARF 5.3.4 gap analysis   → prompts/2026-03-26_02_arf_gap_analysis.md
-
-Phase 2 (parallel):   P03 Sec 03 restructure       → prompts/2026-03-26_03_sec03_restructure.md
-                      P04 Sec 05 restructure       → prompts/2026-03-26_04_sec05_restructure.md
-
-Phase 3 (parallel):   P05 Intro/Abstract framing   → prompts/2026-03-26_05_intro_abstract_framing.md
-                      P06 Sec 04 usage modes       → prompts/2026-03-26_06_sec04_usage_modes.md
-
-Phase 4 (sequential): P07 DCL rename propagate     → prompts/2026-03-26_07_cpl_rename_propagate.md
-
-Phase 5 (sequential): P08 Claim evidence audit     → prompts/2026-03-26_08_claim_evidence_audit.md
-```
-
-Each prompt edits downstream prompts in the chain (see “Chain edits” in each prompt).
-
-### Critical (blocks submission)
-
-**Sec 03 restructure → P03** ✅
-
-- [X] Rename header “Motivation” → “Overview”, update `@META` budget (1.0 → ~1.5 pages)
-- [X] Add `## Motivation` (3.1) — consolidate M1–M5, draft M3/M4/M5
-- [X] Add `## Functional Overview` (3.2) — box/pipeline diagram, three usage modes
-- [X] Add `## Usage Workflow` (3.3) — designer walkthrough on CSOK
-- [X] Update Intro P5 to reference “Overview”
-- [X] Chain edits: P05 placeholders filled (`<<SEC03_STRUCTURE>>`, `<<STRUCTURE_PARA_CURRENT>>`)
-- [X] Chain edits: P06 placeholders filled (`<<THREE_MODES_DEFINITION>>`, `<<SEC03_MODE_NAMES>>`)
-
-**Intro/Abstract framing → P05**
-
-- [ ] “scattered” → “collected and formalized” in abstract and intro P2
-- [ ] Add emergent interaction argument
-- [ ] Add hierarchical vs. peer governance distinction (defense against Reviewer D)
-- [ ] Add why existing tools fail argument
-
-### High priority
-
-**Sec 05 restructure → P04** ✅
-
-- [X] Restructure: Elaboration (5.1) + Scalability Measurement (5.2) + Threats to Validity (5.3)
-- [X] Reframe VCDM coverage as soundness/completeness (elaboration, not measurement)
-- [X] Add baseline comparison scaffold
-- [X] Add scalability measurement fixed schema (RQs, domains, setup, results, analysis)
-- [X] Chain edit P08 placeholders (`<<EVALUATION_STRUCTURE>>`, `<<EVALUATION_CLAIMS>>`)
 - [ ] Create 2–5 model instances of increasing size in `models/`
 - [ ] Run scalability measurements in Refinery
 - [ ] Design 2 `figure*` scalability diagrams (fig_scalability_validation, fig_scalability_generation)
 - [ ] Draft baseline comparison paragraph
 - [ ] Draft threats to validity subsection
-- [ ] Resolve constraint ID collision: Sec 05 headline prose uses C5/C6/C7 (Sec 04 metamodel constraints) while expressiveness table uses C1/C4/C7 (ARF IDs). "C7" means two different things. Disambiguate during Sec 04 or expressiveness table drafting.
+- [ ] Resolve constraint ID collision: prefix ARF IDs (ARF-C1, ARF-C4, ARF-C7) in expressiveness table; paper-internal C1–C9 unchanged. Decision from audit 2026-03-26.
 
-**DCL rename → P01 (research) + P07 (propagate)**
-
-- [X] Research Atkinson & Kühne, de Lara et al. for domain-level layer terminology
-- [X] Propose 3–5 alternatives, record in DECISIONS.md → **Domain Concept Layer (DCL)**
-- [X] Propagate to all sections, CLAUDE.md, models, abstract → P07
-
-**Three Refinery usage modes → P06**
+### Refinery usage modes (P06)
 
 - [ ] Clarify in Sec 04 preamble and per-subsection: OK / NOT_OK(errors) / GENERATED/UNVIABLE
 
-**ARF 5.3.4 gap analysis → P02** ✅
+### ARF gap analysis — future work (from P02)
 
-- [X] Extract constraints from ARF 5.3.4, classify expressibility, feed into Sec 05 table → `archive/arf_5_3_4_gap_analysis.md`
-- [X] Chain-edit P04 placeholders (`<<ARF_CONSTRAINTS>>`, `<<METAMODEL_GAPS>>`)
+Main analysis completed ✅ → `archive/arf_5_3_4_gap_analysis.md`. Remaining:
+
 - [ ] (Future work) Address metamodel gaps: attestation qualification level hierarchy, per-claim SD annotation, SD mechanism distinction
 
-**Cite Nour's STAF/JOT paper** — ⚠️ BLOCKED on double-blind decision (Martin checking with Oszkár)
+### Nour's STAF/JOT paper — ⚠️ BLOCKED on double-blind decision
 
-- Reference obtained: Al-Gburi, Földvári, Marussy, Semeráth, Kocsis — "A Four-Layer Modeling Framework for Policy-Driven Design in Hyperledger Fabric" — JOT (STAF 2026), to appear. PDF in `references/STAF_2026_paper_51.pdf`.
-- Double-blind concern: Semeráth and Kocsis are co-authors on both papers. Citing reveals shared group. Martin discussing with Oszkár.
+Reference obtained: Al-Gburi, Földvári, Marussy, Semeráth, Kocsis — "A Four-Layer Modeling Framework for Policy-Driven Design in Hyperledger Fabric" — JOT (STAF 2026), to appear. PDF in `references/STAF_2026_paper_51.pdf`.
+Double-blind concern: Semeráth and Kocsis are co-authors on both papers. Citing reveals shared group. Martin discussing with Oszkár.
+
 - [ ] Resolve double-blind citation strategy (cite in third person / omit / anonymize)
 - [ ] Add to Zotero as "to appear" once strategy decided
 - [ ] Cite in Sec 02.3 (Refinery — sibling layered metamodel application) and Sec 05 (measurement setup — emulate their RQ/scalability methodology) [Oszkár]
 
-**Claim evidence audit → P08 (last)**
-
-- [ ] Re-run `skills/claim_evidence_audit` against abstract after all restructuring
-
-### Medium / External
+### External coordination
 
 - [ ] **Research governance frameworks beyond ARF sectorial rulebooks** — other formal specs (ISO, NIST, sector EU regs) imposing credential design constraints? [Imre]
 - [ ] **Anonymize supplementary material** — randomize naming, upload only for review period, ensure double-blind [Oszkár]
 - [ ] **(Martin)** Include rendered Refinery model SVG in teaser figure [Oszkár's suggestion]
 - [ ] **(Martin)** Create Teams group for paper coordination
 
-## Per-section drafting (priority order)
+## Claim evidence audit — remaining (2026-03-26)
 
-- [ ] **Draft Section 04 (Approach)** — core contribution, everything depends on it
+Binding claims status: 1/10 delivered, 5/10 partial, 4/10 not yet. Grace period: deadline ~2026-03-29.
+
+- [ ] Update Intro P5 structure paragraph to mention §5.2 Scalability Measurement
+- [ ] Add scalability mention to abstract evidence sentence when measurements ready
+
+### Drafting priority reference
+
+| Priority | Section                                                    | Binding claims   | Notes                                       |
+| -------- | ---------------------------------------------------------- | ---------------- | ------------------------------------------- |
+| P1       | Sec 04 definitions (preamble, A1–A2, A4–A6, A8, A12–A13)  | #1, #3           | Core contribution — mathematician reviewer  |
+| P2       | Sec 05.1.2 expressiveness table (ARF-prefixed IDs)         | #6 [HIGH RISK]   | Data in `archive/arf_5_3_4_gap_analysis.md`  |
+| P3       | Sec 02 background (§2.1, §2.2, §2.3)                      | (explanation floor) | Reviewer C accessibility                  |
+| P4       | Sec 05.1.1 coverage characterization                       | #5               | Brief soundness/completeness                |
+| P5       | Sec 05.1.4 anti-pattern detection                          | #7               | Table + multi-layer visibility              |
+| P6       | Intro/Abstract polish                                      | #10              | Structure paragraph, framing                |
+| P7       | Sec 07 conclusion                                          | —                | Summary + future work                       |
+| P8       | Sec 06 related work                                        | —                | D5 preemption at minimum                    |
+
+## Per-section drafting — subsection details
+
+Cross-references T01–T10 in Consolidation workflow above. Subsection-level tracking below.
+
+- [ ] **Section 04 (Approach)** — core contribution, everything depends on it
   - [ ] 4.1 Domain Concept Layer — metaclasses, constraints, CSOK DCL example (scaffolded)
   - [ ] 4.2 Credential Schema Layer — metaclasses, trace mappings, CSOK CSL example (scaffolded)
   - [ ] 4.3 Format-Specific Layer — metaclasses, FCA-derived constraints, CSOK FSL example (scaffolded)
   - [ ] 4.4 Cross-Layer Constraints — trace consistency, entity alignment, constraint catalog (scaffolded), DCL restructuring worked example (scaffolded)
   - [X] Surface FCA results for format-specific layer constraints (done in `models/csok.problem`)
-- [ ] **Draft Section 03 (Overview)** — restructured per Oszkár feedback (was "Motivation")
+- [ ] **Section 03 (Overview)** — restructured per Oszkár feedback (was "Motivation")
   - [X] 3.1 Motivation: M1-M2 CSOK scenario (existing), M3 single-layer failure, M4 governance complication, M5 problem statement — all drafted
   - [X] 3.2 Functional Overview: figure placeholder + 2 paragraphs (3 modes: OK / NOT_OK / GENERATED|UNVIABLE)
   - [X] 3.3 Usage Workflow: designer walkthrough on CSOK example
@@ -153,43 +100,64 @@ Each prompt edits downstream prompts in the chain (see “Chain edits” in each
   - [ ] Verify M3 "predicate proofs" term is introduced in Sec 02 before first use in Sec 03
   - [ ] Confirm "hierarchical vs. peer" governance argument lives in M4 only — tell P05 not to duplicate in Intro P2
   - [ ] Usage Workflow ending hedges ("or returns UNVIABLE") — commit to one CSOK outcome once Refinery result is known
-- [ ] **Draft Section 05 (Evaluation)** — restructured per Oszkár feedback: elaboration + structured measurement
+- [ ] **Section 05 (Evaluation)** — restructured per Oszkár feedback: elaboration + structured measurement
   - [ ] 5.1 Elaboration: VCDM coverage (soundness/completeness), constraint expressiveness table + ARF 5.3.4 constraints, two headline results (scaffolded), anti-pattern detection, baseline comparison
   - [ ] 5.2 Scalability Measurement: RQs, 2–5 model instances, measurement setup, 2 `figure*` diagrams, analysis
   - [ ] 5.3 Threats to Validity: internal, external, construct, conclusion
-- [ ] **Draft Section 01 (Introduction)** — finalize after approach stabilizes
-- [ ] **Draft Section 02 (Background)** — determined by what approach needs reader to know
+- [ ] **Section 01 (Introduction)** — finalize after approach stabilizes
+- [ ] **Section 02 (Background)** — determined by what approach needs reader to know
   - [ ] 2.1 W3C VCDM 2.0
   - [ ] 2.2 Multi-Level Modeling (Atkinson & Kühne)
   - [ ] 2.3 Refinery
-- [ ] **Draft Sections 06-07 (Related Work, Conclusion)** — last
+- [ ] **Sections 06-07 (Related Work, Conclusion)** — last
 
 ## Other tasks
 
-- [ ] Confirm VENUE.md exemplar papers → `prompts/2026-03-24_01_exemplar_papers.md`
-- [X] Run `skills/gap_analysis` → 7 RQs tested, synthesis in `archive/gap analyis/GAP_ANALYSIS_SYNTHESIS.md`
-- [X] Run `skills/related_work_positioning` — scaffold updated, re-run after gap analysis + more drafting
-- [ ] **Verify Ding & Sato 2023** — "Model-Driven Security Analysis of SSI Systems" IEEE TrustCom 2023 [found via web search, confirm existence and details]
-- [ ] **Verify Schardong & Custodio 2024** — "RAF Framework for Understanding Digital Identity Models" ER 2024 [found via web search, confirm existence and details]
-- [ ] Incorporate gap analysis citations into Sec 06 scaffold (Tier 1 + Tier 2 papers)
-- [ ] Soften C5 claim in introduction P2 and abstract — per DECISIONS.md 2026-03-25
-- [ ] Write differentiation paragraphs for Sec 06.2 (ChorSSI, SecureSSI, Pattiyanon, Braun et al., King et al.)
-- [ ] (Optional) Run supplementary ACM DL/DBLP search: "metamodel" AND "verifiable credential", "model-driven" AND "decentralized identity"
-- [ ] **Draft Section 06 (Related Work)** using positioning from scaffold — 0.75 pages, 3 groups + synthesis
-- [ ] Run `skills/evaluation_design`
-- [ ] Design teaser figure (unified CSOK three-layer visual — see Sec 01 figure spec)
-- [ ] Design fig_metamodel (three-layer class diagram)
-- [ ] Update title in tex/main.tex to new title
+Items duplicated in the prompt pipeline below (O01–O05) are tracked there. Unique remaining items:
+
+- [ ] Incorporate gap analysis citations into Sec 06 scaffold (Tier 1 + Tier 2 papers) — feeds T05
+- [ ] Write differentiation paragraphs for Sec 06.2 (ChorSSI, SecureSSI, Pattiyanon, Braun et al., King et al.) — feeds T05
+
+## Other tasks — Prompt Pipeline
+
+Pipeline & task details: `prompts/2026-03-27 other tasks/PIPELINE.md`.
+
+- [ ] **O01**: Verify Ding & Sato 2023, Verify Schardong & Custodio 2024, update `[VERIFY]` markers
+- [ ] **O02**: (Optional) Supplementary ACM DL/DBLP search
+- [ ] **O03**: Soften C5 in abstract + intro P2 (after O01)
+- [ ] **O04**: Run `skills/evaluation_design`, map contributions to evaluation questions (after T01–T03)
+- [ ] **O05**: Design fig_teaser, fig_metamodel, write `figures/STYLE.md` (after T01–T03)
+
+---
 
 ## Done
 
 | Date       | Task                                      | Notes                                                                                                                                                                                                                                                                                              |
-| ------------ | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ---------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-03-24 | Initialize project                        | Paste CFP, run `skills/cfp_import`, write thesis in CLAUDE.md                                                                                                                                                                                                                                      |
+| 2026-03-24 | Submit abstract                           |                                                                                                                                                                                                                                                                                                    |
 | 2026-03-24 | Paste CFP into CFP.md                     | MODELS 2026 Foundations Track                                                                                                                                                                                                                                                                      |
-| 2026-03-24 | Run`skills/cfp_import` → derive VENUE.md | Deadlines, format, review type populated                                                                                                                                                                                                                                                           |
-| 2026-03-24 | Run`skills/abstract_scaffold`             | Draft in`sections/00_abstract.md`. 3 title candidates. 10 binding claims identified (3 high-risk).                                                                                                                                                                                                 |
-| 2026-03-24 | Run`skills/reviewer_personas`             | 4 personas populated in VENUE.md with calibration guidance (significance, rigor, explanation floor, defense points)                                                                                                                                                                                |
+| 2026-03-24 | Run `skills/cfp_import` → derive VENUE.md | Deadlines, format, review type populated                                                                                                                                                                                                                                                           |
+| 2026-03-24 | Run `skills/reviewer_personas`            | 4 personas populated in VENUE.md with calibration guidance (significance, rigor, explanation floor, defense points)                                                                                                                                                                                 |
+| 2026-03-24 | Run `skills/abstract_scaffold`            | Draft in `sections/00_abstract.md`. 3 title candidates. 10 binding claims identified (3 high-risk).                                                                                                                                                                                                |
+| 2026-03-24 | Run `skills/section_scaffold`             | 7 section files created in `sections/`. Intro has P1-P5 skeleton with structure paragraph. All sections have per-paragraph guidance with markers. DECISIONS.md updated with title, framing, terminology, examples, teaser figure decisions.                                                         |
 | 2026-03-24 | Build pandoc pipeline                     | `build.sh`, `tex/main.tex`, Lua filters in `pandoc/filters/`. Citations and figures filters are stubs. Needs pandoc install to test.                                                                                                                                                               |
-| 2026-03-24 | Run`skills/section_scaffold`              | 7 section files created in`sections/`. Intro has P1-P5 skeleton with structure paragraph. All sections have per-paragraph guidance with markers. DECISIONS.md updated with title, framing, terminology, examples, teaser figure decisions.                                                         |
-| 2026-03-25 | Run`skills/gap_analysis`                  | 7 RQs tested. Core novelty CLEAR. C5 corrected (MDE has been applied to SSI — 4 papers). ~20 papers to cite. 5 differentiation arguments. Synthesis in`archive/gap analyis/GAP_ANALYSIS_SYNTHESIS.md`. Sec 06 scaffold updated.                                                                   |
-| 2026-03-25 | CSOK Refinery formalization (Pass 2)      | `models/csok.problem` written. Evolved metamodel: single abstract format containment, 5 format classes, GovernanceAnnotation markers, FCA propagation rules. Two headline results encoded: `governance_conflict` error (UNSAT), `cross_cred_predicate_gap` shadow pred. Awaiting Refinery testing. |
+| 2026-03-24 | Confirm VENUE.md exemplar papers          | 2 papers from Oszkár's group (MODELS 2020, MODELS 2013)                                                                                                                                                                                                                                           |
+| 2026-03-24 | Design CSOK running example               | Researched eligibility, simplified to 4-5 entities/3 credentials. Governance conflict (eIDAS/GDPR/VCDM on IncomeCred) and cross-credential predicate gap identified. 5 decisions in DECISIONS.md. → `prompts/2026-03-24_06_csok_running_example.md`                                                |
+| 2026-03-24 | Develop cross-governance conflict example | Two headline results designed (Binding claim #8).                                                                                                                                                                                                                                                  |
+| 2026-03-25 | Run `skills/gap_analysis`                 | 7 RQs tested. Core novelty CLEAR. C5 corrected (MDE has been applied to SSI — 4 papers). ~20 papers to cite. 5 differentiation arguments. Synthesis in `archive/gap analyis/GAP_ANALYSIS_SYNTHESIS.md`. Sec 06 scaffold updated.                                                                   |
+| 2026-03-25 | Create Refinery language guide            | `.claude/skills/refinery/` — `.problem` syntax, three-layer pattern, instance writing, curated examples, `run_refinery.sh` CLI wrapper.                                                                                                                                                            |
+| 2026-03-25 | CSOK Refinery formalization (Pass 2)      | `models/csok.problem` written. Evolved metamodel: single abstract format containment, 5 format classes, GovernanceAnnotation markers, FCA propagation rules. Two headline results encoded: `governance_conflict` error (UNSAT), `cross_cred_predicate_gap` shadow pred.                             |
+| 2026-03-25 | Refinery testing complete                 | Syntax fixes, restructured to imports (`vc_metamodel.refinery`, `governance_conflict.refinery`, `csok_instance.refinery`). 4 entry points: `csok.problem` (UNSAT), 3 SAT variants. `check -k` and `generate` both verified.                                                                       |
+| 2026-03-25 | Reframe as multi-level metamodeling       | No MDA terminology (CIM/PIM/PSM). Layer names chosen. DECISIONS.md updated.                                                                                                                                                                                                                        |
+| 2026-03-25 | Remove ifblinded from LaTeX               | Anonymization handled by document style properties.                                                                                                                                                                                                                                                |
+| 2026-03-26 | DCL rename (P01 research + P07 propagate) | Researched Atkinson & Kühne, de Lara et al. Proposed 5 alternatives → selected Domain Concept Layer (DCL). Propagated to all sections, CLAUDE.md, models, abstract.                                                                                                                                |
+| 2026-03-26 | ARF 5.3.4 gap analysis (P02)             | Constraints extracted, classified, fed into Sec 05 table → `archive/arf_5_3_4_gap_analysis.md`. P04 chain edits completed. Future work gaps identified (remaining items above).                                                                                                                     |
+| 2026-03-26 | Sec 03 restructure (P03)                  | Renamed Motivation → Overview. Added 3.1 Motivation (M1-M5 drafted), 3.2 Functional Overview, 3.3 Usage Workflow. Intro P5 updated. P05/P06 chain edits completed.                                                                                                                                |
+| 2026-03-26 | Sec 05 restructure — structure (P04)      | Restructured to Elaboration (5.1) + Scalability (5.2) + Threats (5.3). VCDM coverage reframed as soundness/completeness. Baseline comparison and scalability measurement scaffolded. P08 chain edits completed. Measurement items still pending (remaining items above).                            |
+| 2026-03-26 | Intro/Abstract framing (P05)              | "scattered" → "collected and formalized". Emergent interaction argument, hierarchical vs. peer governance distinction, why existing tools fail argument added.                                                                                                                                      |
+| 2026-03-26 | Claim evidence audit (P08)                | 1/10 binding claims delivered, 5/10 partial, 4/10 not yet. Headline results (Claim #8) strongest section. Terminology clean (no CPL orphans). Critical: Sec 04.4 cross-ref "5.3"→"5.1.3", constraint ID collision (resolved: ARF-prefix). Scalability kept (Oszkár helping). Baseline kept as short placeholder. |
+| 2026-03-26 | Run `skills/related_work_positioning`     | Scaffold updated, re-run needed after gap analysis + more drafting.                                                                                                                                                                                                                                |
+| 2026-03-26 | Fix cross-ref Sec 04:155                  | "Section 5.3" → "Section 5.1.3" (headline results moved after Sec 05 restructure). Done in T00.                                                                                                                                                                                                   |
+| 2026-03-27 | Create consolidation prompts (T00–T10)    | 12 prompt files in `prompts/2026-03-27_consolidation/`.                                                                                                                                                                                                                                            |
+| 2026-03-27 | T00 file restructuring                    | Rename, LaTeX labels, cross-refs, stale metadata, duplicate markers. Title updated in `tex/main.tex`.                                                                                                                                                                                              |
