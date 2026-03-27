@@ -1,4 +1,143 @@
 
+@misc{noauthor_zcash_nodate,
+	title = {Zcash: {Privacy}-protecting digital currency},
+	shorttitle = {Zcash},
+	url = {https://z.cash/},
+	abstract = {The first cryptocurrency to develop zero-knowledge encryption for private peer-to-peer payments. Use Zcash Learn Zcash Current price (USD) \$ 0 Outstanding supply 0 M Shielded ZEC 0 M Payments 0 519.19…},
+	language = {en-US},
+	urldate = {2025-12-11},
+	journal = {Z.Cash},
+}
+
+@article{toldi_blockchain-based_2023,
+	title = {Blockchain-{Based}, {Confidentiality}-{Preserving} {Orchestration} of {Collaborative} {Workflows}},
+	volume = {15},
+	issn = {20612079},
+	url = {https://www.infocommunications.hu/2023_3_8},
+	doi = {10.36244/ICJ.2023.3.8},
+	abstract = {Business process collaboration between independent parties is challenging when participants do not completely trust each other. Tracking actions and enforcing the activity authorizations of participants via blockchain-hosted smart contracts is an emerging solution to this lack of trust, with most state-of-the-art approaches generating the orchestrating smart contract logic from Business Process Model and Notation (BPMN) models. However, compared to centralized business process orchestration services, smart contract state typically leaks potentially sensitive information about the state of the collaboration, limiting the applicability of decentralized process orchestration. This paper presents a novel, collaboration confidentiality-preserving approach where the process orchestrator smart contract only stores encrypted and hashed process states and validates participant actions against a BPMN model using zero-knowledge proofs. We cover a subset of BPMN, which is sufficient from the practical point of view, support messagepassing between participants, and provide an open-source, endto-end prototype implementation that automatically generates the key software artifacts.},
+	number = {3},
+	urldate = {2025-03-11},
+	journal = {Infocommunications journal},
+	author = {Toldi, Balázs Adam and Kocsis, Imre},
+	year = {2023},
+	pages = {72--81},
+}
+
+@article{mezei_validated_nodate,
+	title = {Validated {Multi}-{Layer} {Meta}-modeling via {Intrinsically} {Modeled} {Operations}},
+	abstract = {State-of-the-art meta-model based technologies are facing increasing pressure under new challenges originating from practical industrial applications. Dynamic Multi-Layer Algebra (DMLA) is a novel generic modeling approach that intends to meet these challenges by combining multi-level meta-modeling and validated instantiation. This paper describes the core ideas and techniques that have been applied to DMLA in order to create a modular model intrinsic validation of instantiation. The approach is also illustrated by a simple example.},
+	language = {en},
+	author = {Mezei, Gergely and Urbán, Dániel and Theisz, Zoltán},
+}
+
+@inproceedings{marussy_refinery_2024,
+	address = {Lisbon Portugal},
+	title = {Refinery: {Graph} {Solver} as a {Service}: {Refinement}-based {Generation} and {Analysis} of {Consistent} {Models}},
+	isbn = {979-8-4007-0502-1},
+	shorttitle = {Refinery},
+	url = {https://dl.acm.org/doi/10.1145/3639478.3640045},
+	doi = {10.1145/3639478.3640045},
+	language = {en},
+	urldate = {2026-03-27},
+	booktitle = {Proceedings of the 2024 {IEEE}/{ACM} 46th {International} {Conference} on {Software} {Engineering}: {Companion} {Proceedings}},
+	publisher = {ACM},
+	author = {Marussy, Kristóf and Ficsor, Attila and Semeráth, Oszkár and Varró, Dániel},
+	month = apr,
+	year = {2024},
+	pages = {64--68},
+}
+
+@misc{groth_size_2016,
+	title = {On the {Size} of {Pairing}-based {Non}-interactive {Arguments}},
+	url = {https://eprint.iacr.org/2016/260},
+	abstract = {Non-interactive arguments enable a prover to convince a verifier that a statement is true. Recently there has been a lot of progress both in theory and practice on constructing highly efficient non-interactive arguments with small size and low verification complexity, so-called succinct non-interactive arguments (SNARGs) and succinct non-interactive arguments of knowledge (SNARKs).
+
+Many constructions of SNARGs rely on pairing-based cryptography. In these constructions a proof consists of a number of group elements and the verification consists of checking a number of pairing product equations. The question we address in this article is how efficient pairing-based SNARGs can be.
+
+Our first contribution is a pairing-based (preprocessing) SNARK for arithmetic circuit satisfiability, which is an NP-complete language. In our SNARK we work with asymmetric pairings for higher efficiency, a proof is only 3 group elements, and verification consists of checking a single pairing product equations using 3 pairings in total. Our SNARK is zero-knowledge and does not reveal anything about the witness the prover uses to make the proof.
+
+As our second contribution we answer an open question of Bitansky, Chiesa, Ishai, Ostrovsky and Paneth (TCC 2013) by showing that 2-move linear interactive proofs cannot have a linear decision procedure. It follows from this that SNARGs where the prover and verifier use generic asymmetric bilinear group operations cannot consist of a single group element. This gives the first lower bound for pairing-based SNARGs. It remains an intriguing open problem whether this lower bound can be extended to rule out 2 group element SNARGs, which would prove optimality of our 3 element construction.},
+	urldate = {2025-12-11},
+	author = {Groth, Jens},
+	year = {2016},
+	note = {Publication info: A minor revision of an IACR publication in EUROCRYPT 2016},
+	keywords = {SNARKs, bilinear groups, linear interactive proofs, non-interactive zero-knowledge arguments, quadratic arithmetic programs},
+}
+
+@misc{gabizon_plonk_2019,
+	title = {{PLONK}: {Permutations} over {Lagrange}-bases for {Oecumenical} {Noninteractive} arguments of {Knowledge}},
+	shorttitle = {{PLONK}},
+	url = {https://eprint.iacr.org/2019/953},
+	abstract = {zk-SNARK constructions that utilize an updatable universal structured reference string remove one of the main obstacles in deploying zk-SNARKs [GKMMM, Crypto 2018]. The important work of Maller et al. [MBKM, CCS 2019] presented Sonic - the first potentially practical zk-SNARK with fully succinct verification for general arithmetic circuits with such an SRS.
+However, the version of Sonic enabling fully succinct verification still requires relatively high proof construction overheads. We present a universal SNARK construction with fully succinct verification, and significantly lower prover running time (roughly 7.5-20 less group exponentiations than [MBKM] in the fully succinct verifier mode depending on circuit structure).
+
+Similarly to [MBKM], we rely on a permutation argument based on Bayer and Groth [Eurocrypt 2012]. However, we focus on ``Evaluations on a subgroup rather than coefficients of monomials''; which enables simplifying both the permutation argument and the artihmetization step.},
+	urldate = {2025-12-11},
+	author = {Gabizon, Ariel and Williamson, Zachary J. and Ciobotaru, Oana},
+	year = {2019},
+	note = {Publication info: Preprint.},
+	keywords = {zk-SNARKs},
+}
+
+@inproceedings{braun_ssi_2024,
+	address = {Singapore Singapore},
+	title = {{SSI}, from {Specifications} to {Protocol}? {Formally} {Verify} {Security}!},
+	isbn = {979-8-4007-0171-9},
+	shorttitle = {{SSI}, from {Specifications} to {Protocol}?},
+	url = {https://dl.acm.org/doi/10.1145/3589334.3645426},
+	doi = {10.1145/3589334.3645426},
+	language = {en},
+	urldate = {2026-03-27},
+	booktitle = {Proceedings of the {ACM} {Web} {Conference} 2024},
+	publisher = {ACM},
+	author = {Braun, Christoph H.-J. and Horne, Ross and Käfer, Tobias and Mauw, Sjouke},
+	month = may,
+	year = {2024},
+	pages = {1620--1631},
+}
+
+@incollection{goos_essence_2001,
+	address = {Berlin, Heidelberg},
+	title = {The {Essence} of {Multilevel} {Metamodeling}},
+	volume = {2185},
+	isbn = {978-3-540-42667-7 978-3-540-45441-0},
+	url = {http://link.springer.com/10.1007/3-540-45441-1_3},
+	doi = {10.1007/3-540-45441-1_3},
+	urldate = {2026-03-27},
+	booktitle = {{UML} 2001 — {The} {Unified} {Modeling} {Language}. {Modeling} {Languages}, {Concepts}, and {Tools}},
+	publisher = {Springer Berlin Heidelberg},
+	author = {Atkinson, Colin and Kühne, Thomas},
+	editor = {Goos, Gerhard and Hartmanis, Juris and Van Leeuwen, Jan and Gogolla, Martin and Kobryn, Cris},
+	year = {2001},
+	note = {Series Title: Lecture Notes in Computer Science},
+	pages = {19--33},
+}
+
+@misc{noauthor_naih_2020,
+	title = {{NAIH} ({Hungary}) - {NAIH}-2020-2546-5},
+	url = {https://gdprhub.eu/index.php?title=NAIH_(Hungary)_-_NAIH-2020-2546-5},
+	abstract = {The Hungarian DPA (NAIH) held that the controller processed copies of documentation containing personal data (including health data) without a legal basis and not in line with the purpose of processing. The processing was also not in line with the controller's legal obligation to process information...},
+	language = {en},
+	urldate = {2026-03-27},
+	journal = {GDPRhub},
+	year = {2020},
+}
+
+@misc{noauthor_verifiable_2024,
+	title = {Verifiable {Credential} {Data} {Integrity} 1.0},
+	url = {https://www.w3.org/TR/vc-data-integrity/},
+	urldate = {2026-03-27},
+	year = {2024},
+}
+
+@misc{noauthor_5182023_2023,
+	title = {518/2023. ({XI}. 30.) {Korm}. rendelet - {Nemzeti} {Jogszabálytár}},
+	url = {https://njt.hu/jogszabaly/2023-518-20-22},
+	urldate = {2026-03-27},
+	year = {2023},
+}
+
 @misc{gdpr,
 	title = {Regulation ({EU}) 2016/679 of the {European} {Parliament} and of the {Council} of 27 {April} 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing {Directive} 95/46/{EC} ({General} {Data} {Protection} {Regulation}) ({Text} with {EEA} relevance)},
 	month = may,
@@ -46,12 +185,6 @@
 @misc{noauthor_162016_nodate,
 	title = {16/2016. ({II}. 10.) {Korm}. rendelet - {Nemzeti} {Jogszabálytár}},
 	url = {https://njt.hu/jogszabaly/2016-16-20-22},
-	urldate = {2026-03-27},
-}
-
-@misc{noauthor_5182023_nodate,
-	title = {518/2023. ({XI}. 30.) {Korm}. rendelet - {Nemzeti} {Jogszabálytár}},
-	url = {https://njt.hu/jogszabaly/2023-518-20-22},
 	urldate = {2026-03-27},
 }
 
@@ -116,12 +249,6 @@
 	keywords = {digital-identity, eidas, eidas-framework, eudi, eudi-wallet, identity-framework, wallets},
 }
 
-@misc{noauthor_verifiable_nodate,
-	title = {Verifiable {Credential} {Data} {Integrity} 1.0},
-	url = {https://www.w3.org/TR/vc-data-integrity/},
-	urldate = {2026-03-27},
-}
-
 @techreport{barker_recommendation_2020,
 	address = {Gaithersburg, MD},
 	title = {Recommendation for key management: part 1 - general},
@@ -136,37 +263,6 @@
 	year = {2020},
 	doi = {10.6028/NIST.SP.800-57pt1r5},
 	pages = {NIST SP 800--57pt1r5},
-}
-
-@misc{noauthor_naih_nodate,
-	title = {{NAIH} ({Hungary}) - {NAIH}-2020-2546-5},
-	url = {https://gdprhub.eu/index.php?title=NAIH_(Hungary)_-_NAIH-2020-2546-5},
-	abstract = {The Hungarian DPA (NAIH) held that the controller processed copies of documentation containing personal data (including health data) without a legal basis and not in line with the purpose of processing. The processing was also not in line with the controller's legal obligation to process information...},
-	language = {en},
-	urldate = {2026-03-27},
-	journal = {GDPRhub},
-}
-
-@inproceedings{mezei2017validated,
-	title = {Validated multi-layer meta-modeling via intrinsically modeled operations.},
-	booktitle = {{MoDELS} (satellite events)},
-	author = {Mezei, Gergely and Urbán, Dániel and Theisz, Zoltán},
-	year = {2017},
-	pages = {213--217},
-}
-
-@article{mezei_validated_nodate,
-	title = {Validated {Multi}-{Layer} {Meta}-modeling via {Intrinsically} {Modeled} {Operations}},
-	abstract = {State-of-the-art meta-model based technologies are facing increasing pressure under new challenges originating from practical industrial applications. Dynamic Multi-Layer Algebra (DMLA) is a novel generic modeling approach that intends to meet these challenges by combining multi-level meta-modeling and validated instantiation. This paper describes the core ideas and techniques that have been applied to DMLA in order to create a modular model intrinsic validation of instantiation. The approach is also illustrated by a simple example.},
-	language = {en},
-	author = {Mezei, Gergely and Urbán, Dániel and Theisz, Zoltán},
-}
-
-@article{mezei_validated_nodate-1,
-	title = {Validated {Multi}-{Layer} {Meta}-modeling via {Intrinsically} {Modeled} {Operations}},
-	abstract = {State-of-the-art meta-model based technologies are facing increasing pressure under new challenges originating from practical industrial applications. Dynamic Multi-Layer Algebra (DMLA) is a novel generic modeling approach that intends to meet these challenges by combining multi-level meta-modeling and validated instantiation. This paper describes the core ideas and techniques that have been applied to DMLA in order to create a modular model intrinsic validation of instantiation. The approach is also illustrated by a simple example.},
-	language = {en},
-	author = {Mezei, Gergely and Urbán, Dániel and Theisz, Zoltán},
 }
 
 @inproceedings{sertkaya_cryptanalysis_2022,
@@ -555,40 +651,6 @@
 	pages = {3641--3671},
 }
 
-@inproceedings{marussy_refinery_2024,
-	address = {Lisbon Portugal},
-	title = {Refinery: {Graph} {Solver} as a {Service}: {Refinement}-based {Generation} and {Analysis} of {Consistent} {Models}},
-	isbn = {979-8-4007-0502-1},
-	shorttitle = {Refinery},
-	url = {https://dl.acm.org/doi/10.1145/3639478.3640045},
-	doi = {10.1145/3639478.3640045},
-	language = {en},
-	urldate = {2026-03-27},
-	booktitle = {Proceedings of the 2024 {IEEE}/{ACM} 46th {International} {Conference} on {Software} {Engineering}: {Companion} {Proceedings}},
-	publisher = {ACM},
-	author = {Marussy, Kristóf and Ficsor, Attila and Semeráth, Oszkár and Varró, Dániel},
-	month = apr,
-	year = {2024},
-	pages = {64--68},
-}
-
-@incollection{goos_essence_2001,
-	address = {Berlin, Heidelberg},
-	title = {The {Essence} of {Multilevel} {Metamodeling}},
-	volume = {2185},
-	isbn = {978-3-540-42667-7 978-3-540-45441-0},
-	url = {http://link.springer.com/10.1007/3-540-45441-1_3},
-	doi = {10.1007/3-540-45441-1_3},
-	urldate = {2026-03-27},
-	booktitle = {≪{UML}≫ 2001 — {The} {Unified} {Modeling} {Language}. {Modeling} {Languages}, {Concepts}, and {Tools}},
-	publisher = {Springer Berlin Heidelberg},
-	author = {Atkinson, Colin and Kühne, Thomas},
-	editor = {Goos, Gerhard and Hartmanis, Juris and Van Leeuwen, Jan and Gogolla, Martin and Kobryn, Cris},
-	year = {2001},
-	note = {Series Title: Lecture Notes in Computer Science},
-	pages = {19--33},
-}
-
 @article{semerath_formal_2017,
 	title = {Formal validation of domain-specific languages with derived features and well-formedness constraints},
 	volume = {16},
@@ -670,23 +732,6 @@
 	pages = {52--65},
 }
 
-@inproceedings{braun_ssi_2024,
-	address = {Singapore Singapore},
-	title = {{SSI}, from {Specifications} to {Protocol}? {Formally} {Verify} {Security}!},
-	isbn = {979-8-4007-0171-9},
-	shorttitle = {{SSI}, from {Specifications} to {Protocol}?},
-	url = {https://dl.acm.org/doi/10.1145/3589334.3645426},
-	doi = {10.1145/3589334.3645426},
-	language = {en},
-	urldate = {2026-03-27},
-	booktitle = {Proceedings of the {ACM} {Web} {Conference} 2024},
-	publisher = {ACM},
-	author = {Braun, Christoph H.-J. and Horne, Ross and Käfer, Tobias and Mauw, Sjouke},
-	month = may,
-	year = {2024},
-	pages = {1620--1631},
-}
-
 @incollection{curry_rdf-based_2025,
 	address = {Cham},
 	title = {{RDF}-{Based} {Semantics} for {Selective} {Disclosure} and {Zero}-{Knowledge} {Proofs} on {Verifiable} {Credentials}},
@@ -715,21 +760,6 @@
 	author = {van Ditmarsch, Hans and Fruzsa, Krisztina and Kuznets, Roman and Schmid, Ulrich},
 	month = jul,
 	year = {2024},
-}
-
-@article{toldi,
-	title = {Blockchain-{Based}, {Confidentiality}-{Preserving} {Orchestration} of {Collaborative} {Workflows}},
-	volume = {15},
-	issn = {20612079},
-	url = {https://www.infocommunications.hu/2023_3_8},
-	doi = {10.36244/ICJ.2023.3.8},
-	abstract = {Business process collaboration between independent parties is challenging when participants do not completely trust each other. Tracking actions and enforcing the activity authorizations of participants via blockchain-hosted smart contracts is an emerging solution to this lack of trust, with most state-of-the-art approaches generating the orchestrating smart contract logic from Business Process Model and Notation (BPMN) models. However, compared to centralized business process orchestration services, smart contract state typically leaks potentially sensitive information about the state of the collaboration, limiting the applicability of decentralized process orchestration. This paper presents a novel, collaboration confidentiality-preserving approach where the process orchestrator smart contract only stores encrypted and hashed process states and validates participant actions against a BPMN model using zero-knowledge proofs. We cover a subset of BPMN, which is sufficient from the practical point of view, support messagepassing between participants, and provide an open-source, endto-end prototype implementation that automatically generates the key software artifacts.},
-	number = {3},
-	urldate = {2026-03-21},
-	journal = {Infocommunications journal},
-	author = {Toldi, Balazs Adam and Kocsis, Imre},
-	year = {2023},
-	pages = {72--81},
 }
 
 @article{honda,
@@ -1206,48 +1236,6 @@
 	journal = {Electric Coin Company},
 }
 
-@misc{noauthor_zcash_nodate,
-	title = {Zcash: {Privacy}-protecting digital currency},
-	shorttitle = {Zcash},
-	url = {https://z.cash/},
-	abstract = {The first cryptocurrency to develop zero-knowledge encryption for private peer-to-peer payments. Use Zcash Learn Zcash Current price (USD) \$ 0 Outstanding supply 0 M Shielded ZEC 0 M Payments 0 519.19…},
-	language = {en-US},
-	urldate = {2025-12-11},
-	journal = {Z.Cash},
-}
-
-@misc{groth_size_2016,
-	title = {On the {Size} of {Pairing}-based {Non}-interactive {Arguments}},
-	url = {https://eprint.iacr.org/2016/260},
-	abstract = {Non-interactive arguments enable a prover to convince a verifier that a statement is true. Recently there has been a lot of progress both in theory and practice on constructing highly efficient non-interactive arguments with small size and low verification complexity, so-called succinct non-interactive arguments (SNARGs) and succinct non-interactive arguments of knowledge (SNARKs).
-
-Many constructions of SNARGs rely on pairing-based cryptography. In these constructions a proof consists of a number of group elements and the verification consists of checking a number of pairing product equations. The question we address in this article is how efficient pairing-based SNARGs can be.
-
-Our first contribution is a pairing-based (preprocessing) SNARK for arithmetic circuit satisfiability, which is an NP-complete language. In our SNARK we work with asymmetric pairings for higher efficiency, a proof is only 3 group elements, and verification consists of checking a single pairing product equations using 3 pairings in total. Our SNARK is zero-knowledge and does not reveal anything about the witness the prover uses to make the proof.
-
-As our second contribution we answer an open question of Bitansky, Chiesa, Ishai, Ostrovsky and Paneth (TCC 2013) by showing that 2-move linear interactive proofs cannot have a linear decision procedure. It follows from this that SNARGs where the prover and verifier use generic asymmetric bilinear group operations cannot consist of a single group element. This gives the first lower bound for pairing-based SNARGs. It remains an intriguing open problem whether this lower bound can be extended to rule out 2 group element SNARGs, which would prove optimality of our 3 element construction.},
-	urldate = {2025-12-11},
-	author = {Groth, Jens},
-	year = {2016},
-	note = {Publication info: A minor revision of an IACR publication in EUROCRYPT 2016},
-	keywords = {SNARKs, bilinear groups, linear interactive proofs, non-interactive zero-knowledge arguments, quadratic arithmetic programs},
-}
-
-@misc{gabizon_plonk_2019,
-	title = {{PLONK}: {Permutations} over {Lagrange}-bases for {Oecumenical} {Noninteractive} arguments of {Knowledge}},
-	shorttitle = {{PLONK}},
-	url = {https://eprint.iacr.org/2019/953},
-	abstract = {zk-SNARK constructions that utilize an updatable universal structured reference string remove one of the main obstacles in deploying zk-SNARKs [GKMMM, Crypto 2018]. The important work of Maller et al. [MBKM, CCS 2019] presented Sonic - the first potentially practical zk-SNARK with fully succinct verification for general arithmetic circuits with such an SRS.
-However, the version of Sonic enabling fully succinct verification still requires relatively high proof construction overheads. We present a universal SNARK construction with fully succinct verification, and significantly lower prover running time (roughly 7.5-20 less group exponentiations than [MBKM] in the fully succinct verifier mode depending on circuit structure).
-
-Similarly to [MBKM], we rely on a permutation argument based on Bayer and Groth [Eurocrypt 2012]. However, we focus on ``Evaluations on a subgroup rather than coefficients of monomials''; which enables simplifying both the permutation argument and the artihmetization step.},
-	urldate = {2025-12-11},
-	author = {Gabizon, Ariel and Williamson, Zachary J. and Ciobotaru, Oana},
-	year = {2019},
-	note = {Publication info: Preprint.},
-	keywords = {zk-SNARKs},
-}
-
 @misc{zcash_halo2_nodate,
 	title = {halo2 - {The} halo2 {Book}},
 	url = {https://zcash.github.io/halo2/},
@@ -1394,24 +1382,6 @@ Pages: 1 Band},
 Medium: application/pdf},
 	keywords = {BENUTZEROBERFLÄCHEN (INFORMATIONSSYSTEME), DATA SECURITY + DATA PROTECTION (OPERATING SYSTEMS), DATENSICHERHEIT + DATENSCHUTZ (BETRIEBSSYSTEME), Data processing, computer science, NETWORK PROTOCOLS + COMMUNICATION PROTOCOLS (COMPUTER SYSTEMS), NETZWERKPROTOKOLLE + KOMMUNIKATIONSPROTOKOLLE (COMPUTERSYSTEME), USER INTERFACES (INFORMATION SYSTEMS), info:eu-repo/classification/ddc/004},
 	pages = {35 p.},
-}
-
-@inproceedings{braun_ssi_2024-1,
-	address = {New York, NY, USA},
-	series = {{WWW} '24},
-	title = {{SSI}, from {Specifications} to {Protocol}? {Formally} {Verify} {Security}!},
-	isbn = {979-8-4007-0171-9},
-	shorttitle = {{SSI}, from {Specifications} to {Protocol}?},
-	url = {https://dl.acm.org/doi/10.1145/3589334.3645426},
-	doi = {10.1145/3589334.3645426},
-	abstract = {We evaluate a bundle of specifications from the Self-Sovereign Identity (SSI) paradigm to construct an authentication protocol for the Web. We demonstrate how relevant standards such as W3C Verifiable Credentials (VC), W3C Decentralised Identifiers (DIDs), and components of the Hyperledger Aries Framework are to be assembled methodologically into a protocol. We make those assumptions from standard trust models explicit that underlie the derived protocol, and verify security and privacy properties, notably secrecy, authentication, and unlinkability. This enables us to formally justify the additional precision that we urge these specifications to consider, to ensure that implementors of SSI-based systems do not neglect security-critical controls.},
-	urldate = {2025-03-24},
-	booktitle = {Proceedings of the {ACM} {Web} {Conference} 2024},
-	publisher = {Association for Computing Machinery},
-	author = {Braun, Christoph H.-J. and Horne, Ross and Käfer, Tobias and Mauw, Sjouke},
-	month = may,
-	year = {2024},
-	pages = {1620--1631},
 }
 
 @article{chinosiBPMNIntroductionStandard2012,
@@ -1704,21 +1674,6 @@ Medium: application/pdf},
 	pages = {274--285},
 }
 
-@article{toldi_blockchain-based_2023,
-	title = {Blockchain-{Based}, {Confidentiality}-{Preserving} {Orchestration} of {Collaborative} {Workflows}},
-	volume = {15},
-	issn = {20612079},
-	url = {https://www.infocommunications.hu/2023_3_8},
-	doi = {10.36244/ICJ.2023.3.8},
-	abstract = {Business process collaboration between independent parties is challenging when participants do not completely trust each other. Tracking actions and enforcing the activity authorizations of participants via blockchain-hosted smart contracts is an emerging solution to this lack of trust, with most state-of-the-art approaches generating the orchestrating smart contract logic from Business Process Model and Notation (BPMN) models. However, compared to centralized business process orchestration services, smart contract state typically leaks potentially sensitive information about the state of the collaboration, limiting the applicability of decentralized process orchestration. This paper presents a novel, collaboration confidentiality-preserving approach where the process orchestrator smart contract only stores encrypted and hashed process states and validates participant actions against a BPMN model using zero-knowledge proofs. We cover a subset of BPMN, which is sufficient from the practical point of view, support messagepassing between participants, and provide an open-source, endto-end prototype implementation that automatically generates the key software artifacts.},
-	number = {3},
-	urldate = {2025-03-11},
-	journal = {Infocommunications journal},
-	author = {Toldi, Balázs Adam and Kocsis, Imre},
-	year = {2023},
-	pages = {72--81},
-}
-
 @book{katz_advances_2017,
 	address = {Cham},
 	series = {Lecture {Notes} in {Computer} {Science}},
@@ -1991,24 +1946,6 @@ Publication Title: IFIP Advances in Information and Communication Technology},
 	year = {2017},
 }
 
-@inproceedings{braun_ssi_2024,
-	address = {New York, NY, USA},
-	series = {{WWW} '24},
-	title = {{SSI}, from {Specifications} to {Protocol}? {Formally} {Verify} {Security}!},
-	isbn = {979-8-4007-0171-9},
-	shorttitle = {{SSI}, from {Specifications} to {Protocol}?},
-	url = {https://dl.acm.org/doi/10.1145/3589334.3645426},
-	doi = {10.1145/3589334.3645426},
-	abstract = {We evaluate a bundle of specifications from the Self-Sovereign Identity (SSI) paradigm to construct an authentication protocol for the Web. We demonstrate how relevant standards such as W3C Verifiable Credentials (VC), W3C Decentralised Identifiers (DIDs), and components of the Hyperledger Aries Framework are to be assembled methodologically into a protocol. We make those assumptions from standard trust models explicit that underlie the derived protocol, and verify security and privacy properties, notably secrecy, authentication, and unlinkability. This enables us to formally justify the additional precision that we urge these specifications to consider, to ensure that implementors of SSI-based systems do not neglect security-critical controls.},
-	urldate = {2025-02-25},
-	booktitle = {Proceedings of the {ACM} {Web} {Conference} 2024},
-	publisher = {Association for Computing Machinery},
-	author = {Braun, Christoph H.-J. and Horne, Ross and Käfer, Tobias and Mauw, Sjouke},
-	month = may,
-	year = {2024},
-	pages = {1620--1631},
-}
-
 @inproceedings{nalepa_proposal_2007,
 	title = {Proposal of {Business} {Process} and {Rules} {Modeling} with the {XTT} {Method}},
 	url = {https://ieeexplore.ieee.org/document/4438143},
@@ -2201,16 +2138,6 @@ Publication Title: IFIP Advances in Information and Communication Technology},
 	urldate = {2024-12-15},
 	month = aug,
 	year = {2024},
-}
-
-@misc{_zcash_,
-	title = {Zcash: {Privacy}-protecting digital currency},
-	shorttitle = {Zcash},
-	url = {https://z.cash/},
-	abstract = {The first cryptocurrency to develop zero-knowledge encryption for private peer-to-peer payments. Use Zcash Learn Zcash Current price (USD) \$ 0 Outstanding supply 0 M Shielded ZEC 0 M Payments 0 You…},
-	language = {en-US},
-	urldate = {2024-12-15},
-	journal = {Z.Cash},
 }
 
 @misc{komuves_bkomuves_2024a,
@@ -2561,21 +2488,6 @@ As an application we present a version of the PlonK zk-SNARK[GWC] with significa
 	keywords = {Blockchain, ceremony, kzg, trusted setup},
 }
 
-@misc{gabizon_plonk_2019,
-	title = {{PLONK}: {Permutations} over {Lagrange}-bases for {Oecumenical} {Noninteractive} arguments of {Knowledge}},
-	shorttitle = {{PLONK}},
-	url = {https://eprint.iacr.org/2019/953},
-	abstract = {zk-SNARK constructions that utilize an updatable universal structured reference string remove one of the main obstacles in deploying zk-SNARKs [GKMMM, Crypto 2018]. The important work of Maller et al. [MBKM, CCS 2019] presented Sonic - the first potentially practical zk-SNARK with fully succinct verification for general arithmetic circuits with such an SRS.
-However, the version of Sonic enabling fully succinct verification still requires relatively high proof construction overheads. We present a universal SNARK construction with fully succinct verification, and significantly lower prover running time (roughly 7.5-20 less group exponentiations than [MBKM] in the fully succinct verifier mode depending on circuit structure).
-
-Similarly to [MBKM], we rely on a permutation argument based on Bayer and Groth [Eurocrypt 2012]. However, we focus on ``Evaluations on a subgroup rather than coefficients of monomials''; which enables simplifying both the permutation argument and the artihmetization step.},
-	urldate = {2023-10-29},
-	author = {Gabizon, Ariel and Williamson, Zachary J. and Ciobotaru, Oana},
-	year = {2019},
-	note = {Publication info: Preprint.},
-	keywords = {zk-SNARKs},
-}
-
 @misc{mouris_zilch_2020,
 	title = {Zilch: {A} {Framework} for {Deploying} {Transparent} {Zero}-{Knowledge} {Proofs}},
 	shorttitle = {Zilch},
@@ -2588,23 +2500,6 @@ In this work we present Zilch, a framework that accelerates and simplifies the d
 	year = {2020},
 	note = {Publication info: Published elsewhere. IEEE Transactions on Information Forensics and Security},
 	keywords = {Proof of Knowledge, Transparent Setup, Universal Circuits, Verifiable Computation, Zero Knowledge},
-}
-
-@misc{groth_size_2016,
-	title = {On the {Size} of {Pairing}-based {Non}-interactive {Arguments}},
-	url = {https://eprint.iacr.org/2016/260},
-	abstract = {Non-interactive arguments enable a prover to convince a verifier that a statement is true. Recently there has been a lot of progress both in theory and practice on constructing highly efficient non-interactive arguments with small size and low verification complexity, so-called succinct non-interactive arguments (SNARGs) and succinct non-interactive arguments of knowledge (SNARKs).
-
-Many constructions of SNARGs rely on pairing-based cryptography. In these constructions a proof consists of a number of group elements and the verification consists of checking a number of pairing product equations. The question we address in this article is how efficient pairing-based SNARGs can be.
-
-Our first contribution is a pairing-based (preprocessing) SNARK for arithmetic circuit satisfiability, which is an NP-complete language. In our SNARK we work with asymmetric pairings for higher efficiency, a proof is only 3 group elements, and verification consists of checking a single pairing product equations using 3 pairings in total. Our SNARK is zero-knowledge and does not reveal anything about the witness the prover uses to make the proof.
-
-As our second contribution we answer an open question of Bitansky, Chiesa, Ishai, Ostrovsky and Paneth (TCC 2013) by showing that 2-move linear interactive proofs cannot have a linear decision procedure. It follows from this that SNARGs where the prover and verifier use generic asymmetric bilinear group operations cannot consist of a single group element. This gives the first lower bound for pairing-based SNARGs. It remains an intriguing open problem whether this lower bound can be extended to rule out 2 group element SNARGs, which would prove optimality of our 3 element construction.},
-	urldate = {2023-10-29},
-	author = {Groth, Jens},
-	year = {2016},
-	note = {Publication info: A minor revision of an IACR publication in EUROCRYPT 2016},
-	keywords = {SNARKs, bilinear groups, linear interactive proofs, non-interactive zero-knowledge arguments, quadratic arithmetic programs},
 }
 
 @misc{morais_survey_2019,
@@ -3509,24 +3404,6 @@ place: Redmond, WA},
 	pages = {573--583},
 }
 
-@inproceedings{marussy2024refinery,
-	address = {New York, NY, USA},
-	series = {{ICSE}-{Companion} '24},
-	title = {Refinery: {Graph} {Solver} as a {Service}: {Refinement}-based {Generation} and {Analysis} of {Consistent} {Models}},
-	isbn = {979-8-4007-0502-1},
-	shorttitle = {Refinery},
-	url = {https://dl.acm.org/doi/10.1145/3639478.3640045},
-	doi = {10.1145/3639478.3640045},
-	abstract = {Various software and systems engineering scenarios rely on the systematic construction of consistent graph models. However, automatically generating a diverse set of consistent graph models for complex domain specifications is challenging. First, the graph generation problem must be specified with mathematical precision. Moreover, graph generation is a computationally complex task, which necessitates specialized logic solvers. Refinery is a novel open-source software framework to automatically synthesize a diverse set of consistent domain-specific graph models. The framework offers an expressive high-level specification language using partial models to succinctly formulate a wide range of graph generation challenges. Moreover, it provides a modern cloud-based architecture for a scalable graph solver as a service, which uses logic reasoning rules to efficiently synthesize a diverse set of solutions to graph generation problems by partial model refinement. Applications include system-level architecture synthesis, test generation for modeling tools or traffic scenario synthesis for autonomous vehicles.Video demonstration: https://youtu.be/Qy\_3udNsWsMContinuously deployed at: https://refinery.sen/ices/},
-	urldate = {2024-10-27},
-	booktitle = {Proceedings of the 2024 {IEEE}/{ACM} 46th {International} {Conference} on {Software} {Engineering}: {Companion} {Proceedings}},
-	publisher = {Association for Computing Machinery},
-	author = {Marussy, Kristóf and Ficsor, Attila and Semeráth, Oszkár and Varró, Dániel},
-	month = may,
-	year = {2024},
-	pages = {64--68},
-}
-
 @misc{essif,
 	title = {European {Self}-sovereign {Identity} {Framework} {Lab}},
 	url = {https://essif-lab.eu/},
@@ -4311,16 +4188,6 @@ Many extensions and variants of the original Backus–Naur notation are used; so
 	month = jan,
 	year = {2023},
 	note = {original-date: 2018-08-30T21:48:56Z},
-}
-
-@inproceedings{toldi_blockchainbased_2023,
-	address = {Budapest, Hungary},
-	title = {Blockchain-based, confidentiality-preserving orchestration of collaborative workflows},
-	url = {https://tdk.bme.hu/VIK/sw8/Kollaborativ-munkafolyamatok-titkossagmegorzo},
-	language = {en},
-	publisher = {Budapest University of Technology and Economics},
-	author = {Toldi, Balazs Adam},
-	year = {2023},
 }
 
 @inproceedings{peter_zkpbased_2022,
