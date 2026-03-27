@@ -45,9 +45,9 @@ At the credential schema layer, IncomeCred is well-formed: $\text{CS\_Applicant}
 
 At the format-specific layer, three governance sources impose requirements on IncomeCred:
 
-1. **eIDAS ARF** (normative, SHALL): $\text{format}(\text{IncomeCred}) \in \{\text{SD-JWT-VC}, \text{mdoc}\}$ — neither supports predicate proofs %% @CITE: eIDAS ARF — dual format mandate %%.
+1. **eIDAS ARF** (normative, SHALL): $\text{format}(\text{IncomeCred}) \in \{\text{SD-JWT-VC}, \text{mdoc}\}$ — neither supports predicate proofs [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026].
 2. **GDPR Art. 5(1)(c)** (operationally binding): the income threshold check requires disclosing only whether $\text{monthly\_income} \geq \text{threshold}$, not the exact value. If data minimization is to be achieved through technical means at the credential layer, this requires predicate proof capability %% @CITE: GDPR Art. 5(1)(c) %%. The Hungarian data protection authority has enforced this interpretation in the housing subsidy context specifically.^[NAIH fined a bank 35M HUF for excessive data collection during CSOK applications.]
-3. **W3C VCDM 2.0**: the credential format must conform to the VCDM data model — AnonCreds v1 does not (no `@context`, no `credentialSubject` structure, CL signatures not a registered proof type) %% @CITE: W3C VCDM 2.0 %% %% @CITE: AnonCreds specification %%.
+3. **W3C VCDM 2.0**: the credential format must conform to the VCDM data model — AnonCreds v1 does not (no `@context`, no `credentialSubject` structure, CL signatures not a registered proof type) [@manu_verifiable_2025] [@curran2022anoncreds].
 
 No format satisfies all three requirements. SD-JWT-VC satisfies (1) and (3) but not (2). AnonCreds satisfies (2) but not (1) or (3). The configuration is unsatisfiable: constraints C5, C6, and C7 cannot be simultaneously satisfied on IncomeCred.
 
@@ -68,7 +68,7 @@ No deployed credential format supports cross-credential arithmetic predicates in
 | AnonCreds v1 (CL) | Yes (attr $\geq$ const) | No | **No** |
 | AnonCreds v2 (BBS/PS) | Yes (range proofs) | Yes | **No** |
 | SD-JWT-VC | No | No | **No** |
-| SNARK-based %% @CITE: zk-creds, IEEE S&P 2023 %% | Yes | Yes | Yes (research prototype) |
+| SNARK-based [@rosenberg_zk-creds_2023] | Yes | Yes | Yes (research prototype) |
 
 To verify the floor area constraint, the verifier must see both raw values from two separate credentials, defeating the privacy properties that ZKP-capable formats promise. The metamodel captures this: a domain-concept-layer constraint (C4) that spans credentials cannot be enforced privacy-preservingly at the format-specific layer because no deployed format supports cross-credential predicate proofs (C9).
 

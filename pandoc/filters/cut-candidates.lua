@@ -1,18 +1,22 @@
 -- cut-candidates.lua
--- Pandoc Lua filter: convert @CUT-START / @CUT-END region markers to
--- \begin{cutcandidate}...\end{cutcandidate} or strip them.
+-- Pandoc Lua filter: convert fenced divs and bracketed spans with class
+-- "cutcandidate" to \begin{cutcandidate}...\end{cutcandidate} or strip them.
 --
--- Marker syntax (standalone lines in Obsidian Markdown):
---   %% @CUT-START: reason %%
---   ...paragraphs...
---   %% @CUT-END %%
+-- Markdown syntax:
+--   Block (fenced div):
+--     ::: {.cutcandidate reason="why this can be cut"}
+--     Paragraphs...
+--     :::
 --
--- In draft mode: wraps region in cutcandidate environment (color tint).
--- In submission mode: strips the markers, keeps the text unchanged.
+--   Inline (bracketed span):
+--     [Text to cut.]{.cutcandidate reason="why"}
+--
+-- In draft mode: wraps in cutcandidate environment (block) or command (inline).
+-- In submission mode: keeps content, strips wrapper.
 --
 -- Usage: pandoc --lua-filter=cut-candidates.lua --metadata mode=draft|submission
 
-local mode = "draft" -- default
+local mode = "draft"
 
 function Meta(meta)
   if meta.mode then
@@ -20,90 +24,51 @@ function Meta(meta)
   end
 end
 
---- Check if a block is a standalone @CUT-START or @CUT-END marker.
--- Returns ("start", reason) or ("end", nil) or nil.
-local function parse_cut_marker(block)
-  if block.t ~= "Para" then return nil end
-
-  local text = pandoc.utils.stringify(block.content)
-  text = text:match("^%s*(.-)%s*$")
-
-  -- Match %% @CUT-START: reason %%
-  local reason = text:match("^%%%%@CUT%-START:%s*(.-)%s*%%%%$")
-    or text:match("^%%%% @CUT%-START:%s*(.-)%s*%%%%$")
-  if reason then
-    return "start", reason
+function Div(el)
+  if not el.classes:includes("cutcandidate") then
+    return nil
   end
 
-  -- Match %% @CUT-END %%
-  if text:match("^%%%%@CUT%-END%s*%%%%$")
-    or text:match("^%%%% @CUT%-END%s*%%%%$") then
-    return "end", nil
+  if mode == "submission" then
+    return el.content
   end
 
-  return nil
+  local reason = el.attributes.reason or ""
+  local opt = ""
+  if reason ~= "" then
+    opt = "[" .. reason .. "]"
+  end
+
+  local blocks = pandoc.List()
+  blocks:insert(pandoc.RawBlock("latex", "\\begin{cutcandidate}" .. opt))
+  blocks:extend(el.content)
+  blocks:insert(pandoc.RawBlock("latex", "\\end{cutcandidate}"))
+  return blocks
 end
 
-function Blocks(blocks)
-  local result = pandoc.List()
-  local i = 1
-
-  while i <= #blocks do
-    local kind, reason = parse_cut_marker(blocks[i])
-
-    if kind == "start" then
-      -- Collect blocks until matching @CUT-END
-      local region = pandoc.List()
-      i = i + 1
-      local depth = 1
-
-      while i <= #blocks and depth > 0 do
-        local inner_kind = parse_cut_marker(blocks[i])
-        if inner_kind == "start" then
-          depth = depth + 1
-          region:insert(blocks[i])
-        elseif inner_kind == "end" then
-          depth = depth - 1
-          if depth > 0 then
-            region:insert(blocks[i])
-          end
-          -- depth == 0: consume the @CUT-END, don't add it
-        else
-          region:insert(blocks[i])
-        end
-        i = i + 1
-      end
-
-      if mode == "submission" then
-        -- Keep content, strip markers
-        result:extend(region)
-      else
-        -- Wrap in cutcandidate environment
-        local opt = ""
-        if reason and reason ~= "" then
-          opt = "[" .. reason .. "]"
-        end
-        result:insert(pandoc.RawBlock("latex",
-          "\\begin{cutcandidate}" .. opt))
-        result:extend(region)
-        result:insert(pandoc.RawBlock("latex",
-          "\\end{cutcandidate}"))
-      end
-
-    elseif kind == "end" then
-      -- Orphan @CUT-END — skip it
-      i = i + 1
-
-    else
-      result:insert(blocks[i])
-      i = i + 1
-    end
+function Span(el)
+  if not el.classes:includes("cutcandidate") then
+    return nil
   end
 
-  return result
+  if mode == "submission" then
+    return el.content
+  end
+
+  local reason = el.attributes.reason or ""
+  local opt = ""
+  if reason ~= "" then
+    opt = "[" .. reason .. "]"
+  end
+
+  local inlines = pandoc.List()
+  inlines:insert(pandoc.RawInline("latex", "\\cutcandidate" .. opt .. "{"))
+  inlines:extend(el.content)
+  inlines:insert(pandoc.RawInline("latex", "}"))
+  return inlines
 end
 
 return {
   { Meta = Meta },
-  { Blocks = Blocks },
+  { Div = Div, Span = Span },
 }

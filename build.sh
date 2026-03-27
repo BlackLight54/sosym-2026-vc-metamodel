@@ -55,6 +55,7 @@ for md in "$SECTIONS_DIR"/[0-9]*.md; do
         --lua-filter="$FILTER_DIR/tables.lua" \
         --lua-filter="$FILTER_DIR/markers.lua" \
         --lua-filter="$FILTER_DIR/code-blocks.lua" \
+        --natbib \
         --metadata mode="$MODE" \
         --syntax-highlighting=none \
         --wrap=preserve \

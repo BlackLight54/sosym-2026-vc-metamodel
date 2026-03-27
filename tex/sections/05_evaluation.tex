@@ -50,10 +50,6 @@ ID & Constraint & Source & Expressible & Predicate / Mechanism \\
 
 \label{sec:headlines}
 
-\todo[inline,color=purple!15]{scaffold: E6 --- Cross-governance conflict results --- TWO HEADLINE RESULTS}
-
-\todo[inline,color=purple!15]{scaffold: Binding claims: \#8 (formally contradictory cross-framework constraints), \#9 (multi-layer errors invisible to single-layer).}
-
 \paragraph{Headline 1: Income governance conflict (vertical)}\label{headline-1-income-governance-conflict-vertical}
 
 At the credential schema layer, IncomeCred is well-formed: \(\text{CS\_Applicant}_3\) traces to Applicant, \(\text{earns}_1\) traces to the \(\text{earns}\) property, \(\text{monthly\_income}_1\) traces to its value. All structural constraints (C1--C3) are satisfied.
@@ -64,11 +60,11 @@ At the format-specific layer, three governance sources impose requirements on In
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{eIDAS ARF} (normative, SHALL): \(\text{format}(\text{IncomeCred}) \in \{\text{SD-JWT-VC}, \text{mdoc}\}\) --- neither supports predicate proofs \todo[color=blue!20]{cite: eIDAS ARF --- dual format mandate}.
+  \textbf{eIDAS ARF} (normative, SHALL): \(\text{format}(\text{IncomeCred}) \in \{\text{SD-JWT-VC}, \text{mdoc}\}\) --- neither supports predicate proofs \citep{noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026}.
 \item
   \textbf{GDPR Art. 5(1)(c)} (operationally binding): the income threshold check requires disclosing only whether \(\text{monthly\_income} \geq \text{threshold}\), not the exact value. If data minimization is to be achieved through technical means at the credential layer, this requires predicate proof capability \todo[color=blue!20]{cite: GDPR Art. 5(1)(c)}. The Hungarian data protection authority has enforced this interpretation in the housing subsidy context specifically.\footnote{NAIH fined a bank 35M HUF for excessive data collection during CSOK applications.}
 \item
-  \textbf{W3C VCDM 2.0}: the credential format must conform to the VCDM data model --- AnonCreds v1 does not (no \texttt{@context}, no \texttt{credentialSubject} structure, CL signatures not a registered proof type) \todo[color=blue!20]{cite: W3C VCDM 2.0} \todo[color=blue!20]{cite: AnonCreds specification}.
+  \textbf{W3C VCDM 2.0}: the credential format must conform to the VCDM data model --- AnonCreds v1 does not (no \texttt{@context}, no \texttt{credentialSubject} structure, CL signatures not a registered proof type) \citep{manu_verifiable_2025} \citep{curran2022anoncreds}.
 \end{enumerate}
 
 No format satisfies all three requirements. SD-JWT-VC satisfies (1) and (3) but not (2). AnonCreds satisfies (2) but not (1) or (3). The configuration is unsatisfiable: constraints C5, C6, and C7 cannot be simultaneously satisfied on IncomeCred.
@@ -93,7 +89,7 @@ Format & Single-cred predicate & Cross-cred equality & Cross-cred arithmetic \\
 AnonCreds v1 (CL) & Yes (attr \(\geq\) const) & No & \textbf{No} \\
 AnonCreds v2 (BBS/PS) & Yes (range proofs) & Yes & \textbf{No} \\
 SD-JWT-VC & No & No & \textbf{No} \\
-SNARK-based \%\% @CITE: zk-creds, IEEE S\&P 2023 \%\% & Yes & Yes & Yes (research prototype) \\
+SNARK-based {[}@rosenberg\_zk-creds\_2023{]} & Yes & Yes & Yes (research prototype) \\
 \bottomrule
 \end{tabular}
 \end{center}
