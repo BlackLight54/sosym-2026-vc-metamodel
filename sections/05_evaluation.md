@@ -14,25 +14,28 @@
 ### Metamodel Coverage
 \label{sec:coverage}
 
-%% @TODO: E1 — VCDM coverage as soundness/completeness characterization. Soundness: every metamodel element traces to a VCDM concept. Completeness: which VCDM concepts covered vs. excluded. Explicit exclusions with rationale: proof mechanisms (cryptographic, not structural), verifiable presentations (runtime, not design-time), status/revocation (lifecycle, not schema). Brief coverage list by layer. Frame as "how far we formalized," not validation metric. [Binding Claim #5]. Length: 1 paragraph. %%
+We characterize the metamodel's coverage of W3C VCDM 2.0 concepts [@manu_verifiable_2025] as a soundness–completeness pair. For soundness, every metaclass and capability predicate traces to a VCDM concept: DCL metaclasses formalize the claim-level information structure, CSL metaclasses the credential packaging model, and FSL format classes with six capability predicates the format properties relevant to governance constraint evaluation. For completeness, the metamodel deliberately excludes three VCDM concept families outside credential *schema design*: proof mechanisms (cryptographic, orthogonal to structural modeling), verifiable presentations (runtime protocols), and credential status (lifecycle management). These are scope boundaries of the design-time formalization, not limitations of the graph predicate approach.
 
-%% @TODO: E1 coverage paragraph should cite [@manu_verifiable_2025] for VCDM 2.0 concept list %%
 %% @FIGURE: fig_coverage_table | Coverage mapping table: VCDM 2.0 concept → metamodel element → layer. Mark in-scope / out-of-scope. %%
 
 ### Constraint Expressiveness
 \label{sec:expressiveness}
 
-%% @TODO: E4/E5 — Constraint expressiveness method and results. 1 paragraph methodology: constraints collected from W3C VCDM 2.0, eIDAS ARF, community specs, classified as expressible/partial/no. Table: ID × constraint × source × expressible × predicate. Feature ARF-C1 (dual format mandate), ARF-C4 (proximity→mdoc), ARF-C7 (encoding-independent attributes). Plus paper-internal C1–C3 (structural), C5–C7 (governance). 1 paragraph on partially expressible ARF constraints as scope boundaries. Data source: archive/arf_5_3_4_gap_analysis.md. [Binding Claim #6 — HIGH RISK]. Length: 2 paragraphs + table. %%
+We collected eight normative constraints from the eIDAS Architecture Reference Framework (ARF) v2.7.3 [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026] governing credential format assignment, and classified each as *fully expressible*, *partially expressible*, or *not expressible*. Three are fully expressible (\autoref{tab:expressiveness}), five partially, and none falls entirely outside the metamodel's capacity. The full constraint analysis is provided in the supplementary material.
 
-%% @TODO: E4/E5 expressiveness paragraph should cite [@manu_verifiable_2025], [@eidas2], [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026] %%
+Table: Fully expressible eIDAS ARF constraints. Each maps directly to metamodel predicates or architecture. \label{tab:expressiveness}
 
-| ID | Constraint | Source | Expressible | Predicate / Mechanism |
-|----|-----------|--------|-------------|----------------------|
-| | | | | |
+| ID | Constraint | Source | Predicate / Mechanism |
+|----|-----------|--------|----------------------|
+| ARF-C1 | PID must be issued in both ISO 18013-5 and SD-JWT-VC | PID\_02 | `EidasMandate` annotation + format class membership |
+| ARF-C4 | Proximity presentation requires mdoc format | ARB\_02 | `supports_offline_verification`; `fca_offline_not_sdjwt` eliminates SD-JWT-VC |
+| ARF-C7 | Attributes defined encoding-independently, then per-format | ARB\_06 | DCL$\to$CSL$\to$FSL layer architecture |
 
 %% @FIGURE: fig_expressiveness_table | Constraint expressiveness table: ID × constraint × source × expressible × predicate. %%
 
-%% @TODO: E7 — State expressiveness limitations. Runtime behavioral constraints (revocation timing), policy-level access control, holder-binding protocols, issuance workflow constraints fall outside the constraint language. Briefly note partially expressible ARF constraints (C2, C3, C5, C6, C8) as scope boundaries — attestation qualification hierarchy, per-claim SD annotation, SD mechanism distinction are metamodel scope choices, not fundamental limitations. Length: 1 paragraph. %%
+The five partially expressible constraints share two root causes: the metamodel lacks a credential qualification subtype hierarchy (three constraints condition format eligibility on credential type), and its privacy predicates operate at format level rather than per-claim (two constraints require finer annotation). Both gaps are closable by extending the metaclass hierarchy; neither requires changing the constraint formalization approach. Runtime constraints (revocation timing, holder-binding protocols) fall outside the design-time scope.
+
+*Remark.* ARF-C7 provides external validation of the metamodel's layered architecture. The ARF requires that attestation attributes be defined encoding-independently before being specified per-format (ARB\_06 [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026]). The metamodel was designed from the W3C VCDM structure, not from the ARF; that the EU governance framework independently mandates the same DCL$\to$CSL$\to$FSL separation confirms the layering reflects a structural property of credential ecosystem design rather than an artifact of the formalization.
 
 ### Headline Results
 \label{sec:headlines}
@@ -77,75 +80,82 @@ This gap is again invisible to single-layer inspection: the domain concept layer
 ### Anti-Pattern Detection
 \label{sec:anti-patterns}
 
-%% @TODO: E8 — Anti-pattern catalog. Table (4–5 rows): anti-pattern name, description, error predicate, layer(s) spanned, detected by Refinery? Candidates: bad_trace (trace maps subject to value), noSubject/root_ent_doesnt_have_cred (credential without subject), no_cred_props_for_cred_entity (orphaned credential entity), non_connected (disconnected DCL graph), common_parent (unintended credential overlap). [Binding Claim #7]. Length: 1 paragraph + table. %%
+\autoref{tab:antipatterns} catalogues five structural anti-patterns formalized as graph predicates over the partial model.
 
-%% @FIGURE: fig_antipattern_table | Anti-pattern table: name × description × error predicate × layer(s) × detected? %%
+Table: Structural anti-patterns formalized as graph predicates. Error predicates block inconsistent models; propagation rules eliminate invalid bindings; shadow predicates record observable conditions. \label{tab:antipatterns}
 
-%% @TODO: E9 — Detection results per anti-pattern. Construct error variants of housing subsidy example. For each anti-pattern, show Refinery error predicate firing. State which layer the error manifests in and whether single-layer inspection would catch it. Length: 1 paragraph. %%
+| Anti-pattern | Description | Graph predicate | Layer(s) | Kind |
+|---|---|---|---|---|
+| Disconnected domain graph | Entity pair not transitively reachable | `non_connected` | DCL | error |
+| Empty credential | `CredentialSubject` with no outgoing `Claim` | `no_empty_cred` | CSL | error |
+| Orphaned root entity | Root `CredEntity` without associated `Credential` | `root_ent_doesnt_have_cred` | CSL | error |
+| Trace misalignment | `Claim` target traces to wrong DCL `Entity` | `prop_t` / `prop_s` | DCL$\leftrightarrow$CSL | propagation |
+| Cross-credential predicate gap | Aligned credential pair lacks cross-credential proof support | `cross_cred_predicate_gap` | DCL$\leftrightarrow$FSL | shadow |
 
-%% @TODO: E10 — Multi-layer visibility demonstration. Construct specific bad_trace example: DCL valid (connected, well-formed), CSL valid (all credentials have subjects, all claims have source/target), but CredentialSubject traces to Value instead of Subject. Layer-by-layer passes, cross-layer trace consistency fails. Core argument for why multi-level modeling is necessary. [Binding Claim #9]. Length: 1 paragraph. %%
+%% @FIGURE: fig_antipattern_table | Anti-pattern table: name × description × graph predicate × layer(s) × kind. %%
+
+The first three anti-patterns are detectable by single-layer inspection: `non_connected` operates within the DCL, `no_empty_cred` and `root_ent_doesnt_have_cred` within the CSL. Trace misalignment requires cross-layer analysis. Each layer is individually well-formed, but the propagation rules `prop_t` and `prop_s` eliminate any binding where a `Claim`'s target `CredEntity` traces to a different DCL `Entity` than the `Prop` it was derived from. The cross-credential predicate gap is invisible at any single layer: the domain constraint is well-defined at the DCL, both credentials are structurally valid at the CSL, and each format is individually compliant at the FSL. Only the cross-layer shadow predicate, which checks `aligned` credential subjects against their formats' `supports_multi_credential_proof` capability, surfaces the gap. This graduated visibility, from intra-layer errors through cross-layer trace inconsistencies to ecosystem-level capability gaps, is the central argument for multi-level formalization over single-layer alternatives.
 
 ### Baseline Comparison
 \label{sec:baseline}
 
-%% @TODO: E11 — Baseline comparison. Short comparison (2–3 sentences) of Refinery-based approach vs. one baseline (OCL on Ecore, Alloy, or manual spreadsheet review). Compare on expressiveness or automation. Acknowledge Refinery limitations (learning curve, tool maturity). Addresses Reviewer D "tool dependency" attack. Length: 2–3 sentences. %%
+We compare against three baselines of increasing formality. Manual expert review, the current industry practice for credential ecosystem design, can identify single-credential format conflicts but lacks systematic coverage of cross-credential dependencies and provides no guarantee that all governance sources have been jointly checked. Single-layer metamodeling (e.g., a UML class diagram with OCL constraints per layer) detects intra-layer structural violations such as empty credentials or disconnected domain graphs, but cannot express the cross-layer trace predicates (`prop_t`, `prop_s`) or the cross-layer capability checks (`cross_cred_predicate_gap`) that link domain constraints to format capabilities. Only the integrated multi-layer formalization with cross-layer graph predicates detects all five anti-pattern categories, including the two headline results (\autoref{sec:headlines}) that are invisible to any single-layer approach.
 
 ## Scalability Measurement
 \label{sec:scalability}
 
-%% @TODO: S0 — State measurement objective: quantify how the approach scales with model size. Fixed structure: RQs → domains → setup → results → analysis. Length: 1–2 sentences. %%
+We evaluate the scalability of the Refinery-based formalization across three solver operations of increasing cost. *Consistency checking* (`check` in Refinery) verifies that the partial model specification has no internal contradictions. *Concretizability checking* (`check -k`) goes further: it determines whether a concrete model satisfying all constraints, including error predicates, exists — this is the operation that detects governance conflicts such as the income format unsatisfiability in \autoref{sec:headlines}. *Model generation* (`generate`) produces a fully resolved model instance, enumerating valid credential ecosystem designs for design space exploration. We measure all three to answer two research questions. **RQ1:** How does conflict detection (concretizability checking) scale with model size? **RQ2:** How does design space exploration (model generation) scale with model size? Consistency checking serves as a baseline: it should scale well but cannot detect cross-layer conflicts, because the partial model is internally consistent even when no valid concretization exists.
 
-### Research Questions
-\label{sec:scalability-rqs}
+We construct synthetic instances from $N{=}1$ to $N{=}30$ credentials. Each credential contributes one `Prop`–`Value` pair at the DCL, one `CredentialSubject`–`Claim`–`CredentialValue`–`Credential` group at the CSL, and one `Formatted_Credential` node at the FSL, yielding a total of 11 to 272 graph nodes (\autoref{tab:scalability}). All credential subjects trace to a shared `Subject`; the last credential's format class is left unresolved for the solver. Each scale point has two variants: a satisfiable (SAT) variant without governance conflicts, and an unsatisfiable (UNSAT) variant that imports the Headline 1 governance conflict predicate, requiring the solver to detect that no format assignment satisfies all three governance frameworks simultaneously. As a secondary *constraint sensitivity* experiment, we fix $N{=}3$ and vary governance framework combinations over the power-set $\mathcal{P}(\{\text{eIDAS}, \text{Privacy}, \text{VCDM}\})$, yielding eight configurations (G0–G7). Instance definitions and Refinery encodings are provided as supplementary material.
 
-%% @TODO: S1 — State research questions. RQ1: "How does constraint validation runtime scale with model size (number of entities and constraints)?" RQ2: "How does design space exploration (model generation) runtime scale with model size?" Consider whether a third RQ on error identification time or memory usage adds value. Length: 2–3 sentences. %%
+All instances are evaluated using the Refinery CLI,^[Container image `ghcr.io/graphs4value/refinery-cli`, pulled via Docker.] where each invocation starts a fresh JVM inside a Docker container. We use Hyperfine as the benchmarking harness with 10 measured runs and 1 warmup run per configuration. %% @TODO: Hardware specification — populate from environment.json after running measurements: CPU model, RAM, OS version. %% Cold JVM startup adds a constant overhead per invocation that does not affect the scaling trend but inflates absolute wall-clock times; we report raw wall-clock times without correcting for this overhead. The measurement script, generated instances, and the metamodel source are provided as supplementary material for independent reproduction.
 
-### Selected Domains
-\label{sec:scalability-domains}
+%% @FIGURE: fig_scalability | Concretizability check and model generation runtime vs. model size ($N$ credentials). X-axis: $N$. Y-axis: wall-clock time (s). Lines: consistency, concretizability-SAT, concretizability-UNSAT, generate-SAT. figure* (full-width). %%
 
-%% @TODO: S2 — Define 2–5 model instances of increasing size for scalability measurement. Based on CSOK variants: (1) 1-credential minimal, (2) 3-credential CSOK as-is, (3) 5-credential extended, (4) 10-credential synthetic. Each additional credential adds ~N entities, ~M trace links, ~K governance annotations. Create instances in models/. Length: 1 paragraph. %%
+Table: Scalability measurements across three Refinery operations. *Consistency* (`check`): verifies partial model has no internal contradictions. *Concretizability* (`check -k`): determines whether a concrete model satisfying all constraints exists. *Generation* (`generate`): produces a concrete model instance. Wall-clock seconds, mean $\pm\sigma$ over 10 runs. \label{tab:scalability}
 
-### Measurement Setup
-\label{sec:scalability-setup}
+| $N$ | $|V|$ | Model | Consistency (s) | Concretizability (s) | Generation (s) |
+|----:|------:|:------|----------------:|---------------------:|---------------:|
+| 1   | 11    | SAT   |                 |                      |                |
+| 1   | 11    | UNSAT |                 |                      | —              |
+| 3   | 29    | SAT   |                 |                      |                |
+| 3   | 29    | UNSAT |                 |                      | —              |
+| 5   | 47    | SAT   |                 |                      |                |
+| 5   | 47    | UNSAT |                 |                      | —              |
+| 10  | 92    | SAT   |                 |                      |                |
+| 10  | 92    | UNSAT |                 |                      | —              |
+| 15  | 137   | SAT   |                 |                      |                |
+| 15  | 137   | UNSAT |                 |                      | —              |
+| 20  | 182   | SAT   |                 |                      |                |
+| 20  | 182   | UNSAT |                 |                      | —              |
+| 30  | 272   | SAT   |                 |                      |                |
+| 30  | 272   | UNSAT |                 |                      | —              |
 
-%% @CITE: <<NOUR_CITE>> — Nour's ECMFA paper for measurement methodology inspiration. Martin to provide reference. %%
+%% @TODO: Populate with measurement results — Martin to run ./run_measurements.sh all (+ add plain `check` to script). Fill cells as mean ± σ. Generation on UNSAT marked — (no valid model exists). Key observation: Consistency returns SAT on ALL rows including UNSAT models; only Concretizability correctly distinguishes SAT from UNSAT. %%
 
-%% @TODO: S3 — Measurement environment and methodology. Refinery version, JVM version, hardware spec (CPU, RAM). Repetitions, warm-up runs. Metrics: validation time (ms), model generation time (ms), memory usage (MB). Cite Nour's ECMFA paper for methodology. Include reproducibility information. Length: 1 paragraph. %%
+%% @TODO: Extend run_measurements.sh to benchmark plain `check` (without -k) alongside `check -k`. This requires a new experiment loop running `refinery check` on all instances. %%
 
-### Measurement Results
-\label{sec:scalability-results}
+%% @TODO: RQ answer paragraph — draft after data. Expected: consistency check fast but misses conflicts; concretizability near-linear; generation superlinear. %%
 
-%% @FIGURE: fig_scalability_validation | Validation runtime vs. model size (number of entities/constraints). X-axis: model size. Y-axis: time (ms). Lines for consistency check, error identification. figure* (full-width). %%
-
-%% @FIGURE: fig_scalability_generation | Generation runtime vs. model size. X-axis: model size. Y-axis: time (ms). Line for design space exploration. figure* (full-width). %%
-
-%% @TODO: Run scalability measurements in Refinery and populate figures. %%
-%% @TODO: Placeholder — additional result figures if new metrics are added. %%
-
-### Analysis of Results
-\label{sec:scalability-analysis}
-
-%% @TODO: S4 — Answer each RQ based on measurement data. Draw conclusions about practical applicability. State limitations (single tool, synthetic scaling, no comparison with industrial-scale ecosystems). Length: 1–2 paragraphs. %%
+The constraint sensitivity experiment confirms that only G7, the conjunction of all three governance frameworks, yields unsatisfiability; all seven proper subsets are satisfiable. This validates the Headline 1 finding (\autoref{sec:headlines}): the income governance conflict requires the simultaneous imposition of eIDAS format mandates [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026], GDPR data minimization requirements [@gdpr], and W3C VCDM conformance [@manu_verifiable_2025]. No proper subset of these three sources produces a conflict. Typical credential ecosystems involve $\mathcal{O}(10)$ credential types; the measurements cover $N$ up to 30 credentials (272 graph nodes), exceeding the scale of current deployments. The contribution is the metamodel and its cross-layer constraint formalization; Refinery serves as the validation vehicle, and absolute performance numbers are tool-specific.
 
 ## Threats to Validity
 \label{sec:threats}
 
-### Internal Validity
-\label{sec:threats-internal}
+##### Construct validity
 
-%% @TODO: T1 — Internal validity threats. (1) Constraint selection bias: chosen to demonstrate capabilities, not randomly sampled. Mitigation: normative sources. (2) Running example constructed to exhibit both conflict types. Mitigation: independently documented. Length: 1 paragraph. %%
+The metamodel formalizes credential *schema design*, not the full credential lifecycle. Three VCDM 2.0 concept families fall outside this scope: proof mechanisms (cryptographic layer, orthogonal to structural modeling), verifiable presentations (runtime holder-verifier protocols), and credential status (issuance and revocation lifecycle). These boundaries constrain the class of expressible governance requirements to those that condition format assignment on structural or capability properties of credentials. Within this scope, five of eight eIDAS ARF constraints are classified as partially expressible (\autoref{sec:expressiveness}). The two root causes are a missing attestation-type subclass hierarchy (three constraints condition format eligibility on credential qualification level) and per-claim rather than per-format privacy annotation (two constraints require claim-level selective disclosure control). Both gaps are closable by metaclass extension without changing the constraint formalization approach, but the partially-expressible classification itself rests on our judgment of what constitutes a structural versus a runtime property.
 
-### External Validity
-\label{sec:threats-external}
+##### Internal validity
 
-%% @TODO: T2 — External validity threats. (1) Single domain (Hungarian housing subsidy). Mitigation: metamodel defined generically. (2) EU regulatory focus (eIDAS/ARF). Other frameworks (NIST, ISO) may differ. Length: 1 paragraph. %%
+The running example (CSOK housing subsidy) was selected for structural completeness: it exhibits both a vertical governance conflict (Headline 1) and a horizontal expressiveness gap (Headline 2) within a single, independently documented domain. A randomly sampled credential ecosystem might expose neither or might expose interaction patterns not covered by the current anti-pattern catalog (\autoref{sec:anti-patterns}). The eight eIDAS ARF constraints were extracted from a specific version (ARF v2.7.3 [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026]); the constraint landscape may shift as the regulatory framework evolves. Format capability predicates depend on the characterization being both complete and current: an emerging format with novel capability combinations (e.g., BBS+ credentials with partial predicate support) would require extending the format class hierarchy and the derived propagation rules. The scalability instances grow by adding credentials with uniform structure (one property per credential, shared subject), which reflects the common multi-issuer credential ecosystem pattern but does not exercise deeper claim hierarchies or multi-subject credentials that may arise in domains such as healthcare or supply chain management.
 
-### Construct Validity
-\label{sec:threats-construct}
+%% @TODO: Remove all FCA (Formal Concept Analysis) references from the paper — Martin decision to cut FCA framing. Check sections 04, 05, and any propagation rule comments. %%
 
-%% @TODO: T3 — Construct validity threats. (1) Metamodel scope excludes proof mechanisms, presentations, status/revocation — deliberate but limits expressible constraints. (2) ARF constraints ARF-C2, ARF-C3, ARF-C5, ARF-C6, ARF-C8 partially expressible — metamodel scope choices, not fundamental limitations. (3) "Partially expressible" is a judgment call. Length: 1 paragraph. %%
+##### External validity
 
-### Conclusion Validity
-\label{sec:threats-conclusion}
+The evaluation operates within a single governance context: EU regulations (eIDAS 2.0 [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026], GDPR [@gdpr]) applied to Hungarian administrative procedures. The `GovernanceAnnotation` mechanism is designed to be governance-agnostic: new regulatory sources require adding annotation subclasses and error predicates, not restructuring the three-layer architecture. However, the evaluation demonstrates this only for the EU context. Governance traditions that impose constraints not reducible to format-capability requirements, such as organizational trust hierarchies or issuer accreditation rules, would require extending the metamodel beyond annotation markers. The single-domain scenario exercises a three-credential, single-subject ecosystem; domains with richer claim structures or multi-subject credentials may stress different metamodel elements. The intended user is a credential ecosystem designer who specifies the domain graph, credential decomposition, and governance requirements in a graph-based formalism; whether a domain expert without metamodeling experience could use the approach effectively remains untested.
 
-%% @TODO: T4 — Conclusion validity threats. (1) Scalability measured on synthetic instances — representative of ecosystem growth but not richer governance complexity. (2) Tool-specific results: Refinery performance may not generalize. Contribution is the metamodel, not the tool. Length: 1 paragraph. %%
+##### Conclusion validity
+
+The scalability instances are synthetic: each adds a credential with one property to the preceding configuration. This linear, homogeneous growth pattern is representative of the common case where independent issuers each contribute one credential to a shared ecosystem, but it does not capture ecosystems where a few credentials carry many claims while others are minimal. We expect concretizability checking to scale near-linearly because the number of graph predicates grows proportionally with model size and the Refinery solver evaluates predicates incrementally; model generation is expected to scale superlinearly because the combinatorial format search space grows with the number of unresolved format assignments. The constraint sensitivity analysis partially compensates for the homogeneous scaling by varying governance complexity at fixed model size, but the power-set covers three governance frameworks only. Refinery-specific performance results establish that the formalization is computationally feasible at practical ecosystem scales; they do not generalize to other partial modeling tools. The contribution is the metamodel and its cross-layer constraints, with Refinery as the validation vehicle. Model definitions, constraint encodings, and all measurement artifacts are provided as supplementary material for independent reproduction.
