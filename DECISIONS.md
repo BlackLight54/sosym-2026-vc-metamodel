@@ -127,6 +127,13 @@ Each entry has a date, the decision, the rationale, and what it affects. Use thi
 **Affects:** All section files, CLAUDE.md thesis block, DECISIONS.md terminology entry, TODO.md, models/*.problem comments, memory/feedback_no_mda.md. Supersedes the CPL naming in the 2026-03-24 terminology decision.
 **Revisit when:** Never — unless a reviewer explicitly objects to the term.
 
+### 2026-03-27 — No code listings in the paper
+
+**Decision:** The paper contains no code listings (no `lstlisting`, no fenced code blocks rendered as figures, no inline Refinery `.problem` syntax in the body). All formal definitions are expressed in prose and mathematical notation only. Refinery encodings, if included, go to supplementary material.
+**Rationale:** Aligns with the feedback that Refinery definitions belong in prose and math, not code (see `feedback_no_code_blocks.md`). Code listings consume page budget without advancing the argument for a Foundations Track audience — reviewers evaluate the metamodel and constraints, not the tool syntax. Mathematical notation is the expected register at MODELS Foundations.
+**Affects:** All section files (especially Sec 04 approach, Sec 05 evaluation), figure design (no screenshot-style figures of tool output), supplementary material strategy.
+**Revisit when:** If a reviewer explicitly requests seeing the Refinery encoding in the body, or if the paper moves to a tool-demo track.
+
 ## Superseded decisions
 
 %% Move decisions here when they are replaced, with a note on what replaced them. %%

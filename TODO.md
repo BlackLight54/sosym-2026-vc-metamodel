@@ -5,15 +5,15 @@
 Plan: `prompts/2026-03-27_consolidation/` — 12 prompt files (T00–T10).
 Full plan: `.claude/plans/linked-petting-prism.md`.
 Pipeline & dependency diagram: `prompts/2026-03-27_consolidation/PIPELINE.md`.
-Critical path: **T00 ✅ → T00b → T01/T02 → T07 → T08 → T09 → T10**
+Critical path: **T00 ✅ → T00b ✅ → T01 ✅/T02 ✅ → T07 → T08 → T09 → T10**
 
 - [x] **T00b**: Scaffold/placeholder merging — merge `@SCAFFOLD`+`@TODO: PLACEHOLDER` pairs into clean `@TODO` blocks
-- [ ] **T01**: Sec 04 Preamble + DCL definitions (A1, A2) — [Binding #1, #3]
-- [ ] **T02**: Sec 04 CSL definitions (A4, A5, A6) — [Binding #1, #3]
+- [x] **T01**: Sec 04 Preamble + DCL definitions (A1, A2) — [Binding #1, #3]
+- [x] **T02**: Sec 04 CSL definitions (A4, A5, A6) — [Binding #1, #3]
 - [x] **T03**: Sec 04 FSL definitions (A8, A9) — [Binding #1]
-- [ ] **T04**: Sec 02 Background (B1–B7, all) — [predicate proofs MUST be introduced here]
-- [ ] **T05**: Sec 06 Related Work (R1–R4, all) — [D5 preemption critical]
-- [ ] **T06**: Sec 07 Conclusion (C1–C4, all)
+- [x] **T04**: Sec 02 Background (B1–B7, all) — [predicate proofs MUST be introduced here]
+- [x] **T05**: Sec 06 Related Work (R1–R4, all) — [D5 preemption critical]
+- [x] **T06**: Sec 07 Conclusion (C1–C4, all)
 - [ ] **T07**: Sec 04 Cross-layer constraints (A12–A15) — after T01+T02 — [Binding #3 CORE]
 - [ ] **T08**: Sec 05 Elaboration (coverage, expressiveness, anti-patterns, baseline) — after T01-T03+T07 — [Binding #5, #6, #7, #9]
 - [ ] **T09**: Sec 05 Threats + Scalability — after T08 — [scalability data may be interactive]
@@ -87,9 +87,9 @@ Binding claims status: 1/10 delivered, 5/10 partial, 4/10 not yet. Grace period:
 Cross-references T01–T10 in Consolidation workflow above. Subsection-level tracking below.
 
 - [ ] **Section 04 (Approach)** — core contribution, everything depends on it
-  - [ ] 4.1 Domain Concept Layer — metaclasses, constraints, CSOK DCL example (scaffolded)
-  - [ ] 4.2 Credential Schema Layer — metaclasses, trace mappings, CSOK CSL example (scaffolded)
-  - [ ] 4.3 Format-Specific Layer — metaclasses, FCA-derived constraints, CSOK FSL example (scaffolded)
+  - [x] 4.1 Domain Concept Layer — metaclasses, constraints, CSOK DCL example (drafted)
+  - [x] 4.2 Credential Schema Layer — metaclasses, trace mappings, CSOK CSL example (drafted)
+  - [x] 4.3 Format-Specific Layer — metaclasses, FCA-derived constraints, CSOK FSL example (drafted)
   - [ ] 4.4 Cross-Layer Constraints — trace consistency, entity alignment, constraint catalog (scaffolded), DCL restructuring worked example (scaffolded)
   - [X] Surface FCA results for format-specific layer constraints (done in `models/csok.problem`)
 - [ ] **Section 03 (Overview)** — restructured per Oszkár feedback (was "Motivation")
@@ -97,26 +97,26 @@ Cross-references T01–T10 in Consolidation workflow above. Subsection-level tra
   - [X] 3.2 Functional Overview: figure placeholder + 2 paragraphs (3 modes: OK / NOT_OK / GENERATED|UNVIABLE)
   - [X] 3.3 Usage Workflow: designer walkthrough on CSOK example
   - [ ] Martin review: polish M3/M4/M5 prose, verify Functional Overview framing
-  - [ ] Verify M3 "predicate proofs" term is introduced in Sec 02 before first use in Sec 03
-  - [ ] Confirm "hierarchical vs. peer" governance argument lives in M4 only — tell P05 not to duplicate in Intro P2
+  - [x] Verify M3 "predicate proofs" term is introduced in Sec 02 before first use in Sec 03
+  - [x] Confirm "hierarchical vs. peer" governance argument lives in M4 only — tell P05 not to duplicate in Intro P2
   - [ ] Usage Workflow ending hedges ("or returns UNVIABLE") — commit to one CSOK outcome once Refinery result is known
 - [ ] **Section 05 (Evaluation)** — restructured per Oszkár feedback: elaboration + structured measurement
   - [ ] 5.1 Elaboration: VCDM coverage (soundness/completeness), constraint expressiveness table + ARF 5.3.4 constraints, two headline results (scaffolded), anti-pattern detection, baseline comparison
   - [ ] 5.2 Scalability Measurement: RQs, 2–5 model instances, measurement setup, 2 `figure*` diagrams, analysis
   - [ ] 5.3 Threats to Validity: internal, external, construct, conclusion
-- [ ] **Section 01 (Introduction)** — finalize after approach stabilizes
-- [ ] **Section 02 (Background)** — determined by what approach needs reader to know
-  - [ ] 2.1 W3C VCDM 2.0
-  - [ ] 2.2 Multi-Level Modeling (Atkinson & Kühne)
-  - [ ] 2.3 Refinery
-- [ ] **Sections 06-07 (Related Work, Conclusion)** — last
+- [x] **Section 01 (Introduction)** — fully drafted, pending fig_teaser
+- [x] **Section 02 (Background)** — fully drafted, pending Oscar review of B5
+  - [x] 2.1 W3C VCDM 2.0
+  - [x] 2.2 Multi-Level Modeling (Atkinson & Kühne)
+  - [x] 2.3 Refinery
+- [x] **Sections 06-07 (Related Work, Conclusion)** — fully drafted
 
 ## Other tasks
 
 Items duplicated in the prompt pipeline below (O01–O05) are tracked there. Unique remaining items:
 
-- [ ] Incorporate gap analysis citations into Sec 06 scaffold (Tier 1 + Tier 2 papers) — feeds T05
-- [ ] Write differentiation paragraphs for Sec 06.2 (ChorSSI, SecureSSI, Pattiyanon, Braun et al., King et al.) — feeds T05
+- [x] Incorporate gap analysis citations into Sec 06 scaffold (Tier 1 + Tier 2 papers) — feeds T05
+- [x] Write differentiation paragraphs for Sec 06.2 (ChorSSI, SecureSSI, Pattiyanon, Braun et al., King et al.) — feeds T05
 
 ## Other tasks — Prompt Pipeline
 

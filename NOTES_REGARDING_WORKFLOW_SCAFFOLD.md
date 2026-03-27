@@ -43,3 +43,5 @@ Spans with LaTeX commands. [text]{.smallcaps} → \textsc{text}, [text]{.underli
 Raw LaTeX pass-through. Any content marked with `\command`{=latex} or a ```{=latex} block is passed through verbatim — Pandoc doesn't touch it at all.
 Metadata → LaTeX preamble. YAML fields like title, author, date, documentclass, classoption, header-includes, fontsize, etc. map directly to \title{}, \author{}, \documentclass[]{}, and preamble content.
 The key distinction is: citeproc is Pandoc doing the work itself (format-agnostic), while the items above are Pandoc acting as a structural translator, emitting LaTeX commands and letting the LaTeX toolchain do the heavy lifting. For your workflow — authoring in Obsidian and compiling to LaTeX/PDF — the --biblatex or --natbib route is often preferable since it gives you full access to your LaTeX bibliography style and keeps the .bib handling consistent with a pure LaTeX pipeline.
+
+Use Obsidian pandoc Plugin.
