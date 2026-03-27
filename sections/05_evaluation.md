@@ -52,8 +52,8 @@ At the credential schema layer, IncomeCred is well-formed: $\text{CS\_Applicant}
 At the format-specific layer, three governance sources impose requirements on IncomeCred:
 
 1. **eIDAS ARF** (normative, SHALL): $\text{format}(\text{IncomeCred}) \in \{\text{SD-JWT-VC}, \text{mdoc}\}$ — neither supports predicate proofs [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026].
-2. **GDPR Art. 5(1)(c)** (operationally binding): the income threshold check requires disclosing only whether $\text{monthly\_income} \geq \text{threshold}$, not the exact value. If data minimization is to be achieved through technical means at the credential layer, this requires predicate proof capability [@gdpr]. The Hungarian data protection authority has enforced this interpretation in the housing subsidy context specifically.^[NAIH fined a bank 35M HUF for excessive data collection during CSOK applications.]
-3. **W3C VCDM 2.0**: the credential format must conform to the VCDM data model — AnonCreds v1 does not (no `@context`, no `credentialSubject` structure, CL signatures not a registered proof type) [@manu_verifiable_2025] [@curran2022anoncreds].
+2. **GDPR Art. 5(1)(c)** (authors' operationalization): the income threshold check requires disclosing only whether $\text{monthly\_income} \geq \text{threshold}$, not the exact value. We interpret the data minimization principle as requiring that, when a threshold comparison suffices, disclosing the exact value constitutes disproportionate data collection — and that enforcing this at the credential layer requires predicate proof capability [@gdpr]. Neither inferential step is self-evident: the first is a reading of data minimization for threshold-check scenarios; the second assumes minimization must be achieved through technical means at the credential layer rather than through organizational or procedural controls. A directly analogous enforcement action illustrates the operational weight of this principle: the Hungarian data protection authority (NAIH) fined a bank 35M HUF for copying applicants' entire pregnancy booklets — containing sensitive health data on previous pregnancies, miscarriages, and maternal health — when processing subsidized family loan applications that required only verification that the pregnancy had reached 12 weeks. NAIH found the data collected grossly disproportionate to the verification need [@noauthor_naih_2020]. The decision does not prescribe a specific technical mechanism, but it establishes that collecting exact values when a threshold check suffices violates the data minimization principle — precisely the scenario that predicate proofs are designed to address at the credential layer.
+3. **W3C VCDM 2.0**: the credential format must conform to the VCDM data model — AnonCreds v1 does not, as its encoding is designed around the CL signature scheme rather than VCDM's data model [@manu_verifiable_2025] [@curran2022anoncreds].
 
 No format satisfies all three requirements. SD-JWT-VC satisfies (1) and (3) but not (2). AnonCreds satisfies (2) but not (1) or (3). The configuration is unsatisfiable: constraints C5, C6, and C7 cannot be simultaneously satisfied on IncomeCred.
 
@@ -61,20 +61,21 @@ This contradiction is invisible to single-layer inspection. At the credential sc
 
 %% @TODO: After Refinery formalization (Pass 2) — show the error predicates firing and the model generator producing no valid instance. %%
 
-*Remark.* An issuer-precomputed boolean claim ($\text{income\_above\_threshold}: \text{true}$) can approximate a predicate proof within SD-JWT-VC. However, this workaround requires the issuer to anticipate every verifier threshold at issuance time, produces combinatorial explosion for multi-threshold scenarios, and remains static — a credential issued with threshold $X$ cannot serve a verifier requiring threshold $Y$ without reissuance. As shown in Section~\ref{sec:cross-layer}, this workaround restructures the domain concept layer — itself a cross-layer propagation that confirms the need for multi-layer analysis.
+*Remark.* An issuer-precomputed boolean claim ($\text{income\_above\_threshold}: \text{true}$) can approximate a predicate proof within SD-JWT-VC. However, this workaround requires the issuer to anticipate every verifier threshold at issuance time, produces combinatorial explosion for multi-threshold scenarios, and remains static — a credential issued with threshold $X$ cannot serve a verifier requiring threshold $Y$ without reissuance. As shown in \autoref{sec:cross-layer}, this workaround restructures the domain concept layer — itself a cross-layer propagation that confirms the need for multi-layer analysis.
 
 #### Headline 2: Cross-credential predicate gap (horizontal)
 
 The domain constraint $\text{property\_area} \geq \text{min\_area}(\text{num\_children})$ (C4) requires combining values from two credentials issued by independent authorities: $\text{property\_area}$ from PropertyCred (land registry) and $\text{num\_children}$ from FamilyStatusCred (civil registry).
 
-No deployed credential format supports cross-credential arithmetic predicates in zero-knowledge:
+No deployed credential format (i.e., formats with stable specifications and production implementations, excluding research prototypes) supports cross-credential arithmetic predicates in zero-knowledge:
 
 | Format | Single-cred predicate | Cross-cred equality | Cross-cred arithmetic |
 |---|---|---|---|
 | AnonCreds v1 (CL) | Yes (attr $\geq$ const) | No | **No** |
-| AnonCreds v2 (BBS/PS) | Yes (range proofs) | Yes | **No** |
 | SD-JWT-VC | No | No | **No** |
-| SNARK-based [@rosenberg_zk-creds_2023] | Yes | Yes | Yes (research prototype) |
+| SNARK-based \citep{rosenberg_zk-creds_2023} | Yes | Yes | Yes (research prototype) |
+
+AnonCreds v2 is under development with planned BBS+ signature support and range proof capabilities, but no stable specification is available for independent verification of these claims.
 
 To verify the floor area constraint, the verifier must see both raw values from two separate credentials, defeating the privacy properties that ZKP-capable formats promise. The metamodel captures this: a domain-concept-layer constraint (C4) that spans credentials cannot be enforced privacy-preservingly at the format-specific layer because no deployed format supports cross-credential predicate proofs (C9).
 
@@ -88,8 +89,6 @@ This gap is again invisible to single-layer inspection: the domain concept layer
 
 \autoref{tab:antipatterns} catalogues five structural anti-patterns formalized as graph predicates over the partial model.
 
-Table: Structural anti-patterns formalized as graph predicates. Error predicates block inconsistent models; propagation rules eliminate invalid bindings; shadow predicates record observable conditions. \label{tab:antipatterns}
-
 | Anti-pattern | Description | Graph predicate | Layer(s) | Kind |
 |---|---|---|---|---|
 | Disconnected domain graph | Entity pair not transitively reachable | `non_connected` | DCL | error |
@@ -97,6 +96,8 @@ Table: Structural anti-patterns formalized as graph predicates. Error predicates
 | Orphaned root entity | Root `CredEntity` without associated `Credential` | `root_ent_doesnt_have_cred` | CSL | error |
 | Trace misalignment | `Claim` target traces to wrong DCL `Entity` | `prop_t` / `prop_s` | DCL$\leftrightarrow$CSL | propagation |
 | Cross-credential predicate gap | Aligned credential pair lacks cross-credential proof support | `cross_cred_predicate_gap` | DCL$\leftrightarrow$FSL | shadow |
+
+\label{tab:antipatterns}
 
 %% @FIGURE: fig_antipattern_table | Anti-pattern table: name × description × graph predicate × layer(s) × kind. %%
 
@@ -106,7 +107,7 @@ The first three anti-patterns are detectable by single-layer inspection: `non_co
 
 \label{sec:baseline}
 
-We compare against three baselines of increasing formality. Manual expert review, the current industry practice for credential ecosystem design, can identify single-credential format conflicts but lacks systematic coverage of cross-credential dependencies and provides no guarantee that all governance sources have been jointly checked. Single-layer metamodeling (e.g., a UML class diagram with OCL constraints per layer) detects intra-layer structural violations such as empty credentials or disconnected domain graphs, but cannot express the cross-layer trace predicates (`prop_t`, `prop_s`) or the cross-layer capability checks (`cross_cred_predicate_gap`) that link domain constraints to format capabilities. Only the integrated multi-layer formalization with cross-layer graph predicates detects all five anti-pattern categories, including the two headline results (\autoref{sec:headlines}) that are invisible to any single-layer approach.
+We compare analytically against three baselines of increasing formality; no existing tool implements cross-layer credential ecosystem checking, so the comparison is structural rather than empirical. Manual expert review, the current industry practice for credential ecosystem design, can identify single-credential format conflicts but lacks systematic coverage of cross-credential dependencies and provides no guarantee that all governance sources have been jointly checked. Single-layer metamodeling (e.g., a UML class diagram with OCL constraints per layer) detects intra-layer structural violations such as empty credentials or disconnected domain graphs, but cannot express the cross-layer trace predicates (`prop_t`, `prop_s`) or the cross-layer capability checks (`cross_cred_predicate_gap`) that link domain constraints to format capabilities. Only the integrated multi-layer formalization with cross-layer graph predicates detects all five anti-pattern categories, including the two headline results (\autoref{sec:headlines}) that are invisible to any single-layer approach.
 
 ## Scalability Measurement
 
@@ -114,7 +115,7 @@ We compare against three baselines of increasing formality. Manual expert review
 
 We evaluate the scalability of the Refinery-based formalization across three solver operations of increasing cost. *Consistency checking* (`check` in Refinery) verifies that the partial model specification has no internal contradictions. *Concretizability checking* (`check -k`) goes further: it determines whether a concrete model satisfying all constraints, including error predicates, exists — this is the operation that detects governance conflicts such as the income format unsatisfiability in \autoref{sec:headlines}. *Model generation* (`generate`) produces a fully resolved model instance, enumerating valid credential ecosystem designs for design space exploration. We measure all three to answer two research questions. **RQ1:** How does conflict detection (concretizability checking) scale with model size? **RQ2:** How does design space exploration (model generation) scale with model size? Consistency checking serves as a baseline: it should scale well but cannot detect cross-layer conflicts, because the partial model is internally consistent even when no valid concretization exists.
 
-We construct synthetic instances from $N{=}1$ to $N{=}30$ credentials. Each credential contributes one `Prop`–`Value` pair at the DCL, one `CredentialSubject`–`Claim`–`CredentialValue`–`Credential` group at the CSL, and one `Formatted_Credential` node at the FSL, yielding a total of 11 to 272 graph nodes (\autoref{tab:scalability}). All credential subjects trace to a shared `Subject`; the last credential's format class is left unresolved for the solver. Each scale point has two variants: a satisfiable (SAT) variant without governance conflicts, and an unsatisfiable (UNSAT) variant that imports the Headline 1 governance conflict predicate, requiring the solver to detect that no format assignment satisfies all three governance frameworks simultaneously. As a secondary *constraint sensitivity* experiment, we fix $N{=}3$ and vary governance framework combinations over the power-set $\mathcal{P}(\{\text{eIDAS}, \text{Privacy}, \text{VCDM}\})$, yielding eight configurations (G0–G7). Instance definitions and Refinery encodings are provided as supplementary material.
+We construct synthetic instances from $N{=}1$ to $N{=}30$ credentials. Each credential contributes one `Prop`–`Value` pair at the DCL, one `CredentialSubject`–`Claim`–`CredentialValue`–`Credential` group at the CSL, and one `Formatted_Credential` node at the FSL, %% @TODO: Verify node counts per credential from actual Refinery instances and replace TBD %% yielding a total of TBD to TBD graph nodes (\autoref{tab:scalability}). All credential subjects trace to a shared `Subject`; the last credential's format class is left unresolved for the solver. Each scale point has two variants: a satisfiable (SAT) variant without governance conflicts, and an unsatisfiable (UNSAT) variant that imports the Headline 1 governance conflict predicate, requiring the solver to detect that no format assignment satisfies all three governance frameworks simultaneously. As a secondary *constraint sensitivity* experiment, we fix $N{=}3$ and vary governance framework combinations over the power-set $\mathcal{P}(\{\text{eIDAS}, \text{Privacy}, \text{VCDM}\})$, yielding eight configurations (G0–G7). Instance definitions and Refinery encodings are provided as supplementary material.
 
 All instances are evaluated using the Refinery CLI,^[Container image `ghcr.io/graphs4value/refinery-cli`, pulled via Docker.] where each invocation starts a fresh JVM inside a Docker container. We use Hyperfine as the benchmarking harness with 10 measured runs and 1 warmup run per configuration. %% @TODO: Hardware specification — populate from environment.json after running measurements: CPU model, RAM, OS version. %% Cold JVM startup adds a constant overhead per invocation that does not affect the scaling trend but inflates absolute wall-clock times; we report raw wall-clock times without correcting for this overhead. The measurement script, generated instances, and the metamodel source are provided as supplementary material for independent reproduction.
 
@@ -124,20 +125,20 @@ Table: Scalability measurements across three Refinery operations. *Consistency* 
 
 | $N$ | $|V|$ | Model | Consistency (s) | Concretizability (s) | Generation (s) |
 |----:|------:|:------|----------------:|---------------------:|---------------:|
-| 1   | 11    | SAT   |                 |                      |                |
-| 1   | 11    | UNSAT |                 |                      | —              |
-| 3   | 29    | SAT   |                 |                      |                |
-| 3   | 29    | UNSAT |                 |                      | —              |
-| 5   | 47    | SAT   |                 |                      |                |
-| 5   | 47    | UNSAT |                 |                      | —              |
-| 10  | 92    | SAT   |                 |                      |                |
-| 10  | 92    | UNSAT |                 |                      | —              |
-| 15  | 137   | SAT   |                 |                      |                |
-| 15  | 137   | UNSAT |                 |                      | —              |
-| 20  | 182   | SAT   |                 |                      |                |
-| 20  | 182   | UNSAT |                 |                      | —              |
-| 30  | 272   | SAT   |                 |                      |                |
-| 30  | 272   | UNSAT |                 |                      | —              |
+| 1   | TBD   | SAT   | TBD             | TBD                  | TBD            |
+| 1   | TBD   | UNSAT | TBD             | TBD                  | —              |
+| 3   | TBD   | SAT   | TBD             | TBD                  | TBD            |
+| 3   | TBD   | UNSAT | TBD             | TBD                  | —              |
+| 5   | TBD   | SAT   | TBD             | TBD                  | TBD            |
+| 5   | TBD   | UNSAT | TBD             | TBD                  | —              |
+| 10  | TBD   | SAT   | TBD             | TBD                  | TBD            |
+| 10  | TBD   | UNSAT | TBD             | TBD                  | —              |
+| 15  | TBD   | SAT   | TBD             | TBD                  | TBD            |
+| 15  | TBD   | UNSAT | TBD             | TBD                  | —              |
+| 20  | TBD   | SAT   | TBD             | TBD                  | TBD            |
+| 20  | TBD   | UNSAT | TBD             | TBD                  | —              |
+| 30  | TBD   | SAT   | TBD             | TBD                  | TBD            |
+| 30  | TBD   | UNSAT | TBD             | TBD                  | —              |
 
 %% @TODO: Populate with measurement results — Martin to run ./run_measurements.sh all (+ add plain `check` to script). Fill cells as mean ± σ. Generation on UNSAT marked — (no valid model exists). Key observation: Consistency returns SAT on ALL rows including UNSAT models; only Concretizability correctly distinguishes SAT from UNSAT. %%
 
@@ -145,7 +146,22 @@ Table: Scalability measurements across three Refinery operations. *Consistency* 
 
 %% @TODO: RQ answer paragraph — draft after data. Expected: consistency check fast but misses conflicts; concretizability near-linear; generation superlinear. %%
 
-The constraint sensitivity experiment confirms that only G7, the conjunction of all three governance frameworks, yields unsatisfiability; all seven proper subsets are satisfiable. This validates the Headline 1 finding (\autoref{sec:headlines}): the income governance conflict requires the simultaneous imposition of eIDAS format mandates [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026], GDPR data minimization requirements [@gdpr], and W3C VCDM conformance [@manu_verifiable_2025]. No proper subset of these three sources produces a conflict. Typical credential ecosystems involve $\mathcal{O}(10)$ credential types; the measurements cover $N$ up to 30 credentials (272 graph nodes), exceeding the scale of current deployments. The contribution is the metamodel and its cross-layer constraint formalization; Refinery serves as the validation vehicle, and absolute performance numbers are tool-specific.
+%% @TODO: Populate constraint sensitivity table from measurement results %%
+
+Table: Constraint sensitivity at $N{=}3$: governance framework power-set. \label{tab:sensitivity}
+
+| Config | eIDAS | Privacy | VCDM | Result |
+|--------|:-----:|:-------:|:----:|--------|
+| G0     |       |         |      | TBD    |
+| G1     | x     |         |      | TBD    |
+| G2     |       | x       |      | TBD    |
+| G3     |       |         | x    | TBD    |
+| G4     | x     | x       |      | TBD    |
+| G5     | x     |         | x    | TBD    |
+| G6     |       | x       | x    | TBD    |
+| G7     | x     | x       | x    | TBD    |
+
+The constraint sensitivity experiment confirms that only G7, the conjunction of all three governance frameworks, yields unsatisfiability; all seven proper subsets are satisfiable (\autoref{tab:sensitivity}). This validates the Headline 1 finding (\autoref{sec:headlines}): the income governance conflict requires the simultaneous imposition of eIDAS format mandates [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026], GDPR data minimization requirements [@gdpr], and W3C VCDM conformance [@manu_verifiable_2025]. No proper subset of these three sources produces a conflict. The measurements cover $N$ up to 30 credentials (TBD graph nodes); for reference, the EU Digital Identity Wallet Architecture Reference Framework defines fewer than 10 attestation types in its current version [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026], though future ecosystem growth may increase this number. The contribution is the metamodel and its cross-layer constraint formalization; Refinery serves as the validation vehicle, and absolute performance numbers are tool-specific.
 
 ## Threats to Validity
 
@@ -153,7 +169,7 @@ The constraint sensitivity experiment confirms that only G7, the conjunction of 
 
 #### Construct validity
 
-The metamodel formalizes credential *schema design*, not the full credential lifecycle. Three VCDM 2.0 concept families fall outside this scope: proof mechanisms (cryptographic layer, orthogonal to structural modeling), verifiable presentations (runtime holder-verifier protocols), and credential status (issuance and revocation lifecycle). These boundaries constrain the class of expressible governance requirements to those that condition format assignment on structural or capability properties of credentials. Within this scope, five of eight eIDAS ARF constraints are classified as partially expressible (\autoref{sec:expressiveness}). The two root causes are a missing attestation-type subclass hierarchy (three constraints condition format eligibility on credential qualification level) and per-claim rather than per-format privacy annotation (two constraints require claim-level selective disclosure control). Both gaps are closable by metaclass extension without changing the constraint formalization approach, but the partially-expressible classification itself rests on our judgment of what constitutes a structural versus a runtime property.
+The metamodel formalizes credential *schema design*, not the full credential lifecycle. Three VCDM 2.0 concept families fall outside this scope: proof mechanisms (cryptographic layer, orthogonal to structural modeling), verifiable presentations (runtime holder-verifier protocols), and credential status (issuance and revocation lifecycle). These boundaries constrain the class of expressible governance requirements to those that condition format assignment on structural or capability properties of credentials. Within this scope, five of eight eIDAS ARF constraints are classified as partially expressible (\autoref{sec:expressiveness}). The two root causes are a missing attestation-type subclass hierarchy (three constraints condition format eligibility on credential qualification level) and per-claim rather than per-format privacy annotation (two constraints require claim-level selective disclosure control). Both gaps are closable by metaclass extension without changing the constraint formalization approach, but the partially-expressible classification itself rests on our judgment of what constitutes a structural versus a runtime property. Additionally, the DCL's structural inference rule classifies any Entity with no incoming value reference as a Subject; if a modeler omits a property edge by mistake, the entity may be silently promoted to Subject rather than flagged as incomplete.
 
 #### Internal validity
 
