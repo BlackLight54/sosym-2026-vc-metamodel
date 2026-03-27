@@ -18,7 +18,7 @@ This task drafts the Credential Schema Layer subsection of Section 04. The runni
 
 1. `sections/04_approach.md` — current state, especially existing prose at A7
 2. `models/vc_metamodel.refinery` — authoritative source (CSL section, approximately lines 76-168)
-3. `DECISIONS.md` — layer naming, no MDA
+3. `context/DECISIONS.md` — layer naming, no MDA
 4. `CLAUDE.md` — writing style
 
 ## What to Draft

@@ -21,7 +21,7 @@ Section 4.4 is the core formal contribution. It defines how cross-layer constrai
 3. `models/governance_conflict.refinery` — governance conflict predicates
 4. Output from T01 — DCL metaclass names (Entity, Subject, Prop, etc.)
 5. Output from T02 — CSL metaclass names (CredEntity, CredentialSubject, Claim, Credential) and trace mappings
-6. `DECISIONS.md` — error predicate vs. propagation rule distinction
+6. `context/DECISIONS.md` — error predicate vs. propagation rule distinction
 7. `CLAUDE.md` — writing style
 
 ## What to Draft

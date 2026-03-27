@@ -6,7 +6,7 @@
     },
     // === LaTeX Workshop ===
     // Root document
-    "latex-workshop.latex.rootFile": "tex/main.tex",
+    "latex-workshop.latex.rootFile": "pandoc/main.tex",
     // Custom tools
     "latex-workshop.latex.tools": [
         {
@@ -25,7 +25,7 @@
                 "-synctex=1",
                 "-interaction=nonstopmode",
                 "-outdir=build",
-                "tex/main.tex"
+                "pandoc/main.tex"
             ]
         }
     ],

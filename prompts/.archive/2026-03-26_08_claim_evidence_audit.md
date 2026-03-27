@@ -18,7 +18,7 @@ The abstract (`sections/00_abstract.md`) contains binding claims that the paper 
 
 ## New layer terminology
 
-The "Claim Property Layer (CPL)" has been renamed to **Domain Concept Layer (DCL)** throughout the paper (P07). The abbreviation "DCL" replaces "CPL" everywhere. The audit should verify that no orphaned references to the old name remain outside of `archive/` and `prompts/` (which are historical records).
+The "Claim Property Layer (CPL)" has been renamed to **Domain Concept Layer (DCL)** throughout the paper (P07). The abbreviation "DCL" replaces "CPL" everywhere. The audit should verify that no orphaned references to the old name remain outside of `context/archive/` and `prompts/` (which are historical records).
 
 ## Evaluation structure after restructuring
 
@@ -86,7 +86,7 @@ In addition to the standard skill output, manually verify:
 - Does the Baseline Comparison (Sec 5.1) claim superiority over a specific tool? If so, verify the claim is hedged appropriately.
 
 **Reviewer persona cross-check:**
-- For each reviewer persona in VENUE.md, identify the 1-2 most likely attack points given the restructured paper.
+- For each reviewer persona in context/VENUE.md, identify the 1-2 most likely attack points given the restructured paper.
 - Verify that the paper addresses these attack points (or flag if it doesn't).
 
 ### Step 3 — Produce audit report

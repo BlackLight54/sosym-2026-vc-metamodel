@@ -19,8 +19,8 @@ The Format-Specific Layer is the least mature of the three layers. This task dra
 1. `sections/04_approach.md` — current state, especially existing prose at A10
 2. `models/vc_metamodel.refinery` — authoritative source (FSL section, approximately lines 171-303)
 3. `models/governance_conflict.refinery` — governance conflict predicates
-4. `archive/fca_export.md` — FCA results (if exists; otherwise use model file)
-5. `DECISIONS.md` — mdoc simplified away, FCA results surfaced
+4. `context/archive/fca_export.md` — FCA results (if exists; otherwise use model file)
+5. `context/DECISIONS.md` — mdoc simplified away, FCA results surfaced
 
 ## What to Draft
 

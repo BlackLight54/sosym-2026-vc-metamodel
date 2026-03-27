@@ -3,8 +3,8 @@
 **Wave:** 1.5 (after consolidation T01-T03 complete — metaclass names and layer structure stable)
 **Execution:** Single agent. Runs `skills/figure_design` for two figures. Produces design specs + draft source files.
 **Dependencies:** T01 (DCL metaclasses), T02 (CSL metaclasses), T03 (FSL metaclasses). Benefits from T07 (cross-layer constraints), but can start from existing specs.
-**Target files:** `figures/fig_teaser.*`, `figures/fig_metamodel.*`, `figures/STYLE.md`.
-**Downstream:** T10 (polish — teaser figure must exist for final submission). `tex/main.tex` teaser block must be uncommented.
+**Target files:** `pandoc/assets/fig_teaser.*`, `pandoc/assets/fig_metamodel.*`, `pandoc/assets/STYLE.md`.
+**Downstream:** T10 (polish — teaser figure must exist for final submission). `pandoc/main.tex` teaser block must be uncommented.
 
 ---
 
@@ -24,9 +24,9 @@ Both figures share the three-layer visual structure (DCL/CSL/FSL) and must use a
 2. `sections/04_approach.md` — metamodel definitions and any `@FIGURE: fig_metamodel` spec
 3. `models/vc_metamodel.refinery` — authoritative metaclass names and relationships
 4. `models/csok.problem` or `models/csok_instance_*.refinery` — CSOK scenario entities for teaser
-5. `DECISIONS.md` — CSOK naming convention ("family housing subsidy"), teaser figure decision, mdoc simplified away, two headline results
-6. `VENUE.md` — ACM sigconf format constraints, exemplar papers (check their figure style)
-7. `figures/README.md` — allowed figure formats and conventions
+5. `context/DECISIONS.md` — CSOK naming convention ("family housing subsidy"), teaser figure decision, mdoc simplified away, two headline results
+6. `context/VENUE.md` — ACM sigconf format constraints, exemplar papers (check their figure style)
+7. `pandoc/assets/README.md` — allowed figure formats and conventions
 8. `skills/figure_design/SKILL.md` — figure design skill steps
 9. T01/T02/T03 output — final metaclass names (if available; otherwise use names from `models/vc_metamodel.refinery`)
 
@@ -65,7 +65,7 @@ Both figures share the three-layer visual structure (DCL/CSL/FSL) and must use a
 
 ### Visual Consistency: STYLE.md
 
-Create `figures/STYLE.md` defining:
+Create `pandoc/assets/STYLE.md` defining:
 1. **Color palette:** One color per layer (DCL, CSL, FSL). Must work in grayscale. Suggest: DCL = blue-gray, CSL = teal, FSL = amber/orange. Confirm with Martin.
 2. **Shape vocabulary:** Rounded rectangles for instances/scenarios (teaser), sharp rectangles for metaclasses (metamodel). Dashed borders for constraints/conflicts.
 3. **Line styles:** Solid for containment/composition. Dashed for traces/mappings. Dotted for constraints.
@@ -77,7 +77,7 @@ Create `figures/STYLE.md` defining:
 - Figures must be readable in **grayscale** and by **colorblind readers**. Use shape and position in addition to color.
 - fig_teaser is full-width (`figure*`). fig_metamodel: decide column-width vs. full-width based on complexity.
 - Metaclass names must match the final names from T01-T03. If T01-T03 have not yet run, use names from `models/vc_metamodel.refinery` and flag for update.
-- CSOK naming: "housing subsidy scenario" in caption, not "CSOK." Per DECISIONS.md.
+- CSOK naming: "housing subsidy scenario" in caption, not "CSOK." Per context/DECISIONS.md.
 - **Double-blind:** No author names. Refinery in third person in captions.
-- After designing, note that `tex/main.tex` has the teaser block commented out (lines 56-61) — it must be uncommented when the figure file is ready.
+- After designing, note that `pandoc/main.tex` has the teaser block commented out (lines 56-61) — it must be uncommented when the figure file is ready.
 - Follow `skills/figure_design/SKILL.md` process.

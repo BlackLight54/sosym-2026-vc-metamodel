@@ -3,7 +3,7 @@
 **Wave:** 0 (parallel with O01 and consolidation T00/T00b)
 **Execution:** Single agent, research mode. Database search.
 **Dependencies:** None.
-**Target file:** `archive/supplementary_search_2026-03-27.md` (new file).
+**Target file:** `context/archive/supplementary_search_2026-03-27.md` (new file).
 **Downstream:** T05 if any closer work is found (would require scaffold update). Otherwise non-blocking.
 
 ---
@@ -44,7 +44,7 @@ For each result found, classify as:
 
 ### Output
 
-Write all findings to `archive/supplementary_search_2026-03-27.md` with this structure:
+Write all findings to `context/archive/supplementary_search_2026-03-27.md` with this structure:
 
 ```markdown
 # Supplementary Literature Search — 2026-03-27

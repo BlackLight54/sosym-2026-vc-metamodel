@@ -19,7 +19,7 @@ Section 04 is the core contribution (3.0 pages). This task drafts the preamble a
 1. `sections/04_approach.md` — current state, especially existing prose at A3, A7, A10, A11, A17
 2. `models/vc_metamodel.refinery` — authoritative Refinery source (DCL section, approximately lines 20-73)
 3. `sections/03_overview.md` — Section~\ref{sec:functional-overview} defines the three usage modes (OK / NOT_OK / GENERATED|UNVIABLE)
-4. `DECISIONS.md` — layer naming (DCL/CSL/FSL), no MDA, modeling-first framing
+4. `context/DECISIONS.md` — layer naming (DCL/CSL/FSL), no MDA, modeling-first framing
 5. `CLAUDE.md` — writing style, anti-persona, persona
 
 ## What to Draft

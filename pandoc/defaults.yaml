@@ -1,0 +1,18 @@
+# Pandoc defaults for sections/*.md → pandoc/*.tex conversion
+# Usage: pandoc --defaults pandoc/defaults.yaml -o pandoc/01_intro.tex sections/01_intro.md
+#   Override mode: --metadata mode=submission
+
+from: markdown+raw_tex+tex_math_dollars
+to: latex
+
+filters:
+  - pandoc/filters/cut-candidates.lua
+  - pandoc/filters/tables.lua
+  - pandoc/filters/markers.lua
+  - pandoc/filters/code-blocks.lua
+
+cite-method: natbib
+wrap: preserve
+
+metadata:
+  mode: draft

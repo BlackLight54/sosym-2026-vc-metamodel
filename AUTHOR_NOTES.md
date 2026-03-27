@@ -8,7 +8,7 @@ Martin's workspace. Not loaded by Claude Code.
 
 ```
 Obsidian (authoring)          Overleaf (collaboration + submission)
-sections/*.md  ──pandoc──►  build/*.tex  ──git push──►  Overleaf project
+sections/*.md  ──pandoc──►  pandoc/*.tex  ──git push──►  Overleaf project
                   │                                          │
                   ├── venue template                         │
                   ├── marker filter (strips %% ... %%)       │
@@ -27,7 +27,7 @@ sections/*.md  ──pandoc──►  build/*.tex  ──git push──►  Over
 ### Setup TODO (build with Claude Code)
 
 - [x] Create `build.sh` with pandoc conversion per section
-- [x] Create `tex/main.tex` with preamble, `\input{}` per section (adapted from authordraft)
+- [x] Create `pandoc/main.tex` with preamble, `\input{}` per section (adapted from authordraft)
 - [x] Create pandoc Lua filter: strip `%% ... %%` markers or convert to `\todo{}` (`pandoc/filters/markers.lua`). Handles both standalone markers (→ `\todo[inline]{...}`) and inline markers embedded in prose (→ `\todo{...}` margin notes).
 - [ ] Create pandoc Lua filter: map `%% @CITE: key %%` to `\cite{key}` where key exists in `.bib` (`pandoc/filters/citations.lua` — stub)
 - [x] Create pandoc Lua filter: pass through `\begin{definition}` etc. as raw LaTeX (handled by pandoc `raw_tex` extension — no filter needed)
@@ -55,7 +55,7 @@ sections/*.md  ──pandoc──►  build/*.tex  ──git push──►  Over
 - Merge conflicts happen in `.tex` files — resolve in LaTeX.
 
 **Option 2: Manual upload**
-- Run `make build`, then upload `build/*.tex` + `figures/` + `.bib` to Overleaf.
+- Run `make build`, then upload `pandoc/*.tex` + `pandoc/assets/` + `.bib` to Overleaf.
 - Download from Overleaf for collaborator changes.
 - More error-prone but works without premium.
 
@@ -132,11 +132,11 @@ Some skills produce **prompt files** in `prompts/` — ready-to-execute instruct
 ### Starting a new paper
 1. Drop this scaffold into the project directory.
 2. Paste CFP or give Claude Code the URL.
-3. Run `skills/cfp_import` → CFP.md + VENUE.md (budget, format, exemplars).
-4. Confirm VENUE.md exemplar papers and supplementary strategy.
+3. Run `skills/cfp_import` → `context/CFP.md` + `context/VENUE.md` (budget, format, exemplars).
+4. Confirm `context/VENUE.md` exemplar papers and supplementary strategy.
 5. Write thesis in CLAUDE.md.
-6. Run `skills/reviewer_personas` → 4 personas in VENUE.md (rough, will refine later).
-7. Choose a running example (see `guides/running_example/SKILL.md`). Record in DECISIONS.md.
+6. Run `skills/reviewer_personas` → 4 personas in `context/VENUE.md` (rough, will refine later).
+7. Choose a running example (see `skills/running_example_guide/SKILL.md`). Record in `context/DECISIONS.md`.
 8. Run `skills/abstract_scaffold` → abstract contract + champion test + title candidates.
 9. Run `skills/gap_analysis` → prompt files in `prompts/` for research agents.
 10. Execute research prompts. Import results with `skills/prior_work_import`.
@@ -147,7 +147,7 @@ Some skills produce **prompt files** in `prompts/` — ready-to-execute instruct
 15. Build pandoc pipeline (see "Setup TODO" above).
 
 ### During writing
-- Use WORKFLOW.md task templates for drafting, revising, modeling.
+- Use `context/WORKFLOW.md` task templates for drafting, revising, modeling.
 - Run `skills/paper_status` at session start for a snapshot.
 - Run `skills/claim_evidence_audit` periodically to catch overclaims and check contribution mapping.
 - Re-run `skills/reviewer_personas` after first draft to refine personas with full paper context.
@@ -181,15 +181,14 @@ Some skills produce **prompt files** in `prompts/` — ready-to-execute instruct
 ## Conventions
 
 - Section files numbered: `sections/01_introduction.md`, etc.
-- Removed text: `archive/YYYY-MM-DD_description.md`
-- Collected references: `archive/references/`
+- Removed text: `context/archive/YYYY-MM-DD_description.md`
+- Collected references: `context/references/`
 - Generated prompts: `prompts/YYYY-MM-DD_[skill]_[desc].md`
-- Figure sources: `figures/`
-- Cross-cutting decisions: DECISIONS.md
+- Figure sources: `pandoc/assets/`
+- Cross-cutting decisions: `context/DECISIONS.md`
 
 ## Customize for each paper
 
 - [ ] Build pandoc pipeline (see "Setup TODO" above)
 - [ ] Add author names to `skills/pre_submission_check/check.sh` for anonymity scan
 - [ ] Set domain in CLAUDE.md if not formal methods
-- [ ] Add domain-specific guides to `guides/` as needed

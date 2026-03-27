@@ -34,7 +34,7 @@ If Zotero MCP is connected, use it to search and retrieve. Otherwise, use web se
 
 ### 2. Create reference note
 
-For each paper, create a structured note in `archive/references/`:
+For each paper, create a structured note in `context/references/`:
 
 Filename: `[firstauthor_year_keyword].md` (e.g., `basin_2018_tamarin.md`)
 
@@ -99,7 +99,7 @@ Do NOT modify the `.bib` file directly — Zotero owns it.
 
 ## Output
 
-- Reference notes in `archive/references/`.
+- Reference notes in `context/references/`.
 - Relevance summary presented to Martin.
 - Integration suggestions with section targets.
 - TODO.md updated.

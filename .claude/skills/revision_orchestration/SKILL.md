@@ -15,7 +15,7 @@ description: Decompose multi-section revisions into ordered, self-contained prom
 
 ## Why this exists
 
-Single-section edits are straightforward — use the "Revise a section" template in WORKFLOW.md. But some changes cascade:
+Single-section edits are straightforward — use the "Revise a section" template in context/WORKFLOW.md. But some changes cascade:
 
 - Renaming a concept changes every section that uses it.
 - Removing a claim from Section 3 invalidates parts of Section 1 (contribution list), Section 4 (evaluation), and the abstract.

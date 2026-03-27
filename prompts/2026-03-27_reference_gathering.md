@@ -2,11 +2,11 @@
 
 ## Goal
 
-Produce a single, deduplicated master reference list by extracting every cited work from the paper and its supporting artifacts. For each reference, determine: (a) whether it already exists in `tex/references.bib`, (b) whether a PDF exists in `references/`, and (c) what action Martin needs to take (add to Zotero, download PDF, verify existence, or nothing).
+Produce a single, deduplicated master reference list by extracting every cited work from the paper and its supporting artifacts. For each reference, determine: (a) whether it already exists in `pandoc/bibliography/references.bib`, (b) whether a PDF exists in `context/references/`, and (c) what action Martin needs to take (add to Zotero, download PDF, verify existence, or nothing).
 
 ## Context
 
-The paper cites works through `%% @CITE: description %%` markers in section files. Additional references appear in the gap analysis synthesis and in DECISIONS.md. The `.bib` file (`tex/references.bib`, 322 entries) is a Zotero export from a broader collection — many entries are irrelevant to this paper, and many needed references may be missing.
+The paper cites works through `%% @CITE: description %%` markers in section files. Additional references appear in the gap analysis synthesis and in context/DECISIONS.md. The `.bib` file (`pandoc/bibliography/references.bib`, 322 entries) is a Zotero export from a broader collection — many entries are irrelevant to this paper, and many needed references may be missing.
 
 Two references need verification before citing: Ding & Sato 2023 (TrustCom) and Schardong & Custodio 2024 (ER) — marked `[VERIFY]` in the markers.
 
@@ -27,23 +27,23 @@ Read these files and extract every unique reference (by author+year or by docume
 - `sections/07_conclusion.md`
 
 **Gap analysis (Tier 1/2/3 paper lists):**
-- `archive/gap analyis/GAP_ANALYSIS_SYNTHESIS.md`
+- `context/archive/gap analyis/GAP_ANALYSIS_SYNTHESIS.md`
 
 **Decisions (referenced works that inform decisions):**
-- `DECISIONS.md`
+- `context/DECISIONS.md`
 
 **Existing reference tracking:**
-- `references/REFERENCES_TO_ADD_IN_ZOTERO.md` (may be empty or stale)
+- `context/references/REFERENCES_TO_ADD_IN_ZOTERO.md` (may be empty or stale)
 
 ## Step 2: Match against existing .bib
 
-For each extracted reference, search `tex/references.bib` for a matching entry. Match on: author surname + year, or DOI if present in the marker. Record the BibTeX key if found.
+For each extracted reference, search `pandoc/bibliography/references.bib` for a matching entry. Match on: author surname + year, or DOI if present in the marker. Record the BibTeX key if found.
 
 Note: the .bib file is large (322 entries, ~261KB). Search by grepping for author surnames and years rather than reading the whole file.
 
 ## Step 3: Check for PDFs
 
-List the contents of `references/` (excluding `venue exemplar papers/`). For each extracted reference, note whether a PDF exists.
+List the contents of `context/references/` (excluding `venue exemplar papers/`). For each extracted reference, note whether a PDF exists.
 
 ## Step 4: Classify references
 
@@ -52,7 +52,7 @@ Classify each reference into one of these categories:
 | Category | Description | Action for Martin |
 |---|---|---|
 | **READY** | In .bib + has PDF | None — ready to cite |
-| **BIB_ONLY** | In .bib, no PDF | Download PDF to `references/` |
+| **BIB_ONLY** | In .bib, no PDF | Download PDF to `context/references/` |
 | **PDF_ONLY** | Has PDF, not in .bib | Add to Zotero, re-export .bib |
 | **MISSING** | Neither in .bib nor PDF | Add to Zotero + download PDF |
 | **STANDARD** | W3C/ISO/EU specification (no traditional PDF) | Add to Zotero as @misc or @techreport with URL |
@@ -94,7 +94,7 @@ Produce a checklist Martin can work through:
 
 ## Step 7: Update REFERENCES_TO_ADD_IN_ZOTERO.md
 
-Write the Zotero action list (Step 6) to `references/REFERENCES_TO_ADD_IN_ZOTERO.md`, replacing any stale content. This becomes Martin's working checklist.
+Write the Zotero action list (Step 6) to `context/references/REFERENCES_TO_ADD_IN_ZOTERO.md`, replacing any stale content. This becomes Martin's working checklist.
 
 ## Constraints
 

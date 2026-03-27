@@ -2,7 +2,7 @@
 
 **Task type:** Skill execution
 **Skill:** `skills/reviewer_personas`
-**Target:** VENUE.md → Reviewer personas section
+**Target:** context/VENUE.md → Reviewer personas section
 
 ## Instruction for Claude Code
 
@@ -22,6 +22,6 @@ The paper sits at the intersection of MDE (metamodeling, partial graph modeling)
 
 ## After
 
-- VENUE.md reviewer personas section populated with 4 personas.
+- context/VENUE.md reviewer personas section populated with 4 personas.
 - Calibration guidance filled in (significance framing, rigor ceiling, explanation floor, defense points).
 - Update TODO.md: mark done.

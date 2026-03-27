@@ -16,7 +16,7 @@ This task drafts the scalability measurement section and threats to validity. Sc
 
 1. `sections/05_evaluation.md` — current state (after T08)
 2. `models/vc_metamodel.refinery` — model size (metaclass count, predicate count)
-3. `VENUE.md` — Reviewer B (methodology rigor), Reviewer D (tool dependency attack)
+3. `context/VENUE.md` — Reviewer B (methodology rigor), Reviewer D (tool dependency attack)
 4. `CLAUDE.md` — writing style
 
 ## What to Draft

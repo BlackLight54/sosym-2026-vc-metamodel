@@ -50,7 +50,7 @@ Produce a table sorted by order of first appearance:
 
 ### 4. Determine placement
 
-Some venues expect a notation table in the paper (typically at the end of the background section or as an appendix). Check VENUE.md:
+Some venues expect a notation table in the paper (typically at the end of the background section or as an appendix). Check context/VENUE.md:
 
 - If venue conventions include notation tables → propose adding one to a section file.
 - If not standard for the venue → produce as a working reference only (do not add to paper).

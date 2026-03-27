@@ -18,9 +18,9 @@ description: Diagnose page budget usage and propose restructuring when the paper
 ## Inputs
 
 - All section files in `sections/`.
-- VENUE.md (page limit, supplementary strategy).
-- DECISIONS.md (rationale for current structure — avoid undoing deliberate choices blindly).
-- `figures/` directory (figure count and estimated footprint).
+- context/VENUE.md (page limit, supplementary strategy).
+- context/DECISIONS.md (rationale for current structure — avoid undoing deliberate choices blindly).
+- `pandoc/assets/` directory (figure count and estimated footprint).
 - `@META: Budget:` markers in each section file.
 
 ## Steps
@@ -54,7 +54,7 @@ If `build.sh` succeeds and `latexmk` is available, compile to PDF and extract ac
 
 From each section file, read the `%% @META: Budget: ... %%` marker. Parse the page number (e.g., "1.25 pages" → 1.25).
 
-From VENUE.md, read:
+From context/VENUE.md, read:
 - **Total page limit** (main text).
 - **Reference page allowance** (separate from main text).
 
@@ -69,7 +69,7 @@ Present as a table:
 ```
 ## Page Budget Tree — [date]
 
-Page limit: [N] pages (VENUE.md)
+Page limit: [N] pages (context/VENUE.md)
 Estimated total: [M] pages ([over/under] by [delta])
 
 | Section | Budget | Est. pages | Delta | Status |

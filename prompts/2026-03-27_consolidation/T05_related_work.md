@@ -12,14 +12,14 @@
 
 Section 06 positions the contribution against three bodies of work. Currently ZERO prose — only detailed scaffolds with citation lists and differentiation strategies. Budget: 0.75 pages (~4 paragraphs across 3 subsections + 1 synthesis sentence).
 
-**Key constraint from DECISIONS.md (2026-03-25):** Do NOT claim "MDE has not been applied to SSI." Four prior MDE works exist. The defensible claim is the intersection: no prior work combines multi-level metamodeling + formalized cross-layer constraints + VC credential design.
+**Key constraint from context/DECISIONS.md (2026-03-25):** Do NOT claim "MDE has not been applied to SSI." Four prior MDE works exist. The defensible claim is the intersection: no prior work combines multi-level metamodeling + formalized cross-layer constraints + VC credential design.
 
 ## Read Before Writing
 
 1. `sections/06_related_work.md` — current `@TODO` blocks (after T00b merging)
-2. `archive/gap analyis/GAP_ANALYSIS_SYNTHESIS.md` — positioning from gap analysis
-3. `DECISIONS.md` — corrected C5 claim, D5 preemption for Reviewer D
-4. `VENUE.md` — Reviewer D attack vectors (novelty reduction, tool dependency)
+2. `context/archive/gap analyis/GAP_ANALYSIS_SYNTHESIS.md` — positioning from gap analysis
+3. `context/DECISIONS.md` — corrected C5 claim, D5 preemption for Reviewer D
+4. `context/VENUE.md` — Reviewer D attack vectors (novelty reduction, tool dependency)
 5. `CLAUDE.md` — writing style
 
 ## What to Draft

@@ -2,7 +2,7 @@
 
 **Phase:** 4 (sequential — after all restructuring prompts complete)
 **Execution:** Must run AFTER P01, P03, P04, P05, P06 are all complete. This prompt touches nearly every file — running it in parallel with anything else risks merge conflicts.
-**Dependencies:** P01 must have completed and recorded the decision in DECISIONS.md. P03/P04/P05/P06 must have completed so all files are in their final structure.
+**Dependencies:** P01 must have completed and recorded the decision in context/DECISIONS.md. P03/P04/P05/P06 must have completed so all files are in their final structure.
 **Chain edits:** After completion, edit `prompts/2026-03-26_08_claim_evidence_audit.md` — update `<<TERMINOLOGY>>` placeholder with the new layer name.
 
 ---
@@ -20,7 +20,7 @@ This rename must be propagated to all files that reference the layer name. The r
 
 ### Step 1 — Verify the decision
 
-Read `DECISIONS.md` and confirm the CPL rename decision is recorded. If the decision says "candidates for Martin" (i.e., Martin hasn't chosen yet), STOP and ask Martin to choose before proceeding.
+Read `context/DECISIONS.md` and confirm the CPL rename decision is recorded. If the decision says "candidates for Martin" (i.e., Martin hasn't chosen yet), STOP and ask Martin to choose before proceeding.
 
 ### Step 2 — Inventory all occurrences
 
@@ -44,7 +44,7 @@ Search for all occurrences of the old name and its variants across the project. 
 - `sections/06_related_work.md`
 - `sections/07_conclusion.md`
 - `CLAUDE.md` (thesis block and terminology decision)
-- `DECISIONS.md` (add a superseding note to the 2026-03-24 terminology decision; record the rename)
+- `context/DECISIONS.md` (add a superseding note to the 2026-03-24 terminology decision; record the rename)
 - `TODO.md`
 - `models/*.problem` and `models/*.refinery` files (confirmed: `models/csok_instance.refinery`, `models/vc_metamodel.refinery` reference CPL)
 - `.claude/skills/refinery/three_layer_pattern.md` (references CPL in layer documentation)
@@ -70,9 +70,9 @@ sketch paragraph (P4). Verify that "claim property layer" in P4 is renamed to
 
 For each file:
 1. Replace all variants of the old name with the corresponding variant of the new name.
-2. Preserve the abbreviation convention: the paper uses "CPL" as shorthand — this changes to "DCL" (Domain Concept Layer). The abbreviation is already recorded in DECISIONS.md.
+2. Preserve the abbreviation convention: the paper uses "CPL" as shorthand — this changes to "DCL" (Domain Concept Layer). The abbreviation is already recorded in context/DECISIONS.md.
 3. In `CLAUDE.md`, update the thesis block (layer names) and the terminology decision reference.
-4. In `DECISIONS.md`:
+4. In `context/DECISIONS.md`:
    - Add a new decision entry for the rename
    - Add a "Superseded by" note to the 2026-03-24 terminology decision, pointing to the new entry
 
@@ -92,7 +92,7 @@ Edit `prompts/2026-03-26_08_claim_evidence_audit.md`:
 ## Constraints
 
 - This is a MECHANICAL rename. Do NOT change the meaning, structure, or argumentation of any text.
-- Do NOT modify files in `archive/` — those are historical records.
+- Do NOT modify files in `context/archive/` — those are historical records.
 - Do NOT change "Credential Schema Layer" or "Format-Specific Layer" — only the CPL is being renamed.
 - If you encounter a sentence where the new name reads awkwardly, flag it for Martin rather than rewriting the sentence.
 - If models/*.problem files use the old name in Refinery class names or predicates, rename those too — but note that this may require retesting in Refinery.

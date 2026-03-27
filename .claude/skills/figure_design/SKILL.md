@@ -20,9 +20,9 @@ LLMs can draft figures (TikZ, SVG, Mermaid, Excalidraw, Python/matplotlib). Huma
 
 - Section files (what arguments exist that could benefit from figures).
 - CLAUDE.md: thesis, domain.
-- VENUE.md: format (column width matters for layout), exemplar papers (what good figures look like at this venue).
+- context/VENUE.md: format (column width matters for layout), exemplar papers (what good figures look like at this venue).
 - Running example (should appear as or within a figure).
-- `figures/` directory (existing figure sources).
+- `pandoc/assets/` directory (existing figure sources).
 
 ## Design principles
 
@@ -111,7 +111,7 @@ For each prioritized figure, produce a design spec:
 [First sentence: the conclusion. Then: panel-by-panel description. Then: what to observe.]
 
 **Source format:** [TikZ / SVG / Python+matplotlib / Excalidraw / Mermaid]
-**Filename:** figures/fig_[label].[ext]
+**Filename:** pandoc/assets/fig_[label].[ext]
 
 **Dependencies:** [what must be stable before this figure can be finalized]
 ```
@@ -132,7 +132,7 @@ Propose a visual vocabulary table if one doesn't exist:
 | Credential | green | hexagon | — |
 | Attack/violation | red | — | dashed |
 
-Store in `figures/STYLE.md` for reference.
+Store in `pandoc/assets/STYLE.md` for reference.
 
 ### 5. Draft the figure
 
@@ -207,7 +207,7 @@ When updating, produce a diff description: "Figure fig:X currently shows [old st
 - Figure opportunity audit.
 - Prioritized figure list.
 - Design specs.
-- Draft source files in `figures/`.
-- Visual vocabulary in `figures/STYLE.md`.
+- Draft source files in `pandoc/assets/`.
+- Visual vocabulary in `pandoc/assets/STYLE.md`.
 - Figure metadata in section files.
 - TODO.md updated.

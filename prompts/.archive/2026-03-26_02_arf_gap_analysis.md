@@ -48,7 +48,7 @@ Summarize:
 
 ### Step 4 — Write findings
 
-Save the analysis to `archive/arf_5_3_4_gap_analysis.md` with:
+Save the analysis to `context/archive/arf_5_3_4_gap_analysis.md` with:
 - The full constraint table from Step 2
 - The coverage summary from Step 3
 - Specific recommendations for which constraints to include in the Sec 05 expressiveness table (pick the 5-8 most representative/interesting ones)
@@ -65,7 +65,7 @@ This ensures P04 (Sec 05 restructure) incorporates the ARF findings directly.
 
 ## Constraints
 
-- Do NOT edit section files — this is a research task. Output goes to `archive/`.
+- Do NOT edit section files — this is a research task. Output goes to `context/archive/`.
 - Do NOT fabricate ARF content. If you cannot access the document, state so explicitly and recommend Martin provide the relevant section.
 - Focus on section 5.3.4 (or equivalent). Do not attempt a full ARF analysis — that's out of scope for a 10-page paper with <2 days to deadline.
 - Be precise about what "expressible" means: can a Refinery graph predicate in our current metamodel structure capture this constraint? Not "could a metamodel in general capture it."

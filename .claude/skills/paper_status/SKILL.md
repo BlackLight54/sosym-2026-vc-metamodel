@@ -19,22 +19,22 @@ This is not a quality review (that's `skills/final_review`). This is a dashboard
 
 - All section files in `sections/`.
 - TODO.md.
-- VENUE.md (deadline).
-- `figures/` directory.
+- context/VENUE.md (deadline).
+- `pandoc/assets/` directory.
 - CLAUDE.md (thesis — is it filled?).
 
 ## Steps
 
 ### 1. Time check
 
-Read submission deadline from VENUE.md.
+Read submission deadline from context/VENUE.md.
 
 Compute and report:
 - **Days remaining:** [N] days until submission deadline.
 - **Phase:** Map to the time-based behavior from CLAUDE.md (exploration / drafting / revision / polish / emergency).
 - **Phase guidance:** One sentence on what the current phase means for today's work.
 
-If deadline is not set, flag it: "No deadline in VENUE.md — time-based guidance unavailable."
+If deadline is not set, flag it: "No deadline in context/VENUE.md — time-based guidance unavailable."
 
 ### 2. Section maturity scan
 
@@ -68,14 +68,14 @@ Scan all section files for `%% @CITE:`, `%% @FORMAL:`, `%% @TODO:`, and `%% @FIG
 - **Unresolved citations:** [N] across [M] sections.
 - **Unresolved formal elements:** [N] across [M] sections.
 - **Inline TODOs:** [N] across [M] sections.
-- **Figure placeholders:** [N] (with/without corresponding source files in `figures/`).
+- **Figure placeholders:** [N] (with/without corresponding source files in `pandoc/assets/`).
 
 If any count is high relative to the phase (e.g., 15 unresolved citations in polish phase), flag it.
 
 ### 4. Figure status
 
 For each `%% @FIGURE: fig:[label] %%` marker in section files:
-- Does a corresponding source file exist in `figures/`?
+- Does a corresponding source file exist in `pandoc/assets/`?
 - What format is it in?
 
 Report:
@@ -83,9 +83,9 @@ Report:
 ```
 | Figure | Section | Source file | Status |
 |--------|---------|-------------|--------|
-| fig:running_example | §2 | figures/fig_running_example.tikz | Exists |
+| fig:running_example | §2 | pandoc/assets/fig_running_example.tikz | Exists |
 | fig:architecture | §3 | — | Missing |
-| fig:results | §5 | figures/fig_results.py | Exists |
+| fig:results | §5 | pandoc/assets/fig_results.py | Exists |
 ```
 
 ### 5. TODO.md alignment check
@@ -105,9 +105,9 @@ Check whether foundational elements are in place:
 | Element | Status |
 |---------|--------|
 | Thesis in CLAUDE.md | Filled / Placeholder |
-| VENUE.md populated | Yes / Partial / No |
+| context/VENUE.md populated | Yes / Partial / No |
 | Reviewer personas generated | Yes / No |
-| Running example chosen | Yes (check DECISIONS.md) / No |
+| Running example chosen | Yes (check context/DECISIONS.md) / No |
 | Comparison matrix exists | Yes / No |
 | Pandoc pipeline built | Yes / No (check for Makefile or build.sh) |
 
@@ -162,7 +162,7 @@ Present as a compact report, not a wall of text:
 
 ## Session history (optional)
 
-If DECISIONS.md contains notes from previous sessions, compare:
+If context/DECISIONS.md contains notes from previous sessions, compare:
 - Which sections advanced since last session?
 - Which markers were resolved?
 - Are we on track relative to the deadline?

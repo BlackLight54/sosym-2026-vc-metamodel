@@ -1,10 +1,10 @@
 ---
-description: Import a Call for Papers from a URL or pasted text and populate CFP.md and VENUE.md with venue details, deadlines, and format requirements. Use when setting up a new venue or importing CFP content.
+description: Import a Call for Papers from a URL or pasted text and populate context/CFP.md and context/VENUE.md with venue details, deadlines, and format requirements. Use when setting up a new venue or importing CFP content.
 ---
 
 # Skill: CFP Import and Venue Derivation
 
-**Purpose:** Given a CFP URL or pasted text, populate CFP.md and derive VENUE.md.
+**Purpose:** Given a CFP URL or pasted text, populate context/CFP.md and derive context/VENUE.md.
 
 ## Trigger
 
@@ -30,18 +30,18 @@ If URL provided:
 If text pasted:
 - Clean up formatting. Preserve all factual content.
 
-### 2. Populate CFP.md
+### 2. Populate context/CFP.md
 
-Write the extracted content into CFP.md below the instruction comment. Do not modify the instruction comment at the top of the file.
+Write the extracted content into context/CFP.md below the instruction comment. Do not modify the instruction comment at the top of the file.
 
-### 3. Derive VENUE.md
+### 3. Derive context/VENUE.md
 
 Read the CFP content and extract:
 
 - **Venue:** Conference/journal name and track (e.g., "BPM 2026 Track I: Foundations").
 - **Page limit:** Extract exact limit. Note if references are included/excluded from limit. Note if there are different limits for different paper types (full, short, etc.).
 - **Format:** Identify the required template (LNCS, IEEEtran, ACM sigconf, etc.). If not explicitly stated, infer from the venue.
-- **Deadlines:** Extract all dates available in the CFP and populate the Deadlines section of VENUE.md:
+- **Deadlines:** Extract all dates available in the CFP and populate the Deadlines section of context/VENUE.md:
   - Abstract deadline (if separate from submission).
   - Submission deadline (in YYYY-MM-DD format — this is used for time calculations by `skills/paper_status` and CLAUDE.md time awareness).
   - Notification date.
@@ -62,6 +62,6 @@ Reviewer personas are NOT generated here — they need paper content to be usefu
 
 ## Output
 
-- CFP.md populated with raw CFP content.
-- VENUE.md populated with venue, budget, format, deadlines (YYYY-MM-DD), review type, exemplar papers. Reviewer personas section left empty (populated later by `skills/reviewer_personas`).
+- context/CFP.md populated with raw CFP content.
+- context/VENUE.md populated with venue, budget, format, deadlines (YYYY-MM-DD), review type, exemplar papers. Reviewer personas section left empty (populated later by `skills/reviewer_personas`).
 - TODO.md updated.

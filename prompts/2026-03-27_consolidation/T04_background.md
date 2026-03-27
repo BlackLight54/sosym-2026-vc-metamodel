@@ -21,7 +21,7 @@ The explanation floor is set by Reviewer C (MDE Practitioner — knows metamodel
 1. `sections/02_background.md` — current `@TODO` blocks (after T00b merging)
 2. `sections/04_approach.md` — what concepts are used (especially Refinery mechanisms)
 3. `sections/03_overview.md` — what VC terms the reader encounters first
-4. `DECISIONS.md` — no MDA, mdoc simplified, double-blind
+4. `context/DECISIONS.md` — no MDA, mdoc simplified, double-blind
 5. `models/vc_metamodel.refinery` — for accuracy on Refinery concepts
 6. `CLAUDE.md` — writing style
 

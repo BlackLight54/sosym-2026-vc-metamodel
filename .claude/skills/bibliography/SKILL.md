@@ -35,7 +35,7 @@ Section files (%% @CITE: ... %%)                      │
 
 - All section files (for `%% @CITE: %%` markers).
 - `.bib` file if available locally (for matching against existing keys). If not available locally, Martin provides known keys or Claude works from marker descriptions.
-- `archive/references/` (structured reference notes from `skills/prior_work_import`).
+- `context/references/` (structured reference notes from `skills/prior_work_import`).
 
 ## Steps
 
@@ -65,7 +65,7 @@ For each marker, determine what kind of citation is needed:
 - For each marker, attempt to match the description to an existing entry.
 - Report matches with confidence: "high" (exact title match), "medium" (topic match, likely correct), "low" (vague match, needs Martin's confirmation).
 
-**If reference notes exist in `archive/references/`:**
+**If reference notes exist in `context/references/`:**
 - Cross-reference marker descriptions against imported reference notes from `skills/prior_work_import`.
 - These notes may contain BibTeX keys, DOIs, or structured summaries that help identify the right paper.
 
@@ -150,7 +150,7 @@ When markers are resolved and papers need to be added to Zotero:
 
 ## Interaction with other skills
 
-- **`skills/prior_work_import`:** Imports produce reference notes in `archive/references/` that this skill draws on for resolution.
+- **`skills/prior_work_import`:** Imports produce reference notes in `context/references/` that this skill draws on for resolution.
 - **`skills/overleaf_push`:** Run bibliography resolution before pushing — the pandoc filter converts `%% @CITE: key %%` to `\cite{key}`, but only if the key is already filled in.
 - **`skills/pre_submission_check`:** Counts unresolved `%% @CITE: %%` markers. This skill resolves them.
 - **`skills/claim_evidence_audit`:** May flag claims needing citation support, which feeds markers into this skill.

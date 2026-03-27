@@ -4,7 +4,7 @@ description: Convert Markdown section files to LaTeX using pandoc and the projec
 
 # Skill: Pandoc Convert
 
-**Purpose:** Run the pandoc build pipeline to convert `sections/*.md` → `tex/sections/*.tex`. This is the lightweight conversion step — no pre-flight checks, no Overleaf push. Use `overleaf_push` when you also need to push.
+**Purpose:** Run the pandoc build pipeline to convert `sections/*.md` → `pandoc/*.tex`. This is the lightweight conversion step — no pre-flight checks, no Overleaf push. Use `overleaf_push` when you also need to push.
 
 ## Trigger
 
@@ -34,7 +34,7 @@ Report the pandoc version and number of sections converted from the script outpu
 
 For each section file that was converted, check:
 
-- The `.tex` file exists in `tex/sections/`.
+- The `.tex` file exists in `pandoc/`.
 - The file is non-empty.
 - Math delimiters survived: spot-check that `$...$` passages in the source appear as `$...$` or `\(...\)` in the output, and `$$...$$` appears as `\[...\]` or equivalent.
 
@@ -54,5 +54,5 @@ This skill is purely mechanical — execute directly without plan-mode approval.
 
 ## Output
 
-- Built `.tex` files in `tex/sections/`.
+- Built `.tex` files in `pandoc/`.
 - Summary of conversion results.

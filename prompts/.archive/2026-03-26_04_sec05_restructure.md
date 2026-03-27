@@ -28,8 +28,8 @@ Key advisor quotes:
 
 Read:
 - `sections/05_evaluation.md` (current scaffold and partial prose)
-- `DECISIONS.md` (evaluation-related decisions)
-- If `archive/arf_5_3_4_gap_analysis.md` exists (from P02), read it for ARF constraint findings.
+- `context/DECISIONS.md` (evaluation-related decisions)
+- If `context/archive/arf_5_3_4_gap_analysis.md` exists (from P02), read it for ARF constraint findings.
 
 ### Step 2 — Plan the restructure (present to Martin)
 
@@ -50,7 +50,7 @@ Preamble: State evaluation strategy — two parts (elaboration + measurement) + 
 
 ### Constraint Expressiveness
 - Table: constraint × source (W3C/EU/community) × expressible × predicate
-- **ARF constraints (from P02 — `archive/arf_5_3_4_gap_analysis.md`):** 8 constraints recommended for the expressiveness table, extracted from ARF v2.7.3 (Section 5.3, Topic 3, Topic 12):
+- **ARF constraints (from P02 — `context/archive/arf_5_3_4_gap_analysis.md`):** 8 constraints recommended for the expressiveness table, extracted from ARF v2.7.3 (Section 5.3, Topic 3, Topic 12):
   - C1 (PID_02): Dual format mandate — PID in both ISO 18013-5 and SD-JWT VC. **Yes** — `EidasMandate` + format class.
   - C2 (ARB_01): QEAA/PuB-EAA restricted to ISO 18013-5 or SD-JWT VC. **Partial** — lacks attestation qualification level.
   - C3 (ARB_01a): Non-qualified EAA may also use W3C VCDM. **Partial** — same gap as C2.

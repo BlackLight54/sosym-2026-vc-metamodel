@@ -17,8 +17,8 @@ description: Map contributions to evaluation questions and select appropriate me
 
 - CLAUDE.md: thesis (core claim, mechanism, so-what).
 - Introduction contribution list (P3) — each numbered contribution needs corresponding evidence.
-- VENUE.md: reviewer personas (what evidence each reviewer type expects), exemplar papers (what evaluations look like at this venue).
-- Running example (from DECISIONS.md or guides/running_example).
+- context/VENUE.md: reviewer personas (what evidence each reviewer type expects), exemplar papers (what evaluations look like at this venue).
+- Running example (from context/DECISIONS.md or skills/running_example_guide).
 - Domain from CLAUDE.md (calibrates what counts as evidence in this field).
 
 ## Steps
@@ -78,7 +78,7 @@ Present this in plan mode. Martin approves before any implementation.
 
 ### 4. Check venue expectations
 
-Read VENUE.md exemplar papers and reviewer personas:
+Read context/VENUE.md exemplar papers and reviewer personas:
 
 - **What do accepted papers at this venue typically evaluate?** If the venue expects empirical experiments and you only have a proof, the business manager reviewer will object. If the venue expects formal rigor and you only have experiments, the mathematician reviewer will object.
 - **What scale of evaluation is expected?** A single case study may suffice at a formal methods workshop but not at a top SE conference. Calibrate.
@@ -94,7 +94,7 @@ The running example should appear in the evaluation. Determine:
 - Does it exercise the interesting properties? (If not, the example may be too simple.)
 - Are there additional scenarios beyond the running example? (Usually needed — one example is not an evaluation.)
 
-If the running example doesn't work as an evaluation case, flag this — it may indicate the example needs redesign (see `guides/running_example`).
+If the running example doesn't work as an evaluation case, flag this — it may indicate the example needs redesign (see `skills/running_example_guide`).
 
 ### 6. Propose evaluation section structure
 
@@ -140,7 +140,7 @@ Output in plan mode:
 - Venue expectation alignment check.
 - Dependencies and risks.
 
-Martin approves the plan. Execution follows via WORKFLOW.md "Draft a section" template.
+Martin approves the plan. Execution follows via context/WORKFLOW.md "Draft a section" template.
 
 ### 9. Update TODO.md
 

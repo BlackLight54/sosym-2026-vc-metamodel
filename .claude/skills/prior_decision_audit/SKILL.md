@@ -1,5 +1,5 @@
 ---
-description: Surface cross-cutting decisions from DECISIONS.md and check whether they still serve the paper as it evolved. Use when reviewing early decisions, checking for decision drift, or when something feels structurally off.
+description: Surface cross-cutting decisions from context/DECISIONS.md and check whether they still serve the paper as it evolved. Use when reviewing early decisions, checking for decision drift, or when something feels structurally off.
 ---
 
 # Skill: Prior Decision Audit
@@ -15,10 +15,10 @@ description: Surface cross-cutting decisions from DECISIONS.md and check whether
 
 ## Inputs
 
-- DECISIONS.md (cross-cutting decisions recorded during sessions).
+- context/DECISIONS.md (cross-cutting decisions recorded during sessions).
 - CLAUDE.md: thesis (has it drifted from the original?).
 - All section files (what the paper actually argues, which may differ from what was planned).
-- VENUE.md: reviewer personas (have the defense points shifted?).
+- context/VENUE.md: reviewer personas (have the defense points shifted?).
 - TODO.md (are there stale tasks that reflect old decisions?).
 
 ## What counts as a cross-cutting decision
@@ -38,10 +38,10 @@ A cross-cutting decision is any choice that affects multiple sections or constra
 
 ### 1. Collect decisions
 
-Read DECISIONS.md for all recorded cross-cutting decisions. Supplement with decisions implicit in:
+Read context/DECISIONS.md for all recorded cross-cutting decisions. Supplement with decisions implicit in:
 
 - CLAUDE.md thesis (core claim, mechanism, so-what — each is a decision).
-- VENUE.md (venue choice, supplementary strategy — each is a decision).
+- context/VENUE.md (venue choice, supplementary strategy — each is a decision).
 - Running example choice.
 - Section structure (what's included, what's not).
 - Contribution list in Introduction P3.
@@ -89,7 +89,7 @@ Some cross-cutting decisions are never recorded but exist implicitly. Look for:
 - Structural choices that weren't deliberate (related work is in §2 — was that a decision or a default?).
 - Assumptions that crept in without being stated.
 
-If found, recommend recording them in DECISIONS.md so they can be audited next time.
+If found, recommend recording them in context/DECISIONS.md so they can be audited next time.
 
 ### 5. Present to Martin
 
@@ -107,7 +107,7 @@ Martin decides what to change. Changes are propagated via `skills/revision_orche
 ### 6. Update records
 
 After Martin decides:
-- Update DECISIONS.md with revised decisions (move superseded entries to the "Superseded decisions" section with a note).
+- Update context/DECISIONS.md with revised decisions (move superseded entries to the "Superseded decisions" section with a note).
 - If a decision changes, add a TODO for `skills/revision_orchestration` to propagate the change.
 - If a decision is confirmed as still correct, note that it was audited (prevents re-flagging the same decision next time).
 
@@ -130,5 +130,5 @@ After Martin decides:
 - Decision inventory.
 - Problem classification for each finding.
 - Recommendations for Martin.
-- Updated DECISIONS.md after Martin's decisions.
+- Updated context/DECISIONS.md after Martin's decisions.
 - TODO.md updated if revisions are needed.

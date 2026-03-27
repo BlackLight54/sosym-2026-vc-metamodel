@@ -11,7 +11,7 @@
 
 Advisor feedback (Oszkár, 2026-03-25) identified five framing issues in the Introduction and Abstract. The common thread: the current text is too passive about our contribution and too vague about the problem's distinctive character.
 
-**Terminology note:** The rename from "Claim Property Layer (CPL)" to "Domain Concept Layer (DCL)" has been decided (DECISIONS.md 2026-03-26) but NOT yet propagated. Do NOT rename existing text — P07 handles that. However, any NEW text you write MUST use "domain concept layer" / "DCL". If you edit a sentence that currently says "claim property layer," leave it — P07 will catch it.
+**Terminology note:** The rename from "Claim Property Layer (CPL)" to "Domain Concept Layer (DCL)" has been decided (context/DECISIONS.md 2026-03-26) but NOT yet propagated. Do NOT rename existing text — P07 handles that. However, any NEW text you write MUST use "domain concept layer" / "DCL". If you edit a sentence that currently says "claim property layer," leave it — P07 will catch it.
 
 ## Current state (read these files)
 
@@ -58,7 +58,7 @@ Read these files to verify the state described above:
 - `sections/00_abstract.md`
 - `sections/01_introduction.md`
 - `sections/03_motivation.md` (verify M4 content)
-- `DECISIONS.md` (check for any decisions affecting intro/abstract)
+- `context/DECISIONS.md` (check for any decisions affecting intro/abstract)
 
 ### Step 2 — Plan all five edits (present to Martin)
 

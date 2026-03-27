@@ -15,7 +15,7 @@ description: Generate a structured abstract draft from the thesis. Use when the 
 ## Inputs
 
 - CLAUDE.md must have thesis filled (core claim, mechanism, so-what).
-- VENUE.md must have review type (for voice: "We" vs. passive).
+- context/VENUE.md must have review type (for voice: "We" vs. passive).
 - Domain from CLAUDE.md (calibrates register).
 
 ## Steps
@@ -24,8 +24,8 @@ description: Generate a structured abstract draft from the thesis. Use when the 
 
 Extract:
 - Core claim, mechanism, so-what from CLAUDE.md.
-- Review type from VENUE.md (if double-blind, most CS venues still allow "We").
-- Word/character limits for abstracts if specified in CFP.md.
+- Review type from context/VENUE.md (if double-blind, most CS venues still allow "We").
+- Word/character limits for abstracts if specified in context/CFP.md.
 
 ### 2. Generate abstract draft
 

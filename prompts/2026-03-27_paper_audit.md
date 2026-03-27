@@ -2,7 +2,7 @@
 
 ## Goal
 
-Read the entire paper sequentially (Sec 00–07) and audit it against everything the project has accumulated: the binding claims in the abstract, the decisions in DECISIONS.md, the gap analysis findings, the reviewer persona attack vectors, the running example design, and the Refinery formalization. Produce an actionable audit report identifying what the paper delivers, what it fails to deliver, where the argument breaks, and what the four reviewer personas will attack.
+Read the entire paper sequentially (Sec 00–07) and audit it against everything the project has accumulated: the binding claims in the abstract, the decisions in context/DECISIONS.md, the gap analysis findings, the reviewer persona attack vectors, the running example design, and the Refinery formalization. Produce an actionable audit report identifying what the paper delivers, what it fails to deliver, where the argument breaks, and what the four reviewer personas will attack.
 
 This is NOT a general paper review. It is a targeted cross-reference audit: does the paper, as currently written, fulfill the specific commitments it made and defend against the specific attacks the project identified?
 
@@ -24,15 +24,15 @@ Use `/effort high`.
 8. `sections/07_conclusion.md`
 
 **Commitments and constraints:**
-- `DECISIONS.md` — every active decision is a constraint on the paper
+- `context/DECISIONS.md` — every active decision is a constraint on the paper
 - `TODO.md` — remaining work items indicate gaps between plan and delivery
-- `VENUE.md` — reviewer personas and their attack vectors (Section: Reviewer personas + Calibration guidance)
+- `context/VENUE.md` — reviewer personas and their attack vectors (Section: Reviewer personas + Calibration guidance)
 - `CLAUDE.md` — thesis statement (the paper must deliver exactly this)
 
 **Evidence sources (verify claims trace to these):**
-- `archive/gap analyis/GAP_ANALYSIS_SYNTHESIS.md` — differentiation arguments D1–D5, tier lists, claim correction
-- `archive/arf_5_3_4_gap_analysis.md` — expressiveness table source data
-- `archive/meeting_notes_2026-03-25.md` — advisor feedback that shaped the paper
+- `context/archive/gap analyis/GAP_ANALYSIS_SYNTHESIS.md` — differentiation arguments D1–D5, tier lists, claim correction
+- `context/archive/arf_5_3_4_gap_analysis.md` — expressiveness table source data
+- `context/archive/meeting_notes_2026-03-25.md` — advisor feedback that shaped the paper
 
 **Formalization (verify prose–model consistency):**
 - `models/csok.problem` — the main Refinery model
@@ -40,8 +40,8 @@ Use `/effort high`.
 - `models/csok_2x.problem`, `models/csok_3x.problem` — scalability instances
 
 **Guides (check explanation floor):**
-- `guides/running_example/SKILL.md` — running example design constraints
-- `guides/reviewer_archetypes/SKILL.md` — reviewer attack patterns
+- `skills/running_example_guide/SKILL.md` — running example design constraints
+- `skills/reviewer_archetypes_guide/SKILL.md` — reviewer attack patterns
 
 ## Output format
 
@@ -64,7 +64,7 @@ Gap/Risk = what specifically is missing or weak, and how a reviewer would attack
 
 ### 2. Decision Compliance Check
 
-For each active decision in DECISIONS.md, verify the paper complies:
+For each active decision in context/DECISIONS.md, verify the paper complies:
 
 | Decision | Compliant? | Violation / Drift | Location |
 |---|---|---|---|
@@ -89,7 +89,7 @@ For each entry in GAP_ANALYSIS_SYNTHESIS.md:
 
 ### 4. Reviewer Persona Attack Simulation
 
-For each of the four reviewer personas in VENUE.md, simulate their review of the paper as currently written:
+For each of the four reviewer personas in context/VENUE.md, simulate their review of the paper as currently written:
 
 **Reviewer A (Champion — MDE-for-New-Domains):**
 - Can the champion argument be recovered from the abstract's final sentence and Intro P3?

@@ -41,16 +41,16 @@ Propose 3–5 alternative names for the CPL. For each, state:
 The name must satisfy:
 - Recognizable to MODELS Foundations Track reviewers
 - Distinguishes this layer from the credential schema layer (CSL) and format-specific layer (FSL)
-- Does NOT use MDA terminology (no CIM — see DECISIONS.md "2026-03-24 — Terminology: multi-level metamodeling, no MDA")
+- Does NOT use MDA terminology (no CIM — see context/DECISIONS.md "2026-03-24 — Terminology: multi-level metamodeling, no MDA")
 - Works naturally in the compound forms used throughout the paper: "[Name] Layer," "at the [name] layer," "[name]-layer constraints"
 
 ### Step 3 — Recommend
 
-State your recommendation with a clear rationale. Consider the reviewer personas in VENUE.md — especially Reviewer B (Mathematician, graph modeling expert) and Reviewer D (Adversarial, competing formalism advocate).
+State your recommendation with a clear rationale. Consider the reviewer personas in context/VENUE.md — especially Reviewer B (Mathematician, graph modeling expert) and Reviewer D (Adversarial, competing formalism advocate).
 
 ### Step 4 — Record decision
 
-**Do NOT apply the rename yet.** Record the recommendation (or multiple candidates if the decision needs Martin's input) in DECISIONS.md with the standard format:
+**Do NOT apply the rename yet.** Record the recommendation (or multiple candidates if the decision needs Martin's input) in context/DECISIONS.md with the standard format:
 
 ```
 ### 2026-03-26 — Claim Property Layer rename

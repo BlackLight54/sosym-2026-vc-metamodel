@@ -2,7 +2,7 @@
 
 **Phase:** 2 (parallel with P04)
 **Execution:** Can run simultaneously with `2026-03-26_04_sec05_restructure.md`. Do NOT run in parallel with P05 or P06 (they depend on this prompt's output).
-**Dependencies:** None strictly required, but if P01/P02 have completed, read their outputs from DECISIONS.md and `archive/arf_5_3_4_gap_analysis.md` for context.
+**Dependencies:** None strictly required, but if P01/P02 have completed, read their outputs from context/DECISIONS.md and `context/archive/arf_5_3_4_gap_analysis.md` for context.
 **Chain edits:** After completion, edit both:
   - `prompts/2026-03-26_05_intro_abstract_framing.md` — update structure paragraph guidance and section references
   - `prompts/2026-03-26_06_sec04_usage_modes.md` — insert the three mode definitions as established in the new Functional Overview
@@ -27,8 +27,8 @@ Three Refinery usage modes (from advisor meeting, both Oszkár and Imre):
 Read these files:
 - `sections/03_motivation.md` (current content)
 - `sections/01_introduction.md` (P5 structure paragraph — will need updating)
-- `DECISIONS.md` (current decisions affecting Sec 03)
-- `archive/meeting_notes_2026-03-25.md` (raw advisor feedback)
+- `context/DECISIONS.md` (current decisions affecting Sec 03)
+- `context/archive/meeting_notes_2026-03-25.md` (raw advisor feedback)
 
 ### Step 2 — Plan the restructure (present to Martin)
 

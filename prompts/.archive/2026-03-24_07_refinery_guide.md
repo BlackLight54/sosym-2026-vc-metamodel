@@ -1,7 +1,7 @@
 # Prompt: Create Refinery language guide
 
 **Task type:** Documentation
-**Target:** `guides/refinery/SKILL.md`
+**Target:** `skills/refinery/SKILL.md`
 **Priority:** Blocks CSOK Refinery formalization (Pass 2)
 
 ## Context
@@ -12,7 +12,7 @@ The existing model at `prior_work/dse-vc-refinery/vc_model.new.problem` is the p
 
 ## Instruction
 
-Create a guide at `guides/refinery/SKILL.md` that documents:
+Create a guide at `skills/refinery/SKILL.md` that documents:
 
 ### 1. What Refinery is
 
@@ -70,7 +70,7 @@ Step-by-step for adding a new scenario (like CSOK) on the existing metamodel:
 
 ## Deliverables
 
-1. `guides/refinery/SKILL.md` — the guide itself, structured as above
+1. `skills/refinery/SKILL.md` — the guide itself, structured as above
 
 ## Constraints
 

@@ -17,7 +17,7 @@ description: Derive an honest, structured limitations section from the paper's a
 
 - All section files (especially the formal model and evaluation).
 - CLAUDE.md: thesis (what the paper claims — limitations are what it does *not* claim).
-- VENUE.md: reviewer personas (the adversarial reviewer's likely attacks inform priority), venue conventions (some venues expect a standalone "Threats to Validity" subsection; others fold limitations into Discussion).
+- context/VENUE.md: reviewer personas (the adversarial reviewer's likely attacks inform priority), venue conventions (some venues expect a standalone "Threats to Validity" subsection; others fold limitations into Discussion).
 - `skills/evaluation_design` output (threats identified during evaluation design feed directly here).
 - Running example (limitations of the example itself may reflect limitations of the approach).
 
@@ -118,7 +118,7 @@ For each high-risk and medium-risk limitation, draft a limitation statement foll
 
 ### 6. Determine placement
 
-Check VENUE.md and exemplar papers for where limitations appear:
+Check context/VENUE.md and exemplar papers for where limitations appear:
 
 | Venue convention | Where to place |
 |-----------------|---------------|
@@ -131,7 +131,7 @@ Propose the placement and structure. Martin decides.
 
 ### 7. Cross-check with adversarial reviewer
 
-Read the adversarial reviewer persona from VENUE.md. For each of their likely attacks:
+Read the adversarial reviewer persona from context/VENUE.md. For each of their likely attacks:
 - Is the attack addressed by a stated limitation? If yes, the paper is pre-empting.
 - Is the attack addressed by evidence in the paper? If yes, the limitation may not be needed.
 - Is the attack neither addressed nor pre-empted? Flag — this is a vulnerability.

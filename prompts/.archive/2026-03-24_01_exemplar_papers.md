@@ -1,7 +1,7 @@
-# Prompt: Confirm VENUE.md exemplar papers
+# Prompt: Confirm context/VENUE.md exemplar papers
 
 **Task type:** Manual (Martin) + Claude Code assist
-**Target:** VENUE.md → Exemplar papers section
+**Target:** context/VENUE.md → Exemplar papers section
 
 ## Goal
 
@@ -22,8 +22,8 @@ Bonus: papers that use Refinery, partial graph modeling, or MDA-style layered me
 
 1. Browse MODELS 2022-2025 proceedings on the ACM Digital Library or DBLP.
 2. Pick 2-3 papers. For each, note the title and a one-line reason it's a good style model.
-3. Update VENUE.md: replace the placeholder in the "Exemplar papers" section.
+3. Update context/VENUE.md: replace the placeholder in the "Exemplar papers" section.
 
 ## After
 
-Mark "Confirm VENUE.md exemplar papers" as done in TODO.md.
+Mark "Confirm context/VENUE.md exemplar papers" as done in TODO.md.

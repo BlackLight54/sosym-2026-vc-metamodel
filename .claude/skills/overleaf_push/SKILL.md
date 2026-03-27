@@ -49,7 +49,7 @@ Proceed to step 1.
 Before building, verify:
 
 - Report any remaining `%% @CITE: %%`, `%% @FORMAL: %%`, or `%% @TODO: %%` markers with counts. The pandoc filter strips all of them, so they won't break the build — but they represent unfinished work. Martin decides whether to push with markers remaining.
-- Figures referenced in section files have source files in `figures/`.
+- Figures referenced in section files have source files in `pandoc/assets/`.
 - The `.bib` file exists.
 
 Report any issues. Martin decides whether to proceed or fix first.
@@ -62,7 +62,7 @@ Run the pandoc build:
 make build    # or: bash build.sh
 ```
 
-This converts `sections/*.md` → `build/*.tex` using the venue template and Lua filters.
+This converts `sections/*.md` → `pandoc/*.tex` using the venue template and Lua filters.
 
 ### 3. Verify build output
 
@@ -114,6 +114,6 @@ If significant changes were made on Overleaf that should be reflected in Markdow
 
 ## Output
 
-- Built `.tex` files in `build/`.
+- Built `.tex` files in `pandoc/`.
 - Git push to Overleaf remote.
 - Milestone label reminder if appropriate.

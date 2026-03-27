@@ -16,7 +16,7 @@ description: Parse reviewer feedback, classify points by type, identify decision
 
 - Reviewer comments (pasted by Martin).
 - The submitted paper (all section files as they were at submission — may need to be retrieved from archive or git).
-- VENUE.md (for rebuttal format constraints — word limits, scope of allowed changes).
+- context/VENUE.md (for rebuttal format constraints — word limits, scope of allowed changes).
 
 ## Steps
 

@@ -19,9 +19,9 @@ Section 05 evaluates the metamodel along five axes. The two headline results (go
 1. `sections/05_evaluation.md` — current state (headline results are drafted; rest is scaffold)
 2. `sections/04_approach.md` — layer definitions from T01-T03 and T07 (needed for coverage mapping)
 3. `models/vc_metamodel.refinery` — authoritative predicate names
-4. `archive/arf_5_3_4_gap_analysis.md` — ARF constraint analysis (8 constraints, 3 fully expressible)
-5. `DECISIONS.md` — two orthogonal headline results, ARF constraint ID prefixing
-6. `VENUE.md` — Reviewer B (Mathematician) and Reviewer D (Adversarial) attack vectors
+4. `context/archive/arf_5_3_4_gap_analysis.md` — ARF constraint analysis (8 constraints, 3 fully expressible)
+5. `context/DECISIONS.md` — two orthogonal headline results, ARF constraint ID prefixing
+6. `context/VENUE.md` — Reviewer B (Mathematician) and Reviewer D (Adversarial) attack vectors
 7. `CLAUDE.md` — writing style
 
 ## What to Draft
@@ -35,7 +35,7 @@ Section 05 evaluates the metamodel along five axes. The two headline results (go
 
 ### 5.1.2 Constraint Expressiveness (~1 paragraph + TABLE)
 - **Populate the expressiveness table** — this is currently EMPTY and HIGH RISK
-- Source: `archive/arf_5_3_4_gap_analysis.md` — use ARF constraint IDs with ARF- prefix (ARF-C1, ARF-C4, ARF-C7, etc.)
+- Source: `context/archive/arf_5_3_4_gap_analysis.md` — use ARF constraint IDs with ARF- prefix (ARF-C1, ARF-C4, ARF-C7, etc.)
 - Table columns: Constraint ID | Source | Description | Expressible? | Metamodel Element
 - Include at least the 3 fully expressible constraints (ARF-C1, ARF-C4, ARF-C7) and 2-3 partially expressible
 - ARF-C7 provides direct architectural validation of DCL→CSL→FSL layering — highlight this

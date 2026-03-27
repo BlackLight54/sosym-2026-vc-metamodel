@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# build.sh — Convert sections/*.md to tex/sections/*.tex via pandoc
+# build.sh — Convert sections/*.md to pandoc/*.tex via pandoc
 #
 # Usage:
 #   ./build.sh              # draft mode (markers → \todo{})
@@ -12,8 +12,8 @@ cd "$SCRIPT_DIR"
 
 MODE="${1:-draft}"
 SECTIONS_DIR="sections"
-OUT_DIR="tex/sections"
-FILTER_DIR="pandoc/filters"
+OUT_DIR="pandoc"
+DEFAULTS="pandoc/defaults.yaml"
 
 # --- Validate mode ---
 if [[ "$MODE" != "draft" && "$MODE" != "submission" ]]; then
@@ -37,9 +37,6 @@ echo "pandoc $(pandoc --version | head -1 | awk '{print $2}')"
 echo "Mode: $MODE"
 echo ""
 
-# --- Ensure output directory exists ---
-mkdir -p "$OUT_DIR"
-
 # --- Convert each section ---
 converted=0
 for md in "$SECTIONS_DIR"/[0-9]*.md; do
@@ -49,16 +46,8 @@ for md in "$SECTIONS_DIR"/[0-9]*.md; do
     echo "  $md → $outfile"
 
     pandoc "$md" \
-        --from markdown+raw_tex+tex_math_dollars \
-        --to latex \
-        --lua-filter="$FILTER_DIR/cut-candidates.lua" \
-        --lua-filter="$FILTER_DIR/tables.lua" \
-        --lua-filter="$FILTER_DIR/markers.lua" \
-        --lua-filter="$FILTER_DIR/code-blocks.lua" \
-        --natbib \
+        --defaults "$DEFAULTS" \
         --metadata mode="$MODE" \
-        --syntax-highlighting=none \
-        --wrap=preserve \
         -o "$outfile"
 
     converted=$((converted + 1))
@@ -73,5 +62,4 @@ if [ "$converted" -eq 0 ]; then
 fi
 
 echo ""
-echo "Compile (local):  latexmk -pdf tex/main.tex"
-echo "Compile (manual): TEXINPUTS=./tex/template//: pdflatex tex/main && bibtex main && pdflatex tex/main && pdflatex tex/main"
+echo "Compile (local):  latexmk -pdf pandoc/main.tex"

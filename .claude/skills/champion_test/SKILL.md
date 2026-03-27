@@ -4,7 +4,7 @@ description: Evaluate whether the paper has a champion-worthy insight that a sym
 
 # Skill: Champion Test
 
-**Purpose:** Evaluate whether the paper, in its current state, would be championed by the Champion reviewer archetype (see `guides/reviewer_archetypes`). A paper that passes the champion test has a clear, communicable insight that a sympathetic reviewer would fight for in the PC meeting. A paper that fails may be technically correct but will not be accepted.
+**Purpose:** Evaluate whether the paper, in its current state, would be championed by the Champion reviewer archetype (see `skills/reviewer_archetypes_guide`). A paper that passes the champion test has a clear, communicable insight that a sympathetic reviewer would fight for in the PC meeting. A paper that fails may be technically correct but will not be accepted.
 
 This is the single most important quality signal for A* venues.
 
@@ -20,7 +20,7 @@ This is the single most important quality signal for A* venues.
 - Abstract (if it exists).
 - Introduction contribution list (P3, if it exists).
 - Evaluation section (if it exists).
-- Champion persona from VENUE.md (if generated).
+- Champion persona from context/VENUE.md (if generated).
 
 ## Steps
 
@@ -93,7 +93,7 @@ Present:
 
 - **`skills/abstract_scaffold`:** Runs the champion test as part of abstract generation. If the test fails at this stage, it may be a thesis problem.
 - **`skills/final_review`:** Runs the champion test as part of the full-paper review. If the test fails at this stage, it's a delivery or presentation problem.
-- **`skills/reviewer_personas`:** The champion persona in VENUE.md is an instantiation of the Champion archetype for this specific paper and venue.
+- **`skills/reviewer_personas`:** The champion persona in context/VENUE.md is an instantiation of the Champion archetype for this specific paper and venue.
 
 ## Output
 

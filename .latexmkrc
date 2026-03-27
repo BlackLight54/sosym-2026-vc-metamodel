@@ -1,5 +1,5 @@
-# Tell LaTeX where to find acmart.cls and related files
-$ENV{'TEXINPUTS'} = './tex//;' . ($ENV{'TEXINPUTS'} || '');
+# Tell LaTeX where to find acmart.cls, preamble, section .tex files, etc.
+$ENV{'TEXINPUTS'} = './pandoc//;' . ($ENV{'TEXINPUTS'} || '');
 
 # PDF mode
 $pdf_mode = 1;
@@ -11,4 +11,4 @@ $pdflatex = 'pdflatex -synctex=1 -interaction=nonstopmode %O %S';
 $out_dir = 'build';
 
 # Root document (latexmk runs from project root)
-@default_files = ('tex/main.tex');
+@default_files = ('pandoc/main.tex');

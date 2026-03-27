@@ -4,7 +4,7 @@ description: Instantiate four reviewer archetypes (Champion, Mathematician, Busi
 
 # Skill: Reviewer Personas
 
-**Purpose:** Instantiate the four reviewer archetypes (from `guides/reviewer_archetypes`) into specific personas calibrated to this paper's content, venue, and contribution type. The personas get more precise as more of the paper exists — run early for rough calibration, re-run after drafting for precision.
+**Purpose:** Instantiate the four reviewer archetypes (from `skills/reviewer_archetypes_guide`) into specific personas calibrated to this paper's content, venue, and contribution type. The personas get more precise as more of the paper exists — run early for rough calibration, re-run after drafting for precision.
 
 ## Trigger
 
@@ -15,17 +15,17 @@ description: Instantiate four reviewer archetypes (Champion, Mathematician, Busi
 
 ## Inputs
 
-**Minimum (early run):** CLAUDE.md (thesis, domain) + VENUE.md (venue name) or CFP.md.
+**Minimum (early run):** CLAUDE.md (thesis, domain) + context/VENUE.md (venue name) or context/CFP.md.
 
 **Better (after gap analysis):** Above + comparison matrix from `skills/related_work_positioning`, gap analysis results.
 
 **Best (after first draft):** Above + all section files. The more paper exists, the more specific the personas.
 
-**Always:** Read `guides/reviewer_archetypes/SKILL.md` for the archetype definitions.
+**Always:** Read `skills/reviewer_archetypes_guide/SKILL.md` for the archetype definitions.
 
 ## The four archetypes
 
-Read the full definitions in `guides/reviewer_archetypes`. Summary:
+Read the full definitions in `skills/reviewer_archetypes_guide`. Summary:
 
 | Archetype | Role | Calibration role |
 |-----------|------|-----------------|
@@ -64,7 +64,7 @@ For each archetype, produce a paper-specific persona:
 **Score range:** [What range of scores you'd expect from them given the current state of the paper, and what would move them up or down.]
 ```
 
-The persona inherits the archetype's evaluation criteria, forgiveness patterns, and attack vectors from `guides/reviewer_archetypes` — but makes them concrete for this paper, this venue, this contribution.
+The persona inherits the archetype's evaluation criteria, forgiveness patterns, and attack vectors from `skills/reviewer_archetypes_guide` — but makes them concrete for this paper, this venue, this contribution.
 
 ### 3. Derive calibration guidance
 
@@ -75,9 +75,9 @@ From the four personas, extract the four calibration dimensions defined by the a
 - **Explanation floor** (from Business Manager): What must be explained for the business manager to follow? This sets the background section's depth and the motivation before each definition.
 - **Defense points** (from Adversarial): What will the adversarial reviewer attack? These need pre-emptive responses in the paper.
 
-### 4. Write to VENUE.md
+### 4. Write to context/VENUE.md
 
-Replace the reviewer personas section in VENUE.md with the generated personas and calibration guidance.
+Replace the reviewer personas section in context/VENUE.md with the generated personas and calibration guidance.
 
 ### 5. Run champion test
 
@@ -102,6 +102,6 @@ Each re-run should:
 
 ## Output
 
-- Four personas with calibration guidance in VENUE.md.
+- Four personas with calibration guidance in context/VENUE.md.
 - Champion test result.
 - Risk-based TODOs.

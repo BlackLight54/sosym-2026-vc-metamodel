@@ -47,7 +47,7 @@ Read the full file. Key locations for mode insertion:
 Read:
 - `sections/04_approach.md` (full file — verify locations above)
 - `sections/03_motivation.md` (Sec 3.2 Functional Overview — verify mode definitions match)
-- `.claude/skills/refinery/SKILL.md` or `guides/refinery/` (for accurate Refinery command semantics)
+- `.claude/skills/refinery/SKILL.md` or `skills/refinery/` (for accurate Refinery command semantics)
 
 ### Step 2 — Plan additions (present to Martin)
 

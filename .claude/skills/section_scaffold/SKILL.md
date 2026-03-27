@@ -14,7 +14,7 @@ description: Create initial section files in sections/ based on venue format and
 
 ## Inputs
 
-- VENUE.md must be populated (needs format and page limit).
+- context/VENUE.md must be populated (needs format and page limit).
 - CLAUDE.md must have thesis and domain filled.
 - Martin provides a section list, or Claude proposes one based on venue conventions.
 
@@ -49,7 +49,7 @@ For each section, create `sections/NN_name.md` in Obsidian/MathPix Markdown:
 
 %%
 Goal: [one sentence — what this section must accomplish]
-Budget: [approximate page allocation from VENUE.md total]
+Budget: [approximate page allocation from context/VENUE.md total]
 Dependencies: [what must exist before this can be written]
 %%
 
@@ -59,7 +59,7 @@ Number files with zero-padded two-digit prefixes: `00_abstract.md`, `01_introduc
 
 ### 3. Generate initial page budget proposal
 
-Based on the total page limit from VENUE.md and the section structure, propose approximate page allocations. Rules of thumb:
+Based on the total page limit from context/VENUE.md and the section structure, propose approximate page allocations. Rules of thumb:
 
 - Abstract: 0.3–0.5 pages (often on first page with intro)
 - Introduction: 1–1.5 pages

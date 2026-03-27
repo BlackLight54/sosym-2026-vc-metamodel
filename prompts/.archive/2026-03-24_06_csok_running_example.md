@@ -113,4 +113,4 @@ Entity alignment: `Applicant` appears as credentialSubject in all three credenti
 
 - Update section scaffolds (Sec 03, 04) to reference the CSOK example instead of Diploma/Alice.
 - Create Pass 2 prompt for Refinery formalization.
-- Record final example design in DECISIONS.md.
+- Record final example design in context/DECISIONS.md.

@@ -21,7 +21,7 @@ Critical path: **T00 ✅ → T00b ✅ → T01 ✅/T02 ✅ → T07 → T08 → T0
 
 ## Advisor feedback — remaining work
 
-Raw notes: `archive/meeting_notes_2026-03-25.md`.
+Raw notes: `context/archive/meeting_notes_2026-03-25.md`.
 Prompts archived to `prompts/.archive/2026-03-26_*.md`.
 Pipeline: `prompts/.archive/2026-03-26_pipeline.md` — all phases completed except P06 (below).
 
@@ -42,13 +42,13 @@ Structure completed ✅ (Elaboration 5.1 + Scalability 5.2 + Threats 5.3). Remai
 
 ### ARF gap analysis — future work (from P02)
 
-Main analysis completed ✅ → `archive/arf_5_3_4_gap_analysis.md`. Remaining:
+Main analysis completed ✅ → `context/archive/arf_5_3_4_gap_analysis.md`. Remaining:
 
 - [ ] (Future work) Address metamodel gaps: attestation qualification level hierarchy, per-claim SD annotation, SD mechanism distinction
 
 ### Nour's STAF/JOT paper — ⚠️ BLOCKED on double-blind decision
 
-Reference obtained: Al-Gburi, Földvári, Marussy, Semeráth, Kocsis — "A Four-Layer Modeling Framework for Policy-Driven Design in Hyperledger Fabric" — JOT (STAF 2026), to appear. PDF in `references/STAF_2026_paper_51.pdf`.
+Reference obtained: Al-Gburi, Földvári, Marussy, Semeráth, Kocsis — "A Four-Layer Modeling Framework for Policy-Driven Design in Hyperledger Fabric" — JOT (STAF 2026), to appear. PDF in `context/references/STAF_2026_paper_51.pdf`.
 Double-blind concern: Semeráth and Kocsis are co-authors on both papers. Citing reveals shared group. Martin discussing with Oszkár.
 
 - [ ] Resolve double-blind citation strategy (cite in third person / omit / anonymize)
@@ -74,7 +74,7 @@ Binding claims status: 1/10 delivered, 5/10 partial, 4/10 not yet. Grace period:
 | Priority | Section                                                    | Binding claims   | Notes                                       |
 | -------- | ---------------------------------------------------------- | ---------------- | ------------------------------------------- |
 | P1       | Sec 04 definitions (preamble, A1–A2, A4–A6, A8, A12–A13)  | #1, #3           | Core contribution — mathematician reviewer  |
-| P2       | Sec 05.1.2 expressiveness table (ARF-prefixed IDs)         | #6 [HIGH RISK]   | Data in `archive/arf_5_3_4_gap_analysis.md`  |
+| P2       | Sec 05.1.2 expressiveness table (ARF-prefixed IDs)         | #6 [HIGH RISK]   | Data in `context/archive/arf_5_3_4_gap_analysis.md`  |
 | P3       | Sec 02 background (§2.1, §2.2, §2.3)                      | (explanation floor) | Reviewer C accessibility                  |
 | P4       | Sec 05.1.1 coverage characterization                       | #5               | Brief soundness/completeness                |
 | P5       | Sec 05.1.4 anti-pattern detection                          | #7               | Table + multi-layer visibility              |
@@ -126,7 +126,7 @@ Pipeline & task details: `prompts/2026-03-27 other tasks/PIPELINE.md`.
 - [ ] **O02**: (Optional) Supplementary ACM DL/DBLP search
 - [ ] **O03**: Soften C5 in abstract + intro P2 (after O01)
 - [ ] **O04**: Run `skills/evaluation_design`, map contributions to evaluation questions (after T01–T03)
-- [ ] **O05**: Design fig_teaser, fig_metamodel, write `figures/STYLE.md` (after T01–T03)
+- [ ] **O05**: Design fig_teaser, fig_metamodel, write `pandoc/assets/STYLE.md` (after T01–T03)
 
 ---
 
@@ -141,18 +141,18 @@ Pipeline & task details: `prompts/2026-03-27 other tasks/PIPELINE.md`.
 | 2026-03-24 | Run `skills/reviewer_personas`            | 4 personas populated in VENUE.md with calibration guidance (significance, rigor, explanation floor, defense points)                                                                                                                                                                                 |
 | 2026-03-24 | Run `skills/abstract_scaffold`            | Draft in `sections/00_abstract.md`. 3 title candidates. 10 binding claims identified (3 high-risk).                                                                                                                                                                                                |
 | 2026-03-24 | Run `skills/section_scaffold`             | 7 section files created in `sections/`. Intro has P1-P5 skeleton with structure paragraph. All sections have per-paragraph guidance with markers. DECISIONS.md updated with title, framing, terminology, examples, teaser figure decisions.                                                         |
-| 2026-03-24 | Build pandoc pipeline                     | `build.sh`, `tex/main.tex`, Lua filters in `pandoc/filters/`. Citations and figures filters are stubs. Needs pandoc install to test.                                                                                                                                                               |
+| 2026-03-24 | Build pandoc pipeline                     | `build.sh`, `pandoc/main.tex`, Lua filters in `pandoc/filters/`. Citations and figures filters are stubs. Needs pandoc install to test.                                                                                                                                                               |
 | 2026-03-24 | Confirm VENUE.md exemplar papers          | 2 papers from Oszkár's group (MODELS 2020, MODELS 2013)                                                                                                                                                                                                                                           |
 | 2026-03-24 | Design CSOK running example               | Researched eligibility, simplified to 4-5 entities/3 credentials. Governance conflict (eIDAS/GDPR/VCDM on IncomeCred) and cross-credential predicate gap identified. 5 decisions in DECISIONS.md. → `prompts/2026-03-24_06_csok_running_example.md`                                                |
 | 2026-03-24 | Develop cross-governance conflict example | Two headline results designed (Binding claim #8).                                                                                                                                                                                                                                                  |
-| 2026-03-25 | Run `skills/gap_analysis`                 | 7 RQs tested. Core novelty CLEAR. C5 corrected (MDE has been applied to SSI — 4 papers). ~20 papers to cite. 5 differentiation arguments. Synthesis in `archive/gap analyis/GAP_ANALYSIS_SYNTHESIS.md`. Sec 06 scaffold updated.                                                                   |
+| 2026-03-25 | Run `skills/gap_analysis`                 | 7 RQs tested. Core novelty CLEAR. C5 corrected (MDE has been applied to SSI — 4 papers). ~20 papers to cite. 5 differentiation arguments. Synthesis in `context/archive/gap analyis/GAP_ANALYSIS_SYNTHESIS.md`. Sec 06 scaffold updated.                                                                   |
 | 2026-03-25 | Create Refinery language guide            | `.claude/skills/refinery/` — `.problem` syntax, three-layer pattern, instance writing, curated examples, `run_refinery.sh` CLI wrapper.                                                                                                                                                            |
 | 2026-03-25 | CSOK Refinery formalization (Pass 2)      | `models/csok.problem` written. Evolved metamodel: single abstract format containment, 5 format classes, GovernanceAnnotation markers, format capability propagation rules. Two headline results encoded: `governance_conflict` error (UNSAT), `cross_cred_predicate_gap` shadow pred.                             |
 | 2026-03-25 | Refinery testing complete                 | Syntax fixes, restructured to imports (`vc_metamodel.refinery`, `governance_conflict.refinery`, `csok_instance.refinery`). 4 entry points: `csok.problem` (UNSAT), 3 SAT variants. `check -k` and `generate` both verified.                                                                       |
 | 2026-03-25 | Reframe as multi-level metamodeling       | No MDA terminology (CIM/PIM/PSM). Layer names chosen. DECISIONS.md updated.                                                                                                                                                                                                                        |
 | 2026-03-25 | Remove ifblinded from LaTeX               | Anonymization handled by document style properties.                                                                                                                                                                                                                                                |
 | 2026-03-26 | DCL rename (P01 research + P07 propagate) | Researched Atkinson & Kühne, de Lara et al. Proposed 5 alternatives → selected Domain Concept Layer (DCL). Propagated to all sections, CLAUDE.md, models, abstract.                                                                                                                                |
-| 2026-03-26 | ARF 5.3.4 gap analysis (P02)             | Constraints extracted, classified, fed into Sec 05 table → `archive/arf_5_3_4_gap_analysis.md`. P04 chain edits completed. Future work gaps identified (remaining items above).                                                                                                                     |
+| 2026-03-26 | ARF 5.3.4 gap analysis (P02)             | Constraints extracted, classified, fed into Sec 05 table → `context/archive/arf_5_3_4_gap_analysis.md`. P04 chain edits completed. Future work gaps identified (remaining items above).                                                                                                                     |
 | 2026-03-26 | Sec 03 restructure (P03)                  | Renamed Motivation → Overview. Added 3.1 Motivation (M1-M5 drafted), 3.2 Functional Overview, 3.3 Usage Workflow. Intro P5 updated. P05/P06 chain edits completed.                                                                                                                                |
 | 2026-03-26 | Sec 05 restructure — structure (P04)      | Restructured to Elaboration (5.1) + Scalability (5.2) + Threats (5.3). VCDM coverage reframed as soundness/completeness. Baseline comparison and scalability measurement scaffolded. P08 chain edits completed. Measurement items still pending (remaining items above).                            |
 | 2026-03-26 | Intro/Abstract framing (P05)              | "scattered" → "collected and formalized". Emergent interaction argument, hierarchical vs. peer governance distinction, why existing tools fail argument added.                                                                                                                                      |
@@ -160,4 +160,4 @@ Pipeline & task details: `prompts/2026-03-27 other tasks/PIPELINE.md`.
 | 2026-03-26 | Run `skills/related_work_positioning`     | Scaffold updated, re-run needed after gap analysis + more drafting.                                                                                                                                                                                                                                |
 | 2026-03-26 | Fix cross-ref Sec 04:155                  | "Section 5.3" → "Section 5.1.3" (headline results moved after Sec 05 restructure). Done in T00.                                                                                                                                                                                                   |
 | 2026-03-27 | Create consolidation prompts (T00–T10)    | 12 prompt files in `prompts/2026-03-27_consolidation/`.                                                                                                                                                                                                                                            |
-| 2026-03-27 | T00 file restructuring                    | Rename, LaTeX labels, cross-refs, stale metadata, duplicate markers. Title updated in `tex/main.tex`.                                                                                                                                                                                              |
+| 2026-03-27 | T00 file restructuring                    | Rename, LaTeX labels, cross-refs, stale metadata, duplicate markers. Title updated in `pandoc/main.tex`.                                                                                                                                                                                              |

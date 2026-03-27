@@ -22,7 +22,7 @@ Examples:
 2. TODO.md gets a task per prompt: "Execute `prompts/[filename]`."
 3. Martin (or Claude Code) executes each prompt.
 4. Results are processed (imported via `skills/prior_work_import`, applied to sections, etc.).
-5. Executed prompts can be deleted or moved to `archive/` if the results are worth preserving.
+5. Executed prompts can be deleted or moved to `context/archive/` if the results are worth preserving.
 
 ## What goes here
 
@@ -33,4 +33,4 @@ Examples:
 ## What does NOT go here
 
 - The paper itself (section files are authoritative).
-- Permanent reference material (that goes in `archive/references/` or `guides/`).
+- Permanent reference material (that goes in `context/archive/references/` or `.claude/skills/`).

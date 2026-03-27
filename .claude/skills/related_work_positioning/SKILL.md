@@ -15,7 +15,7 @@ description: Build a comparison matrix positioning the paper against related wor
 ## Inputs
 
 - CLAUDE.md (thesis, domain).
-- Reference notes in `archive/references/` (from `skills/prior_work_import`).
+- Reference notes in `context/references/` (from `skills/prior_work_import`).
 - Gap analysis results.
 - Related work section draft (if it exists).
 

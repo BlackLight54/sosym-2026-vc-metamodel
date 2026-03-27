@@ -7,7 +7,7 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 ### Setup
 | Skill | Trigger | What it does |
 |-------|---------|-------------|
-| `cfp_import` | "Import CFP from [URL]" | Fetches CFP, populates CFP.md, derives VENUE.md |
+| `cfp_import` | "Import CFP from [URL]" | Fetches CFP, populates context/CFP.md, derives context/VENUE.md |
 | `section_scaffold` | "Scaffold the paper" | Creates format-aware section files with budget |
 | `abstract_scaffold` | "Draft the abstract" | Thesis → abstract + champion test + title candidates |
 | `reviewer_personas` | "Generate reviewer personas" | 4 context-dependent personas, improves with more paper |

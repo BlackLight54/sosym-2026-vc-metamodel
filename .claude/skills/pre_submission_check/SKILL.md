@@ -15,8 +15,8 @@ description: Scan all section files for mechanical issues before submission: unr
 ## Inputs
 
 - All files in `sections/`.
-- VENUE.md (for review type).
-- `figures/` directory (for reference resolution).
+- context/VENUE.md (for review type).
+- `pandoc/assets/` directory (for reference resolution).
 
 ## Steps
 
@@ -32,10 +32,10 @@ Execute the check script (`skills/pre_submission_check/check.sh`) or perform the
 
 **Broken figure references:**
 - Find all `\ref{fig:NAME}` in section files.
-- Check that a corresponding source file exists in `figures/` (matching `fig_NAME.*`).
+- Check that a corresponding source file exists in `pandoc/assets/` (matching `fig_NAME.*`).
 - Check that a caption exists near each reference.
 
-**Anonymity (if VENUE.md review type is double-blind):**
+**Anonymity (if context/VENUE.md review type is double-blind):**
 - Search for author names (Martin's name and any co-authors — Martin should list these).
 - Search for first-person references to own prior work ("our previous work", "we previously showed" without appropriate third-person framing).
 - Search for institutional affiliations.

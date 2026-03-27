@@ -3,7 +3,7 @@
 **Task type:** Formal modeling
 **Target:** New `.problem` file for the CSOK running example
 **Priority:** Blocks Section 04 code listings and evaluation
-**Depends on:** Pass 1 conceptual design (`prompts/2026-03-24_06_csok_running_example.md`) and Refinery guide (`guides/refinery/SKILL.md`)
+**Depends on:** Pass 1 conceptual design (`prompts/2026-03-24_06_csok_running_example.md`) and Refinery guide (`skills/refinery/SKILL.md`)
 
 ## Context
 
@@ -12,7 +12,7 @@ Pass 1 produced a conceptual design for the CSOK running example: entities, cred
 The existing metamodel at `prior_work/dse-vc-refinery/vc_model.new.problem` provides the starting point. The metamodel needs evolution — extensions and modifications — to support the CSOK scenario and the format-based governance conflict.
 
 **Read first:**
-- `guides/refinery/SKILL.md` — Refinery language reference
+- `skills/refinery/SKILL.md` — Refinery language reference
 - Pass 1 deliverables (scenario description, three-layer table, governance conflict, metamodel extensions list)
 - `prior_work/dse-vc-refinery/vc_model.new.problem` — current metamodel
 
@@ -90,7 +90,7 @@ Run the model in Refinery and verify:
 
 ## Constraints
 
-- Follow the Refinery guide (`guides/refinery/SKILL.md`) for syntax.
+- Follow the Refinery guide (`skills/refinery/SKILL.md`) for syntax.
 - Metamodel changes must remain generic — don't hardcode CSOK-specific entities into the metamodel classes.
 - Flag any Refinery syntax you're uncertain about.
 - If Refinery can't express the governance conflict directly, document the limitation and propose a workaround.

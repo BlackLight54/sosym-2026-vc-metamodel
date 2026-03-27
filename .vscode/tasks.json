@@ -7,7 +7,7 @@
             "command": "bash",
             "args": [
                 "-c",
-                "bash build.sh draft && latexmk -pvc -pdf -synctex=1 -interaction=nonstopmode -outdir=build tex/main.tex"
+                "bash build.sh draft && latexmk -pvc -pdf -synctex=1 -interaction=nonstopmode -outdir=build pandoc/main.tex"
             ],
             "group": "build",
             "isBackground": true,

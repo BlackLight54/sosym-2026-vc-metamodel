@@ -29,7 +29,7 @@ This skill run is a **verification pass**: does the existing structure adequatel
    - C2: Cross-layer constraints as Refinery graph predicates
    - C3: Three-axis validation (coverage, expressiveness, error visibility)
 3. Read the current evaluation structure in `sections/05_evaluation.md`.
-4. Read `VENUE.md` — exemplar papers (Semerath et al. MODELS 2020, MODELS 2013) for evaluation patterns.
+4. Read `context/VENUE.md` — exemplar papers (Semerath et al. MODELS 2020, MODELS 2013) for evaluation patterns.
 5. Map each contribution to evaluation questions. Check coverage.
 6. Check that claim strength (abstract binding claims #1-#10) matches evaluation method strength.
 7. Flag any mismatches, gaps, or venue-convention violations.
@@ -41,8 +41,8 @@ This skill run is a **verification pass**: does the existing structure adequatel
 2. `sections/01_introduction.md` — P3 contribution list
 3. `sections/05_evaluation.md` — current evaluation structure and scaffolds
 4. `sections/00_abstract.md` — binding claims #1-#10
-5. `VENUE.md` — exemplar papers, reviewer personas
-6. `DECISIONS.md` — two headline results decision, evaluation-related decisions
+5. `context/VENUE.md` — exemplar papers, reviewer personas
+6. `context/DECISIONS.md` — two headline results decision, evaluation-related decisions
 
 ## Constraints
 

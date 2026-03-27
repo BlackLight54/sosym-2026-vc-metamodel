@@ -26,14 +26,14 @@ Wave 1.5 (parallel, after T01-T03):                  │
 
 **O02 — Supplementary literature search** (OPTIONAL)
 - Search ACM DL/DBLP: "metamodel" AND "verifiable credential", "model-driven" AND "decentralized identity"
-- Write findings to `archive/supplementary_search_2026-03-27.md`
+- Write findings to `context/archive/supplementary_search_2026-03-27.md`
 
 ## Wave 0.5
 
 **O03 — C5 claim softening** (after O01)
 - Soften C5 in `sections/00_abstract.md` gap sentence
 - Soften C5 in `sections/01_introduction.md` P2
-- Verify corrected claim matches DECISIONS.md 2026-03-25 wording
+- Verify corrected claim matches context/DECISIONS.md 2026-03-25 wording
 
 ## Wave 1.5
 
@@ -46,5 +46,5 @@ Wave 1.5 (parallel, after T01-T03):                  │
 **O05 — Figure design** (after T01–T03)
 - Design fig_teaser (CSOK three-layer visual, full-width)
 - Design fig_metamodel (three-layer class diagram)
-- Write `figures/STYLE.md` with visual vocabulary
-- Uncomment teaser block in `tex/main.tex`
+- Write `pandoc/assets/STYLE.md` with visual vocabulary
+- Uncomment teaser block in `pandoc/main.tex`
