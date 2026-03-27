@@ -4,14 +4,17 @@
 %% @META: Dependencies: Section 04 (metamodel definitions and constraints). %%
 
 # Evaluation
+
 \label{sec:evaluation}
 
-%% @TODO: E0 — State evaluation strategy. Two parts: (1) elaboration (scope, expressiveness, error visibility — qualitative), (2) scalability measurement (runtime, model size — quantitative). Threats to validity. Explicit about what evaluation does NOT claim: no user study, no industrial deployment. Length: 2–3 sentences. %%
+We evaluate the metamodel and its cross-layer constraint formalization along two complementary axes. A qualitative *elaboration* (\autoref{sec:elaboration}) characterizes metamodel coverage against the W3C VCDM 2.0 specification, constraint expressiveness against EU regulatory sources, two headline results — a governance conflict and a format expressiveness gap — demonstrating cross-layer constraint value, a catalog of structural anti-patterns, and a baseline comparison against single-layer alternatives. A quantitative *scalability measurement* (\autoref{sec:scalability}) benchmarks three Refinery solver operations across ecosystem sizes up to 30 credentials.
 
 ## Elaboration
+
 \label{sec:elaboration}
 
 ### Metamodel Coverage
+
 \label{sec:coverage}
 
 We characterize the metamodel's coverage of W3C VCDM 2.0 concepts [@manu_verifiable_2025] as a soundness–completeness pair. For soundness, every metaclass and capability predicate traces to a VCDM concept: DCL metaclasses formalize the claim-level information structure, CSL metaclasses the credential packaging model, and FSL format classes with six capability predicates the format properties relevant to governance constraint evaluation. For completeness, the metamodel deliberately excludes three VCDM concept families outside credential *schema design*: proof mechanisms (cryptographic, orthogonal to structural modeling), verifiable presentations (runtime protocols), and credential status (lifecycle management). These are scope boundaries of the design-time formalization, not limitations of the graph predicate approach.
@@ -19,6 +22,7 @@ We characterize the metamodel's coverage of W3C VCDM 2.0 concepts [@manu_verifia
 %% @FIGURE: fig_coverage_table | Coverage mapping table: VCDM 2.0 concept → metamodel element → layer. Mark in-scope / out-of-scope. %%
 
 ### Constraint Expressiveness
+
 \label{sec:expressiveness}
 
 We collected eight normative constraints from the eIDAS Architecture Reference Framework (ARF) v2.7.3 [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026] governing credential format assignment, and classified each as *fully expressible*, *partially expressible*, or *not expressible*. Three are fully expressible (\autoref{tab:expressiveness}), five partially, and none falls entirely outside the metamodel's capacity. The full constraint analysis is provided in the supplementary material.
@@ -28,7 +32,7 @@ Table: Fully expressible eIDAS ARF constraints. Each maps directly to metamodel 
 | ID | Constraint | Source | Predicate / Mechanism |
 |----|-----------|--------|----------------------|
 | ARF-C1 | PID must be issued in both ISO 18013-5 and SD-JWT-VC | PID\_02 | `EidasMandate` annotation + format class membership |
-| ARF-C4 | Proximity presentation requires mdoc format | ARB\_02 | `supports_offline_verification`; `fca_offline_not_sdjwt` eliminates SD-JWT-VC |
+| ARF-C4 | Proximity presentation requires mdoc format | ARB\_02 | `supports_offline_verification`; propagation rule eliminates SD-JWT-VC |
 | ARF-C7 | Attributes defined encoding-independently, then per-format | ARB\_06 | DCL$\to$CSL$\to$FSL layer architecture |
 
 %% @FIGURE: fig_expressiveness_table | Constraint expressiveness table: ID × constraint × source × expressible × predicate. %%
@@ -38,6 +42,7 @@ The five partially expressible constraints share two root causes: the metamodel 
 *Remark.* ARF-C7 provides external validation of the metamodel's layered architecture. The ARF requires that attestation attributes be defined encoding-independently before being specified per-format (ARB\_06 [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026]). The metamodel was designed from the W3C VCDM structure, not from the ARF; that the EU governance framework independently mandates the same DCL$\to$CSL$\to$FSL separation confirms the layering reflects a structural property of credential ecosystem design rather than an artifact of the formalization.
 
 ### Headline Results
+
 \label{sec:headlines}
 
 #### Headline 1: Income governance conflict (vertical)
@@ -78,6 +83,7 @@ This gap is again invisible to single-layer inspection: the domain concept layer
 *Complementarity.* The two results are orthogonal. Headline 1 identifies a *vertical* governance conflict: contradictory requirements on a single credential's format from different regulatory sources. Headline 2 identifies a *horizontal* expressiveness gap: an ecosystem-level constraint spanning credentials that exceeds any single format's capabilities. Together, they demonstrate that multi-layer analysis detects both governance conflicts and format expressiveness gaps invisible to single-layer inspection.
 
 ### Anti-Pattern Detection
+
 \label{sec:anti-patterns}
 
 \autoref{tab:antipatterns} catalogues five structural anti-patterns formalized as graph predicates over the partial model.
@@ -97,11 +103,13 @@ Table: Structural anti-patterns formalized as graph predicates. Error predicates
 The first three anti-patterns are detectable by single-layer inspection: `non_connected` operates within the DCL, `no_empty_cred` and `root_ent_doesnt_have_cred` within the CSL. Trace misalignment requires cross-layer analysis. Each layer is individually well-formed, but the propagation rules `prop_t` and `prop_s` eliminate any binding where a `Claim`'s target `CredEntity` traces to a different DCL `Entity` than the `Prop` it was derived from. The cross-credential predicate gap is invisible at any single layer: the domain constraint is well-defined at the DCL, both credentials are structurally valid at the CSL, and each format is individually compliant at the FSL. Only the cross-layer shadow predicate, which checks `aligned` credential subjects against their formats' `supports_multi_credential_proof` capability, surfaces the gap. This graduated visibility, from intra-layer errors through cross-layer trace inconsistencies to ecosystem-level capability gaps, is the central argument for multi-level formalization over single-layer alternatives.
 
 ### Baseline Comparison
+
 \label{sec:baseline}
 
 We compare against three baselines of increasing formality. Manual expert review, the current industry practice for credential ecosystem design, can identify single-credential format conflicts but lacks systematic coverage of cross-credential dependencies and provides no guarantee that all governance sources have been jointly checked. Single-layer metamodeling (e.g., a UML class diagram with OCL constraints per layer) detects intra-layer structural violations such as empty credentials or disconnected domain graphs, but cannot express the cross-layer trace predicates (`prop_t`, `prop_s`) or the cross-layer capability checks (`cross_cred_predicate_gap`) that link domain constraints to format capabilities. Only the integrated multi-layer formalization with cross-layer graph predicates detects all five anti-pattern categories, including the two headline results (\autoref{sec:headlines}) that are invisible to any single-layer approach.
 
 ## Scalability Measurement
+
 \label{sec:scalability}
 
 We evaluate the scalability of the Refinery-based formalization across three solver operations of increasing cost. *Consistency checking* (`check` in Refinery) verifies that the partial model specification has no internal contradictions. *Concretizability checking* (`check -k`) goes further: it determines whether a concrete model satisfying all constraints, including error predicates, exists — this is the operation that detects governance conflicts such as the income format unsatisfiability in \autoref{sec:headlines}. *Model generation* (`generate`) produces a fully resolved model instance, enumerating valid credential ecosystem designs for design space exploration. We measure all three to answer two research questions. **RQ1:** How does conflict detection (concretizability checking) scale with model size? **RQ2:** How does design space exploration (model generation) scale with model size? Consistency checking serves as a baseline: it should scale well but cannot detect cross-layer conflicts, because the partial model is internally consistent even when no valid concretization exists.
@@ -140,22 +148,21 @@ Table: Scalability measurements across three Refinery operations. *Consistency* 
 The constraint sensitivity experiment confirms that only G7, the conjunction of all three governance frameworks, yields unsatisfiability; all seven proper subsets are satisfiable. This validates the Headline 1 finding (\autoref{sec:headlines}): the income governance conflict requires the simultaneous imposition of eIDAS format mandates [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026], GDPR data minimization requirements [@gdpr], and W3C VCDM conformance [@manu_verifiable_2025]. No proper subset of these three sources produces a conflict. Typical credential ecosystems involve $\mathcal{O}(10)$ credential types; the measurements cover $N$ up to 30 credentials (272 graph nodes), exceeding the scale of current deployments. The contribution is the metamodel and its cross-layer constraint formalization; Refinery serves as the validation vehicle, and absolute performance numbers are tool-specific.
 
 ## Threats to Validity
+
 \label{sec:threats}
 
-##### Construct validity
+#### Construct validity
 
 The metamodel formalizes credential *schema design*, not the full credential lifecycle. Three VCDM 2.0 concept families fall outside this scope: proof mechanisms (cryptographic layer, orthogonal to structural modeling), verifiable presentations (runtime holder-verifier protocols), and credential status (issuance and revocation lifecycle). These boundaries constrain the class of expressible governance requirements to those that condition format assignment on structural or capability properties of credentials. Within this scope, five of eight eIDAS ARF constraints are classified as partially expressible (\autoref{sec:expressiveness}). The two root causes are a missing attestation-type subclass hierarchy (three constraints condition format eligibility on credential qualification level) and per-claim rather than per-format privacy annotation (two constraints require claim-level selective disclosure control). Both gaps are closable by metaclass extension without changing the constraint formalization approach, but the partially-expressible classification itself rests on our judgment of what constitutes a structural versus a runtime property.
 
-##### Internal validity
+#### Internal validity
 
 The running example (CSOK housing subsidy) was selected for structural completeness: it exhibits both a vertical governance conflict (Headline 1) and a horizontal expressiveness gap (Headline 2) within a single, independently documented domain. A randomly sampled credential ecosystem might expose neither or might expose interaction patterns not covered by the current anti-pattern catalog (\autoref{sec:anti-patterns}). The eight eIDAS ARF constraints were extracted from a specific version (ARF v2.7.3 [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026]); the constraint landscape may shift as the regulatory framework evolves. Format capability predicates depend on the characterization being both complete and current: an emerging format with novel capability combinations (e.g., BBS+ credentials with partial predicate support) would require extending the format class hierarchy and the derived propagation rules. The scalability instances grow by adding credentials with uniform structure (one property per credential, shared subject), which reflects the common multi-issuer credential ecosystem pattern but does not exercise deeper claim hierarchies or multi-subject credentials that may arise in domains such as healthcare or supply chain management.
 
-%% @TODO: Remove all FCA (Formal Concept Analysis) references from the paper — Martin decision to cut FCA framing. Check sections 04, 05, and any propagation rule comments. %%
-
-##### External validity
+#### External validity
 
 The evaluation operates within a single governance context: EU regulations (eIDAS 2.0 [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026], GDPR [@gdpr]) applied to Hungarian administrative procedures. The `GovernanceAnnotation` mechanism is designed to be governance-agnostic: new regulatory sources require adding annotation subclasses and error predicates, not restructuring the three-layer architecture. However, the evaluation demonstrates this only for the EU context. Governance traditions that impose constraints not reducible to format-capability requirements, such as organizational trust hierarchies or issuer accreditation rules, would require extending the metamodel beyond annotation markers. The single-domain scenario exercises a three-credential, single-subject ecosystem; domains with richer claim structures or multi-subject credentials may stress different metamodel elements. The intended user is a credential ecosystem designer who specifies the domain graph, credential decomposition, and governance requirements in a graph-based formalism; whether a domain expert without metamodeling experience could use the approach effectively remains untested.
 
-##### Conclusion validity
+#### Conclusion validity
 
 The scalability instances are synthetic: each adds a credential with one property to the preceding configuration. This linear, homogeneous growth pattern is representative of the common case where independent issuers each contribute one credential to a shared ecosystem, but it does not capture ecosystems where a few credentials carry many claims while others are minimal. We expect concretizability checking to scale near-linearly because the number of graph predicates grows proportionally with model size and the Refinery solver evaluates predicates incrementally; model generation is expected to scale superlinearly because the combinatorial format search space grows with the number of unresolved format assignments. The constraint sensitivity analysis partially compensates for the homogeneous scaling by varying governance complexity at fixed model size, but the power-set covers three governance frameworks only. Refinery-specific performance results establish that the formalization is computationally feasible at practical ecosystem scales; they do not generalize to other partial modeling tools. The contribution is the metamodel and its cross-layer constraints, with Refinery as the validation vehicle. Model definitions, constraint encodings, and all measurement artifacts are provided as supplementary material for independent reproduction.

@@ -72,7 +72,7 @@ class JwtVCCredentialSchema extends Formatted_Credential.
 
 Layer marker: `shadow pred PSM(e) <-> Formatted_Credential(e).`
 
-Currently minimal — format-specific constraints (capabilities, limitations) are planned for CSOK formalization (Pass 2) using Martin's FCA results.
+Currently minimal — format-specific constraints (capabilities, limitations) are planned for CSOK formalization (Pass 2) using format capability analysis results.
 
 ## Cross-layer enforcement
 

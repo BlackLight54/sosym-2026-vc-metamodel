@@ -13,7 +13,7 @@
 %   - Credential.format: single abstract containment [1] (was per-format [1]x3)
 %   - New format classes: SdJwtVcSchema, MdocSchema
 %   - Format capability predicates (derived from class membership)
-%   - FCA-derived propagation rules (narrow format design space)
+%   - Format capability propagation rules (narrow format design space)
 %   - GovernanceAnnotation marker classes (generic governance encoding)
 % ============================================================================
 
@@ -204,7 +204,7 @@ pred conforms_vcdm(Formatted_Credential f) <->
     JwtVCCredentialSchema(f);
     MdocSchema(f).
 
-% ZKP support (FCA Group 1: indistinguishable with predicate_proofs)
+% ZKP support (co-occurs with predicate_proofs)
 pred supports_zkp(Formatted_Credential f) <->
     AnoncredsCredentialSchema(f).
 
@@ -214,51 +214,51 @@ pred supports_offline_verification(Formatted_Credential f) <->
     JsonLdCredentialSchema(f);
     MdocSchema(f).
 
-% Multi-credential proof support (FCA Group 1: co-occurs with predicate_proofs)
+% Multi-credential proof support (co-occurs with predicate_proofs)
 pred supports_multi_credential_proof(Formatted_Credential f) <->
     AnoncredsCredentialSchema(f).
 
 
-% --- FCA-derived propagation rules ---
-% Source: archive/fca_export.md — Credential Formats formal context
+% --- Format capability propagation rules ---
+% Source: archive/fca_export.md — Credential Formats context
 % Pattern: negative elimination (same as prop_t/prop_s)
 
-% FCA-1: predicate_proofs -> zkp (indistinguishable group, 100%)
+% predicate_proofs -> zkp (indistinguishable group, 100%)
 % Formats without ZKP cannot provide predicate proofs.
 % Eliminates SD-JWT-VC, JWT-VC, mdoc when predicate proofs needed.
-propagation rule fca_predicate_not_sdjwt(Formatted_Credential f) <->
+propagation rule cap_predicate_not_sdjwt(Formatted_Credential f) <->
     must supports_predicate_proof(f),
     may SdJwtVcSchema(f)
 ==>
     !SdJwtVcSchema(f).
 
-propagation rule fca_predicate_not_jwt(Formatted_Credential f) <->
+propagation rule cap_predicate_not_jwt(Formatted_Credential f) <->
     must supports_predicate_proof(f),
     may JwtVCCredentialSchema(f)
 ==>
     !JwtVCCredentialSchema(f).
 
-propagation rule fca_predicate_not_mdoc(Formatted_Credential f) <->
+propagation rule cap_predicate_not_mdoc(Formatted_Credential f) <->
     must supports_predicate_proof(f),
     may MdocSchema(f)
 ==>
     !MdocSchema(f).
 
-propagation rule fca_predicate_not_jsonld(Formatted_Credential f) <->
+propagation rule cap_predicate_not_jsonld(Formatted_Credential f) <->
     must supports_predicate_proof(f),
     may JsonLdCredentialSchema(f)
 ==>
     !JsonLdCredentialSchema(f).
 
-% FCA-3: offline_verification -> selective_disclosure (67%)
+% offline_verification -> selective_disclosure (67%)
 % Formats lacking offline verification are eliminated when it is required.
-propagation rule fca_offline_not_jwt(Formatted_Credential f) <->
+propagation rule cap_offline_not_jwt(Formatted_Credential f) <->
     must supports_offline_verification(f),
     may JwtVCCredentialSchema(f)
 ==>
     !JwtVCCredentialSchema(f).
 
-propagation rule fca_offline_not_sdjwt(Formatted_Credential f) <->
+propagation rule cap_offline_not_sdjwt(Formatted_Credential f) <->
     must supports_offline_verification(f),
     may SdJwtVcSchema(f)
 ==>
