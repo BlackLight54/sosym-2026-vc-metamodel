@@ -59,6 +59,7 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 ### Infrastructure
 | Skill | Trigger | What it does |
 |-------|---------|-------------|
+| `pandoc_convert` | "Convert to LaTeX" / "Run pandoc" | Convert Markdown sections to LaTeX via pandoc + Lua filters |
 | `overleaf_push` | "Push to Overleaf" | Build LaTeX from Markdown, push to Overleaf git remote |
 
 ## Usage

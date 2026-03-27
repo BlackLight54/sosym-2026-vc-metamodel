@@ -11,35 +11,12 @@
 ## Credential Ecosystem Design and Formalization
 \label{sec:rw-credential}
 
-%% @CITE: W3C VCDM 2.0 working group %%
-%% @CITE: ISO/IEC 18013-5 (mDL) %%
-%% @CITE: Hyperledger AnonCreds specification %%
-%% @CITE: EU Architecture Reference Framework (ARF) %%
-%% @CITE: Braun & Kafer 2025 — "RDF-Based Semantics for Selective Disclosure and Zero-Knowledge Proofs on Verifiable Credentials" — Springer LNCS (DOI: 10.1007/978-3-031-94575-5_21) %%
-%% @CITE: EuroS&PW 2022 — Yamamoto, Suga, Sako — "Formalising Linked-Data based Verifiable Credentials for Selective Disclosure" (DOI: 10.1109/eurospw55150.2022.00013) %%
-%% @CITE: Braun, Horne, Kafer, Mauw 2024 — "SSI, from Specifications to Protocol? Formally Verify Security!" — WWW 2024 (DOI: 10.1145/3589334.3645426) %%
-%% @CITE: Tith & Colin 2025 — "A Trust Policy Meta-Model for Trustworthy and Interoperability of Digital Identity Systems" — Procedia CS %%
-%% @CITE: Turkanovic, Kersic et al. 2025 — "From Model to Mechanism: Enforcing Delegated Authority in SSI with Language-Based Security" — Mathematics (DOI: 10.3390/math13182971) %%
-%% @CITE: Garcia-Rodriguez et al. 2021 — "Towards a standardized model for privacy-preserving Verifiable Credentials" — ARES (DOI: 10.1145/3465481.3469204) %%
-%% @CITE: Davie, Gisolfi et al. 2019 — "The Trust over IP Stack" — IEEE Comm. Standards %%
-%% @CITE: Naghmouchi & Laurent 2025 — "A Systematic Review and Layered Framework for Privacy-by-Design in SSI" — arXiv %%
-%% @CITE: Mazzocca et al. 2025 — "A Survey on Decentralized Identifiers and Verifiable Credentials" — IEEE COMST (DOI: 10.1109/COMST.2025.3543197) %%
-%% @CITE: Ding & Sato 2023 — "Model-Driven Security Analysis of Self-Sovereign Identity Systems" — IEEE TrustCom 2023 [VERIFY] %%
-%% @CITE: Schardong & Custodio 2024 — "RAF Framework for Understanding Digital Identity Models" — ER 2024 [VERIFY] %%
-
 Verifiable credential schema design is currently guided by specifications that define credential structure at individual abstraction layers: the W3C Verifiable Credentials Data Model 2.0 [@manu_verifiable_2025] and EU Architecture Reference Framework [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026] prescribe issuance and presentation flows, while AnonCreds [@curran2022anoncreds] and ISO mDL [@_mobile_2021] define format-specific encoding and proof mechanisms. [Mazzocca et al. [@mazzocca_survey_2025] provide a comprehensive survey of this landscape.]{.cutcandidate reason="supplementary survey reference — can be removed for budget"} None of these specifications provides a formal mechanism for checking constraints that span multiple layers. Where formal methods have been applied, they target individual layers: Braun and Käfer [@curry_rdf-based_2025] define RDF-based semantics for selective disclosure and zero-knowledge proofs on verifiable credentials, Yamamoto et al. [@yamamoto_formalising_2022] formalize selective disclosure specifically for linked-data credentials, and Braun et al. [@braun_ssi_2024] verify SSI protocol security properties using ProVerif. Each formalization targets protocol-level security or single-format semantics — none operates across the boundary between domain-level claim semantics and format-specific representation capabilities.
 
 Complementary conceptual models address individual concerns in credential system design. Tith and Colin [@tith_trust_2025] propose a trust policy meta-model that captures how identity systems establish and evaluate trust across organizational boundaries. Turkanović et al. [@turkanovic_model_2025] formalize delegated authority enforcement, modeling how credential issuance rights propagate through delegation chains. The Trust over IP stack [@davie_trust_2019] organizes the credential ecosystem into informal governance layers, and Naghmouchi and Laurent [@naghmouchi_systematic_2025] systematize privacy-by-design principles for SSI. [Garcia-Rodriguez et al. [@garcia-rodriguez_towards_2021] propose a standardized model for privacy-preserving credentials, and Schardong and Custódio [@maass_role-artifact-function_2025] develop a framework for understanding digital identity models.]{.cutcandidate reason="supplementary conceptual models — can be removed for budget"} Each of these works addresses a single concern — trust policy, delegation, governance layering, or privacy — but none formalizes cross-layer constraints spanning domain semantics, credential structure, and format-specific representation simultaneously.
 
 ## Model-Driven Engineering for Security and SSI
 \label{sec:rw-mde}
-
-%% @CITE: UMLsec — Jürjens, UML 2002 / book 2004 %%
-%% @CITE: SecureUML — Basin, Doser, Lodderstedt, UML 2002 / ACM TOSEM 2006 %%
-%% @CITE: ChorSSI — Cippitelli, Marcelletti, Morichetta 2023, EMISA Journal / Springer %%
-%% @CITE: Pattiyanon, Aoki, Ishii 2022 — "A Method for Detecting Common Weaknesses in SSI Systems Using DSMs and Knowledge Graph" — MODELSWARD 2022 %%
-%% @CITE: Barclay et al. 2020 — "Towards a Modelling Framework for SSI Systems" — arXiv %%
-%% @CITE: King, De Vos et al. 2017 — "Automated multi-level governance compliance checking" — AAMAS Journal %%
 
 Model-driven security engineering has established metamodel-based approaches to security properties of software architectures. UMLsec [@noauthor_secure_2005] annotates UML models with confidentiality and authentication constraints, enabling formal verification of security properties during design. SecureUML [@basin_model_2006] integrates role-based access control specifications into class models, generating enforcement infrastructure from the model. Neither targets credential schema design — both operate on software architecture elements rather than the domain-specific structure of verifiable credentials.
 
@@ -50,16 +27,9 @@ Model-driven engineering has thus been applied to SSI for choreography, security
 ## Multi-Level Modeling and Graph-Based Design Space Exploration
 \label{sec:rw-multilevel}
 
-%% @CITE: Atkinson & Kühne — "The Essence of Multilevel Metamodeling" UML 2001; "Reducing accidental complexity" SoSyM 2008 %%
-%% @CITE: de Lara & Guerra 2010 — "Deep meta-modelling with MetaDepth" LNCS %%
-%% @CITE: Diskin et al. — "Specifying overlaps of heterogeneous models for global consistency checking" MODELS 2010 %%
-%% @CITE: Refinery — Marussy et al., "Refinery: Graph Solver as a Service" ICSE 2024; Semerath & Varró, SoSyM 2017 (third person) %%
-%% @CITE: Alloy — Jackson, "Software Abstractions" MIT Press 2012 %%
-%% @CITE: CSCS 2024 short paper — third person, double-blind %%
-
 Multi-level metamodeling, as established by Atkinson and Kühne [@goos_essence_2001; @atkinson_reducing_2008], eliminates accidental complexity in deep classification scenarios by allowing model elements to span more than two metalevels; de Lara and Guerra [@hutchison_deep_2010] implement these principles with deep instantiation in MetaDepth. Diskin et al. [@dingel_specifying_2011] formalize consistency checking across heterogeneous model views — a problem this work extends by adding independently governed constraint sources as a consistency dimension.
 
-The present metamodel relies on the Refinery partial graph modeling framework [@marussy_refinery_2024] as its solver infrastructure. Refinery generates diverse model instances that satisfy structural and relational constraints expressed as graph predicates, and its three-valued partial model semantics enable reasoning over designs that are still incomplete — a property essential for credential ecosystems where not all schema elements are known at design time. A prior short paper %% @CITE: CSCS 2024 short paper %% applied Refinery to credential schema validation with a single-layer prototype; the present work extends this to a three-layer metamodel with formalized cross-layer constraints.
+The present metamodel relies on the Refinery partial graph modeling framework [@marussy_refinery_2024] as its solver infrastructure. Refinery generates diverse model instances that satisfy structural and relational constraints expressed as graph predicates, and its three-valued partial model semantics enable reasoning over designs that are still incomplete — a property essential for credential ecosystems where not all schema elements are known at design time. A prior short paper [@farkas_prolog-based_2024] applied Refinery to credential schema validation with a single-layer prototype; the present work extends this to a three-layer metamodel with formalized cross-layer constraints.
 
 Unlike standard multi-level modeling applications where layers represent successive instantiation and constraints take the form of potency annotations, the three layers in the present metamodel — domain concepts, credential structure, and format-specific representation — represent independently governed concern spaces. They are connected by coverage and capability constraints formalized as graph predicates over partial models (\ref{sec:cross-layer}), not by instantiation relationships. The contribution is therefore the formalization of governance constraints across independently governed layers, not the layering technique itself.
 

@@ -16,7 +16,7 @@
 
 %% @TODO: E1 — VCDM coverage as soundness/completeness characterization. Soundness: every metamodel element traces to a VCDM concept. Completeness: which VCDM concepts covered vs. excluded. Explicit exclusions with rationale: proof mechanisms (cryptographic, not structural), verifiable presentations (runtime, not design-time), status/revocation (lifecycle, not schema). Brief coverage list by layer. Frame as "how far we formalized," not validation metric. [Binding Claim #5]. Length: 1 paragraph. %%
 
-%% @CITE: W3C VCDM 2.0 specification — full concept list %%
+%% @TODO: E1 coverage paragraph should cite [@manu_verifiable_2025] for VCDM 2.0 concept list %%
 %% @FIGURE: fig_coverage_table | Coverage mapping table: VCDM 2.0 concept → metamodel element → layer. Mark in-scope / out-of-scope. %%
 
 ### Constraint Expressiveness
@@ -24,9 +24,7 @@
 
 %% @TODO: E4/E5 — Constraint expressiveness method and results. 1 paragraph methodology: constraints collected from W3C VCDM 2.0, eIDAS ARF, community specs, classified as expressible/partial/no. Table: ID × constraint × source × expressible × predicate. Feature ARF-C1 (dual format mandate), ARF-C4 (proximity→mdoc), ARF-C7 (encoding-independent attributes). Plus paper-internal C1–C3 (structural), C5–C7 (governance). 1 paragraph on partially expressible ARF constraints as scope boundaries. Data source: archive/arf_5_3_4_gap_analysis.md. [Binding Claim #6 — HIGH RISK]. Length: 2 paragraphs + table. %%
 
-%% @CITE: W3C VCDM 2.0 — normative requirements %%
-%% @CITE: eIDAS 2.0 implementing regulation %%
-%% @CITE: EU Architecture Reference Framework (ARF) v2.7.3 %%
+%% @TODO: E4/E5 expressiveness paragraph should cite [@manu_verifiable_2025], [@eidas2], [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026] %%
 
 | ID | Constraint | Source | Expressible | Predicate / Mechanism |
 |----|-----------|--------|-------------|----------------------|
@@ -46,7 +44,7 @@ At the credential schema layer, IncomeCred is well-formed: $\text{CS\_Applicant}
 At the format-specific layer, three governance sources impose requirements on IncomeCred:
 
 1. **eIDAS ARF** (normative, SHALL): $\text{format}(\text{IncomeCred}) \in \{\text{SD-JWT-VC}, \text{mdoc}\}$ — neither supports predicate proofs [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026].
-2. **GDPR Art. 5(1)(c)** (operationally binding): the income threshold check requires disclosing only whether $\text{monthly\_income} \geq \text{threshold}$, not the exact value. If data minimization is to be achieved through technical means at the credential layer, this requires predicate proof capability %% @CITE: GDPR Art. 5(1)(c) %%. The Hungarian data protection authority has enforced this interpretation in the housing subsidy context specifically.^[NAIH fined a bank 35M HUF for excessive data collection during CSOK applications.]
+2. **GDPR Art. 5(1)(c)** (operationally binding): the income threshold check requires disclosing only whether $\text{monthly\_income} \geq \text{threshold}$, not the exact value. If data minimization is to be achieved through technical means at the credential layer, this requires predicate proof capability [@gdpr]. The Hungarian data protection authority has enforced this interpretation in the housing subsidy context specifically.^[NAIH fined a bank 35M HUF for excessive data collection during CSOK applications.]
 3. **W3C VCDM 2.0**: the credential format must conform to the VCDM data model — AnonCreds v1 does not (no `@context`, no `credentialSubject` structure, CL signatures not a registered proof type) [@manu_verifiable_2025] [@curran2022anoncreds].
 
 No format satisfies all three requirements. SD-JWT-VC satisfies (1) and (3) but not (2). AnonCreds satisfies (2) but not (1) or (3). The configuration is unsatisfiable: constraints C5, C6, and C7 cannot be simultaneously satisfied on IncomeCred.
