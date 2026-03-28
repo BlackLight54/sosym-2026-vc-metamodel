@@ -2,7 +2,7 @@
 id: "O-4VAL"
 short: "four-valued-fix"
 title: "Fix three-valued → four-valued Refinery interpretation throughout paper"
-status: pending
+status: done
 priority: high
 depends_on: []
 binding_claims: [3]

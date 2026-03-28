@@ -5,7 +5,7 @@
     "hyperfine_version": "hyperfine 1.20.0",
     "cpu": "AMD Ryzen 9 7950X3D 16-Core Processor          ",
     "ram_gb": "95.6",
-    "os": "Microsoft Windows 11 Education 10.0.26200",
+    "os": "Microsoft Windows 11 10.0.26200",
     "timestamp": "2026-03-28T17:14:14Z",
     "runs_per_benchmark": 10,
     "warmup_runs": 1

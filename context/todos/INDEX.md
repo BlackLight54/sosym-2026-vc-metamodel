@@ -23,7 +23,7 @@
 | ID | Title | Binding | Status | Assigned |
 |----|-------|---------|--------|----------|
 | O-MODES | [Usage modes (Sec 03 + 04)](o-modes_usage_modes.md) | #4 | pending | claude |
-| O-REFBG | [Refinery BG placeholder](o-refinery-bg.md) | #3,4 | pending | oszkár |
+| O-REFBG | [Refinery BG — code examples + missing concepts](o-refinery-bg.md) | #3,4 | pending | oszkár |
 | O-4VAL | [Fix three→four-valued throughout](o-4val.md) | #3 | pending | oszkár |
 
 ## Writing fixes (cross-cutting)
@@ -50,7 +50,7 @@
 
 | ID | Title | Status | Assigned |
 |----|-------|--------|----------|
-| O-GOV | [Governance research beyond ARF](o-gov_gov_research.md) | pending | imre |
+| O-GOV | [Governance research beyond ARF](../archive/completed_todos/o-gov_gov_research.md) | deferred → future work | imre |
 | O-ANON | [Anonymize supplementary](o-anon_anonymize.md) | pending | oszkár |
 | O-S03 | [Sec 03 polish](o-s03_sec03_review.md) | pending | martin |
 

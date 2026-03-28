@@ -53,6 +53,15 @@ for md in "$SECTIONS_DIR"/[0-9]*.md; do
     converted=$((converted + 1))
 done
 
+# --- Convert teaser figure (non-numbered source) ---
+if [ -f "$SECTIONS_DIR/teaser.md" ]; then
+    echo "  $SECTIONS_DIR/teaser.md → $OUT_DIR/teaser.tex"
+    pandoc "$SECTIONS_DIR/teaser.md" \
+        --defaults "$DEFAULTS" \
+        --metadata mode="$MODE" \
+        -o "$OUT_DIR/teaser.tex"
+fi
+
 echo ""
 echo "Converted $converted section(s)."
 

@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "anthropic.claude-code",
+        "ms-azuretools.vscode-containers",
+        "ms-azuretools.vscode-docker",
+        "stephanvs.dot",
+        "stephen-li.inkdown-live-editor",
+        "tintinweb.graphviz-interactive-preview",
+        "james-yu.latex-workshop",
+        "iamhyc.overleaf-workshop",
+        "redhat.vscode-yaml"
+    ]
+}

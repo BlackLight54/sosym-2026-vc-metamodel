@@ -1,11 +1,9 @@
 {
     // === Environment ===
-    // Ensure pandoc and MiKTeX are on PATH for all terminal/task invocations
     "terminal.integrated.env.windows": {
-        "PATH": "${env:PATH};C:\\Users\\blacklight\\AppData\\Local\\Pandoc;C:\\Users\\blacklight\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64"
+        "PATH": "${env:PATH};${env:LOCALAPPDATA}\\Pandoc;${env:LOCALAPPDATA}\\Programs\\MiKTeX\\miktex\\bin\\x64"
     },
     // === LaTeX Workshop ===
-    // Root document
     "latex-workshop.latex.rootFile": "pandoc/main.tex",
     // Custom tools
     "latex-workshop.latex.tools": [
@@ -15,7 +13,10 @@
             "args": [
                 "build.sh",
                 "draft"
-            ]
+            ],
+            "env": {
+                "PATH": "${env:PATH};${env:LOCALAPPDATA}\\Pandoc;${env:LOCALAPPDATA}\\Programs\\MiKTeX\\miktex\\bin\\x64"
+            }
         },
         {
             "name": "latexmk",
@@ -24,9 +25,11 @@
                 "-pdf",
                 "-synctex=1",
                 "-interaction=nonstopmode",
-                "-outdir=build",
                 "pandoc/main.tex"
-            ]
+            ],
+            "env": {
+                "PATH": "${env:PATH};${env:LOCALAPPDATA}\\Programs\\MiKTeX\\miktex\\bin\\x64"
+            }
         }
     ],
     // Recipes — pandoc first, then latexmk
@@ -47,14 +50,10 @@
     ],
     // PDF viewer — use VS Code tab
     "latex-workshop.view.pdf.viewer": "tab",
-    // Point viewer to the build output
     "latex-workshop.latex.outDir": "build",
-    // Auto-build on .tex save (not .md — use Ctrl+Alt+B for that)
+    // Auto-build on .tex save — .md→.tex handled by watch task
     "latex-workshop.latex.autoBuild.run": "onSave",
-    // Don't auto-clean build artifacts
-    "latex-workshop.latex.autoClean.run": "never",
     // === Editor Associations ===
-    // Open Markdown files with Inkdown live editor by default
     "workbench.editorAssociations": {
         "*.md": "inkdown.editor",
         "*.copilotmd": "vscode.markdown.preview.editor",

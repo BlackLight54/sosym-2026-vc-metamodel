@@ -2,13 +2,6 @@
 
 \label{sec:introduction}
 
-\begin{figure*}
-\centering
-\fbox{\parbox{0.85\textwidth}{\centering\vspace{2cm}\small Teaser: Unified housing subsidy scenario across three metamodel layers (DCL / CSL / FSL). Three horizontal bands showing domain facts, credential packaging, and format assignments with governance conflict zone on income credential and cross-credential predicate gap.\vspace{2cm}}}
-\caption{A housing subsidy scenario across three metamodel layers. Domain facts at the domain concept layer are grouped into credentials with aligned subjects at the credential schema layer. At the format-specific layer, eIDAS format mandates and GDPR data minimization impose contradictory requirements on the income credential; cross-credential predicates lack privacy-preserving enforcement entirely.}
-\label{fig:teaser}
-\end{figure*}
-
 Emerging digital credential ecosystems allow persons and organizations to receive, hold, and selectively present cryptographically verifiable claims \citep{sporny_verifiable_2025}. Such ecosystems are deployed under diverse governance frameworks --- from government-regulated EU Digital Identity Wallets \citep{eidas2} to community-governed decentralized identity systems \citep{curran2022anoncreds}. Designing these ecosystems requires satisfying constraints that span multiple abstraction layers --- from domain-level claim properties through credential schema structure to format-specific privacy capabilities --- yet no multi-layer formalization captures the cross-layer constraints spanning domain semantics, credential structure, and format-specific representation.
 
 Constraints from W3C standards, EU implementing regulations, and community design guidelines interact across abstraction layers, and their combined effect on a single credential ecosystem design is not predictable from any individual governance source \citep{mazzocca_survey_2025}. For example, the eIDAS Architecture Reference Framework mandates a specific credential format for government attestations; GDPR requires that privacy-sensitive claims disclose only the minimum necessary information; neither regulation anticipates the other, yet their joint effect on a single income credential may be unsatisfiable. Unlike hierarchical requirement systems in safety-critical domains, these governance sources are independent peers whose design goals may be formally irreconcilable.

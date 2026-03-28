@@ -2,7 +2,7 @@
 id: O-GOV
 short: "gov-research"
 title: "Research governance frameworks beyond eIDAS ARF"
-status: pending
+status: done
 depends_on: []
 binding_claims: [6]
 target: sections/05_evaluation.md
@@ -32,3 +32,7 @@ Currently the expressiveness table evaluates only eIDAS ARF constraints. A revie
 - If the survey finds nothing useful: document that and note in threats to validity
 
 **Assigned to Imre.** Claude can help format findings into the paper once Imre provides them.
+
+## Resolution
+
+Deferred to future work. No time before deadline. The conclusion already covers this direction: "the constraint catalog should be broadened beyond EU regulatory sources to include national eIDAS implementations and sector-specific governance" (Sec 7, P4).

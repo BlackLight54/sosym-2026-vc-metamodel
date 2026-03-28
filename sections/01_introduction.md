@@ -6,16 +6,8 @@ dependencies: []
 ---
 
 # Introduction
-\label{sec:introduction}
 
-```{=latex}
-\begin{figure*}
-\centering
-\fbox{\parbox{0.85\textwidth}{\centering\vspace{2cm}\small Teaser: Unified housing subsidy scenario across three metamodel layers (DCL / CSL / FSL). Three horizontal bands showing domain facts, credential packaging, and format assignments with governance conflict zone on income credential and cross-credential predicate gap.\vspace{2cm}}}
-\caption{A housing subsidy scenario across three metamodel layers. Domain facts at the domain concept layer are grouped into credentials with aligned subjects at the credential schema layer. At the format-specific layer, eIDAS format mandates and GDPR data minimization impose contradictory requirements on the income credential; cross-credential predicates lack privacy-preserving enforcement entirely.}
-\label{fig:teaser}
-\end{figure*}
-```
+\label{sec:introduction}
 
 Emerging digital credential ecosystems allow persons and organizations to receive, hold, and selectively present cryptographically verifiable claims [@sporny_verifiable_2025]. Such ecosystems are deployed under diverse governance frameworks — from government-regulated EU Digital Identity Wallets [@eidas2] to community-governed decentralized identity systems [@curran2022anoncreds]. Designing these ecosystems requires satisfying constraints that span multiple abstraction layers — from domain-level claim properties through credential schema structure to format-specific privacy capabilities — yet no multi-layer formalization captures the cross-layer constraints spanning domain semantics, credential structure, and format-specific representation.
 
