@@ -30,7 +30,7 @@ Run `skills/review_claim_evidence_audit` first. The audit's binding claim status
 
 For each section file:
 - Read the file. Classify: scaffold only / partial draft / complete draft / needs revision.
-- Count unresolved markers (@TODO, @SCAFFOLD, @CITE, @FORMAL, @FIGURE).
+- Count unresolved annotation markers (`.todo`, `.scaffold`, `.cite`, `.formal`, `.figure` divs/spans).
 - Note which binding claims this section must deliver (from the abstract contract).
 
 ### 2. Design the task graph

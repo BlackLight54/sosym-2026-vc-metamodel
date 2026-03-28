@@ -2,7 +2,7 @@
 id: "M10"
 short: "meta-to-yaml"
 title: "Move @META markers to YAML frontmatter in sections"
-status: pending
+status: done
 priority: high
 depends_on: ["M12"]
 binding_claims: []

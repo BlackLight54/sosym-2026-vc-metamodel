@@ -1,7 +1,9 @@
-%% @META: Section: Background %%
-%% @META: Budget: 1.25 pages (~7 paragraphs, 3 subsections) %%
-%% @META: Goal: Establish the three conceptual pillars the reader needs. Nothing more. %%
-%% @META: Dependencies: None. %%
+---
+section: Background
+budget: "1.25 pages (~7 paragraphs, 3 subsections)"
+goal: "Establish the three conceptual pillars the reader needs. Nothing more."
+dependencies: []
+---
 
 # Background
 \label{sec:background}
@@ -24,7 +26,9 @@ When a modeling problem spans multiple abstraction layers, each layer defines it
 
 Layer definitions in \autoref{sec:approach} use Ecore-style class diagrams with typed references and containment hierarchies as the metamodeling notation. Layer instances are *partial models*: model elements may have definite (must), absent (must not), or open (unknown) status for any reference or class membership, enabling reasoning over specifications where not all design decisions have been made. Cross-layer trace relationships are formalized as typed references between partial models at adjacent layers, capturing the correspondence between a domain concept and the credential-layer claims that represent it.
 
-%% @TODO: Review B5 with Oscar — verify partial model and trace characterization matches Refinery semantics %%
+::: {.todo}
+Review B5 with Oscar — verify partial model and trace characterization matches Refinery semantics
+:::
 
 ## Partial Graph Modeling with Refinery
 \label{sec:refinery}

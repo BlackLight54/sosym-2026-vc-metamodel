@@ -148,6 +148,7 @@ Ordered by impact-per-hour given ~1.5 day deadline.
 **Constraints:** No argument changes. Purely mechanical fixes.
 
 **Instructions:**
+
 1. In `sections/05_evaluation.md` line 79: Replace `\citep{rosenberg_zk-creds_2023}` with `[@rosenberg_zk-creds_2023]`.
 2. In `sections/06_related_work.md`: Rewrite self-citation to clean third person: "A prior short paper [@farkas_prolog-based_2024] applied Refinery to credential schema validation with a single-layer prototype. The present metamodel extends that approach to three layers with formalized cross-layer constraints."
 3. Strip all @TODO markers that would render as `\todo{}` in PDF. Specifically remove: Sec 01 lines 13, 17; Sec 02 line 27; Sec 04 lines 17, 23, 113, 117; Sec 05 line 62. For Sec 04 line 25 (acyclicity): soften the prose claim to "connected information graph with tree-structured containment" and remove the @TODO.
@@ -167,6 +168,7 @@ Ordered by impact-per-hour given ~1.5 day deadline.
 **Constraints:** Preserve all 10 binding claims. Stay within 1.25-page intro budget. No LLM tells. Match existing register.
 
 **Instructions:**
+
 1. **Abstract "no existing tool" (T05):** Replace with "yet no formal framework captures their cross-layer interactions or checks their joint consistency."
 2. **Abstract "prerequisite" (T06):** Replace final sentence with: "These results demonstrate that multi-layer formal modeling reveals credential ecosystem design errors invisible to single-layer approaches."
 3. **Abstract "information graphs" (T27):** Replace "as information graphs" with "as typed graph structures" or drop the prepositional phrase.
@@ -190,6 +192,7 @@ Ordered by impact-per-hour given ~1.5 day deadline.
 **Constraints:** No code listings. Obsidian Markdown + Mathpix math. Do not exceed ~3.0 page budget for full approach section. Net growth <= 10 lines.
 
 **Instructions:**
+
 1. **DCL `statement` predicate (T13):** Define compositionally: $\text{statement}(s, p, v) \iff \text{property}(s, p) \wedge \text{value}(p, v)$. State $s \neq v$ as separate constraint cross-referencing `no_self_loop`.
 2. **Subject inference (T14):** Add semi-formal: $\forall e : \text{Entity}.\ (\nexists p : \text{Prop}.\ \text{value}(p, e)) \implies e : \text{Subject}$.
 3. **CSL trace mapping (T15):** Distinguish containment (Prop owns Claim) from trace reference (CredEntity::trace -> Entity). State multiplicities.
@@ -215,6 +218,7 @@ Ordered by impact-per-hour given ~1.5 day deadline.
 **Constraints:** Do not touch Sec 5.2 (scalability) — that requires measurement data. No code listings.
 
 **Instructions:**
+
 1. **Headline 1 @TODO (line 62):** Replace with forward reference to sensitivity experiment: "The constraint sensitivity experiment (\autoref{tab:sensitivity}) formally confirms this: configuration G7 is the only unsatisfiable configuration among all $2^3$ subsets."
 2. **NAIH trimming (T39):** Compress ~30%. Keep: bank fined, pregnancy booklet example, NAIH finding. Cut medical detail.
 3. **SNARK row (T40):** Move from main table to footnote.
@@ -236,6 +240,7 @@ Ordered by impact-per-hour given ~1.5 day deadline.
 **Constraints:** Related work budget: 0.75 pages. Background budget: 1.25 pages. Double-blind compliance.
 
 **Instructions for Sec 06:**
+
 1. **Cut both .cutcandidate spans** (Mazzocca survey, Garcia-Rodriguez + Schardong) to free space.
 2. **Add partial model citations (T11):** Cite Chechik and Devereux (2003), Famelis et al. (2012). Differentiate: partiality here = incomplete credential designs, not behavioral specs or requirements.
 3. **Add Alloy/OCL differentiation (T12):** Alloy = bounded model finding without partial model semantics. OCL on multi-level metamodels = fully instantiated models, no three-valued evaluation.
@@ -261,6 +266,7 @@ Ordered by impact-per-hour given ~1.5 day deadline.
 **Prerequisite:** Martin has run `./models/evaluation/run_measurements.sh all` and results exist.
 
 **Instructions:**
+
 1. Read all measurement JSON files. Extract mean +/- stddev per configuration.
 2. Fill scalability table (lines 129-144): all TBD cells with actual data. Mark Generation as "---" for UNSAT rows.
 3. Fill sensitivity table (lines 156-165): SAT/UNSAT per G0-G7 configuration.
@@ -282,6 +288,7 @@ Ordered by impact-per-hour given ~1.5 day deadline.
 **Constraints:** Minimal edits. Do not restructure.
 
 **Instructions for Sec 03:**
+
 1. **CSOK naming (T34):** Change "a government housing subsidy" to "a family housing subsidy" in first sentence.
 2. **Usage modes precision (T26):** Add operational parentheticals per mode: consistency checking = all error predicates false; error identification = at least one satisfied with binding; exploration = generates completions or proves none exists.
 3. **Gap claim tightening (T10):** Replace "no existing tool or methodology" with survey-backed scoped claim matching C5 correction. Merge with survey citations. Drop "to the best of our knowledge."

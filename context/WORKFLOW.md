@@ -62,7 +62,7 @@ What I need: [foundational work / empirical evidence / definition origin]
 ```
 
 ### Resolve citation markers (batch)
-**Skill:** `skills/draft_bibliography` — scans all `%% @CITE: %%` markers, resolves to BibTeX keys where possible, identifies papers to add to Zotero, and generates research prompts for unresolved markers. Run before `skills/project_overleaf_push` to clear citation debt.
+**Skill:** `skills/draft_bibliography` — scans all `.cite` annotations, resolves to BibTeX keys where possible, identifies papers to add to Zotero, and generates research prompts for unresolved markers. Run before `skills/project_overleaf_push` to clear citation debt.
 
 Pipeline: Zotero → Overleaf Zotero import → `.bib`. This skill resolves markers against known references; Martin adds missing papers to Zotero and re-syncs in Overleaf.
 
@@ -99,7 +99,7 @@ Dependencies: [what must exist first]
 Constraints: [budget sense, audience, terminology]
 ```
 **Plan mode:** Before writing, Claude presents a plan: what each paragraph will do, what claims it will make, what evidence it will reference. Martin approves or adjusts, then Claude drafts.
-**After:** Update TODO.md. Flag claims needing citations (`%% @CITE: description %%`) or formal support (`%% @FORMAL: description %%`).
+**After:** Update TODO.md. Flag claims needing citations (`[description]{.cite}`) or formal support (`[description]{.formal}`).
 
 ### Revise a section
 **Prompt template for Claude Code:**
@@ -112,7 +112,7 @@ Constraints: [what must not change, terminology to preserve]
 **After:** If significant text removed, move to `archive/` with recovery context. Update TODO.md.
 
 ### Cut to page budget
-**Skill:** `skills/plan_budget_cut` — measures actual page usage per section against `@META: Budget` allocations. Diagnostic mode: budget tree with over/under status. Prescriptive mode: phased cut plan ranked by argument damage, with `@CUT-START`/`@CUT-END` marker candidates.
+**Skill:** `skills/plan_budget_cut` — measures actual page usage per section against frontmatter `budget:` allocations. Diagnostic mode: budget tree with over/under status. Prescriptive mode: phased cut plan ranked by argument damage, with cut-candidate annotations.
 
 For single-section prose trimming without the full diagnostic, use the prompt template:
 ```
@@ -249,7 +249,7 @@ Add an entry to DECISIONS.md with date, decision, rationale, affected sections, 
 **Skill:** `skills/review_prior_decision_audit` — surfaces cross-cutting decisions from DECISIONS.md and checks whether they still serve the paper. Run every 3–5 sessions, after major sections are drafted, or when something feels off.
 
 ### Marker hygiene
-Scan section files for stale or misformatted markers (`%% @CITE %%`, `%% @TODO %%`, `%% @FORMAL %%`, `%% @FIGURE %%`). Resolve what can be resolved, remove markers for completed items, and ensure remaining markers have actionable descriptions. Run periodically during writing and before `skills/review_pre_submission_check`.
+Scan section files for stale or misformatted annotations (`.cite`, `.todo`, `.formal`, `.figure` divs/spans). Resolve what can be resolved, remove annotations for completed items, and ensure remaining annotations have actionable descriptions. Run periodically during writing and before `skills/review_pre_submission_check`.
 
 ### Session start
 

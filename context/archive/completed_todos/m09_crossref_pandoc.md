@@ -2,7 +2,7 @@
 id: "M09"
 short: "crossref-pandoc"
 title: "Set up pandoc-crossref for \\autoref references"
-status: pending
+status: done
 priority: medium
 depends_on: ["M12"]
 binding_claims: []

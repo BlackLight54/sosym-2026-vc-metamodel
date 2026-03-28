@@ -1,10 +1,10 @@
 ---
-description: Resolve @CITE markers to BibTeX keys and manage the citation workflow between Obsidian, Zotero, and Overleaf. Use when resolving citations, fixing CITE markers, or checking which citations are missing.
+description: Resolve .cite annotation markers to BibTeX keys and manage the citation workflow between Obsidian, Zotero, and Overleaf. Use when resolving citations, fixing cite markers, or checking which citations are missing.
 ---
 
 # Skill: Bibliography Management
 
-**Purpose:** Resolve `%% @CITE: %%` markers to BibTeX keys and manage the citation workflow between Obsidian (authoring), Zotero (reference management), and Overleaf (Zotero import for `.bib`). The goal is to close the loop: every `%% @CITE: %%` marker either becomes a `\cite{key}` or gets a concrete action item.
+**Purpose:** Resolve `.cite` annotation markers to BibTeX keys and manage the citation workflow between Obsidian (authoring), Zotero (reference management), and Overleaf (Zotero import for `.bib`). The goal is to close the loop: every `.cite` annotation marker either becomes a `\cite{key}` or gets a concrete action item.
 
 ## Trigger
 
@@ -19,7 +19,7 @@ description: Resolve @CITE markers to BibTeX keys and manage the citation workfl
 ```
 Zotero (library)  ──Overleaf Zotero import──►  .bib in Overleaf project
                                                       │
-Section files (%% @CITE: ... %%)                      │
+Section files ([...]{.cite} spans)                      │
       │                                               │
       ▼                                               ▼
   This skill: resolve markers ◄──── match against known keys
@@ -33,7 +33,7 @@ Section files (%% @CITE: ... %%)                      │
 
 ## Inputs
 
-- All section files (for `%% @CITE: %%` markers).
+- All section files (for `.cite` annotation markers).
 - `.bib` file if available locally (for matching against existing keys). If not available locally, Martin provides known keys or Claude works from marker descriptions.
 - `context/references/` (structured reference notes from `skills/research_prior_work_import`).
 
@@ -41,11 +41,11 @@ Section files (%% @CITE: ... %%)                      │
 
 ### 1. Collect all citation markers
 
-Scan all section files for `%% @CITE: description %%`. For each, record:
+Scan all section files for `[description]{.cite}`. For each, record:
 
 | # | Marker description | Section | Line | Context (surrounding sentence) |
 |---|-------------------|---------|------|-------------------------------|
-| 1 | seminal work on VC revocation | §2 | 47 | "Revocation remains an open challenge in VC ecosystems %% @CITE: seminal work on VC revocation %%." |
+| 1 | seminal work on VC revocation | §2 | 47 | "Revocation remains an open challenge in VC ecosystems [seminal work on VC revocation]{.cite}." |
 
 ### 2. Classify each marker
 
@@ -123,8 +123,8 @@ Action: Add these to Zotero, then sync in Overleaf → Zotero import.
 
 After Martin confirms:
 
-- For resolved markers with confirmed keys: replace `%% @CITE: description %%` with `\cite{key}` in the section file. If multiple citations: `\cite{key1,key2}`.
-- For markers awaiting Zotero add: leave the marker but annotate it: `%% @CITE: description — awaiting Zotero sync, key will be [expected_key] %%`.
+- For resolved markers with confirmed keys: replace `[description]{.cite}` with `\cite{key}` in the section file. If multiple citations: `\cite{key1,key2}`.
+- For markers awaiting Zotero add: leave the marker but annotate it: `[description — awaiting Zotero sync, key will be expected_key]{.cite}`.
 - For markers needing research: leave the marker, ensure the research prompt exists in `prompts/`.
 
 ### 7. Update TODO.md
@@ -151,8 +151,8 @@ When markers are resolved and papers need to be added to Zotero:
 ## Interaction with other skills
 
 - **`skills/research_prior_work_import`:** Imports produce reference notes in `context/references/` that this skill draws on for resolution.
-- **`skills/project_overleaf_push`:** Run bibliography resolution before pushing — the pandoc filter converts `%% @CITE: key %%` to `\cite{key}`, but only if the key is already filled in.
-- **`skills/review_pre_submission_check`:** Counts unresolved `%% @CITE: %%` markers. This skill resolves them.
+- **`skills/project_overleaf_push`:** Run bibliography resolution before pushing — the pandoc filter converts `[key]{.cite}` to `\todo{cite: key}` in draft mode and strips it in submission mode.
+- **`skills/review_pre_submission_check`:** Counts unresolved `.cite` annotation markers. This skill resolves them.
 - **`skills/review_claim_evidence_audit`:** May flag claims needing citation support, which feeds markers into this skill.
 
 ## Output

@@ -24,10 +24,10 @@ description: Scan all section files for mechanical issues before submission: unr
 
 Execute the check script (`skills/review_pre_submission_check/check.sh`) or perform these checks manually by reading all section files:
 
-**Unresolved markers:**
-- Search all section files for `%% @CITE:` — each is an unresolved citation.
-- Search for `%% @FORMAL:` — each is an unresolved formal element.
-- Search for `%% @TODO:` — each is an incomplete task.
+**Unresolved annotations:**
+- Search all section files for `.cite` annotations (`[...]{.cite}` or `::: {.cite}`) — each is an unresolved citation.
+- Search for `.formal` annotations — each is an unresolved formal element.
+- Search for `.todo` annotations — each is an incomplete task.
 - Count and list each with file and line location.
 
 **Broken figure references:**
@@ -57,17 +57,17 @@ Execute the check script (`skills/review_pre_submission_check/check.sh`) or perf
 Present findings as a numbered list grouped by severity:
 
 **Must fix (blocks submission):**
-- Unresolved `%% @CITE: description %%` markers
+- Unresolved `[description]{.cite}` annotations
 - Anonymity violations (if double-blind)
 - Broken figure references
 
 **Should fix (likely reviewer complaint):**
-- Unresolved `%% @FORMAL: description %%` markers
+- Unresolved `.formal` annotations
 - Terminology inconsistencies
 - Undefined abbreviations
 
 **Worth checking (minor):**
-- Remaining `%% @TODO: description %%` markers
+- Remaining `.todo` annotations
 - Very long paragraphs (> ~15 sentences — may indicate structure problems)
 
 ### 3. Update TODO.md
@@ -88,13 +88,13 @@ set -euo pipefail
 SECTIONS_DIR="sections"
 FIGURES_DIR="figures"
 
-echo "=== Unresolved Markers ==="
-echo "--- @CITE markers ---"
-grep -rn '%% @CITE:' "$SECTIONS_DIR" || echo "None found."
-echo "--- @FORMAL markers ---"
-grep -rn '%% @FORMAL:' "$SECTIONS_DIR" || echo "None found."
-echo "--- @TODO markers ---"
-grep -rn '%% @TODO:' "$SECTIONS_DIR" || echo "None found."
+echo "=== Unresolved Annotations ==="
+echo "--- .cite annotations ---"
+grep -rn '\.cite' "$SECTIONS_DIR" | grep -E '\{\.cite\}|::: \{\.cite\}' || echo "None found."
+echo "--- .formal annotations ---"
+grep -rn '\.formal' "$SECTIONS_DIR" | grep -E '\{\.formal\}|::: \{\.formal\}' || echo "None found."
+echo "--- .todo annotations ---"
+grep -rn '\.todo' "$SECTIONS_DIR" | grep -E '\{\.todo\}|::: \{\.todo\}' || echo "None found."
 
 echo ""
 echo "=== Figure References ==="

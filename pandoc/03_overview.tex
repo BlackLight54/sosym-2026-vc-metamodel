@@ -1,7 +1,3 @@
-\todo[inline,color=gray!10]{meta: Dependencies: Section 02 (VCDM concepts, multi-level modeling, Refinery).}
-
-\todo[inline,color=gray!10]{meta: Note: The teaser figure (fig\_teaser) is placed before the introduction in ACM sigconf. This section references it but does not carry the figure burden.}
-
 \section{Overview}\label{overview}
 
 \label{sec:overview}
@@ -24,7 +20,7 @@ Credential ecosystem design requires a formal framework that captures constraint
 
 \label{sec:functional-overview}
 
-\todo[inline,color=orange!20]{figure fig\_functional\_overview: Box/pipeline diagram. Input: partial design specification + constraint set {\textrightarrow} Processing box (metamodel + graph predicates) {\textrightarrow} Three output modes: (1) OK --- design is consistent, (2) NOT\_OK(errors) --- specific constraint violations identified, (3) GENERATED(possible\_design) or UNVIABLE(reasons) --- design space exploration produces valid alternatives or proves none exist. Style: clean box diagram like Imre's BPM paper. Production: Excalidraw {\textrightarrow} TikZ.}
+\todo[inline,color=orange!20]{figure: fig:functional\_overview: Box/pipeline diagram. Input: partial design specification + constraint set {\textrightarrow} Processing box (metamodel + graph predicates) {\textrightarrow} Three output modes: (1) OK --- design is consistent, (2) NOT\_OK(errors) --- specific constraint violations identified, (3) GENERATED(possible\_design) or UNVIABLE(reasons) --- design space exploration produces valid alternatives or proves none exist. Style: clean box diagram like Imre's BPM paper. Production: Excalidraw {\textrightarrow} TikZ.}
 
 The approach takes as input a \emph{partial credential ecosystem design} --- entities, credentials, claim mappings, subject bindings, and tentative format assignments --- together with the constraint set derived from the metamodel and applicable governance frameworks. The metamodel organizes these elements across three layers (domain concepts, credential schemas, format-specific representations), and cross-layer constraints are formalized as graph predicates that the Refinery partial graph modeling framework \citep{marussy_refinery_2024} can evaluate or enforce.
 

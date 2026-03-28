@@ -48,7 +48,7 @@ Proceed to step 1.
 
 Before building, verify:
 
-- Report any remaining `%% @CITE: %%`, `%% @FORMAL: %%`, or `%% @TODO: %%` markers with counts. The pandoc filter strips all of them, so they won't break the build — but they represent unfinished work. Martin decides whether to push with markers remaining.
+- Report any remaining `.cite`, `.formal`, or `.todo` annotations with counts. The `annotations.lua` filter strips all of them in submission mode, so they won't break the build — but they represent unfinished work. Martin decides whether to push with annotations remaining.
 - Figures referenced in section files have source files in `pandoc/assets/`.
 - The `.bib` file exists.
 

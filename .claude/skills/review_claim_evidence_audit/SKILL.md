@@ -78,7 +78,7 @@ For each claim, check:
 - Comprehensive experiments but the paper says "preliminary results indicate" → upgrade.
 
 **Unsupported claim:**
-- A claim has no evidence at all. Either provide evidence, add a `%% @FORMAL: description %%` or `%% @CITE: description %%` marker, or cut the claim.
+- A claim has no evidence at all. Either provide evidence, add a `[description]{.formal}` or `[description]{.cite}` annotation, or cut the claim.
 
 **Evidence without a claim:**
 - Significant analysis or results exist that aren't claimed as a contribution. Either claim them or question why the analysis is in the paper.

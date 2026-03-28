@@ -1,9 +1,11 @@
-%% @META: Section: Related Work %%
-%% @META: Budget: 0.75 pages (~4 paragraphs, 3 subsections) %%
-%% @META: Goal: Position the contribution against three bodies of work. Each subsection: cited works, positioning statement, gap. %%
-%% @META: Dependencies: Sections 04 (what we do), 05 (what we demonstrate). %%
-%% @META: Note: Double-blind. CSCS 2024 short paper referenced in third person. %%
-%% @META: Source: Gap analysis synthesis (2026-03-25), archive/gap analyis/GAP_ANALYSIS_SYNTHESIS.md %%
+---
+section: Related Work
+budget: "0.75 pages (~4 paragraphs, 3 subsections)"
+goal: "Position the contribution against three bodies of work. Each subsection: cited works, positioning statement, gap."
+dependencies: ["04_approach", "05_evaluation"]
+note: "Double-blind. CSCS 2024 short paper referenced in third person."
+source: "Gap analysis synthesis (2026-03-25), archive/gap analyis/GAP_ANALYSIS_SYNTHESIS.md"
+---
 
 # Related Work
 \label{sec:related-work}

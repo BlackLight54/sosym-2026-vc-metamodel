@@ -159,12 +159,14 @@ The draft is a starting point. State explicitly what is approximate and what Mar
 Where the figure should appear in the section file, insert:
 
 ```markdown
-%% @FIGURE: fig:[label] | [one-line description] %%
+::: {#fig:label .figure}
+[one-line description]
+:::
 
 **Figure [N]: [Draft caption.]** [First sentence: conclusion. Panel descriptions. What to observe.]
 ```
 
-The `%% @FIGURE %%` marker is picked up by `skills/review_pre_submission_check`. The caption text is the draft — Martin rewrites.
+The `.figure` annotation is picked up by `skills/review_pre_submission_check`. The caption text is the draft — Martin rewrites.
 
 ### 7. Present to Martin
 

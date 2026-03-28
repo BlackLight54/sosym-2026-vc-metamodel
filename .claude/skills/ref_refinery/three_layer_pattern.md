@@ -2,7 +2,7 @@
 
 Project-specific metamodel architecture for the VC ecosystem design space. Defined in `prior_work/dse-vc-refinery/vc_model.new.problem` (current) and `prior_work/dse-vc-refinery/vc_model.problem` (older version).
 
-**Terminology mapping** (per context/DECISIONS.md — no MDA terminology in the paper):
+**Terminology mapping** (per decision_no_mda_terminology.md — no MDA terminology in the paper):
 
 | Prior work name | Paper name | Purpose |
 |---|---|---|

@@ -48,25 +48,35 @@ Filename: `[firstauthor_year_keyword].md` (e.g., `basin_2018_tamarin.md`)
 
 ## Relevance to this paper
 
-%% Fill this in. Why did we look at this paper? Which claim does it support/threaten? %%
+::: {.scaffold}
+Fill this in. Why did we look at this paper? Which claim does it support/threaten?
+:::
 **Relation:** [supports groundedness / threatens novelty / background / methodology source]
 **Relevant to:** [which section or claim in our paper]
 
 ## Key contributions
 
-%% 2-3 sentences. What does this paper actually do? %%
+::: {.scaffold}
+2-3 sentences. What does this paper actually do?
+:::
 
 ## Key distinctions from our work
 
-%% How does our approach differ? What do we do that they don't, and vice versa? %%
+::: {.scaffold}
+How does our approach differ? What do we do that they don't, and vice versa?
+:::
 
 ## Useful for citing
 
-%% Specific claims or results from this paper we might cite, with page/section references. %%
+::: {.scaffold}
+Specific claims or results from this paper we might cite, with page/section references.
+:::
 
 ## Notes
 
-%% Anything else: limitations, methodology concerns, things we disagree with. %%
+::: {.scaffold}
+Anything else: limitations, methodology concerns, things we disagree with.
+:::
 ```
 
 ### 3. Assess batch relevance
@@ -82,7 +92,7 @@ If processing multiple papers (e.g., gap analysis results), produce a summary:
 For directly relevant papers, suggest:
 - Where in the paper they should be discussed (which section).
 - Whether they threaten the novelty claim and how to differentiate.
-- Draft a `%% @CITE: description %%` marker or a brief reference sentence for the appropriate section.
+- Draft a `[description]{.cite}` annotation or a brief reference sentence for the appropriate section.
 
 ### 5. BibTeX management
 

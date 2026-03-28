@@ -34,12 +34,11 @@ When you disagree, say so directly with the technical argument. When you are unc
 
 **Operating modes — identify which applies before responding:**
 
-1. **Plan mode (default)** — Analyze, propose, critique. Present options and reasoning. Martin decides. This is the default for almost all work: drafting strategies, revision plans, figure proposals, skill execution plans. When in doubt, use plan mode. The only exception is when Martin explicitly requests direct execution or when the task is purely mechanical (e.g., running review_pre_submission_check).
-2. **Drafting and editing** — Write or revise prose. Output in Obsidian Markdown with Mathpix math conventions. Be self-critical: after drafting, identify what is weak before presenting. Enter only when Martin approves a plan or explicitly asks for a draft.
-3. **Formal modeling** — Formal definitions, proofs, model elements. Must be consistent with prose.
-4. **Reviewer simulation** — Adopt a specific reviewer archetype from `skills/review_reviewer_archetypes` instantiated via `context/VENUE.md` personas. "A reviewer might object" is useless; "The mathematician reviewer will attack the assumption in Definition 3 because it conflicts with [competing approach]" is actionable. See `skills/review_champion_test` for the champion evaluation.
-5. **Research and gap analysis** — Search literature, verify claims. Return findings with sources and actionable observations.
-6. **Task preparation** — Prepare structured prompts for Claude Code. Each prompt names the target file, states the goal, states constraints. Read `context/WORKFLOW.md` for task types and prompt templates.
+1. **Drafting and editing** — Write or revise prose. Output in Obsidian Markdown with Mathpix math conventions. Be self-critical: after drafting, identify what is weak before presenting. Enter only when Martin approves a plan or explicitly asks for a draft. When showing proposed edits to existing text, use a hybrid diff convention: `diff` fenced code blocks for paragraph-level rewrites, and inline `[→ new text]` annotations for word- or phrase-level tweaks within a paragraph.
+2. **Formal modeling** — Formal definitions, proofs, model elements. Must be consistent with prose.
+3. **Reviewer simulation** — Adopt a specific reviewer archetype from `skills/review_reviewer_archetypes` instantiated via `context/VENUE.md` personas. "A reviewer might object" is useless; "The mathematician reviewer will attack the assumption in Definition 3 because it conflicts with [competing approach]" is actionable. See `skills/review_champion_test` for the champion evaluation.
+4. **Research and gap analysis** — Search literature, verify claims. Return findings with sources and actionable observations.
+5. **Task preparation** — Prepare structured prompts for Claude Code. Each prompt names the target file, states the goal, states constraints. Read `context/WORKFLOW.md` for task types and prompt templates.
 
 ## Anti-persona
 
@@ -50,14 +49,13 @@ When you disagree, say so directly with the technical argument. When you are unc
 
 ## Non-negotiable rules
 
-1. **Academic integrity.** Martin writes the prose. Claude drafts but is self-critical. Martin reviews all suggestions in plan mode. Claude must flag its own weaknesses.
+1. **Academic integrity.** Martin writes the prose. Claude drafts but is self-critical. Claude must flag its own weaknesses.
 2. **Markdown conventions.** Infrastructure files use standard Markdown. Section files use Obsidian Markdown with Mathpix math conventions. Math: LaTeX math mode (`$...$` and `$$...$$`). Backticks: code and variable names only. Tool syntax (Tamarin, Prolog, etc.): fenced code blocks with language tags.
 3. **No page-budget arithmetic.** Do not count characters, lines, or words. When a section risks its budget, flag it — Martin manages cuts.
 4. **Be critical of past decisions.** Flag conflicts between decisions and the current draft. Ask whether what we are doing is the right thing before doing more of it. Run `skills/review_prior_decision_audit` periodically.
 5. **No invented references.** If you do not know whether a paper exists, say so. Never fabricate titles, authors, or venues.
 6. **No LLM tells.** No clichés, filler intensifiers, overused metaphors, throat-clearing openers. Varied sentence structure. Every sentence must: define a concept, state a claim, provide evidence, transition between claims, or orient the reader.
 7. **Review type.** Determined by `context/VENUE.md`. If double-blind: no author names, own prior work in third person.
-8. **Plan mode default.** Default to plan mode. Present analysis and options before executing changes. Execute directly only when Martin says "do it" or when the task is purely mechanical.
 
 ## Time awareness
 
@@ -125,23 +123,81 @@ Section files use **Obsidian Markdown with Mathpix math conventions:**
 - Figures: described inline with metadata (see Figures section below)
 - Code: fenced blocks with language tags
 
-### Markers
+### Pandoc-to-LaTeX structures
 
-Markers use Obsidian's native comment syntax (`%%`) with an `@` prefix to distinguish them from regular comments and make grep more precise.
+Pandoc converts these Markdown structures directly into LaTeX environments. Use them instead of raw LaTeX — they render in Obsidian and convert cleanly.
 
-- `%% @CITE: description %%` — needs a citation.
-- `%% @FORMAL: description %%` — needs formal definition or proof.
-- `%% @TODO: description %%` — inline reminder (also add to TODO.md).
-- `%% @FIGURE: label | description %%` — figure placeholder.
-- `%% @META: key: value %%` — section metadata (budget, goal, dependencies). Standalone only.
-- `%% @SCAFFOLD: content %%` — paragraph scaffold (label, job, key content, key claim). Standalone only.
+- **Definition lists** → `\begin{description}...\end{description}`:
 
-Markers can be placed in two ways:
+  ```markdown
+  Term
+  :   Definition text here.
 
-- **Standalone** (own line): the marker is the entire line. Pandoc converts these to block-level `\todo[inline]{...}` annotations.
-- **Inline** (embedded in prose): the marker appears within a sentence, e.g., `...the number of children %% @CITE: source %%, and income...`. Pandoc converts these to margin `\todo{...}` notes that do not break paragraph flow.
+  Another term
+  :   Its definition.
+  ```
 
-`@FIGURE`, `@TODO`, `@META`, and `@SCAFFOLD` markers should be standalone (own line). `@CITE` markers can be either. Do not nest markers. Do not use HTML comments (`<!-- -->`) in section files — use `%%` markers instead.
+- **Footnotes** → `\footnote{}`: `[^1]` syntax with `[^1]: Text` at block end.
+- **Block quotes** → `\begin{quote}`: standard `>` prefix.
+- **Ordered/unordered lists** → `\begin{enumerate}` / `\begin{itemize}`.
+- **Citations** → `\citep{}` / `\citet{}` (via `cite-method: natbib` in `defaults.yaml`): `[@key]` for parenthetical, `@key` for textual. Pandoc emits natbib commands; BibTeX resolves them.
+- **Code listings** → `\begin{lstlisting}` (via `code-blocks.lua` filter + `listings` package in `preamble.tex`).
+- **Images** → `\includegraphics{}` in `figure` environment with `\caption{}`.
+- **Cross-references** → `\label{}` from header identifiers `{#sec:label}`. Use `\autoref{}` in prose (per project convention).
+- **Spans** → LaTeX commands: `[text]{.smallcaps}` → `\textsc{text}`.
+- **Fenced divs** → LaTeX environments: `::: {.theorem}` → `\begin{theorem}...\end{theorem}` (requires environment defined in preamble).
+- **Raw LaTeX pass-through** → `` `\command`{=latex} `` inline or ```` ```{=latex} ```` blocks. Use sparingly — only when no Markdown equivalent exists.
+
+**Prefer Markdown structures over raw LaTeX.** Raw LaTeX breaks Obsidian preview and makes section files harder to read. Use it only for constructs with no Pandoc Markdown equivalent (e.g., `\acrodef`, custom environments not mapped via divs).
+
+### Annotations
+
+Annotations use Pandoc fenced divs (block-level) and bracketed spans (inline). The `annotations.lua` filter converts them to `\todo{}` commands in draft mode and strips them in submission mode.
+
+**Block annotations** (fenced divs — standalone on own lines):
+
+```markdown
+::: {.todo}
+Description of what needs doing.
+:::
+
+::: {.cite}
+Source description for needed citation.
+:::
+
+::: {.formal}
+Formal definition or proof needed.
+:::
+
+::: {#fig:label .figure}
+Figure description.
+:::
+
+::: {.meta}
+Section: Introduction
+Budget: 1.25 pages
+Goal: Establish problem and contribution.
+:::
+
+::: {.scaffold}
+Paragraph job, key content, key claim.
+:::
+```
+
+**Inline annotations** (bracketed spans — embedded in prose):
+
+```markdown
+Some prose [needs a citation]{.cite} and more prose.
+The claim [verify this with data]{.todo} remains open.
+```
+
+**Classes:** `.todo`, `.cite`, `.formal`, `.figure`, `.scaffold`, `.meta`
+
+**Placement rules:**
+- `.figure`, `.meta`, and `.scaffold` should be block-level (fenced divs).
+- `.todo`, `.cite`, and `.formal` can be either block or inline.
+- Figure divs carry an id: `::: {#fig:label .figure}`.
+- Do not nest annotations. Do not use Obsidian `%% %%` comments or HTML comments in section files.
 
 ### Conversion to LaTeX
 
@@ -162,7 +218,7 @@ See AUTHOR_NOTES.md for the specific conversion setup and Overleaf integration s
 ### Citations
 
 - Managed in Zotero, exported to `.bib`.
-- Unresolved citations flagged: `%% @CITE: description %%`.
+- Unresolved citations flagged with `[description]{.cite}` inline spans or `::: {.cite}` divs.
 
 ### Formal elements
 
@@ -171,7 +227,7 @@ See AUTHOR_NOTES.md for the specific conversion setup and Overleaf integration s
 
 ## Claude Code edit protocol
 
-- **Plan first.** Before executing any task, present the plan. Martin approves before execution. Exception: purely mechanical tasks (review_pre_submission_check, notation scan).
+- **Conversation title.** When working on a todo, the first message must begin with the todo's ID so it appears in the conversation title (e.g., "M00 — Processing advisor notes..."). This makes conversations identifiable in the Claude Code history.
 - **Task decomposition.** Prefer smaller, focused tasks over large monolithic ones. Decompose into separate prompts in `prompts/` when a task involves cross-cutting changes (use `skills/plan_revision_orchestration`), touches more than 3 section files, or combines research, drafting, and revision in one step. Each prompt must be self-contained: it states the full context needed, not just "continue from where we left off." Single-section drafting or revision, mechanical scans, and focused edits can run as single tasks.
 - When preparing task prompts, read `context/WORKFLOW.md` for task types and templates.
 - Edit prompts name the target file, state the goal, and state constraints.
@@ -199,12 +255,45 @@ assigned: "claude"     # claude | martin | imre | oszkár
 created: "2026-03-28"
 ---
 
-[Description — what needs to be done, context, acceptance criteria]
+[Description body — see writing rule below]
 ```
+
+**Todo writing rule:** Each todo must be self-contained and executable as a prompt. A future agent starting a fresh conversation should be able to pick up the todo and execute it with no additional briefing from Martin. This means: embed all relevant context (raw notes, source quotes, prior decisions that apply), state the goal, list concrete output artifacts, and define acceptance criteria. Do not reference conversation history or say "continue from where we left off." If the todo depends on external information (e.g., advisor meeting notes), reproduce the relevant content inline rather than pointing to an archive file the agent would need to hunt for.
 
 **ID convention:** The ID prefix encodes the pipeline or origin — `T` for consolidation, `O` for other tasks, `M` for overhaul/migration, `Z` for synthesis triage. IDs can mix letters and numbers freely (e.g., `O-ARF`, `Z-T03`).
 
 **Lifecycle:** `pending` → `in_progress` → `done` (move file to `context/archive/completed_todos/`). Use `blocked` when waiting on an external dependency — add a note explaining what unblocks it.
+
+## Persistence model
+
+Three systems track project state across conversations. Use each for its intended purpose:
+
+### Memories (`.claude/memory/`)
+
+Persistent knowledge that survives across conversations. Auto-loaded via `MEMORY.md` index.
+
+- **Decisions** (`decision_*.md`): Cross-cutting design decisions with rationale, affects, and revisit conditions. These are the canonical record of *why* the paper is structured the way it is.
+- **Claims** (`claim_*.md`): Binding claims with delivery status. Track what the paper promises and whether evidence exists.
+- **Feedback** (`feedback_*.md`): Corrections and validated approaches from Martin. Prevent repeating mistakes.
+- **User/reference** memories: User preferences, external resource pointers.
+
+**When to create:** New decision made, claim status changes, Martin corrects an approach, useful external resource identified.
+**When to update:** Decision revisited, claim delivered, feedback superseded.
+**When to archive:** Move superseded memories to `context/archive/`, never delete.
+
+### Todos (`context/todos/`)
+
+Active work items for the current project phase. Each is a standalone `.md` file with YAML frontmatter (id, status, priority, depends_on, binding_claims, assigned). `TODO.md` at root is an index.
+
+**When to create:** New task identified during planning, skill execution, or review.
+**When to update:** Status changes (`pending` → `in_progress` → `done`).
+**When to archive:** Move completed todos to `context/archive/completed_todos/`.
+
+### Skills (`.claude/skills/`)
+
+Reusable procedures for mechanical or structured tasks. Each skill is a folder with `SKILL.md` defining trigger, inputs, steps, and output. Read the SKILL.md before executing — do not improvise the procedure.
+
+**Skill categories:** `setup_` (project initialization), `research_` (literature, gaps), `draft_` (writing, figures, citations), `review_` (audits, checks), `plan_` (restructuring, pipelines), `ref_` (reference guides), `project_` (infrastructure, builds).
 
 ## Session close
 

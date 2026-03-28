@@ -1,5 +1,3 @@
-\todo[inline,color=gray!10]{meta: Dependencies: Section 04 (metamodel definitions and constraints).}
-
 \section{Evaluation}\label{evaluation}
 
 \label{sec:evaluation}
@@ -16,7 +14,7 @@ We evaluate the metamodel and its cross-layer constraint formalization along two
 
 We characterize the metamodel's coverage of W3C VCDM 2.0 concepts \citep{sporny_verifiable_2025} as a soundness--completeness pair. For soundness, every metaclass and capability predicate traces to a VCDM concept: DCL metaclasses formalize the claim-level information structure, CSL metaclasses the credential packaging model, and FSL format classes with six capability predicates the format properties relevant to governance constraint evaluation. For completeness, the metamodel deliberately excludes three VCDM concept families outside credential \emph{schema design}: proof mechanisms (cryptographic, orthogonal to structural modeling), verifiable presentations (runtime protocols), and credential status (lifecycle management). These are scope boundaries of the design-time formalization, not limitations of the graph predicate approach.
 
-\todo[inline,color=orange!20]{figure fig\_coverage\_table: Coverage mapping table: VCDM 2.0 concept {\textrightarrow} metamodel element {\textrightarrow} layer. Mark in-scope / out-of-scope.}
+\todo[inline,color=orange!20]{figure: fig:coverage\_table: Coverage mapping table: VCDM 2.0 concept {\textrightarrow} metamodel element {\textrightarrow} layer. Mark in-scope / out-of-scope.}
 
 \subsubsection{Constraint Expressiveness}\label{constraint-expressiveness}
 
@@ -41,7 +39,7 @@ ARF-C7 & Attributes defined encoding-independently, then per-format & ARB\_06 & 
 \end{tabularx}
 \end{table}
 
-\todo[inline,color=orange!20]{figure fig\_expressiveness\_table: Constraint expressiveness table: ID {\texttimes} constraint {\texttimes} source {\texttimes} expressible {\texttimes} predicate.}
+\todo[inline,color=orange!20]{figure: fig:expressiveness\_table: Constraint expressiveness table: ID {\texttimes} constraint {\texttimes} source {\texttimes} expressible {\texttimes} predicate.}
 
 The five partially expressible constraints share two root causes: the metamodel lacks a credential qualification subtype hierarchy (three constraints condition format eligibility on credential type), and its privacy predicates operate at format level rather than per-claim (two constraints require finer annotation). Both gaps are closable by extending the metaclass hierarchy; neither requires changing the constraint formalization approach. Runtime constraints (revocation timing, holder-binding protocols) fall outside the design-time scope.
 
@@ -94,7 +92,7 @@ SD-JWT-VC & No & No & \textbf{No} \\
 JSON-LD (BBS+) & No & No & \textbf{No} \\
 JWT-VC & No & No & \textbf{No} \\
 mdoc (ISO 18013-5) & No & No & \textbf{No} \\
-SNARK-based \citep{rosenberg_zk-creds_2023} & Yes & Yes & Yes (research prototype) \\
+SNARK-based {[}@rosenberg\_zk-creds\_2023{]} & Yes & Yes & Yes (research prototype) \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -131,7 +129,7 @@ Cross-credential predicate gap & Aligned credential pair lacks cross-credential 
 
 \label{tab:antipatterns}
 
-\todo[inline,color=orange!20]{figure fig\_antipattern\_table: Anti-pattern table: name {\texttimes} description {\texttimes} graph predicate {\texttimes} layer(s) {\texttimes} kind.}
+\todo[inline,color=orange!20]{figure: fig:antipattern\_table: Anti-pattern table: name {\texttimes} description {\texttimes} graph predicate {\texttimes} layer(s) {\texttimes} kind.}
 
 The first three anti-patterns are detectable by single-layer inspection: \texttt{non\_connected} operates within the DCL, \texttt{no\_empty\_cred} and \texttt{root\_ent\_doesnt\_have\_cred} within the CSL. Trace misalignment requires cross-layer analysis. Each layer is individually well-formed, but the propagation rules \texttt{prop\_t} and \texttt{prop\_s} eliminate any binding where a \texttt{Claim}`s target \texttt{CredEntity} traces to a different DCL \texttt{Entity} than the \texttt{Prop} it was derived from. The cross-credential predicate gap is invisible at any single layer: the domain constraint is well-defined at the DCL, both credentials are structurally valid at the CSL, and each format is individually compliant at the FSL. Only the cross-layer shadow predicate, which checks \texttt{aligned} credential subjects against their formats' \texttt{supports\_multi\_credential\_proof} capability, surfaces the gap. This graduated visibility, from intra-layer errors through cross-layer trace inconsistencies to ecosystem-level capability gaps, is the central argument for multi-level formalization over single-layer alternatives.
 
@@ -151,7 +149,7 @@ We construct synthetic instances from \(N{=}1\) to \(N{=}30\) credentials. Each 
 
 All instances are evaluated using the Refinery CLI,\footnote{Container image \texttt{ghcr.io/graphs4value/refinery-cli}, pulled via Docker.} where each invocation starts a fresh JVM inside a Docker container. We use Hyperfine as the benchmarking harness with 10 measured runs and 1 warmup run per configuration. \todo{Hardware specification --- populate from environment.json after running measurements: CPU model, RAM, OS version.} Cold JVM startup adds a constant overhead per invocation that does not affect the scaling trend but inflates absolute wall-clock times; we report raw wall-clock times without correcting for this overhead. The measurement script, generated instances, and the metamodel source are provided as supplementary material for independent reproduction.
 
-\todo[inline,color=orange!20]{figure fig\_scalability: Concretizability check and model generation runtime vs. model size (N credentials). X-axis: N. Y-axis: wall-clock time (s). Lines: consistency, concretizability-SAT, concretizability-UNSAT, generate-SAT. figure* (full-width).}
+\todo[inline,color=orange!20]{figure: fig:scalability: Concretizability check and model generation runtime vs. model size (N credentials). X-axis: N. Y-axis: wall-clock time (s). Lines: consistency, concretizability-SAT, concretizability-UNSAT, generate-SAT. figure* (full-width).}
 
 \begin{table}
 \caption{Scalability measurements across three Refinery operations.

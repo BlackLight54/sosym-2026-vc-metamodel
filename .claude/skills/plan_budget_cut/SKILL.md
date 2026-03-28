@@ -19,9 +19,9 @@ description: Diagnose page budget usage and propose restructuring when the paper
 
 - All section files in `sections/`.
 - context/VENUE.md (page limit, supplementary strategy).
-- context/DECISIONS.md (rationale for current structure — avoid undoing deliberate choices blindly).
+- `.claude/memory/decision_*.md` (rationale for current structure — avoid undoing deliberate choices blindly; auto-loaded via MEMORY.md).
 - `pandoc/assets/` directory (figure count and estimated footprint).
-- `@META: Budget:` markers in each section file.
+- YAML frontmatter `budget:` field in each section file.
 
 ## Steps
 
@@ -30,12 +30,12 @@ description: Diagnose page budget usage and propose restructuring when the paper
 For each section file in `sections/`:
 
 **Word count method** (primary):
-- Count words of prose content only — exclude `%% ... %%` markers, `@META` blocks, `@SCAFFOLD` blocks, and LaTeX preamble.
+- Count words of prose content only — exclude YAML frontmatter, annotation divs (`.meta`, `.scaffold`), and LaTeX preamble.
 - Include figure/table captions and math environments in the count.
 - Apply the **ACM sigconf heuristic: ~800 words per page** for prose-only content.
 
 **Figure/table adjustment:**
-- Scan for `%% @FIGURE:` markers and any inline figure references. Each single-column figure ≈ 0.3 pages. Each full-width figure ≈ 0.5 pages. Each table ≈ 0.2–0.4 pages (estimate from row count if available).
+- Scan for `.figure` annotations (`::: {#fig:label .figure}`) and any inline figure references. Each single-column figure ≈ 0.3 pages. Each full-width figure ≈ 0.5 pages. Each table ≈ 0.2–0.4 pages (estimate from row count if available).
 - Add figure/table footprint to the section's page estimate.
 
 **Display math adjustment:**
@@ -52,7 +52,7 @@ If `build.sh` succeeds and `latexmk` is available, compile to PDF and extract ac
 
 ### 2. Extract budgets
 
-From each section file, read the `%% @META: Budget: ... %%` marker. Parse the page number (e.g., "1.25 pages" → 1.25).
+From each section file, read the YAML frontmatter `budget:` field. Parse the page number (e.g., "1.25 pages" → 1.25).
 
 From context/VENUE.md, read:
 - **Total page limit** (main text).
@@ -101,13 +101,13 @@ For each section marked OVER, identify the likely cause:
 | **Prose bloat** | High word count relative to budget, low figure/math density | Over-explained background; redundant transitions |
 | **Figure creep** | Section has more or larger figures than budgeted | Running example grew from 1 to 3 figures |
 | **Definition sprawl** | Many display math blocks / formal environments | Definitions could be compressed or moved to appendix |
-| **Scope creep** | Section covers topics not in its `@META: Goal` | Background section also doing related work's job |
+| **Scope creep** | Section covers topics not in its frontmatter `goal` | Background section also doing related work's job |
 | **Structural misfit** | Content belongs in a different section | Approach section contains evaluation-like examples |
 
 For each section marked **under**, diagnose:
 - **Intentionally lean:** Section is complete but compressed — no action needed.
 - **Incomplete:** Section has TODO/SCAFFOLD markers — not a cut opportunity, it will grow.
-- **Missing content:** Section's goal (from `@META`) is not fully addressed.
+- **Missing content:** Section's goal (from frontmatter) is not fully addressed.
 
 Report per-section diagnosis as a bulleted list under the budget tree.
 
@@ -157,7 +157,7 @@ Present an ordered plan:
 
 #### 5c. Identify `@CUT-START` / `@CUT-END` candidates
 
-For specific prose passages recommended for cutting, identify exact locations where `%% @CUT-START: reason %%` and `%% @CUT-END %%` markers could be placed. These markers integrate with the existing `cut-candidates.lua` pandoc filter:
+For specific prose passages recommended for cutting, identify exact locations where `::: {.cutcandidate reason="..."}` divs could be placed. These integrate with the existing `cut-candidates.lua` pandoc filter:
 - In draft mode: highlighted with color tint for Martin's review.
 - In submission mode: markers stripped, text kept.
 

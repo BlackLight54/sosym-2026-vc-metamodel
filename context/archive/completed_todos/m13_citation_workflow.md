@@ -2,7 +2,7 @@
 id: "M13"
 short: "citation-workflow"
 title: "Update citation workflow to --biblatex + [@key]"
-status: pending
+status: done
 priority: high
 depends_on: ["M12"]
 binding_claims: []

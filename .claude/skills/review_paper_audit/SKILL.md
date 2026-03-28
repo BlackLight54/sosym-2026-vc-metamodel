@@ -115,7 +115,7 @@ Blockers, high-value fixes (ranked by impact/effort), acceptable risks, cut cand
 ## Constraints
 
 - Read the paper sequentially — the argument must work as a linear read.
-- Be specific. "Section 04 needs work" is useless. "Section 04.4 cross-layer constraints subsection has 6 @TODO markers and 0 paragraphs of prose — Binding Claims #3 and #9 are undelivered" is actionable.
+- Be specific. "Section 04 needs work" is useless. "Section 04.4 cross-layer constraints subsection has 6 `.todo` annotations and 0 paragraphs of prose — Binding Claims #3 and #9 are undelivered" is actionable.
 - Quote specific prose when claiming a commitment is met or violated.
 - Do NOT propose rewrites or draft prose. Identify what is wrong and what is needed.
 - Frame the critical path relative to the deadline from `context/VENUE.md`.

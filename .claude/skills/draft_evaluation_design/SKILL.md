@@ -18,7 +18,7 @@ description: Map contributions to evaluation questions and select appropriate me
 - CLAUDE.md: thesis (core claim, mechanism, so-what).
 - Introduction contribution list (P3) — each numbered contribution needs corresponding evidence.
 - context/VENUE.md: reviewer personas (what evidence each reviewer type expects), exemplar papers (what evaluations look like at this venue).
-- Running example (from context/DECISIONS.md or skills/ref_running_example).
+- Running example (from `.claude/memory/decision_csok_running_example.md` or skills/ref_running_example).
 - Domain from CLAUDE.md (calibrates what counts as evidence in this field).
 
 ## Steps
@@ -103,22 +103,30 @@ Based on the above, propose the internal structure of the evaluation section:
 ```markdown
 # Evaluation / Case Study
 
-%% Goal: Demonstrate that contributions C1–CN are delivered as claimed. %%
+::: {.scaffold}
+Goal: Demonstrate that contributions C1–CN are delivered as claimed.
+:::
 
 ## N.1 [First evaluation component — e.g., "Formal verification results"]
 
-%% Evaluation question: [from step 1]
-   Method: [from step 2]
-   Expected result: [from step 3] %%
+::: {.scaffold}
+Evaluation question: [from step 1]
+Method: [from step 2]
+Expected result: [from step 3]
+:::
 
 ## N.2 [Second component — e.g., "Case study: supply chain collaboration"]
 
-%% ... %%
+::: {.scaffold}
+...
+:::
 
 ## N.3 [Discussion of results / Comparison]
 
-%% Synthesis: what do the results collectively demonstrate?
-   How do they support the thesis? %%
+::: {.scaffold}
+Synthesis: what do the results collectively demonstrate?
+How do they support the thesis?
+:::
 ```
 
 ### 7. Identify what must exist before evaluation can be written

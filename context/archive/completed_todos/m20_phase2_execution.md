@@ -2,7 +2,7 @@
 id: "M20"
 short: "phase2-exec"
 title: "Execute workflow overhaul Phase 2 — marker migration, citations, Z01 extraction"
-status: pending
+status: done
 priority: high
 depends_on: ["M11", "M05", "M06", "M08"]
 binding_claims: []

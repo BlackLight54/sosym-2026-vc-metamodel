@@ -2,7 +2,7 @@
 id: "M21"
 short: "archive-prompts"
 title: "Archive executed prompts to context/archive/"
-status: pending
+status: done
 priority: medium
 depends_on: []
 binding_claims: []

@@ -25,7 +25,7 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 
 | Skill | Trigger | What it does |
 |-------|---------|-------------|
-| [`draft_bibliography`](draft_bibliography/SKILL.md) | "Resolve citations" / "Fix CITE markers" | Resolves `@CITE` markers → BibTeX keys, tracks Zotero sync needs |
+| [`draft_bibliography`](draft_bibliography/SKILL.md) | "Resolve citations" / "Fix cite markers" | Resolves `.cite` annotation markers → BibTeX keys, tracks Zotero sync needs |
 | [`draft_evaluation_design`](draft_evaluation_design/SKILL.md) | "Design the evaluation" | Maps contributions → evaluation questions → methods |
 | [`draft_evaluation_execution`](draft_evaluation_execution/SKILL.md) | "Evaluation checklist" / "What do I still need to run?" | Tracks proof/tool/case-study execution status, dependencies, acceptance criteria |
 | [`draft_figure_design`](draft_figure_design/SKILL.md) | "Propose a figure" / "Design figures" | Audit, design, draft, and iterate figures with Nature-style guidance |
@@ -40,6 +40,7 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 | [`review_champion_test`](review_champion_test/SKILL.md) | "Would anyone champion this paper?" | Evaluates whether the paper has a champion-worthy insight and whether it's visible |
 | [`review_claim_evidence_audit`](review_claim_evidence_audit/SKILL.md) | "Audit claims" / "Map contributions" | Contribution mapping + full claim–evidence check |
 | [`review_final_review`](review_final_review/SKILL.md) | "Final review" | Orchestrator: coherence, champion test, reviewer sim |
+| [`review_integrity_audit`](review_integrity_audit/SKILL.md) | "Run integrity audit" / "Ethics check" | Factual accuracy, citation honesty, anonymity, overclaiming, LLM tells |
 | [`review_paper_audit`](review_paper_audit/SKILL.md) | "Full paper audit" | Reads all sections, cross-references claims, decisions, gaps, personas |
 | [`review_paper_status`](review_paper_status/SKILL.md) | "Where are we?" / session start | Lightweight dashboard: section maturity, markers, figures, time-to-deadline |
 | [`review_pre_submission_check`](review_pre_submission_check/SKILL.md) | "Check the paper" | Markers, broken refs, anonymity leaks |

@@ -16,7 +16,7 @@ description: Convert Markdown section files to LaTeX using pandoc and the projec
 ## Arguments
 
 - **mode** (optional): `draft` (default) or `submission`.
-  - `draft`: Obsidian `%%` markers become `\todo{}` annotations.
+  - `draft`: Annotation divs/spans (`.todo`, `.cite`, `.formal`, etc.) become `\todo{}` annotations.
   - `submission`: markers are stripped entirely.
 - If the user says "submission mode", "clean build", or "strip markers", use `submission`. Otherwise default to `draft`.
 

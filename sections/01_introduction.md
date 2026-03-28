@@ -1,20 +1,28 @@
-%% @META: Section: Introduction %%
-%% @META: Budget: 1.25 pages (~7 paragraphs) %%
-%% @META: Goal: Establish problem, gap, contribution, approach sketch, paper structure. %%
-%% @META: Dependencies: None (self-contained). %%
+---
+section: Introduction
+budget: "1.25 pages (~7 paragraphs)"
+goal: "Establish problem, gap, contribution, approach sketch, paper structure."
+dependencies: []
+---
 
 # Introduction
 \label{sec:introduction}
 
-%% @FIGURE: fig_teaser | Teaser figure (full-width, before first column). Unified housing subsidy scenario across three metamodel layers. Layout: three horizontal bands (DCL top, CSL middle, FSL bottom). DCL: Applicant node with three Prop edges to num_children, property_area, monthly_income; dashed arc for cross-property constraint area ≥ f(children). CSL: three credential boxes (FamilyStatus, Property, Income) each with CS+Claim+CV; dashed alignment arrows between CS nodes; vertical trace lines to DCL. FSL: SD-JWT-VC boxes below FamilyStatus/Property (solid, valid); conflict zone below Income (split box: SD-JWT-VC "eIDAS required" vs. AnonCreds "GDPR predicate proof", red dashed border, no single format satisfies both); second conflict annotation between Property/FamilyStatus for cross-credential predicate gap. Caption: "A housing subsidy scenario across three metamodel layers. Domain facts at the domain concept layer are grouped into credentials with aligned subjects at the credential schema layer. At the format-specific layer, eIDAS format mandates and GDPR data minimization impose contradictory requirements on the income credential; cross-credential predicates lack privacy-preserving enforcement entirely." Production: Excalidraw prototype → TikZ for camera-ready. %%
+::: {#fig:teaser .figure}
+Teaser figure (full-width, before first column). Unified housing subsidy scenario across three metamodel layers. Layout: three horizontal bands (DCL top, CSL middle, FSL bottom). DCL: Applicant node with three Prop edges to num_children, property_area, monthly_income; dashed arc for cross-property constraint area ≥ f(children). CSL: three credential boxes (FamilyStatus, Property, Income) each with CS+Claim+CV; dashed alignment arrows between CS nodes; vertical trace lines to DCL. FSL: SD-JWT-VC boxes below FamilyStatus/Property (solid, valid); conflict zone below Income (split box: SD-JWT-VC "eIDAS required" vs. AnonCreds "GDPR predicate proof", red dashed border, no single format satisfies both); second conflict annotation between Property/FamilyStatus for cross-credential predicate gap. Caption: "A housing subsidy scenario across three metamodel layers. Domain facts at the domain concept layer are grouped into credentials with aligned subjects at the credential schema layer. At the format-specific layer, eIDAS format mandates and GDPR data minimization impose contradictory requirements on the income credential; cross-credential predicates lack privacy-preserving enforcement entirely." Production: Excalidraw prototype → TikZ for camera-ready.
+:::
 
 Emerging digital credential ecosystems allow persons and organizations to receive, hold, and selectively present cryptographically verifiable claims [@sporny_verifiable_2025]. Such ecosystems are deployed under diverse governance frameworks — from government-regulated EU Digital Identity Wallets [@eidas2] to community-governed decentralized identity systems [@curran2022anoncreds]. Designing these ecosystems requires satisfying constraints that span multiple abstraction layers — from domain-level claim properties through credential schema structure to format-specific privacy capabilities — yet no integrated formal model captures these cross-layer constraints.
 
-%% @TODO: Verify gap claim — confirm no existing multi-level metamodel for VC ecosystems %%
+::: {.todo}
+Verify gap claim — confirm no existing multi-level metamodel for VC ecosystems
+:::
 
 Constraints from W3C standards, EU implementing regulations, and community design guidelines interact across abstraction layers, and their combined effect on a single credential ecosystem design is not predictable from any individual governance source [@mazzocca_survey_2025]. For example, the eIDAS Architecture Reference Framework mandates a specific credential format for government attestations; GDPR requires that privacy-sensitive claims disclose only the minimum necessary information; neither regulation anticipates the other, yet their joint effect on a single income credential may be unsatisfiable. Unlike hierarchical requirement systems in safety-critical domains, these governance sources are independent peers whose design goals may be formally irreconcilable. Design errors that span multiple layers go unnoticed — not because they are difficult to detect algorithmically, but because no model makes them expressible in the first place. Existing tools operate at a single layer — JSON Schema validators check credential structure, format-specific conformance tools verify encoding constraints, governance frameworks define requirements in isolation — but no tool checks cross-layer consistency. A credential schema may be well-formed when inspected in isolation, yet violate a cross-layer constraint that links domain-level claim semantics to format-specific privacy capabilities.
 
-%% @TODO: Finalize contribution list — must align with binding claims #1-#10 in 00_abstract.md %%
+::: {.todo}
+Finalize contribution list — must align with binding claims #1-#10 in 00_abstract.md
+:::
 
 We make the following contributions:
 

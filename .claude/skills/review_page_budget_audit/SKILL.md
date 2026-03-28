@@ -16,7 +16,7 @@ description: Multi-agent page budget audit. Estimates per-section page counts, c
 
 - All section files in `sections/`
 - `context/VENUE.md` — total page limit, format details
-- Section budgets from `@META: Budget:` markers in section files (or YAML frontmatter once migrated)
+- Section budgets from YAML frontmatter `budget:` field in section files
 
 ## Recommended execution
 
@@ -25,7 +25,7 @@ description: Multi-agent page budget audit. Estimates per-section page counts, c
 One agent per section file. Each agent reads its section and reports:
 
 - **Word count** (prose only — exclude markers, meta, scaffold, comments)
-- **Budget** from `@META: Budget:` marker (or YAML frontmatter)
+- **Budget** from YAML frontmatter `budget:` field
 - **Figure/table count** with estimated page impact (~0.3 pages per figure, ~0.2 per table — adjust based on actual size)
 - **Display math block count** with estimated page impact (~0.1 pages per block)
 - **Estimated page count** using ~800 words/page heuristic for ACM sigconf two-column format

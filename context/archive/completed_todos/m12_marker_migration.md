@@ -2,7 +2,7 @@
 id: "M12"
 short: "marker-migration"
 title: "Migrate markers from %% to Pandoc divs/spans"
-status: pending
+status: done
 priority: high
 depends_on: []
 binding_claims: []

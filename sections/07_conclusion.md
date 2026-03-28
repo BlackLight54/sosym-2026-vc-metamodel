@@ -1,14 +1,16 @@
-%% @META: Section: Conclusion %%
-%% @META: Budget: 0.75 pages (~4 paragraphs) %%
-%% @META: Goal: Summary, key results, limitations, future work. %%
-%% @META: Dependencies: All prior sections. %%
+---
+section: Conclusion
+budget: "0.75 pages (~4 paragraphs)"
+goal: "Summary, key results, limitations, future work."
+dependencies: ["all"]
+---
 
 # Conclusion
 \label{sec:conclusion}
 
 This paper showed that a multi-layer formal model reveals cross-layer design conflicts in credential ecosystems that are invisible to single-layer inspection. The three-layer metamodel (DCL, CSL, FSL), grounded in VCDM 2.0 and formalized as graph predicates in Refinery (\autoref{sec:approach}), makes cross-layer constraints from heterogeneous governance frameworks jointly evaluable — supporting consistency checking, error identification, and design space exploration (\autoref{sec:cross-layer}). A three-axis validation confirmed coverage against the W3C specification, expressiveness against regulatory and standards sources, and error visibility against known design anti-patterns (\autoref{sec:evaluation}).
 
-The coverage characterization shows that the metamodel captures %% @TODO: Replace TBD with actual N/M coverage fraction from coverage mapping table %% TBD VCDM 2.0 concepts relevant to credential ecosystem design, with excluded concepts (proof mechanisms, revocation, presentation exchange) motivated by the design-time scope (\autoref{sec:coverage}). The income credential governance conflict demonstrates that cross-layer constraints from eIDAS, GDPR, and VCDM 2.0 conformance requirements are jointly unsatisfiable — no single credential format meets all three governance mandates simultaneously (\autoref{sec:headlines}). The cross-credential predicate gap shows that a domain-level constraint spanning two independent credentials exceeds the capabilities of all deployed credential formats, forcing raw value disclosure (\autoref{sec:headlines}).
+The coverage characterization shows that the metamodel captures [Replace TBD with actual N/M coverage fraction from coverage mapping table]{.todo} TBD VCDM 2.0 concepts relevant to credential ecosystem design, with excluded concepts (proof mechanisms, revocation, presentation exchange) motivated by the design-time scope (\autoref{sec:coverage}). The income credential governance conflict demonstrates that cross-layer constraints from eIDAS, GDPR, and VCDM 2.0 conformance requirements are jointly unsatisfiable — no single credential format meets all three governance mandates simultaneously (\autoref{sec:headlines}). The cross-credential predicate gap shows that a domain-level constraint spanning two independent credentials exceeds the capabilities of all deployed credential formats, forcing raw value disclosure (\autoref{sec:headlines}).
 
 The format-specific layer (\autoref{sec:fsl}) is less mature than the domain concept and credential schema layers, with fewer constraints formalized and fewer credential formats modeled. The constraint catalog (\autoref{sec:expressiveness}) is representative rather than exhaustive, drawn from a subset of EU regulatory sources (eIDAS Architecture and Reference Framework, GDPR) rather than a comprehensive governance survey. The approach has not been evaluated empirically with credential ecosystem designers in practice. The formalization relies on a single tool, Refinery (\autoref{sec:refinery}); portability to other partial-model solvers or constraint-based toolchains has not been assessed. Finally, the metamodel addresses design-time concerns only — runtime credential exchange, revocation processing, and deployment validation remain out of scope.
 

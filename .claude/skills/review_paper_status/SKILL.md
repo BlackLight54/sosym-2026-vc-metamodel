@@ -45,8 +45,8 @@ For each file in `sections/`, classify its maturity:
 | Maturity | Criteria |
 |----------|---------|
 | **Empty** | File exists but contains only the header comment block (goal/budget/dependencies) or nothing beyond the heading. |
-| **Skeleton** | Contains paragraph-level guidance (`%% P1: ...`, `%% P2: ...`) or bullet-point outlines, but no prose. |
-| **Draft** | Contains substantial prose (multiple paragraphs) but still has `%% @TODO: %%` or `%% @FORMAL: %%` markers, or the prose hasn't been reviewed. |
+| **Skeleton** | Contains paragraph-level guidance or bullet-point outlines, but no prose. |
+| **Draft** | Contains substantial prose (multiple paragraphs) but still has `.todo` or `.formal` annotations, or the prose hasn't been reviewed. |
 | **Revised** | Prose exists, markers are mostly resolved, section has been through at least one revision pass. |
 | **Polished** | No unresolved markers, prose is reviewed, figures are in place. Ready for final review. |
 
@@ -63,9 +63,9 @@ Report as a table:
 
 Markers column: `NC NF NT` = N CITE markers, N FORMAL markers, N TODO markers.
 
-### 3. Marker summary
+### 3. Annotation summary
 
-Scan all section files for `%% @CITE:`, `%% @FORMAL:`, `%% @TODO:`, and `%% @FIGURE:` markers. Report totals:
+Scan all section files for `.cite`, `.formal`, `.todo`, and `.figure` annotations (both fenced div `::: {.type}` and inline span `[...]{.type}` forms). Report totals:
 
 - **Unresolved citations:** [N] across [M] sections.
 - **Unresolved formal elements:** [N] across [M] sections.
@@ -76,7 +76,7 @@ If any count is high relative to the phase (e.g., 15 unresolved citations in pol
 
 ### 4. Figure status
 
-For each `%% @FIGURE: fig:[label] %%` marker in section files:
+For each `::: {#fig:label .figure}` annotation in section files:
 - Does a corresponding source file exist in `pandoc/assets/`?
 - What format is it in?
 

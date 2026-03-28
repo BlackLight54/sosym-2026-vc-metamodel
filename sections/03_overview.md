@@ -1,8 +1,10 @@
-%% @META: Section: Overview %%
-%% @META: Budget: 1.5 pages (~3 subsections: Motivation ~0.7p, Functional Overview ~0.5p, Usage Workflow ~0.3p) %%
-%% @META: Goal: Introduce running example and cross-layer problem (3.1), define the three usage modes via a functional overview (3.2), and walk through a designer's workflow (3.3). %%
-%% @META: Dependencies: Section 02 (VCDM concepts, multi-level modeling, Refinery). %%
-%% @META: Note: The teaser figure (fig_teaser) is placed before the introduction in ACM sigconf. This section references it but does not carry the figure burden. %%
+---
+section: Overview
+budget: "1.5 pages (~3 subsections: Motivation ~0.7p, Functional Overview ~0.5p, Usage Workflow ~0.3p)"
+goal: "Introduce running example and cross-layer problem (3.1), define the three usage modes via a functional overview (3.2), and walk through a designer's workflow (3.3)."
+dependencies: ["02_background"]
+note: "The teaser figure (fig_teaser) is placed before the introduction in ACM sigconf. This section references it but does not carry the figure burden."
+---
 
 # Overview
 \label{sec:overview}
@@ -23,7 +25,9 @@ Credential ecosystem design requires a formal framework that captures constraint
 ## Functional Overview
 \label{sec:functional-overview}
 
-%% @FIGURE: fig_functional_overview | Box/pipeline diagram. Input: partial design specification + constraint set → Processing box (metamodel + graph predicates) → Three output modes: (1) OK — design is consistent, (2) NOT_OK(errors) — specific constraint violations identified, (3) GENERATED(possible_design) or UNVIABLE(reasons) — design space exploration produces valid alternatives or proves none exist. Style: clean box diagram like Imre's BPM paper. Production: Excalidraw → TikZ. %%
+::: {#fig:functional_overview .figure}
+Box/pipeline diagram. Input: partial design specification + constraint set → Processing box (metamodel + graph predicates) → Three output modes: (1) OK — design is consistent, (2) NOT_OK(errors) — specific constraint violations identified, (3) GENERATED(possible_design) or UNVIABLE(reasons) — design space exploration produces valid alternatives or proves none exist. Style: clean box diagram like Imre's BPM paper. Production: Excalidraw → TikZ.
+:::
 
 The approach takes as input a *partial credential ecosystem design* — entities, credentials, claim mappings, subject bindings, and tentative format assignments — together with the constraint set derived from the metamodel and applicable governance frameworks. The metamodel organizes these elements across three layers (domain concepts, credential schemas, format-specific representations), and cross-layer constraints are formalized as graph predicates that the Refinery partial graph modeling framework [@marussy_refinery_2024] can evaluate or enforce.
 

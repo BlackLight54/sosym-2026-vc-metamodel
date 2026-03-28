@@ -17,6 +17,8 @@
 ## Approach refinement
 
 - [O-MODES](o-modes_usage_modes.md) — Clarify Refinery usage modes (OK/NOT_OK/GENERATED)
+- [O-REFBG](o-refinery-bg.md) — Refinery + math foundations placeholder in Background [Oszkár]
+- [O-SOUND](o-soundness-eval.md) — Soundness/completeness model properties in evaluation [Binding #4, #9]
 
 ## Writing and polish
 
@@ -34,6 +36,26 @@
 
 - [O-GOV](o-gov_gov_research.md) — Research governance frameworks beyond ARF [Imre]
 - [O-ANON](o-anon_anonymize.md) — Anonymize supplementary material [Oszkár]
+
+## Cross-cutting review issues (X01–X04)
+
+- [X01](x01_abstract_gdpr_hedge.md) — Hedge "formally contradictory" in abstract for GDPR operationalization [Binding #8]
+- [X02](x02_abstract_surfaces_verb.md) — Replace "surfaces" with "demonstrates detection of" in abstract
+- [X03](x03_none_outside_defense.md) — Defend "none falls entirely outside" expressiveness claim [Binding #6]
+- [X04](x04_tool_demonstration.md) — Include concrete Refinery output for automated checking claim [Binding #4] [Martin]
+- [X05](x05_sec4_to_sec5_bridge.md) — Fix Approach-to-Evaluation transition gap
+- [X06](x06_scalability_csok_anchor.md) — Anchor scalability instances to CSOK running example
+- [X07](x07_income_variable_drift.md) — Align income variable name across Sec 2 and Sec 4
+- [X08](x08_structure_para_antipattern.md) — Fix structure paragraph: anti-patterns in eval not approach
+- [X09](x09_formal_vs_expert_knowledge.md) — Defend what formal model adds beyond expert knowledge [Binding #9, #10]
+- [X10](x10_fsl_structural_defense.md) — Defend FSL as metamodel layer beyond lookup table [Binding #1]
+- [X11](x11_prior_work_extension_substance.md) — Articulate prior work extension substance beyond "two more layers"
+- [X12](x12_dse_navigation.md) — Clarify what DSE produces operationally [Binding #4]
+- [X13](x13_baseline_strawman_defense.md) — Defend baseline comparison against strawman critique [Binding #10]
+
+## Advisor feedback
+
+- ~~[M00](m00_process_advisor_notes_from_oszkár.md)~~ — ✅ Process Oszkár's notes (2026-03-25 meeting + Konzi consultation)
 
 ## Workflow overhaul — Phase 2
 

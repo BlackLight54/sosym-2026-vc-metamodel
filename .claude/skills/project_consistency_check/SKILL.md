@@ -41,14 +41,14 @@ For each active decision memory (`decision_*.md`):
 For each claim memory (`claim_*.md`):
 - Read the `status` field (not_started / partial / delivered / weak).
 - Read the `evidence_section` field. Check the actual section content.
-- Flag: claim marked "delivered" but section has @TODO markers or placeholder prose; claim marked "not_started" but section has substantive content.
+- Flag: claim marked "delivered" but section has `.todo` annotations or placeholder prose; claim marked "not_started" but section has substantive content.
 
 ### 3. Todo completion verification
 
 For each todo file with status "done" or "completed":
 - Read the `target` field. Check the target section.
 - Verify the work described in the todo is actually present in the section.
-- Flag: todo marked done but target section still has scaffolds or @TODO markers in the relevant paragraphs.
+- Flag: todo marked done but target section still has scaffolds or `.todo` annotations in the relevant paragraphs.
 
 ### 4. Cross-reference integrity
 
@@ -61,7 +61,7 @@ Scan all infrastructure files for references:
 
 ### 5. Marker census reconciliation
 
-- Count markers (@TODO, @CITE, @FORMAL, @FIGURE, @SCAFFOLD) across all section files.
+- Count annotation markers (`.todo`, `.cite`, `.formal`, `.figure`, `.scaffold` divs/spans) across all section files.
 - Compare against any marker counts recorded in todo files or previous audits.
 - Flag: sections with unexpectedly high marker counts that should be further along.
 

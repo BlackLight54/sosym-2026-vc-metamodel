@@ -2,17 +2,17 @@
 # Usage: pandoc --defaults pandoc/defaults.yaml -o pandoc/01_intro.tex sections/01_intro.md
 #   Override mode: --metadata mode=submission
 
-from: markdown+raw_tex+tex_math_dollars
+from: markdown+raw_tex+tex_math_dollars+fenced_divs+bracketed_spans
 to: latex
 
 filters:
   - pandoc/filters/cut-candidates.lua
   - pandoc/filters/tables.lua
-  - pandoc/filters/markers.lua
+  - pandoc/filters/annotations.lua
   - pandoc/filters/code-blocks.lua
 
 cite-method: natbib
 wrap: preserve
 
-metadata:
-  mode: draft
+## mode is set by build.sh via --metadata mode=draft|submission
+## Do not set it here — pandoc concatenates rather than overrides metadata values.

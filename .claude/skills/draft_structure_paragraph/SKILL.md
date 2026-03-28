@@ -67,7 +67,9 @@ Verify:
 Replace or insert the structure paragraph in `sections/01_introduction.md`. It should be the last paragraph of the introduction, marked with:
 
 ```markdown
-%% Structure paragraph — regenerate with skills/draft_structure_paragraph when sections change. %%
+::: {.scaffold}
+Structure paragraph — regenerate with skills/draft_structure_paragraph when sections change.
+:::
 ```
 
 ### 5. Update TODO.md

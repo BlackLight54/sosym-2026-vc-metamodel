@@ -47,11 +47,12 @@ For each section, create `sections/NN_name.md` in Obsidian/MathPix Markdown:
 ```markdown
 # Section Title
 
-%%
-Goal: [one sentence — what this section must accomplish]
+::: {.meta}
+Section: [Title]
 Budget: [approximate page allocation from context/VENUE.md total]
+Goal: [one sentence — what this section must accomplish]
 Dependencies: [what must exist before this can be written]
-%%
+:::
 
 ```
 
@@ -78,26 +79,36 @@ The introduction gets more structure than other sections because its rhetorical 
 ```markdown
 # Introduction
 
-%% P1: Hook — why does the problem matter? Ground in concrete consequences.  %%
+::: {.scaffold}
+P1: Hook — why does the problem matter? Ground in concrete consequences.
+:::
 
-%% P2: Gap — what is missing, broken, or unsolved? Be specific.  %%
+::: {.scaffold}
+P2: Gap — what is missing, broken, or unsolved? Be specific.
+:::
 
-%% P3: Contribution — the most important paragraph in the paper.
-     This is where reviewers form their first impression of the contribution.
-     Structure as a numbered list:
-     
-     "The contributions of this paper are:
-     (1) A formal definition of [X] that captures [property] (Section N).
-     (2) A proof/analysis that [property holds / is decidable / ...] (Section M).
-     (3) A case study / evaluation demonstrating [concrete result] (Section K)."
-     
-     Each item must be: specific, falsifiable, and forward-reference its evidence section.
-     Use skills/review_claim_evidence_audit to verify this paragraph delivers what it promises.  %%
+::: {.scaffold}
+P3: Contribution — the most important paragraph in the paper.
+This is where reviewers form their first impression of the contribution.
+Structure as a numbered list:
 
-%% P4: Approach sketch — how? One paragraph, enough to be credible.  %%
+"The contributions of this paper are:
+(1) A formal definition of [X] that captures [property] (Section N).
+(2) A proof/analysis that [property holds / is decidable / ...] (Section M).
+(3) A case study / evaluation demonstrating [concrete result] (Section K)."
 
-%% P5: Structure — trace the argument through the sections, not just list them.
-     Show how each section builds on or enables the next. See skills/draft_structure_paragraph.  %%
+Each item must be: specific, falsifiable, and forward-reference its evidence section.
+Use skills/review_claim_evidence_audit to verify this paragraph delivers what it promises.
+:::
+
+::: {.scaffold}
+P4: Approach sketch — how? One paragraph, enough to be credible.
+:::
+
+::: {.scaffold}
+P5: Structure — trace the argument through the sections, not just list them.
+Show how each section builds on or enables the next. See skills/draft_structure_paragraph.
+:::
 
 ```
 

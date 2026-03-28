@@ -19,7 +19,7 @@ description: Produce a concrete checklist of evaluation items (proofs, tools, ca
 - `skills/draft_evaluation_design` output (if it was run).
 - Contribution list from Introduction P3.
 - CLAUDE.md: thesis and domain.
-- context/DECISIONS.md: any evaluation-related decisions.
+- `.claude/memory/decision_*.md`: any evaluation-related decisions (auto-loaded via MEMORY.md).
 
 ## Steps
 
@@ -51,7 +51,7 @@ For each item, classify:
 | **Done (unwritten)** | Results exist but not yet written into the evaluation section |
 | **Done (written)** | Results exist and are reported in the paper |
 
-Status is determined by reading the evaluation section for reported results and checking for `%% @TODO: %%` or `%% @FORMAL: %%` markers that indicate incomplete work.
+Status is determined by reading the evaluation section for reported results and checking for `.todo` or `.formal` annotations that indicate incomplete work.
 
 ### 3. Identify dependencies
 
@@ -84,7 +84,7 @@ Present as a table:
 |---|------|------|--------|-----------|-------------------|---------|
 | E1 | Prove Theorem 1 (confidentiality) | Proof | In progress | Def 3 stable | Full proof, all cases | §4.2 |
 | E2 | Tamarin: secrecy lemma | Mechanized | Blocked | E1 | Terminates, holds | §5.1 |
-| E3 | Supply chain case study | Case study | Not started | Running example (context/DECISIONS.md) | All steps traced | §5.2 |
+| E3 | Supply chain case study | Case study | Not started | Running example (decision_csok_running_example.md) | All steps traced | §5.2 |
 | E4 | Round-trip measurements | Benchmark | Not started | Prototype (E5) | N=10,50,100 timed | §5.3 |
 | E5 | Credential issuance prototype | Implementation | In progress | — | Issues + verifies 1 VC | §5.3 |
 

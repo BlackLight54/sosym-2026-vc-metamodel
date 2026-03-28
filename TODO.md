@@ -13,6 +13,10 @@
 - **T09** — Sec 05 threats + scalability
 - **T10** — Final polish (eval preamble, Intro P5, abstract numbers) [Binding #10]
 
+### Advisor feedback
+
+- **M00** — Process Oszkár's 2026-03-25 notes into decisions, feedback, and todos
+
 ### High priority (overhaul phase 2)
 
 - **M20** — **Execute Phase 2: marker migration, citations, Z01 extraction** (see `prompts/2026-03-28_workflow_overhaul_phase2.md`)

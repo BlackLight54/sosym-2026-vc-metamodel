@@ -37,7 +37,7 @@ A good running example is:
 
 ## Cross-cutting decision
 
-The running example is a cross-cutting decision — it affects every section. Record it in context/DECISIONS.md:
+The running example is a cross-cutting decision — it affects every section. Record it as a decision memory in `.claude/memory/`:
 - What the example is.
 - What aspects of the contribution it exercises.
 - What it intentionally does NOT exercise (and why).

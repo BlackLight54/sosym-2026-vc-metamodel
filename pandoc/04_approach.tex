@@ -1,7 +1,3 @@
-\todo[inline,color=gray!10]{meta: Dependencies: Section 02 (Refinery concepts, multi-level modeling), Section 03 (running example).}
-
-\todo[inline,color=gray!10]{meta: Source: models/vc\_metamodel.refinery. Layers: DCL / CSL / FSL.}
-
 \section{Approach}\label{approach}
 
 \label{sec:approach}
@@ -180,7 +176,7 @@ C9 & Cross-credential predicate gap & Format limitation & DCL\(\leftrightarrow\)
 \end{tabularx}
 \end{center}
 
-\todo[inline,color=orange!20]{figure fig\_constraint\_taxonomy: The table above, formatted as a figure with caption.}
+\todo[inline,color=orange!20]{figure: fig:constraint\_taxonomy: The table above, formatted as a figure with caption.}
 
 Constraints C1--C3 are structural (metamodel-enforced). C4 is a domain rule grounded in government regulation. C5--C7 each originate from a different governance framework. C8 and C9 are cross-layer results: they emerge only when constraints from multiple sources and layers are checked jointly. \autoref{sec:headlines} develops C8 and C9 as the paper's headline results.
 
@@ -194,7 +190,7 @@ Credentials issued by different authorities for the same person must be recogniz
 
 Some design problems are invisible at any single layer. When a domain constraint spans two credentials --- \(\text{property\_area} \geq f(\text{num\_children})\) requires combining claims from FamilyStatusCred and PropertyCred --- the design depends on a format capability that may not exist. The shadow predicate \texttt{cross\_cred\_predicate\_gap} detects this: \(\text{cross\_cred\_predicate\_gap}(c_1, c_2)\) holds when \(\text{aligned}(cs_1, cs_2)\) and at least one credential's format lacks multi-credential proof support. No deployed format supports cross-credential arithmetic (AnonCreds supports multi-credential \emph{presentation} but not cross-credential \emph{computation}), so the predicate fires for every aligned pair, making a structural limitation of the format landscape visible. As a shadow predicate, it records a condition whose severity depends on domain requirements; \autoref{sec:headlines} develops this as the second headline result.
 
-\todo[inline,color=orange!20]{figure fig\_generated\_model: (Optional) Refinery-generated model instance for the housing subsidy example showing constraint satisfaction.}
+\todo[inline,color=orange!20]{figure: fig:generated\_model: (Optional) Refinery-generated model instance for the housing subsidy example showing constraint satisfaction.}
 
 \todo[inline]{A16 --- Apply complete constraint set to housing subsidy example. Show which propagation rules fire, generated model output. Cross-layer constraint violation when SD-JWT-VC chosen but predicate proof required. Length: 1 paragraph.}
 

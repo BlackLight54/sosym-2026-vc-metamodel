@@ -1,5 +1,5 @@
 ---
-description: Extract lessons learned and update project state before a conversation ends or context compacts. Run when wrapping up, when compaction is imminent, or when explicitly invoked. Saves feedback and decisions as memories, updates claim and todo status.
+description: Extract lessons learned and update project state before a conversation ends or context compacts. Run when wrapping up, when compaction is imminent, or when explicitly invoked. Saves feedback, claims and decisions as memories, updates todo status.
 ---
 
 # Skill: Session Close
@@ -29,6 +29,7 @@ Review the conversation history for:
 ### 2. Check for duplicates
 
 Before writing any new memory:
+
 - Read MEMORY.md index.
 - For each candidate lesson, check if an existing memory already covers it.
 - If yes: update the existing memory file if the lesson refines it. Do not create duplicates.
@@ -37,7 +38,9 @@ Before writing any new memory:
 ### 3. Write new memories
 
 For each genuinely new lesson:
+
 - Create a memory file in `.claude/memory/` following the standard format:
+
   ```markdown
   ---
   name: [descriptive name]
@@ -47,11 +50,13 @@ For each genuinely new lesson:
 
   [Content with Why: and How to apply: lines for feedback/project types]
   ```
+
 - Add a one-line entry to MEMORY.md.
 
 ### 4. Update claim delivery status
 
 Check if any binding claims were advanced during this conversation:
+
 - Read `.claude/memory/claim_*.md` files.
 - For each claim, assess whether work done in this session changed its status.
 - Update the claim file's `status` field if warranted (e.g., partial -> delivered).
@@ -59,6 +64,7 @@ Check if any binding claims were advanced during this conversation:
 ### 5. Update todo status
 
 Check if any todos were completed or progressed:
+
 - Read `context/todos/INDEX.md`.
 - For completed work: update the todo file's status to "done", move to `context/archive/completed_todos/`.
 - For new work items discovered: create new todo files in `context/todos/`.
@@ -67,6 +73,7 @@ Check if any todos were completed or progressed:
 ### 6. Summary
 
 Report what was persisted:
+
 - New memories saved (with filenames)
 - Existing memories updated (with filenames)
 - Claims status changes

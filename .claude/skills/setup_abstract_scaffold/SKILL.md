@@ -76,8 +76,10 @@ Write the draft to `sections/00_abstract.md`:
 ```markdown
 # Abstract
 
-%% This is a contract. Revisit after major changes to the paper's argument.
-     Structure: problem → gap → contribution → approach/results → implication %%
+::: {.scaffold}
+This is a contract. Revisit after major changes to the paper's argument.
+Structure: problem → gap → contribution → approach/results → implication
+:::
 
 [abstract text]
 ```

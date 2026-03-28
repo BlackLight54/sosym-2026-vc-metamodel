@@ -1,8 +1,10 @@
-%% @META: Section: Approach %%
-%% @META: Budget: 3.0 pages (~16 paragraphs, 4 subsections) %%
-%% @META: Goal: Present the three-layer metamodel and cross-layer constraint formalization. This is the core contribution. %%
-%% @META: Dependencies: Section 02 (Refinery concepts, multi-level modeling), Section 03 (running example). %%
-%% @META: Source: models/vc_metamodel.refinery. Layers: DCL / CSL / FSL. %%
+---
+section: Approach
+budget: "3.0 pages (~16 paragraphs, 4 subsections)"
+goal: "Present the three-layer metamodel and cross-layer constraint formalization. This is the core contribution."
+dependencies: ["02_background", "03_overview"]
+source: "models/vc_metamodel.refinery. Layers: DCL / CSL / FSL."
+---
 
 # Approach
 
@@ -14,15 +16,19 @@ Credential ecosystem design involves three distinct concerns: what domain-level 
 
 \label{sec:dcl}
 
-%% @FORMAL: Definition of domain concept layer metaclasses: Entity, Subject, Value, Prop. Statement predicate: statement(subject, property, value). %%
+::: {.formal}
+Definition of domain concept layer metaclasses: Entity, Subject, Value, Prop. Statement predicate: statement(subject, property, value).
+:::
 
 ![The three-layer metamodel. The domain concept layer (top) models facts as a typed information graph; the credential schema layer (middle) partitions facts into credentials with subject bindings and trace mappings; the format-specific layer (bottom) assigns concrete formats with capability predicates and governance annotations.](pandoc/assets/fig_metamodel.png){#fig:metamodel width=100%}
 
 The domain concept layer models domain-level facts as a typed information graph. The abstract metaclass `Entity` has two concrete subclasses: `Subject` and `Value`. A `Subject` is an entity that can anchor a credential — it represents the person, organization, or thing about which claims are made. A `Value` is an entity that serves as the target of a property. Each `Entity` contains zero or more `Prop` instances; each `Prop` holds exactly one `Value` through a containment reference and carries a trace link to the credential schema layer (\autoref{sec:csl}). The ternary predicate $\text{statement}(s, p, v)$ holds when subject $s$ owns property $p$ and $p$ contains value $v$, with the well-formedness condition $s \neq v$. The distinction between `Subject` and `Value` is inferred structurally: a propagation rule classifies any `Entity` with no incoming value reference as a `Subject` — it is a root of the property tree, and therefore a candidate credential subject at the CSL layer. The complete Refinery encoding is provided in the supplementary material.
 
-%% @FORMAL: Domain Concept Layer constraints: connectivity, no self-loops, statement well-formedness. %%
+::: {.formal}
+Domain Concept Layer constraints: connectivity, no self-loops, statement well-formedness.
+:::
 
-A credential ecosystem must cover all domain-level facts — an entity unreachable from the rest of the graph represents a fact that no credential path connects to the subject, and therefore cannot be verified. The `non_connected` error predicate enforces this: it flags any pair of entities not transitively reachable through the `neighbours` relation, where two entities are neighbours if a `statement` connects them in either direction. The `no_self_loop` propagation rule prevents an entity from serving as both the owner and the value of the same property — a structurally meaningless configuration that would collapse the subject–value distinction. Together with the $s \neq v$ condition in the `statement` predicate, these constraints ensure that every DCL instance is a connected, acyclic information graph with clear directionality from subjects to values. %% @TODO: Acyclicity constraint (error cyclic) not yet in vc_metamodel.refinery — add before submission. %% In terms of the usage modes (\autoref{sec:functional-overview}), DCL constraints serve error identification: evaluating `non_connected` on a partial specification with an orphaned entity returns $\textbf{NOT\_OK}(\text{non\_connected}(e_1, e_2))$, naming the unreachable pair and indicating where the domain model is incomplete.
+A credential ecosystem must cover all domain-level facts — an entity unreachable from the rest of the graph represents a fact that no credential path connects to the subject, and therefore cannot be verified. The `non_connected` error predicate enforces this: it flags any pair of entities not transitively reachable through the `neighbours` relation, where two entities are neighbours if a `statement` connects them in either direction. The `no_self_loop` propagation rule prevents an entity from serving as both the owner and the value of the same property — a structurally meaningless configuration that would collapse the subject–value distinction. Together with the $s \neq v$ condition in the `statement` predicate, these constraints ensure that every DCL instance is a connected, acyclic information graph with clear directionality from subjects to values. [Acyclicity constraint (error cyclic) not yet in vc_metamodel.refinery — add before submission.]{.todo} In terms of the usage modes (\autoref{sec:functional-overview}), DCL constraints serve error identification: evaluating `non_connected` on a partial specification with an orphaned entity returns $\textbf{NOT\_OK}(\text{non\_connected}(e_1, e_2))$, naming the unreachable pair and indicating where the domain model is incomplete.
 
 In the housing subsidy scenario, the domain concept layer contains:
 
@@ -127,7 +133,9 @@ The following table classifies the constraints exercised in the housing subsidy 
 | C8 | **Governance conflict** | eIDAS+GDPR+W3C | FSL | C5$\wedge$C6$\wedge$C7 unsatisfiable on IncomeCred |
 | C9 | Cross-credential predicate gap | Format limitation | DCL$\leftrightarrow$FSL | C4 requires cross-credential arithmetic; no deployed format supports it |
 
-%% @FIGURE: fig_constraint_taxonomy | The table above, formatted as a figure with caption. %%
+::: {#fig:constraint_taxonomy .figure}
+The table above, formatted as a figure with caption.
+:::
 
 Constraints C1–C3 are structural (metamodel-enforced). C4 is a domain rule grounded in government regulation. C5–C7 each originate from a different governance framework. C8 and C9 are cross-layer results: they emerge only when constraints from multiple sources and layers are checked jointly. \autoref{sec:headlines} develops C8 and C9 as the paper's headline results.
 
@@ -141,10 +149,16 @@ Credentials issued by different authorities for the same person must be recogniz
 
 Some design problems are invisible at any single layer. When a domain constraint spans two credentials — $\text{property\_area} \geq f(\text{num\_children})$ requires combining claims from FamilyStatusCred and PropertyCred — the design depends on a format capability that may not exist. The shadow predicate `cross_cred_predicate_gap` detects this: $\text{cross\_cred\_predicate\_gap}(c_1, c_2)$ holds when $\text{aligned}(cs_1, cs_2)$ and at least one credential's format lacks multi-credential proof support. No deployed format supports cross-credential arithmetic (AnonCreds supports multi-credential *presentation* but not cross-credential *computation*), so the predicate fires for every aligned pair, making a structural limitation of the format landscape visible. As a shadow predicate, it records a condition whose severity depends on domain requirements; \autoref{sec:headlines} develops this as the second headline result.
 
-%% @FIGURE: fig_generated_model | (Optional) Refinery-generated model instance for the housing subsidy example showing constraint satisfaction. %%
+::: {#fig:generated_model .figure}
+(Optional) Refinery-generated model instance for the housing subsidy example showing constraint satisfaction.
+:::
 
-%% @TODO: A16 — Apply complete constraint set to housing subsidy example. Show which propagation rules fire, generated model output. Cross-layer constraint violation when SD-JWT-VC chosen but predicate proof required. Length: 1 paragraph. %%
+::: {.todo}
+A16 — Apply complete constraint set to housing subsidy example. Show which propagation rules fire, generated model output. Cross-layer constraint violation when SD-JWT-VC chosen but predicate proof required. Length: 1 paragraph.
+:::
 
 The income threshold check illustrates how format-specific limitations propagate upward through the metamodel. With AnonCreds (CL signatures), the issuer encodes $\text{monthly\_income}$ as an integer attribute; at verification time, the holder proves $\text{monthly\_income} \geq \text{threshold}$ via a predicate proof without disclosing the exact value [@curran2022anoncreds] — the domain concept layer structure is unchanged. With SD-JWT-VC, no predicate proof mechanism exists [@terbu_sd-jwt-based_2026]. The only workaround is for the issuer to pre-compute boolean claims at issuance: $\text{earns\_above\_200k} \mapsto \text{true}$, $\text{earns\_above\_300k} \mapsto \text{true}$, and so on. This restructures the domain concept layer: the single Prop $\text{earns} \to \text{monthly\_income}$ (integer) is replaced by multiple Props $\text{earns\_above\_X} \to \text{boolean}$ for each anticipated threshold. The format-specific limitation has forced a change in the domain-level information model — a cross-layer constraint propagation that is visible only when both layers are analyzed together.
 
-%% @TODO: Polish — this paragraph may need tightening for page budget. The key point is that FSL limitations change DCL structure, which is exactly what the metamodel detects. %%
+::: {.todo}
+Polish — this paragraph may need tightening for page budget. The key point is that FSL limitations change DCL structure, which is exactly what the metamodel detects.
+:::
