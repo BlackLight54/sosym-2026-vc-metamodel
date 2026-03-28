@@ -24,7 +24,9 @@ We characterize the metamodel's coverage of W3C VCDM 2.0 concepts \citep{manu_ve
 
 We collected eight normative constraints from the eIDAS Architecture Reference Framework (ARF) v2.7.3 \citep{noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026} governing credential format assignment, and classified each as \emph{fully expressible}, \emph{partially expressible}, or \emph{not expressible}. Three are fully expressible (\autoref{tab:expressiveness}), five partially, and none falls entirely outside the metamodel's capacity. The full constraint analysis is provided in the supplementary material.
 
-\begin{center}
+\begin{table}
+\caption{Fully expressible eIDAS ARF constraints. Each maps directly to metamodel
+predicates or architecture. \label{tab:expressiveness}}
 \small
 \setlength{\tabcolsep}{4pt}
 \begin{tabularx}{\columnwidth}{LLLL}
@@ -37,7 +39,7 @@ SD-JWT-VC \\
 ARF-C7 & Attributes defined encoding-independently, then per-format & ARB\_06 & DCL\(\to\)CSL\(\to\)FSL layer architecture \\
 \bottomrule
 \end{tabularx}
-\end{center}
+\end{table}
 
 \todo[inline,color=orange!20]{figure fig\_expressiveness\_table: Constraint expressiveness table: ID {\texttimes} constraint {\texttimes} source {\texttimes} expressible {\texttimes} predicate.}
 
@@ -151,7 +153,14 @@ All instances are evaluated using the Refinery CLI,\footnote{Container image \te
 
 \todo[inline,color=orange!20]{figure fig\_scalability: Concretizability check and model generation runtime vs. model size (N credentials). X-axis: N. Y-axis: wall-clock time (s). Lines: consistency, concretizability-SAT, concretizability-UNSAT, generate-SAT. figure* (full-width).}
 
-\begin{center}
+\begin{table}
+\caption{Scalability measurements across three Refinery operations.
+\emph{Consistency} (\texttt{check}): verifies partial model has no
+internal contradictions. \emph{Concretizability} (\texttt{check\ -k}):
+determines whether a concrete model satisfying all constraints exists.
+\emph{Generation} (\texttt{generate}): produces a concrete model
+instance. Wall-clock seconds, mean \(\pm\sigma\) over 10 runs.
+\label{tab:scalability}}
 \small
 \setlength{\tabcolsep}{4pt}
 \begin{tabularx}{\columnwidth}{rrLrrr}
@@ -174,7 +183,7 @@ All instances are evaluated using the Refinery CLI,\footnote{Container image \te
 30 & TBD & UNSAT & TBD & TBD & --- \\
 \bottomrule
 \end{tabularx}
-\end{center}
+\end{table}
 
 \todo[inline]{Populate with measurement results --- Martin to run ./run\_measurements.sh all (+ add plain check to script). Fill cells as mean  . Generation on UNSAT marked --- (no valid model exists). Key observation: Consistency returns SAT on ALL rows including UNSAT models; only Concretizability correctly distinguishes SAT from UNSAT.}
 
@@ -184,7 +193,9 @@ All instances are evaluated using the Refinery CLI,\footnote{Container image \te
 
 \todo[inline]{Populate constraint sensitivity table from measurement results}
 
-\begin{center}
+\begin{table}
+\caption{Constraint sensitivity at \(N{=}3\): governance framework power-set.
+\label{tab:sensitivity}}
 \small
 \setlength{\tabcolsep}{4pt}
 \begin{tabularx}{\columnwidth}{LcccL}
@@ -201,7 +212,7 @@ G6 &  & x & x & TBD \\
 G7 & x & x & x & TBD \\
 \bottomrule
 \end{tabularx}
-\end{center}
+\end{table}
 
 The constraint sensitivity experiment confirms that only G7, the conjunction of all three governance frameworks, yields unsatisfiability; all seven proper subsets are satisfiable (\autoref{tab:sensitivity}). This validates the Headline 1 finding (\autoref{sec:headlines}): the income governance conflict requires the simultaneous imposition of eIDAS ARF format mandates \citep{noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026}, GDPR data minimization requirements \citep{gdpr}, and W3C VCDM conformance \citep{manu_verifiable_2025}. No proper subset of these three sources produces a conflict. The measurements cover \(N\) up to 30 credentials (TBD graph nodes); for reference, the EU Digital Identity Wallet Architecture Reference Framework defines fewer than 10 attestation types in its current version \citep{noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026}, though future ecosystem growth may increase this number. The contribution is the metamodel and its cross-layer constraint formalization; Refinery serves as the validation vehicle, and absolute performance numbers are tool-specific.
 

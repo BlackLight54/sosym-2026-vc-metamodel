@@ -1,28 +1,32 @@
 -- tables.lua
--- Pandoc Lua filter: convert Table AST to booktabs tabular/tabularx.
+-- Pandoc Lua filter: emit booktabs tabularx/tabular instead of longtable.
 --
 -- Why: Pandoc emits longtable by default, which is incompatible with
--- two-column layouts (ACM sigconf). This filter emits:
---   - tabular  (≤3 columns): fits naturally in column width
---   - tabularx (≥4 columns): l-aligned columns become wrapping L columns
---     (raggedright X) so text reflows within \columnwidth
+-- two-column layouts (ACM sigconf). This filter reads the table AST
+-- and emits tabularx (≥4 columns) or tabular (<4), wrapped in a
+-- table float when a caption is present. Pandoc's native caption and
+-- label handling is preserved.
 --
 -- Requires: booktabs (loaded by acmart.cls), tabularx, array (in preamble)
 
---- Render a list of Blocks to a LaTeX string.
+--- Render Inlines to a LaTeX string.
+local function inlines_to_latex(inlines)
+  return pandoc.write(pandoc.Pandoc({pandoc.Plain(inlines)}), "latex")
+    :gsub("%s+$", "")
+end
+
+--- Render Blocks to a LaTeX string.
 local function blocks_to_latex(blocks)
-  local doc = pandoc.Pandoc(blocks)
-  local result = pandoc.write(doc, "latex")
-  -- Trim trailing whitespace/newlines
+  local result = pandoc.write(pandoc.Pandoc(blocks), "latex")
   return (result:gsub("%s+$", ""))
 end
 
---- Render a single table cell to a LaTeX string.
+--- Render a single table cell.
 local function cell_to_latex(cell)
   return blocks_to_latex(cell.contents)
 end
 
---- Convert a Row (header or body) to a LaTeX row string.
+--- Render a row as a LaTeX table row.
 local function row_to_latex(row)
   local cells = {}
   for _, cell in ipairs(row.cells) do
@@ -35,7 +39,7 @@ function Table(tbl)
   local ncols = #tbl.colspecs
   local use_tabularx = ncols >= 4
 
-  -- Extract column alignments
+  -- Build column spec
   local aligns = {}
   local has_l = false
   for _, colspec in ipairs(tbl.colspecs) do
@@ -53,14 +57,37 @@ function Table(tbl)
       end
     end
   end
-
-  -- Fall back to plain tabular if no L columns to distribute
   if use_tabularx and not has_l then
     use_tabularx = false
   end
 
+  -- Extract caption from AST
+  local caption_latex = nil
+  if tbl.caption and tbl.caption.long and #tbl.caption.long > 0 then
+    caption_latex = blocks_to_latex(tbl.caption.long)
+    caption_latex = caption_latex:gsub("%s+$", "")
+  end
+
+  -- Extract identifier for \label (from table attributes if present)
+  local label_latex = nil
+  if tbl.attr and tbl.attr.identifier and tbl.attr.identifier ~= "" then
+    label_latex = "\\label{" .. tbl.attr.identifier .. "}"
+  end
+
   local lines = {}
-  table.insert(lines, "\\begin{center}")
+  local has_caption = caption_latex and caption_latex ~= ""
+
+  if has_caption then
+    table.insert(lines, "\\begin{table}")
+    -- Emit \caption{...} with \label inside if we have one
+    if label_latex then
+      table.insert(lines, "\\caption{" .. caption_latex .. "}" .. label_latex)
+    else
+      table.insert(lines, "\\caption{" .. caption_latex .. "}")
+    end
+  else
+    table.insert(lines, "\\begin{center}")
+  end
   table.insert(lines, "\\small")
 
   if use_tabularx then
@@ -93,7 +120,12 @@ function Table(tbl)
   else
     table.insert(lines, "\\end{tabular}")
   end
-  table.insert(lines, "\\end{center}")
+
+  if has_caption then
+    table.insert(lines, "\\end{table}")
+  else
+    table.insert(lines, "\\end{center}")
+  end
 
   return pandoc.RawBlock("latex", table.concat(lines, "\n"))
 end
