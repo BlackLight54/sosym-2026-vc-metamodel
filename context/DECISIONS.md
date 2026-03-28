@@ -2,7 +2,7 @@
 
 Cross-cutting decisions that affect multiple sections or constrain downstream work. This file is the canonical record — inspectable, versionable, and survives context resets.
 
-Record decisions here when they are made. Review them periodically with `skills/prior_decision_audit`.
+Record decisions here when they are made. Review them periodically with `skills/review_prior_decision_audit`.
 
 ## How to record a decision
 

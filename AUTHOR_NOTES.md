@@ -66,7 +66,7 @@ sections/*.md  ──pandoc──►  pandoc/*.tex  ──git push──►  Ove
 
 Version history is tracked by Overleaf. No local git for Markdown files.
 
-**Push workflow:** Use `skills/overleaf_push` to build LaTeX from Markdown and push to the Overleaf git remote. This is the only git usage in the project — it's a deployment mechanism, not a version control workflow.
+**Push workflow:** Use `skills/project_overleaf_push` to build LaTeX from Markdown and push to the Overleaf git remote. This is the only git usage in the project — it's a deployment mechanism, not a version control workflow.
 
 **Milestone labels (Martin — in Overleaf History → Label this version):**
 - `first-draft` — all sections have prose, markers may remain.
@@ -80,7 +80,7 @@ Label in Overleaf immediately after pushing at these milestones.
 
 - **Editor:** Obsidian for writing, VS Code for Claude Code edits
 - **Shell:** Fish
-- **References:** Zotero → Overleaf Zotero import (`.bib` managed on Overleaf side). Use `skills/bibliography` to resolve `%% @CITE: %%` markers and track what needs to be added to Zotero. Better BibTeX plugin recommended for Zotero.
+- **References:** Zotero → Overleaf Zotero import (`.bib` managed on Overleaf side). Use `skills/draft_bibliography` to resolve `%% @CITE: %%` markers and track what needs to be added to Zotero. Better BibTeX plugin recommended for Zotero.
 
 ## MCP servers for Claude Code
 
@@ -99,7 +99,7 @@ claude mcp add-json zotero '{"command":"zotero-mcp","env":{"ZOTERO_LOCAL":"true"
 Requires: Zotero running with local API enabled, or Zotero API key. Recommended: Better BibTeX plugin.
 Docs: https://github.com/54yyyu/zotero-mcp
 
-Note: The primary `.bib` pipeline is Overleaf's Zotero import. This MCP server is an optional convenience for Claude Code to search the Zotero library when resolving `%% @CITE: %%` markers via `skills/bibliography`.
+Note: The primary `.bib` pipeline is Overleaf's Zotero import. This MCP server is an optional convenience for Claude Code to search the Zotero library when resolving `%% @CITE: %%` markers via `skills/draft_bibliography`.
 
 ### GitHub (access repos with prior work code)
 ```fish
@@ -132,63 +132,68 @@ Some skills produce **prompt files** in `prompts/` — ready-to-execute instruct
 ### Starting a new paper
 1. Drop this scaffold into the project directory.
 2. Paste CFP or give Claude Code the URL.
-3. Run `skills/cfp_import` → `context/CFP.md` + `context/VENUE.md` (budget, format, exemplars).
+3. Run `skills/setup_cfp_import` → `context/CFP.md` + `context/VENUE.md` (budget, format, exemplars).
 4. Confirm `context/VENUE.md` exemplar papers and supplementary strategy.
 5. Write thesis in CLAUDE.md.
-6. Run `skills/reviewer_personas` → 4 personas in `context/VENUE.md` (rough, will refine later).
-7. Choose a running example (see `skills/running_example_guide/SKILL.md`). Record in `context/DECISIONS.md`.
-8. Run `skills/abstract_scaffold` → abstract contract + champion test + title candidates.
-9. Run `skills/gap_analysis` → prompt files in `prompts/` for research agents.
-10. Execute research prompts. Import results with `skills/prior_work_import`.
-11. Run `skills/related_work_positioning` → comparison matrix.
-12. Run `skills/section_scaffold` → section files.
-13. Run `skills/evaluation_design` → evaluation structure.
+6. Run `skills/setup_reviewer_personas` → 4 personas in `context/VENUE.md` (rough, will refine later).
+7. Choose a running example (see `skills/ref_running_example/SKILL.md`). Record in `.claude/memory/` as a decision memory.
+8. Run `skills/setup_abstract_scaffold` → abstract contract + champion test + title candidates.
+9. Run `skills/research_gap_analysis` → prompt files in `prompts/` for research agents.
+10. Execute research prompts. Import results with `skills/research_prior_work_import`.
+11. Run `skills/research_related_work_positioning` → comparison matrix.
+12. Run `skills/setup_section_scaffold` → section files.
+13. Run `skills/draft_evaluation_design` → evaluation structure.
 14. Start writing (TODO.md tracks what's next).
 15. Build pandoc pipeline (see "Setup TODO" above).
 
 ### During writing
 - Use `context/WORKFLOW.md` task templates for drafting, revising, modeling.
-- Run `skills/paper_status` at session start for a snapshot.
-- Run `skills/claim_evidence_audit` periodically to catch overclaims and check contribution mapping.
-- Re-run `skills/reviewer_personas` after first draft to refine personas with full paper context.
-- For multi-section changes, run `skills/revision_orchestration` → ordered prompts in `prompts/`.
+- Run `skills/review_paper_status` at session start for a snapshot.
+- Run `skills/review_claim_evidence_audit` periodically to catch overclaims and check contribution mapping.
+- Re-run `skills/setup_reviewer_personas` after first draft to refine personas with full paper context.
+- For multi-section changes, run `skills/plan_revision_orchestration` → ordered prompts in `prompts/`.
 - Thread the running example through each section.
-- Iterate figures with `skills/figure_design`.
-- Run `skills/prior_decision_audit` when something feels off.
+- Iterate figures with `skills/draft_figure_design`.
+- Run `skills/review_prior_decision_audit` when something feels off.
 
 ### Preparing to submit
-1. Run `skills/evaluation_execution` → confirm all evaluation items are done (written).
-2. Run `skills/claim_evidence_audit` → all claims delivered, no overclaims.
-3. Run `skills/limitations_threats` → limitations section is honest and complete.
-4. Run `skills/bibliography` → all `%% @CITE: %%` markers resolved.
-5. Run `skills/pre_submission_check` → markers, refs, anonymity.
-6. Run `skills/final_review` → coherence, champion test, reviewer simulation.
-7. Manual read-through and rewrite.
-8. Revisit abstract and title with `skills/abstract_scaffold` in revision mode.
-9. Handoff to LaTeX on Overleaf for final polish (document in TODO.md).
-10. Submit.
+1. Run `skills/draft_evaluation_execution` → confirm all evaluation items are done (written).
+2. Run `skills/review_claim_evidence_audit` → all claims delivered, no overclaims.
+3. Run `skills/draft_limitations_threats` → limitations section is honest and complete.
+4. Run `skills/draft_bibliography` → all `%% @CITE: %%` markers resolved.
+5. Run `skills/review_pre_submission_check` → markers, refs, anonymity.
+6. Run `skills/review_paper_audit` → full-paper audit against binding claims, decisions, and reviewer personas.
+7. Run `skills/review_final_review` → coherence, champion test, reviewer simulation.
+8. Manual read-through and rewrite.
+9. Revisit abstract and title with `skills/setup_abstract_scaffold` in revision mode.
+10. Handoff to LaTeX on Overleaf for final polish (document in TODO.md).
+11. Submit.
 
 ### After reviews
-1. Run `skills/rebuttal` → parse reviews, draft response, revision plan.
-2. Run `skills/revision_orchestration` → ordered prompts for the revision.
+1. Run `skills/plan_rebuttal` → parse reviews, draft response, revision plan.
+2. Run `skills/plan_revision_orchestration` → ordered prompts for the revision.
 3. Execute revision prompts. Re-run quality skills.
+
+### Ending a session
+
+- Run `skills/project_session_close` before wrapping up to persist lessons learned and update project state.
 
 ### Resuming a session
 1. Open Claude Code in project directory (auto-loads CLAUDE.md).
-2. "Read TODO.md — what should I work on?" (Claude runs `skills/paper_status` automatically.)
+2. "Read TODO.md — what should I work on?" (Claude runs `skills/review_paper_status` automatically.)
 3. Work through tasks.
 
 ## Conventions
 
 - Section files numbered: `sections/01_introduction.md`, etc.
-- Removed text: `context/archive/YYYY-MM-DD_description.md`
+- Removed text: `context/archive/YYYY-MM-DD_description.md` (archive is the single destination for all retired state: superseded decisions, completed todos, cut text)
 - Collected references: `context/references/`
 - Generated prompts: `prompts/YYYY-MM-DD_[skill]_[desc].md`
 - Figure sources: `pandoc/assets/`
-- Cross-cutting decisions: `context/DECISIONS.md`
+- Cross-cutting decisions: `.claude/memory/decision_*.md` (indexed in `.claude/memory/MEMORY.md`)
 
 ## Customize for each paper
 
 - [ ] Build pandoc pipeline (see "Setup TODO" above)
-- [ ] Add author names to `skills/pre_submission_check/check.sh` for anonymity scan
+- [ ] Add author names to `skills/review_pre_submission_check/check.sh` for anonymity scan
 - [ ] Set domain in CLAUDE.md if not formal methods

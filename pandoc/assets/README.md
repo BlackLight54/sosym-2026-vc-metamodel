@@ -1,6 +1,6 @@
 # Assets
 
-Source files for paper figures and other assets. Designed via `skills/figure_design`, drafted by LLM, refined by Martin.
+Source files for paper figures and other assets. Designed via `skills/draft_figure_design`, drafted by LLM, refined by Martin.
 
 ## Naming
 
@@ -16,11 +16,11 @@ Filename matches label: `fig_example.pdf` → label `fig:example`.
 
 ## Visual vocabulary
 
-See `STYLE.md` in this directory (created by `skills/figure_design` when multiple figures exist). Ensures consistent colors, shapes, and conventions across all figures.
+See `STYLE.md` in this directory (created by `skills/draft_figure_design` when multiple figures exist). Ensures consistent colors, shapes, and conventions across all figures.
 
 ## Iteration
 
-Figures are iterated during writing, not deferred. When the argument evolves, the figure evolves too. The `skills/figure_design` iteration protocol tracks this.
+Figures are iterated during writing, not deferred. When the argument evolves, the figure evolves too. The `skills/draft_figure_design` iteration protocol tracks this.
 
 ## Quality checklist (before submission)
 

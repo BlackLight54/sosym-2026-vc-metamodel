@@ -1,6 +1,6 @@
 # Venue
 
-Derived from CFP.md. Contains interpreted, project-specific settings. Populate using `skills/cfp_import/SKILL.md` or manually.
+Derived from CFP.md. Contains interpreted, project-specific settings. Populate using `skills/setup_cfp_import/SKILL.md` or manually.
 
 ## Budget and format
 

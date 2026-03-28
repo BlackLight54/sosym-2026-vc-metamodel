@@ -1,19 +1,19 @@
-revievwer persona-archetype ambiguity. fix
+~~revievwer persona-archetype ambiguity. fix~~ ✅ Done — `review_reviewer_archetypes` skill separated from `setup_reviewer_personas`
 
-pandoc pipeline shoudl be exported and improved
+~~pandoc pipeline shoudl be exported and improved~~ ✅ Done — `project_pandoc_convert` and `project_overleaf_push` skills
 Maybe more todo/filter types, maybe obsidian filters
 
-As code for multiple prompts, uh, to cut up a big task in chunks, I should ask him to create, uh, parallel and, uh, serial and, uh, dependency-informed pipeline because that way he can make... A- and, uh, tell him that he can make, uh, um... The prompts change the depended ones. That way he can make a whole workflow. I should include this in the system prompt
+~~As code for multiple prompts, uh, to cut up a big task in chunks, I should ask him to create, uh, parallel and, uh, serial and, uh, dependency-informed pipeline because that way he can make... A- and, uh, tell him that he can make, uh, um... The prompts change the depended ones. That way he can make a whole workflow. I should include this in the system prompt~~ ✅ Done — `plan_consolidation_pipeline` skill with wave-based parallelism and dependency tracking
 
-Also we should devise a naming convention to capture such dependencies and parallelisms. The thought of Claude was to use phases. I think that's a good first start but if one step takes really longer then it can block the other parts of the phase. So I think we should construct a directed graph instead and somehow put it in the naming convention of the prompts.
+~~Also we should devise a naming convention to capture such dependencies and parallelisms. The thought of Claude was to use phases. I think that's a good first start but if one step takes really longer then it can block the other parts of the phase. So I think we should construct a directed graph instead and somehow put it in the naming convention of the prompts.~~ ✅ Done — consolidation pipeline uses directed dependency graph with waves, not rigid phases
 
-Claude should put all sequences of prompt flows into their own directory, with some diagram and explanation on how they should be run and concatenated.
+~~Claude should put all sequences of prompt flows into their own directory, with some diagram and explanation on how they should be run and concatenated.~~ ✅ Done — `plan_consolidation_pipeline` generates PIPELINE.md with dependency diagram per prompt directory
 
-When drafting with draft prompts that I write and with draft prompts that I ask from Claude, when in plan mode, he should show me how the existing paragraph plans to do scaffolding transforms into the draft and also show me his edits within the plan with cross-through text.
+~~When drafting with draft prompts that I write and with draft prompts that I ask from Claude, when in plan mode, he should show me how the existing paragraph plans to do scaffolding transforms into the draft and also show me his edits within the plan with cross-through text.~~ (Partially addressed in CLAUDE.md plan mode behavior, not yet formalized as a skill constraint)
 
-We should not have a TODO.md that should be like in the paper, but for global to-dos or long running things, I think we should include a single page of just to-dos at the beginning of the paper, like a global to-do list which contains check marks and everything. That should be the authoritative copy, still a different file but included in the paper so we can see it in our leaf. Thus we move the done todos to a change log or the decisions file or something.
+~~We should not have a TODO.md that should be like in the paper, but for global to-dos or long running things, I think we should include a single page of just to-dos at the beginning of the paper, like a global to-do list which contains check marks and everything. That should be the authoritative copy, still a different file but included in the paper so we can see it in our leaf. Thus we move the done todos to a change log or the decisions file or something.~~ ✅ Done — TODO.md decomposed into `context/todos/` with INDEX.md. Completed todos archived to `context/archive/completed_todos/`. Decisions migrated to `.claude/memory/decision_*.md`.
 
-When editing drafted text in the plan, Claude should use strikethrough to signal the changes from the previous version.
+~~When editing drafted text in the plan, Claude should use strikethrough to signal the changes from the previous version.~~ (Not yet formalized)
 
 per section meta table
 Line Marker Disposition

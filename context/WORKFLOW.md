@@ -17,7 +17,7 @@ Tasks are prepared in conversation (plan mode), then executed via Claude Code. C
 ## Setup tasks
 
 ### Initialize project
-**Skill:** `skills/cfp_import` — fetches CFP, populates CFP.md, derives VENUE.md.
+**Skill:** `skills/setup_cfp_import` — fetches CFP, populates CFP.md, derives VENUE.md.
 
 Remaining manual steps:
 - Write thesis in CLAUDE.md (core claim, mechanism, so-what).
@@ -26,26 +26,26 @@ Remaining manual steps:
 - Set up MCP servers if needed (see AUTHOR_NOTES.md).
 
 ### Generate reviewer personas
-**Skill:** `skills/reviewer_personas` — generates 4 personas (weakest, strongest, adversarial, adjacent-field). Run after thesis exists; re-run after first draft for refinement.
+**Skill:** `skills/setup_reviewer_personas` — generates 4 personas (weakest, strongest, adversarial, adjacent-field). Run after thesis exists; re-run after first draft for refinement.
 
 ### Scaffold the paper
-**Skill:** `skills/section_scaffold` — creates format-aware section files.
+**Skill:** `skills/setup_section_scaffold` — creates format-aware section files.
 
 ### Write abstract
-**Skill:** `skills/abstract_scaffold` — generates structured abstract from thesis.
+**Skill:** `skills/setup_abstract_scaffold` — generates structured abstract from thesis.
 
 ---
 
 ## Research tasks
 
 ### Gap analysis
-**Skill:** `skills/gap_analysis` — generates prioritized research questions for agents.
+**Skill:** `skills/research_gap_analysis` — generates prioritized research questions for agents.
 
 ### Process agent results
-**Skill:** `skills/prior_work_import` — imports findings into structured reference notes.
+**Skill:** `skills/research_prior_work_import` — imports findings into structured reference notes.
 
 ### Position against related work
-**Skill:** `skills/related_work_positioning` — builds comparison matrix, derives positioning statements.
+**Skill:** `skills/research_related_work_positioning` — builds comparison matrix, derives positioning statements.
 
 ### Verify novelty claim
 Targeted search: "no one has done X." Return evidence for or against.
@@ -62,24 +62,24 @@ What I need: [foundational work / empirical evidence / definition origin]
 ```
 
 ### Resolve citation markers (batch)
-**Skill:** `skills/bibliography` — scans all `%% @CITE: %%` markers, resolves to BibTeX keys where possible, identifies papers to add to Zotero, and generates research prompts for unresolved markers. Run before `skills/overleaf_push` to clear citation debt.
+**Skill:** `skills/draft_bibliography` — scans all `%% @CITE: %%` markers, resolves to BibTeX keys where possible, identifies papers to add to Zotero, and generates research prompts for unresolved markers. Run before `skills/project_overleaf_push` to clear citation debt.
 
 Pipeline: Zotero → Overleaf Zotero import → `.bib`. This skill resolves markers against known references; Martin adds missing papers to Zotero and re-syncs in Overleaf.
 
 ### Design evaluation
-**Skill:** `skills/evaluation_design` — maps contributions to evaluation questions, selects methods, proposes section structure.
+**Skill:** `skills/draft_evaluation_design` — maps contributions to evaluation questions, selects methods, proposes section structure.
 
 Run after the contribution list (Introduction P3) stabilizes. Produces a plan in plan mode; Martin approves before drafting.
 
 ### Track evaluation execution
-**Skill:** `skills/evaluation_execution` — reads the evaluation plan and produces a concrete checklist: what to prove, run, implement, measure, or compare, with dependencies, acceptance criteria, and status tracking. Re-run to update progress.
+**Skill:** `skills/draft_evaluation_execution` — reads the evaluation plan and produces a concrete checklist: what to prove, run, implement, measure, or compare, with dependencies, acceptance criteria, and status tracking. Re-run to update progress.
 
-Run after `skills/evaluation_design`. Re-run periodically during the evaluation phase to track progress and surface blockers.
+Run after `skills/draft_evaluation_design`. Re-run periodically during the evaluation phase to track progress and surface blockers.
 
 ### Draft limitations and threats to validity
-**Skill:** `skills/limitations_threats` — derives limitations from formal model assumptions, evaluation scope, and adversarial reviewer attacks. Proposes placement based on venue conventions.
+**Skill:** `skills/draft_limitations_threats` — derives limitations from formal model assumptions, evaluation scope, and adversarial reviewer attacks. Proposes placement based on venue conventions.
 
-Run after the evaluation section is drafted. Feeds from `skills/evaluation_design` threat analysis.
+Run after the evaluation section is drafted. Feeds from `skills/draft_evaluation_design` threat analysis.
 
 ---
 
@@ -112,7 +112,7 @@ Constraints: [what must not change, terminology to preserve]
 **After:** If significant text removed, move to `archive/` with recovery context. Update TODO.md.
 
 ### Cut to page budget
-**Skill:** `skills/budget_cut` — measures actual page usage per section against `@META: Budget` allocations. Diagnostic mode: budget tree with over/under status. Prescriptive mode: phased cut plan ranked by argument damage, with `@CUT-START`/`@CUT-END` marker candidates.
+**Skill:** `skills/plan_budget_cut` — measures actual page usage per section against `@META: Budget` allocations. Diagnostic mode: budget tree with over/under status. Prescriptive mode: phased cut plan ranked by argument damage, with `@CUT-START`/`@CUT-END` marker candidates.
 
 For single-section prose trimming without the full diagnostic, use the prompt template:
 ```
@@ -123,10 +123,10 @@ Output: Numbered list of candidates with reasoning. Do not apply cuts.
 ```
 
 ### Update structure paragraph
-**Skill:** `skills/structure_paragraph` — regenerates intro P5 from current section inventory. Run whenever sections are added, removed, or reordered.
+**Skill:** `skills/draft_structure_paragraph` — regenerates intro P5 from current section inventory. Run whenever sections are added, removed, or reordered.
 
 ### Check notation consistency
-**Skill:** `skills/notation_table` — scans all sections for math symbols, flags inconsistencies, generates reference table.
+**Skill:** `skills/draft_notation_table` — scans all sections for math symbols, flags inconsistencies, generates reference table.
 
 ---
 
@@ -160,10 +160,10 @@ Verify formal definitions match the claims made about them in prose.
 ## Review tasks
 
 ### Claim audit (contributions + evidence)
-**Skill:** `skills/claim_evidence_audit` — contribution mapping + full claim–evidence check in one pass.
+**Skill:** `skills/review_claim_evidence_audit` — contribution mapping + full claim–evidence check in one pass.
 
 ### Champion test
-**Skill:** `skills/champion_test` — evaluates whether the paper has a champion-worthy insight and whether it's visible in the abstract, introduction, and title. Run after abstract, after first draft, and during final review.
+**Skill:** `skills/review_champion_test` — evaluates whether the paper has a champion-worthy insight and whether it's visible in the abstract, introduction, and title. Run after abstract, after first draft, and during final review.
 
 ### Reviewer simulation
 **Prompt template:**
@@ -175,48 +175,65 @@ Output: Numbered issues, each with location, problem, suggested fix.
 ```
 
 ### Pre-submission check
-**Skill:** `skills/pre_submission_check` — automated scan for markers, broken refs, anonymity.
+**Skill:** `skills/review_pre_submission_check` — automated scan for markers, broken refs, anonymity.
 
 ### Final review
-**Skill:** `skills/final_review` — orchestrator: delegates to pre_submission_check and claim_evidence_audit, then does coherence, champion test, and reviewer simulation.
+**Skill:** `skills/review_final_review` — orchestrator: delegates to review_pre_submission_check and review_claim_evidence_audit, then does coherence, champion test, and reviewer simulation.
 
 ---
 
 ## Revision tasks
 
 ### Multi-section revision
-**Skill:** `skills/revision_orchestration` — decomposes a cross-cutting change into ordered prompt files in `prompts/`.
+**Skill:** `skills/plan_revision_orchestration` — decomposes a cross-cutting change into ordered prompt files in `prompts/`.
 
 Use when a change touches multiple sections: terminology renames, claim removals, definition changes, argument restructuring, reviewer feedback fixes.
+
+---
+
+## Planning tasks
+
+### Consolidation pipeline
+**Skill:** `skills/plan_consolidation_pipeline` — maps binding claims to ordered prompt files with dependency tracking. Use when multiple sections need simultaneous drafting from scaffolds, when `skills/review_claim_evidence_audit` reveals gaps across sections, or when advisor feedback triggers cross-cutting work.
+
+Produces a sequence of prompts in `prompts/` that can be executed in order. Each prompt is self-contained and names its dependencies.
+
+### Process advisor feedback
+**Skill:** `skills/plan_advisor_feedback` — converts advisor or reviewer feedback into decisions, tasks, and an execution pipeline. Run after advisor meetings or when external feedback requires cross-cutting changes.
+
+Pipeline: raw feedback → classified points → decisions (accept/reject/defer) → task list → consolidation pipeline or revision orchestration.
+
+### Claim-driven planning
+Not a standalone skill. The planning workflow combines `skills/review_claim_evidence_audit` (identify what is missing) with `skills/plan_consolidation_pipeline` (build the execution plan). Run the audit first, then feed its output into the pipeline.
 
 ---
 
 ## Post-submission tasks
 
 ### Rebuttal
-**Skill:** `skills/rebuttal` — parses reviews, classifies points, drafts structured response. Produces a revision plan that feeds into `skills/revision_orchestration`.
+**Skill:** `skills/plan_rebuttal` — parses reviews, classifies points, drafts structured response. Produces a revision plan that feeds into `skills/plan_revision_orchestration`.
 
 ---
 
 ## Figure tasks
 
 ### Audit and design figures
-**Skill:** `skills/figure_design` — audits the paper for figure opportunities, designs each figure with Nature-style principles, drafts source files, manages visual consistency.
+**Skill:** `skills/draft_figure_design` — audits the paper for figure opportunities, designs each figure with Nature-style principles, drafts source files, manages visual consistency.
 
 Run early (after section scaffold) for the running example figure, then during writing as claims stabilize.
 
 ### Iterate a figure
-When prose or model changes, check whether existing figures still match. Use `skills/figure_design` iteration protocol: describe what changed, what the figure currently shows, and what it should show now.
+When prose or model changes, check whether existing figures still match. Use `skills/draft_figure_design` iteration protocol: describe what changed, what the figure currently shows, and what it should show now.
 
 ### Check figure consistency
-Before submission: verify visual vocabulary is consistent across all figures, all figures are referenced in text, all captions are self-contained. Part of `skills/final_review`.
+Before submission: verify visual vocabulary is consistent across all figures, all figures are referenced in text, all captions are self-contained. Part of `skills/review_final_review`.
 
 ---
 
 ## Infrastructure tasks
 
 ### Push to Overleaf
-**Skill:** `skills/overleaf_push` — builds LaTeX from Markdown via pandoc, pushes to Overleaf git remote. Run after productive sessions, before collaborator reviews, and at milestones.
+**Skill:** `skills/project_overleaf_push` — builds LaTeX from Markdown via pandoc, pushes to Overleaf git remote. Run after productive sessions, before collaborator reviews, and at milestones.
 
 ---
 
@@ -229,9 +246,23 @@ Before submission: verify visual vocabulary is consistent across all figures, al
 Add an entry to DECISIONS.md with date, decision, rationale, affected sections, and revisit condition.
 
 ### Audit past decisions
-**Skill:** `skills/prior_decision_audit` — surfaces cross-cutting decisions from DECISIONS.md and checks whether they still serve the paper. Run every 3–5 sessions, after major sections are drafted, or when something feels off.
+**Skill:** `skills/review_prior_decision_audit` — surfaces cross-cutting decisions from DECISIONS.md and checks whether they still serve the paper. Run every 3–5 sessions, after major sections are drafted, or when something feels off.
+
+### Marker hygiene
+Scan section files for stale or misformatted markers (`%% @CITE %%`, `%% @TODO %%`, `%% @FORMAL %%`, `%% @FIGURE %%`). Resolve what can be resolved, remove markers for completed items, and ensure remaining markers have actionable descriptions. Run periodically during writing and before `skills/review_pre_submission_check`.
 
 ### Session start
-1. Run `skills/paper_status` — produces snapshot with time-to-deadline, section maturity, risk flags, and recommended next actions.
+
+1. Run `skills/review_paper_status` — produces snapshot with time-to-deadline, section maturity, risk flags, and recommended next actions.
 2. Ask Martin what to work on, or recommend based on the status report.
 3. Prepare prompts for chosen tasks.
+
+---
+
+## Project maintenance tasks
+
+### Consistency check
+**Skill:** `skills/project_consistency_check` — verifies project consistency across all artifacts: completed todos reflected in sections, decisions reflected in prose, claim delivery status accurate, cross-references valid, skill and workflow references intact. Run after major changes, before submission, or when something feels off.
+
+### Session close
+**Skill:** `skills/project_session_close` — extracts lessons learned and updates project state before a conversation ends or context compacts. Captures corrections, validated approaches, decisions, and terminology as memories. Run when wrapping up, when compaction is imminent, or when explicitly invoked.

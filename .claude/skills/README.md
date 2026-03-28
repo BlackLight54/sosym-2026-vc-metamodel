@@ -1,75 +1,85 @@
 # Skills
 
-Automated skills for mechanical parts of the paper writing process. Each skill is a folder with a `SKILL.md` entry point.
+Automated skills for mechanical parts of the paper writing process. Each skill is a folder with a `SKILL.md` entry point. Skills are organized by category prefix.
 
 ## Available skills
 
-### Setup
-| Skill | Trigger | What it does |
-|-------|---------|-------------|
-| `cfp_import` | "Import CFP from [URL]" | Fetches CFP, populates context/CFP.md, derives context/VENUE.md |
-| `section_scaffold` | "Scaffold the paper" | Creates format-aware section files with budget |
-| `abstract_scaffold` | "Draft the abstract" | Thesis → abstract + champion test + title candidates |
-| `reviewer_personas` | "Generate reviewer personas" | 4 context-dependent personas, improves with more paper |
+### `setup_` — Project initialization
 
-### Research
 | Skill | Trigger | What it does |
 |-------|---------|-------------|
-| `gap_analysis` | "Generate research questions" | Thesis → agent-ready prompt files in `prompts/` |
-| `prior_work_import` | "Import these references" | DOIs/BibTeX → structured reference notes |
-| `related_work_positioning` | "Build comparison matrix" | Positioning statements + comparison matrix |
+| [`setup_abstract_scaffold`](setup_abstract_scaffold/SKILL.md) | "Draft the abstract" | Thesis → abstract + champion test + title candidates |
+| [`setup_cfp_import`](setup_cfp_import/SKILL.md) | "Import CFP from [URL]" | Fetches CFP, populates context/CFP.md, derives context/VENUE.md |
+| [`setup_reviewer_personas`](setup_reviewer_personas/SKILL.md) | "Generate reviewer personas" | 4 context-dependent personas, improves with more paper |
+| [`setup_section_scaffold`](setup_section_scaffold/SKILL.md) | "Scaffold the paper" | Creates format-aware section files with budget |
 
-### Writing support
-| Skill | Trigger | What it does |
-|-------|---------|-------------|
-| `evaluation_design` | "Design the evaluation" | Maps contributions → evaluation questions → methods |
-| `evaluation_execution` | "Evaluation checklist" / "What do I still need to run?" | Tracks proof/tool/case-study execution status, dependencies, acceptance criteria |
-| `limitations_threats` | "Write the limitations" | Derives limitations from assumptions, evaluation scope, reviewer attacks |
-| `figure_design` | "Propose a figure" / "Design figures" | Audit, design, draft, and iterate figures with Nature-style guidance |
-| `structure_paragraph` | "Update the structure paragraph" | Generates/updates intro P5 from section inventory |
-| `notation_table` | "Check notation" / "Generate notation table" | Scans sections for symbols, checks consistency |
-| `bibliography` | "Resolve citations" / "Fix CITE markers" | Resolves `@CITE` markers → BibTeX keys, tracks Zotero sync needs |
+### `research_` — Literature & gap analysis
 
-### Quality
 | Skill | Trigger | What it does |
 |-------|---------|-------------|
-| `paper_status` | "Where are we?" / session start | Lightweight dashboard: section maturity, markers, figures, time-to-deadline |
-| `champion_test` | "Would anyone champion this paper?" | Evaluates whether the paper has a champion-worthy insight and whether it's visible |
-| `prior_decision_audit` | "Are our early decisions still right?" | Surfaces cross-cutting decisions and checks whether they still serve the paper |
-| `claim_evidence_audit` | "Audit claims" / "Map contributions" | Contribution mapping + full claim–evidence check |
-| `pre_submission_check` | "Check the paper" | Markers, broken refs, anonymity leaks |
-| `final_review` | "Final review" | Orchestrator: coherence, champion test, reviewer sim |
+| [`research_gap_analysis`](research_gap_analysis/SKILL.md) | "Generate research questions" | Thesis → agent-ready prompt files in `prompts/` |
+| [`research_prior_work_import`](research_prior_work_import/SKILL.md) | "Import these references" | DOIs/BibTeX → structured reference notes |
+| [`research_related_work_positioning`](research_related_work_positioning/SKILL.md) | "Build comparison matrix" | Positioning statements + comparison matrix |
 
-### Revision
-| Skill | Trigger | What it does |
-|-------|---------|-------------|
-| `budget_cut` | "Page budget usage tree" / "We need major reengineering" | Diagnoses page inflation per section; proposes phased cuts with `@CUT-START`/`@CUT-END` markers |
-| `revision_orchestration` | "This change affects multiple sections" | Decomposes cross-cutting changes into ordered prompts |
+### `draft_` — Drafting & writing
 
-### Post-submission
 | Skill | Trigger | What it does |
 |-------|---------|-------------|
-| `rebuttal` | "Prepare rebuttal" | Parse reviews, classify points, draft response |
+| [`draft_bibliography`](draft_bibliography/SKILL.md) | "Resolve citations" / "Fix CITE markers" | Resolves `@CITE` markers → BibTeX keys, tracks Zotero sync needs |
+| [`draft_evaluation_design`](draft_evaluation_design/SKILL.md) | "Design the evaluation" | Maps contributions → evaluation questions → methods |
+| [`draft_evaluation_execution`](draft_evaluation_execution/SKILL.md) | "Evaluation checklist" / "What do I still need to run?" | Tracks proof/tool/case-study execution status, dependencies, acceptance criteria |
+| [`draft_figure_design`](draft_figure_design/SKILL.md) | "Propose a figure" / "Design figures" | Audit, design, draft, and iterate figures with Nature-style guidance |
+| [`draft_limitations_threats`](draft_limitations_threats/SKILL.md) | "Write the limitations" | Derives limitations from assumptions, evaluation scope, reviewer attacks |
+| [`draft_notation_table`](draft_notation_table/SKILL.md) | "Check notation" / "Generate notation table" | Scans sections for symbols, checks consistency |
+| [`draft_structure_paragraph`](draft_structure_paragraph/SKILL.md) | "Update the structure paragraph" | Generates/updates intro P5 from section inventory |
 
-### Reference
-| Skill | Trigger | What it does |
-|-------|---------|-------------|
-| `refinery` | Reading/writing `.problem` files | Refinery language guide, three-layer pattern, examples, CLI script |
+### `review_` — Quality & audits
 
-### Infrastructure
 | Skill | Trigger | What it does |
 |-------|---------|-------------|
-| `pandoc_convert` | "Convert to LaTeX" / "Run pandoc" | Convert Markdown sections to LaTeX via pandoc + Lua filters |
-| `overleaf_push` | "Push to Overleaf" | Build LaTeX from Markdown, push to Overleaf git remote |
+| [`review_champion_test`](review_champion_test/SKILL.md) | "Would anyone champion this paper?" | Evaluates whether the paper has a champion-worthy insight and whether it's visible |
+| [`review_claim_evidence_audit`](review_claim_evidence_audit/SKILL.md) | "Audit claims" / "Map contributions" | Contribution mapping + full claim–evidence check |
+| [`review_final_review`](review_final_review/SKILL.md) | "Final review" | Orchestrator: coherence, champion test, reviewer sim |
+| [`review_paper_audit`](review_paper_audit/SKILL.md) | "Full paper audit" | Reads all sections, cross-references claims, decisions, gaps, personas |
+| [`review_paper_status`](review_paper_status/SKILL.md) | "Where are we?" / session start | Lightweight dashboard: section maturity, markers, figures, time-to-deadline |
+| [`review_pre_submission_check`](review_pre_submission_check/SKILL.md) | "Check the paper" | Markers, broken refs, anonymity leaks |
+| [`review_prior_decision_audit`](review_prior_decision_audit/SKILL.md) | "Are our early decisions still right?" | Surfaces cross-cutting decisions and checks whether they still serve the paper |
+| [`review_reviewer_archetypes`](review_reviewer_archetypes/SKILL.md) | Reference guide | Reviewer archetype definitions for persona instantiation |
+
+### `plan_` — Planning & orchestration
+
+| Skill | Trigger | What it does |
+|-------|---------|-------------|
+| [`plan_advisor_feedback`](plan_advisor_feedback/SKILL.md) | "Process advisor feedback" | Parse feedback into decisions, tasks, and execution pipeline |
+| [`plan_budget_cut`](plan_budget_cut/SKILL.md) | "Page budget usage tree" / "We need major reengineering" | Diagnoses page inflation per section; proposes phased cuts with `@CUT-START`/`@CUT-END` markers |
+| [`plan_consolidation_pipeline`](plan_consolidation_pipeline/SKILL.md) | "Build consolidation pipeline" | Maps binding claims to ordered prompt files with dependency tracking |
+| [`plan_rebuttal`](plan_rebuttal/SKILL.md) | "Prepare rebuttal" | Parse reviews, classify points, draft response |
+| [`plan_revision_orchestration`](plan_revision_orchestration/SKILL.md) | "This change affects multiple sections" | Decomposes cross-cutting changes into ordered prompts |
+
+### `ref_` — Domain reference
+
+| Skill | Trigger | What it does |
+|-------|---------|-------------|
+| [`ref_refinery`](ref_refinery/SKILL.md) | Reading/writing `.problem` files | Refinery language guide, three-layer pattern, examples, CLI script |
+| [`ref_running_example`](ref_running_example/SKILL.md) | "Running example" | Running example guide and specifications |
+
+### `project_` — Infrastructure & cleanup
+
+| Skill | Trigger | What it does |
+|-------|---------|-------------|
+| [`project_consistency_check`](project_consistency_check/SKILL.md) | "Check project consistency" | Verify todos, decisions, claims, cross-references, and skill references across all artifacts |
+| [`project_overleaf_push`](project_overleaf_push/SKILL.md) | "Push to Overleaf" | Build LaTeX from Markdown, push to Overleaf git remote |
+| [`project_pandoc_convert`](project_pandoc_convert/SKILL.md) | "Convert to LaTeX" / "Run pandoc" | Convert Markdown sections to LaTeX via pandoc + Lua filters |
+| [`project_session_close`](project_session_close/SKILL.md) | "Wrapping up" / session end | Extract lessons learned, update project state before context ends |
 
 ## Usage
 
 In Claude Code: "Read `skills/[name]/SKILL.md` and execute it" or use trigger phrases.
 
-**Plan mode first.** Most skills produce analysis, proposals, or drafts that Martin reviews before anything is committed. Claude presents the skill's output and waits for Martin's decision before making changes to files. Exceptions: purely mechanical skills (`pre_submission_check`, `paper_status`, `notation_table`, `overleaf_push`) can execute directly.
+**Plan mode first.** Most skills produce analysis, proposals, or drafts that Martin reviews before anything is committed. Claude presents the skill's output and waits for Martin's decision before making changes to files. Exceptions: purely mechanical skills (`review_pre_submission_check`, `review_paper_status`, `draft_notation_table`, `project_overleaf_push`) can execute directly.
 
 Skills that delegate work produce **prompt files** in `prompts/`. Each is a self-contained instruction for a research agent or Claude Code. See `prompts/README.md`.
 
-**Task decomposition:** Cross-cutting changes and multi-section tasks are decomposed into ordered prompt files before starting (see `skills/revision_orchestration`). Single-section and mechanical tasks run directly.
+**Task decomposition:** Cross-cutting changes and multi-section tasks are decomposed into ordered prompt files before starting (see `plan_revision_orchestration`). Single-section and mechanical tasks run directly.
 
 Martin reviews all outputs in plan mode.

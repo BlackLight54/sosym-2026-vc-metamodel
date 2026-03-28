@@ -12,10 +12,10 @@ Named `YYYY-MM-DD_description.md`. Each file contains:
 
 ## Collected references
 
-`references/` subfolder. Structured notes from `skills/prior_work_import`.
+`references/` subfolder. Structured notes from `skills/research_prior_work_import`.
 
 ## What does not go here
 
 - Current state of any section (section files are authoritative)
-- Cross-cutting decisions (use `context/DECISIONS.md`)
+- Cross-cutting decisions (use `.claude/memory/decision_*.md`)
 - Minor edits not worth recovering

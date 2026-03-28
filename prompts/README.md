@@ -21,13 +21,13 @@ Examples:
 1. A skill generates prompt files here.
 2. TODO.md gets a task per prompt: "Execute `prompts/[filename]`."
 3. Martin (or Claude Code) executes each prompt.
-4. Results are processed (imported via `skills/prior_work_import`, applied to sections, etc.).
+4. Results are processed (imported via `skills/research_prior_work_import`, applied to sections, etc.).
 5. Executed prompts can be deleted or moved to `context/archive/` if the results are worth preserving.
 
 ## What goes here
 
-- Research agent prompts from `skills/gap_analysis`
-- Multi-section revision prompts from `skills/revision_orchestration`
+- Research agent prompts from `skills/research_gap_analysis`
+- Multi-section revision prompts from `skills/plan_revision_orchestration`
 - Any other delegated work that needs a self-contained instruction
 
 ## What does NOT go here
