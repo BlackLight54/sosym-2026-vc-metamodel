@@ -2,7 +2,7 @@
 id: "X02"
 short: "surfaces-verb"
 title: "Replace 'surfaces' with 'demonstrates detection of' in abstract"
-status: pending
+status: done
 priority: low
 depends_on: []
 binding_claims: []

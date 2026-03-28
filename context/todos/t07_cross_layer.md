@@ -2,7 +2,7 @@
 id: T07
 short: "cross-layer"
 title: "Sec 04 cross-layer constraints (A12-A15)"
-status: pending
+status: done
 depends_on: []
 binding_claims: [3]
 target: sections/04_approach.md

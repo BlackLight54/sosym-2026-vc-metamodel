@@ -49,5 +49,10 @@
 - [Conversation title = todo ID](feedback_conversation_title_todo_id.md) — first message starts with todo ID
 - [Justify tooling concretely](feedback_justify_tooling.md) — Refinery guarantees on partial models, not generic "we need a tool"
 - [Introduce all notation](feedback_notation_introduction.md) — no Refinery concept or math symbol without prior definition
+- [Concrete not abstract](feedback_concrete_not_abstract.md) — use examples and plain language, not dense abstract compression
+- [Show context in plan edits](feedback_plan_edits_show_context.md) — always show surrounding text when proposing edits in plans
+- [Defensive one-liners work](feedback_defensive_one_liners.md) — 1-2 sentence additions mapped to reviewer archetypes, validated by Martin+Oszkár
+- [Keep cutcandidate wrappers](feedback_keep_cutcandidates.md) — don't remove .cutcandidate annotations without explicit approval
+- [Explain why, not just what](feedback_explain_why_not_just_what.md) — comparative claims need mechanism, not just difference
 
 Superseded memories → `context/archive/`, never deleted

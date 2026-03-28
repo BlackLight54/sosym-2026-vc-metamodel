@@ -1,77 +1,80 @@
 # Todo Index
 
-## Critical path (consolidation workflow)
+## Critical path — paper content
 
-- [T07](t07_cross_layer.md) — Sec 04 cross-layer constraints (A12-A15) [Binding #3]
-- [T08](t08_evaluation.md) — Sec 05 elaboration (coverage, expressiveness, headline results) [Binding #5, #6, #7, #9]
-- [T09](t09_threats_scalability.md) — Sec 05 threats + scalability
-- [T10](t10_polish.md) — Final polish (eval preamble, Intro P5, abstract numbers) [Binding #10]
+| ID | Title | Binding | Status | Assigned |
+|----|-------|---------|--------|----------|
+| T07 | [Sec 04 cross-layer constraints](t07_cross_layer.md) | #3 | done | claude |
+| T08 | [Sec 05 elaboration](t08_evaluation.md) | #5,6,7,9 | done | claude |
+| T09 | [Sec 05 threats + scalability](t09_threats_scalability.md) | — | pending | claude |
+| T10 | [Final polish](t10_polish.md) | #10 | pending | claude |
+| **T12** | **[Reconcile eval instances, measurements, metamodel](t12_eval_consistency.md)** | **#4,5,6,7,9** | **pending** | **claude** |
+| O-SOUND | [Soundness/completeness properties](o-soundness-eval.md) | #4,9 | pending | claude |
 
-## Evaluation support
+## Figures
 
-- [O-FIG](o-fig_scalability_figs.md) — 2 scalability figure designs
-- [O-BASE](o-base_baseline_compare.md) — Baseline comparison paragraph
-- [O-THREATS](o-threats_threats.md) — Threats to validity subsection
-- [O-ARF](o-arf_arf_prefix.md) — Prefix ARF constraint IDs in expressiveness table
+| ID | Title | Status | Assigned |
+|----|-------|--------|----------|
+| O05 | [Teaser + metamodel figures](o05_teaser_fig.md) | pending | claude |
+| T11 | [6 remaining figure placeholders](t11_figure_production.md) | pending | martin |
 
 ## Approach refinement
 
-- [O-MODES](o-modes_usage_modes.md) — Clarify Refinery usage modes (OK/NOT_OK/GENERATED)
-- [O-REFBG](o-refinery-bg.md) — Refinery + math foundations placeholder in Background [Oszkár]
-- [O-SOUND](o-soundness-eval.md) — Soundness/completeness model properties in evaluation [Binding #4, #9]
+| ID | Title | Binding | Status | Assigned |
+|----|-------|---------|--------|----------|
+| O-MODES | [Usage modes (Sec 03 + 04)](o-modes_usage_modes.md) | #4 | pending | claude |
+| O-REFBG | [Refinery BG placeholder](o-refinery-bg.md) | #3,4 | pending | oszkár |
+| O-4VAL | [Fix three→four-valued throughout](o-4val.md) | #3 | pending | oszkár |
 
-## Writing and polish
+## Writing fixes (cross-cutting)
 
-- [O03](o03_soften_c5.md) — Soften C5 in abstract + intro P2
-- [O-P5](o-p5_intro_p5.md) — Update Intro P5 structure paragraph
-- [O-S03](o-s03_sec03_review.md) — Martin review: Sec 03 polish
-- [O05](o05_teaser_fig.md) — Design teaser and metamodel figures
+| ID | Title | Status | Assigned |
+|----|-------|--------|----------|
+| X01 | [GDPR hedge in abstract](x01_abstract_gdpr_hedge.md) | pending | claude |
+| X04 | [Concrete Refinery output](x04_tool_demonstration.md) | pending | martin |
+| X05 | [Sec 4→5 transition](x05_sec4_to_sec5_bridge.md) | pending | claude |
+| X07 | [Income variable drift](x07_income_variable_drift.md) | done (Z-P2) | claude |
+| X11 | [Prior work extension substance](x11_prior_work_extension_substance.md) | pending | claude |
+| X14 | [Refinery terminology introduction](x14_refinery_terminology_introduction.md) | pending | claude |
+| O03 | [Soften C5 claim](o03_soften_c5.md) | pending | claude |
 
 ## References and citations
 
-- [O01](o01_verify_refs.md) — Verify Ding & Sato 2023, Schardong & Custodio 2024
-- [O-STAF](o-staf_staf_citation.md) — BLOCKED: Double-blind citation strategy for STAF paper
+| ID | Title | Status | Assigned |
+|----|-------|--------|----------|
+| O01 | [Verify Ding & Sato, Schardong](o01_verify_refs.md) | pending | claude |
+| M00a | [Noor ECMFA differentiation](m00a_noor_ecmfa_differentiation.md) | pending | martin |
+| O-STAF | [STAF citation strategy](o-staf_staf_citation.md) | blocked | martin |
 
-## External coordination
+## External / human tasks
 
-- [O-GOV](o-gov_gov_research.md) — Research governance frameworks beyond ARF [Imre]
-- [O-ANON](o-anon_anonymize.md) — Anonymize supplementary material [Oszkár]
+| ID | Title | Status | Assigned |
+|----|-------|--------|----------|
+| O-GOV | [Governance research beyond ARF](o-gov_gov_research.md) | pending | imre |
+| O-ANON | [Anonymize supplementary](o-anon_anonymize.md) | pending | oszkár |
+| O-S03 | [Sec 03 polish](o-s03_sec03_review.md) | pending | martin |
 
-## Cross-cutting review issues (X01–X04)
+## Z01 triage pipeline
 
-- [X01](x01_abstract_gdpr_hedge.md) — Hedge "formally contradictory" in abstract for GDPR operationalization [Binding #8]
-- [X02](x02_abstract_surfaces_verb.md) — Replace "surfaces" with "demonstrates detection of" in abstract
-- [X03](x03_none_outside_defense.md) — Defend "none falls entirely outside" expressiveness claim [Binding #6]
-- [X04](x04_tool_demonstration.md) — Include concrete Refinery output for automated checking claim [Binding #4] [Martin]
-- [X05](x05_sec4_to_sec5_bridge.md) — Fix Approach-to-Evaluation transition gap
-- [X06](x06_scalability_csok_anchor.md) — Anchor scalability instances to CSOK running example
-- [X07](x07_income_variable_drift.md) — Align income variable name across Sec 2 and Sec 4
-- [X08](x08_structure_para_antipattern.md) — Fix structure paragraph: anti-patterns in eval not approach
-- [X09](x09_formal_vs_expert_knowledge.md) — Defend what formal model adds beyond expert knowledge [Binding #9, #10]
-- [X10](x10_fsl_structural_defense.md) — Defend FSL as metamodel layer beyond lookup table [Binding #1]
-- [X11](x11_prior_work_extension_substance.md) — Articulate prior work extension substance beyond "two more layers"
-- [X12](x12_dse_navigation.md) — Clarify what DSE produces operationally [Binding #4]
-- [X13](x13_baseline_strawman_defense.md) — Defend baseline comparison against strawman critique [Binding #10]
+Execution order: Z-P2 → Z-P1 → Z-P3 → Z-P4.
 
-## Advisor feedback
-
-- ~~[M00](m00_process_advisor_notes_from_oszkár.md)~~ — ✅ Process Oszkár's notes (2026-03-25 meeting + Konzi consultation)
+| ID | Title | Depends on | Status | Assigned |
+|----|-------|------------|--------|----------|
+| Z-P2 | [BG + Related Work + multi-layer rename](z-p2_bg_rw_rename.md) | — | done | claude |
+| Z-P1 | [Abstract + Intro fixes](z-p1_abstract_intro.md) | Z-P2 | pending | claude |
+| Z-P3 | [Approach — FSL elaboration + gaps](z-p3_approach_fsl.md) | Z-P2 | pending | claude |
+| Z-P4 | [Eval polish + Conclusion](z-p4_eval_conclusion.md) | T08 | done | claude |
 
 ## Infrastructure
 
-- [M22](m22_migrate_to_native_tasks.md) — Migrate todo pipeline to Claude Code native Tasks
+| ID | Title | Status | Assigned |
+|----|-------|--------|----------|
+| M00 | [Process Oszkár notes](m00_process_advisor_notes_from_oszkár.md) | pending | claude |
+| M22 | [Migrate to native Tasks](m22_migrate_to_native_tasks.md) | pending | claude |
 
-## Workflow overhaul — Phase 2
+## Absorbed (merged into surviving todos)
 
-- [M20](m20_phase2_execution.md) — **Execute Phase 2: marker migration, citations, Z01 extraction** ⚡
-- [M11](m11_page_audit.md) — ~~Create page budget audit skill~~ ✅
-- [M12](m12_marker_migration.md) — Migrate markers from `%%` to Pandoc divs/spans
-- [M13](m13_citation_workflow.md) — Update citation workflow to `--biblatex` + `[@key]`
-- [M04](m04_z01_extract.md) — Extract todos from Z01 synthesis analysis
-- [M05](m05_overhaul_skill.md) — ~~Create project overhaul skill~~ ✅
-- [M06](m06_todo_consolidate.md) — ~~Consolidate todos with enhanced frontmatter~~ ✅
-- [M07](m07_migration_check.md) — Final migration verification pass
-- [M08](m08_dir_readmes.md) — ~~Create README.md in all directories~~ ✅
-- [M09](m09_crossref_pandoc.md) — Set up pandoc-crossref for `\autoref` references
-- [M10](m10_meta_to_yaml.md) — Move `@META` markers to YAML frontmatter in sections
-- [M21](m21_archive_old_prompts.md) — Archive executed prompts to `context/archive/`
+Archived to `context/archive/completed_todos/`. Parent todo noted below.
+
+- O-THREATS → T09, O-FIG → T09, O-BASE → T08, O-ARF → T08, O-P5 → T10
+- X03 → T08, X06 → T09, X08 → T10, X09 → T08, X10 → T07, X12 → O-MODES, X13 → T08

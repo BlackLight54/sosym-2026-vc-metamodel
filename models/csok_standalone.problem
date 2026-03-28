@@ -1,21 +1,8 @@
 % ============================================================================
-% VC Ecosystem Metamodel — Three-Layer Partial Graph Specification
+% CSOK Standalone — Self-contained for Refinery web editor
 % ============================================================================
-% Three-layer metamodel for verifiable credential ecosystem design.
-% Evolved from prior_work/dse-vc-refinery/vc_model.new.problem.
-%
-% Layers:
-%   DCL — Domain Concept Layer (domain-level information graph)
-%   CSL — Credential Schema Layer (abstract credential schemas)
-%   FSL — Format-Specific Layer (format classes, capabilities, governance)
-%
-% Changes from prior model:
-%   - Credential.format: single abstract containment [1] (was per-format [1]x3)
-%   - New format classes: SdJwtVcSchema, MdocSchema
-%   - Format capability predicates (derived from class membership)
-%   - Format capability propagation rules (narrow format design space)
-%   - GovernanceAnnotation marker classes (generic governance encoding)
-% ============================================================================
+% Inlines vc_metamodel + csok_instance + governance (no conflict error).
+% Expected result: SAT (solver assigns any format to IncomeCred)
 
 
 % =============================================
@@ -70,6 +57,10 @@ error non_connected(Entity n, Entity m) <-> n != m, !neighbours+(n, m).
 
 propagation rule no_self_loop(Prop p, Entity e) <->
     must property(e, p) ==> !value(p, e).
+
+pred directed_edge(Entity s, Entity t) <-> statement(s, _, t).
+
+error cyclic(Entity e) <-> directed_edge+(e, e).
 
 
 % =============================================
@@ -128,7 +119,22 @@ propagation rule credential_statement_rule_opp(CredEntity source, Claim prop, Cr
     credential_statement(source, prop, target),
     CredentialValue(target).
 
-% Cross-layer trace consistency: forbid misaligned claim targets
+pred Root_cred_entity(CredEntity e) <->
+    !credential_statement(_, _, e).
+
+propagation rule targets_are_not_roots(CredEntity e) <->
+    must Claim::target(_, e)
+==>
+    !Root_cred_entity(e).
+
+propagation rule cred_points_to_root_cred_e(CredEntity e, Credential c) <->
+    must !Root_cred_entity(e)
+==>
+    !credentialSubject(c, e).
+
+error root_ent_doesnt_have_cred(Root_cred_entity e) <->
+    !credentialSubject(_, e).
+
 propagation rule prop_t(Claim c, CredEntity t) <->
     must Prop::trace(p, c),
     must Prop::value(p, e),
@@ -137,7 +143,6 @@ propagation rule prop_t(Claim c, CredEntity t) <->
 ==>
     !Claim::target(c, t).
 
-% Cross-layer trace consistency: forbid misaligned claim sources
 propagation rule prop_s(Claim c, CredEntity s) <->
     must Prop::trace(p, c),
     must Entity::property(e, p),
@@ -146,20 +151,17 @@ propagation rule prop_s(Claim c, CredEntity s) <->
 ==>
     !Claim::source(c, s).
 
-% Entity alignment: two CredEntities tracing to the same Entity
-pred aligned(CredEntity c_e1, CredEntity c_e2) <->
+shadow pred aligned(CredEntity c_e1, CredEntity c_e2) <->
     CredEntity::trace(c_e1, e),
     CredEntity::trace(c_e2, e),
     c_e1 != c_e2.
 
-% Credential class — evolved: single abstract format containment
 class Credential {
     container CredentialSubject credentialSubject opposite _
     contains Formatted_Credential[1] format
 }
 
-% Two Props sharing a credential subject (same parent in credential)
-pred common_parent(Prop p1, Prop p2) <->
+shadow pred common_parent(Prop p1, Prop p2) <->
     p1 != p2,
     Prop::trace(p1, cp1),
     Prop::trace(p2, cp2),
@@ -183,49 +185,32 @@ class JwtVCCredentialSchema extends Formatted_Credential.
 class SdJwtVcSchema extends Formatted_Credential.
 class MdocSchema extends Formatted_Credential.
 
-
-% --- Format capability predicates (derived from class membership) ---
-
-% Predicate proof support: only AnonCreds (CL signatures)
 pred supports_predicate_proof(Formatted_Credential f) <->
     AnoncredsCredentialSchema(f).
 
-% Selective disclosure: SD-JWT-VC (hash-based), JSON-LD (BBS+), AnonCreds, mdoc
 pred supports_selective_disclosure(Formatted_Credential f) <->
     SdJwtVcSchema(f);
     JsonLdCredentialSchema(f);
     AnoncredsCredentialSchema(f);
     MdocSchema(f).
 
-% W3C VCDM 2.0 conformance: all except AnonCreds v1
 pred conforms_vcdm(Formatted_Credential f) <->
     SdJwtVcSchema(f);
     JsonLdCredentialSchema(f);
     JwtVCCredentialSchema(f);
     MdocSchema(f).
 
-% ZKP support (co-occurs with predicate_proofs)
 pred supports_zkp(Formatted_Credential f) <->
     AnoncredsCredentialSchema(f).
 
-% Offline verification capability
 pred supports_offline_verification(Formatted_Credential f) <->
     AnoncredsCredentialSchema(f);
     JsonLdCredentialSchema(f);
     MdocSchema(f).
 
-% Multi-credential proof support (co-occurs with predicate_proofs)
 pred supports_multi_credential_proof(Formatted_Credential f) <->
     AnoncredsCredentialSchema(f).
 
-
-% --- Format capability propagation rules ---
-% Source: archive/fca_export.md — Credential Formats context
-% Pattern: negative elimination (same as prop_t/prop_s)
-
-% predicate_proofs -> zkp (indistinguishable group, 100%)
-% Formats without ZKP cannot provide predicate proofs.
-% Eliminates SD-JWT-VC, JWT-VC, mdoc when predicate proofs needed.
 propagation rule cap_predicate_not_sdjwt(Formatted_Credential f) <->
     must supports_predicate_proof(f),
     may SdJwtVcSchema(f)
@@ -250,8 +235,6 @@ propagation rule cap_predicate_not_jsonld(Formatted_Credential f) <->
 ==>
     !JsonLdCredentialSchema(f).
 
-% offline_verification -> selective_disclosure (67%)
-% Formats lacking offline verification are eliminated when it is required.
 propagation rule cap_offline_not_jwt(Formatted_Credential f) <->
     must supports_offline_verification(f),
     may JwtVCCredentialSchema(f)
@@ -264,32 +247,20 @@ propagation rule cap_offline_not_sdjwt(Formatted_Credential f) <->
 ==>
     !SdJwtVcSchema(f).
 
-
-% --- Governance annotation markers ---
-
 abstract class GovernanceAnnotation {
 }
 
-% eIDAS 2.0 ARF: EU wallet attestations must use a mandated format
 class EidasMandate extends GovernanceAnnotation {
     Credential[1] target
 }
 
-% GDPR Art. 5(1)(c): privacy-sensitive claims require data minimization
 class PrivacyRequirement extends GovernanceAnnotation {
     Credential[1] target
 }
 
-% W3C VCDM 2.0: credential format must conform to the data model
 class VcdmConformance extends GovernanceAnnotation {
     Credential[1] target
 }
-
-
-% --- Headline 2: Cross-credential predicate gap (shadow pred) ---
-% Flags credential pairs with aligned subjects where at least one format
-% lacks multi-credential proof support. Since no deployed format supports
-% cross-credential arithmetic predicates, this flags all aligned pairs.
 
 shadow pred cross_cred_predicate_gap(Credential c1, Credential c2) <->
     c1 != c2,
@@ -301,3 +272,114 @@ shadow pred cross_cred_predicate_gap(Credential c1, Credential c2) <->
     credentialSubject(c1, cs1), credentialSubject(c2, cs2),
     aligned(cs1, cs2),
     format(c2, f2), !supports_multi_credential_proof(f2).
+
+
+% =============================================
+% CSOK Instance — Domain facts, credential decomposition, format assignments
+% =============================================
+
+% DCL nodes
+Subject(Applicant).
+Value(num_children).
+Value(property_area).
+Value(monthly_income).
+Prop(has_children).
+Prop(owns_property).
+Prop(earns).
+property(Applicant, has_children).
+property(Applicant, owns_property).
+property(Applicant, earns).
+value(has_children, num_children).
+value(owns_property, property_area).
+value(earns, monthly_income).
+
+!exists(Subject::new).
+!exists(Value::new).
+!exists(Prop::new).
+
+% CSL nodes
+CredentialSubject(CS_Applicant_1).
+CredentialSubject(CS_Applicant_2).
+CredentialSubject(CS_Applicant_3).
+CredentialValue(num_children_1).
+CredentialValue(property_area_1).
+CredentialValue(monthly_income_1).
+Claim(has_children_claim).
+Claim(owns_property_claim).
+Claim(earns_claim).
+Credential(FamilyStatusCred).
+Credential(PropertyCred).
+Credential(IncomeCred).
+
+Prop::trace(has_children, has_children_claim).
+Prop::trace(owns_property, owns_property_claim).
+Prop::trace(earns, earns_claim).
+
+Claim::source(has_children_claim, CS_Applicant_1).
+Claim::target(has_children_claim, num_children_1).
+Claim::source(owns_property_claim, CS_Applicant_2).
+Claim::target(owns_property_claim, property_area_1).
+Claim::source(earns_claim, CS_Applicant_3).
+Claim::target(earns_claim, monthly_income_1).
+
+_(CS_Applicant_1, FamilyStatusCred).
+_(CS_Applicant_2, PropertyCred).
+_(CS_Applicant_3, IncomeCred).
+
+CredEntity::trace(CS_Applicant_1, Applicant).
+CredEntity::trace(CS_Applicant_2, Applicant).
+CredEntity::trace(CS_Applicant_3, Applicant).
+
+CredEntity::trace(num_children_1, num_children).
+CredEntity::trace(property_area_1, property_area).
+CredEntity::trace(monthly_income_1, monthly_income).
+
+!exists(CredentialSubject::new).
+!exists(CredentialValue::new).
+!exists(Claim::new).
+!exists(Credential::new).
+default !CredEntity::trace(*, *).
+
+% FSL: format assignments
+SdJwtVcSchema(sd_jwt_family).
+format(FamilyStatusCred, sd_jwt_family).
+
+SdJwtVcSchema(sd_jwt_property).
+format(PropertyCred, sd_jwt_property).
+
+Formatted_Credential(income_format).
+format(IncomeCred, income_format).
+
+!exists(AnoncredsCredentialSchema::new).
+!exists(JsonLdCredentialSchema::new).
+!exists(JwtVCCredentialSchema::new).
+!exists(SdJwtVcSchema::new).
+!exists(MdocSchema::new).
+
+
+% =============================================
+% Governance markers (no conflict error — SAT)
+% =============================================
+
+EidasMandate(eidas_1).
+EidasMandate::target(eidas_1, FamilyStatusCred).
+EidasMandate(eidas_2).
+EidasMandate::target(eidas_2, PropertyCred).
+EidasMandate(eidas_3).
+EidasMandate::target(eidas_3, IncomeCred).
+
+PrivacyRequirement(privacy_1).
+PrivacyRequirement::target(privacy_1, IncomeCred).
+
+VcdmConformance(vcdm_1).
+VcdmConformance::target(vcdm_1, FamilyStatusCred).
+VcdmConformance(vcdm_2).
+VcdmConformance::target(vcdm_2, PropertyCred).
+VcdmConformance(vcdm_3).
+VcdmConformance::target(vcdm_3, IncomeCred).
+
+!exists(EidasMandate::new).
+!exists(PrivacyRequirement::new).
+!exists(VcdmConformance::new).
+
+scope node = 29, GovernanceAnnotation = 7.

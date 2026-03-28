@@ -2,7 +2,7 @@
 id: T08
 short: "eval-elaboration"
 title: "Sec 05 elaboration — coverage, expressiveness, anti-patterns, baseline"
-status: in_progress
+status: done
 depends_on: ["T07"]
 binding_claims: [5, 6, 7, 9]
 target: sections/05_evaluation.md

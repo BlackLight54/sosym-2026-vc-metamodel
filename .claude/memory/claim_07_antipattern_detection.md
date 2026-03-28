@@ -3,12 +3,12 @@ name: "Claim 7: Anti-pattern detection"
 description: "Error detection against known credential design anti-patterns via formalized graph predicates"
 type: project
 id: 7
-status: partial
+status: delivered
 evidence_section: sections/05_evaluation.md
 risk: medium
 ---
 
 We validate error detection against known credential design anti-patterns.
 
-**Evidence:** Anti-pattern detection scaffolded in Sec 05.1.4. Five structural anti-patterns to be formalized as graph predicates.
-**Gaps:** Prose not yet drafted. Anti-pattern table and multi-layer visibility argument pending (T08).
+**Evidence:** Sec 05.1.4 drafted. Five anti-patterns in table with predicate mappings and kind classification (error/propagation/shadow). Graduated visibility argument (intra-layer → cross-layer → ecosystem-level). Extensibility sentence added. Figure placeholder placed.
+**Gaps:** Anti-pattern figure not yet produced (T11).

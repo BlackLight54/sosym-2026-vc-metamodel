@@ -1,0 +1,12 @@
+{
+    "refinery_image": "ghcr.io/graphs4value/refinery-cli:latest",
+    "refinery_digest": "sha256:88f1332e9aae356d91aef86aaaa3368be1b3931929fb3e10d87d65ab8a7fca8e",
+    "docker_version": "Docker version 29.2.1, build a5c7197",
+    "hyperfine_version": "hyperfine 1.20.0",
+    "cpu": "AMD Ryzen 9 7950X3D 16-Core Processor          ",
+    "ram_gb": "95.6",
+    "os": "Microsoft Windows 11 Education 10.0.26200",
+    "timestamp": "2026-03-28T17:14:14Z",
+    "runs_per_benchmark": 10,
+    "warmup_runs": 1
+}

@@ -2,7 +2,7 @@
 id: "X01"
 short: "gdpr-hedge"
 title: "Hedge 'formally contradictory' in abstract for GDPR operationalization"
-status: pending
+status: done
 priority: medium
 depends_on: []
 binding_claims: [8]

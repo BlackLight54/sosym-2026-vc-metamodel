@@ -3,12 +3,12 @@ name: "Claim 6: Expressiveness validation vs EU regulatory"
 description: "Constraint expressiveness validated against EU regulatory sources (ARF 5.3.4) — HIGH RISK"
 type: project
 id: 6
-status: partial
+status: delivered
 evidence_section: sections/05_evaluation.md
 risk: high
 ---
 
 Constraint expressiveness against EU regulatory sources. The evaluation classifies eight eIDAS regulatory constraints against the metamodel.
 
-**Evidence:** ARF 5.3.4 gap analysis completed (context/archive/arf_5_3_4_gap_analysis.md). Constraints extracted and classified. Data exists for the expressiveness table.
-**Gaps:** Expressiveness table not drafted in Sec 05.1.2 (T08). Constraint ID collision unresolved — needs ARF-prefix (T14). HIGH RISK: this is a drafting bottleneck.
+**Evidence:** Sec 05.1.2 drafted. ARF-prefixed expressiveness table (ARF-C1, ARF-C4, ARF-C7). Five partially expressible analyzed with two root causes. Explicit partial/outside criterion added with PID/QEAA/EAA example. ARF-C7 remark provides external validation of layer architecture. Extended table figure placeholder placed.
+**Gaps:** Extended expressiveness figure not yet produced (T11).

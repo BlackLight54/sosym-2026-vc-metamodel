@@ -14,6 +14,10 @@ created: "2026-03-28"
 ## Inspiration  
 
 <https://claudearchitect.com/docs/claude-code/claude-code-tasks-vs-todos/>
+<https://claudearchitect.com/docs/claude-code/claude-code-task-dependencies/>
+<https://claudearchitect.com/docs/claude-code/claude-code-cross-session-tasks>
+<https://claudearchitect.com/docs/claude-code/taskcreate-taskupdate-reference>
+<https://claudearchitect.com/docs/claude-code/claude-code-subagents-tasks>
 
 ## Goal
 

@@ -2,7 +2,7 @@
 id: "M04"
 short: "z01-extract"
 title: "Consolidate Z01 triage items into existing todos"
-status: pending
+status: done
 priority: high
 depends_on: []
 binding_claims: []

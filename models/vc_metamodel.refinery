@@ -71,8 +71,10 @@ error non_connected(Entity n, Entity m) <-> n != m, !neighbours+(n, m).
 propagation rule no_self_loop(Prop p, Entity e) <->
     must property(e, p) ==> !value(p, e).
 
-% @TODO: Add acyclicity constraint — error cyclic(Entity e) <-> neighbours+(e, e).
-% Prohibits cycles in the DCL information graph via transitive closure.
+pred directed_edge(Entity s, Entity t) <-> statement(s, _, t).
+
+error cyclic(Entity e) <-> directed_edge+(e, e).
+% Prohibits cycles in the DCL information graph via transitive closure of directed edges.
 
 
 % =============================================
