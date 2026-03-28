@@ -21,9 +21,14 @@ We evaluate the metamodel and its cross-layer constraint formalization along two
 
 We characterize the metamodel's coverage of W3C VCDM 2.0 concepts [@sporny_verifiable_2025] as a soundness–completeness pair. For soundness, every metaclass and capability predicate traces to a VCDM concept: DCL metaclasses formalize the claim-level information structure, CSL metaclasses the credential packaging model, and FSL format classes with six capability predicates the format properties relevant to governance constraint evaluation. For completeness, the metamodel deliberately excludes three VCDM concept families outside credential *schema design*: proof mechanisms (cryptographic, orthogonal to structural modeling), verifiable presentations (runtime protocols), and credential status (lifecycle management). These are scope boundaries of the design-time formalization, not limitations of the graph predicate approach.
 
-::: {#fig:coverage_table .figure}
-Coverage mapping table: VCDM 2.0 concept → metamodel element → layer. Mark in-scope / out-of-scope.
-:::
+```{=latex}
+\begin{figure}
+\centering
+\fbox{\parbox{0.85\columnwidth}{\centering\vspace{1.5cm}\small Coverage mapping: VCDM 2.0 concept $\to$ metamodel element $\to$ layer. In-scope / out-of-scope marks.\vspace{1.5cm}}}
+\caption{Metamodel coverage of W3C VCDM 2.0 concepts. Each concept maps to a metamodel element at a specific layer; three concept families (proof mechanisms, presentations, credential status) are explicitly out of scope.}
+\label{fig:coverage_table}
+\end{figure}
+```
 
 ### Constraint Expressiveness
 
@@ -39,9 +44,14 @@ Table: Fully expressible eIDAS ARF constraints. Each maps directly to metamodel 
 | ARF-C4 | Proximity presentation requires mdoc format | ARB\_02 | `supports_offline_verification`; propagation rule eliminates SD-JWT-VC |
 | ARF-C7 | Attributes defined encoding-independently, then per-format | ARB\_06 | DCL$\to$CSL$\to$FSL layer architecture |
 
-::: {#fig:expressiveness_table .figure}
-Constraint expressiveness table: ID × constraint × source × expressible × predicate.
-:::
+```{=latex}
+\begin{figure}
+\centering
+\fbox{\parbox{0.85\columnwidth}{\centering\vspace{1.5cm}\small Extended constraint expressiveness table: all 8 eIDAS ARF constraints with expressibility classification and predicate mappings.\vspace{1.5cm}}}
+\caption{Constraint expressiveness classification for eight eIDAS ARF constraints. Three are fully expressible, five partially expressible, none falls outside the metamodel's capacity.}
+\label{fig:expressiveness_table}
+\end{figure}
+```
 
 The five partially expressible constraints share two root causes: the metamodel lacks a credential qualification subtype hierarchy (three constraints condition format eligibility on credential type), and its privacy predicates operate at format level rather than per-claim (two constraints require finer annotation). Both gaps are closable by extending the metaclass hierarchy; neither requires changing the constraint formalization approach. Runtime constraints (revocation timing, holder-binding protocols) fall outside the design-time scope.
 
@@ -110,9 +120,14 @@ This gap is again invisible to single-layer inspection: the domain concept layer
 
 \label{tab:antipatterns}
 
-::: {#fig:antipattern_table .figure}
-Anti-pattern table: name × description × graph predicate × layer(s) × kind.
-:::
+```{=latex}
+\begin{figure}
+\centering
+\fbox{\parbox{0.85\columnwidth}{\centering\vspace{1.5cm}\small Anti-pattern catalog: name $\times$ description $\times$ graph predicate $\times$ layer(s) $\times$ kind (error / propagation / shadow).\vspace{1.5cm}}}
+\caption{Five structural anti-patterns formalized as graph predicates, spanning intra-layer errors, cross-layer trace inconsistencies, and ecosystem-level capability gaps.}
+\label{fig:antipattern_table}
+\end{figure}
+```
 
 The first three anti-patterns are detectable by single-layer inspection: `non_connected` operates within the DCL, `no_empty_cred` and `root_ent_doesnt_have_cred` within the CSL. Trace misalignment requires cross-layer analysis. Each layer is individually well-formed, but the propagation rules `prop_t` and `prop_s` eliminate any binding where a `Claim`'s target `CredEntity` traces to a different DCL `Entity` than the `Prop` it was derived from. The cross-credential predicate gap is invisible at any single layer: the domain constraint is well-defined at the DCL, both credentials are structurally valid at the CSL, and each format is individually compliant at the FSL. Only the cross-layer shadow predicate, which checks `aligned` credential subjects against their formats' `supports_multi_credential_proof` capability, surfaces the gap. This graduated visibility, from intra-layer errors through cross-layer trace inconsistencies to ecosystem-level capability gaps, is the central argument for multi-level formalization over single-layer alternatives.
 
@@ -132,9 +147,14 @@ We construct synthetic instances from $N{=}1$ to $N{=}30$ credentials. Each cred
 
 All instances are evaluated using the Refinery CLI,^[Container image `ghcr.io/graphs4value/refinery-cli`, pulled via Docker.] where each invocation starts a fresh JVM inside a Docker container. We use Hyperfine as the benchmarking harness with 10 measured runs and 1 warmup run per configuration. [Hardware specification — populate from environment.json after running measurements: CPU model, RAM, OS version.]{.todo} Cold JVM startup adds a constant overhead per invocation that does not affect the scaling trend but inflates absolute wall-clock times; we report raw wall-clock times without correcting for this overhead. The measurement script, generated instances, and the metamodel source are provided as supplementary material for independent reproduction.
 
-::: {#fig:scalability .figure}
-Concretizability check and model generation runtime vs. model size ($N$ credentials). X-axis: $N$. Y-axis: wall-clock time (s). Lines: consistency, concretizability-SAT, concretizability-UNSAT, generate-SAT. figure* (full-width).
-:::
+```{=latex}
+\begin{figure*}
+\centering
+\fbox{\parbox{0.85\textwidth}{\centering\vspace{2cm}\small Scalability plot: wall-clock time (s) vs.\ model size ($N$ credentials). Lines: consistency check, concretizability-SAT, concretizability-UNSAT, model generation-SAT.\vspace{2cm}}}
+\caption{Runtime of three Refinery solver operations across ecosystem sizes from $N{=}1$ to $N{=}30$ credentials. Consistency checking serves as baseline; concretizability checking detects governance conflicts; model generation produces valid configurations.}
+\label{fig:scalability}
+\end{figure*}
+```
 
 Table: Scalability measurements across three Refinery operations. *Consistency* (`check`): verifies partial model has no internal contradictions. *Concretizability* (`check -k`): determines whether a concrete model satisfying all constraints exists. *Generation* (`generate`): produces a concrete model instance. Wall-clock seconds, mean $\pm\sigma$ over 10 runs. \label{tab:scalability}
 
@@ -157,10 +177,6 @@ Table: Scalability measurements across three Refinery operations. *Consistency* 
 
 ::: {.todo}
 Populate with measurement results — Martin to run ./run_measurements.sh all (+ add plain `check` to script). Fill cells as mean ± σ. Generation on UNSAT marked — (no valid model exists). Key observation: Consistency returns SAT on ALL rows including UNSAT models; only Concretizability correctly distinguishes SAT from UNSAT.
-:::
-
-::: {.todo}
-Extend run_measurements.sh to benchmark plain `check` (without -k) alongside `check -k`. This requires a new experiment loop running `refinery check` on all instances.
 :::
 
 ::: {.todo}

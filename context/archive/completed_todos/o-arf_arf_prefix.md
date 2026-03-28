@@ -2,7 +2,7 @@
 id: O-ARF
 short: "arf-prefix"
 title: "Prefix ARF constraint IDs"
-status: pending
+status: done
 depends_on: []
 binding_claims: [6]
 target: sections/05_evaluation.md

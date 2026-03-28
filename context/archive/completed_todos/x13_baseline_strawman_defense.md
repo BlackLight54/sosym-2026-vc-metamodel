@@ -2,7 +2,7 @@
 id: "X13"
 short: "baseline-strawman"
 title: "Defend baseline comparison against strawman critique"
-status: pending
+status: done
 priority: low
 depends_on: []
 binding_claims: [10]

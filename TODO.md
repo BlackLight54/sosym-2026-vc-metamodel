@@ -31,6 +31,10 @@
 - **M09** — Set up pandoc-crossref for `\autoref` references
 - **M10** — Move `@META` markers to YAML frontmatter in sections
 
+### Infrastructure
+
+- **M22** — Migrate todo pipeline to Claude Code native Tasks
+
 ### See also
 
 - `context/todos/INDEX.md` — full categorized listing

@@ -2,7 +2,7 @@
 id: "X06"
 short: "scalability-csok"
 title: "Anchor scalability instances to CSOK running example"
-status: pending
+status: done
 priority: low
 depends_on: []
 binding_claims: []

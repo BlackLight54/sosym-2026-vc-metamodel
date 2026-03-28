@@ -133,9 +133,14 @@ The following table classifies the constraints exercised in the housing subsidy 
 | C8 | **Governance conflict** | eIDAS+GDPR+W3C | FSL | C5$\wedge$C6$\wedge$C7 unsatisfiable on IncomeCred |
 | C9 | Cross-credential predicate gap | Format limitation | DCL$\leftrightarrow$FSL | C4 requires cross-credential arithmetic; no deployed format supports it |
 
-::: {#fig:constraint_taxonomy .figure}
-The table above, formatted as a figure with caption.
-:::
+```{=latex}
+\begin{figure}
+\centering
+\fbox{\parbox{0.85\columnwidth}{\centering\vspace{1.5cm}\small Cross-layer constraint taxonomy (C1--C9) formatted as captioned figure from the table above.\vspace{1.5cm}}}
+\caption{Cross-layer constraint taxonomy for the housing subsidy scenario. Structural constraints (C1--C3) are metamodel-enforced; domain constraint C4 is grounded in regulation; governance constraints C5--C7 originate from independent frameworks; C8 and C9 are cross-layer results.}
+\label{fig:constraint_taxonomy}
+\end{figure}
+```
 
 Constraints C1–C3 are structural (metamodel-enforced). C4 is a domain rule grounded in government regulation. C5–C7 each originate from a different governance framework. C8 and C9 are cross-layer results: they emerge only when constraints from multiple sources and layers are checked jointly. \autoref{sec:headlines} develops C8 and C9 as the paper's headline results.
 
@@ -149,16 +154,17 @@ Credentials issued by different authorities for the same person must be recogniz
 
 Some design problems are invisible at any single layer. When a domain constraint spans two credentials — $\text{property\_area} \geq f(\text{num\_children})$ requires combining claims from FamilyStatusCred and PropertyCred — the design depends on a format capability that may not exist. The shadow predicate `cross_cred_predicate_gap` detects this: $\text{cross\_cred\_predicate\_gap}(c_1, c_2)$ holds when $\text{aligned}(cs_1, cs_2)$ and at least one credential's format lacks multi-credential proof support. No deployed format supports cross-credential arithmetic (AnonCreds supports multi-credential *presentation* but not cross-credential *computation*), so the predicate fires for every aligned pair, making a structural limitation of the format landscape visible. As a shadow predicate, it records a condition whose severity depends on domain requirements; \autoref{sec:headlines} develops this as the second headline result.
 
-::: {#fig:generated_model .figure}
-(Optional) Refinery-generated model instance for the housing subsidy example showing constraint satisfaction.
-:::
+```{=latex}
+\begin{figure}
+\centering
+\fbox{\parbox{0.85\columnwidth}{\centering\vspace{1.5cm}\small Refinery-generated model instance for the housing subsidy example showing constraint satisfaction / violation.\vspace{1.5cm}}}
+\caption{Generated model instance for the housing subsidy scenario.}
+\label{fig:generated_model}
+\end{figure}
+```
 
 ::: {.todo}
 A16 — Apply complete constraint set to housing subsidy example. Show which propagation rules fire, generated model output. Cross-layer constraint violation when SD-JWT-VC chosen but predicate proof required. Length: 1 paragraph.
 :::
 
 The income threshold check illustrates how format-specific limitations propagate upward through the metamodel. With AnonCreds (CL signatures), the issuer encodes $\text{monthly\_income}$ as an integer attribute; at verification time, the holder proves $\text{monthly\_income} \geq \text{threshold}$ via a predicate proof without disclosing the exact value [@curran2022anoncreds] — the domain concept layer structure is unchanged. With SD-JWT-VC, no predicate proof mechanism exists [@terbu_sd-jwt-based_2026]. The only workaround is for the issuer to pre-compute boolean claims at issuance: $\text{earns\_above\_200k} \mapsto \text{true}$, $\text{earns\_above\_300k} \mapsto \text{true}$, and so on. This restructures the domain concept layer: the single Prop $\text{earns} \to \text{monthly\_income}$ (integer) is replaced by multiple Props $\text{earns\_above\_X} \to \text{boolean}$ for each anticipated threshold. The format-specific limitation has forced a change in the domain-level information model — a cross-layer constraint propagation that is visible only when both layers are analyzed together.
-
-::: {.todo}
-Polish — this paragraph may need tightening for page budget. The key point is that FSL limitations change DCL structure, which is exactly what the metamodel detects.
-:::

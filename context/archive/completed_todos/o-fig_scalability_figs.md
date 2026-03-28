@@ -2,7 +2,7 @@
 id: O-FIG
 short: "scalability-figs"
 title: "Scalability figure designs"
-status: pending
+status: done
 depends_on: ["T09"]
 binding_claims: []
 target: pandoc/assets/

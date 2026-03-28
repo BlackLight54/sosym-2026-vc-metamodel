@@ -25,9 +25,14 @@ Credential ecosystem design requires a formal framework that captures constraint
 ## Functional Overview
 \label{sec:functional-overview}
 
-::: {#fig:functional_overview .figure}
-Box/pipeline diagram. Input: partial design specification + constraint set → Processing box (metamodel + graph predicates) → Three output modes: (1) OK — design is consistent, (2) NOT_OK(errors) — specific constraint violations identified, (3) GENERATED(possible_design) or UNVIABLE(reasons) — design space exploration produces valid alternatives or proves none exist. Style: clean box diagram like Imre's BPM paper. Production: Excalidraw → TikZ.
-:::
+```{=latex}
+\begin{figure}
+\centering
+\fbox{\parbox{0.85\columnwidth}{\centering\vspace{1.5cm}\small Functional overview: partial design + constraints $\to$ metamodel + graph predicates $\to$ OK / NOT\_OK(errors) / GENERATED(design) / UNVIABLE(reasons)\vspace{1.5cm}}}
+\caption{Functional overview of the framework. A partial credential ecosystem design and constraint set are evaluated against the three-layer metamodel via graph predicates, producing one of three outcomes: consistency confirmed, specific violations identified, or valid configurations generated (or proven nonexistent).}
+\label{fig:functional_overview}
+\end{figure}
+```
 
 The approach takes as input a *partial credential ecosystem design* — entities, credentials, claim mappings, subject bindings, and tentative format assignments — together with the constraint set derived from the metamodel and applicable governance frameworks. The metamodel organizes these elements across three layers (domain concepts, credential schemas, format-specific representations), and cross-layer constraints are formalized as graph predicates that the Refinery partial graph modeling framework [@marussy_refinery_2024] can evaluate or enforce.
 

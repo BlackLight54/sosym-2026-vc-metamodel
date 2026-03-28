@@ -57,6 +57,10 @@
 
 - ~~[M00](m00_process_advisor_notes_from_oszkár.md)~~ — ✅ Process Oszkár's notes (2026-03-25 meeting + Konzi consultation)
 
+## Infrastructure
+
+- [M22](m22_migrate_to_native_tasks.md) — Migrate todo pipeline to Claude Code native Tasks
+
 ## Workflow overhaul — Phase 2
 
 - [M20](m20_phase2_execution.md) — **Execute Phase 2: marker migration, citations, Z01 extraction** ⚡

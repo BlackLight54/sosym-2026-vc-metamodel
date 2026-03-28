@@ -2,7 +2,7 @@
 id: O-BASE
 short: "baseline-compare"
 title: "Draft baseline comparison paragraph"
-status: pending
+status: done
 depends_on: ["T08"]
 binding_claims: []
 target: sections/05_evaluation.md

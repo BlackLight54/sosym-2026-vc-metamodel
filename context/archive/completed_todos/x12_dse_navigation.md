@@ -2,7 +2,7 @@
 id: "X12"
 short: "dse-navigation"
 title: "Clarify what design space exploration produces operationally"
-status: pending
+status: done
 priority: low
 depends_on: []
 binding_claims: [4]

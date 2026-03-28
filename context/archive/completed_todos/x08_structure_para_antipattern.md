@@ -2,7 +2,7 @@
 id: "X08"
 short: "struct-para-antipattern"
 title: "Fix structure paragraph: anti-patterns are in evaluation, not approach"
-status: pending
+status: done
 priority: low
 depends_on: []
 binding_claims: []

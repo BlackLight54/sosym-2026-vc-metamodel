@@ -2,7 +2,7 @@
 id: "X03"
 short: "none-outside"
 title: "Defend 'none falls entirely outside metamodel capacity' for expressiveness"
-status: pending
+status: done
 priority: medium
 depends_on: []
 binding_claims: [6]

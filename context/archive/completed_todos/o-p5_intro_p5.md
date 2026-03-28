@@ -2,7 +2,7 @@
 id: O-P5
 short: "intro-p5"
 title: "Update Intro P5 structure paragraph"
-status: pending
+status: done
 depends_on: ["T08"]
 binding_claims: []
 target: sections/01_introduction.md

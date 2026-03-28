@@ -2,7 +2,7 @@
 id: "X09"
 short: "formal-vs-expert"
 title: "Defend what formal model adds beyond expert domain knowledge"
-status: pending
+status: done
 priority: medium
 depends_on: []
 binding_claims: [9, 10]

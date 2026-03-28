@@ -2,7 +2,7 @@
 id: "X10"
 short: "fsl-defense"
 title: "Defend FSL as metamodel layer beyond lookup table"
-status: pending
+status: done
 priority: medium
 depends_on: []
 binding_claims: [1]

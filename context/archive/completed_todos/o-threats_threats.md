@@ -2,7 +2,7 @@
 id: O-THREATS
 short: "threats"
 title: "Threats to validity subsection"
-status: pending
+status: done
 depends_on: ["T08"]
 binding_claims: []
 target: sections/05_evaluation.md
