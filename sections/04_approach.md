@@ -36,7 +36,7 @@ In the housing subsidy scenario, the domain concept layer contains:
 | earns | Prop | Employment income |
 | monthly_income | Value | Monthly net income |
 
-Three statements capture the domain facts: $\text{statement}(\text{Applicant}, \text{has\_children}, \text{num\_children})$, $\text{statement}(\text{Applicant}, \text{owns\_property}, \text{property\_area})$, and $\text{statement}(\text{Applicant}, \text{earns}, \text{monthly\_income})$. Two domain constraints apply: $\text{property\_area} \geq \text{min\_area}(\text{num\_children})$ links two properties across what will become separate credentials, and $\text{monthly\_income} \geq \text{threshold}$ establishes a privacy-sensitive eligibility check. All claim-layer structural constraints (connectivity, no self-loops) are satisfied.
+Three statements capture the domain facts --- one per property edge in the domain graph. Two domain constraints apply: $\text{property\_area} \geq \text{min\_area}(\text{num\_children})$ links two properties across what will become separate credentials, and $\text{monthly\_income} \geq \text{threshold}$ establishes a privacy-sensitive eligibility check. All claim-layer structural constraints (connectivity, no self-loops) are satisfied.
 
 ## Credential Schema Layer
 
@@ -44,9 +44,29 @@ Three statements capture the domain facts: $\text{statement}(\text{Applicant}, \
 
 A domain concept graph captures *what* is known about a subject. Credential ecosystems must partition these facts into credentials — each issued by a different authority, each carrying a subset of the domain's claims. The Credential Schema Layer (CSL) models this partitioning. Each CSL element is traced from a DCL element: the abstract metaclass `CredEntity` carries a mandatory `trace` reference to exactly one DCL `Entity`, and each DCL `Prop` contains exactly one `Claim` via `Prop::trace`. This pair of cross-layer references ensures that every credential-layer element has a domain-level origin (\autoref{fig:metamodel}). CSL mirrors DCL's type structure: `CredentialSubject` and `CredentialValue` specialize `CredEntity`, paralleling DCL's `Subject` and `Value`. A `Claim` connects a source `CredEntity` to a target `CredentialValue`, mirroring DCL's `statement` predicate. Each `CredentialSubject` optionally contains a `Credential`, which itself holds exactly one `Formatted_Credential` (\autoref{sec:fsl}). The complete Refinery class declarations are provided in the supplementary material.
 
-Trace mappings do more than record provenance — combined with Refinery's propagation rules, they actively derive CSL structure from DCL during model generation. Propagation rules fire when partial information is committed, narrowing the space of valid completions. The `subject_traces_to_subject` rule enforces type consistency: when a `CredEntity` traces to a DCL `Subject`, the rule infers it must be a `CredentialSubject`. Similarly, `root_is_cred_subj` infers `CredentialSubject` for any `CredEntity` that no `Claim` targets, mirroring DCL's `root_is_subj` at the credential level. The effect is that CSL type assignments are derived from DCL structure rather than independently specified — a credential entity's type is a consequence of its domain-layer origin. The full propagation rule definitions are provided in the supplementary material.
+Trace mappings do more than record provenance — combined with Refinery's propagation rules, they actively derive CSL structure from DCL during model generation. Propagation rules fire when partial information is committed, narrowing the space of valid completions:
 
-Beyond type derivation, the metamodel enforces structural well-formedness through error predicates — graph predicates whose satisfaction marks a partial model as inconsistent. At the CSL, the `credential_statement` predicate mirrors DCL's `statement`: it holds when a `Claim` connects distinct source and target entities with the target typed as `CredentialValue`. The `Root_cred_entity` predicate identifies CredEntities not targeted by any `credential_statement` — these must serve as credential subjects. Two error predicates catch structural violations that would otherwise propagate silently to downstream format assignment: `no_empty_cred` rejects a `CredentialSubject` with no outgoing `Claim`, and `root_ent_doesnt_have_cred` rejects a root entity without an associated `Credential`. When either fires, the framework reports the violation — e.g., $\text{NOT\_OK}(\text{no\_empty\_cred}(cs))$ — before format-specific constraints are even evaluated. The full constraint definitions are provided in the supplementary material.
+| Rule | Trigger | Effect |
+|---|---|---|
+| `subject_traces_to_subject` | `CredEntity` traces to DCL `Subject` | Infer `CredentialSubject` |
+| `root_is_cred_subj` | No `Claim` targets the `CredEntity` | Infer `CredentialSubject` |
+
+Table: CSL propagation rules that derive type assignments from DCL structure.
+
+The second rule mirrors DCL's `root_is_subj` at the credential level. The effect is that CSL type assignments are derived from DCL structure rather than independently specified — a credential entity's type is a consequence of its domain-layer origin. The full propagation rule definitions are provided in the supplementary material.
+
+Beyond type derivation, the metamodel enforces structural well-formedness through error predicates — graph predicates whose satisfaction marks a partial model as inconsistent:
+
+| Predicate | Kind | Condition |
+|---|---|---|
+| `credential_statement` | Shadow | `Claim` connects distinct source and target; target typed as `CredentialValue` |
+| `Root_cred_entity` | Shadow | `CredEntity` not targeted by any `credential_statement` |
+| `no_empty_cred` | Error | `CredentialSubject` with no outgoing `Claim` |
+| `root_ent_doesnt_have_cred` | Error | Root entity without an associated `Credential` |
+
+Table: CSL shadow and error predicates for structural well-formedness.
+
+The first two predicates mirror DCL's `statement` and root-entity classification at the credential level. The two error predicates catch structural violations that would otherwise propagate silently to downstream format assignment. When either fires, the framework reports the violation — e.g., $\text{NOT\_OK}(\text{no\_empty\_cred}(cs))$ — before format-specific constraints are even evaluated. The full constraint definitions are provided in the supplementary material.
 
 In the housing subsidy scenario, three credentials partition the claim-layer facts:
 
@@ -62,9 +82,22 @@ All three credential subjects trace to the same claim-layer entity: $\text{trace
 
 \label{sec:fsl}
 
-The format-specific layer assigns each credential a concrete representation format. The abstract metaclass `Formatted_Credential` has five concrete subclasses — `AnoncredsCredentialSchema`, `JsonLdCredentialSchema`, `JwtVCCredentialSchema`, `SdJwtVcSchema`, and `MdocSchema` — and each `Credential` contains exactly one instance via the `format[1]` containment. These formats differ along a design-relevant axis: *selective disclosure* (revealing a subset of claims) versus *predicate proofs* (proving a comparison such as $\text{income} \geq \text{threshold}$ without disclosing the value). Only AnonCreds supports predicate proofs natively [@curran2022anoncreds]; SD-JWT-VC [@terbu_sd-jwt-based_2026] and mdoc [@_mobile_2021] provide selective disclosure but not predicate proofs, and JSON-LD supports selective disclosure via the BBS+ cryptosuite [@_bbs_2024; @looker_bbs_2024]. Formats lacking predicate proofs force issuers to pre-compute boolean claims, restructuring the domain concept layer (\autoref{sec:cross-layer}). This layer is less mature than DCL and CSL: format-internal structural constraints are not yet formalized.
+The format-specific layer assigns each credential a concrete representation format. The abstract metaclass `Formatted_Credential` has five concrete subclasses (one per credential format in scope: AnonCreds, JSON-LD, JWT-VC, SD-JWT-VC, and mdoc), and each `Credential` contains exactly one instance via the `format[1]` containment. These formats differ along a design-relevant axis: *selective disclosure* (revealing a subset of claims) versus *predicate proofs* (proving a comparison such as $\text{income} \geq \text{threshold}$ without disclosing the value). Only AnonCreds supports predicate proofs natively [@curran2022anoncreds]; SD-JWT-VC [@terbu_sd-jwt-based_2026] and mdoc [@_mobile_2021] provide selective disclosure but not predicate proofs, and JSON-LD supports selective disclosure via the BBS+ cryptosuite [@_bbs_2024; @looker_bbs_2026]. Formats lacking predicate proofs force issuers to pre-compute boolean claims, restructuring the domain concept layer (\autoref{sec:cross-layer}). This layer is less mature than DCL and CSL: format-internal structural constraints are not yet formalized.
 
-The metamodel encodes format capabilities as six derived predicates over the class hierarchy — `supports_predicate_proof`, `supports_selective_disclosure`, `conforms_vcdm`, `supports_zkp`, `supports_offline_verification`, and `supports_multi_credential_proof` (i.e., evaluating predicates over values from distinct credentials without disclosing the values themselves) — each capturing a functional property that at least one governance framework or domain requirement in the running example imposes (full definitions in the supplementary material). Propagation rules use these predicates to narrow the format design space during generation: when a capability is required, formats lacking it are eliminated. Requiring predicate proof support on IncomeCred eliminates all formats except AnonCreds, which in turn does not conform to W3C VCDM 2.0, setting up the governance conflict in \autoref{sec:headlines}. Three governance annotation classes — `EidasMandate`, `PrivacyRequirement`, `VcdmConformance` — attach regulatory and standards requirements to individual credentials as typed markers. These annotations are the primary input for error identification (flagging format-governance conflicts) and design space exploration (generating only format assignments satisfying all active governance constraints).
+The metamodel encodes format capabilities as six derived predicates over the class hierarchy, each capturing a functional property that at least one governance framework or domain requirement in the running example imposes:
+
+| Predicate | Capability |
+|---|---|
+| `supports_predicate_proof` | Predicate proof (e.g., $\text{income} \geq \text{threshold}$ without disclosure) |
+| `supports_selective_disclosure` | Selective disclosure of claim subsets |
+| `conforms_vcdm` | W3C VCDM 2.0 data model conformance |
+| `supports_zkp` | Zero-knowledge proof support |
+| `supports_offline_verification` | Offline verification without network access |
+| `supports_multi_credential_proof` | Cross-credential predicate evaluation |
+
+Table: FSL capability predicates derived from the format class hierarchy.
+
+Full definitions are provided in the supplementary material. Propagation rules use these predicates to narrow the format design space during generation: when a capability is required, formats lacking it are eliminated. Requiring predicate proof support on IncomeCred eliminates all formats except AnonCreds, which in turn does not conform to W3C VCDM 2.0, setting up the governance conflict in \autoref{sec:headlines}. Three governance annotation classes (`EidasMandate`, `PrivacyRequirement`, `VcdmConformance`) attach regulatory and standards requirements to individual credentials as typed markers. These annotations are the primary input for error identification (flagging format-governance conflicts) and design space exploration (generating only format assignments satisfying all active governance constraints).
 
 In the housing subsidy scenario, format assignments are governance-driven:
 
@@ -74,7 +107,7 @@ In the housing subsidy scenario, format assignments are governance-driven:
 | PropertyCred | SD-JWT-VC | eIDAS ARF (SHALL) | Valid |
 | IncomeCred | ? | eIDAS + GDPR | **Conflict** |
 
-FamilyStatusCred and PropertyCred are straightforward: as EU wallet attestations, the eIDAS Architecture Reference Framework mandates SD-JWT-VC (or mdoc; since both lack predicate proof support, we use SD-JWT-VC as the representative format for this analysis (the two formats differ on other capability predicates such as offline verification) [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026]). IncomeCred is the conflict site: the ARF requires SD-JWT-VC, but the income threshold check — verifying $\text{monthly\_income} \geq \text{threshold}$ without disclosing the exact value — requires predicate proof capability that SD-JWT-VC does not provide [@terbu_sd-jwt-based_2026]. AnonCreds supports predicate proofs via CL signatures [@curran2022anoncreds] but does not conform to W3C VCDM 2.0 [@manu_verifiable_2025].
+FamilyStatusCred and PropertyCred are straightforward: as EU wallet attestations, the eIDAS Architecture Reference Framework mandates SD-JWT-VC (or mdoc; since both lack predicate proof support, we use SD-JWT-VC as the representative format for this analysis (the two formats differ on other capability predicates such as offline verification) [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026]). IncomeCred is the conflict site: the ARF requires SD-JWT-VC, but the income threshold check — verifying $\text{monthly\_income} \geq \text{threshold}$ without disclosing the exact value — requires predicate proof capability that SD-JWT-VC does not provide [@terbu_sd-jwt-based_2026]. AnonCreds supports predicate proofs via CL signatures [@curran2022anoncreds] but does not conform to W3C VCDM 2.0 [@sporny_verifiable_2025].
 
 ## Cross-Layer Constraints as Graph Predicates
 
