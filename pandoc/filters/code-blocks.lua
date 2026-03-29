@@ -19,6 +19,14 @@ local aliases = {
   problem = "refinery",
 }
 
+-- Inline [text]{.refi} spans -> \refi{text}
+function Span(el)
+  if el.classes:includes("refi") then
+    local text = pandoc.utils.stringify(el.content)
+    return pandoc.RawInline("latex", "\\refi{" .. text .. "}")
+  end
+end
+
 function CodeBlock(el)
   local lang = el.classes[1] or ""
   local canonical = aliases[lang] or lang

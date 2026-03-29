@@ -5,9 +5,7 @@ goal: "Establish problem, gap, contribution, approach sketch, paper structure."
 dependencies: []
 ---
 
-# Introduction
-
-\label{sec:introduction}
+# Introduction {#sec:introduction}
 
 Emerging digital credential ecosystems allow persons and organizations to receive, hold, and selectively present cryptographically verifiable claims [@sporny_verifiable_2025]. Such ecosystems are deployed under diverse governance frameworks, from government-regulated EU Digital Identity Wallets [@eidas2] to community-governed decentralized identity systems [@curran2022anoncreds]. Designing these ecosystems requires satisfying constraints that span multiple abstraction layers, from domain-level claim properties through credential schema structure to format-specific privacy capabilities, yet no multi-layer formalization captures the cross-layer constraints spanning domain semantics, credential structure, and format-specific representation.
 
