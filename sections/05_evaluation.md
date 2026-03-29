@@ -72,6 +72,12 @@ Five structural anti-patterns are encoded as graph predicates over the partial m
 
 The multi-layer advantage for cross-layer detection is partly definitional. No existing tool implements cross-layer credential ecosystem checking. Manual expert review can identify single-credential format conflicts but lacks systematic coverage of cross-credential dependencies. Formalization adds systematicity: the model checks all constraint combinations exhaustively, scales beyond what manual analysis can track, and yields a reproducible artifact. Single-layer metamodeling (a UML class diagram with OCL constraints per layer) detects intra-layer violations but cannot express cross-layer trace predicates (`prop_t`, `prop_s`) or capability checks (`cross_cred_predicate_gap`). Only the integrated multi-layer formalization detects all five anti-pattern categories, including both headline results (\autoref{sec:headlines}) that single-layer approaches cannot express. We are not aware of an alternative multi-layer credential ecosystem formalization in the literature.
 
+The Refinery-based formalization provides two formal guarantees that hold on partial models.
+
+#### Soundness: if the framework reports a constraint violation, the (partial) model necessarily violates it; no false positives arise from open design decisions
+
+#### Completeness with respect to the formalized predicates: every anti-pattern in \autoref{tab:antipatterns} is checked exhaustively over all model elements, so a flaw matching a defined predicate cannot escape detection. These guarantees distinguish the approach from random graph generation (no constraint satisfaction guarantees), LLM-based schema generation (no formal guarantees), and manual inspection (cannot systematically cover cross-layer interactions at scale)
+
 ## Scalability Measurement
 
 \label{sec:scalability}
