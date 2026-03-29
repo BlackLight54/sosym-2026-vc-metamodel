@@ -25,13 +25,46 @@ Layer definitions in \autoref{sec:approach} use Ecore-style class diagrams with 
 ## Partial Graph Modeling with Refinery
 \label{sec:refinery}
 
-[+PGM]{.full} is a modeling methodology in which design specifications are expressed as partial models and graph predicates serve as a first-class constraint language. Refinery is a PGM framework [@marussy_refinery_2024] that assigns a four-valued interpretation to every node, edge, attribute value, and class membership, enabling reasoning over incomplete specifications where both structural and data-level decisions remain open. In Refinery, nodes correspond to objects (instances of classes defined in a metamodel), and edges correspond to typed references between objects; class membership is an additional unary relation over nodes.
+::: todo
+Do not use this PGM, it is a non-existing concept
+:::
+[+PGM]{.full} 
+During the early phase of developement, our knowledge about models is often incomplete. In partial modeling 
+::: todo
+cite this: Partial models: Towards modeling and reasoning with uncertainty
+M Famelis, R Salay, M Chechik
+:::
+uncertainty can be denoted explicitly, thus a range of design alternatives can be developed together.
+Refinery [@marussy_refinery_2024] is a modeling methodology in which design specifications are expressed as partial models and graph predicates serve as a first-class constraint language. Refinery uses a four-valued logic interpretation
+::: todo
+cite this:
+@incollection{Belnap77useful,
+  author = {Belnap, Jr., Nuel D.},
+  title = {A Useful Four-Valued Logic},
+  booktitle = {Modern Uses of Multiple-Valued Logic},
+  series = {EPIS},
+  volume = {2},
+  pages = {5-37},
+  year = {1977},
+  publisher = {Springer},
+  doi = {10.1007/978-94-010-1161-7_2}
+}
+:::
+to every node, edge, attribute value, enabling reasoning over incomplete (or inconsistent) specifications where both structural and data-level decisions remain open. In Refinery, nodes correspond to objects (instances of classes defined in a metamodel), and edges correspond to typed references between objects; class membership is an additional unary relation over nodes.
 
 ::: {.formal}
 Oscar: precise definition of graph elements (nodes, edges, class membership as relations). Reference Marussy et al. 2024. Target length: 2--3 sentences.
 :::
 
-A *partial model* is one where some edges and class memberships remain open: they may or may not hold in a concrete completion. A *concrete model* resolves every open element to either committed true or committed false. The four-valued interpretation assigns each element one of four statuses: *must* (committed true), *must not* (committed false), *may* (possibly true), and *may not* (possibly false). In diagrams, a solid line denotes a committed (*must*) edge, a dashed line denotes an open (*may*) edge, and absence denotes a committed-false (*must not*) edge.
+A *4-valued partial model* provide partial interpretation to edge and class memberships in a model.
+::: todo
+Honnan jön ez a commited?
+:::
+The four-valued interpretation assigns each element one of four statuses: *true* (the value must be true), *false* (the value must be false), *unknown* (possibly true or false), and *error* (both true and false, denoting contraiction). In diagrams,
+::: todo
+do we have diagrams?
+:::
+a solid line denotes a true values, a dashed line denotes unknown values, and absence denotes a false value. During the development (or automated synthesis) of partial models  *unknown* values are gradually refined to either *true* or *false*.  
 
 ::: {.formal}
 Oscar: refinement ordering definition (partial model $A$ refines $B$ iff every must/must-not commitment in $B$ is preserved in $A$). Target length: 1--2 sentences + definition.
