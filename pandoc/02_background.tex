@@ -26,26 +26,26 @@ Layer definitions in \autoref{sec:approach} use Ecore-style class diagrams with 
 
 \acf{PGM}
 During the early phase of developement, our knowledge about models is often incomplete. In partial modeling
-::: todo
-cite this: Partial models: Towards modeling and reasoning with uncertainty
-M Famelis, R Salay, M Chechik
-:::
+
+\todo[inline]{cite this: Partial models: Towards modeling and reasoning with uncertainty \\
+M Famelis, R Salay, M Chechik}
+
 uncertainty can be denoted explicitly, thus a range of design alternatives can be developed together.
 Refinery \citep{marussy_refinery_2024} is a modeling methodology in which design specifications are expressed as partial models and graph predicates serve as a first-class constraint language. Refinery uses a four-valued logic interpretation
-::: todo
-cite this:
-\citet{incollection}\{Belnap77useful,
-author = \{Belnap, Jr., Nuel D.\},
-title = \{A Useful Four-Valued Logic\},
-booktitle = \{Modern Uses of Multiple-Valued Logic\},
-series = \{EPIS\},
-volume = \{2\},
-pages = \{5-37\},
-year = \{1977\},
-publisher = \{Springer\},
-doi = \{10.1007/978-94-010-1161-7\_2\}
-\}
-:::
+
+\todo[inline]{cite this: \\
+@incollection{Belnap77useful, \\
+author = {Belnap, Jr., Nuel D.}, \\
+title = {A Useful Four-Valued Logic}, \\
+booktitle = {Modern Uses of Multiple-Valued Logic}, \\
+series = {EPIS}, \\
+volume = {2}, \\
+pages = {5-37}, \\
+year = {1977}, \\
+publisher = {Springer}, \\
+doi = {10.1007/978-94-010-1161-7\_2} \\
+}}
+
 to every node, edge, attribute value, enabling reasoning over incomplete (or inconsistent) specifications where both structural and data-level decisions remain open. In Refinery, nodes correspond to objects (instances of classes defined in a metamodel), and edges correspond to typed references between objects; class membership is an additional unary relation over nodes.
 
 \todo[inline,color=green!20]{formal: Oscar: precise definition of graph elements (nodes, edges, class membership as relations). Reference Marussy et al. 2024. Target length: 2--3 sentences.}
@@ -113,7 +113,7 @@ Given a partial specification combining a metamodel, predicates, and instance-le
 
 \todo[inline,color=green!20]{formal: Oscar: formal statement of soundness and completeness guarantees for Refinery's refinement-based generation. Reference Semerath et al. 2018. Target length: 2--3 sentences + formal claim.}
 
-Credential ecosystem designs are inherently incomplete: schema elements, format assignments, and governance constraints are introduced incrementally as standards evolve and regulatory frameworks are adopted. Bounded model finding (Alloy \citep{jackson_software_2012} for relational logic, OCL for UML class models) requires fully specified instances and checks constraints after generation; \ac{PGM} evaluates constraints \emph{during} refinement of incomplete specifications, pruning inconsistent design choices before they propagate. This distinction is critical when governance constraints from independent sources must be checked jointly over a design that is not yet fully determined.
+Credential ecosystem designs are inherently incomplete: schema elements, format assignments, and governance constraints are introduced incrementally as standards evolve and regulatory frameworks are adopted. \ac{PGM} evaluates constraints \emph{during} refinement of such incomplete specifications, pruning inconsistent design choices before they propagate (\autoref{sec:rw-multilevel} compares this to bounded model finding alternatives).
 
 \todo[inline,color=gray!10]{meta: Section: Background / Sec 2.3 \\
 Budget: was ~0.35 pages, now ~0.75--0.85 pages before Oscar's additions. Total Sec 2  1.45 pages (0.2 over 1.25 budget). Oscar's formal content will add further; page cuts needed elsewhere.}
