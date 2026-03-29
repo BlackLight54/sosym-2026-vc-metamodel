@@ -20,7 +20,7 @@ We characterize the metamodel's coverage of W3C VCDM 2.0 concepts \citep{sporny_
 
 We collected eight normative constraints from the eIDAS Architecture Reference Framework (ARF) v2.7.3 \citep{noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026} governing credential format assignment, and classified each as \emph{fully expressible}, \emph{partially expressible}, or \emph{not expressible}. Three are fully expressible (\autoref{tab:expressiveness}), five partially, and none falls entirely outside the metamodel's capacity. The full constraint analysis is provided in the supplementary material.
 
-\begin{table}
+\begin{table}[htb]
 \caption{Fully expressible eIDAS ARF constraints. Each maps directly to metamodel
 predicates or architecture. \label{tab:expressiveness}}
 \small
@@ -88,7 +88,7 @@ No layer-internal check reveals the gap: the DCL constraint is well-defined, bot
 
 \autoref{tab:antipatterns} catalogues five structural anti-patterns formalized as graph predicates over the partial model.
 
-\begin{table}
+\begin{table}[htb]
 \caption{Structural anti-patterns formalized as graph predicates. The first three
 require single-layer inspection; trace misalignment and the
 cross-credential predicate gap require cross-layer analysis.
@@ -126,14 +126,14 @@ We construct synthetic instances from \(N{=}1\) to \(N{=}30\) credentials, with 
 
 All instances are evaluated using the Refinery CLI,\footnote{Container image \texttt{ghcr.io/graphs4value/refinery-cli}, pulled via Docker.} where each invocation starts a fresh JVM inside a Docker container. We use Hyperfine as the benchmarking harness with 10 measured runs and 1 warmup run per configuration, on an AMD Ryzen 9 7950X3D (16 cores), 96 GB RAM, Windows 11. Cold JVM startup inside the Docker container adds a constant overhead of \({\approx}3.9\text{s}\) per invocation (measured via a no-op baseline instance); reported times subtract this overhead to isolate solver computation. At small scales (\(N \leq 5\)), solver time is below the measurement noise floor (\({\approx}0.1\text{s}\)). The measurement script, generated instances, and the metamodel source are provided as supplementary material for independent reproduction.
 
-\begin{figure*}
+\begin{figure}[htb]
 \centering
-\fbox{\parbox{0.85\textwidth}{\centering\vspace{2cm}\small Scalability plot: wall-clock time (s) vs.\ model size ($N$ credentials). Lines: consistency check, concretizability-SAT, concretizability-UNSAT, model generation-SAT.\vspace{2cm}}}
+\fbox{\parbox{0.85\columnwidth}{\centering\vspace{0.5cm}\small Scalability plot: wall-clock time (s) vs.\ model size ($N$ credentials). Lines: consistency check, concretizability-SAT, concretizability-UNSAT, model generation-SAT.\vspace{0.5cm}}}
 \caption{Runtime of three Refinery solver operations across ecosystem sizes from $N{=}1$ to $N{=}30$ credentials. Consistency checking serves as baseline; concretizability checking detects governance conflicts; model generation produces valid configurations.}
 \label{fig:scalability}
-\end{figure*}
+\end{figure}
 
-\begin{table}
+\begin{table}[htb]
 \caption{Scalability measurements for two Refinery operations, baseline-corrected
 (3.9s Docker+JVM overhead subtracted). \emph{Concretizability}
 (\texttt{check\ -k}): determines whether a concrete model satisfying all
@@ -158,7 +158,7 @@ concrete model instance. Seconds, mean \(\pm\sigma\) over 10 runs.
 
 \textbf{RQ1}: Concretizability checking scales sublinearly, reaching 1.09,s at \(N{=}30\) (272 graph nodes), well within interactive use for ecosystem sizes exceeding current EU wallet specifications. SAT and UNSAT instances exhibit comparable timing, confirming that unsatisfiability detection does not incur significant additional cost. \textbf{RQ2}: Model generation reaches 1.85,s at the same scale, reflecting the additional cost of producing a fully resolved instance.
 
-\begin{table}
+\begin{table}[htb]
 \caption{Constraint sensitivity at \(N{=}3\): governance framework power-set.
 Result column reports concretizability (\texttt{check\ -k}). All
 configurations complete in under 0.1s of solver time (below the
@@ -187,4 +187,4 @@ Only G7, the conjunction of all three governance frameworks, yields unsatisfiabi
 
 \label{sec:threats}
 
-The metamodel formalizes design-time credential schemas; proof mechanisms, verifiable presentations, and credential status fall outside this scope (\autoref{sec:coverage}). The DCL's structural inference rule classifies any Entity with no incoming value reference as a Subject; a modeler who omits a property edge may find the entity silently promoted rather than flagged. The running example (housing subsidy) was selected for structural completeness (it exhibits both headline results within a single domain), but a randomly sampled ecosystem might expose interaction patterns not covered by the current anti-pattern catalog. The eight eIDAS ARF constraints were extracted from a specific version (v2.7.3); the constraint set may shift as the regulatory framework evolves. The evaluation operates within a single governance context (EU regulations applied to Hungarian administrative procedures); governance traditions that impose constraints not reducible to format-capability requirements would require extending the metamodel beyond annotation markers. Scalability instances grow by adding credentials with uniform structure (one property, shared subject); deeper claim hierarchies or multi-subject credentials may stress different metamodel elements. The partially-expressible classification (\autoref{sec:expressiveness}) rests on our judgment of what constitutes a structural versus runtime property. The formalization depends on Refinery as the sole validation tool; portability to other partial-model solvers has not been assessed. \todo{Verify the scaling characterization (sublinear, phase transition hypothesis) against Refinery solver behavior.}
+The metamodel formalizes design-time credential schemas; proof mechanisms, verifiable presentations, and credential status fall outside this scope (\autoref{sec:coverage}). The DCL's structural inference rule classifies any Entity with no incoming value reference as a Subject; a modeler who omits a property edge may find the entity silently promoted rather than flagged. The running example (housing subsidy) was selected for structural completeness (it exhibits both headline results within a single domain), but a randomly sampled ecosystem might expose interaction patterns not covered by the current anti-pattern catalog. The eight eIDAS ARF constraints were extracted from a specific version (v2.7.3); the constraint set may shift as the regulatory framework evolves. The evaluation operates within a single governance context (EU regulations applied to Hungarian administrative procedures); governance traditions that impose constraints not reducible to format-capability requirements would require extending the metamodel beyond annotation markers. Scalability instances grow by adding credentials with uniform structure (one property, shared subject); deeper claim hierarchies or multi-subject credentials may stress different metamodel elements. The partially-expressible classification (\autoref{sec:expressiveness}) rests on our judgment of what constitutes a structural versus runtime property. The formalization depends on Refinery as the sole validation tool; portability to other partial-model solvers has not been assessed.

@@ -78,7 +78,7 @@ function Table(tbl)
   local has_caption = caption_latex and caption_latex ~= ""
 
   if has_caption then
-    table.insert(lines, "\\begin{table}")
+    table.insert(lines, "\\begin{table}[htb]")
     -- Emit \caption{...} with \label inside if we have one
     if label_latex then
       table.insert(lines, "\\caption{" .. caption_latex .. "}" .. label_latex)

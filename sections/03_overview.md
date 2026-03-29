@@ -26,9 +26,9 @@ The remainder of this section defines a framework that captures constraints acro
 \label{sec:functional-overview}
 
 ```{=latex}
-\begin{figure}
+\begin{figure}[htb]
 \centering
-\fbox{\parbox{0.85\columnwidth}{\centering\vspace{1.5cm}\small Functional overview: partial design + constraints $\to$ metamodel + graph predicates $\to$ OK / NOT\_OK(errors) / GENERATED(design) / UNVIABLE(reasons)\vspace{1.5cm}}}
+\fbox{\parbox{0.85\columnwidth}{\centering\vspace{0.5cm}\small Functional overview: partial design + constraints $\to$ metamodel + graph predicates $\to$ OK / NOT\_OK(errors) / GENERATED(design) / UNVIABLE(reasons)\vspace{0.5cm}}}
 \caption{Functional overview of the framework. A partial credential ecosystem design and constraint set are evaluated against the three-layer metamodel via graph predicates, producing one of three outcomes: consistency confirmed, specific violations identified, or valid configurations generated (or proven nonexistent).}
 \label{fig:functional_overview}
 \end{figure}

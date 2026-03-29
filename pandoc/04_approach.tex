@@ -20,7 +20,7 @@ A credential ecosystem must cover all domain-level facts; an entity unreachable 
 
 In the housing subsidy scenario, the domain concept layer contains:
 
-\begin{table}
+\begin{table}[htb]
 \caption{DCL instance for the housing subsidy scenario.}
 \small
 \setlength{\tabcolsep}{4pt}
@@ -49,7 +49,7 @@ A domain concept graph captures \emph{what} is known about a subject. Credential
 
 Trace mappings do more than record provenance. Combined with Refinery's propagation rules, they actively derive CSL structure from DCL during model generation. Propagation rules fire when partial information is committed, narrowing the space of valid completions:
 
-\begin{table}
+\begin{table}[htb]
 \caption{CSL propagation rules that derive type assignments from DCL structure.}
 \small
 \setlength{\tabcolsep}{4pt}
@@ -67,7 +67,7 @@ The second rule mirrors DCL's \texttt{root\_is\_subj} at the credential level. T
 
 Beyond type derivation, the metamodel enforces structural well-formedness through error predicates, graph predicates whose satisfaction marks a partial model as inconsistent:
 
-\begin{table}
+\begin{table}[htb]
 \caption{CSL shadow and error predicates for structural well-formedness.}
 \small
 \setlength{\tabcolsep}{4pt}
@@ -88,7 +88,7 @@ The first two predicates mirror DCL's \texttt{statement} and root-entity classif
 
 In the housing subsidy scenario, three credentials partition the claim-layer facts:
 
-\begin{table}
+\begin{table}[htb]
 \caption{CSL instance for the housing subsidy scenario. Issuers: civil registry
 (FamilyStatusCred), land registry (PropertyCred), employer (IncomeCred).}
 \small
@@ -114,7 +114,7 @@ The format-specific layer assigns each credential a concrete representation form
 
 The metamodel encodes format capabilities as six derived predicates over the class hierarchy, each capturing a functional property that at least one governance framework or domain requirement in the running example imposes:
 
-\begin{table}
+\begin{table}[htb]
 \caption{FSL capability predicates derived from the format class hierarchy.}
 \small
 \setlength{\tabcolsep}{4pt}
@@ -137,7 +137,7 @@ Propagation rules narrow the format design space during generation: requiring pr
 
 In the housing subsidy scenario, format assignments are governance-driven:
 
-\begin{table}
+\begin{table}[htb]
 \caption{FSL assignments for the housing subsidy scenario.}
 \small
 \setlength{\tabcolsep}{4pt}
@@ -160,7 +160,7 @@ FamilyStatusCred and PropertyCred are straightforward: as EU wallet attestations
 
 The following table classifies the constraints exercised in the housing subsidy scenario by source and scope:
 
-\begin{table}
+\begin{table}[htb]
 \caption{Cross-layer constraint taxonomy. C1--C3 are metamodel-enforced; C4 is
 grounded in regulation; C5--C7 originate from independent governance
 frameworks; C8 and C9 are cross-layer results.
