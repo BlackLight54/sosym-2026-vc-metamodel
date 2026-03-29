@@ -37,7 +37,7 @@ end
 
 function Table(tbl)
   local ncols = #tbl.colspecs
-  local use_tabularx = ncols >= 4
+  local use_tabularx = ncols >= 2
 
   -- Build column spec
   local aligns = {}

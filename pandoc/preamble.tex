@@ -24,3 +24,8 @@
 \usepackage{tabularx}         % auto-width tables for two-column layout
 \newcolumntype{L}{>{\raggedright\arraybackslash}X}
 %% booktabs is loaded by acmart.cls — no need to load it here
+
+%% Allow line breaks at underscores in \texttt (monospace) text.
+%% Without this, long predicate names like supports_multi_credential_proof
+%% overflow tabularx columns because LaTeX cannot hyphenate them.
+\renewcommand\_{\textunderscore\allowbreak}

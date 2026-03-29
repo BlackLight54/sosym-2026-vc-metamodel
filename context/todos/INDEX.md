@@ -52,7 +52,7 @@
 |----|-------|--------|----------|
 | O-GOV | [Governance research beyond ARF](../archive/completed_todos/o-gov_gov_research.md) | deferred → future work | imre |
 | O-ANON | [Anonymize supplementary](o-anon_anonymize.md) | pending | oszkár |
-| O-S03 | [Sec 03 polish](o-s03_sec03_review.md) | pending | martin |
+| O-S03 | [Sec 03 polish](../archive/completed_todos/o-s03_sec03_review.md) | done | martin |
 
 ## Z01 triage pipeline
 

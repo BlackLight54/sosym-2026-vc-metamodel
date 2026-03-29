@@ -2,7 +2,7 @@
 id: O-S03
 short: "sec03-review"
 title: "Martin review: Sec 03 polish and Functional Overview"
-status: pending
+status: done
 depends_on: []
 binding_claims: []
 target: sections/03_overview.md
