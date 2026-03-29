@@ -64,7 +64,7 @@ The four-valued interpretation assigns each element one of four statuses: *true*
 ::: todo
 do we have diagrams?
 :::
-a solid line denotes a true values, a dashed line denotes unknown values, and absence denotes a false value. During the development (or automated synthesis) of partial models  *unknown* values are gradually refined to either *true* or *false*.  
+a solid line denotes a true values, a dashed line denotes unknown values, and absence denotes a false value. During the development (or automated synthesis) of partial models *unknown* values are gradually refined to either *true* or *false*. If a model contains only *true* and *false* values, we call them *concrete models*. If the 
 
 ::: {.formal}
 Oscar: refinement ordering definition (partial model $A$ refines $B$ iff every must/must-not commitment in $B$ is preserved in $A$). Target length: 1--2 sentences + definition.
