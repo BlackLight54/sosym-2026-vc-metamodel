@@ -14,7 +14,11 @@
 - [mdoc simplified away](decision_mdoc_simplified.md) — SD-JWT-VC only in running example
 - [Two headline results](decision_two_headline_results.md) — income conflict (vertical) + floor area gap (horizontal)
 - [DCL rename](decision_dcl_rename.md) — CPL → Domain Concept Layer
-- [No code listings](decision_no_code_listings.md) — prose+math only, Refinery in supplementary
+- [No code listings](decision_no_code_listings.md) — PARTIALLY SUPERSEDED: selected Refinery listings now in body
+- [Refinery code in paper](decision_refinery_code_in_paper.md) — add lstlisting code in BG + approach; replaces verbose prose
+- [BG notation consistency](decision_bg_notation_consistency.md) — define Refinery terms in BG, reference via autoref elsewhere
+- [Shorten conclusion](decision_conclusion_shortened.md) — limitations+future work → eval; conclusion ≤2 paragraphs
+- [Type graph rename](decision_type_graph_rename.md) — fig:metamodel caption "type graph" not "metamodel"; move near constraint table
 - [Gap framing: formalized](decision_gap_framing_formalized.md) — "collected and formalized" not "scattered across"
 - [Emergent constraint interactions](decision_emergent_constraint_interactions.md) — cross-layer interactions unpredictable without joint analysis
 - [Competing peer requirements](decision_competing_peer_requirements.md) — non-hierarchical stakeholders, goals may conflict
@@ -27,6 +31,8 @@
 - [Soundness/completeness](decision_soundness_completeness.md) — core guarantees: invalid=truly invalid, generated models satisfy constraints
 - [CORE-DISC properties](decision_core_disc_properties.md) — Consistency primary, Diverse/Scalable addressed, Realistic out of scope
 - [Range proofs = future work](decision_range_proofs_future_work.md) — out of scope, mention in conclusion
+- [Three-axis validation](decision_three_axis_validation.md) — coverage + expressiveness + error detection, structures §5
+- [FSL elaboration deferred](decision_fsl_elaboration.md) — intra-layer constraint deferred, defended argumentatively in §4.3
 
 # Claims
 
@@ -39,7 +45,7 @@
 - [Claim 7: Anti-pattern detection](claim_07_antipattern_detection.md) — error detection vs. known anti-patterns (partial)
 - [Claim 8: Contradictory constraints](claim_08_contradictory_constraints.md) — cross-framework formal contradiction (partial)
 - [Claim 9: Multi-layer invisibility](claim_09_multilayer_invisibility.md) — errors invisible to single-layer inspection (partial)
-- [Claim 10: Necessity argument](claim_10_necessity_argument.md) — multi-layer modeling as prerequisite (not_started)
+- [Claim 10: Necessity argument](claim_10_necessity_argument.md) — multi-layer modeling as prerequisite (delivered)
 
 # Feedback
 

@@ -1,15 +1,16 @@
 ---
-name: "No code listings"
-description: "No code listings in paper body — formal definitions in prose+math only, Refinery encodings in supplementary"
+name: "No code listings — PARTIALLY SUPERSEDED"
+description: "Originally no code in body; now selected Refinery listings allowed per advisor feedback 2026-03-29"
 type: project
 date: 2026-03-27
 status: active
 affects: "All section files (especially Sec 04, 05), figure design, supplementary material"
-revisit_when: "If reviewer requests Refinery encoding in body, or paper moves to tool-demo track"
+revisit_when: "After A-CODE and A-SHORT complete — reassess page impact"
 tags: format, code, supplementary
 ---
 
-**Decision:** No code listings in the paper body. All formal definitions in prose and mathematical notation only. Refinery encodings go to supplementary material.
-**Rationale:** Aligns with feedback that Refinery definitions belong in prose+math. Code listings consume page budget without advancing argument for Foundations Track. Math notation is the expected register.
-**Why:** Page budget and register — Foundations Track evaluates metamodel and constraints, not tool syntax.
-**How to apply:** No lstlisting, no fenced code blocks rendered as figures, no inline Refinery syntax in body. Supplementary material only.
+**Decision (original, 2026-03-27):** No code listings in the paper body. All formal definitions in prose and mathematical notation only. Refinery encodings go to supplementary material.
+
+**Partially superseded (2026-03-29):** Advisor feedback reverses this for selected predicates. Key Refinery code listings now go in BG (Sec 2.3) and approach (Sec 04). See `decision_refinery_code_in_paper.md` for the new policy. Full encoding still in supplementary; body gets illustrative listings that replace verbose prose (net page-neutral).
+
+**What still holds:** The full Refinery encoding remains in supplementary. Body listings are selective, not exhaustive.
