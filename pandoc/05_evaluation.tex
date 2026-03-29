@@ -18,28 +18,9 @@ We characterize the metamodel's coverage of W3C VCDM 2.0 concepts \citep{sporny_
 
 \label{sec:expressiveness}
 
-We collected eight normative constraints from the eIDAS Architecture Reference Framework (ARF) v2.7.3 \citep{noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026} governing credential format assignment, and classified each as \emph{fully expressible}, \emph{partially expressible}, or \emph{not expressible}. Three are fully expressible (\autoref{tab:expressiveness}), five partially, and none falls entirely outside the metamodel's capacity. The full constraint analysis is provided in the supplementary material.
+We collected eight normative constraints from the eIDAS Architecture Reference Framework (ARF) v2.7.3 \citep{noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026} governing credential format assignment, and classified each as \emph{fully expressible}, \emph{partially expressible}, or \emph{not expressible}. Three are fully expressible, each mapping directly to metamodel predicates: ARF-C1 (PID dual-format issuance, PID\_02) maps to \texttt{EidasMandate} annotation and format class membership; ARF-C4 (proximity presentation requires mdoc, ARB\_02) maps to \texttt{supports\_offline\_verification} with a propagation rule eliminating SD-JWT-VC; ARF-C7 (encoding-independent attribute definition, ARB\_06) maps to the DCL\(\to\)CSL\(\to\)FSL layer architecture. Five are partially expressible and none falls entirely outside the metamodel's capacity. The full constraint analysis is provided in the supplementary material.
 
-\begin{table}[htb]
-\caption{Fully expressible eIDAS ARF constraints. Each maps directly to metamodel
-predicates or architecture. \label{tab:expressiveness}}
-\small
-\setlength{\tabcolsep}{4pt}
-\begin{tabularx}{\columnwidth}{LLLL}
-\toprule
-ID & Constraint & Source & Predicate / Mechanism \\
-\midrule
-ARF-C1 & PID must be issued in both ISO 18013-5 and SD-JWT-VC & PID\_02 & \texttt{EidasMandate} annotation + format class membership \\
-ARF-C4 & Proximity presentation requires mdoc format & ARB\_02 & \texttt{supports\_offline\_verification}; propagation rule eliminates
-SD-JWT-VC \\
-ARF-C7 & Attributes defined encoding-independently, then per-format & ARB\_06 & DCL\(\to\)CSL\(\to\)FSL layer architecture \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-The five partially expressible constraints share two root causes. Three constraints (ARF-C2, C3: qualified vs.~non-qualified attestation format restrictions; ARF-C6: VCDM completeness as a meta-level property) condition format eligibility on the credential qualification level (PID, QEAA, or non-qualified EAA in eIDAS terminology), but the metamodel does not yet distinguish these attestation subtypes. Two constraints (ARF-C5: per-claim selective disclosability; ARF-C8: salted-hash vs.~ZKP-based selective disclosure) require privacy annotations at claim granularity rather than format level. Both gaps are closable by extending the metaclass hierarchy; neither requires changing the constraint formalization approach. A constraint falls outside the metamodel's capacity only when it governs runtime behavior (revocation timing, holder-binding protocols) with no design-time structural counterpart; none of the eight falls into this category.
-
-\emph{Remark.} ARF-C7 provides external validation of the metamodel's layered architecture. The ARF requires that attestation attributes be defined encoding-independently before being specified per-format (ARB\_06 \citep{noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026}). The metamodel was designed from the W3C VCDM structure, not from the ARF; that the EU governance framework independently mandates the same DCL\(\to\)CSL\(\to\)FSL separation confirms the layering reflects a structural property of credential ecosystem design rather than an artifact of the formalization.
+The five partially expressible constraints share two root causes. Three constraints (ARF-C2, C3: qualified vs.~non-qualified attestation format restrictions; ARF-C6: VCDM completeness as a meta-level property) condition format eligibility on the credential qualification level (PID, QEAA, or non-qualified EAA in eIDAS terminology), but the metamodel does not yet distinguish these attestation subtypes. Two constraints (ARF-C5: per-claim selective disclosability; ARF-C8: salted-hash vs.~ZKP-based selective disclosure) require privacy annotations at claim granularity rather than format level. Both gaps are closable by extending the metaclass hierarchy; neither requires changing the constraint formalization approach. A constraint falls outside the metamodel's capacity only when it governs runtime behavior (revocation timing, holder-binding protocols) with no design-time structural counterpart; none of the eight falls into this category. The significance of ARF-C7 for the metamodel's layered architecture is discussed in \autoref{sec:conclusion}.
 
 \subsubsection{Headline Results}\label{headline-results}
 
@@ -66,9 +47,7 @@ No format satisfies all three requirements. SD-JWT-VC satisfies (1) and (3) but 
 
 No single layer exhibits a defect. At the credential schema layer alone, IncomeCred is well-formed. At the format-specific layer under the eIDAS ARF alone, SD-JWT-VC is compliant. At the format-specific layer under GDPR alone, AnonCreds provides the needed capability. Only the joint, cross-governance, cross-layer analysis reveals the conflict.
 
-The constraint sensitivity analysis (\autoref{sec:scalability}) confirms this result quantitatively: of the eight governance subsets \(G_0\)--\(G_7\), only the full conjunction \(G_7 = \{\text{eIDAS} \wedge \text{GDPR} \wedge \text{W3C}\}\) yields unsatisfiability; every proper subset admits at least one valid format assignment.
-
-\emph{Remark.} An issuer-precomputed boolean claim (\(\text{income\_above\_threshold}: \text{true}\)) can approximate a predicate proof within SD-JWT-VC. However, this workaround requires the issuer to anticipate every verifier threshold at issuance time, produces combinatorial explosion for multi-threshold scenarios, and remains static: a credential issued with threshold \(X\) cannot serve a verifier requiring threshold \(Y\) without reissuance. As shown in \autoref{sec:cross-layer}, this workaround restructures the domain concept layer, itself a cross-layer propagation that confirms the need for multi-layer analysis.
+The constraint sensitivity analysis (\autoref{sec:scalability}) confirms this result quantitatively: of the eight governance subsets \(G_0\)--\(G_7\), only the full conjunction \(G_7 = \{\text{eIDAS} \wedge \text{GDPR} \wedge \text{W3C}\}\) yields unsatisfiability; every proper subset admits at least one valid format assignment. The only available workaround, pre-computing boolean threshold claims in SD-JWT-VC, requires changing the domain concept layer's information model (\autoref{sec:cross-layer}), a cross-layer design consequence visible only under multi-layer analysis.
 
 \paragraph{Headline 2: Cross-credential predicate gap (horizontal)}\label{headline-2-cross-credential-predicate-gap-horizontal}
 
@@ -86,29 +65,7 @@ No layer-internal check reveals the gap: the DCL constraint is well-defined, bot
 
 \label{sec:anti-patterns}
 
-\autoref{tab:antipatterns} catalogues five structural anti-patterns formalized as graph predicates over the partial model.
-
-\begin{table}[htb]
-\caption{Structural anti-patterns formalized as graph predicates. The first three
-require single-layer inspection; trace misalignment and the
-cross-credential predicate gap require cross-layer analysis.
-\label{tab:antipatterns}}
-\small
-\setlength{\tabcolsep}{4pt}
-\begin{tabularx}{\columnwidth}{LLLL}
-\toprule
-Anti-pattern & Graph predicate & Layer(s) & Kind \\
-\midrule
-Disconnected domain graph & \texttt{non\_connected} & DCL & error \\
-Empty credential & \texttt{no\_empty\_cred} & CSL & error \\
-Orphaned root entity & \texttt{root\_ent\_doesnt\_have\_cred} & CSL & error \\
-Trace misalignment & \texttt{prop\_t} / \texttt{prop\_s} & DCL\(\leftrightarrow\)CSL & propagation \\
-Cross-credential predicate gap & \texttt{cross\_cred\_predicate\_gap} & DCL\(\leftrightarrow\)FSL & shadow \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-The first three anti-patterns (\autoref{tab:antipatterns}) require only single-layer inspection; trace misalignment and the cross-credential predicate gap require cross-layer analysis. This graduated visibility, from intra-layer errors through cross-layer trace inconsistencies to ecosystem-level capability gaps, is the central argument for multi-layer formalization. The catalog is extensible: adding an anti-pattern requires a new graph predicate over the existing metamodel, not structural changes to layers or trace links.
+Five structural anti-patterns are formalized as graph predicates over the partial model. Three require only single-layer inspection: disconnected domain graph (\texttt{non\_connected}, DCL error), empty credential (\texttt{no\_empty\_cred}, CSL error), and orphaned root entity (\texttt{root\_ent\_doesnt\_have\_cred}, CSL error). Two require cross-layer analysis: trace misalignment (\texttt{prop\_t}/\texttt{prop\_s}, DCL\(\leftrightarrow\)CSL propagation) and the cross-credential predicate gap (\texttt{cross\_cred\_predicate\_gap}, DCL\(\leftrightarrow\)FSL shadow). This graduated visibility, from intra-layer errors through cross-layer trace inconsistencies to ecosystem-level capability gaps, is the central argument for multi-layer formalization. The catalog is extensible: adding an anti-pattern requires a new graph predicate over the existing metamodel, not structural changes to layers or trace links. The full predicate definitions are provided in the supplementary material.
 
 \subsubsection{Baseline Comparison}\label{baseline-comparison}
 
@@ -126,62 +83,28 @@ We construct synthetic instances from \(N{=}1\) to \(N{=}30\) credentials, with 
 
 All instances are evaluated using the Refinery CLI,\footnote{Container image \texttt{ghcr.io/graphs4value/refinery-cli}, pulled via Docker.} where each invocation starts a fresh JVM inside a Docker container. We use Hyperfine as the benchmarking harness with 10 measured runs and 1 warmup run per configuration, on an AMD Ryzen 9 7950X3D (16 cores), 96 GB RAM, Windows 11. Cold JVM startup inside the Docker container adds a constant overhead of \({\approx}3.9\text{s}\) per invocation (measured via a no-op baseline instance); reported times subtract this overhead to isolate solver computation. At small scales (\(N \leq 5\)), solver time is below the measurement noise floor (\({\approx}0.1\text{s}\)). The measurement script, generated instances, and the metamodel source are provided as supplementary material for independent reproduction.
 
-\begin{figure}[htb]
-\centering
-\fbox{\parbox{0.85\columnwidth}{\centering\vspace{0.5cm}\small Scalability plot: wall-clock time (s) vs.\ model size ($N$ credentials). Lines: consistency check, concretizability-SAT, concretizability-UNSAT, model generation-SAT.\vspace{0.5cm}}}
-\caption{Runtime of three Refinery solver operations across ecosystem sizes from $N{=}1$ to $N{=}30$ credentials. Consistency checking serves as baseline; concretizability checking detects governance conflicts; model generation produces valid configurations.}
-\label{fig:scalability}
-\end{figure}
-
 \begin{table}[htb]
-\caption{Scalability measurements for two Refinery operations, baseline-corrected
-(3.9s Docker+JVM overhead subtracted). \emph{Concretizability}
-(\texttt{check\ -k}): determines whether a concrete model satisfying all
-constraints exists. \emph{Generation} (\texttt{generate}): produces a
-concrete model instance. Seconds, mean \(\pm\sigma\) over 10 runs.
-\label{tab:scalability}}
+\caption{Scalability measurements, baseline-corrected (3.9s Docker+JVM overhead subtracted). \textit{Concretizability} (\texttt{check -k}): determines whether a concrete model satisfying all constraints exists. \textit{Generation} (\texttt{generate}): produces a concrete model instance. Seconds, mean $\pm\sigma$ over 10 runs.}
+\label{tab:scalability}
 \small
 \begin{tabular}{rrrrr}
 \toprule
-\(N\) & \(|V|\) & SAT (s) & UNSAT (s) & Generation (s) \\
+$N$ & $|V|$ & SAT (s) & UNSAT (s) & Gen.\ (s) \\
 \midrule
-1 & 11 & \({<}0.1\) & \({<}0.1\) & \(0.55 \pm 0.11\) \\
-3 & 29 & \({<}0.1\) & \(0.18 \pm 0.07\) & \(0.56 \pm 0.05\) \\
-5 & 47 & \(0.13 \pm 0.10\) & \(0.11 \pm 0.05\) & \(0.69 \pm 0.08\) \\
-10 & 92 & \(0.14 \pm 0.05\) & \(0.22 \pm 0.07\) & \(0.77 \pm 0.06\) \\
-15 & 137 & \(0.42 \pm 0.12\) & \(0.40 \pm 0.08\) & \(0.94 \pm 0.05\) \\
-20 & 182 & \(0.51 \pm 0.06\) & \(0.58 \pm 0.09\) & \(1.23 \pm 0.07\) \\
-30 & 272 & \(1.09 \pm 0.06\) & \(1.19 \pm 0.06\) & \(1.85 \pm 0.07\) \\
+1  & 11  & ${<}0.1$          & ${<}0.1$           & $0.55 \pm 0.11$ \\
+3  & 29  & ${<}0.1$          & $0.18 \pm 0.07$    & $0.56 \pm 0.05$ \\
+5  & 47  & $0.13 \pm 0.10$   & $0.11 \pm 0.05$    & $0.69 \pm 0.08$ \\
+10 & 92  & $0.14 \pm 0.05$   & $0.22 \pm 0.07$    & $0.77 \pm 0.06$ \\
+15 & 137 & $0.42 \pm 0.12$   & $0.40 \pm 0.08$    & $0.94 \pm 0.05$ \\
+20 & 182 & $0.51 \pm 0.06$   & $0.58 \pm 0.09$    & $1.23 \pm 0.07$ \\
+30 & 272 & $1.09 \pm 0.06$   & $1.19 \pm 0.06$    & $1.85 \pm 0.07$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \textbf{RQ1}: Concretizability checking scales sublinearly, reaching 1.09,s at \(N{=}30\) (272 graph nodes), well within interactive use for ecosystem sizes exceeding current EU wallet specifications. SAT and UNSAT instances exhibit comparable timing, confirming that unsatisfiability detection does not incur significant additional cost. \textbf{RQ2}: Model generation reaches 1.85,s at the same scale, reflecting the additional cost of producing a fully resolved instance.
 
-\begin{table}[htb]
-\caption{Constraint sensitivity at \(N{=}3\): governance framework power-set.
-Result column reports concretizability (\texttt{check\ -k}). All
-configurations complete in under 0.1s of solver time (below the
-measurement noise floor at this scale). \label{tab:sensitivity}}
-\small
-\setlength{\tabcolsep}{4pt}
-\begin{tabularx}{\columnwidth}{LcccL}
-\toprule
-Config & eIDAS & Privacy & VCDM & Result \\
-\midrule
-G0 &  &  &  & SAT \\
-G1 & x &  &  & SAT \\
-G2 &  & x &  & SAT \\
-G3 &  &  & x & SAT \\
-G4 & x & x &  & SAT \\
-G5 & x &  & x & SAT \\
-G6 &  & x & x & SAT \\
-G7 & x & x & x & UNSAT \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-Only G7, the conjunction of all three governance frameworks, yields unsatisfiability; all proper subsets are satisfiable (\autoref{tab:sensitivity}). This confirms the Headline 1 finding (\autoref{sec:headlines}): no proper subset produces a conflict.
+A constraint sensitivity experiment at \(N{=}3\) varies governance framework combinations over \(\mathcal{P}(\{\text{eIDAS}, \text{Privacy}, \text{VCDM}\})\): of the eight configurations, only the full conjunction \(G_7 = \text{eIDAS} \wedge \text{Privacy} \wedge \text{VCDM}\) yields unsatisfiability; all seven proper subsets are satisfiable (all complete in \({<}0.1\text{s}\)). This confirms the Headline 1 finding (\autoref{sec:headlines}): no proper subset produces a conflict.
 
 \subsection{Threats to Validity}\label{threats-to-validity}
 

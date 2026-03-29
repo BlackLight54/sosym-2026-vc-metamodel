@@ -25,6 +25,7 @@
                 "-pdf",
                 "-synctex=1",
                 "-interaction=nonstopmode",
+                "-outdir=%OUTDIR%",
                 "pandoc/main.tex"
             ],
             "env": {
