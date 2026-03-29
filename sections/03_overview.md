@@ -22,6 +22,15 @@ The constraints in this scenario originate from governance frameworks that were 
 
 The remainder of this section defines a framework that captures constraints across these layers and governance sources (\autoref{sec:functional-overview}) and demonstrates its usage on the housing subsidy scenario (\autoref{sec:usage-workflow}).
 
+```{=latex}
+\begin{figure*}[t]
+  \includegraphics[width=\textwidth]{assets/teaser.pdf}
+  \caption{The proposed multi-layer modeling framework applied to a housing subsidy credential ecosystem across three metamodel layers, from domain facts through credential schemas to format-specific representations. Error identification detects conflicting governance requirements on the income credential; design space exploration confirms no valid format assignment exists. Both results require cross-layer analysis.}
+  \Description{Teaser figure description.}
+  \label{fig:teaser}
+\end{figure*}
+```
+
 ## Functional Overview
 \label{sec:functional-overview}
 
