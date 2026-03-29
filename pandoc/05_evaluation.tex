@@ -35,7 +35,7 @@ At the format-specific layer, three governance sources impose requirements on In
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{eIDAS \ac{ARF}} (normative, SHALL): EU wallet attestations must be issued in SD-JWT-VC or mdoc format, i.e.~\(\text{format}(\text{IncomeCred}) \in \{\text{SD-JWT-VC}, \text{mdoc}\}\) \citep{noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026}. Neither format supports predicate proofs; both provide selective disclosure only.
+  \textbf{eIDAS ARF} (C5): EU wallet attestations must use SD-JWT-VC or mdoc \citep{noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026}; neither supports predicate proofs.
 \item
   \textbf{\ac{GDPR} Art. 5(1)(c)} (authors' operationalization): the income threshold check requires disclosing only whether \(\text{monthly\_income} \geq \text{threshold}\), not the exact value. When a threshold comparison suffices, disclosing the exact value constitutes disproportionate data collection; enforcing this at the credential layer requires predicate proof capability \citep{gdpr}. This reading assumes minimization must be achieved through technical means at the credential layer rather than through organizational controls; a directly analogous enforcement action supports it.\footnote{The Hungarian data protection authority (NAIH) fined a bank 35M HUF for copying applicants' entire pregnancy booklets when only a 12-week gestation threshold check was required for a subsidized loan, finding the collection grossly disproportionate \citep{noauthor_naih_2020}, precisely the scenario that predicate proofs address at the credential layer.}
 \item

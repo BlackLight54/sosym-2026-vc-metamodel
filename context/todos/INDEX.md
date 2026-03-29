@@ -76,6 +76,7 @@ Absorbs: X14 → A-BG2. Overlaps: O-REFBG (A-BG1 is the unblocking step).
 | ID | Title | Status | Assigned |
 |----|-------|--------|----------|
 | M22 | [Migrate to native Tasks](m22_migrate_to_native_tasks.md) | pending | claude |
+| O-MPE | [MPE + Pandoc in-editor preview](o-mpe_markdown_preview_enhanced.md) | pending | martin |
 
 ## Completed / Archived
 
