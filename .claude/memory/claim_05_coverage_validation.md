@@ -11,4 +11,4 @@ risk: medium
 We validate metamodel coverage against the W3C specification.
 
 **Evidence:** Sec 05.1.1 drafted with soundness–completeness framing, three excluded concept families identified and justified (design-time vs. usage-time distinction). Coverage figure placeholder placed.
-**Gaps:** Coverage figure not yet produced (T11).
+**Gaps:** Coverage figure not yet produced (T11). Prose evidence is complete; figure is supplementary visual support.

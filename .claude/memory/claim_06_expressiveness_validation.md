@@ -11,4 +11,4 @@ risk: high
 Constraint expressiveness against EU regulatory sources. The evaluation classifies eight eIDAS regulatory constraints against the metamodel.
 
 **Evidence:** Sec 05.1.2 drafted. ARF-prefixed expressiveness table (ARF-C1, ARF-C4, ARF-C7). Five partially expressible analyzed with two root causes. Explicit partial/outside criterion added with PID/QEAA/EAA example. ARF-C7 remark provides external validation of layer architecture. Extended table figure placeholder placed.
-**Gaps:** Extended expressiveness figure not yet produced (T11).
+**Gaps:** Extended expressiveness figure not yet produced (T11). Prose evidence is complete; figure is supplementary visual support.

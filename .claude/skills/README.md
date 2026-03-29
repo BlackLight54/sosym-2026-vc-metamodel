@@ -44,7 +44,9 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 | [`review_paper_audit`](review_paper_audit/SKILL.md) | "Full paper audit" | Reads all sections, cross-references claims, decisions, gaps, personas |
 | [`review_paper_status`](review_paper_status/SKILL.md) | "Where are we?" / session start | Lightweight dashboard: section maturity, markers, figures, time-to-deadline |
 | [`review_pre_submission_check`](review_pre_submission_check/SKILL.md) | "Check the paper" | Markers, broken refs, anonymity leaks |
+| [`review_page_budget_audit`](review_page_budget_audit/SKILL.md) | "How many pages per section?" | Multi-agent page budget audit with inflation diagnosis and cut recommendations |
 | [`review_prior_decision_audit`](review_prior_decision_audit/SKILL.md) | "Are our early decisions still right?" | Surfaces cross-cutting decisions and checks whether they still serve the paper |
+| [`review_prose_naturalness`](review_prose_naturalness/SKILL.md) | "Check for LLM tells" | Scans for excess vocabulary, em-dash overuse, template phrases, structural monotony |
 | [`review_reviewer_archetypes`](review_reviewer_archetypes/SKILL.md) | Reference guide | Reviewer archetype definitions for persona instantiation |
 
 ### `plan_` — Planning & orchestration

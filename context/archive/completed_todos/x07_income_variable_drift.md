@@ -2,7 +2,7 @@
 id: "X07"
 short: "income-var-drift"
 title: "Align 'income' variable name across Sec 2 and Sec 4"
-status: pending
+status: done
 priority: low
 depends_on: []
 binding_claims: []
