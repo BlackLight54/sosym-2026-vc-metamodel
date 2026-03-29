@@ -2,6 +2,8 @@
 %% Annotation classes from pandoc/filters/annotations.lua:
 %%   .todo | .cite | .formal | .figure | .scaffold | .meta
 \usepackage{todonotes}
+\usepackage{listing}
+\usepackage{xcolor}
 
 %% Cut candidates — color tint only, zero geometry change.
 %% Active when \if@ACM@review is true (i.e., review class option is set).
@@ -33,3 +35,57 @@
 %% Without this, long predicate names like supports_multi_credential_proof
 %% overflow tabularx columns because LaTeX cannot hyphenate them.
 \renewcommand\_{\textunderscore\allowbreak}
+
+% \definecolor{basicColor}{RGB}{105, 108, 119}
+\definecolor{basicColor}{RGB}{58, 59, 64}
+\definecolor{keywordcolor}{RGB}{27,105,116}
+\definecolor{commentcolor}{RGB}{160, 161, 167}
+\definecolor{stringcolor}{RGB}{80, 161, 79}
+\definecolor{segmentColor}{RGB}{0, 86, 84}
+\definecolor{switchColor}{RGB}{94, 0, 45}
+\definecolor{trackElementColor}{RGB}{107, 107, 107}
+\definecolor{relationColor}{RGB}{25, 32, 43}
+
+\newcommand{\kw}[1]{\textsf{\upshape\color{keywordcolor}#1}}
+\newcommand{\dslStyle}[1]{\textsf{\upshape\color{emphColor}#1}}
+\newcommand{\true}[0]{\kw{1}}
+\newcommand{\false}[0]{\kw{0}}
+
+
+\lstdefinelanguage{refinery}{
+	morekeywords={count,pattern,pred,error,true,false,unknown,extends,opposite,contains,container,abstract,scope,node,class,default,may,must,Person,friend,rule,equals,exists,propagation,*,enum,int,string,boolean},
+	morekeywords=[2]{length,connectsTo,straight,diverging,straightDiverging,noDiverging,noStraight,reachable,Switch,Segment},
+	otherkeywords={*},
+	emph={},
+	emphstyle={\color{emphColor}},
+	sensitive=true, morecomment=[l]{//}, morecomment=[s]{/*}{*/}, morecomment=[l]{\%},
+	morestring=[b]{"}
+}
+\lstdefinestyle{refinery}{
+	basicstyle=\small\ttfamily\upshape,
+	commentstyle=\color{commentcolor}\ttfamily,
+	stringstyle=\color{stringcolor}\ttfamily,
+	%frameround=tttt,
+	captionpos=b,
+	keywordstyle=\color{keywordcolor}\bfseries\ttfamily,
+	keywordstyle=[2]\color{relationColor}\bfseries\ttfamily,
+	showstringspaces=false,
+	tabsize=2,
+	language=refinery,
+	escapeinside={(*@}{@*)},
+	breaklines=false,
+	literate=%
+	{==>}{$\Longrightarrow$}3
+	{<->}{$\longleftrightarrow$}3
+	{=:=}{{$=\mathrel{\mkern-9mu}=$}}2
+	{<=}{$\leqslant$}1
+	{>=}{$\geqslant$}1
+	{!=}{{$\mathrel{\ooalign{$\mkern3mu\not$\cr$=\mathrel{\mkern-9mu}=$}}$}}2
+}
+% \begin{lstlisting}[style=refinery]
+% //Entry states must not have incoming 
+% //transitions.
+% error incomingToEntry(Entry e) <->
+%     Transition(t),
+%     target(t, e).
+% \end{lstlisting}
