@@ -63,12 +63,17 @@ Honnan jön ez a commited?
 The four-valued interpretation assigns each element one of four statuses: *true* (the value must be true), *false* (the value must be false), *unknown* (possibly true or false), and *error* (both true and false, denoting contraiction). In diagrams,
 ::: todo
 do we have diagrams?
-:::
-a solid line denotes a true values, a dashed line denotes unknown values, and absence denotes a false value. During the development (or automated synthesis) of partial models *unknown* values are gradually refined to either *true* or *false*. If a model contains only *true* and *false* values, we call them *concrete models*. If the 
+:: 
+a solid line denotes true values, a dashed line denotes unknown values, and absence denotes a false value. During the development (or automated synthesis) of partial models, *unknown* values are gradually refined to either *true* or *false*. If a model contains only *true* and *false* values, we call them *concrete models*. If one of the design decision contradicts a design constraint, it produces *error* to show the contradiction between a decision and the regulation.
 
 ::: {.formal}
 Oscar: refinement ordering definition (partial model $A$ refines $B$ iff every must/must-not commitment in $B$ is preserved in $A$). Target length: 1--2 sentences + definition.
 :::
+
+
+\autoref{lst:refinery-metamodel} illustrates a fragment of the domain concept layer from \autoref{sec:approach}, simplified for exposition.[^bg-names] Classes define node types with typed references; the `contains` keyword denotes ownership (composition). The derived predicate `reachable` pattern-matches over the `property` and `value` references: it holds when entity $a$ owns a property whose value is entity $b$. The *error predicate* `disconnected` uses transitive closure (`+`) to flag any pair of entities not connected by a chain of reachable steps; when it evaluates to *must*, the partial model contains a structural flaw that no refinement can repair.
+
+[^bg-names]: The full metamodel in \autoref{sec:approach} uses a symmetric `neighbours` relation and the error predicate `non_connected`; the simplified names here prioritize readability.
 
 Graph predicates define structural constraints and derived properties over partial models. A predicate body specifies a graph pattern; the framework evaluates it over the partial interpretation under the four-valued semantics introduced above. Negation and transitive closure extend this evaluation to richer structural queries.
 
@@ -76,9 +81,6 @@ Graph predicates define structural constraints and derived properties over parti
 Oscar: predicate evaluation semantics over partial interpretations. How four-valued logic lifts to predicate bodies, negation, transitive closure. Target length: 3--5 sentences or a compact table.
 :::
 
-\autoref{lst:refinery-metamodel} illustrates a fragment of the domain concept layer from \autoref{sec:approach}, simplified for exposition.[^bg-names] Classes define node types with typed references; the `contains` keyword denotes ownership (composition). The derived predicate `reachable` pattern-matches over the `property` and `value` references: it holds when entity $a$ owns a property whose value is entity $b$. The *error predicate* `disconnected` uses transitive closure (`+`) to flag any pair of entities not connected by a chain of reachable steps; when it evaluates to *must*, the partial model contains a structural flaw that no refinement can repair.
-
-[^bg-names]: The full metamodel in \autoref{sec:approach} uses a symmetric `neighbours` relation and the error predicate `non_connected`; the simplified names here prioritize readability.
 
 ```refinery {#lst:refinery-metamodel caption="Metamodel fragment with error predicate"}
 abstract class Entity {

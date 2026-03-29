@@ -82,6 +82,20 @@
 	{>=}{$\geqslant$}1
 	{!=}{{$\mathrel{\ooalign{$\mkern3mu\not$\cr$=\mathrel{\mkern-9mu}=$}}$}}2
 }
+\newcommand*{\SavedLstInline}{}
+\let\SavedLstInline\lstinline
+\DeclareRobustCommand*{\lstinline}{%
+  \ifmmode
+    \let\SavedBGroup\bgroup
+    \def\bgroup{%
+      \let\bgroup\SavedBGroup
+      \hbox\bgroup
+    }%
+  \fi
+  \SavedLstInline
+}
+\newcommand{\refi}[1]{\textup{\lstinline[style=refinery]{#1}}}
+
 % \begin{lstlisting}[style=refinery]
 % //Entry states must not have incoming 
 % //transitions.
@@ -89,3 +103,5 @@
 %     Transition(t),
 %     target(t, e).
 % \end{lstlisting}
+
+% \refi{error pred foo(a,b)}
