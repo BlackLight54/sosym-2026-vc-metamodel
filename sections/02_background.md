@@ -1,6 +1,6 @@
 ---
 section: Background
-budget: "1.25 pages (~7 paragraphs, 3 subsections)"
+budget: "1.45 pages (~12 paragraphs + 2 listings, 3 subsections) — over 1.25 budget, needs cuts"
 goal: "Establish the three conceptual pillars the reader needs. Nothing more."
 dependencies: []
 ---
@@ -25,8 +25,79 @@ Layer definitions in \autoref{sec:approach} use Ecore-style class diagrams with 
 ## Partial Graph Modeling with Refinery
 \label{sec:refinery}
 
-[+PGM]{.full} is a modeling methodology in which design specifications are expressed as partial models and graph predicates serve as a first-class constraint language. Refinery is a PGM framework [@marussy_refinery_2024] that assigns a four-valued interpretation (*must* (committed true), *must not* (committed false), *may* (possibly true), and *may not* (possibly false)) to every node, edge, attribute value, and class membership, enabling reasoning over incomplete specifications where both structural and data-level decisions remain open. Graph predicates define structural constraints and derived properties over these partial models; the framework evaluates them over partial interpretations; a constraint violation is confirmed only when the error predicate evaluates to *must*, that is, it holds under every possible refinement of the partial model. Given a partial specification, Refinery's design space exploration generates diverse concrete models satisfying all constraints, or determines that no consistent completion exists [@semerath_graph_2018]. This generation is refinement-based: every generated model is guaranteed to satisfy all specified constraints, so violations are excluded during generation rather than detected post-hoc.
+[+PGM]{.full} is a modeling methodology in which design specifications are expressed as partial models and graph predicates serve as a first-class constraint language. Refinery is a PGM framework [@marussy_refinery_2024] that assigns a four-valued interpretation to every node, edge, attribute value, and class membership, enabling reasoning over incomplete specifications where both structural and data-level decisions remain open. In Refinery, nodes correspond to objects (instances of classes defined in a metamodel), and edges correspond to typed references between objects; class membership is an additional unary relation over nodes.
+
+::: {.formal}
+Oscar: precise definition of graph elements (nodes, edges, class membership as relations). Reference Marussy et al. 2024. Target length: 2--3 sentences.
+:::
+
+A *partial model* is one where some edges and class memberships remain open: they may or may not hold in a concrete completion. A *concrete model* resolves every open element to either committed true or committed false. The four-valued interpretation assigns each element one of four statuses: *must* (committed true), *must not* (committed false), *may* (possibly true), and *may not* (possibly false). In diagrams, a solid line denotes a committed (*must*) edge, a dashed line denotes an open (*may*) edge, and absence denotes a committed-false (*must not*) edge.
+
+::: {.formal}
+Oscar: refinement ordering definition (partial model $A$ refines $B$ iff every must/must-not commitment in $B$ is preserved in $A$). Target length: 1--2 sentences + definition.
+:::
+
+Graph predicates define structural constraints and derived properties over partial models. A predicate body specifies a graph pattern; the framework evaluates it over the partial interpretation under the four-valued semantics introduced above. Negation and transitive closure extend this evaluation to richer structural queries.
+
+::: {.formal}
+Oscar: predicate evaluation semantics over partial interpretations. How four-valued logic lifts to predicate bodies, negation, transitive closure. Target length: 3--5 sentences or a compact table.
+:::
+
+\autoref{lst:refinery-metamodel} illustrates a fragment of the domain concept layer from \autoref{sec:approach}, simplified for exposition.[^bg-names] Classes define node types with typed references; the `contains` keyword denotes ownership (composition). The derived predicate `reachable` pattern-matches over the `property` and `value` references: it holds when entity $a$ owns a property whose value is entity $b$. The *error predicate* `disconnected` uses transitive closure (`+`) to flag any pair of entities not connected by a chain of reachable steps; when it evaluates to *must*, the partial model contains a structural flaw that no refinement can repair.
+
+[^bg-names]: The full metamodel in \autoref{sec:approach} uses a symmetric `neighbours` relation and the error predicate `non_connected`; the simplified names here prioritize readability.
+
+```refinery {#lst:refinery-metamodel caption="Metamodel fragment with error predicate"}
+abstract class Entity {
+    contains Prop[] property
+}
+class Subject extends Entity.
+class Value extends Entity.
+
+class Prop {
+    contains Value[1] value
+}
+
+pred reachable(Entity a, Entity b) <->
+    property(a, p), value(p, b).
+
+error disconnected(Entity a, Entity b) <->
+    a != b, !reachable+(a, b).
+```
+
+*Propagation rules* derive new facts during refinement: when their precondition pattern matches with all elements committed (*must*), the consequent is applied. A propagation rule with a positive consequent (e.g., `Subject(e)`) infers new class memberships or edges. *Negative elimination* is the dual: a propagation rule with a negated consequent (e.g., `!value(p, e)`) removes design choices that would necessarily violate a constraint, setting them to *must not*. Both operate incrementally during model refinement, narrowing the space of possible completions before generation explores them.
+
+::: {.formal}
+Oscar: propagation rule semantics (precondition = must pattern, consequent = forced assignment). Boolean encoding and fixpoint computation. Target length: 3--5 sentences.
+:::
+
+\autoref{lst:refinery-mechanisms} demonstrates the remaining mechanisms. The propagation rule `classify_root` performs positive inference: when an entity has no incoming `value` reference, it is classified as a `Subject`. The rule `no_self_loop` performs negative elimination: when an entity owns a property, that property cannot point back to the same entity as its value. The *shadow predicate* `DCL` marks all entities and properties as belonging to the domain concept layer; it records derived information for inspection without constraining generation. Finally, the *scope constraint* bounds the number of instances of each type, controlling the size and shape of generated models.
+
+```refinery {#lst:refinery-mechanisms caption="Propagation rules, shadow predicate, and scope constraint"}
+propagation rule classify_root(Entity e) <->
+    must !value(_, e)
+==>
+    Subject(e).
+
+propagation rule no_self_loop(Prop p, Entity e) <->
+    must property(e, p)
+==>
+    !value(p, e).
+
+shadow pred DCL(e) <-> Entity(e); Prop(e).
+
+scope Entity = 3..5, Prop = 2..4.
+```
+
+Given a partial specification combining a metamodel, predicates, and instance-level assertions, Refinery applies propagation rules to derive new facts, checks error predicates, and generates concrete models that satisfy all constraints, or determines that no consistent completion exists [@semerath_graph_2018]. Generation is refinement-based: every generated model is guaranteed to satisfy all specified constraints (soundness), and if a constraint is violated in every possible completion, the tool detects the violation (completeness).
+
+::: {.formal}
+Oscar: formal statement of soundness and completeness guarantees for Refinery's refinement-based generation. Reference Semerath et al. 2018. Target length: 2--3 sentences + formal claim.
+:::
 
 Credential ecosystem designs are inherently incomplete: schema elements, format assignments, and governance constraints are introduced incrementally as standards evolve and regulatory frameworks are adopted. Bounded model finding (Alloy [@jackson_software_2012] for relational logic, OCL for UML class models) requires fully specified instances and checks constraints after generation; +PGM evaluates constraints *during* refinement of incomplete specifications, pruning inconsistent design choices before they propagate. This distinction is critical when governance constraints from independent sources must be checked jointly over a design that is not yet fully determined.
 
-The cross-layer constraint formalization in \autoref{sec:cross-layer} uses four Refinery mechanisms. An *error predicate* defines a structural pattern that must not hold in any well-formed model; when an error predicate is satisfied, it identifies a specific design anti-pattern, for example a credential containing no claims. A *propagation rule* derives new facts from the current partial interpretation to guide model generation; a special case is *negative elimination*, where the rule removes design choices that would necessarily violate a constraint. A *shadow predicate* records derived information, such as entity alignment between two credential subjects, without constraining the model, making implicit relationships available for inspection. Finally, *scope constraints* bound the number of instances of each type, controlling the size and shape of generated models. Together, these mechanisms operate over partial interpretations, systematically resolving unknown elements into definite values while maintaining all constraints.
+::: {.meta}
+Section: Background / Sec 2.3
+Budget: was ~0.35 pages, now ~0.75--0.85 pages before Oscar's additions. Total Sec 2 ≈ 1.45 pages (0.2 over 1.25 budget). Oscar's formal content will add further; page cuts needed elsewhere.
+:::

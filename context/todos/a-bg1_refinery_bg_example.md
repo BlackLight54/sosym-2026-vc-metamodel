@@ -2,7 +2,7 @@
 id: "A-BG1"
 short: "refinery-bg-example"
 title: "Add Refinery code example to Sec 2.3 Background"
-status: pending
+status: in_progress
 priority: high
 depends_on: ["A-LST"]
 binding_claims: [3, 4]
@@ -14,7 +14,7 @@ created: "2026-03-29"
 
 ## Goal
 
-Add a small, self-contained Refinery `.problem` code listing to Sec 2.3 (Partial Graph Modeling with Refinery) that demonstrates the four mechanisms the prose already describes. This is the **top priority** from the advisor meeting: it unblocks Oszkár's rewrite of the background section.
+Add two small, self-contained Refinery `.problem` code listing to Sec 2.3 (Partial Graph Modeling with Refinery) that demonstrates the four mechanisms the prose already describes. This is the **top priority** from the advisor meeting: it unblocks Oszkár's rewrite of the background section.
 
 ## Context
 
