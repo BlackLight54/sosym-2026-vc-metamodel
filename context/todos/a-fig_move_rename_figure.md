@@ -2,7 +2,7 @@
 id: "A-FIG"
 short: "move-rename-figure"
 title: "Move metamodel figure near constraint table + rename to type graph"
-status: pending
+status: done
 priority: medium
 depends_on: []
 binding_claims: []

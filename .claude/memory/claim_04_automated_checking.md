@@ -3,12 +3,12 @@ name: "Claim 4: Automated consistency checking"
 description: "Automated consistency checking demonstration through Refinery design space exploration"
 type: project
 id: 4
-status: partial
+status: delivered
 evidence_section: sections/05_evaluation.md
 risk: medium
 ---
 
 Enabling automated consistency checking through design space exploration.
 
-**Evidence:** Refinery testing complete — 4 entry points verified (csok.problem UNSAT, 3 SAT variants). check -k and generate both work. Refinery usage modes described in Sec 03.2 (Functional Overview).
-**Gaps:** Usage modes (OK/NOT_OK/GENERATED|UNVIABLE) need clarification in Sec 04 (T15). Evaluation writeup in Sec 05 not yet drafted (T08).
+**Evidence:** Three usage modes defined in Sec 03.2 (consistency checking, error identification, design space exploration). Sec 04.4 traces all three modes on the constraint taxonomy. Sec 05.2 benchmarks three Refinery solver operations (check, check -k, generate) across N=1 to N=30, plus G0–G7 constraint sensitivity analysis.
+**Gaps:** None.

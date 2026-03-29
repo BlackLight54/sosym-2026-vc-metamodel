@@ -2,7 +2,7 @@
 id: "A-SHORT"
 short: "approach-redundancy"
 title: "Approach redundancy check — compress and make precise"
-status: pending
+status: done
 priority: medium
 depends_on: ["A-BG1", "A-BG2"]
 binding_claims: [3, 4]

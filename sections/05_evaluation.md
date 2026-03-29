@@ -64,7 +64,7 @@ No layer-internal check reveals the gap: the +DCL constraint is well-defined, bo
 
 \label{sec:anti-patterns}
 
-Five structural anti-patterns are encoded as graph predicates over the partial model. Three require only single-layer inspection: disconnected domain graph (`non_connected`, +DCL error), empty credential (`no_empty_cred`, +CSL error), and orphaned root entity (`root_ent_doesnt_have_cred`, +CSL error). Two require cross-layer analysis: trace misalignment (`prop_t`/`prop_s`, DCL$\leftrightarrow$CSL propagation) and the cross-credential predicate gap (`cross_cred_predicate_gap`, DCL$\leftrightarrow$FSL shadow). This graduated visibility, from intra-layer errors through cross-layer trace inconsistencies to ecosystem-level capability gaps, is the central argument for multi-layer formalization. The catalog is extensible: adding an anti-pattern requires a new graph predicate over the existing metamodel, not structural changes to layers or trace links.
+Five structural anti-patterns are encoded as graph predicates over the partial model (\autoref{sec:refinery}). Three require only single-layer inspection: disconnected domain graph (`non_connected`, +DCL error), empty credential (`no_empty_cred`, +CSL error), and orphaned root entity (`root_ent_doesnt_have_cred`, +CSL error). Two require cross-layer analysis: trace misalignment (`prop_t`/`prop_s`, DCL$\leftrightarrow$CSL propagation) and the cross-credential predicate gap (`cross_cred_predicate_gap`, DCL$\leftrightarrow$FSL shadow). This graduated visibility, from intra-layer errors through cross-layer trace inconsistencies to ecosystem-level capability gaps, is the central argument for multi-layer formalization. The catalog is extensible: adding an anti-pattern requires a new graph predicate over the existing metamodel, not structural changes to layers or trace links.
 
 ### Baseline Comparison
 
@@ -72,7 +72,7 @@ Five structural anti-patterns are encoded as graph predicates over the partial m
 
 The multi-layer advantage for cross-layer detection is partly definitional. No existing tool implements cross-layer credential ecosystem checking. Manual expert review can identify single-credential format conflicts but lacks systematic coverage of cross-credential dependencies. Formalization adds systematicity: the model checks all constraint combinations exhaustively, scales beyond what manual analysis can track, and yields a reproducible artifact. Single-layer metamodeling (a UML class diagram with OCL constraints per layer) detects intra-layer violations but cannot express cross-layer trace predicates (`prop_t`, `prop_s`) or capability checks (`cross_cred_predicate_gap`). Only the integrated multi-layer formalization detects all five anti-pattern categories, including both headline results (\autoref{sec:headlines}) that single-layer approaches cannot express. We are not aware of an alternative multi-layer credential ecosystem formalization in the literature.
 
-The Refinery-based formalization provides two formal guarantees that hold on partial models.
+The Refinery-based formalization provides two formal guarantees that hold on partial models (\autoref{sec:refinery}).
 
 #### Soundness: if the framework reports a constraint violation, the (partial) model necessarily violates it; no false positives arise from open design decisions
 
@@ -82,7 +82,7 @@ The Refinery-based formalization provides two formal guarantees that hold on par
 
 \label{sec:scalability}
 
-We evaluate three Refinery solver operations. *Consistency checking* (`check`) verifies no internal contradictions. *Concretizability checking* (`check -k`) determines whether a concrete model satisfying all constraints exists, the operation that detects governance conflicts. *Model generation* (`generate`) produces a fully resolved model instance for +DSE. **RQ1:** How does conflict detection scale with model size? **RQ2:** How does model generation scale?
+We evaluate three Refinery solver operations (\autoref{sec:refinery}). *Consistency checking* (`check`) verifies no internal contradictions. *Concretizability checking* (`check -k`) determines whether a concrete model satisfying all constraints exists, the operation that detects governance conflicts. *Model generation* (`generate`) produces a fully resolved model instance for +DSE. **RQ1:** How does conflict detection scale with model size? **RQ2:** How does model generation scale?
 
 We construct synthetic instances from $N{=}1$ to $N{=}30$ credentials, with 11 to 272 graph nodes (\autoref{tab:scalability}). Each scale point has a satisfiable (SAT) and unsatisfiable (UNSAT) variant. A secondary *constraint sensitivity* experiment fixes $N{=}3$ and varies governance framework combinations over $\mathcal{P}(\{\text{eIDAS}, \text{Privacy}, \text{VCDM}\})$, yielding eight configurations (G0–G7).
 
@@ -129,3 +129,11 @@ A constraint sensitivity experiment at $N{=}3$ varies governance framework combi
 \label{sec:threats}
 
 The metamodel formalizes design-time credential schemas; proof mechanisms, verifiable presentations, and credential status fall outside this scope (\autoref{sec:coverage}). The +DCL's structural inference rule classifies any Entity with no incoming value reference as a Subject; a modeler who omits a property edge may find the entity silently promoted rather than flagged. The running example (housing subsidy) was selected for structural completeness (it exhibits both headline results within a single domain), but a randomly sampled ecosystem might expose interaction patterns not covered by the current anti-pattern catalog. The eight eIDAS +ARF constraints were extracted from a specific version (v2.7.3); the constraint set may shift as the regulatory framework evolves. The evaluation operates within a single governance context (EU regulations applied to Hungarian administrative procedures); governance traditions that impose constraints not reducible to format-capability requirements would require extending the metamodel beyond annotation markers. Scalability instances grow by adding credentials with uniform structure (one property, shared subject); deeper claim hierarchies or multi-subject credentials may stress different metamodel elements. The partially-expressible classification (\autoref{sec:expressiveness}) rests on our judgment of what constitutes a structural versus runtime property. The formalization depends on Refinery as the sole validation tool; portability to other partial-model solvers has not been assessed.
+
+## Limitations and Future Work
+
+\label{sec:limitations}
+
+The approach has not been evaluated empirically with credential ecosystem designers in practice; whether domain experts without metamodeling experience, such as credential architects or policy officers specifying governance requirements, can use the approach effectively remains an open question.
+
+Four directions follow from the limitations identified above and in \autoref{sec:threats}. First, the format-specific layer should be extended with additional formats and richer capability constraints to match the maturity of the upper layers. Second, the constraint catalog should be broadened beyond EU regulatory sources to include national eIDAS implementations and sector-specific governance. Third, an empirical case study with credential ecosystem designers would evaluate whether the formalization improves design decision-making in practice. Fourth, portability to other constraint-based toolchains (Alloy, USE/OCL) merits consideration to reduce the current single-tool dependency.

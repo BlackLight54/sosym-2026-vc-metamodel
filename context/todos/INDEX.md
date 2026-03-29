@@ -21,7 +21,7 @@
 | ID | Title | Binding | Status | Assigned |
 |----|-------|---------|--------|----------|
 | O-REFBG | [Refinery BG — code examples + missing concepts](o-refinery-bg.md) | #3,4 | pending | oszkár |
-| X14 | [Refinery terminology introduction](x14_refinery_terminology_introduction.md) | #3,4 | pending | claude |
+| X14 | [Refinery terminology introduction](x14_refinery_terminology_introduction.md) | #3,4 | done | claude |
 | Z-P3 | [Approach — FSL elaboration + gaps](z-p3_approach_fsl.md) | #1,3 | pending | claude |
 
 ## Writing fixes (cross-cutting)
@@ -66,7 +66,7 @@ Execution order: A-LST → A-BG1 → A-CODE, A-FIG, A-CONC → A-BG2 + A-SHORT.
 | A-CODE | [Refinery code listings in Sec 04](a-code_refinery_approach_listings.md) | A-LST, A-BG1 | pending | claude |
 | A-FIG | [Move figure + rename type graph](a-fig_move_rename_figure.md) | — | pending | claude |
 | A-CONC | [Shorten conclusion → eval](a-conc_shorten_conclusion.md) | — | pending | claude |
-| A-BG2 | [BG notation consistency in Sec 04](a-bg2_notation_consistency.md) | A-BG1 | pending | claude |
+| A-BG2 | [BG notation consistency in Sec 04](a-bg2_notation_consistency.md) | A-BG1 | done | claude |
 | A-SHORT | [Approach redundancy check](a-short_approach_redundancy.md) | A-BG1, A-BG2 | pending | claude |
 
 Absorbs: X14 → A-BG2. Overlaps: O-REFBG (A-BG1 is the unblocking step).

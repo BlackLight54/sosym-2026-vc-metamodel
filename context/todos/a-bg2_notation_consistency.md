@@ -2,7 +2,7 @@
 id: "A-BG2"
 short: "notation-consistency"
 title: "Introduce Refinery notation in BG, reference consistently in Sec 04"
-status: pending
+status: done
 priority: medium
 depends_on: ["A-BG1"]
 binding_claims: [3, 4]

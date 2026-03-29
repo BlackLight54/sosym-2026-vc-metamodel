@@ -10,5 +10,5 @@ risk: low
 
 These results establish multi-layer formal modeling as a prerequisite for rigorous credential ecosystem design.
 
-**Evidence:** Delivered across three locations: Sec 05.1.3 complementarity paragraph ("multi-layer analysis detects both governance conflicts and format expressiveness gaps that no individual layer reveals"), Sec 05.1.4 anti-pattern graduated visibility argument ("central argument for multi-layer formalization"), and Sec 07 final sentence ("multi-layer formal modeling is the minimum formalization that makes them visible before deployment").
-**Gaps:** None. The argument is synthesized from Claims 7-9 which are all delivered in prose.
+**Evidence:** Delivered across three locations: Sec 05.1.3 complementarity paragraph ("multi-layer analysis detects both governance conflicts and format expressiveness gaps that no individual layer reveals"), Sec 05.1.4 anti-pattern graduated visibility argument ("central argument for multi-layer formalization"), and Sec 07 closing ("no single-layer formalization can express them without collapsing the governance-source distinction that makes the constraints meaningful... detecting them requires a formalization that preserves governance-source boundaries as first-class structural elements, which the multi-layer metamodel provides").
+**Gaps:** None. Claim calibrated as conditional argument (sufficiency + structural prerequisite), not necessity proof.

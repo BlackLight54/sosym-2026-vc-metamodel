@@ -2,7 +2,7 @@
 id: "X14"
 short: "refinery-terms"
 title: "Introduce Refinery-specific terminology before first use"
-status: pending
+status: done
 priority: high
 depends_on: []
 binding_claims: [3, 4]

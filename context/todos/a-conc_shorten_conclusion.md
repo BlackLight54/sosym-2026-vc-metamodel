@@ -2,7 +2,7 @@
 id: "A-CONC"
 short: "shorten-conclusion"
 title: "Move limitations + future work from conclusion to evaluation"
-status: pending
+status: done
 priority: medium
 depends_on: []
 binding_claims: []
