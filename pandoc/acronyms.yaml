@@ -1,0 +1,70 @@
+# Acronym definitions for pandoc-acronyms Lua filter.
+# Keep in sync with \acrodef commands in preamble.tex.
+#
+# Usage in sections/*.md:
+#   +VC              → \ac{VC}       (auto first/subsequent)
+#   [+VC]{.short}    → \acs{VC}      (short form)
+#   [+VC]{.long}     → \acl{VC}      (long form)
+#   [+VC]{.full}     → \acf{VC}      (full: long + short)
+#   [+VC]{.plural}   → \acp{VC}      (plural)
+#   [+VC]{.caps}     → \Ac{VC}       (capitalized)
+#   Modifiers combinable: [+VC]{.short .plural .caps}
+
+acronyms:
+  VC:
+    short: VC
+    long: Verifiable Credential
+  VCDM:
+    short: VCDM
+    long: Verifiable Credentials Data Model
+  SSI:
+    short: SSI
+    long: Self-Sovereign Identity
+  DID:
+    short: DID
+    long: Decentralized Identifier
+  DCL:
+    short: DCL
+    long: Domain Concept Layer
+  CSL:
+    short: CSL
+    long: Credential Schema Layer
+  FSL:
+    short: FSL
+    long: Format-Specific Layer
+  DSE:
+    short: DSE
+    long: Design Space Exploration
+  MDE:
+    short: MDE
+    long: Model-Driven Engineering
+  ZKP:
+    short: ZKP
+    long: zero-knowledge proof
+  ARF:
+    short: ARF
+    long: Architecture Reference Framework
+  OCL:
+    short: OCL
+    long: Object Constraint Language
+  QEAA:
+    short: QEAA
+    long: Qualified Electronic Attestation of Attributes
+  EAA:
+    short: EAA
+    long: Electronic Attestation of Attributes
+  PID:
+    short: PID
+    long: Person Identification Data
+  PGM:
+    short: PGM
+    long: Partial Graph Modeling
+  GDPR:
+    short: GDPR
+    long: General Data Protection Regulation
+  RDF:
+    short: RDF
+    long: Resource Description Framework
+  BPMN:
+    short: BPMN
+    long: Business Process Model and Notation

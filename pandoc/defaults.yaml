@@ -5,7 +5,11 @@
 from: markdown+raw_tex+tex_math_dollars+fenced_divs+bracketed_spans
 to: latex
 
+metadata-files:
+  - pandoc/acronyms.yaml
+
 filters:
+  - pandoc/filters/acronyms.lua
   - pandoc/filters/abstract.lua
   - pandoc/filters/cut-candidates.lua
   - pandoc/filters/tables.lua
