@@ -65,6 +65,23 @@ Execution order: Z-P2 → Z-P1 → Z-P3 → Z-P4.
 | Z-P3 | [Approach — FSL elaboration + gaps](z-p3_approach_fsl.md) | Z-P2 | pending | claude |
 | Z-P4 | [Eval polish + Conclusion](z-p4_eval_conclusion.md) | T08 | done | claude |
 
+## Advisor feedback (2026-03-29)
+
+Execution order: A-LST → A-BG1 → A-CODE, A-FIG, A-CONC → A-BG2 + A-SHORT.
+
+| ID | Title | Depends on | Status | Assigned |
+|----|-------|------------|--------|----------|
+| A-LST | [Refinery lstlisting language](a-lst_refinery_lstlisting.md) | — | pending | claude |
+| A-REBUS | [Rebus preamble elements](a-rebus_preamble.md) | — | pending | martin |
+| A-BG1 | [Refinery code example in BG](a-bg1_refinery_bg_example.md) | A-LST | pending | oszkár |
+| A-CODE | [Refinery code listings in Sec 04](a-code_refinery_approach_listings.md) | A-LST, A-BG1 | pending | claude |
+| A-FIG | [Move figure + rename type graph](a-fig_move_rename_figure.md) | — | pending | claude |
+| A-CONC | [Shorten conclusion → eval](a-conc_shorten_conclusion.md) | — | pending | claude |
+| A-BG2 | [BG notation consistency in Sec 04](a-bg2_notation_consistency.md) | A-BG1 | pending | claude |
+| A-SHORT | [Approach redundancy check](a-short_approach_redundancy.md) | A-BG1, A-BG2 | pending | claude |
+
+Absorbs: X14 → A-BG2. Overlaps: O-REFBG (A-BG1 is the unblocking step).
+
 ## Infrastructure
 
 | ID | Title | Status | Assigned |
