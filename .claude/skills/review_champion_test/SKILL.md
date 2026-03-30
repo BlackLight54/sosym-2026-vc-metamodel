@@ -4,7 +4,7 @@ description: Evaluate whether the paper has a champion-worthy insight that a sym
 
 # Skill: Champion Test
 
-**Purpose:** Evaluate whether the paper, in its current state, would be championed by the Champion reviewer archetype (see `skills/review_reviewer_archetypes`). A paper that passes the champion test has a clear, communicable insight that a sympathetic reviewer would fight for in the PC meeting. A paper that fails may be technically correct but will not be accepted.
+**Purpose:** Evaluate whether the paper, in its current state, would be championed by the Champion reviewer archetype (see `skills/ref_reviewer_archetypes`). A paper that passes the champion test has a clear, communicable insight that a sympathetic reviewer would fight for in the PC meeting. A paper that fails may be technically correct but will not be accepted.
 
 This is the single most important quality signal for A* venues.
 

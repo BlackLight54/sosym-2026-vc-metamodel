@@ -23,7 +23,7 @@ description: Full-paper audit that reads all sections sequentially, cross-refere
 - `context/todos/INDEX.md` — remaining work items
 - Evidence sources in `context/archive/` (gap analysis, meeting notes)
 - Formalization in `models/*.problem`
-- Domain guides: `skills/ref_running_example`, `skills/review_reviewer_archetypes`
+- Domain guides: `skills/ref_running_example`, `skills/ref_reviewer_archetypes`
 
 ## Recommended execution
 

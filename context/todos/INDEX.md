@@ -21,7 +21,6 @@
 | ID | Title | Binding | Status | Assigned |
 |----|-------|---------|--------|----------|
 | O-REFBG | [Refinery BG — code examples + missing concepts](o-refinery-bg.md) | #3,4 | pending | oszkár |
-| X14 | [Refinery terminology introduction](x14_refinery_terminology_introduction.md) | #3,4 | done | claude |
 | Z-P3 | [Approach — FSL elaboration + gaps](z-p3_approach_fsl.md) | #1,3 | pending | claude |
 
 ## Writing fixes (cross-cutting)
@@ -56,20 +55,16 @@
 
 ## Advisor feedback (2026-03-29)
 
-Execution order: A-LST → A-BG1 → A-CODE, A-FIG, A-CONC → A-BG2 + A-SHORT.
+Execution order: A-LST → A-BG1 → A-CODE.
 
 | ID | Title | Depends on | Status | Assigned |
 |----|-------|------------|--------|----------|
 | A-LST | [Refinery lstlisting language](a-lst_refinery_lstlisting.md) | — | pending | claude |
 | A-REBUS | [Rebus preamble elements](a-rebus_preamble.md) | — | pending | martin |
-| A-BG1 | [Refinery code example in BG](a-bg1_refinery_bg_example.md) | A-LST | pending | oszkár |
+| A-BG1 | [Refinery code example in BG](a-bg1_refinery_bg_example.md) | A-LST | in_progress | oszkár |
 | A-CODE | [Refinery code listings in Sec 04](a-code_refinery_approach_listings.md) | A-LST, A-BG1 | pending | claude |
-| A-FIG | [Move figure + rename type graph](a-fig_move_rename_figure.md) | — | pending | claude |
-| A-CONC | [Shorten conclusion → eval](a-conc_shorten_conclusion.md) | — | pending | claude |
-| A-BG2 | [BG notation consistency in Sec 04](a-bg2_notation_consistency.md) | A-BG1 | done | claude |
-| A-SHORT | [Approach redundancy check](a-short_approach_redundancy.md) | A-BG1, A-BG2 | pending | claude |
 
-Absorbs: X14 → A-BG2. Overlaps: O-REFBG (A-BG1 is the unblocking step).
+Absorbs: X14 → A-BG2 (done). Overlaps: O-REFBG (A-BG1 is the unblocking step).
 
 ## Infrastructure
 
@@ -83,5 +78,6 @@ Absorbs: X14 → A-BG2. Overlaps: O-REFBG (A-BG1 is the unblocking step).
 All completed todos are in `context/archive/completed_todos/`. Key completions:
 
 - T07 (cross-layer constraints), T08 (eval elaboration), Z-P1 (abstract+intro), Z-P2 (BG+RW rename), Z-P4 (eval+conclusion)
-- O-MODES (usage modes), O-4VAL (four-valued fix), X01 (GDPR hedge), X07 (income variable drift)
+- O-MODES (usage modes), O-4VAL (four-valued fix), X01 (GDPR hedge), X07 (income variable drift), X14 (Refinery terminology)
+- A-BG2 (notation consistency), A-CONC (shorten conclusion), A-FIG (move/rename figure), A-SHORT (approach redundancy)
 - M00 (advisor notes processing), plus 60+ infrastructure and consolidation todos

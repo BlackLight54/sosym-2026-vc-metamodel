@@ -4,7 +4,7 @@ description: Instantiate four reviewer archetypes (Champion, Mathematician, Busi
 
 # Skill: Reviewer Personas
 
-**Purpose:** Instantiate the four reviewer archetypes (from `skills/review_reviewer_archetypes`) into specific personas calibrated to this paper's content, venue, and contribution type. The personas get more precise as more of the paper exists — run early for rough calibration, re-run after drafting for precision.
+**Purpose:** Instantiate the four reviewer archetypes (from `skills/ref_reviewer_archetypes`) into specific personas calibrated to this paper's content, venue, and contribution type. The personas get more precise as more of the paper exists — run early for rough calibration, re-run after drafting for precision.
 
 ## Trigger
 
@@ -21,11 +21,11 @@ description: Instantiate four reviewer archetypes (Champion, Mathematician, Busi
 
 **Best (after first draft):** Above + all section files. The more paper exists, the more specific the personas.
 
-**Always:** Read `skills/review_reviewer_archetypes/SKILL.md` for the archetype definitions.
+**Always:** Read `skills/ref_reviewer_archetypes/SKILL.md` for the archetype definitions.
 
 ## The four archetypes
 
-Read the full definitions in `skills/review_reviewer_archetypes`. Summary:
+Read the full definitions in `skills/ref_reviewer_archetypes`. Summary:
 
 | Archetype | Role | Calibration role |
 |-----------|------|-----------------|
@@ -64,7 +64,7 @@ For each archetype, produce a paper-specific persona:
 **Score range:** [What range of scores you'd expect from them given the current state of the paper, and what would move them up or down.]
 ```
 
-The persona inherits the archetype's evaluation criteria, forgiveness patterns, and attack vectors from `skills/review_reviewer_archetypes` — but makes them concrete for this paper, this venue, this contribution.
+The persona inherits the archetype's evaluation criteria, forgiveness patterns, and attack vectors from `skills/ref_reviewer_archetypes` — but makes them concrete for this paper, this venue, this contribution.
 
 ### 3. Derive calibration guidance
 

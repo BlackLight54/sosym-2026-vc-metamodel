@@ -2,7 +2,7 @@
 name: "Gap framing: collected and formalized"
 description: "Gap paragraph says 'we collected and formalized constraints' instead of 'constraints are scattered across' — eliminates citation debt"
 type: project
-status: active
+status: completed
 date: "2026-03-25"
 source: "Oszkár (meeting 2026-03-25 18:30)"
 affects: ["Sec 01 P2 (gap claim)", "abstract"]

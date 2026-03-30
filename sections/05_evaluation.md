@@ -7,7 +7,7 @@ dependencies: ["04_approach"]
 
 # Evaluation {#sec:evaluation}
 
-We evaluate the metamodel and its cross-layer constraint formalization along two complementary axes: a qualitative elaboration (\autoref{sec:elaboration}) and a quantitative scalability measurement (\autoref{sec:scalability}). Supplementary material provides the eIDAS constraint analysis, format capability comparison, and predicate definitions referenced below.
+We evaluate the metamodel and its cross-layer constraint formalization through a qualitative elaboration (\autoref{sec:elaboration}) and a quantitative scalability measurement (\autoref{sec:scalability}). The elaboration validates along three axes: metamodel coverage against W3C VCDM 2.0, constraint expressiveness against EU regulatory sources, and error detection against known credential design anti-patterns. Supplementary material provides the eIDAS constraint analysis, format capability comparison, and predicate definitions referenced below.
 
 ## Elaboration {#sec:elaboration}
 
@@ -103,7 +103,7 @@ $N$ & $|V|$ & SAT (s) & UNSAT (s) & Gen.\ (s) \\
 \end{table}
 ```
 
-<!-- Runtime figure removed — data already in tab:scalability.
+<!-- Runtime figure removed; data already in tab:scalability.
 ```{=latex}
 \begin{figure}[htb]
 \centering

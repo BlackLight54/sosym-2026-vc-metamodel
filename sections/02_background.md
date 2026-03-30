@@ -1,6 +1,6 @@
 ---
 section: Background
-budget: "1.45 pages (~12 paragraphs + 2 listings, 3 subsections) — over 1.25 budget, needs cuts"
+budget: "1.45 pages (~12 paragraphs + 2 listings, 3 subsections); over 1.25 budget, needs cuts"
 goal: "Establish the three conceptual pillars the reader needs. Nothing more."
 dependencies: []
 ---
@@ -27,7 +27,7 @@ Each layer's constraints originate from a different governance source: sector re
 
 These three concerns, format-dependent privacy capabilities (\autoref{sec:vcdm}), independently governed layers (\autoref{sec:multi-layer}), and partial graph reasoning (\autoref{sec:refinery}), together enable the cross-layer analysis. \autoref{sec:overview} introduces the running example where they interact.
 
-## Partial Graph Modeling with Refinery{#sec:refinery}
+## Partial Graph Modeling with Refinery {#sec:refinery}
 
 During the early phase of development, our knowledge about models is often incomplete. In partial modeling [@famelisPartialModelsModeling2012] uncertainty can be denoted explicitly, thus a range of design alternatives can be developed together.
 Refinery [@marussy_refinery_2024] is a modeling methodology in which design specifications are expressed as partial models and graph predicates serve as a first-class constraint language. Refinery uses a four-valued logic interpretation[@Belnap77useful]
@@ -42,7 +42,7 @@ to every node, edge, attribute value, enabling reasoning over incomplete (or inc
 **Partial model** [@marussy_refinery_2024]. A *partial model* over a signature consists of a finite set of objects and an interpretation that assigns each class membership and each reference between objects one of four truth values: [true]{.refi}, [false]{.refi}, [unknown]{.refi}, or [error]{.refi}.
 :::
 
-The four-valued interpretation assigns each element one of four statuses: [true]{.refi} (the value must be true), [false]{.refi} (the value must be false), [unknown]{.refi} (possibly true or false), and [error]{.refi} (both true and false, denoting contradiction). In diagrams,[do we have diagrams?]{.todo} a solid line denotes true values, a dashed line denotes unknown values, and absence denotes a false value. During the development (or automated synthesis) of partial models, [unknown]{.refi} values are gradually refined to either [true]{.refi} or [false]{.refi}. If a model contains only [true]{.refi} and [false]{.refi} values, we call them *concrete models*. If one of the design decision contradicts a design constraint, it produces [error]{.refi} to show the contradiction between a decision and the regulation.
+The four-valued interpretation assigns each element one of four statuses: [true]{.refi} (the value must be true), [false]{.refi} (the value must be false), [unknown]{.refi} (possibly true or false), and [error]{.refi} (both true and false, denoting contradiction). By convention, a solid line denotes [true]{.refi} values, a dashed line denotes [unknown]{.refi} values, and absence denotes a [false]{.refi} value. During the development (or automated synthesis) of partial models, [unknown]{.refi} values are gradually refined to either [true]{.refi} or [false]{.refi}. If a model contains only [true]{.refi} and [false]{.refi} values, we call them *concrete models*. If one of the design decision contradicts a design constraint, it produces [error]{.refi} to show the contradiction between a decision and the regulation.
 
 ::: {.formal}
 Oscar: refinement ordering definition (partial model $A$ refines $B$ iff every must/must-not commitment in $B$ is preserved in $A$). Target length: 1--2 sentences + definition.

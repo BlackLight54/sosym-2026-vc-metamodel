@@ -47,7 +47,6 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 | [`review_page_budget_audit`](review_page_budget_audit/SKILL.md) | "How many pages per section?" | Multi-agent page budget audit with inflation diagnosis and cut recommendations |
 | [`review_prior_decision_audit`](review_prior_decision_audit/SKILL.md) | "Are our early decisions still right?" | Surfaces cross-cutting decisions and checks whether they still serve the paper |
 | [`review_prose_naturalness`](review_prose_naturalness/SKILL.md) | "Check for LLM tells" | Scans for excess vocabulary, em-dash overuse, template phrases, structural monotony |
-| [`review_reviewer_archetypes`](review_reviewer_archetypes/SKILL.md) | Reference guide | Reviewer archetype definitions for persona instantiation |
 
 ### `plan_` — Planning & orchestration
 
@@ -65,6 +64,7 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 | Skill | Trigger | What it does |
 |-------|---------|-------------|
 | [`ref_refinery`](ref_refinery/SKILL.md) | Reading/writing `.problem` files | Refinery language guide, three-layer pattern, examples, CLI script |
+| [`ref_reviewer_archetypes`](ref_reviewer_archetypes/SKILL.md) | Reference guide | Reviewer archetype definitions for persona instantiation |
 | [`ref_running_example`](ref_running_example/SKILL.md) | "Running example" | Running example guide and specifications |
 
 ### `project_` — Infrastructure & cleanup

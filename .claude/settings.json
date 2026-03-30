@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Edit(/.claude/skills/**)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\Martin\\code\\MODELS''''26\\.claude\\memory"
+    ]
+  }
+}

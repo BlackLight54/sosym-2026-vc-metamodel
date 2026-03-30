@@ -3,7 +3,7 @@ name: "No code listings — PARTIALLY SUPERSEDED"
 description: "Originally no code in body; now selected Refinery listings allowed per advisor feedback 2026-03-29"
 type: project
 date: 2026-03-27
-status: superseded
+status: active
 affects: "All section files (especially Sec 04, 05), figure design, supplementary material"
 revisit_when: "After A-CODE and A-SHORT complete — reassess page impact"
 tags: format, code, supplementary

@@ -27,16 +27,16 @@ Three property edges connect the subject to its values. The two domain constrain
 
 The following metaclasses and predicates formalize this structure. The abstract metaclass [Entity]{.refi} has two concrete subclasses, [Subject]{.refi} and [Value]{.refi}, connected by [Prop]{.refi} instances; each [Prop]{.refi} holds exactly one [Value]{.refi} and carries a trace link to the credential schema layer (\autoref{sec:csl}). The distinction between [Subject]{.refi} and [Value]{.refi} is inferred structurally: a propagation rule (\autoref{sec:refinery}) classifies any [Entity]{.refi} with no incoming value reference as a [Subject]{.refi}, a root of the property tree and therefore a candidate credential subject at the +CSL layer. Four predicates constrain the +DCL:
 
-statement(s, p, v) — ternary predicate
+statement(s, p, v): ternary predicate
 :   Satisfied when subject $s$ owns property $p$ and $p$ contains value $v$, with the well-formedness condition $s \neq v$.
 
-non_connected(e1, e2) — error predicate
+non_connected(e1, e2): error predicate
 :   Flags any pair of entities not transitively reachable through the [neighbours]{.refi} relation, where two entities are neighbours if a [statement]{.refi} connects them in either direction. An unreachable entity represents a domain fact that no credential path connects to the subject and therefore cannot be verified.
 
-no_self_loop — propagation rule
+no_self_loop: propagation rule
 :   Prevents an entity from serving as both the owner and the value of the same property, a structurally meaningless configuration that would collapse the subject–value distinction.
 
-cyclic — error predicate
+cyclic: error predicate
 :   Enforces acyclicity via transitive closure of the [neighbours]{.refi} relation.
 
 Together, these constraints ensure that every +DCL instance is a connected, directed acyclic information graph with clear directionality from subjects to values. In terms of the usage modes (\autoref{sec:functional-overview}), +DCL constraints serve error identification: evaluating [`non_connected`]{.refi} on a partial specification with an orphaned entity returns $\textbf{NOT\_OK}(\text{non\_connected}(e_1, e_2))$, naming the unreachable pair and indicating where the domain model is incomplete.
@@ -53,18 +53,18 @@ All three credential subjects trace to the same +DCL entity, Applicant: $\text{t
 
 Beyond type derivation, the metamodel enforces structural well-formedness through four predicates (two shadow, two error; \autoref{sec:refinery}). The shadow predicates mirror +DCL structure at the credential level:
 
-credential_statement — shadow predicate
+credential_statement: shadow predicate
 :   Recognizes when a claim connects distinct source and target credential entities.
 
-Root_cred_entity — shadow predicate
+Root_cred_entity: shadow predicate
 :   Identifies root credential entities that no claim targets.
 
 The error predicates catch violations that would otherwise propagate silently to format assignment:
 
-no_empty_cred — error predicate
+no_empty_cred: error predicate
 :   Flags a credential subject with no outgoing claims.
 
-root_ent_doesnt_have_cred — error predicate
+root_ent_doesnt_have_cred: error predicate
 :   Flags a root credential entity without an associated credential.
 
 When either error predicate fires, the framework reports the violation before format-specific constraints are evaluated. The anti-pattern catalog (\autoref{sec:anti-patterns}) classifies all five predicates by layer scope and kind.
@@ -116,7 +116,7 @@ C8 and C9 are cross-layer results: they emerge only when constraints from multip
 
 The predicates defined in the preceding sections ([non_connected]{.refi}, [no_empty_cred]{.refi}, [root_ent_doesnt_have_cred]{.refi}) operate within a single layer. The cross-layer predicates below combine elements from multiple layers and fall into the three categories defined in \autoref{sec:refinery}: propagation rules, shadow predicates, and error predicates.
 
-prop_t, prop_s — propagation rules (C2)
+prop_t, prop_s: propagation rules (C2)
 :   Trace consistency by negative elimination. The target rule [prop_t]{.refi} excludes any credential entity whose trace is inconsistent with the domain-layer value; the source rule [prop_s]{.refi} is dual. A claim that connects to a credential entity tracing to the wrong domain entity is a silent design error: each layer is well-formed individually, but the cross-layer mapping is broken. In the running example, the claim tracing to [has_children]{.refi} can only target a credential entity tracing to [num_children]{.refi}, not one tracing to [property_area]{.refi}. (\autoref{lst:trace-consistency})
 
 ```refinery {#lst:trace-consistency caption="Cross-layer trace consistency: negative elimination rules"}
@@ -139,10 +139,10 @@ propagation rule prop_s(Claim c, CredEntity s) <->
     !Claim::source(c, s).
 ```
 
-aligned(c_e1, c_e2) — shadow predicate (C1)
+aligned(c_e1, c_e2): shadow predicate (C1)
 :   Holds when two distinct credential entities trace to the same domain entity. Formalizes cross-authority subject identity. In the running example, all three credential subjects are aligned because each traces to Applicant. (\autoref{lst:cross-layer-shadow})
 
-cross_cred_predicate_gap(c1, c2) — shadow predicate (C9)
+cross_cred_predicate_gap(c1, c2): shadow predicate (C9)
 :   Fires when two credentials have aligned subjects but at least one format lacks multi-credential proof support. When a domain constraint spans two credentials ($\text{property\_area} \geq f(\text{num\_children})$ requires combining claims from FamilyStatusCred and PropertyCred), the design depends on a format capability that may not exist. No deployed format supports cross-credential arithmetic, so the predicate fires for every aligned pair, making a structural limitation of the current format space visible. \autoref{sec:headlines} develops this as the second headline result. (\autoref{lst:cross-layer-shadow})
 
 [aligned]{.refi}, [cross_cred_predicate_gap]{.refi}, and [common_parent]{.refi} (defined in supplementary material) feed the anti-pattern analysis (\autoref{sec:evaluation}).

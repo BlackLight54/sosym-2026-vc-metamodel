@@ -21,13 +21,13 @@ The following metaclasses and predicates formalize this structure. The abstract 
 
 \begin{description}
 \tightlist
-\item[statement(s, p, v) --- ternary predicate]
+\item[statement(s, p, v): ternary predicate]
 Satisfied when subject \(s\) owns property \(p\) and \(p\) contains value \(v\), with the well-formedness condition \(s \neq v\).
-\item[non\_connected(e1, e2) --- error predicate]
+\item[non\_connected(e1, e2): error predicate]
 Flags any pair of entities not transitively reachable through the \refi{neighbours} relation, where two entities are neighbours if a \refi{statement} connects them in either direction. An unreachable entity represents a domain fact that no credential path connects to the subject and therefore cannot be verified.
-\item[no\_self\_loop --- propagation rule]
+\item[no\_self\_loop: propagation rule]
 Prevents an entity from serving as both the owner and the value of the same property, a structurally meaningless configuration that would collapse the subject--value distinction.
-\item[cyclic --- error predicate]
+\item[cyclic: error predicate]
 Enforces acyclicity via transitive closure of the \refi{neighbours} relation.
 \end{description}
 
@@ -47,9 +47,9 @@ Beyond type derivation, the metamodel enforces structural well-formedness throug
 
 \begin{description}
 \tightlist
-\item[credential\_statement --- shadow predicate]
+\item[credential\_statement: shadow predicate]
 Recognizes when a claim connects distinct source and target credential entities.
-\item[Root\_cred\_entity --- shadow predicate]
+\item[Root\_cred\_entity: shadow predicate]
 Identifies root credential entities that no claim targets.
 \end{description}
 
@@ -57,9 +57,9 @@ The error predicates catch violations that would otherwise propagate silently to
 
 \begin{description}
 \tightlist
-\item[no\_empty\_cred --- error predicate]
+\item[no\_empty\_cred: error predicate]
 Flags a credential subject with no outgoing claims.
-\item[root\_ent\_doesnt\_have\_cred --- error predicate]
+\item[root\_ent\_doesnt\_have\_cred: error predicate]
 Flags a root credential entity without an associated credential.
 \end{description}
 
@@ -137,7 +137,7 @@ The predicates defined in the preceding sections (\refi{non_connected}, \refi{no
 
 \begin{description}
 \tightlist
-\item[prop\_t, prop\_s --- propagation rules (C2)]
+\item[prop\_t, prop\_s: propagation rules (C2)]
 Trace consistency by negative elimination. The target rule \refi{prop_t} excludes any credential entity whose trace is inconsistent with the domain-layer value; the source rule \refi{prop_s} is dual. A claim that connects to a credential entity tracing to the wrong domain entity is a silent design error: each layer is well-formed individually, but the cross-layer mapping is broken. In the running example, the claim tracing to \refi{has_children} can only target a credential entity tracing to \refi{num_children}, not one tracing to \refi{property_area}. (\autoref{lst:trace-consistency})
 \end{description}
 
@@ -163,9 +163,9 @@ propagation rule prop_s(Claim c, CredEntity s) <->
 
 \begin{description}
 \tightlist
-\item[aligned(c\_e1, c\_e2) --- shadow predicate (C1)]
+\item[aligned(c\_e1, c\_e2): shadow predicate (C1)]
 Holds when two distinct credential entities trace to the same domain entity. Formalizes cross-authority subject identity. In the running example, all three credential subjects are aligned because each traces to Applicant. (\autoref{lst:cross-layer-shadow})
-\item[cross\_cred\_predicate\_gap(c1, c2) --- shadow predicate (C9)]
+\item[cross\_cred\_predicate\_gap(c1, c2): shadow predicate (C9)]
 Fires when two credentials have aligned subjects but at least one format lacks multi-credential proof support. When a domain constraint spans two credentials (\(\text{property\_area} \geq f(\text{num\_children})\) requires combining claims from FamilyStatusCred and PropertyCred), the design depends on a format capability that may not exist. No deployed format supports cross-credential arithmetic, so the predicate fires for every aligned pair, making a structural limitation of the current format space visible. \autoref{sec:headlines} develops this as the second headline result. (\autoref{lst:cross-layer-shadow})
 \end{description}
 
