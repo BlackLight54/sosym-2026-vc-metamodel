@@ -1,9 +1,0 @@
-# Development logs (contain local paths)
-evaluation/SESSION_LOG.md
-
-# Debugging artifacts
-evaluation/results/test*.json
-
-# OS
-.DS_Store
-Thumbs.db

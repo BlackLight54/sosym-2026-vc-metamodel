@@ -22,29 +22,50 @@ The five partially expressible constraints share two root causes. Three constrai
 
 ### Headline Results {#sec:headlines}
 
+The metamodel currently detects two distinct types of cross-layer design error, both demonstrated on the housing subsidy scenario. The first is *vertical*: three independently enacted governance frameworks impose contradictory format requirements on a single credential (\autoref{sec:headline-income-conflict}). The second is *horizontal*: a domain constraint spanning two credentials issued by different authorities exceeds any single format's capabilities (\autoref{sec:headline-predicate-gap}). Neither error is visible when any single layer or governance source is inspected alone.
+
 #### Headline 1: Income governance conflict (vertical) {#sec:headline-income-conflict}
 
-At the credential schema layer, IncomeCred is well-formed: [CS\_Applicant]{.refi}$_3$ traces to Applicant, [earns]{.refi}$_1$ traces to the [earns]{.refi} property, [monthly\_income]{.refi}$_1$ traces to its value. All structural constraints (C1–C3) are satisfied.
+Three governance frameworks independently constrain the format of IncomeCred. EU regulation restricts government attestations to two approved formats. Data protection law, as operationalized for this scenario, requires that a threshold check not disclose the underlying value. The W3C standard requires format conformance to its data model. The question is whether any single format satisfies all three simultaneously.
+
+At the credential schema layer, IncomeCred is well-formed: its credential subject traces to Applicant, each claim traces to the corresponding domain property, and all structural constraints (C1--C3) are satisfied.
 
 At the format-specific layer, three governance sources impose requirements on IncomeCred:
 
 1. **eIDAS ARF** (C5): EU wallet attestations must use SD-JWT-VC or mdoc [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026]; neither supports predicate proofs.
-2. **+GDPR Art. 5(1)(c)** (authors' operationalization): the income threshold check requires disclosing only whether [monthly\_income]{.refi} $\geq$ [threshold]{.refi}, not the exact value. When a threshold comparison suffices, disclosing the exact value constitutes disproportionate data collection; enforcing this at the credential layer requires predicate proof capability [@gdpr]. This reading assumes minimization must be achieved through technical means at the credential layer rather than through organizational controls; a directly analogous enforcement action supports it.^[The Hungarian data protection authority (NAIH) fined a bank 35M HUF for copying applicants' entire pregnancy booklets when only a 12-week gestation threshold check was required for a subsidized loan, finding the collection grossly disproportionate [@noauthor_naih_2020], precisely the scenario that predicate proofs address at the credential layer.]
+2. **+GDPR Art. 5(1)(c)** (C6): the data minimization principle, operationalized as a credential-layer requirement (\autoref{sec:motivation}), demands predicate proof capability so the income threshold check discloses only whether $\text{monthly\_income} \geq \text{threshold}$, not the underlying value [@gdpr].
 3. **W3C VCDM 2.0**: the credential format must conform to the +VCDM data model; AnonCreds v1 does not, as its encoding is designed around the CL signature scheme rather than the +VCDM data model [@sporny_verifiable_2025; @curran2022anoncreds].
 
-No format satisfies all three requirements. SD-JWT-VC satisfies (1) and (3) but not (2). AnonCreds satisfies (2) but not (1) or (3). The configuration is unsatisfiable: constraints C5, C6, and C7 cannot be simultaneously satisfied on IncomeCred. The constraint sensitivity analysis (\autoref{sec:scalability}) confirms this: of eight governance subsets, only the full conjunction yields unsatisfiability; every proper subset admits at least one valid format assignment. The only available workaround, pre-computing boolean threshold claims in SD-JWT-VC, requires changing the domain concept layer's information model (\autoref{sec:cross-layer}), a cross-layer design consequence visible only under multi-layer analysis.
+The [governance_conflict]{.refi} error predicate (\autoref{lst:governance-conflict}) encodes the conflict directly. Its two disjunctive clauses partition the format space: clause 1 fires for formats that conform to +VCDM but lack predicate proofs (SD-JWT-VC, mdoc); clause 2 fires for formats with predicate proofs that do not conform to +VCDM (AnonCreds). Every format triggers one clause, so the configuration is unsatisfiable. The constraint sensitivity analysis (\autoref{sec:scalability}) confirms this: of eight governance subsets, only the full conjunction yields unsatisfiability; every proper subset admits at least one valid format assignment. The only available workaround, pre-computing boolean threshold claims in SD-JWT-VC, requires changing the domain concept layer's information model (\autoref{sec:cross-layer}), a cross-layer design consequence visible only under multi-layer analysis.
+
+```refinery {#lst:governance-conflict caption="Governance conflict: no format satisfies eIDAS, privacy, and VCDM simultaneously"}
+error governance_conflict(Credential c, Formatted_Credential f) <->
+    EidasMandate::target(_, c),
+    PrivacyRequirement::target(_, c),
+    format(c, f),
+    conforms_vcdm(f),
+    !supports_predicate_proof(f)
+  ;
+    EidasMandate::target(_, c),
+    PrivacyRequirement::target(_, c),
+    format(c, f),
+    supports_predicate_proof(f),
+    !conforms_vcdm(f).
+```
 
 #### Headline 2: Cross-credential predicate gap (horizontal) {#sec:headline-predicate-gap}
 
-The domain constraint [property\_area]{.refi} $\geq$ [min\_area(num\_children)]{.refi} (C4) requires combining values from two credentials issued by independent authorities: [property\_area]{.refi} from PropertyCred (land registry) and [num\_children]{.refi} from FamilyStatusCred (civil registry).
+Where Headline 1 concerns conflicting requirements on a single credential, Headline 2 concerns a domain constraint that spans credential boundaries. The question is whether any format can evaluate a predicate whose inputs come from two independently issued credentials.
+
+The domain constraint $\text{property\_area} \geq \text{min\_area}(\text{num\_children})$ (C4) requires combining values from two credentials issued by independent authorities: property area from PropertyCred (land registry) and number of children from FamilyStatusCred (civil registry).
 
 No widely used credential format supports cross-credential arithmetic predicates in zero-knowledge; a detailed format capability analysis accompanies this result.
 
-To verify the floor area constraint, the verifier must see both raw values from two separate credentials, defeating the privacy properties that [+ZKP]{.short}-capable formats promise. The metamodel captures this as [cross_cred_predicate_gap]{.refi} (C9).
+To verify the floor area constraint, the verifier must see both raw values from two separate credentials, defeating the privacy properties that [+ZKP]{.short}-capable formats promise. The metamodel captures this as [cross_cred_predicate_gap]{.refi} (C9, \autoref{lst:cross-layer-shadow}).
 
 No layer-internal check reveals the gap: the +DCL constraint is well-defined, both credentials are well-formed at the +CSL, and each format is individually valid at the +FSL.
 
-*Complementarity.* The two results are orthogonal. Headline 1 identifies a *vertical* governance conflict: contradictory requirements on a single credential's format from different regulatory sources. Headline 2 identifies a *horizontal* expressiveness gap: an ecosystem-level constraint spanning credentials that exceeds any single format's capabilities. Together, they demonstrate that multi-layer analysis detects both governance conflicts and format expressiveness gaps that no individual layer reveals.
+Together, the two results instantiate the vertical and horizontal dimensions of the anti-pattern catalog (\autoref{sec:anti-patterns}): governance conflicts within a credential and capability gaps across credentials, both undetectable by single-layer inspection.
 
 ### Anti-Pattern Detection {#sec:anti-patterns}
 
@@ -56,9 +77,9 @@ No existing tool implements cross-layer credential ecosystem checking. Single-la
 
 ## Scalability Measurement {#sec:scalability}
 
-We evaluate three Refinery solver operations (\autoref{sec:refinery}). *Consistency checking* ([check]{.refi}) verifies no internal contradictions. *Concretizability checking* ([check -k]{.refi}) determines whether a concrete model satisfying all constraints exists, the operation that detects governance conflicts. *Model generation* ([generate]{.refi}) produces a fully resolved model instance for +DSE. 
+We evaluate three Refinery solver operations (\autoref{sec:refinery}). *Consistency checking* ([check]{.refi}) verifies no internal contradictions. *Concretizability checking* ([check -k]{.refi}) determines whether a concrete model satisfying all constraints exists, the operation that detects governance conflicts. *Model generation* ([generate]{.refi}) produces a fully resolved model instance for +DSE.
 
-- **RQ1:** How does conflict detection scale with model size? 
+- **RQ1:** How does conflict detection scale with model size?
 - **RQ2:** How does model generation scale?
 
 We construct synthetic instances from $N{=}1$ to $N{=}30$ credentials, with 11 to 272 graph nodes (\autoref{tab:scalability}). Each scale point has a satisfiable (SAT) and unsatisfiable (UNSAT) variant. A secondary *constraint sensitivity* experiment fixes $N{=}3$ and varies governance framework combinations over $\mathcal{P}(\{\text{eIDAS}, \text{Privacy}, \text{VCDM}\})$, yielding eight configurations (G0–G7).
