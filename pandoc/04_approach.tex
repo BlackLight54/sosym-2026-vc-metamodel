@@ -191,3 +191,37 @@ shadow pred cross_cred_predicate_gap(Credential c1, Credential c2) <->
 \end{lstlisting}
 
 Format capability propagation rules apply the same negative elimination mechanism (\autoref{sec:refinery}) at the format level. When a governance annotation demands a capability, incompatible format classes are eliminated: requiring \refi{supports_predicate_proof} on IncomeCred excludes SD-JWT-VC, JWT-VC, mdoc, and JSON-LD, leaving only AnonCreds. When no format in scope satisfies a required capability, the only workaround is restructuring the domain concept layer, replacing a numeric property with pre-computed boolean claims, a cross-layer design consequence that \autoref{sec:headlines} develops as the first headline result.
+
+\subsection{Design Grounding}\label{sec:design-grounding}
+
+The preceding layers and constraints formalize a deliberate subset of the W3C VCDM 2.0 concept space and the regulatory requirements that bear on credential ecosystem design. \autoref{tab:design_grounding} traces each metamodel element to its standard source and maps eIDAS \ac{ARF} normative constraints to their predicate encoding.
+
+\begin{table}[htb]
+\caption{Design-scope traceability. Top: VCDM concept families mapped to metamodel layers and elements. Middle: eIDAS ARF normative constraints mapped to predicates. Bottom: VCDM families deliberately excluded. *Both gaps are closable by extending the metaclass hierarchy without changing the constraint formalization approach.
+\label{tab:design_grounding}}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\columnwidth}{LLlLLL}
+\toprule
+Concern & Source & Layer & Element(s) & C\# & Status \\
+\midrule
+Claim structure & W3C VCDM 2.0 & DCL & Entity, Prop, ValueDep & C1, C2, C4 & Included \\
+Credential packaging & W3C VCDM 2.0 & CSL & Credential, Claim, trace & C3 & Included \\
+Format capabilities & VCDM 2.0 + vendor & FSL & Formatted\_Credential, 6 cap.\ predicates & C5--C7 & Included \\
+\midrule
+PID dual-format & eIDAS ARF (PID\_02) & FSL & EidasMandate & ARF-C1 & Fully expr. \\
+Proximity pres. & eIDAS ARF (ARB\_02) & FSL & offline\_verification & ARF-C4 & Fully expr. \\
+Encoding indep. & eIDAS ARF (ARB\_06) & --- & Layer architecture & ARF-C7 & Fully expr. \\
+Attestation qual. & eIDAS ARF & --- & --- & ARF-C2,C3,C6 & Partial* \\
+Claim privacy & eIDAS ARF & DCL$\leftrightarrow$FSL & --- & ARF-C5,C8 & Partial* \\
+\midrule
+Proof mechanisms & W3C VCDM 2.0 & --- & --- & --- & Excluded \\
+Ver.\ presentations & W3C VCDM 2.0 & --- & --- & --- & Excluded \\
+Credential status & W3C VCDM 2.0 & --- & --- & --- & Excluded \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The metamodel includes every W3C VCDM 2.0 concept that governs credential \emph{structure}: claim-level information organization (\ac{DCL}), credential packaging with subject bindings and trace links (\ac{CSL}), and format-specific capabilities relevant to governance constraint evaluation (\ac{FSL}). Three VCDM concept families are deliberately excluded: proof mechanisms, verifiable presentations, and credential status. All three govern how a credential with a given structure is \emph{used} (signed, presented, revoked), not how that structure is designed; they are orthogonal to the structural and format-assignment constraints that produce the cross-layer errors in \autoref{sec:headlines}.
+
+Of the eight eIDAS \ac{ARF} constraints mapped in \autoref{tab:design_grounding}, five are partially expressible, sharing two root causes. Three (ARF-C2, C3, C6) condition format eligibility on attestation qualification level (PID, QEAA, or non-qualified EAA), a distinction the metamodel does not yet represent. Two (ARF-C5, C8) require privacy annotations at claim granularity rather than format level. Both gaps are closable by extending the metaclass hierarchy without changing the constraint formalization approach; they define extension points, not fundamental limitations.

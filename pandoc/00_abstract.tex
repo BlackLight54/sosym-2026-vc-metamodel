@@ -13,11 +13,9 @@ their joint consistency.
 We present a three-layer metamodel and formalized constraint set for
 credential ecosystem design, grounded in the W3C Verifiable Credentials
 Data Model 2.0, with cross-layer constraints formalized as graph
-predicates in the Refinery partial graph modeling framework. We validate
-coverage against the W3C specification, expressiveness against EU
-regulatory sources, and error detection against known anti-patterns. The
-evaluation shows that constraints from different governance frameworks
-can be formally conflicting, and that design errors spanning multiple
-layers become visible only through the integrated formalization:
-classifying eight eIDAS constraints, formalizing five anti-patterns, and
-surfacing two cross-layer errors that no single-layer analysis detects.\end{abstract}
+predicates in the Refinery partial graph modeling framework. The
+evaluation detects cross-layer design errors undetectable by single-layer
+inspection, including a governance conflict where three independent
+regulatory sources impose formally contradictory format requirements on a
+single credential, and a cross-credential predicate gap that no single
+format can bridge.\end{abstract}
