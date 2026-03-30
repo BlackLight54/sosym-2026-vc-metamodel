@@ -23,7 +23,7 @@ Prop(owns_property). Value(property_area). property(Applicant, owns_property). v
 Prop(earns).         Value(monthly_income). property(Applicant, earns).         value(earns, monthly_income).
 ```
 
-Three [statement]{.refi} triples connect the subject to its values. The two domain constraints established in \autoref{sec:motivation} carry forward: [property\_area]{.refi} $\geq$ [min\_area(num\_children)]{.refi} spans what will become separate credentials, and [monthly\_income]{.refi} $\geq$ [threshold]{.refi} establishes a privacy-sensitive eligibility check. All structural constraints (connectivity, acyclicity, no self-loops) are satisfied.
+Three property edges connect the subject to its values. The two domain constraints established in \autoref{sec:motivation} carry forward: [property\_area]{.refi} $\geq$ [min\_area(num\_children)]{.refi} spans what will become separate credentials, and [monthly\_income]{.refi} $\geq$ [threshold]{.refi} establishes a privacy-sensitive eligibility check. All structural constraints (connectivity, acyclicity, no self-loops) are satisfied.
 
 The following metaclasses and predicates formalize this structure. The abstract metaclass [Entity]{.refi} has two concrete subclasses, [Subject]{.refi} and [Value]{.refi}, connected by [Prop]{.refi} instances; each [Prop]{.refi} holds exactly one [Value]{.refi} and carries a trace link to the credential schema layer (\autoref{sec:csl}). The distinction between [Subject]{.refi} and [Value]{.refi} is inferred structurally: a propagation rule (\autoref{sec:refinery}) classifies any [Entity]{.refi} with no incoming value reference as a [Subject]{.refi}, a root of the property tree and therefore a candidate credential subject at the +CSL layer. Four predicates constrain the +DCL:
 
@@ -45,11 +45,11 @@ Together, these constraints ensure that every +DCL instance is a connected, dire
 
 The [+CSL]{.full} models how domain-level facts are partitioned into credentials, each issued by a different authority and carrying a subset of the domain's properties, as claimed by the issuer.
 
-In the housing subsidy scenario, three credentials partition the facts, FamilyStatusCred (civil registry) carries $\text{CS\_Applicant}_1$ with claim $\text{has\_children}_1 \to \text{num\_children}_1$. PropertyCred (land registry) carries $\text{CS\_Applicant}_2$ with claim $\text{owns\_property}_1 \to \text{property\_area}_1$. IncomeCred (employer) carries $\text{CS\_Applicant}_3$ with claim $\text{earns}_1 \to \text{monthly\_income}_1$. Each credential subject, claim, and value traces to its +DCL counterpart.
+In the housing subsidy scenario, three credentials partition the facts. FamilyStatusCred (civil registry) carries $\text{CS\_Applicant}_1$ with claim $\text{has\_children}_1 \to \text{num\_children}_1$. PropertyCred (land registry) carries $\text{CS\_Applicant}_2$ with claim $\text{owns\_property}_1 \to \text{property\_area}_1$. IncomeCred (employer) carries $\text{CS\_Applicant}_3$ with claim $\text{earns}_1 \to \text{monthly\_income}_1$. Each credential subject, claim, and value traces to its +DCL counterpart.
+
+Trace references connect layers: when a credential claim traces to a domain fact, the metamodel can check whether the credential faithfully represents what it claims. When a trace is broken, the metamodel names the specific design error. The +CSL mirrors the +DCL type structure (\autoref{fig:metamodel}): credential entities parallel domain entities, claims parallel properties, and credential subjects parallel subjects. Every +CSL element carries a mandatory [trace]{.refi} reference to its +DCL origin. Combined with Refinery's propagation rules, traces actively derive +CSL structure from +DCL during model generation: two propagation rules ([subject_traces_to_subject]{.refi} and [root_is_cred_subj]{.refi}) infer credential-layer type assignments from domain-layer structure, so that +CSL types are consequences of domain-layer origin, not independent design choices.
 
 All three credential subjects trace to the same +DCL entity, Applicant: $\text{trace}(\text{CS\_Applicant}_i, \text{Applicant})$ for $i \in \{1,2,3\}$. Each claim traces to its corresponding property, and each credential value traces to its corresponding value. Entity alignment holds pairwise: $\text{aligned}(\text{CS\_Applicant}_i, \text{CS\_Applicant}_j)$ for all $i \neq j$. The cross-property domain constraint (minimum floor area as a function of the number of children) now spans two credentials, requiring the verifier to combine claims from FamilyStatusCred and PropertyCred.
-
-Trace references are what connect layers: when a credential claim traces to a domain fact, the metamodel can check whether the credential faithfully represents what it claims. When a trace is broken, the metamodel names the specific design error. The +CSL mirrors the +DCL type structure (\autoref{fig:metamodel}): credential entities parallel domain entities, claims parallel properties, and credential subjects parallel subjects. Every +CSL element carries a mandatory [trace]{.refi} reference to its +DCL origin. Combined with Refinery's propagation rules, traces actively derive +CSL structure from +DCL during model generation: two propagation rules ([subject_traces_to_subject]{.refi} and [root_is_cred_subj]{.refi}) infer credential-layer type assignments from domain-layer structure, so that +CSL types are consequences of domain-layer origin, not independent design choices.
 
 Beyond type derivation, the metamodel enforces structural well-formedness through four predicates (two shadow, two error; \autoref{sec:refinery}). The shadow predicates mirror +DCL structure at the credential level:
 
@@ -84,6 +84,7 @@ The +FSL does not carry intra-layer structural constraints like the upper layers
 | [`conforms_vcdm`]{.refi} | — | $\checkmark$ | $\checkmark$ | $\checkmark$ | — |
 | [`supports_zkp`]{.refi} | $\checkmark$ | — | — | — | — |
 | [`supports_offline_verification`]{.refi} | — | — | — | — | $\checkmark$ |
+| [`supports_multi_credential_proof`]{.refi} | — | — | — | — | — |
 
 Table: Format-capability matrix (AC = AnonCreds, JLD = JSON-LD, JWT = JWT-VC, SDJ = SD-JWT-VC). Each predicate is derived from the format class hierarchy. \label{tab:format_capabilities}
 

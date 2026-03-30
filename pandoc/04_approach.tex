@@ -15,7 +15,7 @@ Prop(owns_property). Value(property_area). property(Applicant, owns_property). v
 Prop(earns).         Value(monthly_income). property(Applicant, earns).         value(earns, monthly_income).
 \end{lstlisting}
 
-Three \refi{statement} triples connect the subject to its values. The two domain constraints established in \autoref{sec:motivation} carry forward: \refi{property_area} \(\geq\) \refi{min_area(num_children)} spans what will become separate credentials, and \refi{monthly_income} \(\geq\) \refi{threshold} establishes a privacy-sensitive eligibility check. All structural constraints (connectivity, acyclicity, no self-loops) are satisfied.
+Three property edges connect the subject to its values. The two domain constraints established in \autoref{sec:motivation} carry forward: \refi{property_area} \(\geq\) \refi{min_area(num_children)} spans what will become separate credentials, and \refi{monthly_income} \(\geq\) \refi{threshold} establishes a privacy-sensitive eligibility check. All structural constraints (connectivity, acyclicity, no self-loops) are satisfied.
 
 The following metaclasses and predicates formalize this structure. The abstract metaclass \refi{Entity} has two concrete subclasses, \refi{Subject} and \refi{Value}, connected by \refi{Prop} instances; each \refi{Prop} holds exactly one \refi{Value} and carries a trace link to the credential schema layer (\autoref{sec:csl}). The distinction between \refi{Subject} and \refi{Value} is inferred structurally: a propagation rule (\autoref{sec:refinery}) classifies any \refi{Entity} with no incoming value reference as a \refi{Subject}, a root of the property tree and therefore a candidate credential subject at the \ac{CSL} layer. Four predicates constrain the \ac{DCL}:
 
@@ -37,11 +37,11 @@ Together, these constraints ensure that every \ac{DCL} instance is a connected, 
 
 The \acf{CSL} models how domain-level facts are partitioned into credentials, each issued by a different authority and carrying a subset of the domain's properties, as claimed by the issuer.
 
-In the housing subsidy scenario, three credentials partition the facts, FamilyStatusCred (civil registry) carries \(\text{CS\_Applicant}_1\) with claim \(\text{has\_children}_1 \to \text{num\_children}_1\). PropertyCred (land registry) carries \(\text{CS\_Applicant}_2\) with claim \(\text{owns\_property}_1 \to \text{property\_area}_1\). IncomeCred (employer) carries \(\text{CS\_Applicant}_3\) with claim \(\text{earns}_1 \to \text{monthly\_income}_1\). Each credential subject, claim, and value traces to its \ac{DCL} counterpart.
+In the housing subsidy scenario, three credentials partition the facts. FamilyStatusCred (civil registry) carries \(\text{CS\_Applicant}_1\) with claim \(\text{has\_children}_1 \to \text{num\_children}_1\). PropertyCred (land registry) carries \(\text{CS\_Applicant}_2\) with claim \(\text{owns\_property}_1 \to \text{property\_area}_1\). IncomeCred (employer) carries \(\text{CS\_Applicant}_3\) with claim \(\text{earns}_1 \to \text{monthly\_income}_1\). Each credential subject, claim, and value traces to its \ac{DCL} counterpart.
+
+Trace references connect layers: when a credential claim traces to a domain fact, the metamodel can check whether the credential faithfully represents what it claims. When a trace is broken, the metamodel names the specific design error. The \ac{CSL} mirrors the \ac{DCL} type structure (\autoref{fig:metamodel}): credential entities parallel domain entities, claims parallel properties, and credential subjects parallel subjects. Every \ac{CSL} element carries a mandatory \refi{trace} reference to its \ac{DCL} origin. Combined with Refinery's propagation rules, traces actively derive \ac{CSL} structure from \ac{DCL} during model generation: two propagation rules (\refi{subject_traces_to_subject} and \refi{root_is_cred_subj}) infer credential-layer type assignments from domain-layer structure, so that \ac{CSL} types are consequences of domain-layer origin, not independent design choices.
 
 All three credential subjects trace to the same \ac{DCL} entity, Applicant: \(\text{trace}(\text{CS\_Applicant}_i, \text{Applicant})\) for \(i \in \{1,2,3\}\). Each claim traces to its corresponding property, and each credential value traces to its corresponding value. Entity alignment holds pairwise: \(\text{aligned}(\text{CS\_Applicant}_i, \text{CS\_Applicant}_j)\) for all \(i \neq j\). The cross-property domain constraint (minimum floor area as a function of the number of children) now spans two credentials, requiring the verifier to combine claims from FamilyStatusCred and PropertyCred.
-
-Trace references are what connect layers: when a credential claim traces to a domain fact, the metamodel can check whether the credential faithfully represents what it claims. When a trace is broken, the metamodel names the specific design error. The \ac{CSL} mirrors the \ac{DCL} type structure (\autoref{fig:metamodel}): credential entities parallel domain entities, claims parallel properties, and credential subjects parallel subjects. Every \ac{CSL} element carries a mandatory \refi{trace} reference to its \ac{DCL} origin. Combined with Refinery's propagation rules, traces actively derive \ac{CSL} structure from \ac{DCL} during model generation: two propagation rules (\refi{subject_traces_to_subject} and \refi{root_is_cred_subj}) infer credential-layer type assignments from domain-layer structure, so that \ac{CSL} types are consequences of domain-layer origin, not independent design choices.
 
 Beyond type derivation, the metamodel enforces structural well-formedness through four predicates (two shadow, two error; \autoref{sec:refinery}). The shadow predicates mirror \ac{DCL} structure at the credential level:
 
@@ -88,6 +88,7 @@ Capability predicate & AC & JLD & JWT & SDJ & mdoc \\
 {\texttt{conforms\_vcdm}} & --- & \(\checkmark\) & \(\checkmark\) & \(\checkmark\) & --- \\
 {\texttt{supports\_zkp}} & \(\checkmark\) & --- & --- & --- & --- \\
 {\texttt{supports\_offline\_verification}} & --- & --- & --- & --- & \(\checkmark\) \\
+{\texttt{supports\_multi\_credential\_proof}} & --- & --- & --- & --- & --- \\
 \bottomrule
 \end{tabularx}
 \end{table}
