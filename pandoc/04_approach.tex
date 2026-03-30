@@ -164,10 +164,10 @@ propagation rule prop_s(Claim c, CredEntity s) <->
 \item[aligned(c\_e1, c\_e2): shadow predicate (C1)]
 Holds when two distinct credential entities trace to the same domain entity. Formalizes cross-authority subject identity. In the running example, all three credential subjects are aligned because each traces to Applicant. (\autoref{lst:cross-layer-shadow})
 \item[cross\_cred\_predicate\_gap(c1, c2): shadow predicate (C9)]
-Fires when two credentials have aligned subjects but at least one format lacks multi-credential proof support. When a domain constraint spans two credentials (\(\text{property\_area} \geq f(\text{num\_children})\) requires combining claims from FamilyStatusCred and PropertyCred), the design depends on a format capability that may not exist. No format in \autoref{tab:format-capabilities} supports cross-credential arithmetic, so the predicate fires for every aligned pair, making a structural limitation of the current format space visible. \autoref{sec:headlines} develops this as the second headline result. (\autoref{lst:cross-layer-shadow})
+Fires when two credentials have aligned subjects but at least one format lacks multi-credential proof support. When a domain constraint spans two credentials (\(\text{property\_area} \geq f(\text{num\_children})\) requires combining claims from FamilyStatusCred and PropertyCred), the design depends on a format capability that may not exist. No format in \autoref{tab:format_capabilities} supports cross-credential arithmetic, so the predicate fires for every aligned pair, making a structural limitation of the current format space visible. \autoref{sec:headlines} develops this as the second headline result. (\autoref{lst:cross-layer-shadow})
 \end{description}
 
-\refi{aligned}, \refi{cross_cred_predicate_gap}, and \refi{common_parent} feed the anti-pattern analysis (\autoref{sec:evaluation}).
+\refi{aligned} and \refi{cross_cred_predicate_gap} feed the anti-pattern analysis (\autoref{sec:anti-patterns}).
 
 \begin{lstlisting}[style=refinery, caption={Cross-layer shadow predicates: entity alignment and cross-credential predicate gap}, label=lst:cross-layer-shadow]
 % Entity alignment: two CredEntities tracing to the same Entity

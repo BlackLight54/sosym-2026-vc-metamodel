@@ -34,7 +34,7 @@ IncomeCred passes all structural constraints (C1--C3) at the credential schema l
   \textbf{W3C VCDM 2.0} (C7): the credential format must conform to the \ac{VCDM} data model \citep{sporny_verifiable_2025, curran2022anoncreds}.
 \end{enumerate}
 
-The \refi{governance_conflict} error predicate (\autoref{lst:governance-conflict}) encodes the conflict directly. Its two disjunctive clauses partition the format space: clause 1 fires for formats that conform to \ac{VCDM} but lack predicate proofs (SD-JWT-VC, mdoc); clause 2 fires for formats with predicate proofs that do not conform to \ac{VCDM} (AnonCreds). Every format triggers one clause, so the configuration is unsatisfiable. The constraint sensitivity analysis (\autoref{sec:scalability}) confirms this: of eight governance subsets, only the full conjunction yields unsatisfiability; every proper subset admits at least one valid format assignment. The only available workaround, pre-computing boolean threshold claims in SD-JWT-VC, requires changing the domain concept layer's information model (\autoref{sec:cross-layer}), a cross-layer design consequence visible only under multi-layer analysis.
+The \refi{governance_conflict} error predicate (\autoref{lst:governance-conflict}) encodes the conflict directly. Its two disjunctive clauses capture the core tension: clause 1 fires for +VCDM-conformant formats lacking predicate proofs (SD-JWT-VC, JSON-LD, JWT-VC); clause 2 fires for predicate-proof-capable formats outside \ac{VCDM} (AnonCreds). The remaining format (mdoc) lacks both capabilities and is eliminated by the privacy requirement. No format escapes all constraints, so the configuration is unsatisfiable. The constraint sensitivity analysis (\autoref{sec:scalability}) confirms this: of eight governance subsets, only the full conjunction yields unsatisfiability; every proper subset admits at least one valid format assignment. The only available workaround, pre-computing boolean threshold claims in SD-JWT-VC, requires changing the domain concept layer's information model (\autoref{sec:cross-layer}), a cross-layer design consequence visible only under multi-layer analysis.
 
 \begin{lstlisting}[style=refinery, caption={Governance conflict: no format satisfies eIDAS, privacy, and VCDM simultaneously}, label=lst:governance-conflict]
 error governance_conflict(Credential c, Formatted_Credential f) <->
@@ -57,7 +57,7 @@ Where Headline 1 concerns conflicting requirements on a single credential, Headl
 
 The domain constraint \(\text{property\_area} \geq \text{min\_area}(\text{num\_children})\) (C4) requires combining values from two credentials issued by independent authorities: property area from PropertyCred (land registry) and number of children from FamilyStatusCred (civil registry).
 
-Among the five formats in scope (\autoref{tab:format-capabilities}), none supports cross-credential arithmetic predicates in zero-knowledge; a detailed format capability analysis accompanies this result.
+Among the five formats in scope (\autoref{tab:format_capabilities}), none supports cross-credential arithmetic predicates in zero-knowledge; a detailed format capability analysis accompanies this result.
 
 To verify the floor area constraint, the verifier must see both raw values from two separate credentials, defeating the privacy properties that \acs{ZKP}-capable formats promise. The metamodel captures this as \refi{cross_cred_predicate_gap} (C9, \autoref{lst:cross-layer-shadow}).
 
@@ -85,10 +85,10 @@ We evaluate three Refinery solver operations (\autoref{sec:refinery}). \emph{Con
 
 We construct synthetic instances from \(N{=}1\) to \(N{=}30\) credentials, with 11 to 272 graph nodes (\autoref{tab:scalability}). Each scale point has a satisfiable (SAT) and unsatisfiable (UNSAT) variant. A secondary \emph{constraint sensitivity} experiment fixes \(N{=}3\) and varies governance framework combinations over \(\mathcal{P}(\{\text{eIDAS}, \text{Privacy}, \text{VCDM}\})\), yielding eight configurations (G0--G7).
 
-All instances are evaluated using the Refinery CLI,\footnote{Container image \texttt{ghcr.io/graphs4value/refinery-cli}, pulled via Docker.} where each invocation starts a fresh JVM inside a Docker container. We use Hyperfine as the benchmarking harness with 10 measured runs and 1 warmup run per configuration, on an AMD Ryzen 9 7950X3D (16 cores), 96 GB RAM, Windows 11. Cold JVM startup inside the Docker container adds a constant overhead of \({\approx}3.9\text{s}\) per invocation (measured via a no-op baseline instance); reported times subtract this overhead to isolate solver computation. At small scales (\(N \leq 5\)), solver time is below the measurement noise floor (\({\approx}0.1\text{s}\)). The measurement script, generated instances, and the metamodel source are provided as supplementary material for independent reproduction.
+All instances are evaluated using the Refinery CLI, where each invocation starts a fresh JVM inside a Docker container. We use Hyperfine as the benchmarking harness with 10 measured runs and 1 warmup run per configuration, on an AMD Ryzen 9 7950X3D (16 cores), 96 GB RAM, Windows 11. Cold JVM startup inside the Docker container adds a constant overhead of \({\approx}3.9\text{s}\) per invocation (measured via a no-op baseline instance); reported times subtract this overhead to isolate solver computation. At small scales (\(N \leq 5\)), solver time is below the measurement noise floor (\({\approx}0.1\text{s}\)). The measurement script, generated instances, and the metamodel source are provided as supplementary material for independent reproduction.
 
 \begin{table}[htb]
-\caption{Scalability measurements, baseline-corrected (3.9s Docker+JVM overhead subtracted). \textit{Concretizability} (\texttt{check -k}): determines whether a concrete model satisfying all constraints exists. \textit{Generation} (\texttt{generate}): produces a concrete model instance. Seconds, mean $\pm\sigma$ over 10 runs.}
+\caption{Scalability measurements, baseline-corrected (3.9s overhead subtracted). Seconds, mean $\pm\sigma$ over 10 runs.}
 \label{tab:scalability}
 \small
 \begin{tabular}{rrrrr}

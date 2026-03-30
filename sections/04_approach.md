@@ -147,7 +147,7 @@ aligned(c_e1, c_e2): shadow predicate (C1)
 cross_cred_predicate_gap(c1, c2): shadow predicate (C9)
 :   Fires when two credentials have aligned subjects but at least one format lacks multi-credential proof support. When a domain constraint spans two credentials ($\text{property\_area} \geq f(\text{num\_children})$ requires combining claims from FamilyStatusCred and PropertyCred), the design depends on a format capability that may not exist. No format in \autoref{tab:format_capabilities} supports cross-credential arithmetic, so the predicate fires for every aligned pair, making a structural limitation of the current format space visible. \autoref{sec:headlines} develops this as the second headline result. (\autoref{lst:cross-layer-shadow})
 
-[aligned]{.refi}, [cross_cred_predicate_gap]{.refi}, and [common_parent]{.refi} feed the anti-pattern analysis (\autoref{sec:evaluation}).
+[aligned]{.refi} and [cross_cred_predicate_gap]{.refi} feed the anti-pattern analysis (\autoref{sec:anti-patterns}).
 
 ```refinery {#lst:cross-layer-shadow caption="Cross-layer shadow predicates: entity alignment and cross-credential predicate gap"}
 % Entity alignment: two CredEntities tracing to the same Entity
