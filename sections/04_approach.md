@@ -110,7 +110,7 @@ Cross-layer constraints are predicates whose variables reference elements from m
 
 Table: Cross-layer constraint taxonomy. C1--C3 are metamodel-enforced; C4 is grounded in regulation; C5--C7 originate from independent governance frameworks; C8 and C9 are cross-layer results. \label{tab:constraint_taxonomy}
 
-Constraints C1–C3 are structural (metamodel-enforced). C4 is a domain rule grounded in government regulation. C5–C7 each originate from a different governance framework. C8 and C9 are cross-layer results: they emerge only when constraints from multiple sources and layers are checked jointly. \autoref{sec:headlines} develops C8 and C9 as the paper's headline results.
+C8 and C9 are cross-layer results: they emerge only when constraints from multiple sources and layers are checked jointly. \autoref{sec:headlines} develops them as the paper's headline results.
 
 \autoref{fig:teaser} traces all three usage modes on the constraint table above. Consistency checking on the partial specification returns **OK**. Fixing IncomeCred to SD-JWT-VC triggers error identification: the framework returns $\textbf{NOT\_OK}$([governance\_conflict]{.refi}), naming the conflict site where C5, C6, and C7 cannot be simultaneously satisfied. Leaving IncomeCred's format open and running +DSE with [C5]{.refi} $\wedge$ [C6]{.refi} $\wedge$ [C7]{.refi} returns **UNVIABLE**. Relaxing C6, the framework generates configurations assigning SD-JWT-VC to all three credentials.
 
@@ -142,13 +142,10 @@ propagation rule prop_s(Claim c, CredEntity s) <->
 aligned(c_e1, c_e2) — shadow predicate (C1)
 :   Holds when two distinct credential entities trace to the same domain entity. Formalizes cross-authority subject identity. In the running example, all three credential subjects are aligned because each traces to Applicant. (\autoref{lst:cross-layer-shadow})
 
-common_parent — shadow predicate
-:   Holds when two properties' traced claims share a source. Captures co-location within a single credential.
-
 cross_cred_predicate_gap(c1, c2) — shadow predicate (C9)
 :   Fires when two credentials have aligned subjects but at least one format lacks multi-credential proof support. When a domain constraint spans two credentials ($\text{property\_area} \geq f(\text{num\_children})$ requires combining claims from FamilyStatusCred and PropertyCred), the design depends on a format capability that may not exist. No deployed format supports cross-credential arithmetic, so the predicate fires for every aligned pair, making a structural limitation of the current format space visible. \autoref{sec:headlines} develops this as the second headline result. (\autoref{lst:cross-layer-shadow})
 
-Both [aligned]{.refi} and [cross_cred_predicate_gap]{.refi} feed the anti-pattern analysis (\autoref{sec:evaluation}).
+[aligned]{.refi}, [cross_cred_predicate_gap]{.refi}, and [common_parent]{.refi} (defined in supplementary material) feed the anti-pattern analysis (\autoref{sec:evaluation}).
 
 ```refinery {#lst:cross-layer-shadow caption="Cross-layer shadow predicates: entity alignment and cross-credential predicate gap"}
 % Entity alignment: two CredEntities tracing to the same Entity

@@ -129,7 +129,7 @@ C9 & Cross-credential predicate gap & Format limitation & DCL\(\leftrightarrow\)
 \end{tabularx}
 \end{table}
 
-Constraints C1--C3 are structural (metamodel-enforced). C4 is a domain rule grounded in government regulation. C5--C7 each originate from a different governance framework. C8 and C9 are cross-layer results: they emerge only when constraints from multiple sources and layers are checked jointly. \autoref{sec:headlines} develops C8 and C9 as the paper's headline results.
+C8 and C9 are cross-layer results: they emerge only when constraints from multiple sources and layers are checked jointly. \autoref{sec:headlines} develops them as the paper's headline results.
 
 \autoref{fig:teaser} traces all three usage modes on the constraint table above. Consistency checking on the partial specification returns \textbf{OK}. Fixing IncomeCred to SD-JWT-VC triggers error identification: the framework returns \(\textbf{NOT\_OK}\)(\refi{governance_conflict}), naming the conflict site where C5, C6, and C7 cannot be simultaneously satisfied. Leaving IncomeCred's format open and running \ac{DSE} with \refi{C5} \(\wedge\) \refi{C6} \(\wedge\) \refi{C7} returns \textbf{UNVIABLE}. Relaxing C6, the framework generates configurations assigning SD-JWT-VC to all three credentials.
 
@@ -165,13 +165,11 @@ propagation rule prop_s(Claim c, CredEntity s) <->
 \tightlist
 \item[aligned(c\_e1, c\_e2) --- shadow predicate (C1)]
 Holds when two distinct credential entities trace to the same domain entity. Formalizes cross-authority subject identity. In the running example, all three credential subjects are aligned because each traces to Applicant. (\autoref{lst:cross-layer-shadow})
-\item[common\_parent --- shadow predicate]
-Holds when two properties' traced claims share a source. Captures co-location within a single credential.
 \item[cross\_cred\_predicate\_gap(c1, c2) --- shadow predicate (C9)]
 Fires when two credentials have aligned subjects but at least one format lacks multi-credential proof support. When a domain constraint spans two credentials (\(\text{property\_area} \geq f(\text{num\_children})\) requires combining claims from FamilyStatusCred and PropertyCred), the design depends on a format capability that may not exist. No deployed format supports cross-credential arithmetic, so the predicate fires for every aligned pair, making a structural limitation of the current format space visible. \autoref{sec:headlines} develops this as the second headline result. (\autoref{lst:cross-layer-shadow})
 \end{description}
 
-Both \refi{aligned} and \refi{cross_cred_predicate_gap} feed the anti-pattern analysis (\autoref{sec:evaluation}).
+\refi{aligned}, \refi{cross_cred_predicate_gap}, and \refi{common_parent} (defined in supplementary material) feed the anti-pattern analysis (\autoref{sec:evaluation}).
 
 \begin{lstlisting}[style=refinery, caption={Cross-layer shadow predicates: entity alignment and cross-credential predicate gap}, label=lst:cross-layer-shadow]
 % Entity alignment: two CredEntities tracing to the same Entity
