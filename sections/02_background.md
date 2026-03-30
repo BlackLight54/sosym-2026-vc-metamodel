@@ -29,7 +29,7 @@ These three concerns, format-dependent privacy capabilities (\autoref{sec:vcdm})
 
 ## Partial Graph Modeling with Refinery {#sec:refinery}
 
-During the early phase of development, our knowledge about models is often incomplete. In partial modeling [@famelis_partial_2012] uncertainty can be denoted explicitly, thus a range of design alternatives can be developed together.
+During the early phase of development, our knowledge about models is often incomplete. In partial modeling [@famelisPartialModelsModeling2012] uncertainty can be denoted explicitly, thus a range of design alternatives can be developed together.
 Refinery [@marussy_refinery_2024] is a modeling methodology in which design specifications are expressed as partial models and graph predicates serve as a first-class constraint language. Refinery uses a four-valued logic interpretation [@Belnap77useful] that assigns one of four truth values to every node, edge, and attribute value, enabling reasoning over incomplete (or inconsistent) specifications where both structural and data-level decisions remain open. In Refinery, nodes correspond to objects (instances of classes defined in a metamodel), and edges correspond to typed references between objects; class membership is an additional unary relation over nodes.
 
 ::: {.definition}

@@ -18,7 +18,7 @@ These three concerns, format-dependent privacy capabilities (\autoref{sec:vcdm})
 
 \subsection{Partial Graph Modeling with Refinery}\label{sec:refinery}
 
-During the early phase of development, our knowledge about models is often incomplete. In partial modeling \citep{famelis_partial_2012} uncertainty can be denoted explicitly, thus a range of design alternatives can be developed together.
+During the early phase of development, our knowledge about models is often incomplete. In partial modeling \citep{famelisPartialModelsModeling2012} uncertainty can be denoted explicitly, thus a range of design alternatives can be developed together.
 Refinery \citep{marussy_refinery_2024} is a modeling methodology in which design specifications are expressed as partial models and graph predicates serve as a first-class constraint language. Refinery uses a four-valued logic interpretation \citep{Belnap77useful} that assigns one of four truth values to every node, edge, and attribute value, enabling reasoning over incomplete (or inconsistent) specifications where both structural and data-level decisions remain open. In Refinery, nodes correspond to objects (instances of classes defined in a metamodel), and edges correspond to typed references between objects; class membership is an additional unary relation over nodes.
 
 \textbf{Signature} \citep{marussy_refinery_2024}. A \emph{signature} defines the vocabulary of a domain model: a finite set of \emph{symbols} representing class names and reference names. Each symbol has an \emph{arity}: class names are unary (they classify individual objects), and reference names are binary (they relate pairs of objects).
