@@ -8,6 +8,7 @@
         "tintinweb.graphviz-interactive-preview",
         "james-yu.latex-workshop",
         "iamhyc.overleaf-workshop",
-        "redhat.vscode-yaml"
+        "redhat.vscode-yaml",
+        "mblode.zotero"
     ]
 }
