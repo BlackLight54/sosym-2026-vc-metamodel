@@ -70,7 +70,8 @@
       "Bash(export MSYS_NO_PATHCONV=1)",
       "Bash(hyperfine --shell bash --runs 2 --warmup 1 --export-json \"$RESULTS_DIR/e1_check_S3_sat.json\" --command-name \"check_S3_sat\" \"docker run --rm -v ''$INST_DIR:/work'' -w /work ghcr.io/graphs4value/refinery-cli:latest check -k /work/scale_3_sat.problem\")",
       "Bash(python -m json.tool)",
-      "Bash(hyperfine --shell bash --runs 2 --warmup 1 -i --export-json \"$RESULTS_DIR/e1_check_S3_unsat.json\" --command-name \"check_S3_unsat\" \"docker run --rm -v ''$INST_DIR:/work'' -w /work ghcr.io/graphs4value/refinery-cli:latest check -k /work/scale_3_unsat.problem\")"
+      "Bash(hyperfine --shell bash --runs 2 --warmup 1 -i --export-json \"$RESULTS_DIR/e1_check_S3_unsat.json\" --command-name \"check_S3_unsat\" \"docker run --rm -v ''$INST_DIR:/work'' -w /work ghcr.io/graphs4value/refinery-cli:latest check -k /work/scale_3_unsat.problem\")",
+      "WebFetch(domain:hackage.haskell.org)"
     ]
   }
 }

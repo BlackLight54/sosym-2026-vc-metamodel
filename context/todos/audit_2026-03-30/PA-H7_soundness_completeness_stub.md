@@ -2,7 +2,7 @@
 id: "PA-H7"
 short: "soundness-completeness"
 title: "Fill soundness/completeness formal stub in Sec 02.3"
-status: pending
+status: done
 priority: high
 depends_on: ["PA-B1"]
 binding_claims: [4, 9, 10]

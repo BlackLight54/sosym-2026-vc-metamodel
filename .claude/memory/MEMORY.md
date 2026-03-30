@@ -60,5 +60,9 @@
 - [Defensive one-liners work](feedback_defensive_one_liners.md) — 1-2 sentence additions mapped to reviewer archetypes, validated by Martin+Oszkár
 - [Keep cutcandidate wrappers](feedback_keep_cutcandidates.md) — don't remove .cutcandidate annotations without explicit approval
 - [Explain why, not just what](feedback_explain_why_not_just_what.md) — comparative claims need mechanism, not just difference
+- [Keep annotation divs](feedback_keep_annotation_divs.md) — fill .formal/.todo divs with content inside the div, don't replace with prose
+- [Deliver on claims, don't cut](feedback_deliver_not_cut.md) — ground ungrounded claims in existing content before removing them
+- [Prefer Pandoc-compliant solutions](feedback_pandoc_compliant_solutions.md) — Lua filters over raw LaTeX workarounds
+- [figures.lua filter active](project_figures_lua_filter.md) — emits ACM \Description{} from image description attribute
 
 Superseded memories → `context/archive/`, never deleted

@@ -2,7 +2,7 @@
 id: "PA-B3"
 short: "capability-table-fix"
 title: "Fix capability table vs. Refinery model discrepancies"
-status: pending
+status: done
 priority: high
 depends_on: []
 binding_claims: [8]

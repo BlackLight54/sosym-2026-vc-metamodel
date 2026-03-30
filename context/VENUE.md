@@ -33,7 +33,7 @@ Senior MDE researcher applying metamodeling to emerging domains (CPS, IoT, regul
 
 ### B — Mathematician: "Graph Modeling / Partial Models Expert"
 
-Graph transformations, partial models, or constraint-based modeling. Knows Refinery or its foundations. Could be someone aligned with Semerath/Varro/Chechik/Famelis. Will check every predicate and propagation rule, metamodel definitions, trace link properties, correct characterization of Refinery's 3-valued semantics. Will attack imprecise definitions, mischaracterized partial model semantics, missing related work (Chechik/Famelis partial models, Kuehne/Atkinson multi-level modeling, Diskin multi-view consistency). Score range: accept if formalism is precise and novel; reject if definitions are sloppy.
+Graph transformations, partial models, or constraint-based modeling. Knows Refinery or its foundations. Could be someone aligned with Semerath/Varro/Chechik/Famelis. Will check every predicate and propagation rule, metamodel definitions, trace link properties, correct characterization of Refinery's 4-valued semantics. Will attack imprecise definitions, mischaracterized partial model semantics, missing related work (Chechik/Famelis partial models, Kuehne/Atkinson multi-level modeling, Diskin multi-view consistency). Score range: accept if formalism is precise and novel; reject if definitions are sloppy.
 
 ### C — Business Manager: "MDE Practitioner / Generalist"
 

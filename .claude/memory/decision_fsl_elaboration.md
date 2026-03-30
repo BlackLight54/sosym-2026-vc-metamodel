@@ -11,7 +11,7 @@ revisit_when: "post-submission revision or if Mathematician reviewer objects to 
 
 The FSL should ideally carry at least one intra-layer structural constraint (e.g., SD-JWT-VC disclosure granularity) to demonstrate it is a genuine metamodel layer with its own well-formedness conditions, paralleling DCL's `non_connected`/`cyclic` and CSL's `no_empty_cred`/`root_ent_doesnt_have_cred`.
 
-**Current status (2026-03-29):** Deferred. §4.3 explicitly acknowledges the gap ("Unlike DCL and CSL, the format-specific layer does not yet carry intra-layer structural constraints") and defends FSL's status argumentatively: it participates in cross-layer predicates, carries governance annotations, and its capability predicates feed propagation rules. §7 lists FSL maturity as the first limitation.
+**Current status (2026-03-30):** Deferred but defended. §4.3 now explicitly contrasts FSL with DCL/CSL error predicates and argues FSL is load-bearing via cross-layer predicates C5--C9, governance annotations, and propagation rules. §7 lists FSL scope as the primary limitation with format-internal constraints as the extension point.
 
 **Why deferred:** Deadline pressure. The argumentative defense is coherent and the limitation is honestly acknowledged. Adding a concrete intra-layer constraint would strengthen the paper but is not critical for submission.
 

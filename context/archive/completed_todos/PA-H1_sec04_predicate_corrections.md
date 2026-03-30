@@ -2,7 +2,7 @@
 id: "PA-H1"
 short: "predicate-corrections"
 title: "Fix shadow predicate misclassification and predicate count in Sec 04"
-status: pending
+status: done
 priority: medium
 depends_on: []
 binding_claims: [3]

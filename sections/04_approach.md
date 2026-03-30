@@ -45,18 +45,20 @@ Together, these constraints ensure that every +DCL instance is a connected, dire
 
 The [+CSL]{.full} models how domain-level facts are partitioned into credentials, each issued by a different authority and carrying a subset of the domain's properties, as claimed by the issuer.
 
-In the housing subsidy scenario, three credentials partition the facts. FamilyStatusCred (civil registry) carries $\text{CS\_Applicant}_1$ with claim $\text{has\_children}_1 \to \text{num\_children}_1$. PropertyCred (land registry) carries $\text{CS\_Applicant}_2$ with claim $\text{owns\_property}_1 \to \text{property\_area}_1$. IncomeCred (employer) carries $\text{CS\_Applicant}_3$ with claim $\text{earns}_1 \to \text{monthly\_income}_1$. Each credential subject, claim, and value traces to its +DCL counterpart.
+In the housing subsidy scenario, three credentials partition the domain facts: FamilyStatusCred (civil registry), PropertyCred (land registry), and IncomeCred (employer). Each carries a credential subject and one or more claims that trace to their +DCL counterparts.
 
 Trace references connect layers: when a credential claim traces to a domain fact, the metamodel can check whether the credential faithfully represents what it claims. When a trace is broken, the metamodel names the specific design error. The +CSL mirrors the +DCL type structure (\autoref{fig:metamodel}): credential entities parallel domain entities, claims parallel properties, and credential subjects parallel subjects. Every +CSL element carries a mandatory [trace]{.refi} reference to its +DCL origin. Combined with Refinery's propagation rules, traces actively derive +CSL structure from +DCL during model generation: two propagation rules ([subject_traces_to_subject]{.refi} and [root_is_cred_subj]{.refi}) infer credential-layer type assignments from domain-layer structure, so that +CSL types are consequences of domain-layer origin, not independent design choices.
 
+<!-- CUT-4: Commented out — alignment is formally defined in Sec 4.4 (aligned predicate), cross-credential constraint covered by cross_cred_predicate_gap.
 All three credential subjects trace to the same +DCL entity, Applicant: $\text{trace}(\text{CS\_Applicant}_i, \text{Applicant})$ for $i \in \{1,2,3\}$. Each claim traces to its corresponding property, and each credential value traces to its corresponding value. Entity alignment holds pairwise: $\text{aligned}(\text{CS\_Applicant}_i, \text{CS\_Applicant}_j)$ for all $i \neq j$. The cross-property domain constraint (minimum floor area as a function of the number of children) now spans two credentials, requiring the verifier to combine claims from FamilyStatusCred and PropertyCred.
+-->
 
-Beyond type derivation, the metamodel enforces structural well-formedness through four predicates (two shadow, two error; \autoref{sec:refinery}). The shadow predicates mirror +DCL structure at the credential level:
+Beyond type derivation, the metamodel enforces structural well-formedness through four predicates (two derived, two error; \autoref{sec:refinery}). The derived predicates mirror +DCL structure at the credential level:
 
-credential_statement: shadow predicate
+credential_statement: derived predicate
 :   Recognizes when a claim connects distinct source and target credential entities.
 
-Root_cred_entity: shadow predicate
+Root_cred_entity: derived predicate
 :   Identifies root credential entities that no claim targets.
 
 The error predicates catch violations that would otherwise propagate silently to format assignment:
@@ -67,7 +69,7 @@ no_empty_cred: error predicate
 root_ent_doesnt_have_cred: error predicate
 :   Flags a root credential entity without an associated credential.
 
-When either error predicate fires, the framework reports the violation before format-specific constraints are evaluated. The anti-pattern catalog (\autoref{sec:anti-patterns}) classifies all five predicates by layer scope and kind.
+When either error predicate fires, the framework reports the violation before format-specific constraints are evaluated. The anti-pattern catalog (\autoref{sec:anti-patterns}) classifies all four predicates by layer scope and kind.
 
 ## Format-Specific Layer {#sec:fsl}
 
@@ -75,7 +77,7 @@ Each credential receives a concrete representation format at the third layer, th
 
 In the housing subsidy scenario, governance requirements drive format assignments. FamilyStatusCred and PropertyCred are assigned SD-JWT-VC under the eIDAS +ARF mandate; both formats mandated by the +ARF (SD-JWT-VC and mdoc) lack predicate proof support; we use SD-JWT-VC as representative [@noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026]. IncomeCred is the conflict site analyzed in \autoref{sec:headlines}: the income threshold check requires predicate proof capability that the ARF-mandated format does not provide.
 
-The +FSL does not carry intra-layer structural constraints like the upper layers. Its role is to carry capability predicates that governance frameworks demand or prohibit, and governance annotations that attach regulatory requirements to individual credentials. This makes governance conflicts expressible as graph predicates. The metamodel represents the five credential formats in scope (AnonCreds, JSON-LD, JWT-VC, SD-JWT-VC, and mdoc) as subclasses of [Formatted_Credential]{.refi}; each credential contains exactly one (\autoref{fig:metamodel}). Formats lacking predicate proofs force issuers to pre-compute boolean claims, restructuring the domain concept layer (\autoref{sec:cross-layer}). The following matrix shows the six capability predicates derived from the class hierarchy (analysis in \autoref{sec:vcdm}):
+Unlike the +DCL and +CSL, the +FSL does not carry intra-layer structural constraints (no error predicates analogous to [non_connected]{.refi} or [no_empty_cred]{.refi}). Its contribution to the metamodel is nevertheless load-bearing: capability predicates feed cross-layer constraints C5--C9 (\autoref{sec:cross-layer}), governance annotations attach regulatory requirements to individual credentials, and propagation rules narrow the format design space during generation. Adding format-internal constraints, such as SD-JWT-VC disclosure granularity or mdoc namespace partitioning, would strengthen the layer but is not required for the cross-layer contribution that produces the headline results. This makes governance conflicts expressible as graph predicates. The metamodel represents the five credential formats in scope (AnonCreds, JSON-LD, JWT-VC, SD-JWT-VC, and mdoc) as subclasses of [Formatted_Credential]{.refi}; each credential contains exactly one (\autoref{fig:metamodel}). Formats lacking predicate proofs force issuers to pre-compute boolean claims, restructuring the domain concept layer (\autoref{sec:cross-layer}). The following matrix shows the six capability predicates derived from the class hierarchy (analysis in \autoref{sec:vcdm}):
 
 | Capability predicate | AC | JLD | JWT | SDJ | mdoc |
 |---|:---:|:---:|:---:|:---:|:---:|
@@ -86,13 +88,13 @@ The +FSL does not carry intra-layer structural constraints like the upper layers
 | [`supports_offline_verification`]{.refi} | — | — | — | — | $\checkmark$ |
 | [`supports_multi_credential_proof`]{.refi} | — | — | — | — | — |
 
-Table: Format-capability matrix (AC = AnonCreds, JLD = JSON-LD, JWT = JWT-VC, SDJ = SD-JWT-VC). Each predicate is derived from the format class hierarchy. \label{tab:format_capabilities}
+Table: Format-capability matrix. Predicates derived from format class hierarchy. \label{tab:format_capabilities}
 
 Propagation rules narrow the format design space during generation: requiring predicate proof support on IncomeCred eliminates all formats except AnonCreds, which does not conform to W3C +VCDM 2.0, setting up the governance conflict in \autoref{sec:headlines}. Three governance annotation classes ([EidasMandate]{.refi}, [PrivacyRequirement]{.refi}, [VcdmConformance]{.refi}) attach regulatory requirements to individual credentials as typed markers for error identification and +DSE.
 
 ## Cross-Layer Constraints as Graph Predicates {#sec:cross-layer}
 
-![The three-layer type graph. The +DCL models facts as a typed information graph; the +CSL partitions facts into credentials with subject bindings and trace mappings; the +FSL assigns concrete formats with capability predicates and governance annotations.](pandoc/assets/fig_metamodel.pdf){#fig:metamodel width=100%}
+![The three-layer type graph. The +DCL models facts as a typed information graph; the +CSL partitions facts into credentials with subject bindings and trace mappings; the +FSL assigns concrete formats with capability predicates and governance annotations.](pandoc/assets/fig_metamodel.pdf){#fig:metamodel description="UML-style class diagram spanning three horizontal layers. The top layer (Domain Concept Layer) contains DomainEntity, DomainProperty, and ValueDependency classes. The middle layer (Credential Schema Layer) contains Credential, CredentialSubject, and Claim classes with trace links to domain properties. The bottom layer (Format-Specific Layer) contains FormatAssignment and FormatCapability classes with governance annotation markers. Cross-layer edges connect claims to domain properties and format assignments to credentials." width=100%}
 
 Cross-layer constraints are predicates whose variables reference elements from more than one metamodel layer; they capture design requirements that no single-layer check can express. The following table classifies the constraints exercised in the housing subsidy scenario by source and scope:
 
@@ -112,7 +114,7 @@ Table: Cross-layer constraint taxonomy. C1--C3 are metamodel-enforced; C4 is gro
 
 C8 and C9 are cross-layer results: they emerge only when constraints from multiple sources and layers are checked jointly. \autoref{sec:headlines} develops them as the paper's headline results.
 
-\autoref{fig:teaser} traces all three usage modes on the constraint table above. Consistency checking on the partial specification returns **OK**. Fixing IncomeCred to SD-JWT-VC triggers error identification: the framework returns $\textbf{NOT\_OK}$([governance\_conflict]{.refi}), naming the conflict site where C5, C6, and C7 cannot be simultaneously satisfied. Leaving IncomeCred's format open and running +DSE with [C5]{.refi} $\wedge$ [C6]{.refi} $\wedge$ [C7]{.refi} returns **UNVIABLE**. Relaxing C6, the framework generates configurations assigning SD-JWT-VC to all three credentials.
+\autoref{fig:teaser} traces all three usage modes on the constraint table above. Consistency checking on the partial specification returns **OK**. Fixing IncomeCred to SD-JWT-VC triggers error identification: the framework returns $\textbf{NOT\_OK}$([governance\_conflict]{.refi}), naming the conflict site where C5, C6, and C7 cannot be simultaneously satisfied. Leaving IncomeCred's format open and running +DSE with [C5]{.refi} $\wedge$ [C6]{.refi} $\wedge$ [C7]{.refi} returns **UNVIABLE**. Relaxing C6, the framework generates multiple valid configurations, each assigning a different format to IncomeCred.
 
 The predicates defined in the preceding sections ([non_connected]{.refi}, [no_empty_cred]{.refi}, [root_ent_doesnt_have_cred]{.refi}) operate within a single layer. The cross-layer predicates below combine elements from multiple layers and fall into the three categories defined in \autoref{sec:refinery}: propagation rules, shadow predicates, and error predicates.
 
@@ -143,9 +145,9 @@ aligned(c_e1, c_e2): shadow predicate (C1)
 :   Holds when two distinct credential entities trace to the same domain entity. Formalizes cross-authority subject identity. In the running example, all three credential subjects are aligned because each traces to Applicant. (\autoref{lst:cross-layer-shadow})
 
 cross_cred_predicate_gap(c1, c2): shadow predicate (C9)
-:   Fires when two credentials have aligned subjects but at least one format lacks multi-credential proof support. When a domain constraint spans two credentials ($\text{property\_area} \geq f(\text{num\_children})$ requires combining claims from FamilyStatusCred and PropertyCred), the design depends on a format capability that may not exist. No deployed format supports cross-credential arithmetic, so the predicate fires for every aligned pair, making a structural limitation of the current format space visible. \autoref{sec:headlines} develops this as the second headline result. (\autoref{lst:cross-layer-shadow})
+:   Fires when two credentials have aligned subjects but at least one format lacks multi-credential proof support. When a domain constraint spans two credentials ($\text{property\_area} \geq f(\text{num\_children})$ requires combining claims from FamilyStatusCred and PropertyCred), the design depends on a format capability that may not exist. No format in \autoref{tab:format-capabilities} supports cross-credential arithmetic, so the predicate fires for every aligned pair, making a structural limitation of the current format space visible. \autoref{sec:headlines} develops this as the second headline result. (\autoref{lst:cross-layer-shadow})
 
-[aligned]{.refi}, [cross_cred_predicate_gap]{.refi}, and [common_parent]{.refi} (defined in supplementary material) feed the anti-pattern analysis (\autoref{sec:evaluation}).
+[aligned]{.refi}, [cross_cred_predicate_gap]{.refi}, and [common_parent]{.refi} feed the anti-pattern analysis (\autoref{sec:evaluation}).
 
 ```refinery {#lst:cross-layer-shadow caption="Cross-layer shadow predicates: entity alignment and cross-credential predicate gap"}
 % Entity alignment: two CredEntities tracing to the same Entity

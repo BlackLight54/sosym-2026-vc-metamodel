@@ -2,7 +2,7 @@
 id: "PA-B5"
 short: "remove-overpromises"
 title: "Remove unfulfilled forward reference and abstract scope overpromise"
-status: pending
+status: done
 priority: high
 depends_on: []
 binding_claims: []

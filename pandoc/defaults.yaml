@@ -15,6 +15,7 @@ filters:
   - pandoc/filters/tables.lua
   - pandoc/filters/annotations.lua
   - pandoc/filters/code-blocks.lua
+  - pandoc/filters/figures.lua
 
 cite-method: natbib
 wrap: preserve

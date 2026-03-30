@@ -2,7 +2,7 @@
 id: "PA-H4"
 short: "eval-oneliners"
 title: "Add range proofs future work + CORE-DISC Realistic acknowledgment in Sec 05"
-status: pending
+status: done
 priority: medium
 depends_on: []
 binding_claims: []

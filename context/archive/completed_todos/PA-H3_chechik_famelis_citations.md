@@ -2,7 +2,7 @@
 id: "PA-H3"
 short: "partial-model-citations"
 title: "Add Chechik/Famelis partial model citations to Related Work"
-status: pending
+status: done
 priority: medium
 depends_on: []
 binding_claims: [3, 4]

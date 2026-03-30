@@ -2,7 +2,7 @@
 id: "PA-B1"
 short: "formal-div-rendering"
 title: "Verify .formal divs stripped in submission mode"
-status: pending
+status: done
 priority: high
 depends_on: []
 binding_claims: []

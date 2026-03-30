@@ -2,7 +2,7 @@
 id: "PA-B2"
 short: "teaser-description"
 title: "Fill teaser figure \\Description{} placeholder"
-status: pending
+status: done
 priority: high
 depends_on: []
 binding_claims: []
