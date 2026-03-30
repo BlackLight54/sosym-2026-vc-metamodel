@@ -61,7 +61,7 @@ Where Headline 1 concerns conflicting requirements on a single credential, Headl
 
 The domain constraint $\text{property\_area} \geq \text{min\_area}(\text{num\_children})$ (C4) requires combining values from two credentials issued by independent authorities: property area from PropertyCred (land registry) and number of children from FamilyStatusCred (civil registry).
 
-Among the five formats in scope (\autoref{tab:format-capabilities}), none supports cross-credential arithmetic predicates in zero-knowledge; a detailed format capability analysis accompanies this result.
+Among the five formats in scope (\autoref{tab:format_capabilities}), none supports cross-credential arithmetic predicates in zero-knowledge; a detailed format capability analysis accompanies this result.
 
 To verify the floor area constraint, the verifier must see both raw values from two separate credentials, defeating the privacy properties that [+ZKP]{.short}-capable formats promise. The metamodel captures this as [cross_cred_predicate_gap]{.refi} (C9, \autoref{lst:cross-layer-shadow}).
 
