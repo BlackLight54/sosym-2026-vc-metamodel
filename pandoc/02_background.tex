@@ -6,7 +6,7 @@ The W3C \acf{VCDM} 2.0 \citep{sporny_verifiable_2025} defines a verifiable crede
 
 VCDM credentials can be serialized in multiple formats with distinct privacy capabilities. SD-JWT-VC \citep{terbu_sd-jwt-based_2026} provides hash-based \emph{selective disclosure}, allowing a holder to reveal a chosen subset of claims while withholding others. AnonCreds \citep{curran2022anoncreds} supports both selective disclosure and \emph{predicate proofs}, \acp{ZKP} that a claim value satisfies a predicate (e.g., \refi{monthly_income} \(\geq\) \refi{threshold}) without disclosing the value itself.\footnote{JSON-LD with BBS \citep{noauthor_verifiable_2024, _bbs_2024} and ISO mdoc \citep{_mobile_2021} also support selective disclosure but not predicate proofs.} The eIDAS 2.0 \ac{ARF} mandates SD-JWT-VC for EU wallet attestations \citep{noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026}; subsequent sections use it as the representative format.
 
-The asymmetry between these format families is the central design axis for the analysis that follows. Selective disclosure is available across all four formats; predicate proofs are restricted to AnonCreds. When privacy regulation requires predicate proofs that the mandated format cannot provide, a cross-layer conflict emerges (\autoref{sec:evaluation}).
+The asymmetry between these format families is the central design axis for the analysis that follows. Selective disclosure is available across all four formats; predicate proofs are restricted to AnonCreds. When privacy regulation requires predicate proofs that the mandated format cannot provide, a cross-layer conflict emerges (\autoref{sec:headlines}).
 
 \subsection{Multi-Layer Modeling}\label{sec:multi-layer}
 
@@ -14,7 +14,7 @@ Multi-layer modeling organizes a design problem into abstraction layers, each de
 
 Each layer's constraints originate from a different governance source: sector regulation and business rules at the domain level, the W3C data model at the credential-schema level, EU implementing acts and community specifications such as AnonCreds \citep{curran2022anoncreds} at the format level. These sources were enacted independently. A single-layer model that merges them cannot attribute a constraint to its source, so conflicts between governance sources become undetectable.
 
-These three concerns, format-dependent privacy capabilities (\autoref{sec:vcdm}), independently governed layers (\autoref{sec:multi-layer}), and partial graph reasoning (\autoref{sec:refinery}), together enable the cross-layer analysis. \autoref{sec:overview} introduces the running example where they interact.
+These three foundations, the W3C credential data model and its format-specific privacy asymmetries (\autoref{sec:vcdm}), multi-layer modeling with independently governed concern spaces (\autoref{sec:multi-layer}), and partial graph modeling in Refinery (\autoref{sec:refinery}), together enable the cross-layer analysis. \autoref{sec:overview} develops the running example where they interact and defines the framework's usage modes.
 
 \subsection{Partial Graph Modeling with Refinery}\label{sec:refinery}
 
