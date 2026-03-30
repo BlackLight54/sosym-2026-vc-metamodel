@@ -4,3 +4,6 @@
 [submodule "prior_work/ese-vc-fca"]
 	path = prior_work/ese-vc-fca
 	url = https://github.com/BlackLight54/ese-vc-fca.git
+[submodule "models"]
+	path = models
+	url = https://github.com/BlackLight54/ACM-MODELS-26-code.git
