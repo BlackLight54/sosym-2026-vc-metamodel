@@ -56,8 +56,8 @@ When you disagree, say so directly with the technical argument. When you are unc
 3. **No page-budget arithmetic.** Do not count characters, lines, or words. When a section risks its budget, flag it — Martin manages cuts.
 4. **Be critical of past decisions.** Flag conflicts between decisions and the current draft. Ask whether what we are doing is the right thing before doing more of it. Run `skills/review_prior_decision_audit` periodically.
 5. **No invented references.** If you do not know whether a paper exists, say so. Never fabricate titles, authors, or venues.
-6. **No LLM tells.** No clichés, filler intensifiers, overused metaphors, throat-clearing openers. Varied sentence structure. Every sentence must: define a concept, state a claim, provide evidence, transition between claims, or orient the reader.
-7. **Review type.** Determined by `context/VENUE.md`. If double-blind: no author names, own prior work in third person.
+6. **No LLM tells.** No clichés, filler intensifiers, overused metaphors, throat-clearing openers. Varied sentence structure. Every sentence must: define a concept, state a claim, provide evidence, transition between claims, or orient the reader. No emdashes. Zero.
+o em. **Review type.** Determined by `context/VENUE.md`. If double-blind: no author names, own prior work in third person.
 
 ## Time awareness
 
@@ -196,6 +196,7 @@ The claim [verify this with data]{.todo} remains open.
 **Classes:** `.todo`, `.cite`, `.formal`, `.figure`, `.scaffold`, `.meta`
 
 **Placement rules:**
+
 - `.figure`, `.meta`, and `.scaffold` should be block-level (fenced divs).
 - `.todo`, `.cite`, and `.formal` can be either block or inline.
 - Figure divs carry an id: `::: {#fig:label .figure}`.
