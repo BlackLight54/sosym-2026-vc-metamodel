@@ -37,6 +37,13 @@ sync with `context/references/REFERENCES_TO_ADD_IN_ZOTERO.md`. `UNRESOLVED` = ne
 | S-031 hegedus-guided-dse-2015 | `hegedus_modeldriven_2015` | check (title/venue unconfirmed) |
 | S-032 garzon-5g-vc-2024 | `garzon_certificates_2024` | check (from .bib markers) |
 | S-033 amazon-crossborder-vc-2023 | `kaushiksrinivasan_edata_2023` | check (also `amazon_vc_for_gov`) |
+| S-034 eudiw-arf-2.9.0 | — | UNRESOLVED (cite EUDI Wallet ARF v2.9.0, EC, 21 May 2026) |
+| S-035 cir-2025-848-rp-registration | — | UNRESOLVED (cite CIR (EU) 2025/848; Reg. 910/2014 Art. 5b) |
+| S-036 eidas2-implementing-acts-timeline | — | UNRESOLVED (cite individual CIRs by OJ number) |
+| S-037 eu-eudiw-technical-standards-2026 | — | UNRESOLVED (cite ETSI TS 119 471/472-1/475, TR 119 476-1; ISO/IEC 18013-5/-7; IETF SD-JWT-VC) |
+| S-038 eudiw-zkp-ts13-ts14 | — | UNRESOLVED (cite EC TS13/TS14 deliverables) |
+| S-039 aepd-eudiw-gdpr-analysis | — | UNRESOLVED (verify AEPD blog title/date) |
+| S-040 cryptographers-feedback-arf | — | UNRESOLVED — NEEDS VERIFICATION before citing (title/authors/venue) |
 
 Citekeys are transcribed from the `[@key]` markers in `sections/*.md`; verify against the exported
 `.bib` before relying on them.

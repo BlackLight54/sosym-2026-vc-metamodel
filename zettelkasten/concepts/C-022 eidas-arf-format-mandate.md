@@ -19,6 +19,12 @@ structurally cannot provide the privacy capability GDPR demands. In the expressi
 three of eight ARF constraints are fully expressible and five partially expressible; none falls outside
 the metamodel's capacity.
 
+**Currency note (June 2026):** the real rule is finer than "SD-JWT-VC or mdoc". ARF v2.9.0 §5.4 lists
+distinct format families and ETSI TS 119 472-1 v1.2.1 specifies four EAA realizations ([[S-037 eu-eudiw-technical-standards-2026]]).
+This coarse-reading simplification is flagged in [[M-009 threats-to-applicability]]. It does **not** weaken the
+mandate, though: a verified-refuted claim establishes that the ETSI realization catalogue (which includes JSON-LD
+W3C VC) does not override the ARF rule that W3C VCDM is barred for PIDs/qualified attestations.
+
 ## Links
 - [[C-018 governance-annotations]] — the EidasMandate marker.
 - [[C-024 two-tier-governance-framing]] — eIDAS as hard vs GDPR as operationally binding.

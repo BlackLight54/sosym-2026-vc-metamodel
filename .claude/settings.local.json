@@ -71,7 +71,13 @@
       "Bash(hyperfine --shell bash --runs 2 --warmup 1 --export-json \"$RESULTS_DIR/e1_check_S3_sat.json\" --command-name \"check_S3_sat\" \"docker run --rm -v ''$INST_DIR:/work'' -w /work ghcr.io/graphs4value/refinery-cli:latest check -k /work/scale_3_sat.problem\")",
       "Bash(python -m json.tool)",
       "Bash(hyperfine --shell bash --runs 2 --warmup 1 -i --export-json \"$RESULTS_DIR/e1_check_S3_unsat.json\" --command-name \"check_S3_unsat\" \"docker run --rm -v ''$INST_DIR:/work'' -w /work ghcr.io/graphs4value/refinery-cli:latest check -k /work/scale_3_unsat.problem\")",
-      "WebFetch(domain:hackage.haskell.org)"
+      "WebFetch(domain:hackage.haskell.org)",
+      "WebFetch(domain:www.iso.org)",
+      "Read(//tmp/**)",
+      "Bash(curl -sL -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0 Safari/537.36\" -o ts_119471.pdf \"https://www.etsi.org/deliver/etsi_ts/119400_119499/119471/01.01.01_60/ts_119471v010101p.pdf\")",
+      "WebFetch(domain:eur-lex.europa.eu)",
+      "WebFetch(domain:data.europa.eu)",
+      "WebFetch(domain:datatracker.ietf.org)"
     ]
   }
 }

@@ -8,6 +8,7 @@
 | T10 | [Final polish](t10_polish.md) | #10 | pending | claude |
 | **T12** | **[Reconcile eval instances, measurements, metamodel](t12_eval_consistency.md)** | **#4,5,6,7,9** | **pending** | **claude** |
 | O-SOUND | [Soundness/completeness properties](o-soundness-eval.md) | #4,9 | pending | claude |
+| **O-EUTHREAT** | **[EU regulatory threats-to-applicability + currency update](o-euthreat_regulatory_applicability.md)** | **#10** | **pending** | **claude** |
 
 ## Figures
 

@@ -5,7 +5,7 @@ type: concept
 maturity: developing
 tags: [topic/eidas, topic/gdpr, topic/governance, layer/cross]
 sources: ["inbox/notion/11-eu-digital-identity-wallet-arf-and-eidas-2-0-implementing-acts-status-report-q1-q2-2026.md"]
-related: ["[[C-025 governance-conflict-vertical]]", "[[C-024 two-tier-governance-framing]]", "[[K-008 contradictory-cross-framework-constraints]]", "[[S-028 eudiw-arf-status-2026]]", "[[S-021 schwalm-ssi-eidas-contradiction-2022]]"]
+related: ["[[C-025 governance-conflict-vertical]]", "[[C-024 two-tier-governance-framing]]", "[[K-008 contradictory-cross-framework-constraints]]", "[[S-028 eudiw-arf-status-2026]]", "[[S-021 schwalm-ssi-eidas-contradiction-2022]]", "[[S-034 eudiw-arf-2.9.0]]", "[[S-038 eudiw-zkp-ts13-ts14]]", "[[M-009 threats-to-applicability]]"]
 created: 2026-06-17
 ---
 
@@ -22,6 +22,8 @@ between a privacy statute and a format capability. It strengthens the manufactur
 ([[C-024 two-tier-governance-framing]]) — the tension is not an artifact of over-reading GDPR; the ARF
 states it explicitly — and corroborates the informal contradiction in [[S-021 schwalm-ssi-eidas-contradiction-2022]]
 with a concrete, dated, statutory citation.
+
+**Confirmed in the current ARF (June 2026 update):** ARF v2.9.0 §7.4.3.5.1 names Relying-Party *Linkability* as an explicit privacy risk, with dedicated subsections on mitigation (§7.4.3.5.2) and ZKP (§7.4.3.5.3). The ARF states: "By comparing the received salt values, the Relying Party may find matching salt values ... conclude that the corresponding attestations must have been the same." This is regulator-side acknowledgement of the gap. The unlinkability-capable schemes now exist as *published but non-mandated* specs ([[S-038 eudiw-zkp-ts13-ts14]]), so the contradiction is best stated as "governance does not yet bind the available technology," not "technology missing." See [[S-034 eudiw-arf-2.9.0]].
 
 ## Links
 - [[C-025 governance-conflict-vertical]] — the conflict pattern this instantiates in the wild.

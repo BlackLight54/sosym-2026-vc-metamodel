@@ -16,6 +16,7 @@ New here? Read `README.md`, then walk the maps below in order.
 6. [[M-004 novelty-and-positioning]] — why it is novel; differentiation and all sources.
 7. [[M-007 writing-gaps]] — open questions; what to write next.
 8. [[M-008 artifact-inventory]] — claim → evidence; each result mapped to a model file or figure.
+9. [[M-009 threats-to-applicability]] — EU regulatory threats (current state) and the "is the problem real?" evidence.
 
 ## Binding claims
 
@@ -36,4 +37,4 @@ Results: [[K-008 contradictory-cross-framework-constraints]], [[K-009 multilayer
 
 ## Counts
 
-Concepts (C) 36 · Claims/arguments (K) 15 · Sources (S) 32 · Decisions (D) 12 · Questions (Q) 11 · Artifacts (A) 6 · MOCs (M) 8.
+Concepts (C) 38 · Claims/arguments (K) 15 · Sources (S) 40 · Decisions (D) 12 · Questions (Q) 11 · Artifacts (A) 6 · MOCs (M) 9.

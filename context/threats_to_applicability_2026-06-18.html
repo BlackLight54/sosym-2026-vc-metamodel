@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Threats to applicability in the EU legal/regulatory context</title>
+<style>
+  :root {
+    --fg: #1b1f24; --muted: #5b6570; --faint: #8a939c;
+    --rule: #e4e8ec; --rule-strong: #cdd4da;
+    --accent: #0b5394; --accent-soft: #e8f0f8;
+    --bg: #ffffff; --soft: #f6f8fa; --softer: #fbfcfd;
+    --ok: #1a7f4b; --ok-soft: #e6f4ec;
+    --warn: #9a6700; --warn-soft: #fdf3e0;
+    --bad: #b42318; --bad-soft: #fdeceb;
+    --mono: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 17px; scroll-behavior: smooth; }
+  body {
+    color: var(--fg); background: var(--bg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.62; margin: 0; padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 58rem; margin: 0 auto; padding: 3.5rem 1.6rem 7rem; }
+
+  header.doc { border-bottom: 3px solid var(--accent); padding-bottom: 1.4rem; margin-bottom: 1rem; }
+  header.doc h1 { font-size: 2.1rem; line-height: 1.18; margin: 0 0 .5rem; letter-spacing: -.01em; }
+  .subtitle { color: var(--muted); font-size: 1.02rem; margin: 0; }
+  .runmeta { margin-top: 1rem; font-size: .82rem; color: var(--faint);
+    display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; }
+  .runmeta code { font-family: var(--mono); color: var(--muted); background: var(--soft);
+    padding: .1em .4em; border-radius: 4px; }
+
+  .verdict { margin: 1.6rem 0 2rem; background: var(--ok-soft); border: 1px solid #bfe3cd;
+    border-left: 5px solid var(--ok); border-radius: 8px; padding: 1rem 1.2rem; }
+  .verdict strong { color: var(--ok); }
+
+  nav.toc { background: var(--soft); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 1.1rem 1.4rem; margin: 0 0 2.6rem; font-size: .93rem; }
+  nav.toc .toc-label { font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+    font-size: .72rem; color: var(--muted); margin-bottom: .6rem; }
+  nav.toc ol { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 2rem; }
+  nav.toc li { margin: .28rem 0; break-inside: avoid; }
+  nav.toc a { color: var(--accent); text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+  nav.toc .num { color: var(--faint); font-variant-numeric: tabular-nums; margin-right: .45rem; }
+
+  section { margin-top: 2.8rem; }
+  h2 { font-size: 1.4rem; margin: 0 0 .9rem; padding-bottom: .35rem; border-bottom: 2px solid var(--rule); }
+  h2 .h2num { color: var(--accent); font-variant-numeric: tabular-nums; margin-right: .5rem; }
+  h3 { font-size: 1.08rem; margin: 1.6rem 0 .5rem; color: #2a3138; }
+  p { margin: .7rem 0; }
+  a { color: var(--accent); }
+  a:hover { text-decoration: underline; }
+  strong { font-weight: 650; }
+  code { background: var(--soft); padding: .12em .38em; border-radius: 4px; font-size: .87em; font-family: var(--mono); }
+
+  blockquote { margin: 1.1rem 0; padding: .85rem 1.2rem; border-left: 4px solid var(--accent);
+    background: var(--accent-soft); color: #243b52; border-radius: 0 8px 8px 0; font-size: 1.02rem; }
+  blockquote .src { display: block; margin-top: .5rem; font-size: .8rem; color: var(--muted); font-style: normal; }
+
+  ul, ol { padding-left: 1.4rem; }
+  li { margin: .35rem 0; }
+  ol.ranked > li { margin: .7rem 0; }
+  ol.ranked > li::marker { font-weight: 700; color: var(--accent); }
+
+  .tablescroll { overflow-x: auto; margin: 1.2rem 0; }
+  table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+  th, td { border: 1px solid var(--rule); padding: .55rem .7rem; text-align: left; vertical-align: top; }
+  th { background: var(--soft); font-weight: 650; }
+  tr:nth-child(even) td { background: var(--softer); }
+  td a { word-break: break-word; }
+
+  .badge { display: inline-block; font-size: .7rem; font-weight: 650; padding: .12em .55em;
+    border-radius: 20px; letter-spacing: .02em; vertical-align: middle; white-space: nowrap; }
+  .badge.ok { background: var(--ok-soft); color: var(--ok); }
+  .badge.warn { background: var(--warn-soft); color: var(--warn); }
+  .badge.bad { background: var(--bad-soft); color: var(--bad); }
+  .badge.neutral { background: var(--soft); color: var(--muted); }
+
+  .chip { font-family: var(--mono); font-size: .8rem; background: var(--soft);
+    border: 1px solid var(--rule-strong); border-radius: 5px; padding: .05em .4em;
+    color: var(--accent); text-decoration: none; white-space: nowrap; }
+  .chip:hover { background: var(--accent-soft); text-decoration: none; }
+
+  ul.checklist { list-style: none; padding-left: 0; }
+  ul.checklist li { padding-left: 1.7rem; position: relative; }
+  ul.checklist li::before { content: "\2610"; position: absolute; left: 0; color: var(--faint); font-size: 1.1rem; top: -.05rem; }
+
+  .callout { border: 1px solid var(--rule); border-radius: 8px; padding: .9rem 1.15rem; margin: 1.1rem 0; background: var(--softer); }
+  .callout.warn { background: var(--warn-soft); border-color: #f0dcae; }
+  .callout .ctitle { font-weight: 700; font-size: .82rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin-bottom: .4rem; }
+
+  hr { border: none; border-top: 1px solid var(--rule); margin: 2.6rem 0; }
+
+  footer.doc { margin-top: 4rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
+    font-size: .82rem; color: var(--faint); }
+
+  @media (max-width: 640px) { nav.toc ol { columns: 1; } html { font-size: 16px; } }
+  @media print { .wrap { max-width: none; padding: 0; } nav.toc, .verdict { break-inside: avoid; } h2 { break-after: avoid; } a { color: var(--fg); } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="doc">
+  <h1>Threats to applicability in the EU legal/regulatory context</h1>
+  <p class="subtitle">Research synthesis for the verifiable-credential multi-layer metamodel paper.</p>
+  <div class="runmeta">
+    <span>Dated <strong>2026-06-18</strong></span>
+    <span>Deep-research run <code>w7bu5mdj7</code></span>
+    <span>27 sources fetched &middot; 125 claims &middot; 25 verified &middot; 23 confirmed &middot; 2 refuted</span>
+  </div>
+</header>
+
+<div class="verdict">
+  <strong>Verdict:</strong> the problem is real and primary-source-grounded. The current ARF names the
+  exact conflict the paper formalizes. One genuine scope limitation surfaces: the metamodel does not
+  express verifier-side (relying-party) governance.
+</div>
+
+<p style="color:var(--muted);font-size:.93rem;">
+  Scope as agreed: broad eIDAS&nbsp;2 stack; relying-party angle treated both as real-world fact and as a
+  metamodel scope gap; "is the problem real?" weighed across primary-source contradictions, deployment,
+  and academic/civil-society critique. Companion map:
+  <a class="chip" href="../zettelkasten/moc/M-009 threats-to-applicability.md">M-009</a>
+  &middot; companion todo:
+  <a class="chip" href="todos/o-euthreat_regulatory_applicability.md">O-EUTHREAT</a>.
+</p>
+
+<nav class="toc">
+  <div class="toc-label">Contents</div>
+  <ol>
+    <li><span class="num">1</span><a href="#s1">Is the problem real?</a></li>
+    <li><span class="num">2</span><a href="#s2">Currency corrections</a></li>
+    <li><span class="num">3</span><a href="#s3">Threats, ranked</a></li>
+    <li><span class="num">4</span><a href="#s4">Relying-party regime in detail</a></li>
+    <li><span class="num">5</span><a href="#s5">Caveats before citing</a></li>
+    <li><span class="num">6</span><a href="#s6">Open follow-ups</a></li>
+    <li><span class="num">7</span><a href="#s7">Verified sources</a></li>
+  </ol>
+</nav>
+
+<section id="s1">
+  <h2><span class="h2num">1.</span>Is the problem real? Yes, and the regulator documents it</h2>
+  <p>
+    The strongest evidence is the ARF's own text, not our constructed example or third-party critique.
+    <strong>ARF v2.9.0 &sect;7.4.3.5.1</strong> names Relying-Party <em>Linkability</em> as a privacy risk
+    and concedes the mandated salted-hash baseline is linkable:
+  </p>
+  <blockquote>
+    "By comparing the received salt values, the Relying Party may find matching salt values ... conclude
+    that the corresponding attestations must have been the same."
+    <span class="src">EUDI Wallet ARF v2.9.0, &sect;7.4.3.5.1 Linkability</span>
+  </blockquote>
+  <p>
+    Zero-knowledge proofs sit in a separate subsection (&sect;7.4.3.5.3) as a not-yet-baseline mitigation.
+    The governance source therefore documents the exact vertical conflict the paper formalizes: a statutory
+    unlinkability duty against linkable mandated formats, with the fix acknowledged but not bound.
+  </p>
+  <p>Supporting layers of evidence, weighted by strength:</p>
+  <ul>
+    <li><strong>In-force mechanism <span class="badge ok">primary</span></strong> &mdash;
+      Reg. (EU) 2024/1183 Art.&nbsp;5a(16)(b) unlinkability duty; mandated baseline formats are linkable
+      (salted-hash, not ZK); Art.&nbsp;5b(3) data-minimization bound at registration; dual issuance of two
+      formats (mdoc and SD-JWT&nbsp;VC), neither of which supports predicate proofs.</li>
+    <li><strong>Technology exists but is not bound <span class="badge ok">primary</span></strong> &mdash;
+      unlinkability-capable schemes are now published EC specs (TS13, TS14) yet remain non-mandated. State
+      the contradiction as "governance does not yet bind the available technology," not "technology missing."</li>
+    <li><strong>Institutional corroboration <span class="badge ok">primary</span></strong> &mdash;
+      a national DPA (AEPD) treats minimization and linkability against the wallet as a live obligation.</li>
+    <li><strong>Academic / civil-society <span class="badge warn">unverified</span></strong> &mdash;
+      cryptographers' feedback on the ARF; SoK papers (Biedermann, Schwalm). Corroborating, not load-bearing
+      (see <a href="#s5">&sect;5</a>).</li>
+  </ul>
+</section>
+
+<section id="s2">
+  <h2><span class="h2num">2.</span>Currency corrections (factual errors in the current draft)</h2>
+  <div class="tablescroll">
+  <table>
+    <thead>
+      <tr><th style="width:2.2rem;">#</th><th>Item</th><th>Draft state</th><th>Correct state (June 2026)</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td><td>ARF version</td>
+        <td>v2.7.3 (section files + decision memory)</td>
+        <td><strong>v2.9.0, 21 May 2026</strong> (v2.8.0 was 2 Feb 2026)</td>
+        <td>Bump string <em>and</em> re-verify ARF-C1..C8 against v2.9.0 &sect;5.4/&sect;7.4 (two-minor jump)</td>
+      </tr>
+      <tr>
+        <td>2</td><td>Format taxonomy</td>
+        <td>"SD-JWT-VC or mdoc"</td>
+        <td>Four EAA realizations (SD-JWT&nbsp;VC, mdoc, JSON-LD W3C&nbsp;VC, X.509-AC) per ETSI TS&nbsp;119&nbsp;472-1 v1.2.1; ARF v2.9.0 &sect;5.4 lists distinct families</td>
+        <td>Refine the coarse reading. <strong>Do not</strong> soften "W3C VCDM barred for PIDs/qualified attestations" <span class="badge bad">refuted&nbsp;1-2</span></td>
+      </tr>
+      <tr>
+        <td>3</td><td>ZKP status</td>
+        <td>"single deferred draft TS13/TS14"</td>
+        <td>Two published-but-non-mandated specs: TS13 (arithmetic-circuit, v1.0.1, 26 Jan 2026), TS14 (multi-message-signature, v1.0, 27 Feb 2026); to ETSI as TS&nbsp;119&nbsp;476-2 (~Feb 2027)</td>
+        <td>Restate as published-but-non-mandated; TS13 is arithmetic-circuit, not narrowly zk-SNARK</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section id="s3">
+  <h2><span class="h2num">3.</span>Threats to applicability, ranked by reviewer risk</h2>
+  <ol class="ranked">
+    <li>
+      <strong>Relying-party scope gap <span class="badge bad">highest</span></strong><br>
+      The three layers (DCL/CSL/FSL) are issuer/credential-structure-centric. eIDAS&nbsp;2 Art.&nbsp;5b and
+      <strong>CIR (EU) 2025/848</strong> (adopted 6 May 2025, applicable 24 Dec 2026) impose a verifier-side
+      regime the model does not express: register per intended use the attestations/attributes requested
+      (Annex&nbsp;I point&nbsp;9), a typed entitlement (Service_Provider, PID_Provider, QEAA_Provider,
+      Non_Q_EAA_Provider, PUB_EAA_Provider), and the competent DPA; Art.&nbsp;5b(3) forbids requesting beyond
+      what was registered; over-asking grounds suspension (Art.&nbsp;9(2)(c)); access is mediated by access
+      certificates, not a Trusted&nbsp;List. Sibling instruments out of reach: cross-border matching
+      (2025/846), breach notification (2025/847), certified-wallet listing (2025/849), trust/status
+      governance. <strong>Double-edged:</strong> strengthens motivation and is a genuine limitation. The paper
+      must state explicitly whether verifier-side governance is out of scope or an extension axis; the current
+      draft leaves it silent.
+    </li>
+    <li>
+      <strong>Moving-target regulation</strong><br>
+      Three CIR batches Dec 2024 to Aug 2025; CIR 2025/848 is in force but only applicable 24 Dec 2026, after
+      a typical mid-2026 submission. Frame currency as a dated snapshot.
+    </li>
+    <li>
+      <strong>Coarse format reading</strong><br>
+      See correction&nbsp;#2: the binary reading simplifies the four-realization rule. Refine without
+      over-correcting.
+    </li>
+    <li>
+      <strong>Single-jurisdiction (EU) framing</strong><br>
+      The governance catalogue is EU-specific; generalization beyond eIDAS/GDPR/VCDM is asserted, not shown.
+    </li>
+    <li>
+      <strong>Tool reliance (Refinery)</strong><br>
+      Portability of the predicates beyond one solver is untested (see Q-006).
+    </li>
+  </ol>
+</section>
+
+<section id="s4">
+  <h2><span class="h2num">4.</span>Relying-party regime, in detail</h2>
+  <p>Governance imposed on the verifier, structurally separate from issuer-side credential schemas and formats:</p>
+  <ul>
+    <li><strong>Instrument:</strong> CIR (EU) 2025/848, legal basis Art.&nbsp;5b(11) of Reg. (EU) 910/2014
+      (Art.&nbsp;5b inserted by Reg. (EU) 2024/1183). Adopted 6 May 2025, published 7 May 2025, applicable
+      24 Dec 2026.</li>
+    <li><strong>What must be registered:</strong> for each intended use, the data (attestations and attributes)
+      the RP intends to request (Annex&nbsp;I point&nbsp;9); a typed entitlement; the competent DPA.</li>
+    <li><strong>Minimization enforcement:</strong> Art.&nbsp;5b(3), "Relying parties shall not request users to
+      provide any data other than that indicated pursuant to paragraph 2, point (c)." Over-asking is a
+      suspension ground (CIR 2025/848 Art.&nbsp;9(2)(c)).</li>
+    <li><strong>Trust mechanism:</strong> ARF v2.9.0 states there is no Trusted&nbsp;List or LoTE for relying
+      parties; an RP holds access certificate(s) from an Access Certificate Authority.</li>
+  </ul>
+  <div class="callout">
+    <div class="ctitle">Imprecisions to carry forward</div>
+    RP registration <em>certificates</em> were made optional (April 2025 comitology); cite the "registration
+    record" for the mandatory backstop. The minimization duty attaches to Art.&nbsp;5b(3), not to ETSI TS6.
+    Entitlement <em>types</em> are set by CIR 2025/848 Annex&nbsp;I; ETSI TS&nbsp;119&nbsp;475 only defines
+    their normative URIs.
+  </div>
+  <div class="callout warn">
+    <div class="ctitle">Refuted &mdash; do not assert <span class="badge bad">0-3</span></div>
+    Runtime wallet comparison of request-vs-registration as a settled, format-orthogonal enforcement mechanism
+    is a discussion-topic proposal, not in force.
+  </div>
+</section>
+
+<section id="s5">
+  <h2><span class="h2num">5.</span>Caveats before citing</h2>
+  <ul>
+    <li><strong>External critique unverified.</strong> The cryptographers' feedback and the named SoK papers
+      (Biedermann, Schwalm) did not pass the workflow's verification step. Confirm titles, authors, venue, and
+      dates before any citation (no-invented-references rule). The in-regulation evidence carries the argument
+      independently.</li>
+    <li><strong>EUR-Lex HTML did not render</strong> for the verifier; CIR 2025/848 article text and dates come
+      from the PDF plus four cross-consistent secondary sources. Identifiers and dates are consistent; capture
+      the primary HTML once before camera-ready.</li>
+    <li><strong>ETSI TS 119 472-1 PDF returned 403;</strong> the four-realization list rests on the EC GitHub
+      mirror plus two corroborating extractions.</li>
+    <li><strong>One TS14 sentence was a paraphrase,</strong> not located verbatim; cite ARF Topic&nbsp;G / the
+      TS14 spec wording instead.</li>
+  </ul>
+</section>
+
+<section id="s6">
+  <h2><span class="h2num">6.</span>Open follow-ups (close before submission)</h2>
+  <ul class="checklist">
+    <li>Locate the exact 2025/xxxx OJ numbers and subjects of the 30 Jul 2025 round of eight CIRs (seven trust-services + one EAA specifications).</li>
+    <li>Re-verify ARF-C1..C8 against ARF v2.9.0 &sect;5.4/&sect;7.4 (PID dual-issuance, proximity/mdoc, encoding-independence).</li>
+    <li>Confirm the cryptographers' feedback citation; resolve Biedermann (S-020) and Schwalm (S-021) citekeys.</li>
+    <li>Confirm the AEPD post title/date; fetch the rendered EUR-Lex HTML for CIR 2025/848.</li>
+    <li>Decide and state the RP-scope-gap framing: deliberate out-of-scope, or a verifier/attribute-request extension.</li>
+  </ul>
+</section>
+
+<section id="s7">
+  <h2><span class="h2num">7.</span>Verified sources</h2>
+  <p style="color:var(--muted);font-size:.9rem;">Primary unless noted. Confidence high except where flagged.</p>
+  <div class="tablescroll">
+  <table>
+    <thead>
+      <tr><th>Topic</th><th>Identifier</th><th>Date</th><th>Link</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>ARF (current)</td><td>EUDI Wallet ARF v2.9.0</td><td>21 May 2026</td>
+        <td><a href="https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/releases">GitHub releases</a> &middot; <a href="https://eudi.dev/2.9.0/architecture-and-reference-framework-main/">eudi.dev portal</a></td></tr>
+      <tr><td>RP registration</td><td>CIR (EU) 2025/848</td><td>adopted 6 May 2025, applicable 24 Dec 2026</td>
+        <td><a href="https://eur-lex.europa.eu/eli/reg_impl/2025/848/oj/eng">EUR-Lex</a></td></tr>
+      <tr><td>RP info to register</td><td>EC standards repo TS6</td><td>2025</td>
+        <td><a href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md">TS6</a></td></tr>
+      <tr><td>Implementing acts (batch 2)</td><td>EC announcement, CIR 2025/846-849</td><td>6 May 2025</td>
+        <td><a href="https://ec.europa.eu/digital-building-blocks/sites/spaces/EUDIGITALIDENTITYWALLET/pages/909706465/New+round+of+EU+Digital+Identity+Wallet+implementing+regulations+adopted">EC announcement</a></td></tr>
+      <tr><td>Implementing acts (batch 1)</td><td>EC announcement, CIR 2024/2977-2982</td><td>4 Dec 2024</td>
+        <td><a href="https://ec.europa.eu/digital-building-blocks/sites/spaces/EUDIGITALIDENTITYWALLET/pages/896827698/European+Commission+adopts+new+round+of+EU+Digital+Identity+Wallet+implementing+regulations">EC announcement</a></td></tr>
+      <tr><td>ZKP TS14</td><td>EC standards repo issue #468</td><td>published 27 Feb 2026</td>
+        <td><a href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/issues/468">issue #468</a></td></tr>
+      <tr><td>ZKP TS13</td><td>EC standards repo issue #432</td><td>published 26 Jan 2026</td>
+        <td><a href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/issues/432">issue #432</a></td></tr>
+      <tr><td>EAA realizations</td><td>ETSI TS 119 472-1 v1.2.1 (via mirror)</td><td>Feb 2026</td>
+        <td><a href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/issues/284">issue #284</a></td></tr>
+      <tr><td>EAA issuance</td><td>ETSI TS 119 471 v1.1.1</td><td>2026</td>
+        <td><a href="https://www.etsi.org/deliver/etsi_ts/119400_119499/119471/01.01.01_60/ts_119471v010101p.pdf">ETSI PDF</a></td></tr>
+      <tr><td>Unlinkability analysis</td><td>ETSI TR 119 476-1 v1.3.1</td><td>2026</td>
+        <td><a href="https://www.etsi.org/deliver/etsi_tr/119400_119499/11947601/01.03.01_60/tr_11947601v010301p.pdf">ETSI PDF</a></td></tr>
+      <tr><td>mdoc online presentation</td><td>ISO/IEC 18013-7 ed.2</td><td>&mdash;</td>
+        <td><a href="https://www.iso.org/obp/ui#!iso:std:iso-iec:ts:18013:-7:ed-2:v1:en">ISO OBP</a></td></tr>
+      <tr><td>SD-JWT VC</td><td>IETF draft-ietf-oauth-sd-jwt-vc</td><td>draft</td>
+        <td><a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/">IETF datatracker</a></td></tr>
+      <tr><td>ZKP discussion</td><td>ARF Discussion Topic G</td><td>&mdash;</td>
+        <td><a href="https://eudi.dev/latest/discussion-topics/g-zero-knowledge-proof/">Topic G</a></td></tr>
+      <tr><td>GDPR (institutional)</td><td>AEPD blog, eIDAS2 + EUDI Wallet + GDPR <span class="badge warn">verify</span></td><td>&mdash;</td>
+        <td><a href="https://www.aepd.es/en/press-and-communication/blog/eidas2-the-eudi-wallet-and-the-gdpr-ii">AEPD blog</a></td></tr>
+      <tr><td>Critique <span class="badge warn">unverified</span></td><td>Cryptographers' feedback on the ARF</td><td>&mdash;</td>
+        <td><a href="https://www.cs.ru.nl/~jhh/publications/cryptographers-feedback.pdf">cs.ru.nl PDF</a></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout warn">
+    <div class="ctitle">Refuted claims &mdash; do not assert</div>
+    <strong>(1)</strong> runtime wallet request-vs-registration comparison as settled enforcement <span class="badge bad">0-3</span>;
+    <strong>(2)</strong> that ETSI TS&nbsp;119&nbsp;472-1's JSON-LD realization overrides the ARF rule barring
+    W3C VCDM for PIDs/qualified attestations <span class="badge bad">1-2</span>.
+  </div>
+</section>
+
+<footer class="doc">
+  Generated 2026-06-18 from deep-research run <code>w7bu5mdj7</code>.
+  Source markdown: <code>context/threats_to_applicability_2026-06-18.md</code>.
+  Atomic notes: Zettelkasten S-034 to S-040, C-037, C-038, M-009.
+</footer>
+
+</div>
+</body>
+</html>

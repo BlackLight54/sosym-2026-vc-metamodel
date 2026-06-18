@@ -20,6 +20,10 @@ neither mandated format supports predicate proofs ([[C-016 format-capability-mat
 conjunction cannot be escaped by choosing the more capable of the two — both are required, both lack the
 capability GDPR's operationalization demands.
 
+**Currency flag (June 2026):** the dual-issuance rule was read from ARF v2.7.3 / CIR 2024/2977. The current
+ARF is v2.9.0 ([[S-034 eudiw-arf-2.9.0]]); re-verify that PID dual-issuance (mdoc AND SD-JWT VC) still holds
+verbatim in v2.9.0 §5.4 before relying on the exact wording. See [[M-009 threats-to-applicability]].
+
 ## Links
 - [[C-022 eidas-arf-format-mandate]] — the constraint this refines (or/and).
 - [[C-016 format-capability-matrix]] — both mandated formats lack predicate proofs.

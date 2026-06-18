@@ -32,7 +32,13 @@ Primary-source evidence that the governance conflict ([[K-008 contradictory-cros
 is real outside the constructed CSOK example. Anchors the journal's broadened governance catalogue
 ([[Q-008 broaden-governance-catalog]]).
 **Open:** citekey UNRESOLVED — cite the primary instruments (Reg. (EU) 2024/1183; CIR 2024/2977;
-EUDI Wallet ARF v2.8.0), not the Notion compilation.
+EUDI Wallet ARF), not the Notion compilation.
+
+**Superseded (June 2026):** a deep-research pass version-pinned and corrected this compilation. The current ARF
+is **v2.9.0 (21 May 2026)**, not v2.8.0 → [[S-034 eudiw-arf-2.9.0]]. Verifier-side governance is now captured
+separately → [[S-035 cir-2025-848-rp-registration]], [[S-036 eidas2-implementing-acts-timeline]],
+[[S-037 eu-eudiw-technical-standards-2026]], [[S-038 eudiw-zkp-ts13-ts14]]. For citation, prefer those
+version-pinned primary notes over this Notion compilation. Threat map: [[M-009 threats-to-applicability]].
 
 ## Links
 - [[C-016 format-capability-matrix]] — the capability facts this grounds.
