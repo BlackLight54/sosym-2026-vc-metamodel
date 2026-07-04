@@ -5,7 +5,7 @@ type: question
 maturity: developing
 tags: [layer/csl, topic/gdpr, prov/self]
 sources: ["sections/05_evaluation.md §5.1.2"]
-related: ["[[K-006 expressiveness-validation]]", "[[K-005 coverage-validation]]", "[[C-018 governance-annotations]]"]
+related: ["[[K-006 expressiveness-validation]]", "[[K-005 coverage-validation]]", "[[C-018 governance-annotations]]", "[[D-015 expressiveness-strength-first]]"]
 created: 2026-06-16
 ---
 
@@ -24,6 +24,7 @@ formalization approach.
 ## Links
 - [[K-006 expressiveness-validation]], [[K-005 coverage-validation]] — claims it strengthens.
 - [[C-018 governance-annotations]] — annotations to refine to claim level.
+- [[D-015 expressiveness-strength-first]] — the framing that names this gap in the paper.
 
 ## Source
 §5.1.2.

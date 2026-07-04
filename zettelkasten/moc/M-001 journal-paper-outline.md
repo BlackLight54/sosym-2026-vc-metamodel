@@ -40,17 +40,28 @@ Key claims delivered here: [[K-001 three-layer-metamodel]], [[K-002 vcdm-groundi
 Claims: [[K-005 coverage-validation]], [[K-006 expressiveness-validation]], [[K-007 antipattern-detection]],
 [[K-008 contradictory-cross-framework-constraints]], [[K-009 multilayer-invisibility]].
 Scope: [[D-007 three-axis-validation-structure]], [[D-009 core-disc-properties-scope]].
+External validity / threats (§5.3): [[M-009 threats-to-applicability]] — the RP scope boundary
+([[D-013 verifier-scope-issuer-remit]]), the as-of snapshot ([[D-016 dated-snapshot-method-over-catalogue]]),
+and the partials paragraph ([[D-015 expressiveness-strength-first]]).
 
 ## 6. Related work / positioning
 [[M-004 novelty-and-positioning]] and [[K-010 necessity-of-multilayer-modeling]].
 
 ## 7. Conclusion, limitations, future work
-[[M-007 writing-gaps]]; [[D-010 range-proofs-future-work]].
+[[M-007 writing-gaps]]; [[D-010 range-proofs-future-work]]; the "is the problem real?" evidence from
+[[M-009 threats-to-applicability]] closes the loop ([[D-014 regulator-documented-conflict]]).
 
 ## Framing decisions (apply throughout)
 [[D-004 gap-framing-collected-and-formalized]], [[D-005 formal-claims-required]],
 [[D-006 soundness-completeness-core-guarantees]], [[D-008 error-detection-vs-dse-two-modalities]],
-[[D-011 gdpr-two-tier-operationalization]], [[D-012 format-driven-restructuring]].
+[[D-011 gdpr-two-tier-operationalization]], [[D-012 format-driven-restructuring]],
+[[D-013 verifier-scope-issuer-remit]], [[D-014 regulator-documented-conflict]],
+[[D-015 expressiveness-strength-first]], [[D-016 dated-snapshot-method-over-catalogue]],
+[[D-017 mdoc-simplified-wlog]].
+
+Presentation-level drafting decisions (Refinery listings in the body, notation defined once in the
+background, type-graph figure caption, teaser figure, conclusion length) are not duplicated here; they
+live in `.claude/memory/decision_*.md` and apply at the paragraph-engineering stage.
 
 ## Source
 Synthesizes all section files, claims, and decisions.

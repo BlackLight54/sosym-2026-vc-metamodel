@@ -19,6 +19,13 @@ argument primary-source-grounded. Also fix three currency errors. Output feeds T
 conclusion. Full evidence is in the Zettelkasten: [[M-009 threats-to-applicability]] and the source
 notes S-034..S-040. Source: deep-research run w7bu5mdj7 (2026-06-18), 27 sources, 23 confirmed claims.
 
+**Update 2026-07-04:** the four framing decisions are made and captured as Zettelkasten decision notes
+[[D-013 verifier-scope-issuer-remit]] (issuer remit, named verifier extension),
+[[D-014 regulator-documented-conflict]] (ARF §7.4.3.5.1 leads the motivation),
+[[D-015 expressiveness-strength-first]] (own the partials), and
+[[D-016 dated-snapshot-method-over-catalogue]] (as-of June 2026 / ARF v2.9.0). The drafting below
+executes those decisions; it no longer needs to make them.
+
 ## Currency corrections (do first — these are factual errors in the draft)
 
 1. **ARF version.** Section files and `.claude/memory/decision_three_axis_validation.md` cite ARF
@@ -39,9 +46,11 @@ notes S-034..S-040. Source: deep-research run w7bu5mdj7 (2026-06-18), 27 sources
    structure-centric and cannot express verifier-side governance: RP registration + per-intended-use
    attribute declaration (eIDAS 2 Art. 5b; CIR (EU) 2025/848, applicable 24 Dec 2026), access
    entitlements/certificates, cross-border matching (2025/846), breach notification (2025/847),
-   certified-wallet listing (2025/849), trust/status governance. **Decide explicitly:** declare
-   out-of-scope, or sketch a verifier/attribute-request extension. Do not leave the verifier axis silent
-   (current draft does). See [[C-038 relying-party-scope-gap]], [[C-037 relying-party-registration-regime]].
+   certified-wallet listing (2025/849), trust/status governance. **DECIDED (2026-07-04, Decision A →
+   [[D-013 verifier-scope-issuer-remit]]):** issuer-side remit; verifier axis named as the extension of
+   the same method ([[C-040 verifier-side-extension-sketch]]), CIR 2025/848 cited as breadth evidence.
+   Remaining work: write the §5.3 paragraph stating it. See [[C-038 relying-party-scope-gap]],
+   [[C-037 relying-party-registration-regime]].
 2. **Moving-target regulation.** Three CIR batches Dec 2024 – Aug 2025; 2025/848 in force but applicable
    only 24 Dec 2026. State currency as a dated snapshot. See [[S-036 eidas2-implementing-acts-timeline]].
 3. **Single-jurisdiction (EU) framing.** Catalogue is EU-specific; generalization is asserted, not shown.

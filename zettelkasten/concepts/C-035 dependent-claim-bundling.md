@@ -2,7 +2,7 @@
 id: C-035
 title: Dependent-claim bundling constraint
 type: concept
-maturity: seed
+maturity: developing
 tags: [layer/cross, kind/predicate, topic/dse]
 sources: ["inbox/notion/03-3-dse.md"]
 related: ["[[C-013 cross-layer-constraint-taxonomy-c1-c9]]", "[[C-009 cross-layer-constraint]]", "[[C-036 static-dynamic-revocation-mismatch]]", "[[S-027 own-tdk-thesis-mda]]"]

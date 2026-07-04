@@ -34,16 +34,20 @@ sync with `context/references/REFERENCES_TO_ADD_IN_ZOTERO.md`. `UNRESOLVED` = ne
 | S-027 own-tdk-thesis-mda | — | UNRESOLVED (own unpublished thesis; cite withdrawn MODELS'26) |
 | S-028 eudiw-arf-status-2026 | — | UNRESOLVED (cite Reg (EU) 2024/1183; CIR 2024/2977; ARF v2.8.0) |
 | S-029 preukschat-reed-ssi-2021 | `SSIPreukschatReed` | check (from Notion note) |
+| S-030 eidas2-regulation-2024-1183 | — | UNRESOLVED (cite Reg. (EU) 2024/1183, OJ L 30 Apr 2024) |
 | S-031 hegedus-guided-dse-2015 | `hegedus_modeldriven_2015` | check (title/venue unconfirmed) |
 | S-032 garzon-5g-vc-2024 | `garzon_certificates_2024` | check (from .bib markers) |
 | S-033 amazon-crossborder-vc-2023 | `kaushiksrinivasan_edata_2023` | check (also `amazon_vc_for_gov`) |
-| S-034 eudiw-arf-2.9.0 | — | UNRESOLVED (cite EUDI Wallet ARF v2.9.0, EC, 21 May 2026) |
+| S-034 eudiw-arf-2.9.0 | `noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026` | check — key already cited in sections; re-pin the bib entry to v2.9.0 (21 May 2026) |
 | S-035 cir-2025-848-rp-registration | — | UNRESOLVED (cite CIR (EU) 2025/848; Reg. 910/2014 Art. 5b) |
 | S-036 eidas2-implementing-acts-timeline | — | UNRESOLVED (cite individual CIRs by OJ number) |
 | S-037 eu-eudiw-technical-standards-2026 | — | UNRESOLVED (cite ETSI TS 119 471/472-1/475, TR 119 476-1; ISO/IEC 18013-5/-7; IETF SD-JWT-VC) |
 | S-038 eudiw-zkp-ts13-ts14 | — | UNRESOLVED (cite EC TS13/TS14 deliverables) |
 | S-039 aepd-eudiw-gdpr-analysis | — | UNRESOLVED (verify AEPD blog title/date) |
 | S-040 cryptographers-feedback-arf | — | UNRESOLVED — NEEDS VERIFICATION before citing (title/authors/venue) |
+| S-041 gdpr-2016-679 | `gdpr` | ok (cited in sections) |
+| S-042 naih-minimization-fine-2020 | `noauthor_naih_2020` | check — verify NAIH decision number/date |
+| S-043 csok-decree-518-2023 | `noauthor_5182023_2023` | ok (cited in sections) |
 
 Citekeys are transcribed from the `[@key]` markers in `sections/*.md`; verify against the exported
 `.bib` before relying on them.

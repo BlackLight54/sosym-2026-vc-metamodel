@@ -5,7 +5,7 @@ type: concept
 maturity: permanent
 tags: [layer/fsl, topic/format, kind/metamodel]
 sources: ["sections/04_approach.md §4.3 tab:format_capabilities", "sections/02_background.md §2.1"]
-related: ["[[C-004 format-specific-layer]]", "[[C-017 capability-driven-format-elimination]]", "[[C-025 governance-conflict-vertical]]", "[[C-026 cross-credential-predicate-gap-horizontal]]", "[[C-033 dual-issuance-mandate]]", "[[S-028 eudiw-arf-status-2026]]", "[[Q-009 functional-extrafunctional-capability-matrix]]"]
+related: ["[[C-004 format-specific-layer]]", "[[C-017 capability-driven-format-elimination]]", "[[C-025 governance-conflict-vertical]]", "[[C-026 cross-credential-predicate-gap-horizontal]]", "[[C-033 dual-issuance-mandate]]", "[[S-028 eudiw-arf-status-2026]]", "[[Q-009 functional-extrafunctional-capability-matrix]]", "[[C-039 disclosure-spectrum]]"]
 created: 2026-06-16
 ---
 
@@ -29,6 +29,7 @@ every format. These two facts directly produce the two headline results.
 - [[C-017 capability-driven-format-elimination]] — capabilities drive propagation.
 - [[C-025 governance-conflict-vertical]] — predicate-proof vs VCDM asymmetry.
 - [[C-026 cross-credential-predicate-gap-horizontal]] — empty multi-credential column.
+- [[C-039 disclosure-spectrum]] — the ordered spectrum these capabilities point-sample.
 
 ## Source
 `sections/04_approach.md §4.3`, format-capability table; `sections/02_background.md §2.1`.

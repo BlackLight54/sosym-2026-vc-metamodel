@@ -2,7 +2,7 @@
 id: C-036
 title: Static/dynamic revocation-mismatch constraint
 type: concept
-maturity: seed
+maturity: developing
 tags: [layer/cross, kind/predicate, topic/dse]
 sources: ["inbox/notion/03-3-dse.md"]
 related: ["[[C-013 cross-layer-constraint-taxonomy-c1-c9]]", "[[C-009 cross-layer-constraint]]", "[[C-035 dependent-claim-bundling]]", "[[S-027 own-tdk-thesis-mda]]"]

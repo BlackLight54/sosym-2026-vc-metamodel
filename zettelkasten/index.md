@@ -1,8 +1,8 @@
 # Index — credential-ecosystem metamodel Zettelkasten
 
-Master map of content. 112 atomic notes distilled from this repository (including a model and figure
-artifact layer) plus Notion and Todoist ingestion (see `INGESTION.md`), organized for drafting a
-journal-length article on the three-layer verifiable-credential metamodel.
+Master map of content. 133 atomic notes and 9 maps, distilled from this repository (including a model
+and figure artifact layer) plus Notion and Todoist ingestion (see `INGESTION.md`), organized for
+drafting a journal-length article on the three-layer verifiable-credential metamodel.
 
 New here? Read `README.md`, then walk the maps below in order.
 
@@ -26,6 +26,13 @@ Validation: [[K-005 coverage-validation]], [[K-006 expressiveness-validation]], 
 Results: [[K-008 contradictory-cross-framework-constraints]], [[K-009 multilayer-invisibility]],
 [[K-010 necessity-of-multilayer-modeling]].
 
+## Committed framing (2026-07-04)
+
+The four decisions that fix the paper's positioning against the EU regulatory landscape, with the
+committed one-paragraph framing, live in [[M-009 threats-to-applicability]]:
+[[D-013 verifier-scope-issuer-remit]] · [[D-014 regulator-documented-conflict]] ·
+[[D-015 expressiveness-strength-first]] · [[D-016 dated-snapshot-method-over-catalogue]].
+
 ## Tooling
 
 - [[glossary]] — terms, symbols, acronyms → concept notes.
@@ -37,4 +44,4 @@ Results: [[K-008 contradictory-cross-framework-constraints]], [[K-009 multilayer
 
 ## Counts
 
-Concepts (C) 38 · Claims/arguments (K) 15 · Sources (S) 40 · Decisions (D) 12 · Questions (Q) 11 · Artifacts (A) 6 · MOCs (M) 9.
+Concepts (C) 40 · Claims/arguments (K) 15 · Sources (S) 43 · Decisions (D) 17 · Questions (Q) 12 · Artifacts (A) 6 · MOCs (M) 9.

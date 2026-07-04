@@ -36,6 +36,13 @@ predicates. The load-bearing argument is [[C-032 competing-peer-governance-sourc
 
 ## Governance tensions (motivation sources)
 [[S-020 biedermann-eudi-web3-sok-2024]], [[S-021 schwalm-ssi-eidas-contradiction-2022]], [[S-028 eudiw-arf-status-2026]].
+Primary instruments: [[S-030 eidas2-regulation-2024-1183]], [[S-041 gdpr-2016-679]],
+[[S-042 naih-minimization-fine-2020]], [[S-043 csok-decree-518-2023]].
+EU regulatory currency (June 2026, version-pinned): [[S-034 eudiw-arf-2.9.0]],
+[[S-035 cir-2025-848-rp-registration]], [[S-036 eidas2-implementing-acts-timeline]],
+[[S-037 eu-eudiw-technical-standards-2026]], [[S-038 eudiw-zkp-ts13-ts14]],
+[[S-039 aepd-eudiw-gdpr-analysis]], [[S-040 cryptographers-feedback-arf]] — threaded in
+[[M-009 threats-to-applicability]].
 
 ## SSI foundations & sector exemplars (background/motivation)
 [[S-029 preukschat-reed-ssi-2021]], [[S-032 garzon-5g-vc-2024]], [[S-033 amazon-crossborder-vc-2023]].

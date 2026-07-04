@@ -6,7 +6,7 @@ maturity: developing
 tags: [topic/eidas, topic/governance, topic/gdpr, prov/external]
 citekey:
 sources: ["https://eur-lex.europa.eu/eli/reg_impl/2025/848/oj/eng", "https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/discussion-topics/x-rr-relying-party-registration.md"]
-related: ["[[C-037 relying-party-registration-regime]]", "[[C-038 relying-party-scope-gap]]", "[[S-036 eidas2-implementing-acts-timeline]]", "[[C-023 gdpr-data-minimization]]", "[[M-009 threats-to-applicability]]"]
+related: ["[[C-037 relying-party-registration-regime]]", "[[C-038 relying-party-scope-gap]]", "[[S-036 eidas2-implementing-acts-timeline]]", "[[C-023 gdpr-data-minimization]]", "[[M-009 threats-to-applicability]]", "[[D-013 verifier-scope-issuer-remit]]", "[[S-030 eidas2-regulation-2024-1183]]"]
 created: 2026-06-18
 ---
 
@@ -21,6 +21,7 @@ This is the **strongest threat to applicability** ([[C-038 relying-party-scope-g
 - [[C-037 relying-party-registration-regime]] — what the regime binds.
 - [[C-038 relying-party-scope-gap]] — why it is a threat to the metamodel.
 - [[S-036 eidas2-implementing-acts-timeline]] — the batch it belongs to.
+- [[D-013 verifier-scope-issuer-remit]] — the decision that cites this instrument as breadth evidence.
 
 ## Source
 Deep-research synthesis 2026-06-18; cite CIR (EU) 2025/848 and Reg. (EU) 910/2014 Art. 5b.

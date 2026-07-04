@@ -60,7 +60,7 @@ created: 2026-06-16
 
 - **One idea per note.** If a note states two ideas, split it.
 - **No orphans.** Every note must be reachable from at least one MOC.
-- **Reciprocal links.** If A lists B in `related`, B lists A. `check_links.sh` flags one-directional links.
+- **Reciprocal links where load-bearing.** If the A→B relation matters in both directions (claim↔evidence, decision↔affected note), both list each other. Hub→leaf and note→source links may stay one-directional; `check_links.sh` reports one-way links as warnings, not errors.
 - **Tags from `tags.md` only.** The controlled vocabulary keeps filtering consistent.
 - **Trace provenance.** `sources:` records the repo artifact (or Notion/Todoist item) the note distills.
 

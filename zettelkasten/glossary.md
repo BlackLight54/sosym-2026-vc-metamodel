@@ -34,6 +34,17 @@ discipline; a journal terminology table can be generated from this.
 - **AnonCreds, JSON-LD, JWT-VC, SD-JWT-VC, mdoc.** The five in-scope formats. [[C-016 format-capability-matrix]]
 - **Governance annotation.** EidasMandate / PrivacyRequirement / VcdmConformance markers. [[C-018 governance-annotations]]
 
+## EU regulatory landscape (June 2026 snapshot)
+- **eIDAS 2 / Reg. (EU) 2024/1183.** The amending regulation; unlinkability (Art. 5a(16)(b)) and RP minimization (Art. 5b(3)) duties. [[S-030 eidas2-regulation-2024-1183]]
+- **Relying party (RP) / registration regime.** Verifier-side governance under CIR (EU) 2025/848. [[C-037 relying-party-registration-regime]]
+- **RP scope gap / verifier extension.** The issuer-side boundary and its named extension. [[C-038 relying-party-scope-gap]], [[C-040 verifier-side-extension-sketch]]
+- **Linkability / statutory unlinkability gap.** Salted-hash baseline vs Art. 5a(16)(b); ARF §7.4.3.5.1. [[C-034 statutory-unlinkability-gap]]
+- **Dual issuance.** PID in both mdoc AND SD-JWT VC (CIR 2024/2977). [[C-033 dual-issuance-mandate]]
+- **TS13 / TS14.** Published-but-non-mandated EC ZKP specs. [[S-038 eudiw-zkp-ts13-ts14]]
+- **EAA realizations.** Four-format taxonomy (ETSI TS 119 472-1), finer than "SD-JWT-VC or mdoc". [[S-037 eu-eudiw-technical-standards-2026]]
+- **Disclosure spectrum.** Full presentation → selective disclosure → predicate proof → general ZK. [[C-039 disclosure-spectrum]]
+- **Method over catalogue.** The durable contribution vs its dated regulatory instantiation. [[D-016 dated-snapshot-method-over-catalogue]]
+
 ## Method and scope
 - **Three usage modes.** Consistency checking / error identification / DSE. [[C-020 three-usage-modes]]
 - **DSE — design space exploration.** Generate valid completions or prove none exist. [[C-020 three-usage-modes]]

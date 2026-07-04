@@ -19,6 +19,8 @@ cross-layer errors.
 - [[C-024 two-tier-governance-framing]] — grading the two sources.
 - [[C-025 governance-conflict-vertical]] — Headline 1 (income conflict).
 - [[C-026 cross-credential-predicate-gap-horizontal]] — Headline 2 (floor-area gap).
+- [[S-043 csok-decree-518-2023]] — the decree grounding the floor-area rule (C4).
+- [[D-017 mdoc-simplified-wlog]] — the example carries SD-JWT-VC only, w.l.o.g.
 
 ## Source
 `sections/03_overview.md`; `sections/05_evaluation.md §5.1.3`.

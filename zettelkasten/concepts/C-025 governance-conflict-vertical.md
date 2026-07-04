@@ -5,7 +5,7 @@ type: concept
 maturity: permanent
 tags: [topic/governance, kind/result, layer/fsl]
 sources: ["sections/05_evaluation.md §5.1.3", ".claude/memory/claim_08_contradictory_constraints.md", ".claude/memory/decision_two_headline_results.md"]
-related: ["[[C-013 cross-layer-constraint-taxonomy-c1-c9]]", "[[C-016 format-capability-matrix]]", "[[C-012 error-predicate]]", "[[C-026 cross-credential-predicate-gap-horizontal]]", "[[K-008 contradictory-cross-framework-constraints]]"]
+related: ["[[C-013 cross-layer-constraint-taxonomy-c1-c9]]", "[[C-016 format-capability-matrix]]", "[[C-012 error-predicate]]", "[[C-026 cross-credential-predicate-gap-horizontal]]", "[[K-008 contradictory-cross-framework-constraints]]", "[[C-034 statutory-unlinkability-gap]]", "[[D-014 regulator-documented-conflict]]"]
 created: 2026-06-16
 ---
 
@@ -28,6 +28,8 @@ consequence visible only under multi-layer analysis.
 - [[C-013 cross-layer-constraint-taxonomy-c1-c9]] — C5/C6/C7/C8.
 - [[C-026 cross-credential-predicate-gap-horizontal]] — the orthogonal second headline.
 - [[K-008 contradictory-cross-framework-constraints]] — the binding claim.
+- [[C-034 statutory-unlinkability-gap]] — the same conflict shape documented in the live EU framework.
+- [[D-014 regulator-documented-conflict]] — presentation: regulator-documented first, CSOK as instantiation.
 
 ## Source
 `sections/05_evaluation.md §5.1.3`; claim_08; two-headline-results decision.

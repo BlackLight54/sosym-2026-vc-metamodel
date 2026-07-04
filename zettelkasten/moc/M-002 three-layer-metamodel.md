@@ -19,6 +19,7 @@ concrete formats, with each layer derived from the one above.
 - [[C-004 format-specific-layer]] — FSL: concrete formats, no intra-layer constraints.
 - [[C-014 trace-reference]] — how the CSL is derived from the DCL.
 - [[C-016 format-capability-matrix]] — the six capabilities per format.
+- [[C-039 disclosure-spectrum]] — the ordered disclosure spectrum the capabilities point-sample.
 - [[C-017 capability-driven-format-elimination]] — capabilities narrow the format space.
 - [[C-018 governance-annotations]] — governance sources as first-class markers.
 - [[C-005 vcdm-2.0-grounding]] — what the whole metamodel is grounded in.
