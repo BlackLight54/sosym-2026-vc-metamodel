@@ -93,6 +93,38 @@
   .callout.warn { background: var(--warn-soft); border-color: #f0dcae; }
   .callout .ctitle { font-weight: 700; font-size: .82rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin-bottom: .4rem; }
 
+  /* Decisions & framing */
+  .decisions { margin-top: 2rem; }
+  .decision { border: 1px solid var(--rule-strong); border-radius: 10px; padding: 1.1rem 1.3rem;
+    margin: 1.2rem 0; background: var(--softer); }
+  .decision .dec-q { font-weight: 650; font-size: 1.02rem; margin-bottom: .7rem; }
+  .decn { display: inline-block; min-width: 1.5em; text-align: center; font-weight: 700;
+    color: #fff; background: var(--accent); border-radius: 5px; padding: 0 .35em; margin-right: .5em;
+    font-variant-numeric: tabular-nums; }
+  ul.dec-opt { list-style: none; padding-left: 0; margin: .4rem 0 .9rem; }
+  ul.dec-opt li { padding: .4rem .7rem; border-left: 3px solid var(--rule-strong);
+    background: var(--bg); border-radius: 0 6px 6px 0; margin: .4rem 0; font-size: .95rem; }
+  ul.dec-opt li.rec { border-left-color: var(--ok); background: var(--ok-soft); }
+  .opt-tag { display: inline-block; font-size: .68rem; font-weight: 700; padding: .1em .5em;
+    border-radius: 20px; letter-spacing: .02em; vertical-align: middle; white-space: nowrap;
+    text-transform: uppercase; }
+  .opt-tag.go { background: var(--ok-soft); color: var(--ok); }
+  .opt-tag.risk { background: var(--bad-soft); color: var(--bad); }
+  .dec-rec { background: var(--accent-soft); border-radius: 8px; padding: .7rem .95rem;
+    font-size: .95rem; color: #243b52; }
+  .dec-rec strong { color: var(--accent); }
+  .dec-impl { margin-top: .7rem; font-size: .88rem; color: var(--muted); }
+  .dec-impl .lbl { font-weight: 700; color: var(--fg); text-transform: uppercase;
+    letter-spacing: .03em; font-size: .74rem; margin-right: .3em; }
+  .framing { border: 1px solid #bfe3cd; border-left: 5px solid var(--ok); background: var(--ok-soft);
+    border-radius: 8px; padding: 1rem 1.2rem; margin: 1.6rem 0 .5rem; }
+  .framing .ctitle { font-weight: 700; font-size: .82rem; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--ok); margin-bottom: .4rem; }
+  .framing p { margin: .3rem 0; }
+  .evidence-label { text-align: center; text-transform: uppercase; letter-spacing: .14em;
+    font-size: .74rem; font-weight: 700; color: var(--faint); margin: 3rem 0 0;
+    padding-top: 1.4rem; border-top: 1px solid var(--rule); }
+
   hr { border: none; border-top: 1px solid var(--rule); margin: 2.6rem 0; }
 
   footer.doc { margin-top: 4rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
@@ -107,9 +139,10 @@
 
 <header class="doc">
   <h1>Threats to applicability in the EU legal/regulatory context</h1>
-  <p class="subtitle">Research synthesis for the verifiable-credential multi-layer metamodel paper.</p>
+  <p class="subtitle">Research synthesis and framing decisions for the verifiable-credential multi-layer metamodel paper.</p>
   <div class="runmeta">
     <span>Dated <strong>2026-06-18</strong></span>
+    <span>As-of snapshot <strong>June 2026, ARF v2.9.0</strong></span>
     <span>Deep-research run <code>w7bu5mdj7</code></span>
     <span>27 sources fetched &middot; 125 claims &middot; 25 verified &middot; 23 confirmed &middot; 2 refuted</span>
   </div>
@@ -133,6 +166,7 @@
 <nav class="toc">
   <div class="toc-label">Contents</div>
   <ol>
+    <li><span class="num">0</span><a href="#s0">Decisions &amp; framing</a></li>
     <li><span class="num">1</span><a href="#s1">Is the problem real?</a></li>
     <li><span class="num">2</span><a href="#s2">Currency corrections</a></li>
     <li><span class="num">3</span><a href="#s3">Threats, ranked</a></li>
@@ -142,6 +176,90 @@
     <li><span class="num">7</span><a href="#s7">Verified sources</a></li>
   </ol>
 </nav>
+
+<section id="s0" class="decisions">
+  <h2><span class="h2num">0.</span>Decisions &amp; framing</h2>
+  <p style="color:var(--muted);font-size:.93rem;">
+    Four framing decisions the paper must commit to before the EU-regulatory material is drafted. Each
+    states the options, the recommended choice, and what that choice binds the paper to. The recommended
+    one-paragraph framing at the end synthesizes all four.
+  </p>
+
+  <div class="decision">
+    <div class="dec-q"><span class="decn">A</span> Is verifier-side (relying-party) governance in scope, out of scope, or an extension axis?</div>
+    <ul class="dec-opt">
+      <li class="rec">Issuer-side remit, name the verifier extension <span class="opt-tag go">recommend</span> &mdash; scope the paper to issuer-side credential design and name verifier-side governance (RP registration under CIR&nbsp;2025/848) as the adjacent extension of the same cross-layer-constraint method, cited as breadth evidence that multi-source governance is pervasive.</li>
+      <li>Silent on the verifier axis (current draft) <span class="opt-tag risk">adversarial reviewer: "you model half the governance"</span></li>
+      <li>Retrofit the verifier axis under deadline &mdash; a missing entity class and constraint family, not a tweak</li>
+    </ul>
+    <div class="dec-rec">
+      <strong>Recommend: issuer-side remit, verifier axis named as the extension.</strong> Naming the
+      boundary converts a genuine gap into evidence for the approach: an over-asking check is structurally a
+      cross-layer predicate (requested attributes against registered attributes), so the method carries over
+      even though the current metamodel does not express it.
+    </div>
+    <div class="dec-impl"><span class="lbl">Commits the paper to:</span> a &sect;5.3 external-validity paragraph that names the issuer/verifier boundary and cites CIR&nbsp;2025/848 as breadth evidence rather than leaving the verifier axis silent.</div>
+  </div>
+
+  <div class="decision">
+    <div class="dec-q"><span class="decn">B</span> Is the vertical conflict presented as regulator-documented or author-constructed?</div>
+    <ul class="dec-opt">
+      <li class="rec">Regulator-documented, the ARF's own text as primary evidence <span class="opt-tag go">recommend</span> &mdash; headline ARF v2.9.0 &sect;7.4.3.5.1, which names Relying-Party linkability as a privacy risk and concedes the salted-hash baseline is linkable; the CSOK running example instantiates the same shape rather than originating it.</li>
+      <li>Author-constructed example first <span class="opt-tag risk">invites "is this a real problem?"</span></li>
+    </ul>
+    <div class="dec-rec">
+      <strong>Recommend: regulator-documented.</strong> The strongest evidence is the framework's own
+      admission, not our example or third-party critique. Leading with the regulator's text pre-empts the
+      "constructed straw problem" objection and lets the in-regulation evidence carry the argument
+      independently of the unverified academic sources.
+    </div>
+    <div class="dec-impl"><span class="lbl">Commits the paper to:</span> quoting ARF &sect;7.4.3.5.1 in the motivation and positioning CSOK as an instantiation of a live conflict, not its origin.</div>
+  </div>
+
+  <div class="decision">
+    <div class="dec-q"><span class="decn">C</span> Is the eIDAS expressiveness result (the highest-risk binding claim) framed as a strength or a limitation?</div>
+    <ul class="dec-opt">
+      <li class="rec">Strength first, own the partials <span class="opt-tag go">recommend</span> &mdash; all eight ARF constraints expressible (three fully, five partially, none outside the metamodel), then explain the five partials via their two named root causes.</li>
+      <li>Strength only &mdash; headline the result, leave the partials unexamined <span class="opt-tag risk">adversarial reviewer attacks the gap</span></li>
+      <li>Limitation first &mdash; undersells a genuinely positive result</li>
+    </ul>
+    <div class="dec-rec">
+      <strong>Recommend: strength first, then own the partials.</strong> This is the claim most exposed to a
+      rigorous reviewer. Stating plainly what "partial" means, and why, is more credible than a clean headline
+      and disarms the objection before it is raised.
+    </div>
+    <div class="dec-impl"><span class="lbl">Commits the paper to:</span> a short "what partial expressibility means and why" paragraph naming the two gaps (attestation-qualification levels; claim-granularity privacy annotations).</div>
+  </div>
+
+  <div class="decision">
+    <div class="dec-q"><span class="decn">D</span> How is the moving-target regulation handled, given three CIR batches and ARF now at v2.9.0?</div>
+    <ul class="dec-opt">
+      <li class="rec">Dated snapshot, method over catalogue <span class="opt-tag go">recommend</span> &mdash; state an explicit as-of date (June 2026, ARF v2.9.0) and frame the eIDAS/GDPR/VCDM catalogue as a dated instantiation of a method (cross-layer constraints as predicates) that outlives any version.</li>
+      <li>Pin to one version silently &mdash; <span class="opt-tag risk">out of date by publication</span></li>
+    </ul>
+    <div class="dec-rec">
+      <strong>Recommend: dated snapshot, method over catalogue.</strong> Foregrounding the durable method,
+      with the regulation as a timestamped instance, protects the contribution from the regulation moving
+      again between submission and print.
+    </div>
+    <div class="dec-impl"><span class="lbl">Commits the paper to:</span> an as-of footnote; an explicit method-vs-catalogue distinction; the v2.7.3 &rarr; v2.9.0 re-verification already tracked in O-EUTHREAT.</div>
+  </div>
+
+  <div class="framing">
+    <div class="ctitle">Recommended one-paragraph framing</div>
+    <p>
+      A method for detecting cross-layer design errors in interrelated verifiable-credential schemas under
+      multiple, independently-enacted governance sources (W3C VCDM, eIDAS&nbsp;2 / ARF, GDPR). The motivation
+      is a conflict the EU's own framework documents, not one we constructed; the eIDAS/GDPR/VCDM stack is a
+      dated instantiation (June 2026, ARF v2.9.0) of a method that outlives it. The remit is issuer-side
+      credential design; verifier-side governance (relying-party registration under CIR 2025/848) is the
+      named, adjacent extension, evidence that multi-source governance is pervasive rather than a gap in the
+      model.
+    </p>
+  </div>
+</section>
+
+<p class="evidence-label">Evidence base</p>
 
 <section id="s1">
   <h2><span class="h2num">1.</span>Is the problem real? Yes, and the regulator documents it</h2>
@@ -160,6 +278,33 @@
     The governance source therefore documents the exact vertical conflict the paper formalizes: a statutory
     unlinkability duty against linkable mandated formats, with the fix acknowledged but not bound.
   </p>
+
+  <h3>The mechanism, precisely</h3>
+  <p>The conflict is not rhetorical. It follows from format capabilities the regulation itself fixes:</p>
+  <ol>
+    <li>Both mandated baseline formats, ISO/IEC 18013-5 mdoc (MSO) and SD-JWT&nbsp;VC, realize selective
+      disclosure with <strong>salted-hash commitments</strong>. The holder can hide fields, but the disclosed
+      salts are stable across presentations, so two verifiers (or a verifier and an issuer) can correlate
+      them. This is disclosure-with-linkability, not zero-knowledge.</li>
+    <li>Genuine unlinkability, and predicate proofs that establish "income&nbsp;&gt;&nbsp;threshold" without
+      revealing the value, require <strong>ZKP / multi-message-signature (BBS-type) schemes</strong>. In the
+      EU stack these are TS13 and TS14: published, but <strong>out of baseline and bound by no implementing
+      act</strong>.</li>
+    <li><strong>Dual issuance</strong> (CIR 2024/2977) requires a PID in <em>both</em> mdoc and SD-JWT&nbsp;VC.
+      The conjunction removes the usual escape hatch of "pick the more capable format": both mandated formats
+      share the same capability ceiling.</li>
+    <li>Two statutory duties pull the other way: unlinkability where identification is not needed
+      (Art.&nbsp;5a(16)(b)) and request-time data minimization (Art.&nbsp;5b(3)).</li>
+  </ol>
+  <p>
+    So the set {mandated, linkable, non-predicate baseline formats} together with {statutory unlinkability +
+    minimization} is jointly unsatisfiable under the currently approved capability set. That is the paper's
+    vertical Headline-1 conflict, occurring verbatim in the live framework. The CSOK running example
+    instantiates the same shape, and its G0&ndash;G7 ablation shows that only the full conjunction of
+    governance sources is unsatisfiable, every proper subset is satisfiable, so the conflict is structural,
+    not an artifact of one over-read rule.
+  </p>
+
   <p>Supporting layers of evidence, weighted by strength:</p>
   <ul>
     <li><strong>In-force mechanism <span class="badge ok">primary</span></strong> &mdash;
@@ -206,6 +351,21 @@
     </tbody>
   </table>
   </div>
+  <h3>Why these matter beyond a version bump</h3>
+  <ul>
+    <li><strong>#1 is not cosmetic.</strong> The eight ARF constraints (ARF-C1..C8) in the evaluation were
+      read from v2.7.3. v2.9.0 reorganizes the format rules into &sect;5.4 and the privacy/linkability
+      treatment into &sect;7.4.3.5. Before resubmission each constraint must be re-located and re-checked
+      against the current text; a stale version invites the reviewer to ask whether the result still holds.</li>
+    <li><strong>#2 cuts both ways.</strong> The four-realization taxonomy (SD-JWT&nbsp;VC, mdoc, JSON-LD
+      W3C&nbsp;VC, X.509-AC) is finer than the paper's binary, so the coarse reading should be softened where
+      it overstates. But the catalogue does not relax the PID / qualified-attestation mandate: the inference
+      that JSON-LD W3C&nbsp;VC is therefore permitted for qualified attestations was adversarially refuted
+      (1-2). Keep the bar.</li>
+    <li><strong>#3 strengthens the argument.</strong> "Deferred draft" understated the case. The unlinkable
+      schemes are published specs that the regulation chooses not to mandate. That reframes the gap from a
+      technical immaturity into a governance decision, which is precisely the paper's point.</li>
+  </ul>
 </section>
 
 <section id="s3">
@@ -221,27 +381,50 @@
       what was registered; over-asking grounds suspension (Art.&nbsp;9(2)(c)); access is mediated by access
       certificates, not a Trusted&nbsp;List. Sibling instruments out of reach: cross-border matching
       (2025/846), breach notification (2025/847), certified-wallet listing (2025/849), trust/status
-      governance. <strong>Double-edged:</strong> strengthens motivation and is a genuine limitation. The paper
-      must state explicitly whether verifier-side governance is out of scope or an extension axis; the current
-      draft leaves it silent.
+      governance. <strong>Double-edged:</strong> it strengthens the motivation and is a genuine limitation at
+      the same time.
+      <div class="dec-impl"><span class="lbl">Raised by:</span> the adversarial reviewer ("you model half the
+        governance") and the practitioner ("real deployments turn on who may ask"). <span class="lbl">Severity:</span>
+        high, it touches the central claim. <span class="lbl">Mitigation:</span> Decision&nbsp;A, name the
+        boundary and cite CIR 2025/848 as breadth evidence, not silence.</div>
     </li>
     <li>
       <strong>Moving-target regulation</strong><br>
-      Three CIR batches Dec 2024 to Aug 2025; CIR 2025/848 is in force but only applicable 24 Dec 2026, after
-      a typical mid-2026 submission. Frame currency as a dated snapshot.
+      The stack moved across three CIR batches between Dec 2024 and Aug 2025, ARF advanced two minor versions
+      in six months, and CIR 2025/848 is in force but only <em>applicable</em> from 24 Dec 2026, after a
+      typical mid-2026 submission. A reader checking the citations at review time may find them superseded.
+      <div class="dec-impl"><span class="lbl">Raised by:</span> the practitioner and the adversarial reviewer.
+        <span class="lbl">Severity:</span> medium, it threatens currency not correctness. <span class="lbl">Mitigation:</span>
+        Decision&nbsp;D, dated snapshot plus method-over-catalogue framing.</div>
     </li>
     <li>
       <strong>Coarse format reading</strong><br>
-      See correction&nbsp;#2: the binary reading simplifies the four-realization rule. Refine without
-      over-correcting.
+      The paper's binary "SD-JWT-VC or mdoc" simplifies the current four-realization rule (ETSI
+      TS&nbsp;119&nbsp;472-1 v1.2.1; ARF v2.9.0 &sect;5.4). The simplification is harmless for the headline
+      conflict (all baseline realizations share the salted-hash ceiling) but a precise reviewer will flag the
+      imprecision.
+      <div class="dec-impl"><span class="lbl">Raised by:</span> the standards-literate reviewer.
+        <span class="lbl">Severity:</span> low. <span class="lbl">Mitigation:</span> refine the wording per
+        correction&nbsp;#2 without relaxing the qualified-attestation bar (refuted softening, 1-2).</div>
     </li>
     <li>
       <strong>Single-jurisdiction (EU) framing</strong><br>
-      The governance catalogue is EU-specific; generalization beyond eIDAS/GDPR/VCDM is asserted, not shown.
+      The governance catalogue is EU-specific (eIDAS/GDPR/VCDM). The method is jurisdiction-agnostic, but the
+      paper currently asserts rather than demonstrates that it transfers to, say, the US or a sectoral
+      framework.
+      <div class="dec-impl"><span class="lbl">Raised by:</span> the generalizability reviewer.
+        <span class="lbl">Severity:</span> low-medium. <span class="lbl">Mitigation:</span> claim only what is
+        shown, position the EU stack as one instantiation of the method (Decision&nbsp;D), and name a second
+        jurisdiction as future work.</div>
     </li>
     <li>
       <strong>Tool reliance (Refinery)</strong><br>
-      Portability of the predicates beyond one solver is untested (see Q-006).
+      The constraints are expressed and solved in one framework. Whether they port to another partial-model
+      finder or a generic SMT encoding is untested, so reproducibility depends on a single research prototype.
+      <div class="dec-impl"><span class="lbl">Raised by:</span> the formal-methods reviewer.
+        <span class="lbl">Severity:</span> low. <span class="lbl">Mitigation:</span> argue the predicates are
+        framework-independent (graph predicates over partial models) and flag portability as future work
+        (Q-006).</div>
     </li>
   </ol>
 </section>
@@ -261,6 +444,31 @@
     <li><strong>Trust mechanism:</strong> ARF v2.9.0 states there is no Trusted&nbsp;List or LoTE for relying
       parties; an RP holds access certificate(s) from an Access Certificate Authority.</li>
   </ul>
+
+  <h3>Why the metamodel cannot express this, and what it would take</h3>
+  <p>
+    The three layers model the credential and its issuer-side format governance: DCL (domain claims), CSL
+    (schemas, credentials, subjects), FSL (formats, capabilities, issuer governance annotations). The
+    relying-party regime governs a different actor and a different act, the verifier's request. Expressing it
+    would require model elements the metamodel does not have:
+  </p>
+  <ul>
+    <li>a <strong>Verifier / Relying-Party</strong> entity carrying its registered intended-uses and a typed
+      entitlement;</li>
+    <li>a <strong>request</strong> relation: the attributes an RP may ask for, per intended use;</li>
+    <li>an <strong>access-policy predicate</strong> over that relation, with over-asking as the violation
+      (request&nbsp;&#8836;&nbsp;registration);</li>
+    <li>an <strong>access-certificate</strong> artifact as the trust anchor, in place of the issuer-side
+      trust assumption.</li>
+  </ul>
+  <p>
+    That is a missing entity class and a missing constraint family, not a tweak. It is also why
+    Decision&nbsp;A matters: the clean move is to name this as the verifier-side extension of the same
+    cross-layer-constraint method, not to retrofit it under deadline. Notably, the method itself would carry
+    over, an over-asking check is structurally a cross-layer predicate (request attributes against registered
+    attributes), which is evidence for, not against, the approach.
+  </p>
+
   <div class="callout">
     <div class="ctitle">Imprecisions to carry forward</div>
     RP registration <em>certificates</em> were made optional (April 2025 comitology); cite the "registration
@@ -294,12 +502,13 @@
 
 <section id="s6">
   <h2><span class="h2num">6.</span>Open follow-ups (close before submission)</h2>
+  <p style="color:var(--muted);font-size:.92rem;">All tracked in the todo <code>O-EUTHREAT</code>. Tagged by what each one blocks.</p>
   <ul class="checklist">
-    <li>Locate the exact 2025/xxxx OJ numbers and subjects of the 30 Jul 2025 round of eight CIRs (seven trust-services + one EAA specifications).</li>
-    <li>Re-verify ARF-C1..C8 against ARF v2.9.0 &sect;5.4/&sect;7.4 (PID dual-issuance, proximity/mdoc, encoding-independence).</li>
-    <li>Confirm the cryptographers' feedback citation; resolve Biedermann (S-020) and Schwalm (S-021) citekeys.</li>
-    <li>Confirm the AEPD post title/date; fetch the rendered EUR-Lex HTML for CIR 2025/848.</li>
-    <li>Decide and state the RP-scope-gap framing: deliberate out-of-scope, or a verifier/attribute-request extension.</li>
+    <li>Re-verify ARF-C1..C8 against ARF v2.9.0 &sect;5.4/&sect;7.4 (PID dual-issuance, proximity/mdoc, encoding-independence). <span class="opt-tag risk">blocks K-006</span></li>
+    <li>Decide and state the RP-scope-gap framing: deliberate out-of-scope, or a verifier/attribute-request extension. <span class="opt-tag risk">blocks Decision&nbsp;A</span></li>
+    <li>Confirm the cryptographers' feedback citation; resolve Biedermann (S-020) and Schwalm (S-021) citekeys. <span class="opt-tag risk">blocks citation</span></li>
+    <li>Confirm the AEPD post title/date; fetch the rendered EUR-Lex HTML for CIR 2025/848. <span class="opt-tag go">low effort</span></li>
+    <li>Locate the exact 2025/xxxx OJ numbers and subjects of the 30 Jul 2025 round of eight CIRs (seven trust-services + one EAA specifications). <span class="opt-tag go">low effort</span></li>
   </ul>
 </section>
 
@@ -354,7 +563,8 @@
 </section>
 
 <footer class="doc">
-  Generated 2026-06-18 from deep-research run <code>w7bu5mdj7</code>.
+  Generated 2026-06-18 from deep-research run <code>w7bu5mdj7</code>; framing decisions added for the
+  eIDAS-expressiveness pass.
   Source markdown: <code>context/threats_to_applicability_2026-06-18.md</code>.
   Atomic notes: Zettelkasten S-034 to S-040, C-037, C-038, M-009.
 </footer>
