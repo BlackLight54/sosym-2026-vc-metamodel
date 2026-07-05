@@ -56,6 +56,7 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 | [`plan_budget_cut`](plan_budget_cut/SKILL.md) | "Page budget usage tree" / "We need major reengineering" | Diagnoses page inflation per section; proposes phased cuts with `@CUT-START`/`@CUT-END` markers |
 | [`plan_consolidation_pipeline`](plan_consolidation_pipeline/SKILL.md) | "Build consolidation pipeline" | Maps binding claims to ordered prompt files with dependency tracking |
 | [`plan_rebuttal`](plan_rebuttal/SKILL.md) | "Prepare rebuttal" | Parse reviews, classify points, draft response |
+| [`plan_spine`](plan_spine/SKILL.md) | "Create the spine" / "What goes where?" | Six passes from spin document to frozen structural contract: harvest, home, order, contract, place, audit-and-freeze |
 | [`plan_revision_orchestration`](plan_revision_orchestration/SKILL.md) | "This change affects multiple sections" | Decomposes cross-cutting changes into ordered prompts |
 | [`plan_t3_prototype_first`](plan_t3_prototype_first/SKILL.md) | "Prototype first, then spec" | Three-phase method: prototype on toy example → spec from learnings → full implementation |
 
