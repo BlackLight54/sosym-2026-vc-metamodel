@@ -25,6 +25,7 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 
 | Skill | Trigger | What it does |
 |-------|---------|-------------|
+| [`draft_advisor_brief`](draft_advisor_brief/SKILL.md) | "Advisor brief" / "research proposal one-pager" | One-to-two-page gate artifact: thesis, RQs, delta, evidence state, adversarial readiness, acceptance case, asks |
 | [`draft_bibliography`](draft_bibliography/SKILL.md) | "Resolve citations" / "Fix cite markers" | Resolves `.cite` annotation markers → BibTeX keys, tracks Zotero sync needs |
 | [`draft_evaluation_design`](draft_evaluation_design/SKILL.md) | "Design the evaluation" | Maps contributions → evaluation questions → methods |
 | [`draft_evaluation_execution`](draft_evaluation_execution/SKILL.md) | "Evaluation checklist" / "What do I still need to run?" | Tracks proof/tool/case-study execution status, dependencies, acceptance criteria |

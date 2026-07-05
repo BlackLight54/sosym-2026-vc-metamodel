@@ -47,6 +47,16 @@ at first point of need; (6) *Audit and freeze* — checklist against `M-011`/`M-
 **Must not:** introduce new claims or contributions (that was Stage 2); merge passes; leave a used
 element without an earlier introduction or a signposted forward reference; write prose.
 
+## Gate 3→4 — Advisor check
+
+Before prose begins, the frozen spine is compressed into a one-to-two-page **advisor brief**
+(`.claude/skills/draft_advisor_brief/SKILL.md`): thesis, research questions (proposed → approved as a
+`D-` note), contributions and journal delta, evidence state, adversarial readiness (top objections
+with committed rebuttals), the acceptance case with its honest inverse, and concrete asks with
+defaults. Output: `context/advisor_brief_[date].md`. The meeting's feedback is processed with
+`skills/plan_advisor_feedback`; its decisions come back as `D-` notes and todos before Stage 4
+starts. A brief with no ask that changes what we do next means the gate is not ready to run.
+
 ## Stage 4 — Paragraph engineering
 
 **Reads:** the **frozen spine** (`context/spine/SPINE.md`) one section block at a time, `M-013`
@@ -66,6 +76,31 @@ quotes; restructure silently — a structural change reopens the spine and requi
 The vault serves lookup: `glossary.md` for terms, `M-013` for quotes and traps, `M-011` for what each
 section still owes. Cut prose goes to `context/archive/` with recovery context; new decisions made
 while writing come back as `D-` notes.
+
+## Optional LLM-assisted gates
+
+Candidate checkpoints to insert when the stage they guard is active. Existing skills cover several;
+the rest are candidate skills to create on first need:
+
+- **Spine mock review** (after Stage 3 freeze): run the reviewer personas against `SPINE.md` itself —
+  structural review before any prose exists is the cheapest review the paper will ever get. Uses
+  `skills/ref_reviewer_archetypes` + `setup_reviewer_personas`; no dedicated skill yet.
+- **Claim stress-test** (before Stage 4): one agent per binding claim attempts refutation — find the
+  design that breaks the soundness story or the ARF constraint that resists expression before a
+  reviewer does. Candidate skill: `review_claim_stress_test`.
+- **Model–prose sync check** (during/after Stage 4): every predicate, class, and result named in
+  prose exists in `models/` with matching name and arity, and vice versa for paper-claimed artifacts.
+  Pairs with `skills/ref_refinery`. Candidate skill: `review_model_prose_sync`.
+- **Paragraph contract check** (during Stage 4): each drafted paragraph judged against its scaffold
+  job and `M-013` — the per-paragraph alarm. Partially covered by `review_prose_naturalness` +
+  `review_claim_evidence_audit`; the per-paragraph judge is the addition.
+- **Regulatory currency sweep** (before submission and again before camera-ready): re-run the
+  deep-research currency check against the EU stack; the O-EUTHREAT pattern, generalized. Updates
+  `M-009` and the affected S-notes.
+- Already covered by existing skills: figures (`draft_figure_design`), citations
+  (`draft_bibliography`), naturalness (`review_prose_naturalness`), mechanical pre-submission
+  (`review_pre_submission_check`), champion test (`review_champion_test`), rebuttal (`plan_rebuttal`),
+  advisor feedback intake (`plan_advisor_feedback`).
 
 ## Freshness rules
 
