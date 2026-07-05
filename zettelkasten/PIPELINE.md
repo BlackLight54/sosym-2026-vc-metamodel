@@ -77,30 +77,55 @@ The vault serves lookup: `glossary.md` for terms, `M-013` for quotes and traps, 
 section still owes. Cut prose goes to `context/archive/` with recovery context; new decisions made
 while writing come back as `D-` notes.
 
-## Optional LLM-assisted gates
+## LLM-assisted gates (implemented)
 
-Candidate checkpoints to insert when the stage they guard is active. Existing skills cover several;
-the rest are candidate skills to create on first need:
+Checkpoints with dedicated skills, in pipeline order:
 
-- **Spine mock review** (after Stage 3 freeze): run the reviewer personas against `SPINE.md` itself —
-  structural review before any prose exists is the cheapest review the paper will ever get. Uses
-  `skills/ref_reviewer_archetypes` + `setup_reviewer_personas`; no dedicated skill yet.
-- **Claim stress-test** (before Stage 4): one agent per binding claim attempts refutation — find the
-  design that breaks the soundness story or the ARF constraint that resists expression before a
-  reviewer does. Candidate skill: `review_claim_stress_test`.
-- **Model–prose sync check** (during/after Stage 4): every predicate, class, and result named in
-  prose exists in `models/` with matching name and arity, and vice versa for paper-claimed artifacts.
-  Pairs with `skills/ref_refinery`. Candidate skill: `review_model_prose_sync`.
-- **Paragraph contract check** (during Stage 4): each drafted paragraph judged against its scaffold
-  job and `M-013` — the per-paragraph alarm. Partially covered by `review_prose_naturalness` +
-  `review_claim_evidence_audit`; the per-paragraph judge is the addition.
-- **Regulatory currency sweep** (before submission and again before camera-ready): re-run the
-  deep-research currency check against the EU stack; the O-EUTHREAT pattern, generalized. Updates
-  `M-009` and the affected S-notes.
-- Already covered by existing skills: figures (`draft_figure_design`), citations
-  (`draft_bibliography`), naturalness (`review_prose_naturalness`), mechanical pre-submission
-  (`review_pre_submission_check`), champion test (`review_champion_test`), rebuttal (`plan_rebuttal`),
-  advisor feedback intake (`plan_advisor_feedback`).
+- **Spine mock review** — after the Stage 3 freeze, before the advisor gate: personas attack
+  `SPINE.md` structurally; findings map to `M-010` or reopen named spine passes.
+  → `.claude/skills/review_spine_mock_review`
+- **Claim stress-test** — before Stage 4 and again pre-submission: one skeptic per binding claim
+  attempts refutation (REFUTED / WEAKENED / SURVIVES); verdicts flow into `M-011` and the K-notes.
+  → `.claude/skills/review_claim_stress_test`
+- **Paragraph contract check** — during Stage 4, after each section draft: the per-paragraph alarm
+  against scaffold job, spine contract, and `M-013`; flags with sentence anchors, never rewrites.
+  → `.claude/skills/review_paragraph_contract_check`
+- **Model–prose sync check** — during/after Stage 4 and on any `models/` change: identifier, arity,
+  role, and counted-set consistency both ways (init the `models` submodule first).
+  → `.claude/skills/review_model_prose_sync`
+- **Regulatory currency sweep** — before submission and before camera-ready: every dated EU fact
+  re-verified against primary sources; S-notes, `M-009`, and the as-of snapshot move together.
+  → `.claude/skills/research_currency_sweep`
+
+Also covered by pre-existing skills: figures (`draft_figure_design`), citations
+(`draft_bibliography`), naturalness (`review_prose_naturalness`), mechanical pre-submission
+(`review_pre_submission_check`), champion test (`review_champion_test`), rebuttal (`plan_rebuttal`),
+advisor feedback intake (`plan_advisor_feedback`).
+
+## Candidate gates (next generation, create on first need)
+
+- **Reproducibility dry-run** (`review_repro_dry_run`): a clean-container agent follows the
+  supplementary README from scratch — build the models, rerun E0–E3, diff verdicts and numbers
+  against the paper. The artifact-evaluation rehearsal.
+- **Number consistency check** (`review_number_consistency`): every number in prose (timings, node
+  counts, "eight constraints", abstract figures) traced to the artifact that generates it; flags
+  hand-typed numbers with no generating source.
+- **Cold-reader simulation** (`review_cold_reader_sim`): an agent pinned to the practitioner
+  persona's floor reads linearly and reports, per section, believed-state / confusions /
+  expectations — the empirical test of the spine's entry/exit contracts (complement to the mock
+  review: comprehension, not attack).
+- **Related-work freshness sweep** (`research_related_work_refresh`): near submission, re-run the
+  gap-analysis queries for papers published since; each hit classified must-cite / differentiate
+  (updates `M-004`, `K-011..K-015`) / ignore.
+- **Figure self-containment check** (`review_figure_selfcontainment`): a judge sees only
+  figure + caption and must reconstruct the message; failures are caption fixes (the
+  figures-carry-the-argument doctrine, enforced).
+- **Rebuttal delivery check** (`review_rebuttal_delivery`): after revisions, every change promised
+  in the response letter verified as landed in the text, with diff anchors (closes the
+  `plan_rebuttal` loop).
+- **Submission package assembly** (`project_submission_package`): build and verify the final
+  package — anonymity scan on PDF and supplementary, metadata, completeness against the venue
+  checklist (complements `review_pre_submission_check`, which scans sections, not the package).
 
 ## Freshness rules
 

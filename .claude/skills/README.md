@@ -20,6 +20,7 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 | [`research_gap_analysis`](research_gap_analysis/SKILL.md) | "Generate research questions" | Thesis → agent-ready prompt files in `prompts/` |
 | [`research_prior_work_import`](research_prior_work_import/SKILL.md) | "Import these references" | DOIs/BibTeX → structured reference notes |
 | [`research_related_work_positioning`](research_related_work_positioning/SKILL.md) | "Build comparison matrix" | Positioning statements + comparison matrix |
+| [`research_currency_sweep`](research_currency_sweep/SKILL.md) | "Run the currency sweep" | Re-verifies dated EU regulatory/standards facts against primary sources; updates S-notes, M-009, and the as-of snapshot |
 
 ### `draft_` — Drafting & writing
 
@@ -40,6 +41,10 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 |-------|---------|-------------|
 | [`review_champion_test`](review_champion_test/SKILL.md) | "Would anyone champion this paper?" | Evaluates whether the paper has a champion-worthy insight and whether it's visible |
 | [`review_claim_evidence_audit`](review_claim_evidence_audit/SKILL.md) | "Audit claims" / "Map contributions" | Contribution mapping + full claim–evidence check |
+| [`review_claim_stress_test`](review_claim_stress_test/SKILL.md) | "Stress-test the claims" | One adversarial agent per binding claim attempts refutation; verdicts (REFUTED/WEAKENED/SURVIVES) flow into M-011 and K-notes |
+| [`review_model_prose_sync`](review_model_prose_sync/SKILL.md) | "Do the predicate names still match?" | Bidirectional identifier/arity/role/count consistency between sections/ and models/ |
+| [`review_paragraph_contract_check`](review_paragraph_contract_check/SKILL.md) | "Run the paragraph alarms" | Judges each drafted paragraph against its scaffolded job, spine contract, and M-013 guardrails; flags, never rewrites |
+| [`review_spine_mock_review`](review_spine_mock_review/SKILL.md) | "Mock-review the spine" | Reviewer personas attack the frozen spine before any prose exists; findings map to M-010 or reopen spine passes |
 | [`review_final_review`](review_final_review/SKILL.md) | "Final review" | Orchestrator: coherence, champion test, reviewer sim |
 | [`review_integrity_audit`](review_integrity_audit/SKILL.md) | "Run integrity audit" / "Ethics check" | Factual accuracy, citation honesty, anonymity, overclaiming, LLM tells |
 | [`review_paper_audit`](review_paper_audit/SKILL.md) | "Full paper audit" | Reads all sections, cross-references claims, decisions, gaps, personas |
