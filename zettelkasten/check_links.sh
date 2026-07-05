@@ -25,7 +25,7 @@ for extra in ("index.md", "glossary.md"):
     if os.path.exists(extra): files.append(extra)
 stems = {stem(f) for f in files}
 # Infra docs are valid link targets but are not scanned (they hold illustrative [[links]]).
-stems |= {"README", "tags", "dashboards", "INGESTION", "index", "glossary"}
+stems |= {"README", "tags", "dashboards", "INGESTION", "index", "glossary", "PIPELINE"}
 
 def frontmatter(text):
     if not text.startswith("---"): return {}
@@ -82,6 +82,22 @@ for f in files:
     if s not in {t.strip() for t in moc_targets}:
         errors.append(f"ORPHAN    {f}: not referenced by any MOC or index")
 
+# lint: every source note must have a row in the citekey map
+if os.path.exists("sources/_citekey-map.md"):
+    mapped = set(re.findall(r"\|\s*(S-\d+)", open("sources/_citekey-map.md").read()))
+    for f in files:
+        if f.startswith("sources/") and stem(f) != "_citekey-map":
+            sid = stem(f).split(" ")[0]
+            if sid not in mapped:
+                warnings.append(f"NO-CITEKEY-ROW  {f}: not listed in sources/_citekey-map.md")
+
+# lint: claim notes must carry a status field
+for f in files:
+    if f.startswith("claims/"):
+        fm = frontmatter(open(f, encoding="utf-8").read())
+        if not fm.get("status"):
+            warnings.append(f"NO-STATUS  {f}: claim note missing `status:` field")
+
 # one-directional related (warning): skip if either endpoint is a MOC note
 moc_stems = {stem(f) for f in files if f.startswith("moc/")}
 for a, rels in related.items():
@@ -96,10 +112,14 @@ print("Maturity:", ", ".join(f"{k}={v}" for k, v in sorted(maturity.items())))
 print()
 # One-directional `related` links are expected in a Zettelkasten (hub and concept->source
 # links are naturally asymmetric); summarize by default, list with -v.
-if warnings:
-    print(f"{len(warnings)} one-directional `related` link(s) (expected; run with -v to list).")
+oneway = [w for w in warnings if w.startswith("ONE-WAY")]
+lint = [w for w in warnings if not w.startswith("ONE-WAY")]
+if oneway:
+    print(f"{len(oneway)} one-directional `related` link(s) (expected; run with -v to list).")
     if verbose:
-        for w in warnings: print("  ", w)
+        for w in oneway: print("  ", w)
+for w in lint:
+    print("WARN", w)
 print()
 if errors:
     for e in errors: print("ERROR", e)

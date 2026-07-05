@@ -11,9 +11,14 @@ This is a standalone Obsidian-compatible vault. It is **not** part of the LaTeX 
 ## Start here
 
 1. `index.md` — master map of content (entry point).
-2. `moc/M-001 journal-paper-outline.md` — proposed journal structure, each section linking the notes that feed it.
-3. `moc/M-007 writing-gaps.md` — open questions and the `maturity: seed` worklist: what to write next.
-4. `dashboards.md` — live Dataview queries (claims by status, orphans, seed worklist).
+2. `PIPELINE.md` — the stage contract: what each pipeline stage reads here and what it owes.
+3. `moc/M-001 journal-paper-outline.md` — proposed journal structure, each section linking the notes that feed it.
+4. `moc/M-007 writing-gaps.md` — open questions and the `maturity: seed` worklist: what to write next.
+5. `dashboards.md` — live Dataview queries (claims by status, orphans, seed worklist).
+
+MOCs split into two planes: **argument maps** (M-001..M-009, what the paper knows and claims) and
+**production maps** (M-010..M-014: objection ledger, claim delivery matrix, journal delta, drafting
+guardrails, figure plan). Drafting work loads `M-013` first.
 
 ## Note types and ID scheme
 
