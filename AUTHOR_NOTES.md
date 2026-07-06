@@ -46,6 +46,14 @@ sections/*.md  ──pandoc──►  pandoc/*.tex  ──git push──►  Ove
 - Obsidian `%%` comments are not standard pandoc Markdown — the Lua filter must strip them before pandoc processes the file, or preprocess with `sed`.
 - Cross-references (`\ref{fig:...}`, `\label{...}`): pass through as raw LaTeX in Markdown. Pandoc preserves raw LaTeX by default.
 
+### Repository structure (post-migration, 2026-07-06)
+
+This repo (`sosym-2026-vc-metamodel`) is the main authoring repo; it carries the full history of
+`ACM-MODELS-26`, which stays as the frozen conference record. Submodules: `models/`
+(ACM-MODELS-26-code), `prior_work/dse-vc-refinery`, `prior_work/ese-vc-fca` (all https URLs).
+The Overleaf project attaches under `overleaf/` (see `overleaf/README.md`); until its git URL is
+configured, Option 1 below is not wired and builds stay local.
+
 ### Overleaf integration
 
 **Option 1: Git sync (recommended if available)**

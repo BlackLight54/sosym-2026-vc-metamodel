@@ -1,5 +1,23 @@
 # Co-Author Guide
 
+## Repository structure
+
+This is the **main authoring repository** for the SoSyM journal article (successor of the
+withdrawn MODELS'26 submission, whose frozen record lives in `BlackLight54/ACM-MODELS-26`).
+Everything reachable from here:
+
+| Path | What it is |
+|------|-----------|
+| `sections/`, `pandoc/` | Paper source (Markdown, authoritative) and generated LaTeX |
+| `zettelkasten/` | Knowledge base: notes, maps, claims, decisions (`PIPELINE.md` = stage contract) |
+| `context/`, `prompts/`, `skills/`, `.claude/` | Pipeline state, task prompts, automation, memory |
+| `models/` | Submodule → `ACM-MODELS-26-code` (Refinery models, evaluation harness) |
+| `prior_work/dse-vc-refinery` | Submodule → prior Refinery repo |
+| `prior_work/ese-vc-fca` | Submodule → prior artifact repo |
+| `overleaf/` | Attachment point for the Overleaf project (see `overleaf/README.md`) |
+
+Clone with submodules: `git clone --recurse-submodules <url>`.
+
 ## What to edit
 
 Edit the **Markdown files** in `sections/`:
