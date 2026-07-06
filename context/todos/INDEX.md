@@ -74,6 +74,7 @@ Absorbs: X14 → A-BG2 (done). Overlaps: O-REFBG (A-BG1 is the unblocking step).
 |----|-------|--------|----------|
 | M22 | [Migrate to native Tasks](m22_migrate_to_native_tasks.md) | pending | claude |
 | O-MPE | [MPE + Pandoc in-editor preview](o-mpe_markdown_preview_enhanced.md) | pending | martin |
+| O-OVERLEAF | [Wire the Overleaf project into overleaf/](o-overleaf_attach_project.md) | blocked | martin |
 
 ## Completed / Archived
 

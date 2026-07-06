@@ -1,5 +1,7 @@
 # Decisions
 
+- [Repo structure: sosym-2026-vc-metamodel is main](decision_repo_structure_sosym.md) — Overleaf attaches at the edge; ACM-MODELS-26 frozen
+
 - [Modeling-first framing](decision_modeling_first_framing.md) — metamodeling, not detection
 - [Domain: MDE](decision_domain_mde.md) — MDE venue, not formal methods
 - [No MDA terminology](decision_no_mda_terminology.md) — hard constraint from advisor
