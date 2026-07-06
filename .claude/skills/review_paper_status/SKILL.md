@@ -1,5 +1,5 @@
 ---
-description: Lightweight dashboard reporting section maturity, unresolved markers, figure status, TODOs, and time-to-deadline. Use at session start, when asking 'where are we?' or 'what is the status?', or to decide what to work on next.
+description: Lightweight dashboard reporting section maturity, unresolved markers, figure status, TODOs, pipeline gates due, and time-to-deadline. Use at session start, when asking 'where are we?' or 'what is the status?', or to decide what to work on next.
 ---
 
 # Skill: Paper Status Diagnostic
@@ -24,6 +24,8 @@ This is not a quality review (that's `skills/review_final_review`). This is a da
 - CLAUDE.md (thesis — is it filled?).
 - `.claude/memory/decision_*.md` — active decisions (count and list from MEMORY.md).
 - `.claude/memory/claim_*.md` — binding claims with delivery status (from MEMORY.md).
+- `zettelkasten/PIPELINE.md` and the gate artifacts it names (`context/spine/`, `context/*_[date].md`
+  reports), plus `git log` timestamps — for the derived gates-due step (5b).
 
 ## Steps
 
@@ -105,6 +107,25 @@ Read MEMORY.md for decision and claim summaries:
 
 Report any misalignment. Do not fix todos automatically — present findings and let Martin decide.
 
+### 5b. Pipeline gates due (derived — no stored state)
+
+Determine which `zettelkasten/PIPELINE.md` gates are due, **by derivation only**: every gate
+produces an artifact, so due-ness is a pure function of artifact existence and timestamps (file
+dates in `context/`, git log for `sections/` and `models/`). This step MUST NOT write or maintain
+any tracking file — the artifacts are the state; a second ledger would drift from them.
+
+| Gate | Due when |
+|------|----------|
+| Spine mock review | `context/spine/SPINE.md` carries `FROZEN` and no `context/spine/mock_review_*.md` is newer than the freeze date |
+| Advisor brief (Gate 3→4) | mock review verdict is *proceed* and no `context/advisor_brief_*.md` is newer than the freeze |
+| Claim stress-test | spine frozen and no `context/stress_test_*.md` newer than the last change to `M-011` (git log) |
+| Paragraph contract check | any `sections/*.md` committed after the newest `context/paragraph_check_*` for that section |
+| Model–prose sync | `models/` submodule pointer or a model-naming section changed since the newest `context/model_prose_sync_*.md` |
+| Currency sweep | a submission event is upcoming (VENUE.md), or no `context/currency_sweep_*.md` exists and the EU S-notes' last verification predates the current quarter |
+
+Report as: gate, due/not-due/not-yet-applicable, and the one-line evidence (which artifact is
+missing or stale). A gate whose *stage* has not been reached is not-yet-applicable, not due.
+
 ### 6. Setup completeness
 
 Check whether foundational elements are in place:
@@ -157,6 +178,9 @@ Present as a compact report, not a wall of text:
 
 ### Figures
 [figure table, only if figures are in play]
+
+### Pipeline gates
+[gate table from step 5b — only rows that are due or newly satisfied]
 
 ### Risks
 [bulleted risk flags, or "None" if clean]

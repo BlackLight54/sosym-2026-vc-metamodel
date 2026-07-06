@@ -133,5 +133,8 @@ advisor feedback intake (`plan_advisor_feedback`).
   fields.
 - The open items that gate submission live in `context/todos/` (O-EUTHREAT is the current gate);
   `M-011` mirrors them per claim.
+- Gate due-ness is **derived, never stored**: each gate's own report artifact (and git timestamps)
+  is the only state; `skills/review_paper_status` step 5b computes what is due from those artifacts
+  at session start. No separate tracking ledger exists, by design.
 - When a stage finds this contract wrong, fix the contract in the same commit as the work that
   exposed it.
