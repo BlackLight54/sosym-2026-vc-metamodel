@@ -2,11 +2,11 @@
 id: "O-OVERLEAF"
 short: "overleaf-attach"
 title: "Wire the Overleaf project into overleaf/"
-status: blocked
+status: in_progress
 priority: medium
 depends_on: []
 binding_claims: []
-target: "overleaf/, AUTHOR_NOTES.md"
+target: "overleaf/, AUTHOR_NOTES.md, skills/project_overleaf_push"
 pipeline: ""
 assigned: "martin"
 created: "2026-07-06"
@@ -14,29 +14,31 @@ created: "2026-07-06"
 
 ## Goal
 
-`overleaf/` is the attachment point for the Overleaf project in the post-migration repo
-structure (see `overleaf/README.md`), but it is unwired: no Overleaf git URL is configured
-anywhere in this repo. Wire it so `skills/project_overleaf_push` has a working remote.
+Wire the Overleaf project into `overleaf/` so builds reach Overleaf and Overleaf edits flow back.
 
-## Blocked on
+## Done (2026-07-06)
 
-Martin supplying the Overleaf project's git URL (`https://git.overleaf.com/<project-id>`,
-Overleaf: Menu → Git) and an access token if the account uses one. This cannot be discovered
-from the repo.
+The Overleaf project syncs with GitHub via Overleaf GitHub Sync
+(`BlackLight54/sosym-2026-overleaf`); that repo is attached as submodule `overleaf/project`,
+pinned at the Springer Nature template import (commit `1a49800`). `overleaf/README.md` records
+the chosen wiring and the fallback option.
 
-## Steps once unblocked
+## Remaining
 
-1. Prefer Option A from `overleaf/README.md`: add the Overleaf project as a submodule at
-   `overleaf/project`. If the git bridge or credentials make the submodule awkward, fall back to
-   Option B (plain `overleaf` remote on a build checkout, the pre-migration design in
-   AUTHOR_NOTES.md "Overleaf integration").
-2. Update AUTHOR_NOTES.md "Setup TODO": check off the Overleaf git remote item.
-3. Verify round-trip: `skills/project_overleaf_push` pre-flight passes and a test push lands in
-   the Overleaf project history.
-4. Record which option was chosen and why as a one-line note in `overleaf/README.md`.
+1. **Martin:** verify the round trip once. Push any trivial change to
+   `sosym-2026-overleaf:main`, pull it into Overleaf (Menu → GitHub → Pull), confirm the project
+   compiles; make one edit on Overleaf, sync, and confirm it lands back on GitHub.
+2. **Claude:** update `skills/project_overleaf_push` to target `overleaf/project` (build, copy
+   `pandoc/` output into the submodule, commit, push, remind Martin to pull in Overleaf) instead
+   of the pre-migration `build/` checkout with an `overleaf` remote.
+3. **Claude (with O-VENUE):** retarget the pandoc pipeline from ACM `acmart` to the Springer
+   Nature template (`sn-jnl.cls`) now in the Overleaf project; `pandoc/main.tex`,
+   `defaults.yaml`, and the preamble are ACM-shaped.
+4. Update AUTHOR_NOTES.md "Setup TODO" (Overleaf git remote item) when 1 and 2 are confirmed.
 
 ## Acceptance criteria
 
-- A push via `skills/project_overleaf_push` (or the submodule) reaches the Overleaf project.
-- `overleaf/README.md` states the chosen wiring.
+- Round trip verified in both directions.
+- `skills/project_overleaf_push` works against the submodule.
+- Pandoc output compiles under `sn-jnl.cls` on Overleaf.
 - No credentials committed to the repo.

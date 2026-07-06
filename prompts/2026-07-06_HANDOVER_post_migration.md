@@ -43,9 +43,11 @@ advisor brief must be derived from §10 when its time comes, never written indep
   harness); `prior_work/dse-vc-refinery`; `prior_work/ese-vc-fca`. Fresh clones need
   `git submodule update --init` before any model-facing work (`review_model_prose_sync` depends
   on it).
-- `overleaf/` is the attachment point for the Overleaf project; it is **unwired** until Martin
-  supplies the project's git URL (todo O-OVERLEAF, see `overleaf/README.md` for both wiring
-  options and why Overleaf cannot be the main repo).
+- `overleaf/project` is a submodule → `BlackLight54/sosym-2026-overleaf`, which the Overleaf
+  project syncs with via GitHub Sync; it holds the Springer Nature template (`sn-jnl.cls`).
+  Remaining wiring in todo O-OVERLEAF: Martin verifies the sync round trip;
+  `skills/project_overleaf_push` gets retargeted at the submodule; the pandoc pipeline moves
+  from ACM `acmart` to `sn-jnl.cls` (fold that into O-VENUE execution).
 
 **Advisor meeting (2026-07-06):** Martin showed the spin document to his advisor. The outcomes
 are NOT in the repo. Nothing from that meeting has been processed.
@@ -62,9 +64,10 @@ are NOT in the repo. Nothing from that meeting has been processed.
    the confirmed venue via `skills/setup_cfp_import`, regenerate reviewer personas via
    `skills/setup_reviewer_personas`, record the venue D-note. This gates the spine freeze; do it
    before Stage 3 even if feedback intake is quick.
-3. **Execute O-OVERLEAF** (`context/todos/o-overleaf_attach_project.md`) once Martin provides the
-   Overleaf git URL. If he does not have it at hand, leave the todo pending and continue; it does
-   not gate the spine.
+3. **Finish O-OVERLEAF** (`context/todos/o-overleaf_attach_project.md`). The submodule wiring is
+   done; what remains is Martin's one-time sync round-trip check, retargeting
+   `skills/project_overleaf_push` at `overleaf/project`, and the acmart-to-sn-jnl pandoc
+   retarget (do that alongside O-VENUE). None of it gates the spine.
 4. **Start Stage 3.** Run `skills/plan_spine` against the updated spin document. Read the Stage 3
    contract in `PIPELINE.md` first: six passes, no new claims, no prose, output
    `context/spine/SPINE.md` + `mindmap.md`, then the mock review gate.

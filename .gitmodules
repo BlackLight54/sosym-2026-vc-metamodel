@@ -7,3 +7,6 @@
 [submodule "models"]
 	path = models
 	url = https://github.com/BlackLight54/ACM-MODELS-26-code.git
+[submodule "overleaf/project"]
+	path = overleaf/project
+	url = https://github.com/BlackLight54/sosym-2026-overleaf.git
