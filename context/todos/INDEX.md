@@ -9,6 +9,7 @@
 | **T12** | **[Reconcile eval instances, measurements, metamodel](t12_eval_consistency.md)** | **#4,5,6,7,9** | **pending** | **claude** |
 | O-SOUND | [Soundness/completeness properties](o-soundness-eval.md) | #4,9 | pending | claude |
 | **O-EUTHREAT** | **[EU regulatory threats-to-applicability + currency update](o-euthreat_regulatory_applicability.md)** | **#10** | **pending** | **claude** |
+| O-VENUE | [Re-populate VENUE.md for SoSyM + regenerate personas](o-venue_sosym_cfp_import.md) | — | pending | claude |
 
 ## Figures
 
@@ -78,6 +79,7 @@ Absorbs: X14 → A-BG2 (done). Overlaps: O-REFBG (A-BG1 is the unblocking step).
 
 All completed todos are in `context/archive/completed_todos/`. Key completions:
 
+- O-SPIN (Stage 2 spin document, `context/spin_2026-07-06.md`, 2026-07-06)
 - T07 (cross-layer constraints), T08 (eval elaboration), Z-P1 (abstract+intro), Z-P2 (BG+RW rename), Z-P4 (eval+conclusion)
 - O-MODES (usage modes), O-4VAL (four-valued fix), X01 (GDPR hedge), X07 (income variable drift), X14 (Refinery terminology)
 - A-BG2 (notation consistency), A-CONC (shorten conclusion), A-FIG (move/rename figure), A-SHORT (approach redundancy)

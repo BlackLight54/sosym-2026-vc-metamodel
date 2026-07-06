@@ -56,6 +56,15 @@ in the regulator's own June-2026 text.
 [[Q-012 llm-schema-generation-formal-guardrails]], verifier extension realized
 ([[C-040 verifier-side-extension-sketch]]).
 
+## Spin commitment (2026-07-06)
+
+`context/spin_2026-07-06.md` committed the default scope, labeled assumed pending Martin's ruling:
+Tier 1 (mandatory) + [[C-035 dependent-claim-bundling]] / [[C-036 static-dynamic-revocation-mismatch]]
+as C10/C11 + explicit dual issuance ([[D-017 mdoc-simplified-wlog]] revisit via
+[[C-033 dual-issuance-mandate]]). [[Q-007 scalability-deeper-hierarchies]] was recommended for
+inclusion but stays excluded under the default; the rest of Tier 3 and all of Tier 4 are future-work
+paragraphs only.
+
 ## Heilmeier pre-answers (research-proposal seed)
 1. *What are you trying to do?* Make cross-layer design errors in credential ecosystems detectable
    before deployment, by formalizing multi-source governance constraints over a three-layer metamodel
