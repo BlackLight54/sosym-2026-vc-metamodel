@@ -20,11 +20,13 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 | [`research_gap_analysis`](research_gap_analysis/SKILL.md) | "Generate research questions" | Thesis → agent-ready prompt files in `prompts/` |
 | [`research_prior_work_import`](research_prior_work_import/SKILL.md) | "Import these references" | DOIs/BibTeX → structured reference notes |
 | [`research_related_work_positioning`](research_related_work_positioning/SKILL.md) | "Build comparison matrix" | Positioning statements + comparison matrix |
+| [`research_currency_sweep`](research_currency_sweep/SKILL.md) | "Run the currency sweep" | Re-verifies dated EU regulatory/standards facts against primary sources; updates S-notes, M-009, and the as-of snapshot |
 
 ### `draft_` — Drafting & writing
 
 | Skill | Trigger | What it does |
 |-------|---------|-------------|
+| [`draft_advisor_brief`](draft_advisor_brief/SKILL.md) | "Advisor brief" / "research proposal one-pager" | One-to-two-page gate artifact: thesis, RQs, delta, evidence state, adversarial readiness, acceptance case, asks |
 | [`draft_bibliography`](draft_bibliography/SKILL.md) | "Resolve citations" / "Fix cite markers" | Resolves `.cite` annotation markers → BibTeX keys, tracks Zotero sync needs |
 | [`draft_evaluation_design`](draft_evaluation_design/SKILL.md) | "Design the evaluation" | Maps contributions → evaluation questions → methods |
 | [`draft_evaluation_execution`](draft_evaluation_execution/SKILL.md) | "Evaluation checklist" / "What do I still need to run?" | Tracks proof/tool/case-study execution status, dependencies, acceptance criteria |
@@ -39,6 +41,10 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 |-------|---------|-------------|
 | [`review_champion_test`](review_champion_test/SKILL.md) | "Would anyone champion this paper?" | Evaluates whether the paper has a champion-worthy insight and whether it's visible |
 | [`review_claim_evidence_audit`](review_claim_evidence_audit/SKILL.md) | "Audit claims" / "Map contributions" | Contribution mapping + full claim–evidence check |
+| [`review_claim_stress_test`](review_claim_stress_test/SKILL.md) | "Stress-test the claims" | One adversarial agent per binding claim attempts refutation; verdicts (REFUTED/WEAKENED/SURVIVES) flow into M-011 and K-notes |
+| [`review_model_prose_sync`](review_model_prose_sync/SKILL.md) | "Do the predicate names still match?" | Bidirectional identifier/arity/role/count consistency between sections/ and models/ |
+| [`review_paragraph_contract_check`](review_paragraph_contract_check/SKILL.md) | "Run the paragraph alarms" | Judges each drafted paragraph against its scaffolded job, spine contract, and M-013 guardrails; flags, never rewrites |
+| [`review_spine_mock_review`](review_spine_mock_review/SKILL.md) | "Mock-review the spine" | Reviewer personas attack the frozen spine before any prose exists; findings map to M-010 or reopen spine passes |
 | [`review_final_review`](review_final_review/SKILL.md) | "Final review" | Orchestrator: coherence, champion test, reviewer sim |
 | [`review_integrity_audit`](review_integrity_audit/SKILL.md) | "Run integrity audit" / "Ethics check" | Factual accuracy, citation honesty, anonymity, overclaiming, LLM tells |
 | [`review_paper_audit`](review_paper_audit/SKILL.md) | "Full paper audit" | Reads all sections, cross-references claims, decisions, gaps, personas |
@@ -56,6 +62,7 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 | [`plan_budget_cut`](plan_budget_cut/SKILL.md) | "Page budget usage tree" / "We need major reengineering" | Diagnoses page inflation per section; proposes phased cuts with `@CUT-START`/`@CUT-END` markers |
 | [`plan_consolidation_pipeline`](plan_consolidation_pipeline/SKILL.md) | "Build consolidation pipeline" | Maps binding claims to ordered prompt files with dependency tracking |
 | [`plan_rebuttal`](plan_rebuttal/SKILL.md) | "Prepare rebuttal" | Parse reviews, classify points, draft response |
+| [`plan_spine`](plan_spine/SKILL.md) | "Create the spine" / "What goes where?" | Six passes from spin document to frozen structural contract: harvest, home, order, contract, place, audit-and-freeze |
 | [`plan_revision_orchestration`](plan_revision_orchestration/SKILL.md) | "This change affects multiple sections" | Decomposes cross-cutting changes into ordered prompts |
 | [`plan_t3_prototype_first`](plan_t3_prototype_first/SKILL.md) | "Prototype first, then spec" | Three-phase method: prototype on toy example → spec from learnings → full implementation |
 

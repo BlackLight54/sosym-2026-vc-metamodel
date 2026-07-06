@@ -5,7 +5,7 @@ type: question
 maturity: developing
 tags: [topic/eidas, layer/csl, prov/self]
 sources: ["sections/05_evaluation.md §5.1.2"]
-related: ["[[K-006 expressiveness-validation]]", "[[C-022 eidas-arf-format-mandate]]"]
+related: ["[[K-006 expressiveness-validation]]", "[[C-022 eidas-arf-format-mandate]]", "[[D-015 expressiveness-strength-first]]"]
 created: 2026-06-16
 ---
 
@@ -24,6 +24,7 @@ changing the constraint formalization approach.
 ## Links
 - [[K-006 expressiveness-validation]] — the claim it strengthens.
 - [[C-022 eidas-arf-format-mandate]] — the ARF source.
+- [[D-015 expressiveness-strength-first]] — the framing that names this gap in the paper.
 
 ## Source
 §5.1.2.

@@ -5,7 +5,7 @@ type: concept
 maturity: permanent
 tags: [kind/example, layer/cross]
 sources: ["sections/03_overview.md §3.1", ".claude/memory/decision_csok_running_example.md", ".claude/memory/decision_csok_naming.md"]
-related: ["[[C-002 domain-concept-layer]]", "[[C-025 governance-conflict-vertical]]", "[[C-026 cross-credential-predicate-gap-horizontal]]", "[[C-024 two-tier-governance-framing]]"]
+related: ["[[C-002 domain-concept-layer]]", "[[C-025 governance-conflict-vertical]]", "[[C-026 cross-credential-predicate-gap-horizontal]]", "[[C-024 two-tier-governance-framing]]", "[[D-017 mdoc-simplified-wlog]]", "[[S-043 csok-decree-518-2023]]"]
 created: 2026-06-16
 ---
 
@@ -24,6 +24,8 @@ single domain — the vertical income governance conflict and the horizontal flo
 - [[C-025 governance-conflict-vertical]] — IncomeCred conflict.
 - [[C-026 cross-credential-predicate-gap-horizontal]] — floor-area gap across two credentials.
 - [[C-024 two-tier-governance-framing]] — eIDAS vs GDPR framing on IncomeCred.
+- [[D-017 mdoc-simplified-wlog]] — why the example carries SD-JWT-VC only.
+- [[S-043 csok-decree-518-2023]] — the decree grounding the floor-area rule.
 
 ## Source
 `sections/03_overview.md §3.1`; csok-running-example and csok-naming decisions.

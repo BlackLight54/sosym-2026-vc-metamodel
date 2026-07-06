@@ -1,8 +1,9 @@
 # Index — credential-ecosystem metamodel Zettelkasten
 
-Master map of content. 112 atomic notes distilled from this repository (including a model and figure
-artifact layer) plus Notion and Todoist ingestion (see `INGESTION.md`), organized for drafting a
-journal-length article on the three-layer verifiable-credential metamodel.
+Master map of content. 133 atomic notes and 14 maps, distilled from this repository (including a model
+and figure artifact layer) plus Notion and Todoist ingestion (see `INGESTION.md`), organized for
+drafting a journal-length article on the three-layer verifiable-credential metamodel. How the vault is
+consumed stage by stage: `PIPELINE.md`.
 
 New here? Read `README.md`, then walk the maps below in order.
 
@@ -18,6 +19,16 @@ New here? Read `README.md`, then walk the maps below in order.
 8. [[M-008 artifact-inventory]] — claim → evidence; each result mapped to a model file or figure.
 9. [[M-009 threats-to-applicability]] — EU regulatory threats (current state) and the "is the problem real?" evidence.
 
+## Maps of content (the production)
+
+Consumed by the spin, paragraph-engineering, and writing stages (`PIPELINE.md`):
+
+10. [[M-010 objection-ledger]] — every anticipated attack, its committed rebuttal, its landing spot.
+11. [[M-011 claim-delivery-matrix]] — claim → evidence → artifact → figure → threat → open item, one table.
+12. [[M-012 journal-extension-delta]] — the conference→journal delta ranked by claim impact; Heilmeier seed.
+13. [[M-013 drafting-guardrails]] — prohibitions, refuted claims, do-not-cite list, anchor quotes. **Load before drafting.**
+14. [[M-014 figure-plan]] — each figure and the claim it carries; existing / planned / proposed.
+
 ## Binding claims
 
 Contributions: [[K-001 three-layer-metamodel]], [[K-002 vcdm-grounding]],
@@ -25,6 +36,13 @@ Contributions: [[K-001 three-layer-metamodel]], [[K-002 vcdm-grounding]],
 Validation: [[K-005 coverage-validation]], [[K-006 expressiveness-validation]], [[K-007 antipattern-detection]].
 Results: [[K-008 contradictory-cross-framework-constraints]], [[K-009 multilayer-invisibility]],
 [[K-010 necessity-of-multilayer-modeling]].
+
+## Committed framing (2026-07-04)
+
+The four decisions that fix the paper's positioning against the EU regulatory landscape, with the
+committed one-paragraph framing, live in [[M-009 threats-to-applicability]]:
+[[D-013 verifier-scope-issuer-remit]] · [[D-014 regulator-documented-conflict]] ·
+[[D-015 expressiveness-strength-first]] · [[D-016 dated-snapshot-method-over-catalogue]].
 
 ## Tooling
 
@@ -37,4 +55,4 @@ Results: [[K-008 contradictory-cross-framework-constraints]], [[K-009 multilayer
 
 ## Counts
 
-Concepts (C) 38 · Claims/arguments (K) 15 · Sources (S) 40 · Decisions (D) 12 · Questions (Q) 11 · Artifacts (A) 6 · MOCs (M) 9.
+Concepts (C) 40 · Claims/arguments (K) 15 · Sources (S) 43 · Decisions (D) 17 · Questions (Q) 12 · Artifacts (A) 6 · MOCs (M) 14.

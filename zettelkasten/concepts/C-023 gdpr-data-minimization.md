@@ -5,7 +5,7 @@ type: concept
 maturity: permanent
 tags: [topic/gdpr, topic/governance, layer/cross]
 sources: ["sections/03_overview.md §3.1", "sections/05_evaluation.md §5.1.3", ".claude/memory/decision_gdpr_two_tier.md"]
-related: ["[[C-024 two-tier-governance-framing]]", "[[C-018 governance-annotations]]", "[[C-025 governance-conflict-vertical]]", "[[C-013 cross-layer-constraint-taxonomy-c1-c9]]"]
+related: ["[[C-024 two-tier-governance-framing]]", "[[C-018 governance-annotations]]", "[[C-025 governance-conflict-vertical]]", "[[C-013 cross-layer-constraint-taxonomy-c1-c9]]", "[[S-041 gdpr-2016-679]]", "[[S-042 naih-minimization-fine-2020]]"]
 created: 2026-06-16
 ---
 
@@ -24,6 +24,8 @@ mandate; eIDAS is the hard one.
 - [[C-018 governance-annotations]] — the PrivacyRequirement marker.
 - [[C-025 governance-conflict-vertical]] — C6 in the conflict.
 - [[C-013 cross-layer-constraint-taxonomy-c1-c9]] — C6.
+- [[S-041 gdpr-2016-679]] — the instrument.
+- [[S-042 naih-minimization-fine-2020]] — the enforcement precedent.
 
 ## Source
 `sections/03_overview.md §3.1`; gdpr-two-tier decision.

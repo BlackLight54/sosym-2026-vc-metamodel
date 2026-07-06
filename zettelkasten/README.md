@@ -11,9 +11,14 @@ This is a standalone Obsidian-compatible vault. It is **not** part of the LaTeX 
 ## Start here
 
 1. `index.md` — master map of content (entry point).
-2. `moc/M-001 journal-paper-outline.md` — proposed journal structure, each section linking the notes that feed it.
-3. `moc/M-007 writing-gaps.md` — open questions and the `maturity: seed` worklist: what to write next.
-4. `dashboards.md` — live Dataview queries (claims by status, orphans, seed worklist).
+2. `PIPELINE.md` — the stage contract: what each pipeline stage reads here and what it owes.
+3. `moc/M-001 journal-paper-outline.md` — proposed journal structure, each section linking the notes that feed it.
+4. `moc/M-007 writing-gaps.md` — open questions and the `maturity: seed` worklist: what to write next.
+5. `dashboards.md` — live Dataview queries (claims by status, orphans, seed worklist).
+
+MOCs split into two planes: **argument maps** (M-001..M-009, what the paper knows and claims) and
+**production maps** (M-010..M-014: objection ledger, claim delivery matrix, journal delta, drafting
+guardrails, figure plan). Drafting work loads `M-013` first.
 
 ## Note types and ID scheme
 
@@ -60,7 +65,7 @@ created: 2026-06-16
 
 - **One idea per note.** If a note states two ideas, split it.
 - **No orphans.** Every note must be reachable from at least one MOC.
-- **Reciprocal links.** If A lists B in `related`, B lists A. `check_links.sh` flags one-directional links.
+- **Reciprocal links where load-bearing.** If the A→B relation matters in both directions (claim↔evidence, decision↔affected note), both list each other. Hub→leaf and note→source links may stay one-directional; `check_links.sh` reports one-way links as warnings, not errors.
 - **Tags from `tags.md` only.** The controlled vocabulary keeps filtering consistent.
 - **Trace provenance.** `sources:` records the repo artifact (or Notion/Todoist item) the note distills.
 

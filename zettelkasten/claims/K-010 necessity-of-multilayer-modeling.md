@@ -6,7 +6,7 @@ maturity: permanent
 tags: [layer/cross, kind/method, prov/self]
 status: delivered
 sources: [".claude/memory/claim_10_necessity_argument.md", "sections/07_conclusion.md"]
-related: ["[[C-027 multilayer-invisibility]]", "[[C-031 emergent-constraint-interactions]]", "[[C-032 competing-peer-governance-sources]]", "[[K-015 differentiation-mlm-new-domain]]"]
+related: ["[[C-027 multilayer-invisibility]]", "[[C-031 emergent-constraint-interactions]]", "[[C-032 competing-peer-governance-sources]]", "[[K-015 differentiation-mlm-new-domain]]", "[[C-038 relying-party-scope-gap]]"]
 created: 2026-06-16
 ---
 
@@ -23,6 +23,7 @@ without collapsing the governance-source distinction that makes them meaningful.
 - [[C-031 emergent-constraint-interactions]] — why joint analysis is required.
 - [[C-032 competing-peer-governance-sources]] — the distinction single-layer models lose.
 - [[K-015 differentiation-mlm-new-domain]] — the differentiation that protects the claim.
+- [[C-038 relying-party-scope-gap]] — the scope boundary that qualifies the claim (resolved by [[D-013 verifier-scope-issuer-remit]]).
 
 ## Source
 claim_10.

@@ -5,7 +5,7 @@ type: concept
 maturity: developing
 tags: [topic/eidas, topic/gdpr, topic/governance, layer/cross]
 sources: ["inbox/notion/11-eu-digital-identity-wallet-arf-and-eidas-2-0-implementing-acts-status-report-q1-q2-2026.md"]
-related: ["[[C-025 governance-conflict-vertical]]", "[[C-024 two-tier-governance-framing]]", "[[K-008 contradictory-cross-framework-constraints]]", "[[S-028 eudiw-arf-status-2026]]", "[[S-021 schwalm-ssi-eidas-contradiction-2022]]", "[[S-034 eudiw-arf-2.9.0]]", "[[S-038 eudiw-zkp-ts13-ts14]]", "[[M-009 threats-to-applicability]]"]
+related: ["[[C-025 governance-conflict-vertical]]", "[[C-024 two-tier-governance-framing]]", "[[K-008 contradictory-cross-framework-constraints]]", "[[S-028 eudiw-arf-status-2026]]", "[[S-021 schwalm-ssi-eidas-contradiction-2022]]", "[[S-034 eudiw-arf-2.9.0]]", "[[S-038 eudiw-zkp-ts13-ts14]]", "[[M-009 threats-to-applicability]]", "[[D-014 regulator-documented-conflict]]", "[[S-030 eidas2-regulation-2024-1183]]", "[[C-039 disclosure-spectrum]]"]
 created: 2026-06-17
 ---
 
@@ -27,6 +27,8 @@ with a concrete, dated, statutory citation.
 
 ## Links
 - [[C-025 governance-conflict-vertical]] — the conflict pattern this instantiates in the wild.
+- [[D-014 regulator-documented-conflict]] — the framing decision: this evidence leads the motivation.
+- [[S-030 eidas2-regulation-2024-1183]] — the statute imposing the unlinkability duty.
 - [[K-008 contradictory-cross-framework-constraints]] — external corroboration of the binding claim.
 - [[S-028 eudiw-arf-status-2026]] — the source.
 

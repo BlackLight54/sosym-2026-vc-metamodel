@@ -6,7 +6,7 @@ maturity: developing
 tags: [topic/eidas, topic/governance, prov/external]
 citekey:
 sources: ["https://ec.europa.eu/digital-building-blocks/sites/spaces/EUDIGITALIDENTITYWALLET/pages/896827698/European+Commission+adopts+new+round+of+EU+Digital+Identity+Wallet+implementing+regulations", "https://ec.europa.eu/digital-building-blocks/sites/spaces/EUDIGITALIDENTITYWALLET/pages/909706465/New+round+of+EU+Digital+Identity+Wallet+implementing+regulations+adopted"]
-related: ["[[S-035 cir-2025-848-rp-registration]]", "[[C-033 dual-issuance-mandate]]", "[[C-038 relying-party-scope-gap]]", "[[M-009 threats-to-applicability]]", "[[Q-008 broaden-governance-catalog]]"]
+related: ["[[S-035 cir-2025-848-rp-registration]]", "[[C-033 dual-issuance-mandate]]", "[[C-038 relying-party-scope-gap]]", "[[M-009 threats-to-applicability]]", "[[Q-008 broaden-governance-catalog]]", "[[D-016 dated-snapshot-method-over-catalogue]]", "[[S-030 eidas2-regulation-2024-1183]]"]
 created: 2026-06-18
 ---
 
@@ -23,6 +23,8 @@ Grounds the **moving-target regulation** threat ([[M-009 threats-to-applicabilit
 - [[S-035 cir-2025-848-rp-registration]] — the priority instrument from batch 2.
 - [[C-033 dual-issuance-mandate]] — grounded in batch 1 (CIR 2024/2977).
 - [[C-038 relying-party-scope-gap]] — verifier-side instruments the metamodel does not express.
+- [[D-016 dated-snapshot-method-over-catalogue]] — the framing decision this timeline motivates.
+- [[S-030 eidas2-regulation-2024-1183]] — the amending regulation these acts implement.
 
 ## Source
 Deep-research synthesis 2026-06-18; cite the individual CIRs by OJ number.

@@ -21,7 +21,12 @@ would strengthen. Pair with the `maturity: seed`/`developing` worklist in [[dash
 - Robustness of automated checking ([[K-004 automated-consistency-checking]]):
   [[Q-006 portability-beyond-refinery]], [[Q-007 scalability-deeper-hierarchies]].
 - External validity ([[K-010 necessity-of-multilayer-modeling]]): [[Q-001 empirical-evaluation-with-designers]],
-  [[Q-008 broaden-governance-catalog]], [[Q-011 wallet-provider-eudiw-landscape]].
+  [[Q-008 broaden-governance-catalog]], [[Q-011 wallet-provider-eudiw-landscape]]. The EU-regulatory
+  framing is now decided ([[D-013 verifier-scope-issuer-remit]] through [[D-016 dated-snapshot-method-over-catalogue]],
+  threaded in [[M-009 threats-to-applicability]]); the committed §5.3 paragraph, ARF quote, and as-of
+  footnote are writing tasks tracked in O-EUTHREAT.
+- Future-work candidates beyond the current claims: [[Q-012 llm-schema-generation-formal-guardrails]] —
+  the metamodel as validation oracle for LLM-generated schemas (scope risk flagged).
 - New evaluation axis ([[S-026 own-ese-vc-fca]]): [[Q-010 fca-ecosystem-maturity-metrics]] — ecosystem-maturity metrics from FCA lattices over time.
 
 > Q-009–Q-011 and the governance notes [[C-033 dual-issuance-mandate]] / [[C-034 statutory-unlinkability-gap]] / [[S-028 eudiw-arf-status-2026]] were ingested from Notion and Todoist (2026-06-17).
