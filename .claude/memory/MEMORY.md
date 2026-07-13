@@ -71,5 +71,7 @@
 - [Deliver on claims, don't cut](feedback_deliver_not_cut.md) — ground ungrounded claims in existing content before removing them
 - [Prefer Pandoc-compliant solutions](feedback_pandoc_compliant_solutions.md) — Lua filters over raw LaTeX workarounds
 - [figures.lua filter active](project_figures_lua_filter.md) — emits ACM \Description{} from image description attribute
+- [Parallel multi-agent method validated](feedback_parallel_agent_method.md) — background workflow/agents + main-loop edits; file-disjoint tasks only; adversarial verification mandatory in literature sweeps
+- [Subagents run on Opus](feedback_subagents_opus.md) — cost rule after spend-limit hit 2026-07-13; tight prompts, opus for scoped subtasks
 
 Superseded memories → `context/archive/`, never deleted
