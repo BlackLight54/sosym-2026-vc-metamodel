@@ -68,6 +68,15 @@ future-work paragraphs only. The 2026-07-06 advisor consultation adds RQ0 and th
 taxonomy to the delta ([[D-020 rq0-relevance-and-error-taxonomy]]), grounded by the proto-SLR
 before any prose promises it.
 
+Proto-SLR verdict (2026-07-13, `context/slr/corpus_map.md`): the delta statement the corpus
+supports is that no verified item combines ecosystem-governance scope with formal checkable
+constraints. Formal treatment exists below the target level (protocol verification, code
+analysis, certificate-artifact linting) and informal treatment exists at the target level
+(Sroor 2022 visual DSM, vLEI EGF documentary metamodel, manual legal-to-technical mappings);
+nothing does both, and no single rival exists. RQ0's threat characterization is unclaimed
+ground; the paper claims it as a three-legged synthesis, with claims narrowed to errors
+visible in specifications and pilots.
+
 ## Heilmeier pre-answers (research-proposal seed)
 1. *What are you trying to do?* Make cross-layer design errors in credential ecosystems detectable
    before deployment, by formalizing multi-source governance constraints over a three-layer metamodel

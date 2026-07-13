@@ -82,8 +82,12 @@ is needed; think before diving in; focus and continuous work.
 - "Peint[?] cikk": resolved. Martin supplied the DOI: https://doi.org/10.1145/3589334.3645426
   (ACM, WWW '24 proceedings). Existence and exact metadata are verified in proto-SLR axis (e)
   before any citation; the K-013 Braun-line hypothesis updates to whatever the record shows.
-- Siemens Hyperledger Global Forum, Dublin: Martin does not recall the year; proto-SLR axis
-  (g) identifies the talk and settles 2022 vs 2023 before it enters the vault as an S-note.
+- Siemens Hyperledger Global Forum, Dublin: resolved by proto-SLR axis (g), 2026-07-13. The
+  talk is Franz and Shams, Hyperledger Global Forum 2022, Dublin, 12 September 2022
+  (industrial device lifecycle VC prototype with Deutsche Bahn; agenda entry
+  https://hgf22.sched.com/event/14H61, recording https://www.youtube.com/watch?v=QP3NloQhLss).
+  The year is 2022; the meeting note's "2023" was a misremembering. A keynote by Kind (ESG,
+  Indy) is the disambiguated alternative referent.
 - "LSP-k" = EUDI large-scale pilots and "belga wallet" = the Belgian member-state wallet
   project: readings confirmed by Martin.
 - "mandate tokens" = eIDAS mandates / representation credentials: reading confirmed by

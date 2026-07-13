@@ -2,7 +2,7 @@
 id: "O-EUTHREAT"
 short: "eu-regulatory-threats"
 title: "Threats to applicability in the EU legal/regulatory context + currency update"
-status: pending
+status: in_progress
 priority: high
 depends_on: []
 binding_claims: [10]
@@ -71,7 +71,16 @@ executes those decisions; it no longer needs to make them.
 ## Verification follow-ups (must close before submission)
 
 - [ ] Locate exact 2025/xxxx OJ numbers + subjects of the 30 Jul 2025 round of eight CIRs (S-036 open).
-- [ ] Re-verify ARF-C1..C8 against ARF v2.9.0 §5.4/§7.4 (currency #1).
+- [x] Re-verify ARF-C1..C8 against ARF v2.9.0 §5.4/§7.4 (currency #1). **Done 2026-07-13**: fetched
+      v2.9.0 and v2.7.3 from GitHub tags (main doc, Annex 2.02, Topic A paper); all eight hold;
+      classification unchanged (3 full / 5 partial / 0 not expressible); ARF-C6 renumbered §5.3.4 to
+      §5.4.4, ARF-C8 §5.3.3 to §5.4.3 (+ §7.4.3.5.3 stable); per-constraint table and old-to-new
+      section map in [[S-034 eudiw-arf-2.9.0]]. Prose re-pinned (§5.1.2, §5 limitations), decision
+      memory and claim_06 updated, bib entry re-pinned (mirror in Zotero pending). ANCHOR-QUOTE
+      CORRECTION: the M-013 salted-hash sentence is in the ARF Topic A discussion paper §2.2, not
+      main-doc §7.4.3.5.1 (both versions); M-013/M-009 corrected with dated notes. The main-doc
+      concession at §7.4.3.5.3 concerns Attestation Provider linkability specifically; D-014-based
+      motivation prose must cite the two loci precisely.
 - [ ] Confirm S-040 (cryptographers' feedback) title/authors/venue; resolve S-020, S-021 citekeys.
 - [ ] Confirm AEPD post title/date (S-039); EUR-Lex HTML for 2025/848 (fetched via PDF + secondaries only).
 

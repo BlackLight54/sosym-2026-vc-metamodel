@@ -12,7 +12,7 @@ revisit_when: "if evaluation axes are added or removed"
 The evaluation is framed as a "three-axis validation":
 
 1. **Coverage** — metamodel coverage against W3C VCDM 2.0 (§5.1 Coverage)
-2. **Expressiveness** — constraint expressiveness against EU regulatory sources, specifically eIDAS ARF v2.7.3 (§5.1 Expressiveness)
+2. **Expressiveness** — constraint expressiveness against EU regulatory sources, specifically eIDAS ARF v2.9.0 (§5.1 Expressiveness; re-verified against the v2.9.0 primary text 2026-07-13, see S-034)
 3. **Error detection** — detection against known credential design anti-patterns, including two headline results (§5.1 Headlines, Anti-Patterns)
 
 This framing appears in the abstract ("We validate coverage against the W3C specification, expressiveness against EU regulatory sources, and error detection against known anti-patterns"), the introduction (contribution 3), and structures the entire elaboration subsection of §5.

@@ -13,7 +13,7 @@ sync with `context/references/REFERENCES_TO_ADD_IN_ZOTERO.md`. `UNRESOLVED` = ne
 | S-006 famelis-partial-models-2012 | `famelisPartialModelsModeling2012` | ok |
 | S-007 braun-ssi-protocol-2024 | `braun_ssi_2024` | ok |
 | S-008 cippitelli-chorssi-2023 | `cippitelli_chorssi_2024` | ok |
-| S-009 ding-securessi-2023 | `ding_model-driven_2023` | ok |
+| S-009 ding-securessi-2023 | `ding_model-driven_2023` | ok (verified 2026-07-13 vs Crossref/DBLP; DOI 10.1109/TrustCom60117.2023.00230) |
 | S-010 pattiyanon-dsm-weakness-2022 | `pattiyanonMethodDetectingCommon2022` | ok |
 | S-011 barclay-ssi-modelling-2020 | `barclay_towards_2020` | ok |
 | S-012 king-governance-compliance-2017 | `king_automated_2017` | ok |
@@ -38,16 +38,36 @@ sync with `context/references/REFERENCES_TO_ADD_IN_ZOTERO.md`. `UNRESOLVED` = ne
 | S-031 hegedus-guided-dse-2015 | `hegedus_modeldriven_2015` | check (title/venue unconfirmed) |
 | S-032 garzon-5g-vc-2024 | `garzon_certificates_2024` | check (from .bib markers) |
 | S-033 amazon-crossborder-vc-2023 | `kaushiksrinivasan_edata_2023` | check (also `amazon_vc_for_gov`) |
-| S-034 eudiw-arf-2.9.0 | `noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026` | check — key already cited in sections; re-pin the bib entry to v2.9.0 (21 May 2026) |
+| S-034 eudiw-arf-2.9.0 | `noauthor_eu-digital-identity-walleteudi-doc-architecture-and-reference-framework_2026` | ok — bib entry re-pinned to v2.9.0 (21 May 2026), urldate 2026-07-13; mirror in Zotero before next export |
 | S-035 cir-2025-848-rp-registration | — | UNRESOLVED (cite CIR (EU) 2025/848; Reg. 910/2014 Art. 5b) |
 | S-036 eidas2-implementing-acts-timeline | — | UNRESOLVED (cite individual CIRs by OJ number) |
 | S-037 eu-eudiw-technical-standards-2026 | — | UNRESOLVED (cite ETSI TS 119 471/472-1/475, TR 119 476-1; ISO/IEC 18013-5/-7; IETF SD-JWT-VC) |
 | S-038 eudiw-zkp-ts13-ts14 | — | UNRESOLVED (cite EC TS13/TS14 deliverables) |
 | S-039 aepd-eudiw-gdpr-analysis | — | UNRESOLVED (verify AEPD blog title/date) |
-| S-040 cryptographers-feedback-arf | — | UNRESOLVED — NEEDS VERIFICATION before citing (title/authors/venue) |
+| S-040 cryptographers-feedback-arf | `baum_cryptographers-feedback_2024` | UNRESOLVED (pending Zotero entry); metadata verified 2026-07-13 |
 | S-041 gdpr-2016-679 | `gdpr` | ok (cited in sections) |
 | S-042 naih-minimization-fine-2020 | `noauthor_naih_2020` | check — verify NAIH decision number/date |
 | S-043 csok-decree-518-2023 | `noauthor_5182023_2023` | ok (cited in sections) |
+| S-044 sroor-ssi-governance-modeling-2022 | `sroor_modeling_2022` | UNRESOLVED (pending Zotero entry) |
+| S-045 kumar-zlint-misissuance-2018 | `kumar_misissuance_2018` | UNRESOLVED (pending Zotero entry) |
+| S-046 gleif-vlei-egf-2026 | `gleif_vlei-egf_2026` | UNRESOLVED (pending Zotero entry) |
+| S-047 abellan-alvarez-arf-privacy-2026 | `abellan_privacy_2026` | UNRESOLVED (pending Zotero entry) |
+| S-048 ellison-schneier-pki-risks-2000 | `ellison_pki-risks_2000` | UNRESOLVED (pending Zotero entry) |
+| S-049 serrano-pki-incidents-2019 | `serrano_pki-incidents_2019` | UNRESOLVED (pending Zotero entry) |
+| S-050 gruener-ssi-threat-modeling-2023 | `gruener_threat-modeling_2023` | UNRESOLVED (pending Zotero entry) |
+| S-051 richter-anke-ssi-framework-2026 | `richter_ssi-framework_2026` | UNRESOLVED (pending Zotero entry) |
+| S-052 otto-designing-data-spaces-2022 | `otto_data-spaces_2022` | UNRESOLVED (pending Zotero entry) |
+| S-053 franz-shams-industrial-device-vc-2022 | `franz_device-lifecycle_2022` | UNRESOLVED (pending Zotero entry) |
 
 Citekeys are transcribed from the `[@key]` markers in `sections/*.md`; verify against the exported
 `.bib` before relying on them.
+
+## Verified but uncited (O01, 2026-07-13)
+
+`maass_role-artifact-function_2025` (Schardong & Custódio, "The Role-Artifact-Function Framework
+for Understanding Digital Identity Models", ER 2024, Conceptual Modeling, LNCS 15238, Springer,
+pp. 377-395, DOI 10.1007/978-3-031-75872-0_20) is confirmed real against Crossref and DBLP.
+The Zotero year 2025 is the Springer print year; the chapter went online 21 Oct 2024 and the
+conference was ER 2024 (Pittsburgh, 28 to 31 Oct 2024). The entry sits in `references.bib`, but
+no section cites it and no S-note covers it. If related work re-adds a meta-framework comparison,
+cite this key; do not re-verify.

@@ -2,7 +2,7 @@
 id: "AF03"
 short: "slr-integration"
 title: "Integrate proto-SLR results into the vault"
-status: in_progress
+status: done
 priority: high
 depends_on: []
 binding_claims: []
@@ -41,3 +41,17 @@ Steps:
 
 Acceptance: keepers imported with verified metadata only; MOC updates in place; spin
 re-checked; unverifiable items quarantined in M-013; AF01 unblocked.
+
+## Completion note (2026-07-13)
+
+Done in the kickoff session, same day as the workflow run. 12 priority items imported:
+S-044..S-053 created, S-007 updated (the verified Braun WWW '24 seed, resolving the
+advisor's "Peint" lead, K-013 note added), S-040 flipped to CONFIRMED with the corrected
+citekey. M-004 gained the proto-SLR corpus section; M-010 gained the O3 X.509 leg and new
+objection O13 (RQ0 speculativeness) with committed rebuttal; M-012 gained the corpus delta
+verdict; M-013: S-040 hold lifted, S-020/S-021 hold stands, zero do-not-cite additions
+(0 UNVERIFIABLE of 74). Spin §2/§4 re-checked against the corpus (RQ0 three-legged
+synthesis, claims narrowed to specification/pilot-visible errors). Industry 5.0 probe
+returned a clean negative; D-023 stands, probe result recorded in the D-note. Remaining
+35 must-cite items import as drafting reaches them (corpus_map §8); BibTeX/Zotero entries
+for the new citekeys pend with Martin.

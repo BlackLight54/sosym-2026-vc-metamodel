@@ -43,9 +43,13 @@ revising any prose.** Positive framing lives in the D-notes; this map is what mu
   PIDs/qualified attestations (1-2 vote). **Do not soften the bar** → [[S-037 eu-eudiw-technical-standards-2026]].
 
 ## Do not cite before verification (no-invented-references rule)
-- [[S-040 cryptographers-feedback-arf]] — title/authors/venue unverified.
+- [[S-040 cryptographers-feedback-arf]] — verified 2026-07-13 by the proto-SLR adversarial pass
+  (existence and locator confirmed, hosted PDF; see `context/slr/candidates.json`); citable, but
+  pull exact author list and title from the PDF at drafting time (quote-precision caveat,
+  `context/slr/corpus_map.md` §7).
 - [[S-020 biedermann-eudi-web3-sok-2024]], [[S-021 schwalm-ssi-eidas-contradiction-2022]] — not
-  independently verified; citekeys unresolved.
+  independently verified; citekeys unresolved. Not rediscovered by the proto-SLR must-cite pass;
+  hold stands.
 - [[S-039 aepd-eudiw-gdpr-analysis]] — confirm post title/date (multi-part series).
 - [[S-042 naih-minimization-fine-2020]] — confirm the NAIH decision number/date.
 - [[S-031 hegedus-guided-dse-2015]] — title/venue unconfirmed against the `.bib`.
@@ -59,10 +63,20 @@ revising any prose.** Positive framing lives in the D-notes; this map is what mu
 - Cite implementing acts by **OJ number**; batch-3 numbers are still unlocated →
   [[S-036 eidas2-implementing-acts-timeline]].
 - Re-pin the ARF bib entry to **v2.9.0 (21 May 2026)** before reuse → [[S-034 eudiw-arf-2.9.0]].
+  Done 2026-07-13 (`references.bib` + S-note); mirror the version note in Zotero before re-export.
 
 ## Anchor quotes (verbatim; do not paraphrase-drift)
-- ARF v2.9.0 §7.4.3.5.1: "By comparing the received salt values, the Relying Party may find matching
-  salt values ... conclude that the corresponding attestations must have been the same."
+- ARF v2.9.0, Discussion Paper for Topic A ("A - Privacy risks and mitigation"), §2.2 Relying Party
+  linkability: "By comparing the received salt values, the Relying Party may find matching salt
+  values. It can then conclude that the corresponding attestations must have been the same, and
+  hence that it must have been interacting with the same person."
+  **CORRECTED 2026-07-13 (O-EUTHREAT verbatim check):** this anchor was previously attributed to
+  main-document §7.4.3.5.1 with the two sentences spliced by an ellipsis. The sentence is not in the
+  main document (neither v2.9.0 nor v2.7.3); it is in the Topic A discussion paper shipped with the
+  ARF release, which §7.4.3.5.1 cites for detail. Main-doc §7.4.3.5.1 names the RP-linkability risk;
+  the main-doc salted-hash concession is §7.4.3.5.3 and concerns Attestation Provider linkability:
+  "Unlike Relying Party linkability, Attestation Provider linkability cannot be fully eliminated
+  when using attestation formats based on salted hashes." → [[S-034 eudiw-arf-2.9.0]].
 - Reg. 910/2014 Art. 5b(3): "Relying parties shall not request users to provide any data other than
   that indicated pursuant to paragraph 2, point (c)."
 - CIR 2025/848 Annex I point 9: "For each intended use, a list of the data, including attestations and

@@ -25,6 +25,12 @@ This coarse-reading simplification is flagged in [[M-009 threats-to-applicabilit
 mandate, though: a verified-refuted claim establishes that the ETSI realization catalogue (which includes JSON-LD
 W3C VC) does not override the ARF rule that W3C VCDM is barred for PIDs/qualified attestations.
 
+**Verified against ARF v2.9.0 primary text (2026-07-13, [[S-034 eudiw-arf-2.9.0]]):** §5.4.1 states
+verbatim that Wallet Units support mdoc and SD-JWT VC, and that "Support for the third format is
+optional and meant for non-qualified EAAs only." ARB_01 (QEAA/PuB-EAA: ISO/IEC 18013-5 or SD-JWT VC
+only) and ARB_01a (non-qualified EAA: those two plus W3C VCDM) are substantively unchanged from
+v2.7.3. The bar stands; the mandate as modeled by C5 holds in the current ARF.
+
 ## Links
 - [[C-018 governance-annotations]] — the EidasMandate marker.
 - [[C-024 two-tier-governance-framing]] — eIDAS as hard vs GDPR as operationally binding.

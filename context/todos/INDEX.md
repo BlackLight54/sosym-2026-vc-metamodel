@@ -37,7 +37,7 @@
 
 | ID | Title | Status | Assigned |
 |----|-------|--------|----------|
-| O01 | [Verify Ding & Sato, Schardong](o01_verify_refs.md) | pending | claude |
+| O01 | [Verify Ding & Sato, Schardong](../archive/completed_todos/o01_verify_refs.md) | done 2026-07-13 | claude |
 | M00a | [Noor ECMFA differentiation](m00a_noor_ecmfa_differentiation.md) | pending | martin |
 | O-STAF | [STAF citation strategy](o-staf_staf_citation.md) | blocked | martin |
 
@@ -57,11 +57,11 @@
 
 ## Advisor feedback (2026-03-29)
 
-Execution order: A-LST → A-BG1 → A-CODE.
+Execution order: A-LST → A-BG1 → A-CODE. A-LST is done; A-BG1 and A-CODE are unblocked.
 
 | ID | Title | Depends on | Status | Assigned |
 |----|-------|------------|--------|----------|
-| A-LST | [Refinery lstlisting language](a-lst_refinery_lstlisting.md) | — | pending | claude |
+| A-LST | [Refinery lstlisting language](../archive/completed_todos/a-lst_refinery_lstlisting.md) | — | done 2026-07-13 | claude |
 | A-REBUS | [Rebus preamble elements](a-rebus_preamble.md) | — | pending | martin |
 | A-BG1 | [Refinery code example in BG](a-bg1_refinery_bg_example.md) | A-LST | in_progress | oszkár |
 | A-CODE | [Refinery code listings in Sec 04](a-code_refinery_approach_listings.md) | A-LST, A-BG1 | pending | claude |
@@ -76,8 +76,8 @@ independent.
 
 | ID | Title | Depends on | Status | Assigned |
 |----|-------|------------|--------|----------|
-| AF03 | [Integrate proto-SLR results](af03_slr_integration.md) | SLR workflow output | in_progress | claude |
-| AF01 | [Design-error taxonomy](af01_design_error_taxonomy.md) | AF03 | blocked | claude |
+| AF03 | [Integrate proto-SLR results](../archive/completed_todos/af03_slr_integration.md) | — | done 2026-07-13 | claude |
+| AF01 | [Design-error taxonomy](af01_design_error_taxonomy.md) | — (unblocked by AF03) | pending | claude |
 | AF02 | [Q-007 instance generator + re-measurement](af02_q007_instance_generator.md) | — | pending | claude |
 
 ## Infrastructure

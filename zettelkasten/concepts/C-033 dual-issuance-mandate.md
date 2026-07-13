@@ -20,9 +20,12 @@ neither mandated format supports predicate proofs ([[C-016 format-capability-mat
 conjunction cannot be escaped by choosing the more capable of the two — both are required, both lack the
 capability GDPR's operationalization demands.
 
-**Currency flag (June 2026):** the dual-issuance rule was read from ARF v2.7.3 / CIR 2024/2977. The current
-ARF is v2.9.0 ([[S-034 eudiw-arf-2.9.0]]); re-verify that PID dual-issuance (mdoc AND SD-JWT VC) still holds
-verbatim in v2.9.0 §5.4 before relying on the exact wording. See [[M-009 threats-to-applicability]].
+**Currency flag closed (2026-07-13):** re-verified against the fetched ARF v2.9.0 text
+([[S-034 eudiw-arf-2.9.0]]). PID_02 (Annex 2.02, Topic 3) reads, verbatim: "A PID Provider SHALL
+issue any PID in both the format specified in ISO/IEC 18013-5 [ISO/IEC 18013-5] and the format
+specified in [SD-JWT VC]." The requirement is substantively identical to v2.7.3 (whitespace-only
+diff). Dual issuance holds; the conjunctive reading stands. Note the rule's home is Annex 2
+(Topic 3, PID Rulebook requirements), corroborated by the §5.4.1 format overview, not §5.4 itself.
 
 ## Links
 - [[C-022 eidas-arf-format-mandate]] — the constraint this refines (or/and).

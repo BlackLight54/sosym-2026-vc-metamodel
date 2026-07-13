@@ -2,9 +2,9 @@
 id: "AF01"
 short: "error-taxonomy"
 title: "Construct the design-error taxonomy (X.509-motivated, corpus-grounded)"
-status: blocked
+status: pending
 priority: high
-depends_on: ["AF03"]
+depends_on: []
 binding_claims: []
 target: "zettelkasten/ (new K-note + C-notes), later a dedicated section via the spine"
 pipeline: "advisor-2026-07-06"

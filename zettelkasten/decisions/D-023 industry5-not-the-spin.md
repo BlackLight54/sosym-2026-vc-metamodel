@@ -33,6 +33,13 @@ and VC/data-spaces line explicitly; the corpus map reports what exists. Revisit 
 axis (c) returns a substantial, verified I5.0-VC literature at integration, in which case the
 question goes back to Martin with evidence.
 
+## Probe result (2026-07-13, proto-SLR)
+Clean negative. Zero verified items pair Industry 5.0 with VCs or SSI; the single verified
+industrial item (Bartolomeu et al. 2019, IEEE ETFA) is Industry 4.0 device identity, not
+organizational governance. The revisit condition is not met; the rejection stands. If I5.0
+appears in the paper at all, it appears as this explicit non-finding, never as motivation
+(`context/slr/corpus_map.md` §5).
+
 ## Links
 - [[D-014 regulator-documented-conflict]] and [[D-016 dated-snapshot-method-over-catalogue]]
   hold the framing legs this decision protects.

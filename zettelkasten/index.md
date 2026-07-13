@@ -63,4 +63,4 @@ consultation:
 
 ## Counts
 
-Concepts (C) 40 · Claims/arguments (K) 15 · Sources (S) 43 · Decisions (D) 23 · Questions (Q) 12 · Artifacts (A) 6 · MOCs (M) 14.
+Concepts (C) 40 · Claims/arguments (K) 15 · Sources (S) 53 · Decisions (D) 23 · Questions (Q) 12 · Artifacts (A) 6 · MOCs (M) 14.

@@ -75,11 +75,17 @@ Right column (mandate chain):
 | Column title | Mandate chain (in force) |
 | Chain box 1 | CIR (EU) 2024/2977: dual issuance; every PID in both ISO/IEC 18013-5 (mdoc) and SD-JWT VC |
 | Chain box 2 | Salted-hash disclosure ceiling: mdoc MSO and SD-JWT VC `_sd` commitments; disclosures linkable across relying parties |
-| Chain box 3 | ARF v2.9.0 section 7.4.3.5.1 (Linkability): the framework's own admission |
+| Chain box 3 | ARF v2.9.0 release, Topic A discussion paper section 2.2 (RP linkability): the framework's own admission; main doc section 7.4.3.5.1 names the risk |
 
-Verbatim anchor for chain box 3 (M-013 anchor list; quote exactly, including the
-ellipsis): "By comparing the received salt values, the Relying Party may find matching
-salt values ... conclude that the corresponding attestations must have been the same."
+Verbatim anchor for chain box 3 (M-013 anchor list, CORRECTED 2026-07-13 by the
+O-EUTHREAT verbatim check; quote exactly, no ellipsis splice): "By comparing the received
+salt values, the Relying Party may find matching salt values. It can then conclude that
+the corresponding attestations must have been the same, and hence that it must have been
+interacting with the same person." Loci precision (binding): the sentence is in the ARF
+v2.9.0 release's Topic A discussion paper section 2.2, NOT in main-doc section 7.4.3.5.1;
+the main doc names the RP-linkability risk at 7.4.3.5.1 and concedes salted-hash
+linkability at 7.4.3.5.3 for Attestation Provider linkability specifically. Labels and
+prose must cite the two loci precisely (M-013).
 
 Wedge:
 
@@ -143,8 +149,9 @@ this paper. Left: two statutory duties of Reg. 910/2014, as amended by Reg. (EU)
 2024/1183: the unlinkability requirement of Art. 5a(16)(b) and the minimization duty of
 Art. 5b(3). Right: the in-force mandate chain: CIR (EU) 2024/2977 requires each PID to be
 issued in both ISO/IEC 18013-5 (mdoc) and SD-JWT VC; both formats disclose through
-salted-hash commitments that are linkable across relying parties, a ceiling the framework
-itself concedes (ARF v2.9.0, section 7.4.3.5.1). Center wedge: the zero-knowledge
+salted-hash commitments that are linkable across relying parties, a ceiling the framework's
+own release documents concede (ARF v2.9.0, Topic A discussion paper section 2.2; risk
+named in main doc section 7.4.3.5.1). Center wedge: the zero-knowledge
 specifications TS13 and TS14 that would discharge the duties are published but referenced
 by no implementing act. The duties and the mandate chain are jointly unsatisfiable under
 the formats governance currently binds; the gap is not missing technology but governance
@@ -164,7 +171,8 @@ Reg. (EU) 2024/1183: the unlinkability requirement of Art. 5a(16)(b) and the min
 duty of Art. 5b(3). Right: the in-force mandate chain: CIR (EU) 2024/2977 requires each
 PID to be issued in both ISO/IEC 18013-5 (mdoc) and SD-JWT VC; both formats disclose
 through salted-hash commitments that are linkable across relying parties, a ceiling the
-framework itself concedes (ARF v2.9.0, section 7.4.3.5.1). Center wedge: the
+framework's own release documents concede (ARF v2.9.0, Topic A discussion paper section
+2.2; risk named in main doc section 7.4.3.5.1). Center wedge: the
 zero-knowledge specifications TS13 and TS14 that would discharge the duties are published
 but referenced by no implementing act. The duties and the mandate chain are jointly
 unsatisfiable under the formats governance currently binds; the gap is not missing
@@ -196,12 +204,13 @@ journal width it likely wants full text width. Re-check after VENUE.md regenerat
 
 ## Open questions for Martin
 
-1. **Quote inside the figure or in the prose only?** D-022 places F8 near the ARF
-   section 7.4.3.5.1 anchor quote. Carrying the full verbatim quote in chain box 3
-   duplicates the adjacent prose. Options: (a) full quote in the figure, prose paraphrase;
-   (b) quote in prose, figure box reads only "ARF v2.9.0 section 7.4.3.5.1: salted-hash
-   disclosures admitted linkable"; (c) truncated quote in the figure. The spec drafts (a)
-   in the element inventory but the caption works under any option.
+1. **Quote inside the figure or in the prose only?** D-022 places F8 near the ARF anchor
+   quote (now precisely located: Topic A discussion paper section 2.2, per the 2026-07-13
+   O-EUTHREAT correction). Carrying the full verbatim quote in chain box 3 duplicates the
+   adjacent prose. Options: (a) full quote in the figure, prose paraphrase; (b) quote in
+   prose, figure box reads only "ARF v2.9.0 Topic A section 2.2: salted-hash disclosures
+   admitted linkable"; (c) truncated quote in the figure. The spec drafts (a) in the
+   element inventory but the caption works under any option.
 2. **Citation form for the statute.** C-034 cites Art. 5a(16)(b) under "Reg. (EU)
    2024/1183"; M-013 pins Art. 5b(3) to "Reg. 910/2014". Both articles live in Reg.
    910/2014 as amended by Reg. (EU) 2024/1183. Which canonical string does section 3

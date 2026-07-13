@@ -50,5 +50,31 @@ EU regulatory currency (June 2026, version-pinned): [[S-034 eudiw-arf-2.9.0]],
 ## Own prior work (extension narrative)
 [[S-025 own-dse-vc-refinery]], [[S-026 own-ese-vc-fca]], [[S-027 own-tdk-thesis-mda]].
 
+## Proto-SLR corpus (2026-07-13, RQ0/RQ1/taxonomy grounding)
+
+74 adversarially verified sources across seven axes; full map, classifications, and gaps in
+`context/slr/corpus_map.md` (axis files and ledger alongside). Positioning verdict: formal
+treatment exists below the target level and informal treatment exists at the target level;
+no item combines ecosystem-governance scope with formal checkable constraints; no single
+rival exists. Priority S-notes created from the must-cite and differentiate buckets:
+
+- RQ1 neighbors to differentiate: [[S-044 sroor-ssi-governance-modeling-2022]] (primary
+  novelty threat, informal at the target level), [[S-045 kumar-zlint-misissuance-2018]]
+  (formal at artifact level, the methodological precedent), [[S-046 gleif-vlei-egf-2026]]
+  (documentary metamodel, nearest existing metamodel claim),
+  [[S-007 braun-ssi-protocol-2024]] (formal at protocol level, the advisor's resolved
+  "Peint" lead).
+- RQ0 relevance legs: [[S-051 richter-anke-ssi-framework-2026]] (definitional gap
+  persists), [[S-052 otto-designing-data-spaces-2022]] (ecosystem concept by practice),
+  [[S-047 abellan-alvarez-arf-privacy-2026]] and [[S-040 cryptographers-feedback-arf]]
+  (pre-deployment error visibility), [[S-053 franz-shams-industrial-device-vc-2022]]
+  (industrial prototype, the resolved Siemens Dublin talk).
+- X.509 taxonomy legs: [[S-048 ellison-schneier-pki-risks-2000]] (anticipation precedent),
+  [[S-049 serrano-pki-incidents-2019]] (taxonomizability precedent, differentiate),
+  [[S-050 gruener-ssi-threat-modeling-2023]] (SSI threat grounding).
+
+Remaining must-cite items (35) become S-notes as drafting reaches them, in axis order per
+`context/slr/corpus_map.md` §8.
+
 ## Source
-`sections/06_related_work.md`; gap analysis synthesis.
+`sections/06_related_work.md`; gap analysis synthesis; proto-SLR corpus map (2026-07-13).

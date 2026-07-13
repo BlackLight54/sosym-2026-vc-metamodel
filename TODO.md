@@ -15,9 +15,8 @@
 
 ### Advisor feedback (2026-03-29)
 
-Execution order: A-LST → A-BG1 → A-CODE.
+Execution order: A-LST → A-BG1 → A-CODE. A-LST done 2026-07-13; A-BG1 and A-CODE unblocked.
 
-- **A-LST** — Refinery lstlisting language
 - **A-REBUS** — Rebus preamble elements (martin)
 - **A-BG1** — Refinery code example in BG (oszkár, in_progress)
 - **A-CODE** — Refinery code listings in Sec 04
@@ -35,7 +34,6 @@ Execution order: A-LST → A-BG1 → A-CODE.
 
 ### References
 
-- **O01** — Verify Ding & Sato, Schardong
 - **M00a** — Noor ECMFA differentiation (martin)
 - **O-STAF** — STAF citation strategy (blocked, martin)
 
