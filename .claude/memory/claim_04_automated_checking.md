@@ -11,4 +11,4 @@ risk: medium
 Enabling automated consistency checking through design space exploration.
 
 **Evidence:** Three usage modes defined in Sec 03.2 (consistency checking, error identification, design space exploration). Sec 04.4 traces all three modes on the constraint taxonomy. Sec 05.2 benchmarks three Refinery solver operations (check, check -k, generate) across N=1 to N=30, plus G0–G7 constraint sensitivity analysis.
-**Gaps:** None.
+**Gaps:** Journal scope (D-021, 2026-07-13): scalability evidence rests on uniform instances; structurally diverse instances (Q-007, todo AF02) are scheduled and the claim wording follows the new measurements.

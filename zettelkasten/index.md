@@ -44,6 +44,14 @@ committed one-paragraph framing, live in [[M-009 threats-to-applicability]]:
 [[D-013 verifier-scope-issuer-remit]] · [[D-014 regulator-documented-conflict]] ·
 [[D-015 expressiveness-strength-first]] · [[D-016 dated-snapshot-method-over-catalogue]].
 
+## Kickoff rulings (2026-07-13)
+
+Martin's rulings on the six decisions left open by the spin and the 2026-07-06 advisor
+consultation:
+[[D-018 venue-sosym]] · [[D-019 rq-wording-approved]] ·
+[[D-020 rq0-relevance-and-error-taxonomy]] · [[D-021 q007-structurally-diverse-instances]] ·
+[[D-022 f8-conflict-anatomy]] · [[D-023 industry5-not-the-spin]].
+
 ## Tooling
 
 - [[glossary]] — terms, symbols, acronyms → concept notes.
@@ -55,4 +63,4 @@ committed one-paragraph framing, live in [[M-009 threats-to-applicability]]:
 
 ## Counts
 
-Concepts (C) 40 · Claims/arguments (K) 15 · Sources (S) 43 · Decisions (D) 17 · Questions (Q) 12 · Artifacts (A) 6 · MOCs (M) 14.
+Concepts (C) 40 · Claims/arguments (K) 15 · Sources (S) 43 · Decisions (D) 23 · Questions (Q) 12 · Artifacts (A) 6 · MOCs (M) 14.

@@ -35,6 +35,11 @@
 - [Range proofs = future work](decision_range_proofs_future_work.md) — out of scope, mention in conclusion
 - [Three-axis validation](decision_three_axis_validation.md) — coverage + expressiveness + error detection, structures §5
 - [FSL elaboration deferred](decision_fsl_elaboration.md) — intra-layer constraint deferred, defended argumentatively in §4.3
+- [Venue: SoSyM committed](decision_venue_sosym.md) — ruled 2026-07-13, D-018; unblocks O-VENUE
+- [RQ0 + design-error taxonomy adopted](decision_rq0_taxonomy.md) — RQ0 precedes RQ1-RQ3; X.509-motivated taxonomy closes the paper (D-019, D-020)
+- [Q-007 diverse scalability instances in scope](decision_q007_in_scope.md) — R9 closed, instance generator needed (D-021)
+- [F8 conflict anatomy committed](decision_f8_committed.md) — figure set gains F8, pre-empts O5 (D-022)
+- [Industry 5.0 rejected as spin](decision_industry5_not_spin.md) — stays an SLR axis (c) probe; revisit only with corpus evidence (D-023)
 
 # Claims
 

@@ -77,16 +77,17 @@ Example to chase: the Siemens talk at Hyperledger Global Forum, Dublin. Method: 
 (SLR runs while the bibliographic dialogue, iteration, and figure drawing continue); such a plan
 is needed; think before diving in; focus and continuous work.
 
-## Unresolved readings
+## Unresolved readings (resolutions 2026-07-13, Martin)
 
-- "Peint[?] cikk": a specific paper on DIDComm verification to reach back to (possibly the
-  Braun protocol-verification line, K-013). Martin to recall the author; do not cite until
-  verified.
-- Siemens Hyperledger Global Forum, Dublin: the forum was in Dublin in 2022; the noted "2023"
-  needs verification before the talk enters the vault as an S-note.
-- "LSP-k" (large-scale pilots) and "belga wallet": plausible but ambiguous strokes.
-- "mandate tokens": uncertain reading; could relate to eIDAS mandates/representation
-  credentials.
+- "Peint[?] cikk": resolved. Martin supplied the DOI: https://doi.org/10.1145/3589334.3645426
+  (ACM, WWW '24 proceedings). Existence and exact metadata are verified in proto-SLR axis (e)
+  before any citation; the K-013 Braun-line hypothesis updates to whatever the record shows.
+- Siemens Hyperledger Global Forum, Dublin: Martin does not recall the year; proto-SLR axis
+  (g) identifies the talk and settles 2022 vs 2023 before it enters the vault as an S-note.
+- "LSP-k" = EUDI large-scale pilots and "belga wallet" = the Belgian member-state wallet
+  project: readings confirmed by Martin.
+- "mandate tokens" = eIDAS mandates / representation credentials: reading confirmed by
+  Martin.
 
 ## Immediate implications (processed downstream, recorded here for provenance)
 
@@ -94,5 +95,10 @@ is needed; think before diving in; focus and continuous work.
    spin §2 (RQ set), §4 (delta), §6 (O3 rebuttal gains the X.509 precedent leg), M-010, M-012.
 2. Framing probe: Industry 5.0 as spin. Touches committed framing (M-009, D-016); requires an
    explicit Martin ruling, not silent adoption.
-3. No rulings on the spin §11 table were given at the meeting; those remain open.
+3. No rulings on the spin §11 table were given at the meeting. Ruled 2026-07-13 by Martin:
+   D-018 (venue SoSyM), D-019 (RQ1-RQ3 wording), D-020 (RQ0 + design-error taxonomy),
+   D-021 (Q-007 in scope), D-022 (F8 committed), D-023 (Industry 5.0 rejected as spin,
+   kept as SLR axis (c) probe).
 4. Working method: delegate the SLR to Fable as parallel multi-agent work; plan first.
+   Executed 2026-07-13: proto-SLR launched as a multi-agent workflow (find, verify,
+   synthesize) writing to `context/slr/`; main loop continued pipeline work in parallel.

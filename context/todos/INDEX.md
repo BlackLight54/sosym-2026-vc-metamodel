@@ -68,6 +68,18 @@ Execution order: A-LST → A-BG1 → A-CODE.
 
 Absorbs: X14 → A-BG2 (done). Overlaps: O-REFBG (A-BG1 is the unblocking step).
 
+## Advisor feedback (2026-07-06, kickoff 2026-07-13)
+
+Rulings recorded as D-018..D-023 (see `zettelkasten/index.md`, "Kickoff rulings"). Proto-SLR
+ran as a lights-out workflow into `context/slr/`. Execution order: AF03 → AF01; AF02
+independent.
+
+| ID | Title | Depends on | Status | Assigned |
+|----|-------|------------|--------|----------|
+| AF03 | [Integrate proto-SLR results](af03_slr_integration.md) | SLR workflow output | in_progress | claude |
+| AF01 | [Design-error taxonomy](af01_design_error_taxonomy.md) | AF03 | blocked | claude |
+| AF02 | [Q-007 instance generator + re-measurement](af02_q007_instance_generator.md) | — | pending | claude |
+
 ## Infrastructure
 
 | ID | Title | Status | Assigned |
