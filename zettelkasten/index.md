@@ -28,6 +28,7 @@ Consumed by the spin, paragraph-engineering, and writing stages (`PIPELINE.md`):
 12. [[M-012 journal-extension-delta]] — the conference→journal delta ranked by claim impact; Heilmeier seed.
 13. [[M-013 drafting-guardrails]] — prohibitions, refuted claims, do-not-cite list, anchor quotes. **Load before drafting.**
 14. [[M-014 figure-plan]] — each figure and the claim it carries; existing / planned / proposed.
+15. [[M-015 design-error-taxonomy]]: the paper's closing element; X.509-grounded design-error classes (`[proposed]`, AF01).
 
 ## Binding claims
 
@@ -36,6 +37,7 @@ Contributions: [[K-001 three-layer-metamodel]], [[K-002 vcdm-grounding]],
 Validation: [[K-005 coverage-validation]], [[K-006 expressiveness-validation]], [[K-007 antipattern-detection]].
 Results: [[K-008 contradictory-cross-framework-constraints]], [[K-009 multilayer-invisibility]],
 [[K-010 necessity-of-multilayer-modeling]].
+Closing element (`[proposed]`, AF01): [[K-016 design-error-taxonomy]] via [[M-015 design-error-taxonomy]].
 
 ## Committed framing (2026-07-04)
 
@@ -66,4 +68,4 @@ Proto-SLR findings (2026-07-13), persisted from the kickoff/SLR report:
 
 ## Counts
 
-Concepts (C) 43 · Claims/arguments (K) 15 · Sources (S) 53 · Decisions (D) 23 · Questions (Q) 12 · Artifacts (A) 6 · MOCs (M) 14.
+Concepts (C) 49 · Claims/arguments (K) 16 · Sources (S) 75 · Decisions (D) 23 · Questions (Q) 12 · Artifacts (A) 6 · MOCs (M) 15.

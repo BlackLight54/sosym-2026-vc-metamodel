@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AF01: Design-error taxonomy (findings)</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; max-width: 52rem; margin: 2rem auto; padding: 0 1rem; }
+  h1 { font-size: 1.5rem; margin-bottom: 0.2rem; }
+  h2 { font-size: 1.15rem; margin-top: 1.8rem; border-bottom: 1px solid #8884; padding-bottom: 0.2rem; }
+  .sub { color: #8a8a8a; margin-top: 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.9rem; margin: 0.6rem 0; }
+  th, td { border: 1px solid #8884; padding: 0.35rem 0.5rem; text-align: left; vertical-align: top; }
+  th { background: #8881; }
+  code { background: #8882; padding: 0 0.25rem; border-radius: 3px; }
+  .tag { display: inline-block; background: #6a8fd822; border: 1px solid #6a8fd8aa; border-radius: 3px; padding: 0 0.35rem; font-size: 0.8rem; }
+  .warn { color: #b8860b; }
+  ul { margin: 0.4rem 0; }
+  .box { border: 1px solid #8884; border-radius: 6px; padding: 0.6rem 0.9rem; margin: 0.8rem 0; background: #8881; }
+</style>
+</head>
+<body>
+<h1>AF01: Design-error taxonomy for VC ecosystems</h1>
+<p class="sub">Research cycle 1, session A (<code>research_multiagent_cycle</code>) · 2026-07-17 · all artifacts <span class="tag">[proposed]</span> pending Martin's approval</p>
+
+<div class="box">
+<strong>Headline.</strong> The paper's closing design-error taxonomy now exists as a corpus-grounded,
+layer-mapped, six-class scheme (K-016 + C-044..C-049 + M-015), with both headline results placed into
+exactly one class each. The targeted non-web-PKI arm moved the X.509 grounding from <em>web-PKI-only</em>
+to <strong>PARTIAL</strong>: 10 verified carriers (0 unverifiable) give every class a non-web-PKI
+relative. Two of the four load-bearing quotes are now full-text-confirmed; two still need a manual pull
+to freeze. Nothing is frozen; the class set and wording await approval.
+</div>
+
+<h2>1. The taxonomy (what it says)</h2>
+<p>Outer classification keyed to the documented X.509/PKI error history (not our own examples, per D-020),
+each class mapped to the metamodel layer it spans. It references, rather than replaces, the two internal
+schemes: C-013 (C1..C9) supplies the constraint <em>instruments</em>, C-029 the detected <em>signatures</em>.</p>
+<table>
+<tr><th>Class</th><th>Layer</th><th>Instrument</th><th>X.509 carrier</th><th>VC instance</th></tr>
+<tr><td>Issuance / schema-binding</td><td>CSL (DCL&#8596;CSL)</td><td>error; C1/C2</td><td>Kumar 2018, Georgiev 2012</td><td>trace-misalignment anti-pattern</td></tr>
+<tr><td>Status / revocation propagation</td><td>CSL&#8596;FSL</td><td>propagation</td><td>Liu 2015</td><td>C-036 static-dynamic mismatch</td></tr>
+<tr><td><strong>Cross-framework governance conflict</strong></td><td>FSL</td><td>error; <strong>C8</strong></td><td>Lopez 2005, Grindal 2025</td><td><strong>Headline 1 (vertical, C-025)</strong></td></tr>
+<tr><td><strong>Cross-credential expressiveness gap</strong></td><td>DCL&#8596;FSL</td><td>shadow; <strong>C9</strong></td><td>Georgiev 2012, Brubaker 2014</td><td><strong>Headline 2 (horizontal, C-026)</strong></td></tr>
+<tr><td>Specification ambiguity</td><td>FSL (CSL&#8596;FSL)</td><td>error; C7</td><td>Brubaker 2014, Clark 2013</td><td>VCDM-conformance gap</td></tr>
+<tr><td>Single-point-of-trust / root governance</td><td class="warn">out-of-model</td><td>none in-model</td><td>Fox-IT 2012, Ellison/Schneier 2000</td><td>trusted-list governance</td></tr>
+</table>
+<p>Both headlines land uniquely: the vertical income-governance conflict is the governance-conflict class;
+the horizontal floor-area gap is the expressiveness-gap class. The runtime single-point-of-trust class is
+named <span class="warn">out-of-model</span> rather than forced onto a layer.</p>
+
+<h2>2. Non-web-PKI arm (the honesty upgrade)</h2>
+<p>10 CONFIRMED carriers, 0 unverifiable, one or more per class, from the closer B2B/B2G relatives.
+Honesty verdict: <strong>PARTIAL</strong> (no longer web-PKI-only). Full detail in <code>axis_d_nonweb.md</code>.</p>
+<ul>
+<li><strong>eIDAS-1 qualified certs:</strong> Entschew 2022 (QWAC display failure), Parsovs 2020 (Estonian eID key flaws), Valtna-Dvorak 2021 (ROCA, ~750k certs revoked).</li>
+<li><strong>S/MIME:</strong> Ondaro 2025 (mass non-compliance at scale), Poddebniak 2018 (Efail), Muller 2019 (signature spoofing), Clark 2021 (secure-email SoK).</li>
+<li><strong>Enterprise / code-signing:</strong> Schroeder/Christensen 2021 (AD CS ESC1..ESC8), Kim 2017 (Certified Malware), Kim 2018 (Broken Shield).</li>
+</ul>
+<p class="warn">Residual gaps (stated in prose): no documented TSL/trusted-list governance incident was
+found; the QWAC record is dominated by the eIDAS-2 Article 45 policy controversy, not realized
+misissuance; the eIDAS-1 evidence is Estonia-concentrated.</p>
+
+<h2>3. Pre-freeze full-text pulls</h2>
+<table>
+<tr><th>Source</th><th>Load-bearing claim</th><th>Status</th></tr>
+<tr><td>Bochnia 2024</td><td>organizational holder role "largely unexplored"</td><td>CONFIRMED-verbatim (CC-BY PDF); no manual pull needed</td></tr>
+<tr><td>Serrano 2019</td><td>"taxonomy of incidents/failures", 1300+/379</td><td>CONFIRMED-verbatim (OA mirror); backs the differentiation</td></tr>
+<tr><td>Schmidt 2021</td><td>SSI ecosystem "rapidly changing and ill-defined"</td><td class="warn">verbatim in abstract; IEEE full text bot-blocked, manual pull to freeze</td></tr>
+<tr><td>Sroor 2022</td><td>governance modeled "visually and informally" (delta)</td><td class="warn">"visual" supported; "informal" is our framing; ScienceDirect 403, manual pull to freeze</td></tr>
+<tr><td>Hadan 2021</td><td>failure dimensions + expert-vs-incident divergence</td><td>dimensions are code/crypto/organizational/human (already correct in S-055); the technical/economic/legal/social framing is Lopez 2005's, not Hadan's</td></tr>
+</table>
+
+<h2>4. Artifacts produced (all <span class="tag">[proposed]</span>)</h2>
+<ul>
+<li><code>K-016 design-error-taxonomy</code> (claim, status [proposed]) + M-011 row + <code>M-015</code> taxonomy MOC + index.md registration.</li>
+<li>Six class C-notes <code>C-044..C-049</code>; caveats updated in <code>C-043</code>.</li>
+<li>Corpus: <code>axis_d_nonweb.md</code>, 10 records appended to <code>candidates.json</code> (84 total, 0 unverifiable), <code>corpus_map.md</code> addendum.</li>
+<li>S-notes: axis-d must-cite batch <code>S-054..S-063</code> (WS4); non-web carriers + quote sources <code>S-064..S-075</code>; citekey-map + Zotero-flag files updated (entries UNRESOLVED, Martin enters Zotero manually per ruling 8).</li>
+<li><code>check_links.sh</code>: 0 errors.</li>
+</ul>
+
+<h2>5. Open decisions for Martin</h2>
+<ul>
+<li><strong>Approve the class set and wording</strong> (the six classes above), or adjust. Until then K-016 stays [proposed] and no prose promises the taxonomy.</li>
+<li><strong>Accept PARTIAL grounding</strong> with the three residual gaps stated as limitations, or request a further arm (TSL/trusted-list incident search; broader member-state eIDAS-1 coverage).</li>
+<li><strong>Two manual full-text pulls</strong> remain before the RQ0/novelty wording can freeze: Schmidt (IEEE Xplore) and Sroor (ScienceDirect). Both are behind bot-blocks the automated arm could not pass.</li>
+</ul>
+<p class="sub">File-disjoint from the parallel evaluation arm (T12, AF02): those own <code>models/</code> and
+<code>sections/05_evaluation.md</code>; AF01 owns the SLR ledger, the new K/C/S-notes, and appends a
+row-disjoint M-011 taxonomy row. No cycle-1 MANIFEST existed; the split is recorded in the plan artifact.</p>
+</body>
+</html>

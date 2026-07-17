@@ -151,3 +151,21 @@ Vault-note feeds:
 - M-013 (do-not-cite): no additions. do_not_cite_additions.md records zero UNVERIFIABLE verdicts; all 74 entries are CONFIRMED or CORRECTED, with corrections in candidates.json verify_notes. M-013 needs no edit from this pass.
 
 Axis g additionally resolves a provenance question for the meeting-notes trail: the Siemens Dublin talk is Franz and Shams, HGF 2022, 12 September 2022, with the Kind keynote as the disambiguated alternative; the year 2022 (not 2023) should be corrected wherever the notes say otherwise.
+
+## Addendum: AF01 cycle 1 session A (2026-07-17)
+
+- **Gap 7 (non-web PKI): partially closed.** A targeted finder-plus-verifier arm added 10 CONFIRMED
+  non-web-PKI carriers (0 unverifiable), one or more per design-error class, across eIDAS-1 qualified
+  certificates, S/MIME, and enterprise/code-signing PKI. See `axis_d_nonweb.md`. The taxonomy grounding
+  moves from web-PKI-only to **PARTIAL**. Residual: no TSL/trusted-list governance incident located; the
+  QWAC record is dominated by the eIDAS-2 Article 45 policy controversy, not realized misissuance; the
+  eIDAS-1 evidence is Estonia-concentrated. Records appended to `candidates.json` with axes ["d-nonweb"].
+- **Gap 12 (quote precision): partially closed for the load-bearing items.** Full-text pulls (AF01 WS3):
+  Bochnia 2024 "largely unexplored" CONFIRMED-verbatim from the CC-BY PDF (S-074); Serrano 2019
+  "taxonomy of incidents/failures" CONFIRMED-verbatim from an OA mirror (S-049 updated). Still open,
+  manual pull needed to freeze: Schmidt 2021 "rapidly changing and ill-defined" (verbatim in the
+  abstract, IEEE full text bot-blocked, S-075); Sroor 2022 "visual/informal" (ScienceDirect 403, "visual"
+  supported by abstract and sibling thesis, "informal" is our framing, S-044 updated). Hadan 2021 uses
+  the dimensions code/cryptography/organizational/human, already correct in S-055; the
+  technical/economic/legal/social framing is Lopez 2005's and must not be pinned on Hadan.
+- **do-not-cite: still none.** All 84 ledger entries are CONFIRMED or CORRECTED; 0 UNVERIFIABLE.

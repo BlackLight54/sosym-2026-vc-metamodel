@@ -30,6 +30,9 @@ RQ1 (primary novelty threat) and DIFF. This is the closest scholarly precedent f
 ## Relation to this work
 Primary RQ1 anchor per corpus_map §3 (axis a). The delta statement M-012 rests on the contrast between this informal, right-scope modeling and the paper's formal checkable constraints.
 
+## Full-text pull (AF01 WS3, 2026-07-17): STILL-ABSTRACT
+The Procedia article full text was not reached (ScienceDirect, ResearchGate, and proxy all returned HTTP 403). The "visual" half of the delta is supported: the article abstract states the work develops a governance framework "by providing a visual view of the SSI ecosystem," and the first author's open-access Master's thesis (Sroor, University of Jyvaskyla, 2022, the source document behind this report) states verbatim that the EGC notation "can give a visual model for the SSI ecosystem only and can not generates codes" [sic]. The "informal / not-checkable" half is supported in substance but "informal" is this paper's framing, not the authors' word. **To freeze a verbatim in-paper quote, a manual ScienceDirect pull is required; the sibling JYX thesis must not be attributed to the Procedia paper.** Marked abstract-derived until then.
+
 ## Links
 - [[S-011 barclay-ssi-modelling-2020]]: prior SSI modeling that stopped at iStar goal/actor models.
 - [[S-009 ding-securessi-2023]]: formal SSI modeling at architecture level, below the target scope.

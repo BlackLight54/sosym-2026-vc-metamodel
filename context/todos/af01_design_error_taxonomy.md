@@ -2,7 +2,7 @@
 id: "AF01"
 short: "error-taxonomy"
 title: "Construct the design-error taxonomy (X.509-motivated, corpus-grounded)"
-status: pending
+status: in_progress
 priority: high
 depends_on: []
 binding_claims: []

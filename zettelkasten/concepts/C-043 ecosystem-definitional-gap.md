@@ -37,11 +37,14 @@ mini-contribution that fills a documented six-year gap and scopes the design-err
 
 ## Caveat: quote precision
 
-Every wording above is paraphrased from abstracts, index records, and verification notes. The
-verbatim phrasings, in particular Schmidt's "ill-defined" and Bochnia's "largely unexplored", must
-be re-pulled from full texts before any of them enters the paper as a quotation. The gap claim
-itself is robust across the chain; only the exact wordings need full-text re-verification at
-drafting time.
+Status after the AF01 WS3 full-text pull (2026-07-17). Bochnia's "largely unexplored" is now
+**CONFIRMED-verbatim** from the CC-BY published PDF (see [[S-074 bochnia-ssi-organizations-2024]]):
+"The organization's roles as an issuer, verifier, and especially as a holder of Verifiable
+Credentials (VCs) remain largely unexplored." Schmidt's "rapidly changing and ill-defined" is
+verbatim in the paper's own abstract (Semantic Scholar mirror), but IEEE full text stayed
+bot-blocked, so it remains **abstract-derived**: a manual IEEE Xplore full-text pull is still needed
+before it enters the paper as a frozen quotation (see [[S-075 schmidt-clear-the-fog-2021]]). The gap
+claim itself is robust across the chain; only Schmidt's exact wording awaits full-text confirmation.
 
 ## Links
 - [[S-051 richter-anke-ssi-framework-2026]] the 2026 endpoint: the gap still stands.
