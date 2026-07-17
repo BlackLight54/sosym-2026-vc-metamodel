@@ -36,9 +36,15 @@ The non-web-PKI arm verified 10 carriers (0 unverifiable), one or more per class
 - Spec ambiguity: [[S-069 mueller-johnny-signature-spoofing-2019]] (S/MIME signature spoofing, 15 of 22 clients).
 - Single-point-of-trust: [[S-072 kim-certified-malware-2017]] (111 compromised code-signing certificates).
 
+## Governance carriers (AF01 governance arm, 2026-07-17)
+
+A follow-on arm strengthened the two governance-facing classes (TSL-gap verdict PARTIAL, see `context/slr/axis_d_nonweb.md`).
+- Governance conflict (C-046): [[S-077 ec-eidas-evaluation-swd-2021]] (Commission eIDAS evaluation, supervisory fragmentation), [[S-076 enisa-trust-services-incidents-2024]] (ENISA trust-service incident aggregation), [[S-080 weigl-ssi-construction-governance-2023]] (GIQ, SSI self-sovereignty-versus-institution tension).
+- Single-point-of-trust (C-049): [[S-079 sovrin-foundation-dissolution-2025]] (Sovrin Foundation collapse, MainNet read-only on one operator, a deployed-SSI instance), [[S-078 krul-sok-trusting-ssi-2024]] (SoK on where SSI trust re-concentrates).
+
 ## Honesty obligations (bind the wording)
 
-- **Grounding is PARTIAL, no longer web-PKI-only.** Every class now carries a non-web-PKI relative (above). Residual gaps to state in prose: no documented TSL/trusted-list governance incident was located; the QWAC error record is dominated by the Article 45 policy controversy rather than realized misissuance; the eIDAS-1 evidence is Estonia-concentrated.
+- **Grounding is PARTIAL, no longer web-PKI-only.** Every class now carries a non-web-PKI relative (above), and the two governance-facing classes gained EU trusted-list-regime and SSI trust-framework carriers. Residual gaps to state in prose: no carrier documents a Trusted-List-as-artifact failure (only the governance regime behind the lists); the QWAC error record is dominated by the Article 45 policy controversy rather than realized misissuance; the eIDAS-1 evidence is Estonia-concentrated. Krul 2024 ([[S-078 krul-sok-trusting-ssi-2024]]) was earlier abstract-level-dropped for drawing no PKI-failure lessons; it is re-included only for its SSI trust-model analysis, not as a PKI lesson.
 - **No single citable PKI design-error taxonomy exists.** The grounding is a documented synthesis; [[S-049 serrano-pki-incidents-2019]] is the closest analog, cited-and-differentiated (WS3 confirmed verbatim: a "taxonomy of incidents and causes" / "taxonomy of failures" from a business-practice lens, not a design-error taxonomy).
 
 ## Links

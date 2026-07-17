@@ -80,6 +80,11 @@ sync with `context/references/REFERENCES_TO_ADD_IN_ZOTERO.md`. `UNRESOLVED` = ne
 | S-073 kim-broken-shield-revocation-2018 | `kim_broken-shield_2018` | UNRESOLVED (pending Zotero entry) |
 | S-074 bochnia-ssi-organizations-2024 | `bochnia_ssi-organizations_2024` | UNRESOLVED (pending Zotero entry) |
 | S-075 schmidt-clear-the-fog-2021 | `schmidt_clear-the-fog_2021` | UNRESOLVED (pending Zotero entry) |
+| S-076 enisa-trust-services-incidents-2024 | `enisa_trust-services-incidents_2024` | UNRESOLVED (pending Zotero entry) |
+| S-077 ec-eidas-evaluation-swd-2021 | `ec_eidas-evaluation_2021` | UNRESOLVED (pending Zotero entry) |
+| S-078 krul-sok-trusting-ssi-2024 | `krul_trusting-ssi_2024` | UNRESOLVED (pending Zotero entry) |
+| S-079 sovrin-foundation-dissolution-2025 | `sovrin_dissolution_2025` | UNRESOLVED (pending Zotero entry) |
+| S-080 weigl-ssi-construction-governance-2023 | `weigl_ssi-construction_2023` | UNRESOLVED (pending Zotero entry) |
 
 Citekeys are transcribed from the `[@key]` markers in `sections/*.md`; verify against the exported
 `.bib` before relying on them.

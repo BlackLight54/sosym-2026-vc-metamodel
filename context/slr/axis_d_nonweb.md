@@ -35,10 +35,16 @@ Certified Pre-Owned was checked against locally extracted full text.
 
 ## Residual gaps (state honestly in prose)
 
-1. **TSL/trusted-list governance failure: no carrier.** Targeted searches for a documented list-of-trusted-lists
-   or member-state trusted-list incident (expired signing cert, malformed list) found only framework docs
-   and a currently-passing status, no primary error incident. The governance-failure dimension for
-   qualified-cert infrastructure remains unfilled.
+1. **TSL/trusted-list governance failure: PARTIAL (AF01 governance arm, 2026-07-17).** The governance
+   *regime* backing the trusted lists now has a documented failure history from three independent source
+   types: a regulator self-evaluation admitting divergent supervision ([[S-077 ec-eidas-evaluation-swd-2021]]),
+   an agency incident record of recurring trust-service failures ([[S-076 enisa-trust-services-incidents-2024]]),
+   and a peer-reviewed case of a listed provider's failures escaping supervision ([[S-065 parsovs-estonian-eid-2020]]).
+   What remains unevidenced is a failure of a Trusted List *as an artifact* (an erroneous or compromised TL
+   entry, member-state list mismanagement, or compilation failure); no carrier documents that. So the paper
+   can claim the governance regime has a documented failure history, not that the lists themselves have failed.
+   Closest cut for that narrow claim: Berbecaru and Lioy (STORK, 2015), TSL-mechanism-specific but on the
+   defunct STORK pilot.
 2. **QC/QWAC realized-misissuance record is thin.** The accessible QWAC error literature is dominated by the
    eIDAS-2 Article 45(2) browser-trust policy controversy, not realized qualified-cert misissuance; no
    citable QWAC misissuance measurement was found.

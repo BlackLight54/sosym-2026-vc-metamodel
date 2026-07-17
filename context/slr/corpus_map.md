@@ -169,3 +169,19 @@ Axis g additionally resolves a provenance question for the meeting-notes trail: 
   the dimensions code/cryptography/organizational/human, already correct in S-055; the
   technical/economic/legal/social framing is Lopez 2005's and must not be pinned on Hadan.
 - **do-not-cite: still none.** All 84 ledger entries are CONFIRMED or CORRECTED; 0 UNVERIFIABLE.
+
+### Governance arm (AF01 follow-on, 2026-07-17)
+
+- **Governance dimension: strengthened (TSL gap now PARTIAL).** 6 verified (5 CONFIRMED, 1 CORRECTED,
+  0 unverifiable). C-046 governance-conflict gains the EU trusted-list regime failure history:
+  EC SWD(2021) 130 eIDAS evaluation (supervisory fragmentation, primary instrument), ENISA 2024
+  trust-service incident report, Weigl et al. 2023 (GIQ, SSI governance tension). C-049
+  single-point-of-trust gains a deployed-SSI instance: the Sovrin Foundation dissolution (21 May 2025,
+  MainNet read-only on one operator) plus Krul et al. 2024 (PoPETs SoK). Parsovs 2020 (already S-065)
+  re-surfaced as a supervisory-oversight failure. Records appended to candidates.json with axes ["governance"].
+- **Residual (state in prose):** no carrier documents a Trusted-List-as-artifact failure, only the
+  governance regime behind the lists; C-049's non-web evidence is entirely SSI-side.
+- **Krul reconciliation:** Krul et al. 2024 (SoK: Trusting SSI) was earlier abstract-level dropped in
+  this map (gap note, "draws no PKI-failure lessons"). It is re-included for its SSI trust-MODEL analysis
+  only, a different relevance, not as a PKI-failure lesson. The earlier drop rationale still holds for the
+  PKI-lessons use.

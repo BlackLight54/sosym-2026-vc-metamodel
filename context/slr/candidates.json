@@ -1349,5 +1349,85 @@
     "verdict": "CONFIRMED",
     "evidence": "https://www.usenix.org/conference/usenixsecurity18/presentation/kim",
     "verify_notes": "Existence corroborated by three independent index/publisher sources. DBLP record conf/uss/KimKKGD18 (https://dblp.uni-trier.de/rec/conf/uss/KimKKGD18.html) lists the identical title and all five authors in the stated order at USENIX Security 2018. ACM Digital Library (dl.acm.org/doi/10.5555/3277203.3277267) and Semantic Scholar carry the same record. The USENIX presentation locator and PDF (sec18-kim.pdf) exist; direct WebFetch of the USENIX page returned HTTP 403 (bot block), but the URL appears verbatim in USENIX/DBLP indexes so it resolves. Title, authors, year, and venue all match the candidate exactly (no correction needed). Relevance/error_class_signal are supported: search-surfaced abstract states erroneously set revocation dates leave signed malware valid after revocation and that failures in disseminating revocations cause clients to keep trusting revoked certificates, i.e. a status and revocation design failure. Note (cap/precision): I relied on DBLP/ACM/Semantic-Scholar index metadata plus an abstract-derived summary; I did not read the full-text PDF, so the abstract characterization is abstract-derived, not a verbatim full-text quote. No caps hit beyond the single 403 on the USENIX page."
+  },
+  {
+    "title": "Annual Report - Trust Services Security Incidents 2024",
+    "authors": "ENISA (European Union Agency for Cybersecurity)",
+    "venue": "ENISA (EU Agency for Cybersecurity), CIRAS annual report series",
+    "year": "2025",
+    "locator": "https://www.enisa.europa.eu/publications/annual-report-trust-services-security-incidents-2024",
+    "kind": "regulator/agency incident report",
+    "axes": [
+      "governance"
+    ],
+    "relevance": "ENISA's mandatory Article 19a aggregation of trust-service security incidents reported by national supervisory bodies, giving the documented failure history (root causes, outages, and human errors) of eIDAS qualified and non-qualified trust services rather than a framework tutorial.",
+    "rq_signal": "AF01 governance arm; class=governance-conflict; subtopic=eu-trusted-lists",
+    "verdict": "CONFIRMED",
+    "evidence": "https://www.enisa.europa.eu/publications/annual-report-trust-services-security-incidents-2024",
+    "verify_notes": "The publisher URL resolves to the ENISA publication page. Title matches exactly: \"Annual Report - Trust Services Security Incidents 2024\". Publisher is ENISA (European Union Agency for Cybersecurity). Publication date June 23, 2025 (matches claimed year 2025). The page states this is the eighth round of ENISA trust-services incident reporting, aggregating notified breaches for 2024 as reported by 21 EU Member States and 3 EFTA countries, and analysing root causes, statistics and trends. This confirms the governance-conflict class_signal and the relevance claim: it documents the failure history (root causes, outages, human errors) of eIDAS trust services via mandatory national supervisory-body reporting, not a framework tutorial. Minor note: the page attributes the breach-notification mandate to Article 19 of eIDAS, whereas the metadata relevance narrative says \"Article 19a\"; this legal-article citation nuance does not affect the bibliographic verdict. Existence corroborated by the resolving primary/institutional ENISA publisher URL.</parameter>\n<parameter name=\"corrected_fields\">"
+  },
+  {
+    "title": "Commission Staff Working Document: Evaluation of Regulation (EU) No 910/2014 (eIDAS), SWD(2021) 130 final",
+    "authors": "European Commission",
+    "venue": "European Commission, EUR-Lex CELEX 52021SC0130",
+    "year": "2021",
+    "locator": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:52021SC0130",
+    "kind": "regulator evaluation / staff working document",
+    "axes": [
+      "governance"
+    ],
+    "relevance": "The Commission's own regulatory evaluation finds that varying levels of supervision and the trust-service legal framework produced fragmentation and reduced trust across member states, a primary-source finding of supervisory-body and trust-scheme governance shortcomings underpinning the qualified-provider trusted lists.",
+    "rq_signal": "AF01 governance arm; class=governance-conflict; subtopic=eu-trusted-lists",
+    "verdict": "CONFIRMED",
+    "evidence": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:52021SC0130",
+    "verify_notes": "Existence corroborated via EUR-Lex and multiple independent sources. CELEX 52021SC0130 = SWD(2021) 130 final, Commission Staff Working Document, \"EVALUATION\" of Regulation (EU) No 910/2014 (eIDAS), European Commission, Brussels, dated 3.6.2021 (year 2021 correct). Official PDF at eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=SWD:2021:0130:FIN:EN:PDF and HTML at the supplied locator; also indexed on digital-strategy.ec.europa.eu. All metadata fields (author = European Commission, year = 2021, venue/CELEX, document kind = staff working document / regulator evaluation) match the reference as given.\n\nGovernance-conflict claim (class_signal=\"governance-conflict\") is supported by the document's own findings: the evaluation reports that varying levels of supervision led to a lack of trust and legal certainty of trust services in the European market, hindering cross-border uptake and producing an uneven playing field on trustworthiness and cost; and that although trust services are largely regulated under the current legal framework, differing national practices create a risk of increased fragmentation. National supervisory bodies (which audit QTSPs, grant qualified status, take enforcement action, and maintain the national Trusted Lists) exist per member state, and their divergent supervision underpins the fragmentation/reduced-trust finding tied to qualified-provider trusted lists. This is a primary-source regulatory-evaluation finding of supervisory-body and trust-scheme governance shortcomings, matching the stated relevance.\n\nNote on caps/limitations: the EUR-Lex HTML locator and PDF returned blank via automated fetch (JS-rendered/server-side delivery), so the specific supervision/fragmentation wording was corroborated through EUR-Lex search indexing and a secondary legal summary (Wiggin LLP) rather than direct extraction of the primary text; existence and metadata are nonetheless firmly confirmed. No verbatim quotation reproduced."
+  },
+  {
+    "title": "SoK: Trusting Self-Sovereign Identity",
+    "authors": "Evan Krul, Hye-young Paik, Sushmita Ruj, Salil S. Kanhere",
+    "venue": "Proceedings on Privacy Enhancing Technologies (PoPETs) 2024(3), pp. 297-313",
+    "year": "2024",
+    "locator": "https://doi.org/10.56553/popets-2024-0079",
+    "kind": "SoK / peer-reviewed systematization",
+    "axes": [
+      "governance"
+    ],
+    "relevance": "Peer-reviewed systematization that derives trust models for SSI and identifies shortcomings in how trust is rooted across issuers, verifiers and governance authorities, including where trust re-concentrates in issuers, registries, and ledger anchors despite decentralization claims, directly analyzing the trust-framework assumptions the arm targets.",
+    "rq_signal": "AF01 governance arm; class=single-point-of-trust; subtopic=ssi-trust-framework",
+    "verdict": "CONFIRMED",
+    "evidence": "https://doi.org/10.56553/popets-2024-0079",
+    "verify_notes": "DOI 10.56553/popets-2024-0079 resolves via a 302 redirect to the official PoPETs publisher page (petsymposium.org/popets/2024/popets-2024-0079.php), which lists the exact title, all four authors (Evan Krul, Hye-young Paik, Sushmita Ruj, Salil S. Kanhere, all University of New South Wales; Krul also Cyber Security Cooperative Research Centre), volume 2024 issue 3, and pages 297-313, all matching the reference. Corroborated independently by arXiv (2404.06729), Semantic Scholar, and ResearchGate. On the class_signal (\"single-point-of-trust\") and relevance: the publisher abstract and PoPETs page confirm this is a peer-reviewed systematization of knowledge that analyzes trust in SSI across its components and the threats posed by various system actors, and derives three distinct trust models capturing threats and mitigations across SSI literature and implementations, while cataloging design prerequisites for establishing trust and identifying gaps in current implementations. This directly supports the claim that the work systematizes SSI trust models and identifies shortcomings in how trust is rooted across actors (issuers, verifiers, governance/registries, ledger anchors). Note: the abstract does not verbatim enumerate \"issuers/verifiers/registries/ledger anchors\" or explicitly state trust \"re-concentrates\" in those parties; that specific framing is an interpretive extrapolation of the SoK's actor/threat analysis rather than quoted text, though it is consistent with the paper's stated scope. No verbatim quotes reproduced. No caps hit."
+  },
+  {
+    "title": "The Sovrin Foundation Has Been Dissolved — but Sovrin MainNet Remains",
+    "authors": "Sovrin Foundation (Board of Trustees)",
+    "venue": "Sovrin Foundation (primary foundation postmortem / grey source)",
+    "year": "2026",
+    "locator": "https://sovrin.org/the-sovrin-foundation-has-been-dissolved-but-sovrin-mainnet-remains/",
+    "kind": "foundation postmortem / primary grey source",
+    "axes": [
+      "governance"
+    ],
+    "relevance": "Primary documentation of the governance and sustainability collapse of the flagship SSI trust foundation (Foundation dissolved 21 May 2025 after accumulated debt and steward attrition), whose dissolution left the once-decentralized MainNet running read-only on a single operator's server; corroborated by ENISA-independent reporting and the Foundation's own MainNet shutdown notices.",
+    "rq_signal": "AF01 governance arm; class=single-point-of-trust; subtopic=ssi-trust-framework",
+    "verdict": "CORRECTED",
+    "evidence": "https://sovrin.org/the-sovrin-foundation-has-been-dissolved-but-sovrin-mainnet-remains/",
+    "verify_notes": "URL resolves to a live Sovrin Foundation page with the stated title (page renders an em-dash where the entry has a hyphen). Page content confirms: Sovrin Foundation formally dissolved by the State of Utah on 21 May 2025 after reduced activity and inability to sustain its mission; MainNet persists as a read-only archive operated by a single caretaker node (Trinsic) on one virtual cloud server, queryable via indyscan.io; governance frameworks and historical records preserved on migrated sovrin.org. Publication date printed on page is 20 January 2026. Independent corroboration: ID Tech Wire ('The Community Moved On': Sovrin Announces MainNet's Likely Shutdown) and Autheo blog ('What Happened to Sovrin Network') confirm the dissolution, ~$2M accumulated debt, absence of a sustainable revenue model, and the single-node read-only MainNet status. Supports class_signal single-point-of-trust: the once-decentralized ledger now runs on a single operator's server. No verbatim quotes reproduced. | CORRECTED: year: 2025 -> 2026 (article publication date is 20 January 2026; the 21 May 2025 date is the dissolution event, not the publication date). Title punctuation: entry hyphen vs page em-dash (cosmetic)."
+  },
+  {
+    "title": "The construction of self-sovereign identity: Extending the interpretive flexibility of technology towards institutions",
+    "authors": "Linda Weigl, Tom Josua Barbereau, Gilbert Fridgen",
+    "venue": "Government Information Quarterly, 40(4), 101873",
+    "year": "2023",
+    "locator": "https://doi.org/10.1016/j.giq.2023.101873",
+    "kind": "peer-reviewed journal article (critical institutional analysis)",
+    "axes": [
+      "governance"
+    ],
+    "relevance": "Critically analyzes the governance tension in SSI between the self-sovereignty ideal and the institutional/regulatory embedding that trust frameworks require, exposing the governance conflict at the heart of B2G credential ecosystems.",
+    "rq_signal": "AF01 governance arm; class=governance-conflict; subtopic=ssi-trust-framework",
+    "verdict": "CONFIRMED",
+    "evidence": "https://doi.org/10.1016/j.giq.2023.101873",
+    "verify_notes": "DOI 10.1016/j.giq.2023.101873 resolves via a 302 redirect to the canonical Elsevier record (linkinghub.elsevier.com/retrieve/pii/S0740624X23000734), i.e. ScienceDirect PII S0740624X23000734. Existence and metadata corroborated across multiple independent sources: ScienceDirect (sciencedirect.com/science/article/pii/S0740624X23000734), ResearchGate (publication 375072617), CORE (outputs/596818605), and the University of Amsterdam author profile for L. Weigl. Title matches exactly; authors match exactly (Linda Weigl, Tom Josua Barbereau, Gilbert Fridgen); venue confirmed as Government Information Quarterly, volume 40, issue 4, article 101873; published online 27 October 2023, consistent with year 2023. On the class_signal \"governance-conflict\" and relevance claim: the article develops an Extended Model of Interpretive Flexibility (combining Social Construction of Technology with the Structurational Model of Technology) that explicitly extends interpretive flexibility \"towards institutions,\" analyzing how SSI's value-laden self-sovereignty ideal is shaped by and reshapes institutional properties, and how competing interpretations create hype and idiosyncrasy in public discourse. This substantiates the described governance tension between the self-sovereignty ideal and institutional/regulatory embedding, supporting the governance-conflict classification. No verbatim abstract text quoted. No caps hit."
   }
 ]
