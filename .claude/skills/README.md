@@ -21,6 +21,7 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 | [`research_prior_work_import`](research_prior_work_import/SKILL.md) | "Import these references" | DOIs/BibTeX → structured reference notes |
 | [`research_related_work_positioning`](research_related_work_positioning/SKILL.md) | "Build comparison matrix" | Positioning statements + comparison matrix |
 | [`research_currency_sweep`](research_currency_sweep/SKILL.md) | "Run the currency sweep" | Re-verifies dated EU regulatory/standards facts against primary sources; updates S-notes, M-009, and the as-of snapshot |
+| [`research_multiagent_cycle`](research_multiagent_cycle/SKILL.md) | "Run the research cycle" / "Run the proto-SLR" | Seven-step lights-out cycle: plan-first, record rulings, staged find/dedup/verify/synthesize workflow, disjoint parallel work, vault integration, findings-first report, close |
 
 ### `draft_` — Drafting & writing
 
@@ -61,6 +62,7 @@ Automated skills for mechanical parts of the paper writing process. Each skill i
 | [`plan_advisor_feedback`](plan_advisor_feedback/SKILL.md) | "Process advisor feedback" | Parse feedback into decisions, tasks, and execution pipeline |
 | [`plan_budget_cut`](plan_budget_cut/SKILL.md) | "Page budget usage tree" / "We need major reengineering" | Diagnoses page inflation per section; proposes phased cuts with `@CUT-START`/`@CUT-END` markers |
 | [`plan_consolidation_pipeline`](plan_consolidation_pipeline/SKILL.md) | "Build consolidation pipeline" | Maps binding claims to ordered prompt files with dependency tracking |
+| [`plan_research_pipeline`](plan_research_pipeline/SKILL.md) | "Plan the next research cycle" / "Kick off a new cycle" | Meta-skill: designs a cycle's parallel session prompts plus a manifest proving file-disjointness; each session runs `research_multiagent_cycle` |
 | [`plan_rebuttal`](plan_rebuttal/SKILL.md) | "Prepare rebuttal" | Parse reviews, classify points, draft response |
 | [`plan_spine`](plan_spine/SKILL.md) | "Create the spine" / "What goes where?" | Six passes from spin document to frozen structural contract: harvest, home, order, contract, place, audit-and-freeze |
 | [`plan_revision_orchestration`](plan_revision_orchestration/SKILL.md) | "This change affects multiple sections" | Decomposes cross-cutting changes into ordered prompts |

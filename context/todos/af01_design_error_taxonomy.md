@@ -45,3 +45,21 @@ Steps:
 
 Acceptance: K-note + M-011 row exist; every class carries a verified precedent citation or a
 corpus-verified instance; check_links.sh at 0 errors; no em dashes.
+
+## Amendment (2026-07-13, Martin ruling)
+
+The AF01 workflow gains one finder-plus-verifier arm for **non-web-PKI error history**: eIDAS 1
+qualified certificates, S/MIME, and enterprise PKI. The verified corpus (axis d) covers only the
+web PKI/TLS; these are arguably the closer B2B/B2G relatives, so the taxonomy claims must either
+gain carriers from this extended search or the web-PKI limitation must be stated explicitly with
+evidence. Run the extension as a targeted, adversarially verified finder pass in parallel with the
+evaluation arm (T12 then AF02), file-disjoint. See `context/advisor_notes_2026-07-13.md` and the
+web-PKI-only threat row in `context/reports/2026-07-13_kickoff_slr_report.html` section 8.
+
+## Amendment 2 (2026-07-13, coverage-audit follow-up)
+
+Before the taxonomy classes and the RQ0 wording freeze, pull FULL TEXTS of the load-bearing
+sources and re-verify the quoted characterizations (audit thin spot 3): Schmidt 2021
+("ill-defined"), Bochnia 2024 ("largely unexplored"), Sroor 2022 (the visual-and-informal
+delta the novelty claim rests on), plus every carrier study a taxonomy class cites. Abstract
+level characterizations are not sufficient backing for a frozen claim.

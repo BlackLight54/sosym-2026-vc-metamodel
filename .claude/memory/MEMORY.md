@@ -73,5 +73,6 @@
 - [figures.lua filter active](project_figures_lua_filter.md) — emits ACM \Description{} from image description attribute
 - [Parallel multi-agent method validated](feedback_parallel_agent_method.md) — background workflow/agents + main-loop edits; file-disjoint tasks only; adversarial verification mandatory in literature sweeps
 - [Subagents run on Opus](feedback_subagents_opus.md) — cost rule after spend-limit hit 2026-07-13; tight prompts, opus for scoped subtasks
+- [Corpus-first method validated: a gold mine](feedback_advisor_goldmine.md), advisor's 2026-07-13 verdict on the kickoff/SLR report; findings-first reporting on a corpus-first cycle works; repeat the cycle shape
 
 Superseded memories → `context/archive/`, never deleted

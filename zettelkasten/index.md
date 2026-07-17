@@ -52,6 +52,9 @@ consultation:
 [[D-020 rq0-relevance-and-error-taxonomy]] · [[D-021 q007-structurally-diverse-instances]] ·
 [[D-022 f8-conflict-anatomy]] · [[D-023 industry5-not-the-spin]].
 
+Proto-SLR findings (2026-07-13), persisted from the kickoff/SLR report:
+[[C-041 formality-scope-gap]] · [[C-042 ecosystem-level-lint]] · [[C-043 ecosystem-definitional-gap]].
+
 ## Tooling
 
 - [[glossary]] — terms, symbols, acronyms → concept notes.
@@ -63,4 +66,4 @@ consultation:
 
 ## Counts
 
-Concepts (C) 40 · Claims/arguments (K) 15 · Sources (S) 53 · Decisions (D) 23 · Questions (Q) 12 · Artifacts (A) 6 · MOCs (M) 14.
+Concepts (C) 43 · Claims/arguments (K) 15 · Sources (S) 53 · Decisions (D) 23 · Questions (Q) 12 · Artifacts (A) 6 · MOCs (M) 14.
