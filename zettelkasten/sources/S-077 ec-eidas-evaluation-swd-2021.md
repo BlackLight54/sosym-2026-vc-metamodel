@@ -6,7 +6,7 @@ maturity: seed
 tags: [topic/governance, prov/external]
 citekey: ec_eidas-evaluation_2021
 sources: ["https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:52021SC0130"]
-related: ["[[C-046 design-error-cross-framework-governance-conflict]]", "[[M-015 design-error-taxonomy]]", "[[S-076 enisa-trust-services-incidents-2024]]", "[[S-080 weigl-ssi-construction-governance-2023]]", "[[S-065 parsovs-estonian-eid-2020]]"]
+related: ["[[C-050 design-error-governance-regime-failure]]", "[[M-015 design-error-taxonomy]]", "[[S-076 enisa-trust-services-incidents-2024]]", "[[S-080 weigl-ssi-construction-governance-2023]]", "[[S-065 parsovs-estonian-eid-2020]]"]
 created: 2026-07-17
 ---
 
@@ -23,13 +23,13 @@ The Commission's own regulatory evaluation of eIDAS, finding that varying levels
 - Verdict: CONFIRMED
 
 ## Target use
-Governance-conflict class carrier (C-046). The regulator self-evaluation that admits divergent national supervision produced fragmentation and reduced cross-border trust. Use it as the primary instrument establishing that the governance regime behind the trusted lists is itself acknowledged, by its author, to have a supervisory-consistency problem.
+Governance-regime-failure class carrier (C-050, out-of-model). The regulator self-evaluation that admits divergent national supervision produced fragmentation and reduced cross-border trust. Use it as the primary instrument establishing that the governance regime behind the trusted lists is itself acknowledged, by its author, to have a supervisory-consistency problem.
 
 ## Honesty flags
 The EUR-Lex HTML and PDF returned blank to automated fetch, so no verbatim quotation was extracted. Existence and metadata are firmly confirmed through EUR-Lex CELEX indexing plus an independent secondary legal summary; the relevance is paraphrased from that corroboration, not quoted from the document body.
 
 ## Links
-- [[C-046 design-error-cross-framework-governance-conflict]]: the design-error class this carrier strengthens (acknowledged supervisory fragmentation).
+- [[C-050 design-error-governance-regime-failure]]: the design-error class this carrier strengthens (acknowledged supervisory fragmentation).
 - [[S-076 enisa-trust-services-incidents-2024]]: sibling EU primary source; the agency incident record for the same regime.
 - [[S-080 weigl-ssi-construction-governance-2023]]: the SSI-side governance-tension counterpart in the same class.
 - [[S-065 parsovs-estonian-eid-2020]]: a concrete listed-provider failure that supervision did not catch.

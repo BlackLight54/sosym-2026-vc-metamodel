@@ -6,7 +6,7 @@ maturity: seed
 tags: [topic/ssi, topic/governance, prov/external]
 citekey: weigl_ssi-construction_2023
 sources: ["https://doi.org/10.1016/j.giq.2023.101873"]
-related: ["[[C-046 design-error-cross-framework-governance-conflict]]", "[[M-015 design-error-taxonomy]]", "[[S-077 ec-eidas-evaluation-swd-2021]]", "[[S-021 schwalm-ssi-eidas-contradiction-2022]]", "[[S-044 sroor-ssi-governance-modeling-2022]]"]
+related: ["[[C-050 design-error-governance-regime-failure]]", "[[M-015 design-error-taxonomy]]", "[[S-077 ec-eidas-evaluation-swd-2021]]", "[[S-021 schwalm-ssi-eidas-contradiction-2022]]", "[[S-044 sroor-ssi-governance-modeling-2022]]"]
 created: 2026-07-17
 ---
 
@@ -23,13 +23,13 @@ A peer-reviewed critical analysis of the governance tension in self-sovereign id
 - Verdict: CONFIRMED
 
 ## Target use
-Governance-conflict class carrier (C-046). Cite it for the tension between the self-sovereignty ideal and the institutional embedding trust frameworks demand: a peer-reviewed, SSI-native articulation of why decentralized-identity governance conflicts with the institutional trust it must rely on. It balances the EU-primary carriers with a scholarly, institution-facing analysis.
+Governance-regime-failure class carrier (C-050, out-of-model). Cite it for the tension between the self-sovereignty ideal and the institutional embedding trust frameworks demand: a peer-reviewed, SSI-native articulation of why decentralized-identity governance conflicts with the institutional trust it must rely on. It balances the EU-primary carriers with a scholarly, institution-facing analysis.
 
 ## Honesty flags
 Peer-reviewed, no known metadata caveats. The relevance stated here is a paraphrase of the paper's governance-tension argument, not a verbatim quotation.
 
 ## Links
-- [[C-046 design-error-cross-framework-governance-conflict]]: the design-error class this carrier strengthens (self-sovereignty vs institutional embedding).
+- [[C-050 design-error-governance-regime-failure]]: the design-error class this carrier strengthens (self-sovereignty vs institutional embedding).
 - [[S-077 ec-eidas-evaluation-swd-2021]]: the EU-primary regulatory counterpart in the same class.
 - [[S-021 schwalm-ssi-eidas-contradiction-2022]]: the SSI-vs-eIDAS contradiction neighbor.
 - [[S-044 sroor-ssi-governance-modeling-2022]]: SSI governance-modeling neighbor.

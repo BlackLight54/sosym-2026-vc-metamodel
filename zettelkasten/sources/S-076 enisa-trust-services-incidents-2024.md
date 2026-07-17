@@ -6,7 +6,7 @@ maturity: seed
 tags: [topic/governance, prov/external]
 citekey: enisa_trust-services-incidents_2024
 sources: ["https://www.enisa.europa.eu/publications/annual-report-trust-services-security-incidents-2024"]
-related: ["[[C-046 design-error-cross-framework-governance-conflict]]", "[[M-015 design-error-taxonomy]]", "[[S-077 ec-eidas-evaluation-swd-2021]]", "[[S-080 weigl-ssi-construction-governance-2023]]", "[[S-065 parsovs-estonian-eid-2020]]"]
+related: ["[[C-050 design-error-governance-regime-failure]]", "[[M-015 design-error-taxonomy]]", "[[S-077 ec-eidas-evaluation-swd-2021]]", "[[S-080 weigl-ssi-construction-governance-2023]]", "[[S-065 parsovs-estonian-eid-2020]]"]
 created: 2026-07-17
 ---
 
@@ -23,13 +23,13 @@ The mandatory aggregation of trust-service security incidents reported by nation
 - Verdict: CONFIRMED
 
 ## Target use
-Governance-conflict class carrier (C-046). Primary agency evidence that the supervisory regime backing the eIDAS trusted lists has a documented, recurring failure history: root causes, service outages, and human errors reported by national supervisory bodies. Use it for the documented-failure-history claim, not as a framework tutorial.
+Governance-regime-failure class carrier (C-050, out-of-model). Primary agency evidence that the supervisory regime backing the eIDAS trusted lists has a documented, recurring failure history: root causes, service outages, and human errors reported by national supervisory bodies. Use it for the documented-failure-history claim, not as a framework tutorial.
 
 ## Honesty flags
 Grey literature, but an authoritative primary aggregation: an EU-agency mandatory incident record, not a secondary summary. Article-number nuance: the report page cites Article 19 (eIDAS) as the incident-reporting duty, whereas our earlier narrative referred to Article 19a. Recorded here as Article 19 per the source, with the 19a divergence noted so downstream citation uses the number the report itself prints.
 
 ## Links
-- [[C-046 design-error-cross-framework-governance-conflict]]: the design-error class this carrier strengthens (supervisory-regime failure history).
+- [[C-050 design-error-governance-regime-failure]]: the design-error class this carrier strengthens (supervisory-regime failure history).
 - [[S-077 ec-eidas-evaluation-swd-2021]]: sibling EU primary source; the Commission's own evaluation of the same supervisory divergence.
 - [[S-080 weigl-ssi-construction-governance-2023]]: the SSI-side governance-tension counterpart in the same class.
 - [[S-065 parsovs-estonian-eid-2020]]: a listed provider's failures escaping supervision, one layer below the incident aggregation.

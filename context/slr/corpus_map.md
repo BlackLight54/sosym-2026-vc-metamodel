@@ -173,7 +173,7 @@ Axis g additionally resolves a provenance question for the meeting-notes trail: 
 ### Governance arm (AF01 follow-on, 2026-07-17)
 
 - **Governance dimension: strengthened (TSL gap now PARTIAL).** 6 verified (5 CONFIRMED, 1 CORRECTED,
-  0 unverifiable). C-046 governance-conflict gains the EU trusted-list regime failure history:
+  0 unverifiable). the out-of-model governance-regime class (C-050) gains the EU trusted-list regime failure history:
   EC SWD(2021) 130 eIDAS evaluation (supervisory fragmentation, primary instrument), ENISA 2024
   trust-service incident report, Weigl et al. 2023 (GIQ, SSI governance tension). C-049
   single-point-of-trust gains a deployed-SSI instance: the Sovrin Foundation dissolution (21 May 2025,

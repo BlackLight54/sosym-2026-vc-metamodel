@@ -14,8 +14,9 @@ created: 2026-07-17
 - **Layer scope:** FSL, with roots in DCL to FSL and CSL to FSL (each framework constrains a different layer aspect; the contradiction is a format-level result).
 - **Detection instrument:** `error` predicate; the governance-conflict constraint **C8** ([[C-013 cross-layer-constraint-taxonomy-c1-c9]]), which emerges only when C5, C6 and C7 are checked jointly.
 - **X.509 precedent carrier:** [[S-057 lopez-why-pki-failed-2005]] (multi-source failure, why PKIs failed); [[S-063 grindal-webpki-governance-2025]] (governance as a first-class layer of the trust ecosystem); [[S-056 gutmann-pki-not-dead-2002]] (design-versus-deployment-reality mismatch).
-- **Governance-regime carriers (AF01 governance arm):** [[S-077 ec-eidas-evaluation-swd-2021]], the Commission's own eIDAS evaluation finding that divergent national supervision produced fragmentation and reduced trust (primary regulatory instrument); [[S-076 enisa-trust-services-incidents-2024]], the mandatory ENISA aggregation of trust-service security incidents reported by national supervisory bodies (documented failure history); [[S-080 weigl-ssi-construction-governance-2023]] (GIQ), the governance tension between the self-sovereignty ideal and the institutional embedding trust frameworks require. Parsovs 2020 ([[S-065 parsovs-estonian-eid-2020]]) also evidences a listed provider's failures escaping supervision.
 - **VC instance (headline result):** [[C-025 governance-conflict-vertical]], the income-governance conflict (eIDAS ARF vs GDPR Art. 5(1)(c) vs W3C VCDM on IncomeCred), unsatisfiable at G7.
+
+This class is strictly the **in-model formal conflict** (C8). The AF01 governance arm's carriers document institutional and runtime governance-*regime* dysfunction, which the metamodel does not detect; those live in the out-of-model [[C-050 design-error-governance-regime-failure]], deliberately kept distinct so the formal C8 claim stays clean.
 
 This class is one of the two the paper's headline results instantiate. Headline 1 (vertical) lands here and in **no other class**; the orthogonal Headline 2 lands in [[C-047 design-error-cross-credential-expressiveness-gap]].
 

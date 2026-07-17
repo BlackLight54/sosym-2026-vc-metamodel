@@ -68,4 +68,4 @@ Proto-SLR findings (2026-07-13), persisted from the kickoff/SLR report:
 
 ## Counts
 
-Concepts (C) 49 · Claims/arguments (K) 16 · Sources (S) 75 · Decisions (D) 23 · Questions (Q) 12 · Artifacts (A) 6 · MOCs (M) 15.
+Concepts (C) 50 · Claims/arguments (K) 16 · Sources (S) 75 · Decisions (D) 23 · Questions (Q) 12 · Artifacts (A) 6 · MOCs (M) 15.
