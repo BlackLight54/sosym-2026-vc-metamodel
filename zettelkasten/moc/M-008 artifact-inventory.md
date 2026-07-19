@@ -22,7 +22,7 @@ file or script, not only to prose.
 - [[A-004 constraint-sensitivity-variants]] — the G0–G7 power-set → [[K-008 contradictory-cross-framework-constraints]], [[C-030 scalability-measurement]].
 
 ## Evaluation
-- [[A-005 evaluation-harness]] — the E0–E3 measurement campaign → [[C-030 scalability-measurement]], [[K-004 automated-consistency-checking]].
+- [[A-005 evaluation-harness]] — the E0/EC/E1/E2/E3/ED measurement campaign, including the structurally diverse instances of [[Q-007 scalability-deeper-hierarchies]] → [[C-030 scalability-measurement]], [[K-004 automated-consistency-checking]].
 
 ## Figures
 - [[A-006 paper-figure-sources]] — metamodel / teaser / scalability figures → [[C-001 three-layer-metamodel-overview]], [[M-006 running-example-csok]], [[C-030 scalability-measurement]].

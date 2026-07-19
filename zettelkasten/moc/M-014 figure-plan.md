@@ -18,7 +18,7 @@ Existing sources inventoried in [[A-006 paper-figure-sources]].
 |---|---|---|---|
 | F1 | Three-layer **type graph** (caption discipline per [[M-013 drafting-guardrails]]) | [[K-001 three-layer-metamodel]]; placed near the constraint table | exists (`fig_metamodel`) |
 | F2 | CSOK teaser: three layers, one vertical + one horizontal conflict in a single visual | [[K-009 multilayer-invisibility]] at first glance | exists (`fig_teaser`) |
-| F3 | Scalability plots (E1/E2) | [[K-004 automated-consistency-checking]] | exists (`fig_scalability`) |
+| F3 | Scalability plots (EC/E1/E2, plus ED diverse overlay) | [[K-004 automated-consistency-checking]] | superseded in-paper by `tab:scalability` (runtime figure commented out in §5.2, data already tabular). Assets regenerate from [[A-005 evaluation-harness]] (`analyze_results.py`): `fig_scalability_check`, `fig_scalability_generate`, and `fig_diverse_comparison` (uniform vs diverse, from AF02). Reinstate a figure only if §5.2 needs the visual; Martin's call |
 | F4 | VCDM coverage map: metaclasses ↔ VCDM concepts, three excluded families marked design-time vs usage-time | [[K-005 coverage-validation]] soundness–completeness | planned (T11) |
 | F5 | Expressiveness grid: 8 ARF constraints × full/partial, the five partials grouped under the two root causes | [[K-006 expressiveness-validation]] + the [[D-015 expressiveness-strength-first]] partials story | planned (T11) |
 | F6 | Anti-pattern visibility ladder: intra-layer → cross-layer trace → ecosystem capability | [[K-007 antipattern-detection]] graduated-visibility argument | planned (T11) |

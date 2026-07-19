@@ -6,7 +6,7 @@
 |----|-------|---------|--------|----------|
 | T09 | [Sec 05 threats + scalability](t09_threats_scalability.md) | — | pending | claude |
 | T10 | [Final polish](t10_polish.md) | #10 | pending | claude |
-| **T12** | **[Reconcile eval instances, measurements, metamodel](t12_eval_consistency.md)** | **#4,5,6,7,9** | **pending** | **claude** |
+| T12 | [Reconcile eval instances, measurements, metamodel](../archive/completed_todos/t12_eval_consistency.md) | #4,5,6,7,9 | done 2026-07-17 | claude |
 | O-SOUND | [Soundness/completeness properties](o-soundness-eval.md) | #4,9 | pending | claude |
 | **O-EUTHREAT** | **[EU regulatory threats-to-applicability + currency update](o-euthreat_regulatory_applicability.md)** | **#10** | **pending** | **claude** |
 | O-VENUE | [Re-populate VENUE.md for SoSyM + regenerate personas](../archive/completed_todos/o-venue_sosym_cfp_import.md) | — | done 2026-07-13 | claude |
@@ -78,7 +78,7 @@ independent.
 |----|-------|------------|--------|----------|
 | AF03 | [Integrate proto-SLR results](../archive/completed_todos/af03_slr_integration.md) | — | done 2026-07-13 | claude |
 | AF01 | [Design-error taxonomy](af01_design_error_taxonomy.md) | — (unblocked by AF03) | pending | claude |
-| AF02 | [Q-007 instance generator + re-measurement](af02_q007_instance_generator.md) | — | pending | claude |
+| AF02 | [Q-007 instance generator + re-measurement](../archive/completed_todos/af02_q007_instance_generator.md) | — | done 2026-07-17 | claude |
 
 ## Infrastructure
 

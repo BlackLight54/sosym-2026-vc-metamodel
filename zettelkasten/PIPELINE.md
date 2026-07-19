@@ -105,7 +105,7 @@ advisor feedback intake (`plan_advisor_feedback`).
 ## Candidate gates (next generation, create on first need)
 
 - **Reproducibility dry-run** (`review_repro_dry_run`): a clean-container agent follows the
-  supplementary README from scratch — build the models, rerun E0–E3, diff verdicts and numbers
+  supplementary README from scratch — build the models, rerun E0/EC/E1/E2/E3/ED, diff verdicts and numbers
   against the paper. The artifact-evaluation rehearsal.
 - **Number consistency check** (`review_number_consistency`): every number in prose (timings, node
   counts, "eight constraints", abstract figures) traced to the artifact that generates it; flags

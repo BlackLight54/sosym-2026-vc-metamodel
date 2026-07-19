@@ -2,7 +2,8 @@
 id: "T12"
 short: "eval-consistency"
 title: "Reconcile evaluation instances, measurements, and metamodel"
-status: pending
+status: done
+completed: "2026-07-17"
 priority: high
 depends_on: []
 binding_claims: [4, 5, 6, 7, 9]
@@ -111,6 +112,27 @@ These results were obtained with the DRIFTED metamodel. They are useful as a bas
 - G7 (UNSAT): 3.96±0.07s
 
 ~3.5s is Docker+JVM startup overhead (constant). Net solver time: ~0.2s (N=1) to ~1.5s (N=30).
+
+## Completion (2026-07-17)
+
+- **Phase A (reconciliation):** No drift existed to fix. The harness was refactored (submodule
+  commit f2cdc2e) to mount `models/` as `/work`, so instances resolve the single canonical
+  `models/vc_metamodel.refinery` via `import vc_metamodel.` — there is no simplified copy in
+  `instances/`. Hardened `generate_instances.py` to never copy `vc_metamodel.refinery` (only
+  `governance_conflict.refinery`), preventing a stale local copy from re-introducing drift.
+  Validation: 23/23 instances correct SAT/UNSAT against the full metamodel.
+- **Phase B (plain check):** Added experiment **EC** (`run_ec`, files `ec_consistency_S{N}_{sat,unsat}.json`)
+  to `run_measurements.sh`; fixed the `refinery_cmd` mode trap (was mapping `check`→`check -k`).
+  Key property confirmed on all UNSAT instances: plain `check` returns SAT (exit 0), `check -k`
+  returns UNSAT (exit 1). E0 (baseline noop) kept its name to avoid a filename collision.
+- **Phase C (re-run):** Full campaign re-run (`run_measurements.sh all`) on the same CPU under
+  WSL2/Ubuntu (harness made OS-detecting; Windows branch preserved). New baseline 4.06 s.
+- **Phase D (Sec 05):** tab:scalability re-populated with a new Consistency column; environment
+  line, overhead (≈4.1 s), noise-floor, RQ1/RQ2 numbers, and E3 sensitivity timing updated.
+- **Environment note:** reporting shifted Windows→WSL2 (same silicon, same refinery digest
+  88f1332e). Numbers run ~30% higher and noisier than the prior Docker-Desktop run. Reversible —
+  `run_measurements.sh all` on native Windows regenerates tighter numbers into the same structure.
+  Old baseline (pre-reconciliation Windows) preserved above and in git history.
 
 ### Windows compatibility notes
 

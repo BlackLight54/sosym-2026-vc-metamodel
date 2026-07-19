@@ -84,24 +84,26 @@ We evaluate three Refinery solver operations (\autoref{sec:refinery}). *Consiste
 
 We construct synthetic instances from $N{=}1$ to $N{=}30$ credentials, with 11 to 272 graph nodes (\autoref{tab:scalability}). Each scale point has a satisfiable (SAT) and unsatisfiable (UNSAT) variant. A secondary *constraint sensitivity* experiment fixes $N{=}3$ and varies governance framework combinations over $\mathcal{P}(\{\text{eIDAS}, \text{Privacy}, \text{VCDM}\})$, yielding eight configurations (G0–G7).
 
-All instances are evaluated using the Refinery CLI, where each invocation starts a fresh JVM inside a Docker container. We use Hyperfine as the benchmarking harness with 10 measured runs and 1 warmup run per configuration, on an AMD Ryzen 9 7950X3D (16 cores), 96 GB RAM, Windows 11. Cold JVM startup inside the Docker container adds a constant overhead of ${\approx}3.9\text{s}$ per invocation (measured via a no-op baseline instance); reported times subtract this overhead to isolate solver computation. At small scales ($N \leq 5$), solver time is below the measurement noise floor (${\approx}0.1\text{s}$). The measurement script, generated instances, and the metamodel source are provided as supplementary material for independent reproduction.
+All instances are evaluated using the Refinery CLI, where each invocation starts a fresh JVM inside a Docker container. We use Hyperfine as the benchmarking harness with 10 measured runs and 1 warmup run per configuration, on an AMD Ryzen 9 7950X3D (16 cores), 47 GB RAM, Ubuntu 24.04 (WSL2). Cold JVM startup inside the Docker container adds a constant overhead of ${\approx}4.1\text{s}$ per invocation (measured via a no-op baseline instance); reported times subtract this overhead to isolate solver computation. Because each run is a fresh cold container, run-to-run variance is dominated by startup jitter (${\approx}0.2\text{s}$), so at small scales ($N \leq 5$) baseline-corrected solver time sits at the noise floor. The measurement script, generated instances, and the metamodel source are provided as supplementary material for independent reproduction.
 
 ```{=latex}
 \begin{table}[htb]
-\caption{Scalability measurements, baseline-corrected (3.9s overhead subtracted). Seconds, mean $\pm\sigma$ over 10 runs.}
+\caption{Scalability measurements, baseline-corrected (4.1s cold-container overhead subtracted). Seconds, mean $\pm\sigma$ over 10 runs. \emph{Cons.} is plain \texttt{check} (consistency); \emph{Concr.} is \texttt{check -k} (concretizability), which alone distinguishes SAT from UNSAT.}
 \label{tab:scalability}
 \small
-\begin{tabular}{rrrrr}
+\begin{tabular}{rrrrrr}
 \toprule
-$N$ & $|V|$ & SAT (s) & UNSAT (s) & Gen.\ (s) \\
+ & & Cons. & \multicolumn{2}{c}{Concr.\ (s)} & Gen. \\
+\cmidrule(lr){4-5}
+$N$ & $|V|$ & (s) & SAT & UNSAT & (s) \\
 \midrule
-1  & 11  & ${<}0.1$          & ${<}0.1$           & $0.55 \pm 0.11$ \\
-3  & 29  & ${<}0.1$          & $0.18 \pm 0.07$    & $0.56 \pm 0.05$ \\
-5  & 47  & $0.13 \pm 0.10$   & $0.11 \pm 0.05$    & $0.69 \pm 0.08$ \\
-10 & 92  & $0.14 \pm 0.05$   & $0.22 \pm 0.07$    & $0.77 \pm 0.06$ \\
-15 & 137 & $0.42 \pm 0.12$   & $0.40 \pm 0.08$    & $0.94 \pm 0.05$ \\
-20 & 182 & $0.51 \pm 0.06$   & $0.58 \pm 0.09$    & $1.23 \pm 0.07$ \\
-30 & 272 & $1.09 \pm 0.06$   & $1.19 \pm 0.06$    & $1.85 \pm 0.07$ \\
+1  & 11  & ${<}0.2$         & $0.18 \pm 0.16$ & $0.25 \pm 0.15$ & $1.30 \pm 0.28$ \\
+3  & 29  & $0.50 \pm 0.22$  & $0.28 \pm 0.17$ & $0.34 \pm 0.15$ & $1.42 \pm 0.40$ \\
+5  & 47  & $0.39 \pm 0.17$  & $0.31 \pm 0.21$ & $0.30 \pm 0.16$ & $1.26 \pm 0.18$ \\
+10 & 92  & $0.47 \pm 0.17$  & $0.66 \pm 0.26$ & $0.58 \pm 0.18$ & $1.35 \pm 0.19$ \\
+15 & 137 & $0.64 \pm 0.19$  & $0.64 \pm 0.17$ & $0.67 \pm 0.16$ & $1.46 \pm 0.24$ \\
+20 & 182 & $0.59 \pm 0.16$  & $0.67 \pm 0.16$ & $0.80 \pm 0.17$ & $1.71 \pm 0.16$ \\
+30 & 272 & $1.11 \pm 0.19$  & $1.48 \pm 0.30$ & $1.63 \pm 0.16$ & $2.50 \pm 0.56$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -118,11 +120,13 @@ $N$ & $|V|$ & SAT (s) & UNSAT (s) & Gen.\ (s) \\
 ```
 -->
 
-**RQ1**: Concretizability checking scales sublinearly, reaching 1.09\,s at $N{=}30$ (272 graph nodes), well within interactive use for ecosystem sizes exceeding current EU wallet specifications. SAT and UNSAT instances exhibit comparable timing, confirming that unsatisfiability detection does not incur significant additional cost.
+**RQ1**: Concretizability checking scales sublinearly, reaching $1.48\,\text{s}$ at $N{=}30$ (272 graph nodes), well within interactive use for ecosystem sizes exceeding current EU wallet specifications. SAT and UNSAT instances exhibit comparable timing, confirming that unsatisfiability detection does not incur significant additional cost. Consistency checking (plain [check]{.refi}) is the weaker operation: it returns SAT ("model is consistent") on *every* instance, including all UNSAT variants, because it does not enforce error predicates against the concretization. Only concretizability checking ([check -k]{.refi}) returns UNSAT on the conflicting instances. Consistency time tracks concretizability closely and undercuts it at the larger scales (${\approx}1.1\,\text{s}$ versus ${\approx}1.5\,\text{s}$ at $N{=}30$), consistent with its doing strictly less work; at small scales the two are indistinguishable within the startup jitter.
 
-**RQ2**: Model generation reaches 1.85\,s at the same scale, reflecting the additional cost of producing a fully resolved instance.
+**RQ2**: Model generation reaches $2.50\,\text{s}$ at the same scale, reflecting the additional cost of producing a fully resolved instance.
 
-A constraint sensitivity experiment at $N{=}3$ varies governance framework combinations over $\mathcal{P}(\{\text{eIDAS}, \text{Privacy}, \text{VCDM}\})$: of the eight configurations, only the full conjunction $G_7 = \text{eIDAS} \wedge \text{Privacy} \wedge \text{VCDM}$ yields unsatisfiability; all seven proper subsets are satisfiable (all complete in ${<}0.1\text{s}$). This confirms the Headline 1 finding (\autoref{sec:headlines}): no proper subset produces a conflict.
+A constraint sensitivity experiment at $N{=}3$ varies governance framework combinations over $\mathcal{P}(\{\text{eIDAS}, \text{Privacy}, \text{VCDM}\})$: of the eight configurations, only the full conjunction $G_7 = \text{eIDAS} \wedge \text{Privacy} \wedge \text{VCDM}$ yields unsatisfiability; all seven proper subsets are satisfiable. Concretizability time is flat across all eight configurations (${\approx}0.3\text{s}$, baseline-corrected), so the conflict is detected by the verdict, not by any timing signature. This confirms the Headline 1 finding (\autoref{sec:headlines}): no proper subset produces a conflict.
+
+**Structural diversity**: The instances above grow by adding credentials of uniform structure, each describing a single shared subject with one property (a depth-one star). To test whether the sublinear scaling depends on that uniformity, we additionally measure *structurally diverse* instances in which credentials are chained, so a credential can describe the value asserted by another credential. This realizes the two phenomena a uniform generator omits: deeper claim hierarchies (a chain of credentials produces a domain path whose transitive closure the acyclicity and connectivity predicates must traverse) and ecosystems spanning many distinct subjects. A single credential binds exactly one subject here, because credential-to-subject containment is one-to-one and the domain graph must remain connected, so subject diversity appears *across* the chain: each level is a distinct subject, and a child credential's subject and its parent credential's value denote the same domain entity, exercising the cross-layer alignment predicates on a topology the uniform star never produces. Holding node count fixed at $N{=}12$ while varying chain depth from 1 to 12 leaves concretizability time flat (${\approx}0.2$–$0.4\text{s}$ throughout, if anything decreasing with depth), and a depth-four instance family reproduces the $N{=}1$ to $N{=}30$ sweep with times at or below the uniform figures ($1.27\,\text{s}$ versus $1.48\,\text{s}$ concretizability at $N{=}30$). Structural diversity does not degrade solver performance; if anything the uniform star is the harder case, because its shared subject aligns every credential pair. The interactive-time result therefore holds beyond the uniform instances, not only for them.
 
 <!-- CUT-5: Merged Threats + Limitations into one compact subsection.
 ## Threats to Validity {#sec:threats}
@@ -140,4 +144,4 @@ Future work addresses five directions: extending the format-specific layer with 
 
 ## Limitations {#sec:limitations}
 
-The running example (housing subsidy) was selected for structural completeness but represents a single domain; randomly sampled ecosystems might expose interaction patterns absent from the current anti-pattern catalog. The evaluation operates within one governance context (EU regulations applied to Hungarian administrative procedures), and the eight eIDAS +ARF constraints target a specific version (v2.9.0, 21 May 2026) that will evolve. The +DCL structural inference rule silently promotes any [Entity]{.refi} lacking incoming value references to [Subject]{.refi}, which may mask modeling errors rather than flag them. Scalability instances grow by adding credentials with uniform structure; deeper claim hierarchies or multi-subject credentials may stress different metamodel elements. The partially-expressible classification (\autoref{sec:expressiveness}) rests on our judgment of what constitutes a structural versus runtime property. The formalization depends on Refinery as the sole validation tool; portability to other partial-model solvers has not been assessed. The approach has not been evaluated empirically with domain practitioners.
+The running example (housing subsidy) was selected for structural completeness but represents a single domain; randomly sampled ecosystems might expose interaction patterns absent from the current anti-pattern catalog. The evaluation operates within one governance context (EU regulations applied to Hungarian administrative procedures), and the eight eIDAS +ARF constraints target a specific version (v2.9.0, 21 May 2026) that will evolve. The +DCL structural inference rule silently promotes any [Entity]{.refi} lacking incoming value references to [Subject]{.refi}, which may mask modeling errors rather than flag them. The partially-expressible classification (\autoref{sec:expressiveness}) rests on our judgment of what constitutes a structural versus runtime property. The formalization depends on Refinery as the sole validation tool; portability to other partial-model solvers has not been assessed. The approach has not been evaluated empirically with domain practitioners.

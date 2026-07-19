@@ -8,7 +8,7 @@
 
 ### Critical path (paper content)
 
-- **T12** — Reconcile eval instances, measurements, metamodel [Binding #4,5,6,7,9]
+- ~~**T12** — Reconcile eval instances, measurements, metamodel [Binding #4,5,6,7,9]~~ done 2026-07-17
 - **T09** — Sec 05 threats + scalability
 - **T10** — Final polish (eval preamble, Intro P5, abstract numbers) [Binding #10]
 - **O-SOUND** — Soundness/completeness properties [Binding #4,9]

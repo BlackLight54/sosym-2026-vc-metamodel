@@ -26,6 +26,22 @@ A richer instance generator over `models/` and a re-run of the scalability measu
 Q-007 in scope and §8 drops R9; the scalability claim wording follows the new measurements,
 narrowing if diverse instances degrade solver performance.
 
+## Resolution (2026-07-17, AF02 + T12)
+Delivered. The generator (`models/evaluation/generate_instances.py`) gained a
+`generate_chain_instance` function that realizes both phenomena as *chained*
+credentials (a credential can describe the value of a parent credential): chain
+depth gives deeper claim hierarchies, and each chain level is a distinct subject.
+A depth sweep (depth 1–12 at fixed N=12) and a depth-four N-sweep (N=1–30, SAT and
+UNSAT) were added as experiment ED and re-run with the rest of the campaign. Outcome:
+structural diversity does **not** degrade solver performance — concretizability time
+is flat across depth and at or below the uniform figures across N (1.27 s vs 1.48 s
+at N=30). Per the M-013 discipline the claim wording *broadened* rather than
+narrowed: §5.2 now states the interactive-time result holds beyond uniform
+instances. K-004's M-011 Open cell is closed; spin R9 stays closed. The
+measurement environment shifted from native Windows to WSL2 on the same CPU (T12
+mandated one coherent re-run); figures are absolute-comparable (same refinery image
+digest) but run ~30% higher and noisier than the prior Docker-Desktop run.
+
 ## Links
 - [[Q-007 scalability-deeper-hierarchies]] defines the instance classes.
 - [[K-004 automated-consistency-checking]] is the claim this protects at journal depth.
