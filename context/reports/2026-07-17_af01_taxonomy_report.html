@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AF01: Design-error taxonomy (findings)</title>
+<style>
+  :root{ color-scheme: light dark;
+    --paper:#eef0f4; --surface:#fff; --ink:#1b1e26; --muted:#586173; --line:#d6dae3;
+    --accent:#33487e; --accent-soft:#e7ecf7; --ok:#1c6f54; --ok-soft:#e0f0ea; --warn:#8a5e0f; --warn-soft:#f4ead2; }
+  @media (prefers-color-scheme:dark){ :root{
+    --paper:#12141a; --surface:#1a1d25; --ink:#e6e9f0; --muted:#98a1b2; --line:#2a2f3b;
+    --accent:#93a4de; --accent-soft:#212840; --ok:#54b994; --ok-soft:#182a24; --warn:#d6a942; --warn-soft:#2a2314; } }
+  body{background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    line-height:1.6;max-width:56rem;margin:0 auto;padding:2rem 1.2rem;}
+  h1{font-family:Georgia,serif;font-size:1.9rem;margin:0 0 .3rem;letter-spacing:-.01em;}
+  h2{font-family:Georgia,serif;font-size:1.25rem;margin:2.2rem 0 .4rem;padding-top:1.2rem;border-top:1px solid var(--line);}
+  .sub{color:var(--muted);margin:0 0 1.2rem;}
+  .tag{display:inline-block;font-family:ui-monospace,Menlo,monospace;font-size:.75rem;background:var(--accent-soft);
+    color:var(--accent);border:1px solid var(--line);border-radius:999px;padding:.2rem .6rem;}
+  .box{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:10px;padding:.9rem 1.1rem;margin:1rem 0;}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.9rem 1.1rem;margin:1rem 0;}
+  .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface);margin:1rem 0;}
+  table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:34rem;}
+  th,td{border-bottom:1px solid var(--line);padding:.55rem .75rem;text-align:left;vertical-align:top;}
+  th{background:var(--accent-soft);font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);}
+  tbody tr:last-child td{border-bottom:none;}
+  code{font-family:ui-monospace,Menlo,monospace;font-size:.85em;background:var(--accent-soft);padding:0 .25rem;border-radius:3px;}
+  .oom{color:var(--warn);font-weight:600;}
+  .chip{display:inline-block;font-family:ui-monospace,Menlo,monospace;font-size:.7rem;padding:.15rem .45rem;
+    border-radius:5px;border:1px solid var(--line);}
+  .ok{background:var(--ok-soft);color:var(--ok);} .warn{background:var(--warn-soft);color:var(--warn);}
+  a{color:var(--accent);}
+</style>
+</head>
+<body>
+<h1>AF01: Design-error taxonomy for VC ecosystems</h1>
+<p class="sub">Research cycle 1, session A (<code>research_multiagent_cycle</code>) &middot; 2026-07-17 &middot;
+  <span class="tag">[proposed]</span> pending Martin's approval (D-020)</p>
+
+<div class="box">
+<strong>Headline.</strong> The paper's closing design-error taxonomy exists as a corpus-grounded, layer-mapped,
+<strong>seven-class</strong> scheme (K-016 + C-044..C-050 + M-015): five in-model classes mapped to DCL/CSL/FSL,
+two named out-of-model. Both headline results place into exactly one class each. The non-web-PKI arm moved the
+X.509 grounding from web-PKI-only to <strong>PARTIAL</strong> (10 verified carriers, one or more per class), and a
+follow-on governance arm added six more. Nothing is frozen.
+</div>
+
+<h2>1. The taxonomy</h2>
+<p>An outer classification keyed to the documented X.509/PKI error history (not our own examples, per D-020).
+It references, rather than replaces, the two internal schemes: C-013 (C1..C9) supplies the constraint
+<em>instruments</em>, C-029 the detected <em>signatures</em>.</p>
+<div class="scroll"><table>
+<thead><tr><th>Class</th><th>Layer</th><th>Instrument</th><th>X.509 carrier</th><th>VC instance</th></tr></thead>
+<tbody>
+<tr><td>Issuance / schema-binding</td><td>CSL (DCL&#8596;CSL)</td><td>error; C1/C2</td><td>Kumar 2018, Georgiev 2012</td><td>trace-misalignment anti-pattern</td></tr>
+<tr><td>Status / revocation propagation</td><td>CSL&#8596;FSL</td><td>propagation</td><td>Liu 2015</td><td>C-036 static-dynamic mismatch</td></tr>
+<tr><td><strong>Cross-framework governance conflict</strong></td><td>FSL</td><td>error; <strong>C8</strong></td><td>Lopez 2005, Grindal 2025</td><td><strong>Headline 1 (vertical, C-025)</strong></td></tr>
+<tr><td><strong>Cross-credential expressiveness gap</strong></td><td>DCL&#8596;FSL</td><td>shadow; <strong>C9</strong></td><td>Georgiev 2012, Brubaker 2014</td><td><strong>Headline 2 (horizontal, C-026)</strong></td></tr>
+<tr><td>Specification ambiguity</td><td>FSL (CSL&#8596;FSL)</td><td>error; C7</td><td>Brubaker 2014, Clark 2013</td><td>VCDM-conformance gap</td></tr>
+<tr><td>Single-point-of-trust (C-049)</td><td class="oom">out-of-model</td><td>none in-model</td><td>Fox-IT 2012, Ellison/Schneier 2000</td><td>Sovrin collapse (verified by direct fetch)</td></tr>
+<tr><td>Governance-regime failure (C-050)</td><td class="oom">out-of-model</td><td>none in-model</td><td>EC eIDAS eval 2021, ENISA 2024</td><td>EU trusted-list regime; SSI trust frameworks</td></tr>
+</tbody>
+</table></div>
+<p>C-050 was split out on advisor review (2026-07-17): the governance arm's carriers are institutional and
+runtime regime failures the metamodel does not detect, so filing them under the in-model formal C8 class
+(C-046) would have blurred the paper's load-bearing formal claim. Both out-of-model classes are named
+explicitly rather than forced onto a layer.</p>
+
+<h2>2. Non-web-PKI arm</h2>
+<p>10 CONFIRMED carriers, 0 unverifiable, one or more per class. Verdict: <span class="chip ok">PARTIAL</span>,
+no longer web-PKI-only. Detail in <code>context/slr/axis_d_nonweb.md</code>.</p>
+<ul>
+<li><strong>eIDAS-1 qualified certs:</strong> Entschew 2022 (QWAC display failure), Parsovs 2020 (Estonian eID key flaws), Valtna-Dvorak 2021 (ROCA, ~750k certs revoked).</li>
+<li><strong>S/MIME:</strong> Ondaro 2025 (mass non-compliance at scale), Poddebniak 2018 (Efail), Muller 2019 (signature spoofing), Clark 2021 (secure-email SoK).</li>
+<li><strong>Enterprise / code-signing:</strong> Schroeder and Christensen 2021 (AD CS ESC1..ESC8), Kim 2017 (Certified Malware), Kim 2018 (Broken Shield).</li>
+</ul>
+
+<h2>3. Governance arm (follow-on)</h2>
+<p>Targeted at the one dimension the first arm left empty. 6 verified, 0 unverifiable.
+TSL/trusted-list verdict: <span class="chip warn">PARTIAL</span>.</p>
+<ul>
+<li><strong>Governance-regime failure (C-050):</strong> EC SWD(2021) 130 eIDAS evaluation (supervisory
+  fragmentation, primary instrument), ENISA 2024 trust-service incident report, Weigl et al. 2023 (GIQ).</li>
+<li><strong>Single-point-of-trust (C-049):</strong> the Sovrin Foundation dissolution (dissolved 21 May 2025,
+  MainNet read-only on a single cloud server, Trinsic sole Steward, notice posted 20 Jan 2026) plus
+  Krul et al. 2024 SoK.</li>
+</ul>
+<div class="card"><strong style="color:var(--warn)">Residual.</strong> No carrier documents a Trusted-List
+<em>as-artifact</em> failure, only the governance regime behind the lists; C-049's non-web evidence is entirely
+SSI-side. Krul was earlier abstract-level dropped for drawing no PKI-failure lessons and is re-included only
+for its SSI trust-model analysis.</div>
+
+<h2>4. Pre-freeze full-text pulls</h2>
+<div class="scroll"><table>
+<thead><tr><th>Source</th><th>Load-bearing claim</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Bochnia 2024</td><td>holder role "largely unexplored"</td><td><span class="chip ok">CONFIRMED-verbatim</span> CC-BY PDF</td></tr>
+<tr><td>Serrano 2019</td><td>"taxonomy of failures", 1300+/379</td><td><span class="chip ok">CONFIRMED-verbatim</span> backs the differentiation</td></tr>
+<tr><td>Schmidt 2021</td><td>ecosystem "rapidly changing and ill-defined"</td><td><span class="chip warn">MANUAL PULL</span> verbatim in abstract; IEEE bot-blocked</td></tr>
+<tr><td>Sroor 2022</td><td>governance "visually and informally"</td><td><span class="chip warn">MANUAL PULL</span> "visual" ok; "informal" is our framing; ScienceDirect 403</td></tr>
+<tr><td>Hadan 2021</td><td>failure dimensions + expert divergence</td><td>dimensions are code/crypto/organizational/human (already correct in S-055); technical/economic/legal/social is Lopez 2005's</td></tr>
+</tbody>
+</table></div>
+<div class="card"><strong>Verification depth.</strong> CONFIRMED means existence and bibliographic fields, not
+full text. Most newer and grey items were bot-blocked, so their relevance is abstract or snippet-derived. Read
+in full: Bochnia, Serrano, Certified Pre-Owned, and the Sovrin notice. Snippet-only rows need a real full-text
+read before any quote or specific figure freezes; each S-note records its own depth.</div>
+
+<h2>5. Artifacts produced (all [proposed])</h2>
+<ul>
+<li><code>K-016</code> taxonomy claim + M-011 row + <code>M-015</code> MOC + index registration.</li>
+<li>Seven class C-notes <code>C-044..C-050</code>; caveats updated in <code>C-043</code>, <code>S-044</code>, <code>S-049</code>.</li>
+<li>Corpus: <code>axis_d_nonweb.md</code>; 15 records appended to <code>candidates.json</code> (89 total, 0 unverifiable); <code>corpus_map.md</code> addenda.</li>
+<li>S-notes <code>S-054..S-080</code>: axis-d must-cite batch, non-web carriers, quote sources, governance carriers. Citekey-map and Zotero-flag files updated (all UNRESOLVED; Martin enters Zotero manually per ruling 8).</li>
+<li><code>check_links.sh</code>: 0 errors. No em dashes in new artifacts.</li>
+</ul>
+
+<h2>6. Open decisions for Martin</h2>
+<ul>
+<li><strong>Approve the class set and wording</strong> (seven classes, five in-model and two out-of-model), or adjust. Until then K-016 stays [proposed] and no prose promises the taxonomy.</li>
+<li><strong>Accept PARTIAL grounding</strong> with the residual gaps stated as limitations, or commission a narrower arm (a Trusted-List-as-artifact incident search; broader member-state eIDAS-1 coverage).</li>
+<li><strong>Two manual full-text pulls</strong> before the RQ0 and novelty wording can freeze: Schmidt (IEEE Xplore) and Sroor (ScienceDirect), both behind bot-blocks the automated arms could not pass.</li>
+</ul>
+<p class="sub">File-disjoint from the parallel evaluation arm (T12, AF02), which owns <code>models/</code> and
+<code>sections/05_evaluation.md</code>; AF01 appends a row-disjoint M-011 taxonomy row. No cycle-1 MANIFEST
+existed; the ownership split is recorded in the plan artifact.</p>
+</body>
+</html>

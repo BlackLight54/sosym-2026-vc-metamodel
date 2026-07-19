@@ -58,6 +58,33 @@ sync with `context/references/REFERENCES_TO_ADD_IN_ZOTERO.md`. `UNRESOLVED` = ne
 | S-051 richter-anke-ssi-framework-2026 | `richter_ssi-framework_2026` | UNRESOLVED (pending Zotero entry) |
 | S-052 otto-designing-data-spaces-2022 | `otto_data-spaces_2022` | UNRESOLVED (pending Zotero entry) |
 | S-053 franz-shams-industrial-device-vc-2022 | `franz_device-lifecycle_2022` | UNRESOLVED (pending Zotero entry) |
+| S-054 clark-vanoorschot-sok-ssl-2013 | `clark_sok-ssl_2013` | UNRESOLVED (pending Zotero entry) |
+| S-055 hadan-pki-failures-2021 | `hadan_pki-failures_2021` | UNRESOLVED (pending Zotero entry) |
+| S-056 gutmann-pki-not-dead-2002 | `gutmann_pki-not-dead_2002` | UNRESOLVED (pending Zotero entry) |
+| S-057 lopez-why-pki-failed-2005 | `lopez_pki-failed_2005` | UNRESOLVED (pending Zotero entry) |
+| S-058 georgiev-dangerous-code-2012 | `georgiev_dangerous-code_2012` | UNRESOLVED (pending Zotero entry) |
+| S-059 brubaker-frankencerts-2014 | `brubaker_frankencerts_2014` | UNRESOLVED (pending Zotero entry) |
+| S-060 durumeric-https-ecosystem-2013 | `durumeric_https-ecosystem_2013` | UNRESOLVED (pending Zotero entry) |
+| S-061 liu-revocation-measurement-2015 | `liu_revocation_2015` | UNRESOLVED (pending Zotero entry) |
+| S-062 foxit-diginotar-black-tulip-2012 | `foxit_black-tulip_2012` | UNRESOLVED (pending Zotero entry) |
+| S-063 grindal-webpki-governance-2025 | `grindal_webpki-governance_2025` | UNRESOLVED (pending Zotero entry) |
+| S-064 entschew-qwac-2022 | `entschew_qwac_2022` | UNRESOLVED (pending Zotero entry) |
+| S-065 parsovs-estonian-eid-2020 | `parsovs_estonian-eid_2020` | UNRESOLVED (pending Zotero entry) |
+| S-066 valtna-dvorak-roca-estonia-2021 | `valtna-dvorak_roca_2021` | UNRESOLVED (pending Zotero entry) |
+| S-067 oendaroe-smime-scale-2025 | `oendaroe_smime_2025` | UNRESOLVED (pending Zotero entry) |
+| S-068 poddebniak-efail-2018 | `poddebniak_efail_2018` | UNRESOLVED (pending Zotero entry) |
+| S-069 mueller-johnny-signature-spoofing-2019 | `mueller_signature-spoofing_2019` | UNRESOLVED (pending Zotero entry) |
+| S-070 clark-securing-email-sok-2021 | `clark_securing-email_2021` | UNRESOLVED (pending Zotero entry) |
+| S-071 schroeder-christensen-adcs-certified-preowned-2021 | `schroeder_certified-preowned_2021` | UNRESOLVED (pending Zotero entry) |
+| S-072 kim-certified-malware-2017 | `kim_certified-malware_2017` | UNRESOLVED (pending Zotero entry) |
+| S-073 kim-broken-shield-revocation-2018 | `kim_broken-shield_2018` | UNRESOLVED (pending Zotero entry) |
+| S-074 bochnia-ssi-organizations-2024 | `bochnia_ssi-organizations_2024` | UNRESOLVED (pending Zotero entry) |
+| S-075 schmidt-clear-the-fog-2021 | `schmidt_clear-the-fog_2021` | UNRESOLVED (pending Zotero entry) |
+| S-076 enisa-trust-services-incidents-2024 | `enisa_trust-services-incidents_2024` | UNRESOLVED (pending Zotero entry) |
+| S-077 ec-eidas-evaluation-swd-2021 | `ec_eidas-evaluation_2021` | UNRESOLVED (pending Zotero entry) |
+| S-078 krul-sok-trusting-ssi-2024 | `krul_trusting-ssi_2024` | UNRESOLVED (pending Zotero entry) |
+| S-079 sovrin-foundation-dissolution-2025 | `sovrin_dissolution_2025` | UNRESOLVED (pending Zotero entry) |
+| S-080 weigl-ssi-construction-governance-2023 | `weigl_ssi-construction_2023` | UNRESOLVED (pending Zotero entry) |
 
 Citekeys are transcribed from the `[@key]` markers in `sections/*.md`; verify against the exported
 `.bib` before relying on them.

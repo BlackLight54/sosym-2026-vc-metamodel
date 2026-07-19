@@ -65,7 +65,10 @@ rival exists. Priority S-notes created from the must-cite and differentiate buck
   [[S-007 braun-ssi-protocol-2024]] (formal at protocol level, the advisor's resolved
   "Peint" lead).
 - RQ0 relevance legs: [[S-051 richter-anke-ssi-framework-2026]] (definitional gap
-  persists), [[S-052 otto-designing-data-spaces-2022]] (ecosystem concept by practice),
+  persists), [[S-075 schmidt-clear-the-fog-2021]] (SSI ecosystem "rapidly changing and
+  ill-defined", quote abstract-derived pending manual pull), [[S-074 bochnia-ssi-organizations-2024]]
+  (organizational holder role "largely unexplored", quote confirmed verbatim),
+  [[S-052 otto-designing-data-spaces-2022]] (ecosystem concept by practice),
   [[S-047 abellan-alvarez-arf-privacy-2026]] and [[S-040 cryptographers-feedback-arf]]
   (pre-deployment error visibility), [[S-053 franz-shams-industrial-device-vc-2022]]
   (industrial prototype, the resolved Siemens Dublin talk).
