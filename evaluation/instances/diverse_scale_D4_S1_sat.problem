@@ -1,0 +1,95 @@
+% ========================================================================
+% Instance: ED_scale_D4_N1_sat — N=1 credentials, depth=4, breadth=1, subjects=1, variant=sat
+% Governance: eidas, privacy, vcdm
+% Structure: chained credentials (a credential can describe the value of its parent credential)
+% ========================================================================
+
+import vc_metamodel.
+
+
+% === DCL: domain facts (chained) ===
+
+declare Applicant.
+declare dp_0_0, dv_0_0.
+
+Subject(Applicant).
+Prop(dp_0_0).
+Value(dv_0_0).
+
+property(Applicant, dp_0_0).
+value(dp_0_0, dv_0_0).
+
+% Close DCL
+!exists(Subject::new).
+!exists(Value::new).
+!exists(Prop::new).
+
+
+% === CSL: credential decomposition (chained) ===
+
+declare cs_0_0, claim_0_0, cv_0_0, cred_0_0.
+
+CredentialSubject(cs_0_0).
+Claim(claim_0_0).
+CredentialValue(cv_0_0).
+Credential(cred_0_0).
+
+% Trace: Prop -> Claim
+Prop::trace(dp_0_0, claim_0_0).
+
+% Claims: source (subject) and target (value)
+Claim::source(claim_0_0, cs_0_0).
+Claim::target(claim_0_0, cv_0_0).
+
+% Credential containment
+_(cs_0_0, cred_0_0).
+
+% Entity alignment: subject traces to its domain anchor,
+% value traces to its domain value. A child credential's subject and its
+% parent credential's value trace the SAME domain entity (multi-subject).
+CredEntity::trace(cs_0_0, Applicant).
+CredEntity::trace(cv_0_0, dv_0_0).
+
+% Close CSL
+!exists(CredentialSubject::new).
+!exists(CredentialValue::new).
+!exists(Claim::new).
+!exists(Credential::new).
+default !CredEntity::trace(*, *).
+
+
+% === FSL: format assignments ===
+
+declare fmt_0_0.
+
+
+% cred_0_0: format class left open for solver
+Formatted_Credential(fmt_0_0).
+format(cred_0_0, fmt_0_0).
+
+% Close FSL
+!exists(AnoncredsCredentialSchema::new).
+!exists(JsonLdCredentialSchema::new).
+!exists(JwtVCCredentialSchema::new).
+!exists(SdJwtVcSchema::new).
+!exists(MdocSchema::new).
+
+
+% === Governance markers ===
+
+EidasMandate(eidas_0_0).
+EidasMandate::target(eidas_0_0, cred_0_0).
+
+PrivacyRequirement(privacy_1).
+PrivacyRequirement::target(privacy_1, cred_0_0).
+
+VcdmConformance(vcdm_0_0).
+VcdmConformance::target(vcdm_0_0, cred_0_0).
+
+% Close governance
+!exists(EidasMandate::new).
+!exists(PrivacyRequirement::new).
+!exists(VcdmConformance::new).
+
+
+scope node = 11, GovernanceAnnotation = 3.

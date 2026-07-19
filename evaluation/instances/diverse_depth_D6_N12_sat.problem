@@ -1,0 +1,337 @@
+% ========================================================================
+% Instance: ED_depth_D6_N12 — N=12 credentials, depth=6, breadth=2, subjects=11, variant=sat
+% Governance: eidas, privacy, vcdm
+% Structure: chained credentials (a credential can describe the value of its parent credential)
+% ========================================================================
+
+import vc_metamodel.
+
+
+% === DCL: domain facts (chained) ===
+
+declare Applicant.
+declare dp_0_0, dv_0_0.
+declare dp_0_1, dv_0_1.
+declare dp_0_2, dv_0_2.
+declare dp_0_3, dv_0_3.
+declare dp_0_4, dv_0_4.
+declare dp_0_5, dv_0_5.
+declare dp_1_0, dv_1_0.
+declare dp_1_1, dv_1_1.
+declare dp_1_2, dv_1_2.
+declare dp_1_3, dv_1_3.
+declare dp_1_4, dv_1_4.
+declare dp_1_5, dv_1_5.
+
+Subject(Applicant).
+Prop(dp_0_0).
+Prop(dp_0_1).
+Prop(dp_0_2).
+Prop(dp_0_3).
+Prop(dp_0_4).
+Prop(dp_0_5).
+Prop(dp_1_0).
+Prop(dp_1_1).
+Prop(dp_1_2).
+Prop(dp_1_3).
+Prop(dp_1_4).
+Prop(dp_1_5).
+Value(dv_0_0).
+Value(dv_0_1).
+Value(dv_0_2).
+Value(dv_0_3).
+Value(dv_0_4).
+Value(dv_0_5).
+Value(dv_1_0).
+Value(dv_1_1).
+Value(dv_1_2).
+Value(dv_1_3).
+Value(dv_1_4).
+Value(dv_1_5).
+
+property(Applicant, dp_0_0).
+property(dv_0_0, dp_0_1).
+property(dv_0_1, dp_0_2).
+property(dv_0_2, dp_0_3).
+property(dv_0_3, dp_0_4).
+property(dv_0_4, dp_0_5).
+property(Applicant, dp_1_0).
+property(dv_1_0, dp_1_1).
+property(dv_1_1, dp_1_2).
+property(dv_1_2, dp_1_3).
+property(dv_1_3, dp_1_4).
+property(dv_1_4, dp_1_5).
+value(dp_0_0, dv_0_0).
+value(dp_0_1, dv_0_1).
+value(dp_0_2, dv_0_2).
+value(dp_0_3, dv_0_3).
+value(dp_0_4, dv_0_4).
+value(dp_0_5, dv_0_5).
+value(dp_1_0, dv_1_0).
+value(dp_1_1, dv_1_1).
+value(dp_1_2, dv_1_2).
+value(dp_1_3, dv_1_3).
+value(dp_1_4, dv_1_4).
+value(dp_1_5, dv_1_5).
+
+% Close DCL
+!exists(Subject::new).
+!exists(Value::new).
+!exists(Prop::new).
+
+
+% === CSL: credential decomposition (chained) ===
+
+declare cs_0_0, claim_0_0, cv_0_0, cred_0_0.
+declare cs_0_1, claim_0_1, cv_0_1, cred_0_1.
+declare cs_0_2, claim_0_2, cv_0_2, cred_0_2.
+declare cs_0_3, claim_0_3, cv_0_3, cred_0_3.
+declare cs_0_4, claim_0_4, cv_0_4, cred_0_4.
+declare cs_0_5, claim_0_5, cv_0_5, cred_0_5.
+declare cs_1_0, claim_1_0, cv_1_0, cred_1_0.
+declare cs_1_1, claim_1_1, cv_1_1, cred_1_1.
+declare cs_1_2, claim_1_2, cv_1_2, cred_1_2.
+declare cs_1_3, claim_1_3, cv_1_3, cred_1_3.
+declare cs_1_4, claim_1_4, cv_1_4, cred_1_4.
+declare cs_1_5, claim_1_5, cv_1_5, cred_1_5.
+
+CredentialSubject(cs_0_0).
+CredentialSubject(cs_0_1).
+CredentialSubject(cs_0_2).
+CredentialSubject(cs_0_3).
+CredentialSubject(cs_0_4).
+CredentialSubject(cs_0_5).
+CredentialSubject(cs_1_0).
+CredentialSubject(cs_1_1).
+CredentialSubject(cs_1_2).
+CredentialSubject(cs_1_3).
+CredentialSubject(cs_1_4).
+CredentialSubject(cs_1_5).
+Claim(claim_0_0).
+Claim(claim_0_1).
+Claim(claim_0_2).
+Claim(claim_0_3).
+Claim(claim_0_4).
+Claim(claim_0_5).
+Claim(claim_1_0).
+Claim(claim_1_1).
+Claim(claim_1_2).
+Claim(claim_1_3).
+Claim(claim_1_4).
+Claim(claim_1_5).
+CredentialValue(cv_0_0).
+CredentialValue(cv_0_1).
+CredentialValue(cv_0_2).
+CredentialValue(cv_0_3).
+CredentialValue(cv_0_4).
+CredentialValue(cv_0_5).
+CredentialValue(cv_1_0).
+CredentialValue(cv_1_1).
+CredentialValue(cv_1_2).
+CredentialValue(cv_1_3).
+CredentialValue(cv_1_4).
+CredentialValue(cv_1_5).
+Credential(cred_0_0).
+Credential(cred_0_1).
+Credential(cred_0_2).
+Credential(cred_0_3).
+Credential(cred_0_4).
+Credential(cred_0_5).
+Credential(cred_1_0).
+Credential(cred_1_1).
+Credential(cred_1_2).
+Credential(cred_1_3).
+Credential(cred_1_4).
+Credential(cred_1_5).
+
+% Trace: Prop -> Claim
+Prop::trace(dp_0_0, claim_0_0).
+Prop::trace(dp_0_1, claim_0_1).
+Prop::trace(dp_0_2, claim_0_2).
+Prop::trace(dp_0_3, claim_0_3).
+Prop::trace(dp_0_4, claim_0_4).
+Prop::trace(dp_0_5, claim_0_5).
+Prop::trace(dp_1_0, claim_1_0).
+Prop::trace(dp_1_1, claim_1_1).
+Prop::trace(dp_1_2, claim_1_2).
+Prop::trace(dp_1_3, claim_1_3).
+Prop::trace(dp_1_4, claim_1_4).
+Prop::trace(dp_1_5, claim_1_5).
+
+% Claims: source (subject) and target (value)
+Claim::source(claim_0_0, cs_0_0).
+Claim::target(claim_0_0, cv_0_0).
+Claim::source(claim_0_1, cs_0_1).
+Claim::target(claim_0_1, cv_0_1).
+Claim::source(claim_0_2, cs_0_2).
+Claim::target(claim_0_2, cv_0_2).
+Claim::source(claim_0_3, cs_0_3).
+Claim::target(claim_0_3, cv_0_3).
+Claim::source(claim_0_4, cs_0_4).
+Claim::target(claim_0_4, cv_0_4).
+Claim::source(claim_0_5, cs_0_5).
+Claim::target(claim_0_5, cv_0_5).
+Claim::source(claim_1_0, cs_1_0).
+Claim::target(claim_1_0, cv_1_0).
+Claim::source(claim_1_1, cs_1_1).
+Claim::target(claim_1_1, cv_1_1).
+Claim::source(claim_1_2, cs_1_2).
+Claim::target(claim_1_2, cv_1_2).
+Claim::source(claim_1_3, cs_1_3).
+Claim::target(claim_1_3, cv_1_3).
+Claim::source(claim_1_4, cs_1_4).
+Claim::target(claim_1_4, cv_1_4).
+Claim::source(claim_1_5, cs_1_5).
+Claim::target(claim_1_5, cv_1_5).
+
+% Credential containment
+_(cs_0_0, cred_0_0).
+_(cs_0_1, cred_0_1).
+_(cs_0_2, cred_0_2).
+_(cs_0_3, cred_0_3).
+_(cs_0_4, cred_0_4).
+_(cs_0_5, cred_0_5).
+_(cs_1_0, cred_1_0).
+_(cs_1_1, cred_1_1).
+_(cs_1_2, cred_1_2).
+_(cs_1_3, cred_1_3).
+_(cs_1_4, cred_1_4).
+_(cs_1_5, cred_1_5).
+
+% Entity alignment: subject traces to its domain anchor,
+% value traces to its domain value. A child credential's subject and its
+% parent credential's value trace the SAME domain entity (multi-subject).
+CredEntity::trace(cs_0_0, Applicant).
+CredEntity::trace(cs_0_1, dv_0_0).
+CredEntity::trace(cs_0_2, dv_0_1).
+CredEntity::trace(cs_0_3, dv_0_2).
+CredEntity::trace(cs_0_4, dv_0_3).
+CredEntity::trace(cs_0_5, dv_0_4).
+CredEntity::trace(cs_1_0, Applicant).
+CredEntity::trace(cs_1_1, dv_1_0).
+CredEntity::trace(cs_1_2, dv_1_1).
+CredEntity::trace(cs_1_3, dv_1_2).
+CredEntity::trace(cs_1_4, dv_1_3).
+CredEntity::trace(cs_1_5, dv_1_4).
+CredEntity::trace(cv_0_0, dv_0_0).
+CredEntity::trace(cv_0_1, dv_0_1).
+CredEntity::trace(cv_0_2, dv_0_2).
+CredEntity::trace(cv_0_3, dv_0_3).
+CredEntity::trace(cv_0_4, dv_0_4).
+CredEntity::trace(cv_0_5, dv_0_5).
+CredEntity::trace(cv_1_0, dv_1_0).
+CredEntity::trace(cv_1_1, dv_1_1).
+CredEntity::trace(cv_1_2, dv_1_2).
+CredEntity::trace(cv_1_3, dv_1_3).
+CredEntity::trace(cv_1_4, dv_1_4).
+CredEntity::trace(cv_1_5, dv_1_5).
+
+% Close CSL
+!exists(CredentialSubject::new).
+!exists(CredentialValue::new).
+!exists(Claim::new).
+!exists(Credential::new).
+default !CredEntity::trace(*, *).
+
+
+% === FSL: format assignments ===
+
+declare fmt_0_0, fmt_0_1, fmt_0_2, fmt_0_3, fmt_0_4, fmt_0_5, fmt_1_0, fmt_1_1, fmt_1_2, fmt_1_3, fmt_1_4, fmt_1_5.
+
+SdJwtVcSchema(fmt_0_0).
+format(cred_0_0, fmt_0_0).
+SdJwtVcSchema(fmt_0_1).
+format(cred_0_1, fmt_0_1).
+SdJwtVcSchema(fmt_0_2).
+format(cred_0_2, fmt_0_2).
+SdJwtVcSchema(fmt_0_3).
+format(cred_0_3, fmt_0_3).
+SdJwtVcSchema(fmt_0_4).
+format(cred_0_4, fmt_0_4).
+SdJwtVcSchema(fmt_0_5).
+format(cred_0_5, fmt_0_5).
+SdJwtVcSchema(fmt_1_0).
+format(cred_1_0, fmt_1_0).
+SdJwtVcSchema(fmt_1_1).
+format(cred_1_1, fmt_1_1).
+SdJwtVcSchema(fmt_1_2).
+format(cred_1_2, fmt_1_2).
+SdJwtVcSchema(fmt_1_3).
+format(cred_1_3, fmt_1_3).
+SdJwtVcSchema(fmt_1_4).
+format(cred_1_4, fmt_1_4).
+
+% cred_1_5: format class left open for solver
+Formatted_Credential(fmt_1_5).
+format(cred_1_5, fmt_1_5).
+
+% Close FSL
+!exists(AnoncredsCredentialSchema::new).
+!exists(JsonLdCredentialSchema::new).
+!exists(JwtVCCredentialSchema::new).
+!exists(SdJwtVcSchema::new).
+!exists(MdocSchema::new).
+
+
+% === Governance markers ===
+
+EidasMandate(eidas_0_0).
+EidasMandate::target(eidas_0_0, cred_0_0).
+EidasMandate(eidas_0_1).
+EidasMandate::target(eidas_0_1, cred_0_1).
+EidasMandate(eidas_0_2).
+EidasMandate::target(eidas_0_2, cred_0_2).
+EidasMandate(eidas_0_3).
+EidasMandate::target(eidas_0_3, cred_0_3).
+EidasMandate(eidas_0_4).
+EidasMandate::target(eidas_0_4, cred_0_4).
+EidasMandate(eidas_0_5).
+EidasMandate::target(eidas_0_5, cred_0_5).
+EidasMandate(eidas_1_0).
+EidasMandate::target(eidas_1_0, cred_1_0).
+EidasMandate(eidas_1_1).
+EidasMandate::target(eidas_1_1, cred_1_1).
+EidasMandate(eidas_1_2).
+EidasMandate::target(eidas_1_2, cred_1_2).
+EidasMandate(eidas_1_3).
+EidasMandate::target(eidas_1_3, cred_1_3).
+EidasMandate(eidas_1_4).
+EidasMandate::target(eidas_1_4, cred_1_4).
+EidasMandate(eidas_1_5).
+EidasMandate::target(eidas_1_5, cred_1_5).
+
+PrivacyRequirement(privacy_1).
+PrivacyRequirement::target(privacy_1, cred_1_5).
+
+VcdmConformance(vcdm_0_0).
+VcdmConformance::target(vcdm_0_0, cred_0_0).
+VcdmConformance(vcdm_0_1).
+VcdmConformance::target(vcdm_0_1, cred_0_1).
+VcdmConformance(vcdm_0_2).
+VcdmConformance::target(vcdm_0_2, cred_0_2).
+VcdmConformance(vcdm_0_3).
+VcdmConformance::target(vcdm_0_3, cred_0_3).
+VcdmConformance(vcdm_0_4).
+VcdmConformance::target(vcdm_0_4, cred_0_4).
+VcdmConformance(vcdm_0_5).
+VcdmConformance::target(vcdm_0_5, cred_0_5).
+VcdmConformance(vcdm_1_0).
+VcdmConformance::target(vcdm_1_0, cred_1_0).
+VcdmConformance(vcdm_1_1).
+VcdmConformance::target(vcdm_1_1, cred_1_1).
+VcdmConformance(vcdm_1_2).
+VcdmConformance::target(vcdm_1_2, cred_1_2).
+VcdmConformance(vcdm_1_3).
+VcdmConformance::target(vcdm_1_3, cred_1_3).
+VcdmConformance(vcdm_1_4).
+VcdmConformance::target(vcdm_1_4, cred_1_4).
+VcdmConformance(vcdm_1_5).
+VcdmConformance::target(vcdm_1_5, cred_1_5).
+
+% Close governance
+!exists(EidasMandate::new).
+!exists(PrivacyRequirement::new).
+!exists(VcdmConformance::new).
+
+
+scope node = 110, GovernanceAnnotation = 25.

@@ -1,0 +1,195 @@
+% ============================================================================
+% CSOK Instance 2x — Extended Financial Profile (2x scale)
+% ============================================================================
+% Original CSOK instance (set A) plus set B (dependents, vehicle, secondary
+% income). Single-subject expansion: all properties hang off Applicant.
+% Governance markers and scope are in the entry-point .problem files.
+
+import vc_metamodel.
+
+
+% === Node declarations ===
+
+% DCL nodes — Set A (original)
+declare Applicant, has_children, owns_property, earns.
+declare num_children, property_area, monthly_income.
+
+% DCL nodes — Set B (extended)
+declare has_dependents, owns_vehicle, earns_secondary.
+declare num_dependents, vehicle_value, secondary_income.
+
+% CSL nodes — Set A
+declare CS_Applicant_1, CS_Applicant_2, CS_Applicant_3.
+declare has_children_claim, owns_property_claim, earns_claim.
+declare num_children_1, property_area_1, monthly_income_1.
+declare FamilyStatusCred, PropertyCred, IncomeCred.
+
+% CSL nodes — Set B
+declare CS_Applicant_4, CS_Applicant_5, CS_Applicant_6.
+declare has_dependents_claim, owns_vehicle_claim, earns_secondary_claim.
+declare num_dependents_1, vehicle_value_1, secondary_income_1.
+declare DependentStatusCred, VehicleCred, SecondaryIncomeCred.
+
+% FSL nodes
+declare sd_jwt_family, sd_jwt_property, income_format.
+declare sd_jwt_dependent, sd_jwt_vehicle, secondary_income_format.
+
+
+% === DCL: domain facts ===
+
+Subject(Applicant).
+
+% Set A values
+Value(num_children).
+Value(property_area).
+Value(monthly_income).
+
+% Set B values
+Value(num_dependents).
+Value(vehicle_value).
+Value(secondary_income).
+
+% Set A properties
+Prop(has_children).
+Prop(owns_property).
+Prop(earns).
+property(Applicant, has_children).
+property(Applicant, owns_property).
+property(Applicant, earns).
+value(has_children, num_children).
+value(owns_property, property_area).
+value(earns, monthly_income).
+
+% Set B properties
+Prop(has_dependents).
+Prop(owns_vehicle).
+Prop(earns_secondary).
+property(Applicant, has_dependents).
+property(Applicant, owns_vehicle).
+property(Applicant, earns_secondary).
+value(has_dependents, num_dependents).
+value(owns_vehicle, vehicle_value).
+value(earns_secondary, secondary_income).
+
+% Close DCL
+!exists(Subject::new).
+!exists(Value::new).
+!exists(Prop::new).
+
+
+% === CSL: credential decomposition (fixed — not explored) ===
+
+% Set A types
+CredentialSubject(CS_Applicant_1).
+CredentialSubject(CS_Applicant_2).
+CredentialSubject(CS_Applicant_3).
+CredentialValue(num_children_1).
+CredentialValue(property_area_1).
+CredentialValue(monthly_income_1).
+Claim(has_children_claim).
+Claim(owns_property_claim).
+Claim(earns_claim).
+Credential(FamilyStatusCred).
+Credential(PropertyCred).
+Credential(IncomeCred).
+
+% Set B types
+CredentialSubject(CS_Applicant_4).
+CredentialSubject(CS_Applicant_5).
+CredentialSubject(CS_Applicant_6).
+CredentialValue(num_dependents_1).
+CredentialValue(vehicle_value_1).
+CredentialValue(secondary_income_1).
+Claim(has_dependents_claim).
+Claim(owns_vehicle_claim).
+Claim(earns_secondary_claim).
+Credential(DependentStatusCred).
+Credential(VehicleCred).
+Credential(SecondaryIncomeCred).
+
+% Set A trace mappings: each Prop traces to a Claim
+Prop::trace(has_children, has_children_claim).
+Prop::trace(owns_property, owns_property_claim).
+Prop::trace(earns, earns_claim).
+
+% Set B trace mappings
+Prop::trace(has_dependents, has_dependents_claim).
+Prop::trace(owns_vehicle, owns_vehicle_claim).
+Prop::trace(earns_secondary, earns_secondary_claim).
+
+% Set A claims: source and target
+Claim::source(has_children_claim, CS_Applicant_1).
+Claim::target(has_children_claim, num_children_1).
+Claim::source(owns_property_claim, CS_Applicant_2).
+Claim::target(owns_property_claim, property_area_1).
+Claim::source(earns_claim, CS_Applicant_3).
+Claim::target(earns_claim, monthly_income_1).
+
+% Set B claims: source and target
+Claim::source(has_dependents_claim, CS_Applicant_4).
+Claim::target(has_dependents_claim, num_dependents_1).
+Claim::source(owns_vehicle_claim, CS_Applicant_5).
+Claim::target(owns_vehicle_claim, vehicle_value_1).
+Claim::source(earns_secondary_claim, CS_Applicant_6).
+Claim::target(earns_secondary_claim, secondary_income_1).
+
+% Set A credential structure
+_(CS_Applicant_1, FamilyStatusCred).
+_(CS_Applicant_2, PropertyCred).
+_(CS_Applicant_3, IncomeCred).
+
+% Set B credential structure
+_(CS_Applicant_4, DependentStatusCred).
+_(CS_Applicant_5, VehicleCred).
+_(CS_Applicant_6, SecondaryIncomeCred).
+
+% All credential subjects trace to Applicant
+CredEntity::trace(CS_Applicant_1, Applicant).
+CredEntity::trace(CS_Applicant_2, Applicant).
+CredEntity::trace(CS_Applicant_3, Applicant).
+CredEntity::trace(CS_Applicant_4, Applicant).
+CredEntity::trace(CS_Applicant_5, Applicant).
+CredEntity::trace(CS_Applicant_6, Applicant).
+
+% Set A value traces
+CredEntity::trace(num_children_1, num_children).
+CredEntity::trace(property_area_1, property_area).
+CredEntity::trace(monthly_income_1, monthly_income).
+
+% Set B value traces
+CredEntity::trace(num_dependents_1, num_dependents).
+CredEntity::trace(vehicle_value_1, vehicle_value).
+CredEntity::trace(secondary_income_1, secondary_income).
+
+% Close CSL
+!exists(CredentialSubject::new).
+!exists(CredentialValue::new).
+!exists(Claim::new).
+!exists(Credential::new).
+default !CredEntity::trace(*, *).
+
+
+% === FSL: format assignments ===
+
+% Set A: FamilyStatusCred and PropertyCred fixed, IncomeCred open
+SdJwtVcSchema(sd_jwt_family).
+format(FamilyStatusCred, sd_jwt_family).
+SdJwtVcSchema(sd_jwt_property).
+format(PropertyCred, sd_jwt_property).
+Formatted_Credential(income_format).
+format(IncomeCred, income_format).
+
+% Set B: DependentStatusCred and VehicleCred fixed, SecondaryIncomeCred open
+SdJwtVcSchema(sd_jwt_dependent).
+format(DependentStatusCred, sd_jwt_dependent).
+SdJwtVcSchema(sd_jwt_vehicle).
+format(VehicleCred, sd_jwt_vehicle).
+Formatted_Credential(secondary_income_format).
+format(SecondaryIncomeCred, secondary_income_format).
+
+% Close FSL (income_format and secondary_income_format classes are unknowns)
+!exists(AnoncredsCredentialSchema::new).
+!exists(JsonLdCredentialSchema::new).
+!exists(JwtVCCredentialSchema::new).
+!exists(SdJwtVcSchema::new).
+!exists(MdocSchema::new).

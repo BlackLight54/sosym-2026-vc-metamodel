@@ -1,0 +1,119 @@
+% ============================================================================
+% CSOK Instance — Family Housing Subsidy (Csaladi Otthonteremtesi Kedvezmeny)
+% ============================================================================
+% Domain facts, credential decomposition, and format assignments.
+% Governance markers and scope are in the entry-point .problem files.
+
+import vc_metamodel.
+
+
+% === Node declarations (required in modules) ===
+
+% DCL nodes
+declare Applicant, has_children, owns_property, earns.
+declare num_children, property_area, monthly_income.
+
+% CSL nodes
+declare CS_Applicant_1, CS_Applicant_2, CS_Applicant_3.
+declare has_children_claim, owns_property_claim, earns_claim.
+declare num_children_1, property_area_1, monthly_income_1.
+declare FamilyStatusCred, PropertyCred, IncomeCred.
+
+% FSL nodes
+declare sd_jwt_family, sd_jwt_property, income_format.
+
+
+% === DCL: domain facts ===
+
+Subject(Applicant).
+Value(num_children).
+Value(property_area).
+Value(monthly_income).
+Prop(has_children).
+Prop(owns_property).
+Prop(earns).
+property(Applicant, has_children).
+property(Applicant, owns_property).
+property(Applicant, earns).
+value(has_children, num_children).
+value(owns_property, property_area).
+value(earns, monthly_income).
+
+% Close DCL
+!exists(Subject::new).
+!exists(Value::new).
+!exists(Prop::new).
+
+
+% === CSL: credential decomposition (fixed — not explored) ===
+
+% Explicit types
+CredentialSubject(CS_Applicant_1).
+CredentialSubject(CS_Applicant_2).
+CredentialSubject(CS_Applicant_3).
+CredentialValue(num_children_1).
+CredentialValue(property_area_1).
+CredentialValue(monthly_income_1).
+Claim(has_children_claim).
+Claim(owns_property_claim).
+Claim(earns_claim).
+Credential(FamilyStatusCred).
+Credential(PropertyCred).
+Credential(IncomeCred).
+
+% Trace mappings: each Prop traces to a Claim
+Prop::trace(has_children, has_children_claim).
+Prop::trace(owns_property, owns_property_claim).
+Prop::trace(earns, earns_claim).
+
+% Claims: source and target
+Claim::source(has_children_claim, CS_Applicant_1).
+Claim::target(has_children_claim, num_children_1).
+Claim::source(owns_property_claim, CS_Applicant_2).
+Claim::target(owns_property_claim, property_area_1).
+Claim::source(earns_claim, CS_Applicant_3).
+Claim::target(earns_claim, monthly_income_1).
+
+% Credential structure
+_(CS_Applicant_1, FamilyStatusCred).
+_(CS_Applicant_2, PropertyCred).
+_(CS_Applicant_3, IncomeCred).
+
+% Entity alignment: all credential subjects trace to the same Applicant
+CredEntity::trace(CS_Applicant_1, Applicant).
+CredEntity::trace(CS_Applicant_2, Applicant).
+CredEntity::trace(CS_Applicant_3, Applicant).
+
+% Value traces
+CredEntity::trace(num_children_1, num_children).
+CredEntity::trace(property_area_1, property_area).
+CredEntity::trace(monthly_income_1, monthly_income).
+
+% Close CSL
+!exists(CredentialSubject::new).
+!exists(CredentialValue::new).
+!exists(Claim::new).
+!exists(Credential::new).
+default !CredEntity::trace(*, *).
+
+
+% === FSL: format assignments ===
+
+% FamilyStatusCred: SD-JWT-VC (eIDAS compliant)
+SdJwtVcSchema(sd_jwt_family).
+format(FamilyStatusCred, sd_jwt_family).
+
+% PropertyCred: SD-JWT-VC (eIDAS compliant)
+SdJwtVcSchema(sd_jwt_property).
+format(PropertyCred, sd_jwt_property).
+
+% IncomeCred: format node exists, concrete class left for solver
+Formatted_Credential(income_format).
+format(IncomeCred, income_format).
+
+% Close FSL (income_format class is the only unknown)
+!exists(AnoncredsCredentialSchema::new).
+!exists(JsonLdCredentialSchema::new).
+!exists(JwtVCCredentialSchema::new).
+!exists(SdJwtVcSchema::new).
+!exists(MdocSchema::new).
