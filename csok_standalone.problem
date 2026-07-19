@@ -1,0 +1,398 @@
+% ============================================================================
+% CSOK Standalone — Self-contained for Refinery web editor
+% ============================================================================
+% Inlines vc_metamodel + csok_instance + governance (no conflict error).
+% Expected result: SAT (solver assigns any format to IncomeCred)
+
+
+% =============================================
+% DCL — Domain Concept Layer (domain-level information graph)
+% =============================================
+
+shadow pred DCL(e) <-> Entity(e); Prop(e).
+
+abstract class Entity {
+    contains Prop[] property
+}
+
+class Subject extends Entity {
+}
+
+propagation rule root_is_subj(Entity e) <->
+    must !value(_, e)
+    ==>
+    Subject(e).
+
+class Value extends Entity {
+}
+
+pred Leaf(Value e) <-> !property(e, _).
+
+class Prop {
+    contains Value[1] value
+    contains Claim[1] trace
+}
+
+pred statement(Entity subject, Prop property, Entity value) <->
+    subject != value,
+    property(subject, property),
+    value(property, value).
+
+propagation rule statement_rule(Entity subject, Prop property, Entity value) <->
+    must statement(subject, property, value)
+==>
+    Value(value),
+    property(subject, property),
+    value(property, value).
+
+propagation rule statement_rule_bw(Entity subject, Prop property, Entity value) <->
+    must property(subject, property), must value(property, value)
+==>
+    Value(value),
+    statement(subject, property, value).
+
+pred neighbours(Entity s, Entity t) <-> statement(s, _, t); statement(t, _, s).
+
+error non_connected(Entity n, Entity m) <-> n != m, !neighbours+(n, m).
+
+propagation rule no_self_loop(Prop p, Entity e) <->
+    must property(e, p) ==> !value(p, e).
+
+pred directed_edge(Entity s, Entity t) <-> statement(s, _, t).
+
+error cyclic(Entity e) <-> directed_edge+(e, e).
+
+
+% =============================================
+% CSL — Credential Schema Layer (abstract credential schemas)
+% =============================================
+
+shadow pred CSL(e) <-> CredEntity(e); Claim(e); Credential(e).
+
+abstract class CredEntity {
+    Entity[1] trace
+}
+
+class CredentialSubject extends CredEntity {
+    contains Credential[0..1] _ opposite credentialSubject
+}
+
+propagation rule subject_traces_to_subject(CredEntity t) <->
+    must Subject(e), must CredEntity::trace(t, e)
+==>
+    CredentialSubject(t).
+
+class CredentialValue extends CredEntity {
+}
+
+class Claim {
+    contains CredEntity[1] source
+    contains CredentialValue[1] target
+}
+
+pred cred_neighbors(CredEntity s, CredEntity t) <->
+    credential_statement(s, _, t); credential_statement(t, _, s).
+
+propagation rule root_is_cred_subj(CredEntity cs) <->
+    may CredentialSubject(cs), must !Claim::target(_, cs)
+==>
+    CredentialSubject(cs).
+
+error no_empty_cred(CredentialSubject cs) <-> !source(_, cs).
+
+pred credential_statement(CredEntity source, Claim prop, CredEntity target) <->
+    source != target,
+    Claim::source(prop, source),
+    Claim::target(prop, target),
+    CredentialValue(target).
+
+propagation rule credential_statement_rule(CredEntity source, Claim prop, CredEntity target) <->
+    must credential_statement(source, prop, target)
+==>
+    Claim::source(prop, source),
+    Claim::target(prop, target),
+    CredentialValue(target).
+
+propagation rule credential_statement_rule_opp(CredEntity source, Claim prop, CredEntity target) <->
+    must Claim::source(prop, source), must Claim::target(prop, target)
+==>
+    credential_statement(source, prop, target),
+    CredentialValue(target).
+
+pred Root_cred_entity(CredEntity e) <->
+    !credential_statement(_, _, e).
+
+propagation rule targets_are_not_roots(CredEntity e) <->
+    must Claim::target(_, e)
+==>
+    !Root_cred_entity(e).
+
+propagation rule cred_points_to_root_cred_e(CredEntity e, Credential c) <->
+    must !Root_cred_entity(e)
+==>
+    !credentialSubject(c, e).
+
+error root_ent_doesnt_have_cred(Root_cred_entity e) <->
+    !credentialSubject(_, e).
+
+propagation rule prop_t(Claim c, CredEntity t) <->
+    must Prop::trace(p, c),
+    must Prop::value(p, e),
+    must !CredEntity::trace(t, e),
+    may Claim::target(c, t)
+==>
+    !Claim::target(c, t).
+
+propagation rule prop_s(Claim c, CredEntity s) <->
+    must Prop::trace(p, c),
+    must Entity::property(e, p),
+    must !CredEntity::trace(s, e),
+    may Claim::source(c, s)
+==>
+    !Claim::source(c, s).
+
+shadow pred aligned(CredEntity c_e1, CredEntity c_e2) <->
+    CredEntity::trace(c_e1, e),
+    CredEntity::trace(c_e2, e),
+    c_e1 != c_e2.
+
+class Credential {
+    container CredentialSubject credentialSubject opposite _
+    contains Formatted_Credential[1] format
+}
+
+shadow pred common_parent(Prop p1, Prop p2) <->
+    p1 != p2,
+    Prop::trace(p1, cp1),
+    Prop::trace(p2, cp2),
+    Claim::source(cp1, e1),
+    Claim::source(cp2, e2),
+    e1 == e2.
+
+
+% =============================================
+% FSL — Format-Specific Layer
+% =============================================
+
+shadow pred FSL(e) <-> Formatted_Credential(e); GovernanceAnnotation(e).
+
+abstract class Formatted_Credential {
+}
+
+class AnoncredsCredentialSchema extends Formatted_Credential.
+class JsonLdCredentialSchema extends Formatted_Credential.
+class JwtVCCredentialSchema extends Formatted_Credential.
+class SdJwtVcSchema extends Formatted_Credential.
+class MdocSchema extends Formatted_Credential.
+
+pred supports_predicate_proof(Formatted_Credential f) <->
+    AnoncredsCredentialSchema(f).
+
+pred supports_selective_disclosure(Formatted_Credential f) <->
+    SdJwtVcSchema(f);
+    JsonLdCredentialSchema(f);
+    AnoncredsCredentialSchema(f);
+    MdocSchema(f).
+
+% W3C VCDM 2.0 conformance: all except AnonCreds v1 and mdoc
+% mdoc (ISO 18013-5) uses CBOR/COSE, not the JSON-LD/JSON data model of VCDM 2.0.
+pred conforms_vcdm(Formatted_Credential f) <->
+    SdJwtVcSchema(f);
+    JsonLdCredentialSchema(f);
+    JwtVCCredentialSchema(f).
+
+pred supports_zkp(Formatted_Credential f) <->
+    AnoncredsCredentialSchema(f).
+
+% Offline/proximity verification capability (ISO 18013-5 NFC transfer)
+pred supports_offline_verification(Formatted_Credential f) <->
+    MdocSchema(f).
+
+% No deployed format supports cross-credential arithmetic proofs.
+pred supports_multi_credential_proof(Formatted_Credential f) <->
+    f != f.
+
+propagation rule cap_predicate_not_sdjwt(Formatted_Credential f) <->
+    must supports_predicate_proof(f),
+    may SdJwtVcSchema(f)
+==>
+    !SdJwtVcSchema(f).
+
+propagation rule cap_predicate_not_jwt(Formatted_Credential f) <->
+    must supports_predicate_proof(f),
+    may JwtVCCredentialSchema(f)
+==>
+    !JwtVCCredentialSchema(f).
+
+propagation rule cap_predicate_not_mdoc(Formatted_Credential f) <->
+    must supports_predicate_proof(f),
+    may MdocSchema(f)
+==>
+    !MdocSchema(f).
+
+propagation rule cap_predicate_not_jsonld(Formatted_Credential f) <->
+    must supports_predicate_proof(f),
+    may JsonLdCredentialSchema(f)
+==>
+    !JsonLdCredentialSchema(f).
+
+propagation rule cap_offline_not_jwt(Formatted_Credential f) <->
+    must supports_offline_verification(f),
+    may JwtVCCredentialSchema(f)
+==>
+    !JwtVCCredentialSchema(f).
+
+propagation rule cap_offline_not_sdjwt(Formatted_Credential f) <->
+    must supports_offline_verification(f),
+    may SdJwtVcSchema(f)
+==>
+    !SdJwtVcSchema(f).
+
+propagation rule cap_offline_not_anoncreds(Formatted_Credential f) <->
+    must supports_offline_verification(f),
+    may AnoncredsCredentialSchema(f)
+==>
+    !AnoncredsCredentialSchema(f).
+
+propagation rule cap_offline_not_jsonld(Formatted_Credential f) <->
+    must supports_offline_verification(f),
+    may JsonLdCredentialSchema(f)
+==>
+    !JsonLdCredentialSchema(f).
+
+abstract class GovernanceAnnotation {
+}
+
+class EidasMandate extends GovernanceAnnotation {
+    Credential[1] target
+}
+
+class PrivacyRequirement extends GovernanceAnnotation {
+    Credential[1] target
+}
+
+class VcdmConformance extends GovernanceAnnotation {
+    Credential[1] target
+}
+
+shadow pred cross_cred_predicate_gap(Credential c1, Credential c2) <->
+    c1 != c2,
+    credentialSubject(c1, cs1), credentialSubject(c2, cs2),
+    aligned(cs1, cs2),
+    format(c1, f1), !supports_multi_credential_proof(f1)
+  ;
+    c1 != c2,
+    credentialSubject(c1, cs1), credentialSubject(c2, cs2),
+    aligned(cs1, cs2),
+    format(c2, f2), !supports_multi_credential_proof(f2).
+
+
+% =============================================
+% CSOK Instance — Domain facts, credential decomposition, format assignments
+% =============================================
+
+% DCL nodes
+Subject(Applicant).
+Value(num_children).
+Value(property_area).
+Value(monthly_income).
+Prop(has_children).
+Prop(owns_property).
+Prop(earns).
+property(Applicant, has_children).
+property(Applicant, owns_property).
+property(Applicant, earns).
+value(has_children, num_children).
+value(owns_property, property_area).
+value(earns, monthly_income).
+
+!exists(Subject::new).
+!exists(Value::new).
+!exists(Prop::new).
+
+% CSL nodes
+CredentialSubject(CS_Applicant_1).
+CredentialSubject(CS_Applicant_2).
+CredentialSubject(CS_Applicant_3).
+CredentialValue(num_children_1).
+CredentialValue(property_area_1).
+CredentialValue(monthly_income_1).
+Claim(has_children_claim).
+Claim(owns_property_claim).
+Claim(earns_claim).
+Credential(FamilyStatusCred).
+Credential(PropertyCred).
+Credential(IncomeCred).
+
+Prop::trace(has_children, has_children_claim).
+Prop::trace(owns_property, owns_property_claim).
+Prop::trace(earns, earns_claim).
+
+Claim::source(has_children_claim, CS_Applicant_1).
+Claim::target(has_children_claim, num_children_1).
+Claim::source(owns_property_claim, CS_Applicant_2).
+Claim::target(owns_property_claim, property_area_1).
+Claim::source(earns_claim, CS_Applicant_3).
+Claim::target(earns_claim, monthly_income_1).
+
+_(CS_Applicant_1, FamilyStatusCred).
+_(CS_Applicant_2, PropertyCred).
+_(CS_Applicant_3, IncomeCred).
+
+CredEntity::trace(CS_Applicant_1, Applicant).
+CredEntity::trace(CS_Applicant_2, Applicant).
+CredEntity::trace(CS_Applicant_3, Applicant).
+
+CredEntity::trace(num_children_1, num_children).
+CredEntity::trace(property_area_1, property_area).
+CredEntity::trace(monthly_income_1, monthly_income).
+
+!exists(CredentialSubject::new).
+!exists(CredentialValue::new).
+!exists(Claim::new).
+!exists(Credential::new).
+default !CredEntity::trace(*, *).
+
+% FSL: format assignments
+SdJwtVcSchema(sd_jwt_family).
+format(FamilyStatusCred, sd_jwt_family).
+
+SdJwtVcSchema(sd_jwt_property).
+format(PropertyCred, sd_jwt_property).
+
+Formatted_Credential(income_format).
+format(IncomeCred, income_format).
+
+!exists(AnoncredsCredentialSchema::new).
+!exists(JsonLdCredentialSchema::new).
+!exists(JwtVCCredentialSchema::new).
+!exists(SdJwtVcSchema::new).
+!exists(MdocSchema::new).
+
+
+% =============================================
+% Governance markers (no conflict error — SAT)
+% =============================================
+
+EidasMandate(eidas_1).
+EidasMandate::target(eidas_1, FamilyStatusCred).
+EidasMandate(eidas_2).
+EidasMandate::target(eidas_2, PropertyCred).
+EidasMandate(eidas_3).
+EidasMandate::target(eidas_3, IncomeCred).
+
+PrivacyRequirement(privacy_1).
+PrivacyRequirement::target(privacy_1, IncomeCred).
+
+VcdmConformance(vcdm_1).
+VcdmConformance::target(vcdm_1, FamilyStatusCred).
+VcdmConformance(vcdm_2).
+VcdmConformance::target(vcdm_2, PropertyCred).
+VcdmConformance(vcdm_3).
+VcdmConformance::target(vcdm_3, IncomeCred).
+
+!exists(EidasMandate::new).
+!exists(PrivacyRequirement::new).
+!exists(VcdmConformance::new).
+
+scope node = 29, GovernanceAnnotation = 7.

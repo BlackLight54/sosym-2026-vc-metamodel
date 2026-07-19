@@ -1,0 +1,35 @@
+% ============================================================================
+% CSOK — No conflict check (governance_conflict error DISABLED)
+% ============================================================================
+% Imports metamodel and instance but NOT governance_conflict.
+% Expected result: SAT (solver assigns any format to IncomeCred)
+
+import vc_metamodel.
+import csok_instance.
+
+
+% === Governance markers (all present, but no conflict error to enforce) ===
+
+EidasMandate(eidas_1).
+EidasMandate::target(eidas_1, FamilyStatusCred).
+EidasMandate(eidas_2).
+EidasMandate::target(eidas_2, PropertyCred).
+EidasMandate(eidas_3).
+EidasMandate::target(eidas_3, IncomeCred).
+
+PrivacyRequirement(privacy_1).
+PrivacyRequirement::target(privacy_1, IncomeCred).
+
+VcdmConformance(vcdm_1).
+VcdmConformance::target(vcdm_1, FamilyStatusCred).
+VcdmConformance(vcdm_2).
+VcdmConformance::target(vcdm_2, PropertyCred).
+VcdmConformance(vcdm_3).
+VcdmConformance::target(vcdm_3, IncomeCred).
+
+% Close governance
+!exists(EidasMandate::new).
+!exists(PrivacyRequirement::new).
+!exists(VcdmConformance::new).
+
+scope node = 29, GovernanceAnnotation = 7.

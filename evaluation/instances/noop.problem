@@ -1,0 +1,11 @@
+% ========================================================================
+% Instance: noop — minimal problem to measure Docker + JVM baseline
+% No domain facts, no constraints, no solver work.
+% ========================================================================
+
+import vc_metamodel.
+
+declare dummy.
+Entity(dummy).
+
+scope node = 1.
