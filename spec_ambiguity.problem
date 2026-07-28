@@ -1,0 +1,33 @@
+% ============================================================================
+% Specification-ambiguity VC instance  [unverified, needs check -k]
+% ============================================================================
+% Demonstrates the specification-ambiguity design-error class (vault C-048)
+% via the enforced C7 (VCDM-conformance) error in spec_ambiguity.refinery.
+%
+% VC instance: IncomeCred is required to be VCDM-conformant (VcdmConformance
+% annotation) but is assigned mdoc. mdoc (ISO 18013-5, CBOR/COSE) is treated
+% as conformant under a permissive reading yet fails the VCDM 2.0
+% JSON-LD/JSON data model -- the ambiguity the C7 error pins down.
+%
+% Expected result: UNSAT (vcdm_conformance_violation fires on IncomeCred).
+% governance_conflict is deliberately NOT imported, isolating C7's error.
+
+import vc_metamodel.
+import spec_ambiguity.
+import csok_instance.
+
+% Pin the open income format to mdoc (the non-VCDM-conformant reading).
+MdocSchema(income_format).
+
+% VCDM conformance required on IncomeCred.
+VcdmConformance(vcdm_income).
+VcdmConformance::target(vcdm_income, IncomeCred).
+
+% Close governance (no other annotations generated).
+!exists(EidasMandate::new).
+!exists(PrivacyRequirement::new).
+!exists(VcdmConformance::new).
+
+% Base instance is 22 non-governance nodes (cf. csok_no_eidas: 28 = 22 + 6).
+% One governance annotation added here. Widen if the solver reports 0 solutions.
+scope node = 23, GovernanceAnnotation = 1.

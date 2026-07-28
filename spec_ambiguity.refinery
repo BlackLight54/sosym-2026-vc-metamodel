@@ -1,0 +1,23 @@
+% ============================================================================
+% Constraint C7 as an enforced error: VCDM-conformance violation  [unverified, needs check -k]
+% ============================================================================
+% In-model instrument for the specification-ambiguity design-error class
+% (vault C-048). An ambiguous/underspecified profile admits divergent
+% conformant readings; C7 pins one reading, and a format that fails it is
+% flagged rather than silently accepted.
+%
+% NOTE (model/prose gap this addresses): the VcdmConformance governance
+% annotation is declared in vc_metamodel.refinery and asserted in every CSOK
+% scenario, but NO predicate reads it -- C7 was, until now, unenforced. This
+% predicate enforces it. Kept in its own file (do NOT import into csok.problem):
+% under a C7 error, an open income format narrows to the VCDM-conformant three
+% and clause 1 of governance_conflict would carry the UNSAT by a different
+% route, muddying the error-vs-propagation division of labour.
+
+import vc_metamodel.
+
+% A credential required to be VCDM-conformant must use a VCDM-conformant format.
+error vcdm_conformance_violation(Credential c, Formatted_Credential f) <->
+    VcdmConformance::target(_, c),
+    format(c, f),
+    !conforms_vcdm(f).

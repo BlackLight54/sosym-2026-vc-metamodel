@@ -1,23 +1,42 @@
 % ============================================================================
 % Headline 1: Governance conflict error predicate
 % ============================================================================
-% Fires when a credential has both eIDAS mandate and privacy requirement,
-% but no single format satisfies both.
-% Clause 1: VCDM-conformant formats lack predicate proofs.
-% Clause 2: Predicate-proof formats lack VCDM conformance.
-% Since the two sets are disjoint, every format triggers one clause -> UNSAT.
+% Fires when a credential carries all three governance mandates -- eIDAS
+% mandate, privacy requirement, and VCDM-conformance mandate -- and no single
+% format satisfies them jointly. Gating on all three annotations (D-039,
+% 2026-07-28) makes the triple conjunction minimal: dropping any one mandate
+% removes a precondition, so every proper subset (G0-G6) is satisfiable and
+% only the full conjunction (G7) is UNSAT. [unverified] until a refinery
+% check -k run records the G0-G7 verdicts in A-004.
+% The three clauses partition the failure condition
+%   !(conforms_vcdm(f) & supports_predicate_proof(f)):
+%   Clause 1: VCDM-conformant, but no predicate proofs (SD-JWT-VC, JSON-LD, JWT-VC).
+%   Clause 2: predicate-proof-capable, but not VCDM-conformant (AnonCreds).
+%   Clause 3: neither VCDM-conformant nor predicate-proof-capable (mdoc).
+% No deployed format is both, so every format triggers a clause -> UNSAT.
+% (Disjointness of the two capability sets alone does NOT imply coverage:
+% clause 3 is required, otherwise mdoc escapes both clauses 1 and 2.)
 
 import vc_metamodel.
 
 error governance_conflict(Credential c, Formatted_Credential f) <->
     EidasMandate::target(_, c),
     PrivacyRequirement::target(_, c),
+    VcdmConformance::target(_, c),
     format(c, f),
     conforms_vcdm(f),
     !supports_predicate_proof(f)
   ;
     EidasMandate::target(_, c),
     PrivacyRequirement::target(_, c),
+    VcdmConformance::target(_, c),
     format(c, f),
     supports_predicate_proof(f),
-    !conforms_vcdm(f).
+    !conforms_vcdm(f)
+  ;
+    EidasMandate::target(_, c),
+    PrivacyRequirement::target(_, c),
+    VcdmConformance::target(_, c),
+    format(c, f),
+    !conforms_vcdm(f),
+    !supports_predicate_proof(f).
