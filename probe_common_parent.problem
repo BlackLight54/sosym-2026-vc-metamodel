@@ -1,0 +1,27 @@
+% Vacuity probe for common_parent (2026-07-28 verification run; finding #3 in
+% agents/reports/2026-07-28-model-evidence-findings.md). Shadow relations may
+% not be referenced from non-shadow contexts, so the body of common_parent
+% (vc_metamodel.refinery:183) is inlined verbatim into witness/2. Builds on the
+% known-SAT CSOK instance (csok_instance, no governance_conflict) with widened
+% scope so the solver may add structure, and forces every generated model to
+% contain a witness pair via error missing_witness. If generate reports
+% unsatisfiability, no model within scope contains a common_parent pair: the
+% shadow predicate is vacuous. Control: probe_common_parent_control.problem
+% (identical, error line commented out) must be SAT.
+
+import vc_metamodel.
+import csok_instance.
+
+pred witness(Prop p1, Prop p2) <->
+    p1 != p2,
+    Prop::trace(p1, cp1),
+    Prop::trace(p2, cp2),
+    Claim::source(cp1, e1),
+    Claim::source(cp2, e2),
+    e1 == e2.
+
+pred some_witness() <-> witness(_, _).
+
+error missing_witness() <-> !some_witness().
+
+scope node = 29..40.

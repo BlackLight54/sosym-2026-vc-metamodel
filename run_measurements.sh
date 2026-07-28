@@ -299,7 +299,7 @@ run_e3() {
             $ignore_flag \
             --export-json "$outfile" \
             --command-name "check_G${i}" \
-            "$(refinery_cmd check "$fname")"
+            "$(refinery_cmd checkk "$fname")"
         echo ""
     done
 }

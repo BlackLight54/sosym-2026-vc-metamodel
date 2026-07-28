@@ -1,0 +1,114 @@
+% ========================================================================
+% C11 firing instance — status/revocation-propagation mismatch
+% ========================================================================
+% Chained two-claim credential pair (ED family shape, depth=2, breadth=1):
+% cred_0_1 describes the value of its parent credential cred_0_0 (the child
+% subject cs_0_1 and the parent value cv_0_0 trace the SAME domain entity
+% dv_0_0). claim_0_0 is StaticRevocation-marked, claim_0_1 is
+% DynamicRevocation-marked -> revocation_mismatch must fire.
+% Expected: INCONSISTENT under `check -k`.
+% Control (same structure, single cadence): revocation_mismatch_control.problem
+% ========================================================================
+
+import vc_metamodel.
+import revocation_mismatch.
+
+
+% === DCL: domain facts (chained) ===
+
+declare Applicant.
+declare dp_0_0, dv_0_0.
+declare dp_0_1, dv_0_1.
+
+Subject(Applicant).
+Prop(dp_0_0).
+Prop(dp_0_1).
+Value(dv_0_0).
+Value(dv_0_1).
+
+property(Applicant, dp_0_0).
+property(dv_0_0, dp_0_1).
+value(dp_0_0, dv_0_0).
+value(dp_0_1, dv_0_1).
+
+% Close DCL
+!exists(Subject::new).
+!exists(Value::new).
+!exists(Prop::new).
+
+
+% === CSL: credential decomposition (chained) ===
+
+declare cs_0_0, claim_0_0, cv_0_0, cred_0_0.
+declare cs_0_1, claim_0_1, cv_0_1, cred_0_1.
+
+CredentialSubject(cs_0_0).
+CredentialSubject(cs_0_1).
+Claim(claim_0_0).
+Claim(claim_0_1).
+CredentialValue(cv_0_0).
+CredentialValue(cv_0_1).
+Credential(cred_0_0).
+Credential(cred_0_1).
+
+% Trace: Prop -> Claim
+Prop::trace(dp_0_0, claim_0_0).
+Prop::trace(dp_0_1, claim_0_1).
+
+% Claims: source (subject) and target (value)
+Claim::source(claim_0_0, cs_0_0).
+Claim::target(claim_0_0, cv_0_0).
+Claim::source(claim_0_1, cs_0_1).
+Claim::target(claim_0_1, cv_0_1).
+
+% Credential containment
+_(cs_0_0, cred_0_0).
+_(cs_0_1, cred_0_1).
+
+% Entity alignment: subject traces to its domain anchor,
+% value traces to its domain value. The child credential's subject and the
+% parent credential's value trace the SAME domain entity (chained shape).
+CredEntity::trace(cs_0_0, Applicant).
+CredEntity::trace(cs_0_1, dv_0_0).
+CredEntity::trace(cv_0_0, dv_0_0).
+CredEntity::trace(cv_0_1, dv_0_1).
+
+% Close CSL
+!exists(CredentialSubject::new).
+!exists(CredentialValue::new).
+!exists(Claim::new).
+!exists(Credential::new).
+default !CredEntity::trace(*, *).
+
+
+% === FSL: format assignments ===
+
+declare fmt_0_0, fmt_0_1.
+
+SdJwtVcSchema(fmt_0_0).
+format(cred_0_0, fmt_0_0).
+SdJwtVcSchema(fmt_0_1).
+format(cred_0_1, fmt_0_1).
+
+% Close FSL
+!exists(AnoncredsCredentialSchema::new).
+!exists(JsonLdCredentialSchema::new).
+!exists(JwtVCCredentialSchema::new).
+!exists(SdJwtVcSchema::new).
+!exists(MdocSchema::new).
+
+
+% === Revocation-cadence markers (mismatched -> C11 fires) ===
+
+declare static_0, dynamic_1.
+
+StaticRevocation(static_0).
+StaticRevocation::target(static_0, claim_0_0).
+DynamicRevocation(dynamic_1).
+DynamicRevocation::target(dynamic_1, claim_0_1).
+
+% Close markers
+!exists(StaticRevocation::new).
+!exists(DynamicRevocation::new).
+
+scope node = 17.

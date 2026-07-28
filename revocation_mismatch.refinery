@@ -1,5 +1,5 @@
 % ============================================================================
-% Constraint C11: status/revocation-propagation mismatch  [DRAFT - unverified, needs check -k]
+% Constraint C11: status/revocation-propagation mismatch  [EXERCISED 2026-07-28, check -k]
 % ============================================================================
 % Paper C11 / vault C-036 (static-dynamic-revocation-mismatch), the taxonomy
 % instrument for the status/revocation-propagation design-error class (C-045).
@@ -7,27 +7,32 @@
 % revoking a dynamic claim would needlessly revoke a co-located static one.
 % Dual of C10 (dependent-claim bundling, C-035), which forces co-location.
 %
-% DRAFT status and open modeling questions (no solver available this session):
+% Status (exercised 2026-07-28 with refinery-cli check -k):
+%   - revocation_mismatch_instance.problem (chained two-claim pair, one static-
+%     one dynamic-marked) -> "Inconsistencies found in model:
+%     revocation_mismatch::revocation_mismatch(claim_0_0, claim_0_1): error."
+%   - revocation_mismatch_control.problem (same structure, both static-marked)
+%     -> "Model is consistent". The inconsistency is therefore attributable to
+%     this error predicate, not to the chained structure.
+%
+% Remaining open modeling question:
 %   - The base metamodel (vc_metamodel.refinery) has NO revocation/lifecycle
 %     structure. This file adds the minimal new structure: two marker classes
 %     (StaticRevocation, DynamicRevocation) each targeting a Claim. Whether
 %     revocation cadence belongs under GovernanceAnnotation, its own annotation
 %     family, or as a Claim attribute is UNRESOLVED; kept standalone here to
 %     avoid mislabeling it FSL (GovernanceAnnotation is in the FSL shadow pred).
+%
+% Encoding note ("same credential"):
 %   - "Same credential" for two claims is NOT expressible as a shared source:
 %     Claim declares `contains CredEntity[1] source`, so a CredEntity has at
 %     most one container and two distinct claims can never share one source
 %     (Refinery containment; this is why the CSOK instance gives each claim its
 %     own CredentialSubject, related only by the `aligned` shadow pred). Two
 %     claims are co-located instead when both are reachable from the same
-%     credential root through the claim graph (`cred_neighbors+`, the chained
-%     shape the ED experiment builds). The traversal below is the intended
-%     idiom but is UNVERIFIED.
-%   - UNEXERCISED: the current CSOK instances hold exactly one claim per
-%     credential, so this error fires on nothing there. A firing instance (one
-%     credential root reaching both a static- and a dynamic-marked claim) must
-%     be added and the whole checked with `refinery check -k` before this is
-%     trusted. See the commented sketch at the end of this file.
+%     credential root through credential_statement edges AND alignment steps
+%     (`colocated_step+` below); the chained ED shape connects a child
+%     credential to its parent only through the alignment step.
 
 import vc_metamodel.
 
@@ -40,16 +45,41 @@ class DynamicRevocation {
     Claim[1] target
 }
 
-% Claim membership: cl belongs to the credential rooted at CredentialSubject r
-% if its source is r itself or a CredEntity reachable from r through the
-% credential's claim graph (cred_neighbors, chained credentials).  [UNVERIFIED]
+% Co-location step: one hop through the credential/claim structure. Either a
+% credential_statement edge (claim source<->target, via cred_neighbors) or an
+% alignment step (two distinct CredEntities tracing the same domain Entity —
+% the chained-credential link: a child credential's subject and its parent
+% credential's value trace the same domain value; inlined rather than reusing
+% the `aligned` shadow pred, which is display-only).
+%
+% Why cred_neighbors+ alone (the first draft) cannot work: cred_neighbors only
+% connects the source and target of ONE claim, and Claim `contains` both ends,
+% so a second claim can never attach to the same component without giving some
+% CredEntity two containers (structurally inconsistent). Verified 2026-07-28:
+% the chained instance is `consistent` under the cred_neighbors+-only variant.
+pred colocated_step(CredEntity s, CredEntity t) <->
+    cred_neighbors(s, t)
+  ; s != t,
+    CredEntity::trace(s, e),
+    CredEntity::trace(t, e).
+
+% Claim membership: cl belongs to the credential chain rooted at
+% CredentialSubject r if its source is r itself or reachable from r through
+% credential_statement edges and alignment steps (chained credentials).
 pred claim_in_credential(Claim cl, CredentialSubject r) <->
     Claim::source(cl, r)
-  ; Claim::source(cl, x), cred_neighbors+(r, x).
+  ; Claim::source(cl, x), colocated_step+(r, x).
 
-% C11: a credential must not bundle claims of mismatched revocation cadence.
-% Two distinct claims reachable from one credential root, one marked static
-% and one marked dynamic, are co-located in one credential -> error.  [UNVERIFIED]
+% First-draft variant, kept for the record (cannot fire; see comment above):
+% pred claim_in_credential(Claim cl, CredentialSubject r) <->
+%     Claim::source(cl, r)
+%   ; Claim::source(cl, x), cred_neighbors+(r, x).
+
+% C11: a credential (chain) must not bundle claims of mismatched revocation
+% cadence. Two distinct claims reachable from one credential root, one marked
+% static and one marked dynamic, are co-located -> error.
+% Exercised 2026-07-28: fires on revocation_mismatch_instance.problem, silent
+% on revocation_mismatch_control.problem (see header).
 error revocation_mismatch(Claim cl1, Claim cl2) <->
     cl1 != cl2,
     claim_in_credential(cl1, r),
@@ -57,10 +87,10 @@ error revocation_mismatch(Claim cl1, Claim cl2) <->
     StaticRevocation::target(_, cl1),
     DynamicRevocation::target(_, cl2).
 
-% --- Firing-scenario sketch (commented; needs a two-claim credential) ---
-% A future session must build an instance where one credential root reaches two
-% claims (a chained credential per the ED family), one StaticRevocation-marked
-% and one DynamicRevocation-marked, then run `refinery check -k` to confirm this
-% error fires (expected UNSAT), and confirm a single-cadence bundle stays SAT.
-% Building that instance requires the chained-credential scaffolding; see the
-% csok_instance_2x / _3x and evaluation/generate_instances.py chained emitters.
+% --- Firing scenario (delivered 2026-07-28) ---
+% revocation_mismatch_instance.problem: chained two-claim credential pair per
+% the ED family (cred_0_1 describes the value of its parent cred_0_0), one
+% claim StaticRevocation-marked, one DynamicRevocation-marked. check -k reports
+% revocation_mismatch(claim_0_0, claim_0_1) as an inconsistency (UNSAT).
+% revocation_mismatch_control.problem: identical structure, both claims
+% static-marked. check -k reports "Model is consistent" (SAT).
