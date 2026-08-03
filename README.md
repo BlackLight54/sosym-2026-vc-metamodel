@@ -146,3 +146,7 @@ The evaluation comprises six experiments:
 - **`csok_instance.refinery`** — The CSOK running example: three credentials (FamilyStatusCred, PropertyCred, IncomeCred) for a shared applicant, with domain properties and credential schemas instantiated.
 
 - **`csok.problem`** — Canonical entry point that imports the metamodel, governance conflict, and CSOK instance with full governance annotations. Expected result: UNSAT.
+
+- **`spec_ambiguity.refinery` / `spec_ambiguity.problem`** — The specification-ambiguity instrument: constraint C7 (VCDM conformance) as an enforced error predicate, plus a dedicated scenario that pins the income format to mdoc and violates it. Deliberately not imported by any CSOK entry point, so C7 is an available instrument demonstrated in its own scenario rather than a constraint enforced across the delivered instances. Verdict (`check -k`, 2026-07-28): UNSAT, `spec_ambiguity::vcdm_conformance_violation(IncomeCred, income_format): error.`
+
+- **`probe_cyclic.problem` / `probe_cyclic_control.problem`** — Acyclicity probe pair for the `cyclic` error predicate. The control is a minimal DCL path `a → b → c` (SAT); the probe adds one edge closing a length-two cycle and is UNSAT, reporting `vc_metamodel::cyclic(b)` / `vc_metamodel::cyclic(c)`. Verdicts from `check -k`, 2026-08-03.

@@ -1,7 +1,9 @@
 % Vacuity probe for common_parent (2026-07-28 verification run; finding #3 in
 % agents/reports/2026-07-28-model-evidence-findings.md). Shadow relations may
 % not be referenced from non-shadow contexts, so the body of common_parent
-% (vc_metamodel.refinery:183) is inlined verbatim into witness/2. Builds on the
+% (vc_metamodel.refinery:183, retired 2026-08-03 per D-045 on the strength of
+% this probe) is inlined verbatim into witness/2. The probe is therefore
+% self-contained and still reproducible after the retirement. Builds on the
 % known-SAT CSOK instance (csok_instance, no governance_conflict) with widened
 % scope so the solver may add structure, and forces every generated model to
 % contain a witness pair via error missing_witness. If generate reports

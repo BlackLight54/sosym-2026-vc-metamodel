@@ -161,14 +161,9 @@ class Credential {
     contains Formatted_Credential[1] format
 }
 
-shadow pred common_parent(Prop p1, Prop p2) <->
-    p1 != p2,
-    Prop::trace(p1, cp1),
-    Prop::trace(p2, cp2),
-    Claim::source(cp1, e1),
-    Claim::source(cp2, e2),
-    e1 == e2.
-
+% The shadow predicate common_parent was retired on 2026-08-03 (decision D-045):
+% solver-confirmed vacuous under the containment structure of Prop::trace and
+% Claim::source. See vc_metamodel.refinery for the full note.
 
 % =============================================
 % FSL — Format-Specific Layer

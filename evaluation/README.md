@@ -92,8 +92,8 @@ realizes the two phenomena Q-007 flags:
   star never exercises.
 - **Multi-subject credentials** — each chain level is a distinct subject; a
   child credential's subject and its parent's value trace the same domain entity,
-  exercising the alignment predicates (`aligned`, `common_parent`,
-  `cross_cred_predicate_gap`) on a different topology.
+  exercising the alignment predicates (`aligned`, `cross_cred_predicate_gap`) on
+  a different topology.
 
 Two families:
 
@@ -128,6 +128,12 @@ Power-set of {eIDAS, Privacy, VCDM} = 8 configurations:
 Only G7 (all three governance frameworks simultaneously) is UNSAT.
 This confirms the conflict requires the triple conjunction — any
 proper subset of governance requirements is satisfiable.
+
+All eight instances import `governance_conflict`, so the seven SAT
+verdicts are taken with the error predicate loaded: they show the
+predicate cannot fire without the full triple conjunction, not merely
+that it was absent. Verdicts re-taken 2026-08-03 with `check -k`
+(refinery-cli digest `sha256:88f1332e9aae...`) match the table.
 
 ## Scaling model
 

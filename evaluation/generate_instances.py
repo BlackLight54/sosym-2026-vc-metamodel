@@ -26,8 +26,9 @@ CONFIG_PATH = SCRIPT_DIR / "config.yaml"
 # harness mounts models/ as /work, so `import vc_metamodel.` resolves against the
 # single canonical metamodel at the repository root. Copying it here would
 # reintroduce the metamodel drift T12 eliminated (a stale local copy shadowing the
-# root). governance_conflict.refinery is small, tracked, and imported only by UNSAT
-# instances; it is copied so import resolution works from the instances/ directory.
+# root). governance_conflict.refinery is small, tracked, and imported by the UNSAT
+# instances and by every E3 sensitivity instance; it is copied so import resolution
+# works from the instances/ directory.
 METAMODEL_FILES = ["governance_conflict.refinery"]
 
 
@@ -62,6 +63,7 @@ def generate_instance(
     variant: str,
     governance: list[str] | None = None,
     instance_id: str | None = None,
+    import_conflict: bool | None = None,
 ) -> str:
     """Generate a Refinery .problem file for N credentials.
 
@@ -70,6 +72,10 @@ def generate_instance(
         variant: "sat" or "unsat". UNSAT imports governance_conflict.
         governance: List of active governance types. Default: [eidas, privacy, vcdm].
         instance_id: Label for the file header comment.
+        import_conflict: Override for whether `governance_conflict` is imported.
+            Defaults to the variant (UNSAT imports it). The E3 sensitivity
+            instances set this True for every configuration so that the SAT
+            verdicts are taken with the error predicate loaded.
     """
     if governance is None:
         governance = ["eidas", "privacy", "vcdm"]
@@ -77,6 +83,8 @@ def generate_instance(
         instance_id = f"S{n}_{variant}"
 
     has_conflict = variant == "unsat"
+    if import_conflict is None:
+        import_conflict = has_conflict
     total_nodes, gov_count = compute_scope(n, has_conflict, governance)
 
     lines = []
@@ -91,7 +99,7 @@ def generate_instance(
 
     # Imports
     lines.append("import vc_metamodel.")
-    if has_conflict:
+    if import_conflict:
         lines.append("import governance_conflict.")
     lines.append("")
     lines.append("")
@@ -306,7 +314,7 @@ def generate_chain_instance(
         cyclic) that a diameter-2 star never exercises.
       * Multi-subject credentials — each chain level is a *distinct* subject; the
         parent's credential value and the child's credential subject trace the same
-        domain entity, exercising the alignment predicates (aligned, common_parent,
+        domain entity, exercising the alignment predicates (aligned,
         cross_cred_predicate_gap) on a different topology than the star.
 
     N credentials are packed into ceil(N/depth) parallel chains, each up to
@@ -548,13 +556,16 @@ def main():
     # --- E3: Sensitivity instances (N=3, governance power-set) ---
     sens_n = config["sensitivity_n"]
     for config_name, gov_list in config["sensitivity_configs"].items():
-        # Sensitivity instances always use check (no governance_conflict import needed
-        # unless all three are active — but for consistency we use the same logic:
-        # G7 with governance_conflict = UNSAT, all others = SAT)
+        # Every sensitivity instance imports governance_conflict, including the
+        # proper subsets: the ablation claim is that dropping any one governance
+        # annotation makes the conflict predicate unable to fire, so the predicate
+        # must be loaded in all eight configurations for the SAT verdicts to
+        # exercise it. `variant` still labels the expected verdict (G7 = unsat,
+        # all proper subsets = sat) and drives nothing else here.
         variant = "unsat" if set(gov_list) == {"eidas", "privacy", "vcdm"} else "sat"
         filename = f"sensitivity_{config_name}.problem"
         content = generate_instance(
-            sens_n, variant, gov_list, f"E3_{config_name}"
+            sens_n, variant, gov_list, f"E3_{config_name}", import_conflict=True
         )
         files_to_generate.append((filename, content))
 

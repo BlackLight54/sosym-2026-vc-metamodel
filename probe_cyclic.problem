@@ -1,0 +1,91 @@
+% ============================================================================
+% Acyclicity probe — length-2 cycle  [Q-014 verification, 2026-08-03]
+% ============================================================================
+% Identical to probe_cyclic_control.problem (SAT) except for one added DCL
+% edge c -> b (prop p_cb and its CSL/FSL structure), which closes a directed
+% cycle b -> c -> b. No self-loop is present, so `no_self_loop` cannot account
+% for the rejection: only `cyclic` (vc_metamodel.refinery:75,
+% error cyclic(Entity e) <-> directed_edge+(e, e)) can.
+% Expected result: UNSAT with vc_metamodel::cyclic(b) / cyclic(c) reported.
+
+import vc_metamodel.
+
+declare a, b, c, p_ab, p_bc, p_cb.
+declare cl_ab, cl_bc, cl_cb, cs_a, cs_b, cs_c, cv_b, cv_b2, cv_c.
+declare Cred1, Cred2, Cred3, f1, f2, f3.
+
+% === DCL: a -> b -> c -> b (cycle of length 2 between b and c) ===
+Subject(a).
+Value(b).
+Value(c).
+Prop(p_ab).
+Prop(p_bc).
+Prop(p_cb).
+property(a, p_ab).
+value(p_ab, b).
+property(b, p_bc).
+value(p_bc, c).
+property(c, p_cb).
+value(p_cb, b).
+
+!exists(Subject::new).
+!exists(Value::new).
+!exists(Prop::new).
+
+% === CSL: one claim per prop ===
+Claim(cl_ab).
+Claim(cl_bc).
+Claim(cl_cb).
+CredentialSubject(cs_a).
+CredentialSubject(cs_b).
+CredentialSubject(cs_c).
+CredentialValue(cv_b).
+CredentialValue(cv_b2).
+CredentialValue(cv_c).
+Credential(Cred1).
+Credential(Cred2).
+Credential(Cred3).
+
+Prop::trace(p_ab, cl_ab).
+Prop::trace(p_bc, cl_bc).
+Prop::trace(p_cb, cl_cb).
+
+Claim::source(cl_ab, cs_a).
+Claim::target(cl_ab, cv_b).
+Claim::source(cl_bc, cs_b).
+Claim::target(cl_bc, cv_c).
+Claim::source(cl_cb, cs_c).
+Claim::target(cl_cb, cv_b2).
+
+_(cs_a, Cred1).
+_(cs_b, Cred2).
+_(cs_c, Cred3).
+
+CredEntity::trace(cs_a, a).
+CredEntity::trace(cs_b, b).
+CredEntity::trace(cs_c, c).
+CredEntity::trace(cv_b, b).
+CredEntity::trace(cv_b2, b).
+CredEntity::trace(cv_c, c).
+
+!exists(CredentialSubject::new).
+!exists(CredentialValue::new).
+!exists(Claim::new).
+!exists(Credential::new).
+default !CredEntity::trace(*, *).
+
+% === FSL: fixed formats (no governance annotations imported) ===
+SdJwtVcSchema(f1).
+format(Cred1, f1).
+SdJwtVcSchema(f2).
+format(Cred2, f2).
+SdJwtVcSchema(f3).
+format(Cred3, f3).
+
+!exists(AnoncredsCredentialSchema::new).
+!exists(JsonLdCredentialSchema::new).
+!exists(JwtVCCredentialSchema::new).
+!exists(SdJwtVcSchema::new).
+!exists(MdocSchema::new).
+
+scope node = 21.

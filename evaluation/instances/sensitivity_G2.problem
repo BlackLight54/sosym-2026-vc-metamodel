@@ -5,6 +5,7 @@
 % ========================================================================
 
 import vc_metamodel.
+import governance_conflict.
 
 
 % === DCL: domain facts ===

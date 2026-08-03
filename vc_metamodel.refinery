@@ -179,15 +179,12 @@ class Credential {
     contains Formatted_Credential[1] format
 }
 
-% Two Props sharing a credential subject (same parent in credential)
-shadow pred common_parent(Prop p1, Prop p2) <->
-    p1 != p2,
-    Prop::trace(p1, cp1),
-    Prop::trace(p2, cp2),
-    Claim::source(cp1, e1),
-    Claim::source(cp2, e2),
-    e1 == e2.
-
+% The shadow predicate common_parent (two Props sharing a credential subject)
+% was retired on 2026-08-03 (decision D-045): it was solver-confirmed vacuous.
+% Prop::trace and Claim::source are both containments, so distinct Props force
+% distinct Claims force distinct source CredEntities and e1 == e2 can never
+% hold. Vacuity evidence: probe_common_parent.problem (UNSAT under generate)
+% against probe_common_parent_control.problem (SAT).
 
 % =============================================
 % FSL — Format-Specific Layer
