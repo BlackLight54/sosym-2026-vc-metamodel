@@ -40,8 +40,10 @@ Results appear in `results/` (Hyperfine JSON) and `figures/` (PDF plots, LaTeX t
 ### E0: Baseline Overhead
 
 Measures Docker + JVM startup cost using a minimal no-op problem (`noop.problem`).
-This constant overhead (~5–7s per invocation) is reported alongside E1/E2 results
-so that solver time can be isolated from container startup.
+This constant overhead is reported alongside E1/E2 results so that solver time can be
+isolated from container startup. On the reference machine (Ryzen 9 7950X3D, WSL2) it
+measures 4.06 s ± 0.11 s over 10 runs (2026-08-03); the ~5–7s previously quoted here came
+from the retired native-Windows Docker Desktop campaign.
 
 ### EC: Consistency Check Scalability
 
@@ -135,6 +137,13 @@ predicate cannot fire without the full triple conjunction, not merely
 that it was absent. Verdicts re-taken 2026-08-03 with `check -k`
 (refinery-cli digest `sha256:88f1332e9aae...`) match the table.
 
+Timings were also re-measured on 2026-08-03 under `check -k` (the E3
+benchmark previously ran plain `check`): 4.16–4.45 s wall clock per
+configuration against a 4.06 s no-op baseline, i.e. 0.10–0.39 s
+baseline-corrected, flat within cold-start jitter for all eight
+including the UNSAT G7. The conflict is visible in the verdict, not in
+the runtime.
+
 ## Scaling model
 
 Each credential with K=1 property adds to the model:
@@ -169,7 +178,8 @@ credential's format is left unassigned for the solver.
 - **Environment:** Captured automatically in `results/environment.json`
 
 Each invocation starts a fresh Docker container (cold JVM). This
-adds constant overhead (~5-7s) that does not affect the scaling shape
+adds constant overhead (~4.1s on the reference machine; ~5-7s on the retired
+Docker Desktop setup) that does not affect the scaling shape
 but inflates absolute times. Reported honestly in the paper.
 
 ## File structure

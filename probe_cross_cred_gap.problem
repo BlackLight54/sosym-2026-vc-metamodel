@@ -1,0 +1,69 @@
+% ============================================================================
+% True-positive probe for cross_cred_predicate_gap (C9)  [D-029 evidence, 2026-08-03]
+% ============================================================================
+% Headline 2 (vault C-026 / taxonomy class C-047) is encoded as
+%   shadow pred cross_cred_predicate_gap(Credential c1, Credential c2)
+% at vc_metamodel.refinery:324. A shadow predicate is display-only: it never
+% constrains the solver, so no check -k run on any delivered instance can show
+% it firing, and the D-029 register carried "one true-positive violating
+% instance per anti-pattern" as an open obligation for it.
+%
+% This probe converts the shadow predicate into an enforced error of the same
+% arity so the solver must report the offending credential pairs by name.
+% Shadow relations may not be referenced from non-shadow contexts (the same
+% restriction probe_common_parent.problem documents), so both the body of
+% cross_cred_predicate_gap AND the body of the shadow pred `aligned`
+% (vc_metamodel.refinery:171) are inlined verbatim; `aligned` carries the
+% c_e1 != c_e2 conjunct, kept here as cs1 != cs2.
+%
+% Base: the delivered CSOK instance without governance_conflict, i.e. exactly
+% csok_no_conflict.problem (SAT, verdict recorded in A-004), so any
+% inconsistency reported here is attributable to the added error alone.
+% Control: probe_cross_cred_gap_control.problem (identical, error line
+% commented out) must be SAT.
+% Expected result: UNSAT, with one error atom per gapped credential pair.
+
+import vc_metamodel.
+import csok_instance.
+
+
+% === Governance markers (as in csok_no_conflict.problem) ===
+
+EidasMandate(eidas_1).
+EidasMandate::target(eidas_1, FamilyStatusCred).
+EidasMandate(eidas_2).
+EidasMandate::target(eidas_2, PropertyCred).
+EidasMandate(eidas_3).
+EidasMandate::target(eidas_3, IncomeCred).
+
+PrivacyRequirement(privacy_1).
+PrivacyRequirement::target(privacy_1, IncomeCred).
+
+VcdmConformance(vcdm_1).
+VcdmConformance::target(vcdm_1, FamilyStatusCred).
+VcdmConformance(vcdm_2).
+VcdmConformance::target(vcdm_2, PropertyCred).
+VcdmConformance(vcdm_3).
+VcdmConformance::target(vcdm_3, IncomeCred).
+
+!exists(EidasMandate::new).
+!exists(PrivacyRequirement::new).
+!exists(VcdmConformance::new).
+
+
+% === The probe: cross_cred_predicate_gap, inlined and enforced ===
+
+error cross_cred_gap_witness(Credential c1, Credential c2) <->
+    c1 != c2,
+    credentialSubject(c1, cs1), credentialSubject(c2, cs2),
+    cs1 != cs2,
+    CredEntity::trace(cs1, e), CredEntity::trace(cs2, e),
+    format(c1, f1), !supports_multi_credential_proof(f1)
+  ;
+    c1 != c2,
+    credentialSubject(c1, cs1), credentialSubject(c2, cs2),
+    cs1 != cs2,
+    CredEntity::trace(cs1, e), CredEntity::trace(cs2, e),
+    format(c2, f2), !supports_multi_credential_proof(f2).
+
+scope node = 29, GovernanceAnnotation = 7.

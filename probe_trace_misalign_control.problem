@@ -1,0 +1,79 @@
+% ============================================================================
+% CONTROL for the trace-misalignment probes (C1/C2)  [D-029 evidence, 2026-08-03]
+% ============================================================================
+% Aligned three-node skeleton: DCL path a -> b -> c with the CSL claims whose
+% sources and targets trace to exactly the domain entities their Props relate
+% (cl_ab: source cs_a -> a, target cv_b -> b; cl_bc: source cs_b -> b, target
+% cv_c -> c). The structure is the one probe_cyclic_control.problem uses (the
+% two files differ only in header); it is repeated here so each probe pair is
+% self-contained.
+% The paired probes each move exactly one CredEntity::trace edge:
+%   probe_trace_misalign_target.problem  -> target trace, fires prop_t
+%   probe_trace_misalign_source.problem  -> source trace, fires prop_s
+% Expected result: SAT (Model is consistent).
+
+import vc_metamodel.
+
+declare a, b, c, p_ab, p_bc.
+declare cl_ab, cl_bc, cs_a, cs_b, cv_b, cv_c, Cred1, Cred2, f1, f2.
+
+% === DCL: a -> b -> c (acyclic path) ===
+Subject(a).
+Value(b).
+Value(c).
+Prop(p_ab).
+Prop(p_bc).
+property(a, p_ab).
+value(p_ab, b).
+property(b, p_bc).
+value(p_bc, c).
+
+!exists(Subject::new).
+!exists(Value::new).
+!exists(Prop::new).
+
+% === CSL: one claim per prop ===
+Claim(cl_ab).
+Claim(cl_bc).
+CredentialSubject(cs_a).
+CredentialSubject(cs_b).
+CredentialValue(cv_b).
+CredentialValue(cv_c).
+Credential(Cred1).
+Credential(Cred2).
+
+Prop::trace(p_ab, cl_ab).
+Prop::trace(p_bc, cl_bc).
+
+Claim::source(cl_ab, cs_a).
+Claim::target(cl_ab, cv_b).
+Claim::source(cl_bc, cs_b).
+Claim::target(cl_bc, cv_c).
+
+_(cs_a, Cred1).
+_(cs_b, Cred2).
+
+CredEntity::trace(cs_a, a).
+CredEntity::trace(cs_b, b).
+CredEntity::trace(cv_b, b).
+CredEntity::trace(cv_c, c).
+
+!exists(CredentialSubject::new).
+!exists(CredentialValue::new).
+!exists(Claim::new).
+!exists(Credential::new).
+default !CredEntity::trace(*, *).
+
+% === FSL: fixed formats (no governance annotations imported) ===
+SdJwtVcSchema(f1).
+format(Cred1, f1).
+SdJwtVcSchema(f2).
+format(Cred2, f2).
+
+!exists(AnoncredsCredentialSchema::new).
+!exists(JsonLdCredentialSchema::new).
+!exists(JwtVCCredentialSchema::new).
+!exists(SdJwtVcSchema::new).
+!exists(MdocSchema::new).
+
+scope node = 15.
