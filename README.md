@@ -36,6 +36,23 @@ The running example models the Hungarian Family Housing Subsidy (CSOK) applicati
 ├── csok_no_eidas.problem          # eIDAS governance removed (SAT)
 ├── csok_no_gdpr.problem           # Privacy governance removed (SAT)
 ├── csok_standalone.problem        # Self-contained version for web editor
+├── spec_ambiguity.refinery        # C7 (VCDM conformance) as an enforced error
+├── spec_ambiguity.problem         # Dedicated C7 scenario (UNSAT)
+├── revocation_mismatch.refinery   # C11 revocation-mismatch error predicate
+├── revocation_mismatch_instance.problem  # C11 probe: static+dynamic pair (UNSAT)
+├── revocation_mismatch_control.problem   # C11 control: both static (SAT)
+├── probe_common_parent.problem    # common_parent vacuity probe (UNSAT under generate)
+├── probe_common_parent_control.problem   # Vacuity probe control (SAT)
+├── probe_cyclic.problem           # Acyclicity probe (UNSAT)
+├── probe_cyclic_control.problem   # Acyclicity control (SAT)
+├── probe_cross_cred_gap.problem   # C9 shadow-predicate true-positive probe (UNSAT)
+├── probe_cross_cred_gap_control.problem  # C9 probe control (SAT)
+├── probe_trace_misalign_target.problem   # prop_t propagation probe (UNSAT)
+├── probe_trace_misalign_source.problem   # prop_s propagation probe (UNSAT)
+├── probe_trace_misalign_control.problem  # Shared trace-alignment control (SAT)
+├── coverage_instance_map.md       # Constraint-coverage-to-instance bucket map
+├── eidas_arf_supplement.md        # eIDAS ARF constraint supplement notes
+├── justfile                       # Task runner wrapping the commands below
 ├── run_editor.sh                  # Launch Refinery web editor (Docker)
 ├── run_measurements.sh            # Evaluation measurement campaign (Hyperfine)
 └── evaluation/
@@ -141,13 +158,19 @@ The evaluation comprises six experiments:
 
 - **`vc_metamodel.refinery`** — The three-layer metamodel. Defines all classes, relations, propagation rules, derived predicates, and format capability constraints. This is the primary artifact.
 
-- **`governance_conflict.refinery`** — The governance conflict error predicate. Fires when a credential is subject to both an eIDAS mandate (requiring VCDM-conformant formats) and a privacy requirement (requiring predicate proof support), and no single format satisfies both.
+- **`governance_conflict.refinery`** — The governance conflict error predicate. Fires when a credential carries all three governance mandates (eIDAS mandate, privacy requirement, VCDM-conformance mandate) and no single format satisfies them jointly; the three-clause body partitions the failure condition (D-039). Verdicts (`check -k`, 2026-07-28 battery + 2026-08-03 re-run): canonical CSOK instances and sensitivity G7 UNSAT, every proper governance subset G0–G6 SAT with the predicate loaded.
 
 - **`csok_instance.refinery`** — The CSOK running example: three credentials (FamilyStatusCred, PropertyCred, IncomeCred) for a shared applicant, with domain properties and credential schemas instantiated.
 
 - **`csok.problem`** — Canonical entry point that imports the metamodel, governance conflict, and CSOK instance with full governance annotations. Expected result: UNSAT.
 
 - **`spec_ambiguity.refinery` / `spec_ambiguity.problem`** — The specification-ambiguity instrument: constraint C7 (VCDM conformance) as an enforced error predicate, plus a dedicated scenario that pins the income format to mdoc and violates it. Deliberately not imported by any CSOK entry point, so C7 is an available instrument demonstrated in its own scenario rather than a constraint enforced across the delivered instances. Verdict (`check -k`, 2026-07-28): UNSAT, `spec_ambiguity::vcdm_conformance_violation(IncomeCred, income_format): error.`
+
+- **`revocation_mismatch.refinery`** — The C11 status/revocation-propagation mismatch error predicate: two claims with mismatched revocation lifespans (one static-, one dynamic-marked) must not be co-located on the same credential chain. Adds two minimal marker classes (`StaticRevocation`, `DynamicRevocation`) on top of the metamodel; kept standalone, not imported by any CSOK entry point.
+
+- **`revocation_mismatch_instance.problem` / `revocation_mismatch_control.problem`** — Probe pair for C11. The instance (chained two-claim pair, one static- and one dynamic-marked) is UNSAT, reporting `revocation_mismatch::revocation_mismatch(claim_0_0, claim_0_1): error.`; the control (same structure, both static-marked) is SAT, isolating the error predicate rather than the chained structure as the cause. Verdicts from `check -k`, 2026-07-28.
+
+- **`probe_common_parent.problem` / `probe_common_parent_control.problem`** — Vacuity probe pair for the retired `common_parent` shadow predicate (D-045). The probe inlines the predicate body as `witness/2` and forces a witness via `error missing_witness() <-> !some_witness()`; it is UNSAT under `generate` (`UnsatisfiableProblemException`), while the identical control without the forcing error generates a model (SAT). This shows the original predicate could never hold: both `Prop::trace` and `Claim::source` are containments, so distinct props force distinct source entities. Verdicts from `generate`, 2026-07-28, reproduced 2026-08-03 after the retirement edit.
 
 - **`probe_cyclic.problem` / `probe_cyclic_control.problem`** — Acyclicity probe pair for the `cyclic` error predicate. The control is a minimal DCL path `a → b → c` (SAT); the probe adds one edge closing a length-two cycle and is UNSAT, reporting `vc_metamodel::cyclic(b)` / `vc_metamodel::cyclic(c)`. Verdicts from `check -k`, 2026-08-03.
 

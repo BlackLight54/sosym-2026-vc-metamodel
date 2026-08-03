@@ -1,5 +1,5 @@
 % ============================================================================
-% Specification-ambiguity VC instance  [unverified, needs check -k]
+% Specification-ambiguity VC instance  [EXERCISED 2026-07-28, check -k]
 % ============================================================================
 % Demonstrates the specification-ambiguity design-error class (vault C-048)
 % via the enforced C7 (VCDM-conformance) error in spec_ambiguity.refinery.
@@ -11,6 +11,12 @@
 %
 % Expected result: UNSAT (vcdm_conformance_violation fires on IncomeCred).
 % governance_conflict is deliberately NOT imported, isolating C7's error.
+%
+% Status (exercised 2026-07-28 with refinery-cli check -k, image digest
+% sha256:88f1332e9aae356d91aef86aaaa3368be1b3931929fb3e10d87d65ab8a7fca8e):
+%   -> "Inconsistencies found in model:
+%     spec_ambiguity::vcdm_conformance_violation(IncomeCred, income_format):
+%     error." Reproduced unchanged 2026-08-03 (vault A-008 / A-004).
 
 import vc_metamodel.
 import spec_ambiguity.

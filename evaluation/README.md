@@ -35,6 +35,26 @@ python analyze_results.py
 
 Results appear in `results/` (Hyperfine JSON) and `figures/` (PDF plots, LaTeX tables).
 
+### Paper figure
+
+`generate_paper_figure.py` produces the baseline-corrected scalability figure
+used in the paper (E0-corrected E1/E2 curves, square PDF for a `figure*`
+minipage):
+
+```bash
+python generate_paper_figure.py    # writes figures/fig_scalability.pdf
+```
+
+The paper build does not read this repository. After regenerating, copy the
+figure manually into the paper repository's asset directory:
+
+```bash
+cp figures/fig_scalability.pdf ../../paper-latex-overleaf/assets/fig_scalability.pdf
+```
+
+(the relative path assumes this repository is checked out as the `models/`
+submodule of the paper workspace; adjust otherwise).
+
 ## Experiments
 
 ### E0: Baseline Overhead
@@ -210,6 +230,7 @@ evaluation/
     ed_scale_check_D4_S{N}_{variant}.json
     ed_scale_generate_D4_S{N}.json
   figures/                   # Generated artifacts
+    fig_scalability.pdf        (paper figure — generate_paper_figure.py)
     fig_scalability_check.pdf
     fig_scalability_generate.pdf
     fig_constraint_sensitivity.pdf

@@ -6,7 +6,11 @@ and produces a square PDF figure suitable for a figure* minipage.
 
 Usage:
     python generate_paper_figure.py
-    python generate_paper_figure.py --output pandoc/assets/fig_scalability.pdf
+    python generate_paper_figure.py --output figures/fig_scalability.pdf
+
+The output stays in this repository (figures/); copy it manually into the
+paper repository's asset directory (paper-latex-overleaf/assets/) — see
+README.md, "Paper figure".
 """
 
 import argparse
@@ -20,7 +24,7 @@ import numpy as np
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 RESULTS_DIR = SCRIPT_DIR / "results"
-DEFAULT_OUTPUT = SCRIPT_DIR.parent.parent / "pandoc" / "assets" / "fig_scalability.pdf"
+DEFAULT_OUTPUT = SCRIPT_DIR / "figures" / "fig_scalability.pdf"
 
 SCALE_POINTS = [1, 3, 5, 10, 15, 20, 30]
 
