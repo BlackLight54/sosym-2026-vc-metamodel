@@ -1,0 +1,37 @@
+% ========================================================================
+% C11 re-scoping probe control — separated design, single cadence
+% ========================================================================
+% Identical to probe_c11_separated_design.problem (canonical CSOK
+% decomposition, three credentials, one claim each) but BOTH marked claims
+% carry StaticRevocation. No cadence mismatch, so `revocation_mismatch`
+% cannot fire for any reason. Expected: `Model is consistent` under
+% `check -k`.
+%
+% Purpose: pin the separated-design probe's verdict to the cadence markers
+% rather than to the CSOK decomposition itself. Before the 2026-08-05
+% re-scoping the probe was INCONSISTENT and this control was consistent, so
+% the difference was attributable to the mismatch; after the re-scoping both
+% are consistent and the pair shows the predicate is silent on the
+% prescribed remedy whatever the cadences are.
+% ========================================================================
+
+import vc_metamodel.
+import revocation_mismatch.
+import csok_instance.
+
+
+% === Revocation-cadence markers (single cadence) ===
+
+declare static_family, static_income.
+
+StaticRevocation(static_family).
+StaticRevocation::target(static_family, has_children_claim).
+StaticRevocation(static_income).
+StaticRevocation::target(static_income, earns_claim).
+
+% Close markers
+!exists(StaticRevocation::new).
+!exists(DynamicRevocation::new).
+
+% 22 nodes from csok_instance (7 DCL + 12 CSL + 3 FSL) + 2 markers
+scope node = 24.

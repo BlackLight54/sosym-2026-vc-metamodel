@@ -1,0 +1,47 @@
+% ========================================================================
+% C11 re-scoping probe — separated-credential design (must stay SAT)
+% ========================================================================
+% The design the paper PRESCRIBES as the remedy for a C11 revocation-cadence
+% mismatch: put the two claims in two different credentials. This probe takes
+% the canonical CSOK decomposition unchanged (three credentials, one per
+% claim, all three credential subjects tracing the same domain Subject
+% `Applicant`) and marks two claims that already live in SEPARATE credentials
+% with mismatched cadence:
+%   has_children_claim (FamilyStatusCred) -> StaticRevocation
+%   earns_claim        (IncomeCred)       -> DynamicRevocation
+%
+% There is no bundling here and nothing to repair, so `revocation_mismatch`
+% must NOT fire. Expected: `Model is consistent` under `check -k`.
+%
+% Built for the K-003 stress-test finding F1 (2026-08-03): under the
+% pre-restriction `colocated_step`, the alignment disjunct made ANY two
+% credential subjects of one domain subject co-located, so this probe was
+% INCONSISTENT — the predicate flagged the prescribed remedy as the disease.
+% Companion control: probe_c11_separated_design_control.problem (same design,
+% single cadence).
+%
+% No governance markers and no `governance_conflict` import: the CSOK
+% governance conflict is a different constraint (C8) and would mask the C11
+% verdict.
+% ========================================================================
+
+import vc_metamodel.
+import revocation_mismatch.
+import csok_instance.
+
+
+% === Revocation-cadence markers (mismatched, but in separate credentials) ===
+
+declare static_family, dynamic_income.
+
+StaticRevocation(static_family).
+StaticRevocation::target(static_family, has_children_claim).
+DynamicRevocation(dynamic_income).
+DynamicRevocation::target(dynamic_income, earns_claim).
+
+% Close markers
+!exists(StaticRevocation::new).
+!exists(DynamicRevocation::new).
+
+% 22 nodes from csok_instance (7 DCL + 12 CSL + 3 FSL) + 2 markers
+scope node = 24.
