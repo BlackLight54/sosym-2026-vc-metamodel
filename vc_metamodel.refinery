@@ -76,6 +76,25 @@ error cyclic(Entity e) <-> directed_edge+(e, e).
 % Prohibits cycles in the DCL information graph via transitive closure of directed edges.
 
 
+% --- C4: cross-credential value dependency (uninterpreted domain rule) ---
+% depends_on(p1, p2) records that a domain rule constrains the value of p1
+% using the value of p2. The relation is UNINTERPRETED: it has no body, so its
+% extension is instance data asserted by the ecosystem designer, never derived.
+% The metamodel records THAT a rule relates two properties and in which
+% direction; it does not represent the rule's predicate, its arithmetic, or its
+% satisfaction. Nothing here claims the model understands, for example, the CSOK
+% floor-area rule property_area >= min_area(num_children); it claims only that
+% owns_property is subject to a rule reading has_children.
+%
+% Scope of the encoding, so it is not read as more: depends_on prunes nothing
+% and flags nothing on its own. Its single consumer is domain_dependency_gap
+% below, which uses it to separate the credential pair a domain rule actually
+% spans from the pairs that are merely subject-aligned.
+% Unasserted pairs are false, not unknown (solver-verified 2026-08-05), so no
+% closure statement is required in instance files.
+pred depends_on(Prop p1, Prop p2).
+
+
 % =============================================
 % CSL — Credential Schema Layer (abstract credential schemas)
 % =============================================
@@ -233,6 +252,26 @@ pred supports_offline_verification(Formatted_Credential f) <->
 % Multi-credential proof support: no deployed format supports evaluating
 % predicates over values from distinct credentials in a single proof.
 % AnonCreds link secrets allow linking proofs but not cross-credential arithmetic.
+%
+% STIPULATED, NOT DERIVED. Every other capability predicate in this block is a
+% disjunction over format classes, so its extension follows from the class
+% assignment the solver chooses. This one is `f != f`: unsatisfiable by
+% construction, an empty row of the capability matrix hardcoded as a
+% compile-time constant. It is a closed-world fact read off the format
+% specifications as of the snapshot (ARF v2.9.0, SD-JWT VC, ISO/IEC 18013-5,
+% AnonCreds v1, W3C VCDM 2.0), not a consequence of anything the model
+% computes. Deliberate and load-bearing for Headline 2: the point of the row is
+% that the capability is absent across the whole format space, and a five-way
+% empty disjunction would state the same thing less legibly.
+%
+% What this costs, stated so it is not discovered: the format conjunct of
+% cross_cred_predicate_gap is constant, so C9's extension does not depend on the
+% format the solver assigns, and adding a sixth format class would not change
+% the predicate unless this line were edited. The claim is falsifiable exactly
+% here, in one line, by a format that acquires the capability.
+% Do not "repair" this to a class disjunction; that would assert a positive
+% capability the snapshot does not support. The A-notes carrying the
+% stipulation are A-001 (declaration) and A-010 (C9 witness record).
 pred supports_multi_credential_proof(Formatted_Credential f) <->
     f != f.
 
@@ -331,3 +370,24 @@ shadow pred cross_cred_predicate_gap(Credential c1, Credential c2) <->
     credentialSubject(c1, cs1), credentialSubject(c2, cs2),
     aligned(cs1, cs2),
     format(c2, f2), !supports_multi_credential_proof(f2).
+
+
+% --- C4 x C9: the gapped pair a domain rule actually spans ---
+% cross_cred_predicate_gap above fires for EVERY aligned pair, which is correct
+% as a statement about format capability (no format has it, so no aligned pair
+% can carry a cross-credential predicate) but says nothing about which pair the
+% ecosystem needs one for. This predicate is that second, narrower fact: the
+% pair is gapped AND a C4 domain rule reads a property realized in each of the
+% two credentials. Direction is preserved: c1 carries the constrained property,
+% c2 the property the rule reads.
+%
+% Read together, the two are the honest split of Headline 2: the capability is
+% absent everywhere (C9), and the CSOK design needs it in exactly one place
+% (this predicate). cross_cred_predicate_gap is NOT narrowed by C4 and its
+% extension is unchanged.
+shadow pred domain_dependency_gap(Credential c1, Credential c2) <->
+    cross_cred_predicate_gap(c1, c2),
+    credentialSubject(c1, cs1), credentialSubject(c2, cs2),
+    Claim::source(k1, cs1), Claim::source(k2, cs2),
+    Prop::trace(p1, k1), Prop::trace(p2, k2),
+    depends_on(p1, p2).

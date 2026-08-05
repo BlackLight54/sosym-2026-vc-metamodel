@@ -62,6 +62,13 @@ pred directed_edge(Entity s, Entity t) <-> statement(s, _, t).
 
 error cyclic(Entity e) <-> directed_edge+(e, e).
 
+% C4 — cross-credential value dependency, UNINTERPRETED: no body, extension
+% asserted as instance data. Records that a domain rule constrains p1 using p2
+% and in which direction, not the rule's arithmetic. Prunes nothing, flags
+% nothing; its only consumer is domain_dependency_gap below. Unasserted pairs
+% are false, not unknown, so no closure statement is needed.
+pred depends_on(Prop p1, Prop p2).
+
 
 % =============================================
 % CSL — Credential Schema Layer (abstract credential schemas)
@@ -204,6 +211,14 @@ pred supports_offline_verification(Formatted_Credential f) <->
     MdocSchema(f).
 
 % No deployed format supports cross-credential arithmetic proofs.
+% STIPULATED, NOT DERIVED: `f != f` is an empty capability row hardcoded as a
+% compile-time constant, a closed-world fact read off the format specifications
+% as of the snapshot (ARF v2.9.0, SD-JWT VC, ISO/IEC 18013-5, AnonCreds v1,
+% W3C VCDM 2.0), not something the model computes. Every other capability
+% predicate here is a disjunction over format classes; this one is not. Cost:
+% C9's format conjunct is constant, so its extension does not depend on the
+% assigned format class. Falsifiable in this one line. Do not "repair" it to a
+% class disjunction. Full note at vc_metamodel.refinery, same declaration.
 pred supports_multi_credential_proof(Formatted_Credential f) <->
     f != f.
 
@@ -281,6 +296,18 @@ shadow pred cross_cred_predicate_gap(Credential c1, Credential c2) <->
     aligned(cs1, cs2),
     format(c2, f2), !supports_multi_credential_proof(f2).
 
+% C4 x C9 — the gapped pair a domain rule actually spans. cross_cred_predicate_gap
+% fires for every aligned pair (correct about capability, silent about need);
+% this adds the C4 link, so it holds only where a domain rule reads a property
+% realized in each of the two credentials. c1 carries the constrained property.
+% cross_cred_predicate_gap is not narrowed by C4; its extension is unchanged.
+shadow pred domain_dependency_gap(Credential c1, Credential c2) <->
+    cross_cred_predicate_gap(c1, c2),
+    credentialSubject(c1, cs1), credentialSubject(c2, cs2),
+    Claim::source(k1, cs1), Claim::source(k2, cs2),
+    Prop::trace(p1, k1), Prop::trace(p2, k2),
+    depends_on(p1, p2).
+
 
 % =============================================
 % CSOK Instance — Domain facts, credential decomposition, format assignments
@@ -300,6 +327,9 @@ property(Applicant, earns).
 value(has_children, num_children).
 value(owns_property, property_area).
 value(earns, monthly_income).
+
+% C4 — the floor-area domain rule as an uninterpreted dependency.
+depends_on(owns_property, has_children).
 
 !exists(Subject::new).
 !exists(Value::new).

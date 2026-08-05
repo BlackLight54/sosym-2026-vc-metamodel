@@ -39,6 +39,16 @@ value(has_children, num_children).
 value(owns_property, property_area).
 value(earns, monthly_income).
 
+% C4 — the floor-area domain rule, as an uninterpreted dependency.
+% The CSOK decree conditions the subsidised dwelling's floor area on the number
+% of children: property_area >= min_area(num_children). (Decree cited in the
+% paper as noauthor_5182023_2023; minimum areas 40/50/60/70/80 m2 for one
+% through five or more children, 03_overview.md:21.)
+% The model records the dependency and its direction only; the inequality and
+% the min_area table are outside what the metamodel claims to check
+% (see vc_metamodel.refinery, pred depends_on).
+depends_on(owns_property, has_children).
+
 % Close DCL
 !exists(Subject::new).
 !exists(Value::new).
