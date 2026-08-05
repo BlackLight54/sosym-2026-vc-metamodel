@@ -1,0 +1,62 @@
+% ============================================================================
+% Control for probe_governance_sources.problem
+% ============================================================================
+% Identical instance, eIDAS format mandate only (privacy requirement dropped).
+% C5 admits {SdJwtVcSchema, MdocSchema}, which is non-empty, so this must be
+% SAT. It isolates the empty C5 x C6 intersection as the cause of the probe's
+% UNSAT rather than any structural defect of the instance.
+
+import vc_metamodel.
+import governance_conflict.
+
+
+% === DCL ===
+declare Applicant, prop_1, val_1.
+Subject(Applicant).
+Prop(prop_1).
+Value(val_1).
+property(Applicant, prop_1).
+value(prop_1, val_1).
+!exists(Subject::new).
+!exists(Value::new).
+!exists(Prop::new).
+
+
+% === CSL ===
+declare cs_1, claim_1, cv_1, cred_1.
+CredentialSubject(cs_1).
+Claim(claim_1).
+CredentialValue(cv_1).
+Credential(cred_1).
+Prop::trace(prop_1, claim_1).
+Claim::source(claim_1, cs_1).
+Claim::target(claim_1, cv_1).
+_(cs_1, cred_1).
+CredEntity::trace(cs_1, Applicant).
+CredEntity::trace(cv_1, val_1).
+!exists(CredentialSubject::new).
+!exists(CredentialValue::new).
+!exists(Claim::new).
+!exists(Credential::new).
+default !CredEntity::trace(*, *).
+
+
+% === FSL: format class left open for the solver ===
+declare fmt_1.
+Formatted_Credential(fmt_1).
+format(cred_1, fmt_1).
+!exists(AnoncredsCredentialSchema::new).
+!exists(JsonLdCredentialSchema::new).
+!exists(JwtVCCredentialSchema::new).
+!exists(SdJwtVcSchema::new).
+!exists(MdocSchema::new).
+
+
+% === Governance: eIDAS only ===
+EidasMandate(eidas_1).
+EidasMandate::target(eidas_1, cred_1).
+!exists(EidasMandate::new).
+!exists(PrivacyRequirement::new).
+!exists(VcdmConformance::new).
+
+scope node = 7, GovernanceAnnotation = 1.

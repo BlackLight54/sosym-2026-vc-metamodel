@@ -19,7 +19,10 @@ check file:
 # Canonical CSOK example under full governance (expected: UNSAT)
 csok: (check "csok.problem")
 
-# Ablations: each drops one governance framework (expected: all SAT)
+# Ablations: each drops one governance framework.
+# Expected since 2026-08-05 (independent C5/C6/C7 in governance_sources.refinery):
+# csok_no_eidas UNSAT ({privacy, VCDM} is itself a conflicting pair),
+# csok_no_gdpr SAT, csok_no_conflict SAT.
 ablations: (check "csok_no_eidas.problem") (check "csok_no_gdpr.problem") (check "csok_no_conflict.problem")
 
 # Regenerate scaled/sensitivity/diverse instances into evaluation/instances/

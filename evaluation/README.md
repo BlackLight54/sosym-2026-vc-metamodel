@@ -136,26 +136,37 @@ canonical instance size).
 
 Power-set of {eIDAS, Privacy, VCDM} = 8 configurations:
 
-| Config | eIDAS | Privacy | VCDM | Expected |
-|--------|:-----:|:-------:|:----:|:--------:|
-| G0 | - | - | - | SAT |
-| G1 | X | - | - | SAT |
-| G2 | - | X | - | SAT |
-| G3 | - | - | X | SAT |
-| G4 | X | X | - | SAT |
-| G5 | X | - | X | SAT |
-| G6 | - | X | X | SAT |
-| G7 | X | X | X | **UNSAT** |
+| Config | eIDAS | Privacy | VCDM | Verdict | Pre-2026-08-05 |
+|--------|:-----:|:-------:|:----:|:-------:|:--------------:|
+| G0 | - | - | - | SAT | SAT |
+| G1 | X | - | - | SAT | SAT |
+| G2 | - | X | - | SAT | SAT |
+| G3 | - | - | X | SAT | SAT |
+| G4 | X | X | - | **UNSAT** | SAT |
+| G5 | X | - | X | SAT | SAT |
+| G6 | - | X | X | **UNSAT** | SAT |
+| G7 | X | X | X | **UNSAT** | **UNSAT** |
 
-Only G7 (all three governance frameworks simultaneously) is UNSAT.
-This confirms the conflict requires the triple conjunction — any
-proper subset of governance requirements is satisfiable.
+The conflict is **not** minimal at the triple. Two proper subsets are
+already unsatisfiable, and both are pairs containing the GDPR privacy
+requirement: G4 {eIDAS, privacy} (the eIDAS format mandate admits only
+SD-JWT VC and mdoc, GDPR predicate proofs admit only AnonCreds) and G6
+{privacy, VCDM} (GDPR admits only AnonCreds, W3C VCDM 2.0 excludes it).
+G5 {eIDAS, VCDM} is satisfiable via SD-JWT VC, so no single framework and
+no pair without the privacy requirement produces a conflict. The three
+frameworks bear on the credential independently; VCDM conformance is a
+third, separate obstruction rather than a conjunct the conflict needs.
 
-All eight instances import `governance_conflict`, so the seven SAT
-verdicts are taken with the error predicate loaded: they show the
-predicate cannot fire without the full triple conjunction, not merely
-that it was absent. Verdicts re-taken 2026-08-03 with `check -k`
-(refinery-cli digest `sha256:88f1332e9aae...`) match the table.
+The pre-2026-08-05 column is the superseded reading. Until that date C5,
+C6 and C7 had no independent encoding: enforcement ran only through
+`governance_conflict`, every clause of which requires all three annotation
+targets at once, so G0–G6 were satisfiable by construction and the column
+measured the predicate's syntax rather than format availability (mock
+review 2026-08-03, Mathematician findings 1–3; stress-test K-008). The
+current column is measured against `governance_sources.refinery`, which
+encodes each source as its own elimination rules plus a named error
+predicate. Verdicts taken 2026-08-05 with `check -k` (refinery-cli digest
+`sha256:88f1332e9aae...`); verbatim output in vault A-004.
 
 Timings were also re-measured on 2026-08-03 under `check -k` (the E3
 benchmark previously ran plain `check`): 4.16–4.45 s wall clock per
@@ -163,6 +174,15 @@ configuration against a 4.06 s no-op baseline, i.e. 0.10–0.39 s
 baseline-corrected, flat within cold-start jitter for all eight
 including the UNSAT G7. The conflict is visible in the verdict, not in
 the runtime.
+
+**Timing staleness (2026-08-05).** Those timings predate
+`governance_sources.refinery`. Every instance that imports
+`governance_conflict` now also loads nine propagation rules and three error
+predicates, so the E1/E2/E3 wall-clock numbers were measured against a
+different model and must be re-measured before any timing claim is
+re-stated. Verdicts are unaffected: the full `run_measurements.sh validate`
+pass was re-run on 2026-08-05 and every instance outside E3 kept its
+recorded SAT/UNSAT verdict.
 
 ## Scaling model
 

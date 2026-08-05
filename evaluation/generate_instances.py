@@ -29,7 +29,10 @@ CONFIG_PATH = SCRIPT_DIR / "config.yaml"
 # root). governance_conflict.refinery is small, tracked, and imported by the UNSAT
 # instances and by every E3 sensitivity instance; it is copied so import resolution
 # works from the instances/ directory.
-METAMODEL_FILES = ["governance_conflict.refinery"]
+# governance_sources.refinery (C5/C6/C7 as independent per-source rules, added
+# 2026-08-05) is imported by governance_conflict.refinery, so it is copied for the
+# same reason and must not be allowed to drift from the root copy.
+METAMODEL_FILES = ["governance_conflict.refinery", "governance_sources.refinery"]
 
 
 def load_config() -> dict:

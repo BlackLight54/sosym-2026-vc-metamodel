@@ -33,7 +33,7 @@ The running example models the Hungarian Family Housing Subsidy (CSOK) applicati
 ├── csok_2x_gen.problem            # 2x scale for generation (SAT)
 ├── csok_3x_gen.problem            # 3x scale for generation (SAT)
 ├── csok_no_conflict.problem       # No governance conflict imported (SAT)
-├── csok_no_eidas.problem          # eIDAS governance removed (SAT)
+├── csok_no_eidas.problem          # eIDAS governance removed (UNSAT since 2026-08-05)
 ├── csok_no_gdpr.problem           # Privacy governance removed (SAT)
 ├── csok_standalone.problem        # Self-contained version for web editor
 ├── spec_ambiguity.refinery        # C7 (VCDM conformance) as an enforced error
@@ -103,15 +103,20 @@ docker run --rm -v "$(pwd):/work" -w /work \
 
 The `-k` flag performs a concretizability check that enforces error predicates. The governance conflict predicate fires because no single credential format simultaneously satisfies eIDAS, GDPR privacy, and W3C VCDM conformance requirements.
 
-To confirm that removing any one governance framework resolves the conflict:
+To see which governance frameworks the conflict actually needs. Removing the
+eIDAS mandate does **not** resolve it: the surviving {privacy, VCDM} pair is
+itself unsatisfiable (see E3 below and vault A-004).
 
 ```bash
-# Each of these is SAT:
+# UNSAT since 2026-08-05 ({privacy, VCDM} is a conflicting pair on its own):
 docker run --rm -v "$(pwd):/work" -w /work \
   ghcr.io/graphs4value/refinery-cli:latest check -k /work/csok_no_eidas.problem
 
+# SAT (SD-JWT VC satisfies the eIDAS mandate and VCDM conformance jointly):
 docker run --rm -v "$(pwd):/work" -w /work \
   ghcr.io/graphs4value/refinery-cli:latest check -k /work/csok_no_gdpr.problem
+
+# SAT (governance_conflict, and with it governance_sources, is not imported):
 
 docker run --rm -v "$(pwd):/work" -w /work \
   ghcr.io/graphs4value/refinery-cli:latest check -k /work/csok_no_conflict.problem
@@ -152,7 +157,7 @@ The evaluation comprises six experiments:
 
 **E2 — Model generation scalability:** Measures `refinery generate` runtime on SAT variants at the same scale points. Shows the overhead of full design space exploration versus concretizability checking alone.
 
-**E3 — Constraint sensitivity:** Systematically enables/disables governance framework combinations (power-set of {eIDAS, Privacy, VCDM} = 8 configurations) at the canonical instance size (N=3). Confirms the conflict requires the triple conjunction — any proper subset of governance requirements is satisfiable.
+**E3 — Constraint sensitivity:** Systematically enables/disables governance framework combinations (power-set of {eIDAS, Privacy, VCDM} = 8 configurations) at the canonical instance size (N=3). Measures which framework subsets admit a format assignment. Result since the 2026-08-05 per-source encoding: UNSAT at G4 {eIDAS, privacy}, G6 {privacy, VCDM} and G7, SAT elsewhere, so the two minimal conflicting provision sets are the pairs containing the GDPR privacy requirement (`evaluation/README.md` § E3).
 
 **ED — Structurally diverse instances (AF02 / Q-007):** Measures `check -k` and `generate` on *chained* instances (a credential can describe the value of its parent credential), realizing deeper claim hierarchies and multi-subject credentials. A depth sweep at fixed N=12 and a depth-fixed N-sweep test whether the sublinear-in-N scaling of the uniform instances survives structural diversity.
 
@@ -160,7 +165,9 @@ The evaluation comprises six experiments:
 
 - **`vc_metamodel.refinery`** — The three-layer metamodel. Defines all classes, relations, propagation rules, derived predicates, and format capability constraints. This is the primary artifact.
 
-- **`governance_conflict.refinery`** — The governance conflict error predicate. Fires when a credential carries all three governance mandates (eIDAS mandate, privacy requirement, VCDM-conformance mandate) and no single format satisfies them jointly; the three-clause body partitions the failure condition (D-039). Verdicts (`check -k`, 2026-07-28 battery + 2026-08-03 re-run): canonical CSOK instances and sensitivity G7 UNSAT, every proper governance subset G0–G6 SAT with the predicate loaded.
+- **`governance_conflict.refinery`** — The governance conflict error predicate (constraint C8). Fires when a credential carries all three governance mandates (eIDAS mandate, privacy requirement, VCDM-conformance mandate) and no single format satisfies them jointly; the three-clause body partitions the failure condition (D-039). It is the credential-granularity diagnostic that names the joint conflict in one atom, and since 2026-08-05 it is no longer the sole carrier of the UNSAT verdict: C5 and C6 alone already make the CSOK instance unsatisfiable. Imports `governance_sources.refinery`.
+
+- **`governance_sources.refinery`** — C5 (eIDAS/ARF format mandate), C6 (GDPR predicate-proof requirement) and C7 (W3C VCDM conformance) as independent per-source constraints, each gated on its own annotation class: nine `propagation rule` declarations that eliminate the inadmissible format classes, plus one named `error` predicate per source (`eidas_format_violation`, `privacy_format_violation`, `vcdm_format_violation`) so an empty format design space produces an attributable verdict atom. Added 2026-08-05 to replace the syntactic minimality reading of the G0–G7 battery with a measured one. Probe pair: `probe_governance_sources.problem` (eIDAS + privacy, UNSAT) against `probe_governance_sources_control.problem` (eIDAS only, SAT).
 
 - **`csok_instance.refinery`** — The CSOK running example: three credentials (FamilyStatusCred, PropertyCred, IncomeCred) for a shared applicant, with domain properties and credential schemas instantiated.
 

@@ -147,7 +147,13 @@ run_validate() {
             expected="UNSAT"
         elif [[ "$fname" == *"_sat"* ]]; then
             expected="SAT"
-        elif [[ "$fname" == *"G7"* ]]; then
+        elif [[ "$fname" == *"G4"* || "$fname" == *"G6"* || "$fname" == *"G7"* ]]; then
+            # E3 governance power set: UNSAT at G4 {eIDAS, privacy}, G6 {privacy,
+            # VCDM} and G7 (all three). Before the 2026-08-05 per-source encoding
+            # of C5/C6/C7 (governance_sources.refinery) only G7 was UNSAT, because
+            # every clause of governance_conflict required all three annotations at
+            # once and the G0-G6 verdicts were syntactic. Measured, not assumed:
+            # verbatim verdicts in vault A-004 constraint-sensitivity-variants.
             expected="UNSAT"
         else
             expected="SAT"

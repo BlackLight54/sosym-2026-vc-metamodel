@@ -1,13 +1,38 @@
 % ============================================================================
-% Headline 1: Governance conflict error predicate
+% Headline 1: Governance conflict error predicate  [EXERCISED 2026-07-28 + 2026-08-03, check -k]
 % ============================================================================
 % Fires when a credential carries all three governance mandates -- eIDAS
 % mandate, privacy requirement, and VCDM-conformance mandate -- and no single
-% format satisfies them jointly. Gating on all three annotations (D-039,
-% 2026-07-28) makes the triple conjunction minimal: dropping any one mandate
-% removes a precondition, so every proper subset (G0-G6) is satisfiable and
-% only the full conjunction (G7) is UNSAT. [unverified] until a refinery
-% check -k run records the G0-G7 verdicts in A-004.
+% format satisfies them jointly.
+%
+% MINIMALITY: SUPERSEDED 2026-08-05. This header previously argued that gating
+% on all three annotations (D-039) makes the triple conjunction minimal,
+% because every proper subset (G0-G6) was SAT. That reading was circular: all
+% three clauses below require all three annotation targets at once, so the
+% G0-G6 verdicts were entailed by this predicate's syntax and said nothing
+% about format availability. C5, C6 and C7 are now encoded independently, one
+% rule set per governance source, in governance_sources.refinery. Under that
+% encoding the conflict is NOT minimal at the triple: G4 {eIDAS, privacy} and
+% G6 {privacy, VCDM} are both UNSAT, G5 {eIDAS, VCDM} is SAT. The two minimal
+% conflicting provision sets are the two pairs containing the GDPR privacy
+% requirement. Verbatim verdicts: vault A-004 constraint-sensitivity-variants,
+% block "2026-08-05 -- G0-G7 under independent per-source C5/C6/C7".
+%
+% Status (re-exercised 2026-08-05 with refinery-cli check -k, image digest
+% sha256:88f1332e9aae356d91aef86aaaa3368be1b3931929fb3e10d87d65ab8a7fca8e):
+%   - csok.problem / csok_2x.problem / csok_3x.problem -> UNSAT, still carrying
+%     "governance_conflict::governance_conflict(IncomeCred, income_format):
+%     error." (one atom per income credential at 2x/3x), now alongside the
+%     per-source atoms from governance_sources.
+%   - evaluation/instances/sensitivity_G0/G1/G2/G3/G5.problem -> "Model is
+%     consistent" (SAT).
+%   - evaluation/instances/sensitivity_G4/G6/G7.problem -> UNSAT.
+%
+% This predicate is retained: it is the credential-granularity diagnostic that
+% names the joint conflict in one atom. It is no longer what makes the CSOK
+% instance unsatisfiable -- C5 and C6 alone already do that -- so it must not
+% be described as the sole carrier of the UNSAT verdict.
+%
 % The three clauses partition the failure condition
 %   !(conforms_vcdm(f) & supports_predicate_proof(f)):
 %   Clause 1: VCDM-conformant, but no predicate proofs (SD-JWT-VC, JSON-LD, JWT-VC).
@@ -18,6 +43,7 @@
 % clause 3 is required, otherwise mdoc escapes both clauses 1 and 2.)
 
 import vc_metamodel.
+import governance_sources.
 
 error governance_conflict(Credential c, Formatted_Credential f) <->
     EidasMandate::target(_, c),
