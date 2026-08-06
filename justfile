@@ -29,9 +29,21 @@ ablations: (check "csok_no_eidas.problem") (check "csok_no_gdpr.problem") (check
 instances:
     cd evaluation && python generate_instances.py
 
-# Validate SAT/UNSAT expectations for every instance (no timing)
+# Tier 1: smoke test — toolchain, headline conflict, one probe pair, generation (<30s)
+smoke:
+    bash run_tests.sh smoke
+
+# Tier 2: validate declared SAT/UNSAT expectations for every instance (no timing)
 validate:
-    bash run_measurements.sh validate
+    bash run_tests.sh validate
+
+# Tier 3 (quick): reduced timing sweep + wall-clock ceiling gate (~5 min)
+perf:
+    bash run_tests.sh perf quick
+
+# Tier 3 (full): archival campaign + ceiling gate (~1 hour)
+perf-full:
+    bash run_tests.sh perf full
 
 # Full measurement campaign (E0+EC+E1+E2+E3+ED, ~1 hour)
 measure:

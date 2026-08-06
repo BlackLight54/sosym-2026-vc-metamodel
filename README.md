@@ -55,6 +55,9 @@ The running example models the Hungarian Family Housing Subsidy (CSOK) applicati
 ├── probe_trace_misalign_source.problem   # prop_s propagation probe (UNSAT)
 ├── probe_trace_misalign_control.problem  # Shared trace-alignment control (SAT)
 ├── coverage_instance_map.md       # Constraint-coverage-to-instance bucket map
+├── expectations.tsv               # Declared verdicts for the entry points above (tiers 1-2)
+├── run_tests.sh                   # Three-tier test harness (smoke / validate / perf)
+├── scripts/pre-push-smoke.sh      # Optional warn-only push guard running tier 1
 ├── eidas_arf_supplement.md        # eIDAS ARF constraint supplement notes
 ├── justfile                       # Task runner wrapping the commands below
 ├── run_editor.sh                  # Launch Refinery web editor (Docker)
@@ -122,6 +125,53 @@ docker run --rm -v "$(pwd):/work" -w /work \
 
 docker run --rm -v "$(pwd):/work" -w /work \
   ghcr.io/graphs4value/refinery-cli:latest check -k /work/csok_no_conflict.problem
+```
+
+### Testing
+
+Three tiers, each answering a different question at a different cost. All three
+are `just` recipes over `run_tests.sh`.
+
+| Tier | Command | Cost | What it answers |
+|------|---------|------|-----------------|
+| 1 Smoke | `just smoke` | ~7 s | Does the toolchain work, does the governance conflict still fire, and does the solver still produce a model? |
+| 2 Validation | `just validate` | ~2 min | Does every instance still produce its declared verdict, under both `check -k` and `generate`? |
+| 3 Performance | `just perf` / `just perf-full` | ~3 min / ~1 h | Do runtimes hold, and does any benchmark breach the wall-clock ceiling? |
+
+Tier 1 runs six solver invocations concurrently: the canonical CSOK check, the
+no-conflict ablation, the acyclicity probe and its control, one generation, and
+one generate-side unsatisfiability probe. Both operations appear because they
+answer different questions — `check -k` says concretization is not excluded,
+`generate` says a model was actually produced, and `probe_common_parent.problem`
+is in the repository precisely because the two can diverge.
+
+Tier 2 reads two manifests: `expectations.tsv` for the hand-authored entry points
+here, and `evaluation/instances/expectations.tsv`, which `generate_instances.py`
+emits for the measurement corpus. **A `.problem` file with no row in either
+manifest fails the tier.** Adding an instance means declaring what it should do.
+Verdicts are `SAT`, `UNSAT`, or `UNKNOWN` (run and report, never fail); the
+`generate` column may be `SKIP` where an instance is not a generation entry point.
+
+Verdict classification separates three outcomes, not two. Exit status alone does
+not distinguish an unsatisfiable model from a broken one — `check -k` returns 1
+for both a real UNSAT and a parse failure — so each operation is matched against
+its own unsatisfiability signal (`Inconsistencies found in model:` for `check -k`,
+`UnsatisfiableProblemException` for `generate`). Anything else nonzero is `ERROR`,
+which fails the tier whatever the expectation says.
+
+Tier 3 is serial by construction (parallel timing is meaningless). `just perf`
+runs E0+E1+E2 at `RUNS=3` over scale points 1/10/30; `just perf-full` delegates to
+the archival campaign. Both end in `evaluation/check_ceilings.py`, which fails if
+any benchmark mean exceeds `CEILING_SECONDS` (default 60).
+
+Environment knobs: `JOBS` (concurrent containers, default 4), `TIMEOUT` (per
+invocation, default 300 s), `CEILING_SECONDS`.
+
+Optional push guard, warn-only and never blocking:
+
+```bash
+ln -sf "$(git rev-parse --show-toplevel)/scripts/pre-push-smoke.sh" \
+       "$(git rev-parse --git-common-dir)/hooks/pre-push"
 ```
 
 ### Full evaluation campaign

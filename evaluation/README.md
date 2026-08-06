@@ -24,6 +24,7 @@ No local Java installation is required.
 python generate_instances.py
 
 # 2. Validate all instances (runs each once, checks SAT/UNSAT)
+#    Delegates to ../run_tests.sh validate (tier 2); `just validate` is equivalent.
 ../run_measurements.sh validate
 
 # 3. Run full measurement campaign (E0+EC+E1+E2+E3+ED, ~1 hour)
@@ -232,7 +233,9 @@ evaluation/
   generate_instances.py      # Instance generator
   run_measurements.sh        # Hyperfine orchestration
   analyze_results.py         # Results -> figures + tables
+  check_ceilings.py          # Tier-3 wall-clock ceiling gate (CEILING_SECONDS)
   instances/                 # Generated .problem files
+    expectations.tsv             (GENERATED verdict manifest read by ../run_tests.sh)
     governance_conflict.refinery (copy of error predicate)
     noop.problem                 (E0 baseline — minimal no-op)
     scale_{N}_{sat,unsat}.problem  (EC/E1/E2 uniform instances)
@@ -299,6 +302,13 @@ definition (`governance_conflict.refinery`) in the repository root changes, rege
 python generate_instances.py
 ../run_measurements.sh validate   # verify SAT/UNSAT expectations still hold
 ```
+
+`generate_instances.py` also writes `instances/expectations.tsv`, the verdict
+manifest tier 2 reads. It is generated output: the expectations come from the
+`variant` each instance was built with, so regenerating instances and
+regenerating their expectations cannot drift apart. Do not hand-edit it; the
+hand-authored entry points at the repository root declare their expectations in
+`../expectations.tsv` instead.
 
 The generator copies `governance_conflict.refinery` into `instances/` for import
 resolution. It does **not** copy `vc_metamodel.refinery`: the harness mounts
