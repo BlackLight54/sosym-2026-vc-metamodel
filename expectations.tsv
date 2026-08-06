@@ -29,7 +29,7 @@ csok_generated.problem	SAT	SAT	README.md generation entry point
 csok_2x_gen.problem	SAT	SAT	README.md 2x generation entry point
 csok_3x_gen.problem	SAT	SAT	README.md 3x generation entry point
 csok_no_conflict.problem	SAT	SAT	README.md ablation, conflict predicate not imported
-csok_no_eidas.problem	SAT	SAT	README.md ablation, eIDAS governance removed
+csok_no_eidas.problem	UNSAT	SKIP	README.md — UNSAT since 2026-08-05: {privacy, VCDM} conflict on their own under the per-source encoding
 csok_no_gdpr.problem	SAT	SAT	README.md ablation, privacy governance removed
 csok_standalone.problem	SAT	SAT	A-004 baseline (check -k); generate observed 2026-08-05
 spec_ambiguity.problem	UNSAT	SKIP	README.md C7 instrument, vcdm_conformance_violation
@@ -44,4 +44,10 @@ probe_cross_cred_gap_control.problem	SAT	SAT	README.md C9 control (pair: probe_c
 probe_trace_misalign_target.problem	UNSAT	SKIP	README.md prop_t propagation probe (pair: probe_trace_misalign_control)
 probe_trace_misalign_source.problem	UNSAT	SKIP	README.md prop_s propagation probe (pair: probe_trace_misalign_control)
 probe_trace_misalign_control.problem	SAT	SAT	README.md shared trace-alignment control
+probe_governance_sources.problem	UNSAT	SKIP	README.md per-source probe, eIDAS + privacy (pair: probe_governance_sources_control)
+probe_governance_sources_control.problem	SAT	SKIP	README.md per-source control, eIDAS only; generate SKIP — exact `scope node = 7` leaves no room to build a concrete model (widening to 7..12 generates), so a generate run here measures the scope, not the design
+probe_c11_separated_design.problem	SAT	SAT	README.md C11 negative probe, mismatched cadence in separate credentials
+probe_c11_separated_design_control.problem	SAT	SAT	README.md C11 negative control, single cadence
+probe_c4_domain_dependency.problem	UNSAT	SKIP	README.md C4xC9 firing probe (pair: probe_c4_domain_dependency_control)
+probe_c4_domain_dependency_control.problem	SAT	SAT	README.md C4xC9 control, error block disabled
 evaluation/instances/noop.problem	SAT	SKIP	E0 baseline, hand-committed rather than generated

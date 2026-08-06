@@ -2,7 +2,18 @@
 % CSOK — No eIDAS (EidasMandate removed from IncomeCred)
 % ============================================================================
 % Removes eIDAS mandate from IncomeCred only. GDPR + W3C remain.
-% Expected result: SAT (AnonCreds satisfies privacy requirement)
+% Result: UNSAT (measured 2026-08-05, check -k).
+%
+% This file previously recorded "Expected result: SAT (AnonCreds satisfies
+% privacy requirement)". That expectation held only while C5/C6/C7 had no
+% independent encoding and the sole enforcement was governance_conflict's
+% three-way conjunction. Since governance_sources.refinery encodes each source
+% separately, the surviving pair {privacy, VCDM} on IncomeCred is itself
+% unsatisfiable: GDPR admits only AnonCreds, W3C VCDM 2.0 excludes AnonCreds.
+% Verdict atoms: governance_sources::privacy_format_violation(IncomeCred,
+% income_format) and governance_sources::vcdm_format_violation(IncomeCred,
+% income_format). This is the CSOK-scenario twin of sensitivity_G6.
+% Verbatim verdicts: vault A-004, block "2026-08-05".
 
 import vc_metamodel.
 import governance_conflict.

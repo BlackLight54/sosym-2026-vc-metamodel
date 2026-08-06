@@ -42,7 +42,7 @@ evaluation/instances/sensitivity_G0.problem	SAT	SKIP	generate_instances.py
 evaluation/instances/sensitivity_G1.problem	SAT	SKIP	generate_instances.py
 evaluation/instances/sensitivity_G2.problem	SAT	SKIP	generate_instances.py
 evaluation/instances/sensitivity_G3.problem	SAT	SKIP	generate_instances.py
-evaluation/instances/sensitivity_G4.problem	SAT	SKIP	generate_instances.py
+evaluation/instances/sensitivity_G4.problem	UNSAT	SKIP	generate_instances.py
 evaluation/instances/sensitivity_G5.problem	SAT	SKIP	generate_instances.py
-evaluation/instances/sensitivity_G6.problem	SAT	SKIP	generate_instances.py
+evaluation/instances/sensitivity_G6.problem	UNSAT	SKIP	generate_instances.py
 evaluation/instances/sensitivity_G7.problem	UNSAT	SKIP	generate_instances.py

@@ -57,14 +57,17 @@ ranges over all five `Formatted_Credential` subclasses.
 Counts are asserted atoms, not distinct metaclasses. "Open fmt" is the number of unpinned format
 slots. Verdicts are copied from `A-004 constraint-sensitivity-variants` (batteries of 2026-07-28 and
 2026-08-03) and `models/README.md`; instances with no recorded verdict are marked as such rather
-than inferred from their header comments.
+than inferred from their header comments. The 2026-08-05 battery (independent per-source C5/C6/C7 in
+`governance_sources.refinery`) moved exactly one verdict in this table: `csok_no_eidas.problem`,
+SAT to UNSAT. Every other recorded verdict, including all 36 `evaluation/instances` outside E3,
+reproduced unchanged.
 
 | Instance | A1 CSL | A2 FSL-conf | A3 FSL-out | A4 DCL | A5 gov | Open fmt | Recorded verdict |
 |---|---|---|---|---|---|---|---|
 | `csok.problem` | 12 | 2 | 0 | 7 | 7 | 1 | UNSAT (`check -k`) |
 | `csok_2x.problem` | 24 | 4 | 0 | 13 | 14 | 2 | UNSAT (`check -k`) |
 | `csok_3x.problem` | 36 | 6 | 0 | 19 | 21 | 3 | UNSAT (`check -k`) |
-| `csok_no_eidas.problem` | 12 | 2 | 0 | 7 | 6 | 1 | SAT (`check -k`) |
+| `csok_no_eidas.problem` | 12 | 2 | 0 | 7 | 6 | 1 | UNSAT (`check -k`, 2026-08-05; SAT before) |
 | `csok_no_gdpr.problem` | 12 | 2 | 0 | 7 | 6 | 1 | SAT (`check -k`) |
 | `csok_no_conflict.problem` | 12 | 2 | 0 | 7 | 7 | 1 | SAT (`check -k`) |
 | `csok_standalone.problem` | 12 | 2 | 0 | 7 | 7 | 1 | SAT (`check -k`); `generate` exit 0 |
@@ -110,8 +113,8 @@ uninformative: every instance imports the metamodel, so all six predicates are a
 
 | Capability predicate | Read by | Exercised in | Count |
 |---|---|---|---|
-| `conforms_vcdm` | `error governance_conflict`; `error vcdm_conformance_violation` (`spec_ambiguity.refinery`) | `csok`, `csok_2x`, `csok_3x`, `csok_no_eidas`, `csok_no_gdpr`, `spec_ambiguity` | 6 |
-| `supports_predicate_proof` | `error governance_conflict`; four `cap_predicate_not_*` propagation rules | `csok`, `csok_2x`, `csok_3x`, `csok_no_eidas`, `csok_no_gdpr` (error); `csok_generated` (rules, via its asserted AnonCreds atom, though vacuously: the node is already typed and `!exists(::new)` holds, so the rules eliminate nothing) | 6 |
+| `conforms_vcdm` | `error governance_conflict`; `error vcdm_format_violation` and two `vcdm_not_*` propagation rules (`governance_sources.refinery`, C7); `error vcdm_conformance_violation` (`spec_ambiguity.refinery`) | `csok`, `csok_2x`, `csok_3x`, `csok_no_eidas`, `csok_no_gdpr`, `spec_ambiguity` | 6 |
+| `supports_predicate_proof` | `error governance_conflict`; `error privacy_format_violation` and four `privacy_not_*` propagation rules (`governance_sources.refinery`, C6); four `cap_predicate_not_*` propagation rules | `csok`, `csok_2x`, `csok_3x`, `csok_no_eidas`, `csok_no_gdpr` (error); `csok_generated` (rules, via its asserted AnonCreds atom, though vacuously: the node is already typed and `!exists(::new)` holds, so the rules eliminate nothing) | 6 |
 | `supports_offline_verification` | four `cap_offline_not_*` propagation rules | `spec_ambiguity` (asserted mdoc atom); reachable in any instance whose open format slot the solver assigns to mdoc | 1 asserted |
 | `supports_multi_credential_proof` | `shadow pred cross_cred_predicate_gap` only — display-only, never constrains the solver | **none among the 17**; the post-snapshot `probe_cross_cred_gap` pair inlines it as an enforced error to close exactly this gap | 0 (in flight) |
 | `supports_selective_disclosure` | nothing in `models/` | **none** | 0 |

@@ -1,0 +1,65 @@
+% ============================================================================
+% Control for probe_c4_domain_dependency.problem  [ho7 item 2, 2026-08-05]
+% ============================================================================
+% Identical to probe_c4_domain_dependency.problem with the enforced error block
+% commented out, so the probe's UNSAT is attributable to that predicate and not
+% to the base instance, the governance markers, the new depends_on assertion, or
+% the scope line. Note that this control still carries the C4 assertion
+% depends_on(owns_property, has_children) through csok_instance.refinery:
+% asserting the domain dependency is by itself inert, which is the point of an
+% uninterpreted relation.
+% Expected result: SAT (Model is consistent).
+%
+% The second control is probe_cross_cred_gap.problem: same base, same error
+% minus the C4 conjuncts, six atoms / three pairs. See the probe header.
+
+import vc_metamodel.
+import csok_instance.
+
+
+% === Governance markers (as in csok_no_conflict.problem) ===
+
+EidasMandate(eidas_1).
+EidasMandate::target(eidas_1, FamilyStatusCred).
+EidasMandate(eidas_2).
+EidasMandate::target(eidas_2, PropertyCred).
+EidasMandate(eidas_3).
+EidasMandate::target(eidas_3, IncomeCred).
+
+PrivacyRequirement(privacy_1).
+PrivacyRequirement::target(privacy_1, IncomeCred).
+
+VcdmConformance(vcdm_1).
+VcdmConformance::target(vcdm_1, FamilyStatusCred).
+VcdmConformance(vcdm_2).
+VcdmConformance::target(vcdm_2, PropertyCred).
+VcdmConformance(vcdm_3).
+VcdmConformance::target(vcdm_3, IncomeCred).
+
+!exists(EidasMandate::new).
+!exists(PrivacyRequirement::new).
+!exists(VcdmConformance::new).
+
+
+% === The probe: domain_dependency_gap, inlined and enforced (disabled) ===
+
+% error domain_dependency_gap_witness(Credential c1, Credential c2) <->
+%     c1 != c2,
+%     credentialSubject(c1, cs1), credentialSubject(c2, cs2),
+%     cs1 != cs2,
+%     CredEntity::trace(cs1, e), CredEntity::trace(cs2, e),
+%     format(c1, f1), !supports_multi_credential_proof(f1),
+%     Claim::source(k1, cs1), Claim::source(k2, cs2),
+%     Prop::trace(p1, k1), Prop::trace(p2, k2),
+%     depends_on(p1, p2)
+%   ;
+%     c1 != c2,
+%     credentialSubject(c1, cs1), credentialSubject(c2, cs2),
+%     cs1 != cs2,
+%     CredEntity::trace(cs1, e), CredEntity::trace(cs2, e),
+%     format(c2, f2), !supports_multi_credential_proof(f2),
+%     Claim::source(k1, cs1), Claim::source(k2, cs2),
+%     Prop::trace(p1, k1), Prop::trace(p2, k2),
+%     depends_on(p1, p2).
+
+scope node = 29, GovernanceAnnotation = 7.

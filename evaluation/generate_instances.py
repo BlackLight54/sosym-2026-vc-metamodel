@@ -29,7 +29,10 @@ CONFIG_PATH = SCRIPT_DIR / "config.yaml"
 # root). governance_conflict.refinery is small, tracked, and imported by the UNSAT
 # instances and by every E3 sensitivity instance; it is copied so import resolution
 # works from the instances/ directory.
-METAMODEL_FILES = ["governance_conflict.refinery"]
+# governance_sources.refinery (C5/C6/C7 as independent per-source rules, added
+# 2026-08-05) is imported by governance_conflict.refinery, so it is copied for the
+# same reason and must not be allowed to drift from the root copy.
+METAMODEL_FILES = ["governance_conflict.refinery", "governance_sources.refinery"]
 
 
 def load_config() -> dict:
@@ -608,7 +611,17 @@ def main():
         content = generate_instance(
             sens_n, variant, gov_list, f"E3_{config_name}", import_conflict=True
         )
-        files_to_generate.append((filename, content, *expectations(variant, generate="SKIP")))
+        # The expected verdict is NOT `variant`. Since the 2026-08-05 per-source
+        # encoding of C5/C6/C7 (governance_sources.refinery), a privacy requirement
+        # conflicts with eIDAS and with VCDM conformance independently, so G4
+        # {eIDAS, privacy} and G6 {privacy, VCDM} are UNSAT alongside G7. Only the
+        # triple conjunction was UNSAT under the single-clause encoding. Verbatim
+        # verdicts: vault A-004 constraint-sensitivity-variants.
+        gov = set(gov_list)
+        e3_unsat = "privacy" in gov and bool(gov & {"eidas", "vcdm"})
+        files_to_generate.append(
+            (filename, content, "UNSAT" if e3_unsat else "SAT", "SKIP")
+        )
 
     # --- ED: Structurally diverse instances (AF02 / Q-007) ---
     diverse = config.get("diverse")

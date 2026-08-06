@@ -1,0 +1,145 @@
+% ============================================================================
+% C5 / C6 / C7 as independent per-source constraints
+% ============================================================================
+% Each of the three governance frameworks that bear on the CSOK credential is
+% encoded here as a rule gated on ITS OWN annotation class, independently of
+% the other two. Before this module, no propagation rule read any governance
+% annotation: EidasMandate, PrivacyRequirement and VcdmConformance were marker
+% classes whose only consumer was the three-way conjunction in
+% governance_conflict.refinery (constraint C8). The G0-G6 satisfiability
+% verdicts were therefore entailed by that conjunction's syntax and carried no
+% information about format availability (mock review 2026-08-03, Mathematician
+% findings 1-3; Adversarial F3; stress-test K-008).
+%
+% Each constraint takes two declaration forms, with different jobs:
+%   - propagation (elimination) rules, gated on the annotation, that narrow the
+%     format design space before generation explores it. This is the pruning
+%     behaviour the constraint catalogue attributes to C5/C6/C7.
+%   - a named error predicate that produces an attributable verdict atom when
+%     the surviving format set is empty. Without it an unsatisfiable instance
+%     reports an untyped node rather than naming which source obligation was
+%     violated, and the minimal-unsat-core reading would not be recoverable
+%     from the solver output.
+%
+% Admissible format sets (from the capability matrix in vc_metamodel.refinery;
+% recorded as fact, not tuned):
+%   C5 eIDAS format mandate  -> {SdJwtVcSchema, MdocSchema}
+%   C6 predicate proof (GDPR) -> {AnoncredsCredentialSchema}
+%   C7 VCDM conformance       -> {SdJwtVcSchema, JsonLdCredentialSchema,
+%                                 JwtVCCredentialSchema}
+%
+% CAVEAT (C5 fidelity). ARF PID_02 is conjunctive: a PID Provider SHALL issue
+% any PID in BOTH ISO/IEC 18013-5 (mdoc) AND SD-JWT VC. `Credential` declares
+% `contains Formatted_Credential[1] format`, so one credential carries one
+% format assignment and the mandate can only be approximated disjunctively
+% ("the format must be one of the two mandated families"). See note 1 of
+% eidas_arf_supplement.md; the approximation is weaker than the obligation, so
+% it cannot manufacture an unsatisfiability that the obligation does not have.
+%
+% CAVEAT (C5 tier). {SdJwtVcSchema, MdocSchema} is the qualified-tier reading
+% (ARF PID_02 / ARB_01). The non-qualified tier (ARB_01a) additionally admits
+% W3C VCDM. AnonCreds is excluded under both readings, so every verdict below
+% that turns on C5 excluding AnonCreds is invariant under the tier distinction
+% the model cannot currently state (root cause Q-004).
+
+import vc_metamodel.
+
+
+% --- C5: eIDAS / ARF format mandate ---------------------------------------
+% A credential under an eIDAS format mandate must use a mandated format family.
+% Eliminates the three non-mandated classes.
+
+propagation rule eidas_not_jsonld(EidasMandate a, Credential c, Formatted_Credential f) <->
+    must EidasMandate::target(a, c),
+    must format(c, f),
+    may JsonLdCredentialSchema(f)
+==>
+    !JsonLdCredentialSchema(f).
+
+propagation rule eidas_not_jwt(EidasMandate a, Credential c, Formatted_Credential f) <->
+    must EidasMandate::target(a, c),
+    must format(c, f),
+    may JwtVCCredentialSchema(f)
+==>
+    !JwtVCCredentialSchema(f).
+
+propagation rule eidas_not_anoncreds(EidasMandate a, Credential c, Formatted_Credential f) <->
+    must EidasMandate::target(a, c),
+    must format(c, f),
+    may AnoncredsCredentialSchema(f)
+==>
+    !AnoncredsCredentialSchema(f).
+
+error eidas_format_violation(Credential c, Formatted_Credential f) <->
+    EidasMandate::target(_, c),
+    format(c, f),
+    !SdJwtVcSchema(f),
+    !MdocSchema(f).
+
+
+% --- C6: GDPR Art. 5(1)(c) data minimisation, predicate proof required -----
+% A credential carrying a privacy requirement must use a predicate-proof-capable
+% format. Only AnonCreds qualifies, so the other four classes are eliminated.
+% (The pre-existing cap_predicate_not_* rules in vc_metamodel.refinery are
+% gated on the capability predicate supports_predicate_proof, not on the
+% requirement; these rules gate on the requirement itself.)
+
+propagation rule privacy_not_sdjwt(PrivacyRequirement a, Credential c, Formatted_Credential f) <->
+    must PrivacyRequirement::target(a, c),
+    must format(c, f),
+    may SdJwtVcSchema(f)
+==>
+    !SdJwtVcSchema(f).
+
+propagation rule privacy_not_jwt(PrivacyRequirement a, Credential c, Formatted_Credential f) <->
+    must PrivacyRequirement::target(a, c),
+    must format(c, f),
+    may JwtVCCredentialSchema(f)
+==>
+    !JwtVCCredentialSchema(f).
+
+propagation rule privacy_not_jsonld(PrivacyRequirement a, Credential c, Formatted_Credential f) <->
+    must PrivacyRequirement::target(a, c),
+    must format(c, f),
+    may JsonLdCredentialSchema(f)
+==>
+    !JsonLdCredentialSchema(f).
+
+propagation rule privacy_not_mdoc(PrivacyRequirement a, Credential c, Formatted_Credential f) <->
+    must PrivacyRequirement::target(a, c),
+    must format(c, f),
+    may MdocSchema(f)
+==>
+    !MdocSchema(f).
+
+error privacy_format_violation(Credential c, Formatted_Credential f) <->
+    PrivacyRequirement::target(_, c),
+    format(c, f),
+    !supports_predicate_proof(f).
+
+
+% --- C7: W3C VCDM 2.0 conformance -----------------------------------------
+% A credential required to conform to the VC data model must use a conformant
+% format. Eliminates AnonCreds v1 and mdoc.
+% (spec_ambiguity.refinery keeps its own standalone vcdm_conformance_violation
+% for the specification-ambiguity scenario; these are separate declarations and
+% no entry point imports both.)
+
+propagation rule vcdm_not_anoncreds(VcdmConformance a, Credential c, Formatted_Credential f) <->
+    must VcdmConformance::target(a, c),
+    must format(c, f),
+    may AnoncredsCredentialSchema(f)
+==>
+    !AnoncredsCredentialSchema(f).
+
+propagation rule vcdm_not_mdoc(VcdmConformance a, Credential c, Formatted_Credential f) <->
+    must VcdmConformance::target(a, c),
+    must format(c, f),
+    may MdocSchema(f)
+==>
+    !MdocSchema(f).
+
+error vcdm_format_violation(Credential c, Formatted_Credential f) <->
+    VcdmConformance::target(_, c),
+    format(c, f),
+    !conforms_vcdm(f).

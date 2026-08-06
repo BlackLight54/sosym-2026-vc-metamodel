@@ -7,13 +7,20 @@
 % revoking a dynamic claim would needlessly revoke a co-located static one.
 % Dual of C10 (dependent-claim bundling, C-035), which forces co-location.
 %
-% Status (exercised 2026-07-28 with refinery-cli check -k):
+% Status (exercised 2026-07-28, re-scoped and re-exercised 2026-08-05 with
+% refinery-cli check -k):
 %   - revocation_mismatch_instance.problem (chained two-claim pair, one static-
 %     one dynamic-marked) -> "Inconsistencies found in model:
 %     revocation_mismatch::revocation_mismatch(claim_0_0, claim_0_1): error."
 %   - revocation_mismatch_control.problem (same structure, both static-marked)
 %     -> "Model is consistent". The inconsistency is therefore attributable to
 %     this error predicate, not to the chained structure.
+%   - probe_c11_separated_design.problem (the prescribed remedy: the two
+%     mismatched claims in SEPARATE credentials of one subject) -> "Model is
+%     consistent". Before the 2026-08-05 colocated_step re-scoping this probe
+%     was inconsistent, which is the defect the re-scoping repairs.
+%   - probe_c11_separated_design_control.problem (same, single cadence) ->
+%     "Model is consistent".
 %
 % Remaining open modeling question:
 %   - The base metamodel (vc_metamodel.refinery) has NO revocation/lifecycle
@@ -30,9 +37,14 @@
 %     (Refinery containment; this is why the CSOK instance gives each claim its
 %     own CredentialSubject, related only by the `aligned` shadow pred). Two
 %     claims are co-located instead when both are reachable from the same
-%     credential root through credential_statement edges AND alignment steps
-%     (`colocated_step+` below); the chained ED shape connects a child
-%     credential to its parent only through the alignment step.
+%     credential root through credential_statement edges AND chain-link
+%     alignment steps (`colocated_step+` below); the chained ED shape connects
+%     a child credential to its parent only through the alignment step.
+%   - Since 2026-08-05 the alignment step is restricted to the chain direction
+%     (parent claim target -> child credentialSubject root), so "same
+%     credential" means one credential or a parent/child chain, never two
+%     sibling credentials of one subject. Separating the claims into sibling
+%     credentials is therefore a repair the predicate recognises.
 
 import vc_metamodel.
 
@@ -46,20 +58,35 @@ class DynamicRevocation {
 }
 
 % Co-location step: one hop through the credential/claim structure. Either a
-% credential_statement edge (claim source<->target, via cred_neighbors) or an
-% alignment step (two distinct CredEntities tracing the same domain Entity —
-% the chained-credential link: a child credential's subject and its parent
-% credential's value trace the same domain value; inlined rather than reusing
-% the `aligned` shadow pred, which is display-only).
+% credential_statement edge (claim source<->target, via cred_neighbors) or a
+% CHAIN-LINK alignment step: a parent credential's value node and a child
+% credential's subject node trace the same domain Entity. Inlined rather than
+% reusing the `aligned` shadow pred, which is display-only AND symmetric.
 %
 % Why cred_neighbors+ alone (the first draft) cannot work: cred_neighbors only
 % connects the source and target of ONE claim, and Claim `contains` both ends,
 % so a second claim can never attach to the same component without giving some
-% CredEntity two containers (structurally inconsistent). Verified 2026-07-28:
-% the chained instance is `consistent` under the cred_neighbors+-only variant.
+% CredEntity two containers (structurally inconsistent). Verified 2026-07-28
+% and again 2026-08-05: the chained instance is `consistent` under the
+% cred_neighbors-only variant, so the alignment step is load-bearing.
+%
+% Re-scoping 2026-08-05 (stress-test K-003 finding F1, solver-confirmed): the
+% alignment disjunct was previously unrestricted — any two distinct CredEntities
+% tracing the same Entity. That made SIBLING credentials of one subject
+% co-located (all CSOK credential subjects trace `Applicant`), so
+% revocation_mismatch fired on the separated-credential design the paper
+% prescribes as the remedy. The two added conjuncts make the chain direction
+% structural: `s` must be a claim target (a value node INSIDE a credential) and
+% `t` must be the credentialSubject root OF a credential. Two credential roots
+% therefore never step to each other; a parent value stepping to a child root
+% still does. Both conjuncts are positive atoms asserted verbatim in the
+% instances, not negations over unclosed relations.
+% Evidence: probe_c11_separated_design{,_control}.problem; see vault A-013.
 pred colocated_step(CredEntity s, CredEntity t) <->
     cred_neighbors(s, t)
   ; s != t,
+    Claim::target(_, s),
+    credentialSubject(_, t),
     CredEntity::trace(s, e),
     CredEntity::trace(t, e).
 
@@ -78,8 +105,12 @@ pred claim_in_credential(Claim cl, CredentialSubject r) <->
 % C11: a credential (chain) must not bundle claims of mismatched revocation
 % cadence. Two distinct claims reachable from one credential root, one marked
 % static and one marked dynamic, are co-located -> error.
-% Exercised 2026-07-28: fires on revocation_mismatch_instance.problem, silent
-% on revocation_mismatch_control.problem (see header).
+% Exercised 2026-07-28, re-exercised after the 2026-08-05 re-scoping: fires on
+% revocation_mismatch_instance.problem, silent on
+% revocation_mismatch_control.problem and on both separated-design probes
+% (see header). "Credential (chain)" is now structural: co-location is
+% bundling within one credential or across a parent/child chain link, never
+% across sibling credentials of one subject.
 error revocation_mismatch(Claim cl1, Claim cl2) <->
     cl1 != cl2,
     claim_in_credential(cl1, r),

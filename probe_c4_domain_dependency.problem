@@ -1,0 +1,97 @@
+% ============================================================================
+% Firing probe for domain_dependency_gap (C4 x C9)  [ho7 item 2, 2026-08-05]
+% ============================================================================
+% C4 (cross-credential value dependency, the CSOK floor-area rule) was carried
+% in the constraint catalogue with no Refinery declaration, so C9
+% (cross_cred_predicate_gap) could not tell the one credential pair the domain
+% rule actually spans from any other subject-aligned pair. On the delivered CSOK
+% instance C9 reports three pairs; the paper's Headline 2 narrative is about one
+% of them (05_evaluation.md:101). Stress-test K-009 finding F2.
+%
+% The repair encodes C4 as the uninterpreted relation
+%   pred depends_on(Prop p1, Prop p2).            (vc_metamodel.refinery, DCL)
+%   depends_on(owns_property, has_children).      (csok_instance.refinery)
+% and adds
+%   shadow pred domain_dependency_gap(Credential c1, Credential c2)
+% which conjoins C9's body with the C4 link lifted to credentials.
+% cross_cred_predicate_gap itself is UNCHANGED; see the control note below.
+%
+% This probe converts domain_dependency_gap into an enforced error of the same
+% arity so the solver must name the pair. Shadow relations may not be referenced
+% from non-shadow contexts (same restriction as probe_common_parent.problem and
+% probe_cross_cred_gap.problem), so the bodies of domain_dependency_gap,
+% cross_cred_predicate_gap and aligned are all inlined verbatim; `aligned`
+% carries the c_e1 != c_e2 conjunct, kept here as cs1 != cs2.
+%
+% Base: the delivered CSOK instance without governance_conflict, i.e. exactly
+% probe_cross_cred_gap.problem's base (= csok_no_conflict.problem), so the two
+% probes differ only in the added C4 conjuncts and are directly comparable.
+%
+% Controls, two of them:
+%   probe_c4_domain_dependency_control.problem — identical, error block
+%     commented out. Must be SAT, isolating the enforced predicate as the cause.
+%   probe_cross_cred_gap.problem — the same base and the same error MINUS the
+%     C4 conjuncts. Reports six atoms / three pairs. It is the discrimination
+%     control: the difference between the two outputs is exactly what C4 buys.
+%
+% Expected result: UNSAT with ONE atom,
+%   domain_dependency_gap_witness(PropertyCred, FamilyStatusCred): error.
+% One ordered atom, not two: depends_on is asserted one-directionally
+% (owns_property depends on has_children), and the chain
+% owns_property -> owns_property_claim -> CS_Applicant_2 -> PropertyCred
+% has_children  -> has_children_claim  -> CS_Applicant_1 -> FamilyStatusCred
+% binds c1 and c2 in a fixed order. C9's two clauses are symmetric in which
+% format is checked, not in the pair order, so the reverse tuple does not hold.
+% Count discipline: one atom, one credential pair, direction meaningful
+% (c1 carries the constrained property).
+
+import vc_metamodel.
+import csok_instance.
+
+
+% === Governance markers (as in csok_no_conflict.problem) ===
+
+EidasMandate(eidas_1).
+EidasMandate::target(eidas_1, FamilyStatusCred).
+EidasMandate(eidas_2).
+EidasMandate::target(eidas_2, PropertyCred).
+EidasMandate(eidas_3).
+EidasMandate::target(eidas_3, IncomeCred).
+
+PrivacyRequirement(privacy_1).
+PrivacyRequirement::target(privacy_1, IncomeCred).
+
+VcdmConformance(vcdm_1).
+VcdmConformance::target(vcdm_1, FamilyStatusCred).
+VcdmConformance(vcdm_2).
+VcdmConformance::target(vcdm_2, PropertyCred).
+VcdmConformance(vcdm_3).
+VcdmConformance::target(vcdm_3, IncomeCred).
+
+!exists(EidasMandate::new).
+!exists(PrivacyRequirement::new).
+!exists(VcdmConformance::new).
+
+
+% === The probe: domain_dependency_gap, inlined and enforced ===
+
+error domain_dependency_gap_witness(Credential c1, Credential c2) <->
+    c1 != c2,
+    credentialSubject(c1, cs1), credentialSubject(c2, cs2),
+    cs1 != cs2,
+    CredEntity::trace(cs1, e), CredEntity::trace(cs2, e),
+    format(c1, f1), !supports_multi_credential_proof(f1),
+    Claim::source(k1, cs1), Claim::source(k2, cs2),
+    Prop::trace(p1, k1), Prop::trace(p2, k2),
+    depends_on(p1, p2)
+  ;
+    c1 != c2,
+    credentialSubject(c1, cs1), credentialSubject(c2, cs2),
+    cs1 != cs2,
+    CredEntity::trace(cs1, e), CredEntity::trace(cs2, e),
+    format(c2, f2), !supports_multi_credential_proof(f2),
+    Claim::source(k1, cs1), Claim::source(k2, cs2),
+    Prop::trace(p1, k1), Prop::trace(p2, k2),
+    depends_on(p1, p2).
+
+scope node = 29, GovernanceAnnotation = 7.
