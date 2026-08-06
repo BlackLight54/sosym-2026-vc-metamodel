@@ -1,0 +1,47 @@
+# Declared verdict expectations for the hand-authored entry points.
+#
+# Read by run_tests.sh (tiers 1 and 2). The generated measurement instances
+# declare their own expectations in evaluation/instances/expectations.tsv,
+# which generate_instances.py writes; do not add them here.
+#
+# Format: TAB-separated. Paths are relative to this directory (the Docker
+# mount), so each row maps to /work/<path>.
+#
+#   check_k    expected verdict of `refinery check -k`
+#   generate   expected verdict of `refinery generate`, or SKIP
+#   source     where the expectation comes from
+#
+# Verdicts: SAT | UNSAT | UNKNOWN (run and report, never fail) | SKIP.
+#
+# generate is SKIP for the UNSAT check-k rows: generation from an instance that
+# is already not concretizable is unsatisfiable by construction and adds nothing.
+# probe_common_parent is the exception — it is a generate-side probe and
+# README.md records its verdict under that operation.
+#
+# A .problem file on disk with no row here (and none in the generated manifest)
+# fails tier 2. Adding an instance means declaring what it should do.
+#
+# file	check_k	generate	source
+csok.problem	UNSAT	SKIP	README.md canonical entry point
+csok_2x.problem	UNSAT	SKIP	README.md 2x scale, conflict active
+csok_3x.problem	UNSAT	SKIP	README.md 3x scale, conflict active
+csok_generated.problem	SAT	SAT	README.md generation entry point
+csok_2x_gen.problem	SAT	SAT	README.md 2x generation entry point
+csok_3x_gen.problem	SAT	SAT	README.md 3x generation entry point
+csok_no_conflict.problem	SAT	SAT	README.md ablation, conflict predicate not imported
+csok_no_eidas.problem	SAT	SAT	README.md ablation, eIDAS governance removed
+csok_no_gdpr.problem	SAT	SAT	README.md ablation, privacy governance removed
+csok_standalone.problem	SAT	SAT	web-editor file, no prior recorded verdict; observed 2026-08-05
+spec_ambiguity.problem	UNSAT	SKIP	README.md C7 instrument, vcdm_conformance_violation
+revocation_mismatch_instance.problem	UNSAT	SKIP	README.md C11 probe (pair: revocation_mismatch_control)
+revocation_mismatch_control.problem	SAT	SAT	README.md C11 control (pair: revocation_mismatch_instance)
+probe_common_parent.problem	UNSAT	UNSAT	README.md records generate UNSAT (D-045); check -k also UNSAT, observed 2026-08-05
+probe_common_parent_control.problem	SAT	SAT	README.md vacuity control (pair: probe_common_parent)
+probe_cyclic.problem	UNSAT	SKIP	README.md acyclicity probe (pair: probe_cyclic_control)
+probe_cyclic_control.problem	SAT	SAT	README.md acyclicity control (pair: probe_cyclic)
+probe_cross_cred_gap.problem	UNSAT	SKIP	README.md C9 shadow-predicate probe (pair: probe_cross_cred_gap_control)
+probe_cross_cred_gap_control.problem	SAT	SAT	README.md C9 control (pair: probe_cross_cred_gap)
+probe_trace_misalign_target.problem	UNSAT	SKIP	README.md prop_t propagation probe (pair: probe_trace_misalign_control)
+probe_trace_misalign_source.problem	UNSAT	SKIP	README.md prop_s propagation probe (pair: probe_trace_misalign_control)
+probe_trace_misalign_control.problem	SAT	SAT	README.md shared trace-alignment control
+evaluation/instances/noop.problem	SAT	SKIP	E0 baseline, hand-committed rather than generated

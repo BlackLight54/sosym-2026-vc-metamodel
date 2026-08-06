@@ -1,13 +1,27 @@
 % ============================================================================
-% Headline 1: Governance conflict error predicate
+% Headline 1: Governance conflict error predicate  [EXERCISED 2026-07-28 + 2026-08-03, check -k]
 % ============================================================================
 % Fires when a credential carries all three governance mandates -- eIDAS
 % mandate, privacy requirement, and VCDM-conformance mandate -- and no single
 % format satisfies them jointly. Gating on all three annotations (D-039,
 % 2026-07-28) makes the triple conjunction minimal: dropping any one mandate
 % removes a precondition, so every proper subset (G0-G6) is satisfiable and
-% only the full conjunction (G7) is UNSAT. [unverified] until a refinery
-% check -k run records the G0-G7 verdicts in A-004.
+% only the full conjunction (G7) is UNSAT.
+%
+% Status (exercised 2026-07-28 full battery and 2026-08-03 G0-G7 re-run with
+% refinery-cli check -k, image digest
+% sha256:88f1332e9aae356d91aef86aaaa3368be1b3931929fb3e10d87d65ab8a7fca8e):
+%   - csok.problem / csok_2x.problem / csok_3x.problem -> "Inconsistencies
+%     found in model: governance_conflict::governance_conflict(IncomeCred,
+%     income_format): error." (one atom per income credential at 2x/3x).
+%   - evaluation/instances/sensitivity_G0..G6.problem -> "Model is consistent"
+%     (SAT). Per the 2026-08-03 re-run all eight instances import this
+%     predicate, so the seven SAT verdicts hold with the predicate loaded:
+%     it cannot fire on any proper subset of the three mandates.
+%   - evaluation/instances/sensitivity_G7.problem -> "Inconsistencies found in
+%     model: governance_conflict::governance_conflict(cred_3, fmt_3): error."
+%   Verbatim verdict tables: vault A-004 constraint-sensitivity-variants.
+%
 % The three clauses partition the failure condition
 %   !(conforms_vcdm(f) & supports_predicate_proof(f)):
 %   Clause 1: VCDM-conformant, but no predicate proofs (SD-JWT-VC, JSON-LD, JWT-VC).

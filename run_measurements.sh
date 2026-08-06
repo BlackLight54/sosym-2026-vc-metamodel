@@ -26,8 +26,13 @@ WARMUP="${WARMUP:-1}"
 # Git Bash path mangling prevention (for direct docker calls in validate)
 export MSYS_NO_PATHCONV=1
 
-# Scale points matching config.yaml
-SCALE_POINTS=(1 3 5 10 15 20 30)
+# Scale points matching config.yaml. SCALE_POINTS_OVERRIDE (space-separated)
+# narrows the sweep without editing config — used by `run_tests.sh perf quick`.
+if [ -n "${SCALE_POINTS_OVERRIDE:-}" ]; then
+    read -r -a SCALE_POINTS <<< "$SCALE_POINTS_OVERRIDE"
+else
+    SCALE_POINTS=(1 3 5 10 15 20 30)
+fi
 
 # ──────────────────────────────────────────────────────────
 # OS detection. Windows (Git Bash / MSYS) needs backslash result paths for
@@ -122,49 +127,17 @@ refinery_cmd() {
 }
 
 # ──────────────────────────────────────────────────────────
-# Validation pass: run each instance once, check SAT/UNSAT
+# Validation pass — delegated to run_tests.sh (tier 2).
+#
+# This used to be a local loop that inferred expectations from filename
+# substrings and read the verdict with `grep -qi "inconsist\|error"`, which
+# reports a parse failure as UNSAT (the expected verdict for half the corpus) and
+# never covered the hand-authored entry points at the repository root. The tier-2
+# harness declares expectations in expectations.tsv, separates ERROR from UNSAT
+# per operation, and covers both corpora. One validator, not two.
 # ──────────────────────────────────────────────────────────
 run_validate() {
-    echo "=== Validation Pass ==="
-    local pass=0
-    local fail=0
-
-    for f in "$INSTANCES_DIR_LOCAL"/*.problem; do
-        fname="$(basename "$f")"
-        echo -n "  $fname ... "
-
-        output=$(docker run --rm \
-            -v "$MOUNT_DIR:/work" -w /work \
-            "$REFINERY_IMAGE" check -k "/work/evaluation/instances/$fname" 2>&1) || true
-
-        if echo "$output" | grep -qi "inconsist\|error"; then
-            result="UNSAT"
-        else
-            result="SAT"
-        fi
-
-        if [[ "$fname" == *"_unsat"* ]]; then
-            expected="UNSAT"
-        elif [[ "$fname" == *"_sat"* ]]; then
-            expected="SAT"
-        elif [[ "$fname" == *"G7"* ]]; then
-            expected="UNSAT"
-        else
-            expected="SAT"
-        fi
-
-        if [ "$result" = "$expected" ]; then
-            echo "OK ($result)"
-            pass=$((pass + 1))
-        else
-            echo "FAIL (expected $expected, got $result)"
-            fail=$((fail + 1))
-        fi
-    done
-
-    echo ""
-    echo "Validation: $pass passed, $fail failed"
-    [ "$fail" -eq 0 ] || exit 1
+    bash "$SCRIPT_DIR/run_tests.sh" validate
 }
 
 # ──────────────────────────────────────────────────────────
