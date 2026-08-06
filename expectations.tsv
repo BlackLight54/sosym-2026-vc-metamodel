@@ -31,11 +31,11 @@ csok_3x_gen.problem	SAT	SAT	README.md 3x generation entry point
 csok_no_conflict.problem	SAT	SAT	README.md ablation, conflict predicate not imported
 csok_no_eidas.problem	SAT	SAT	README.md ablation, eIDAS governance removed
 csok_no_gdpr.problem	SAT	SAT	README.md ablation, privacy governance removed
-csok_standalone.problem	SAT	SAT	web-editor file, no prior recorded verdict; observed 2026-08-05
+csok_standalone.problem	SAT	SAT	A-004 baseline (check -k); generate observed 2026-08-05
 spec_ambiguity.problem	UNSAT	SKIP	README.md C7 instrument, vcdm_conformance_violation
 revocation_mismatch_instance.problem	UNSAT	SKIP	README.md C11 probe (pair: revocation_mismatch_control)
 revocation_mismatch_control.problem	SAT	SAT	README.md C11 control (pair: revocation_mismatch_instance)
-probe_common_parent.problem	UNSAT	UNSAT	README.md records generate UNSAT (D-045); check -k also UNSAT, observed 2026-08-05
+probe_common_parent.problem	UNSAT	UNSAT	A-004 records generate UNSAT (D-045); check -k also UNSAT, observed 2026-08-05
 probe_common_parent_control.problem	SAT	SAT	README.md vacuity control (pair: probe_common_parent)
 probe_cyclic.problem	UNSAT	SKIP	README.md acyclicity probe (pair: probe_cyclic_control)
 probe_cyclic_control.problem	SAT	SAT	README.md acyclicity control (pair: probe_cyclic)
