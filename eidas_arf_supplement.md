@@ -56,7 +56,7 @@ the format specified in ISO/IEC 18013-5 and the format specified in SD-JWT VC"),
 `Credential` declares `contains Formatted_Credential[1] format`. A single credential in the
 delivered model therefore holds exactly one format assignment. This mismatch is an open loop item,
 `L5-dual-issuance-asserted-but-format-is-arity-1` in
-`agents/artifacts/loop-register-2026-08-03.md` (evidence: `04_approach.md:120/:123`,
+`zettelkasten/reports/loop-register-2026-08-03.md` (evidence: `04_approach.md:120/:123`,
 `03_overview.md:29`, `vc_metamodel.refinery:179`, `csok_standalone.problem:161`); its default
 action is either to encode the two-format arity or to mark the prose `[proposed]`. **This
 supplement records the mismatch and does not resolve it**; the C1 verdict column reproduces K-006

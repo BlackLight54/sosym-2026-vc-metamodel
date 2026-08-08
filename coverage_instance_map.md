@@ -154,4 +154,4 @@ uninformative: every instance imports the metamodel, so all six predicates are a
 - `zettelkasten/artifacts/A-003 csok-instance-models.md`, `A-005 evaluation-harness.md` — the instance
   families and the harness that generates the other 43 instances under `evaluation/instances/`.
 - `models/README.md` — `probe_cyclic` pair verdicts.
-- `agents/artifacts/loop-register-2026-08-03.md` — the D-029 delivery obligations this file funds.
+- `zettelkasten/reports/loop-register-2026-08-03.md` — the D-029 delivery obligations this file funds.
