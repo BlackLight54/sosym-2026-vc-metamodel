@@ -1,4 +1,4 @@
-# Coverage buckets against the delivered instances (K-005 evidence map)
+# Coverage buckets against the delivered instances (CLM-coverage_validation evidence map)
 
 Which of the coverage-validation buckets of §5.1.1 each delivered `.problem` instance actually
 populates, and which buckets no instance exercises.
@@ -8,8 +8,8 @@ It answers one question the coverage prose does not: the metamodel maps onto W3C
 five relation kinds plus a capability mapping, but *which of those elements do the executable
 instances ever put on the table?* A bucket populated by no instance is prose-only coverage.
 
-**What this is not.** It does not re-run the solver, does not change any K-005 wording, and does not
-close the K-005 residual recorded at `05_evaluation.md:31`. That residual is about **unmodeled VCDM
+**What this is not.** It does not re-run the solver, does not change any CLM-coverage_validation wording, and does not
+close the CLM-coverage_validation residual recorded at `05_evaluation.md:31`. That residual is about **unmodeled VCDM
 concepts** (credential schema, terms of use, evidence, refresh service, render method, related
 resource, validity period) being bucketed in `fig:coverage-map`; it is a figure-and-prose obligation
 and remains open. This file is the instance-side complement.
@@ -23,7 +23,7 @@ marked. Regenerating the table after that run lands is a mechanical re-derivatio
 
 ## The buckets
 
-From §5.1.1 / `K-005 coverage-validation`. **Mapping A** is the 19 metaclasses against VCDM 2.0
+From §5.1.1 / `CLM-coverage_validation`. **Mapping A** is the 19 metaclasses against VCDM 2.0
 concepts, decomposed into five relation kinds; **Mapping B** is the six capability predicates
 against format-family properties.
 
@@ -55,7 +55,7 @@ ranges over all five `Formatted_Credential` subclasses.
 ## Mapping A — population per instance
 
 Counts are asserted atoms, not distinct metaclasses. "Open fmt" is the number of unpinned format
-slots. Verdicts are copied from `A-004 constraint-sensitivity-variants` (batteries of 2026-07-28 and
+slots. Verdicts are copied from `ART-constraint_sensitivity_variants` (batteries of 2026-07-28 and
 2026-08-03) and `models/README.md`; instances with no recorded verdict are marked as such rather
 than inferred from their header comments. The 2026-08-05 battery (independent per-source C5/C6/C7 in
 `governance_sources.refinery`) moved exactly one verdict in this table: `csok_no_eidas.problem`,
@@ -147,11 +147,11 @@ uninformative: every instance imports the metamodel, so all six predicates are a
 
 ## Sources
 
-- `zettelkasten/claims/K-005 coverage-validation.md`; `paper-latex-overleaf/sections/05_evaluation.md`
+- `zettelkasten/claims/CLM-coverage_validation.md`; `paper-latex-overleaf/sections/05_evaluation.md`
   §5.1.1 — the bucket definitions.
-- `zettelkasten/artifacts/A-004 constraint-sensitivity-variants.md` — recorded verdicts (batteries of
+- `zettelkasten/artifacts/ART-constraint_sensitivity_variants.md` — recorded verdicts (batteries of
   2026-07-28 and 2026-08-03, Refinery CLI image digest recorded there).
-- `zettelkasten/artifacts/A-003 csok-instance-models.md`, `A-005 evaluation-harness.md` — the instance
+- `zettelkasten/artifacts/ART-csok_instance_models.md`, `ART-evaluation_harness.md` — the instance
   families and the harness that generates the other 43 instances under `evaluation/instances/`.
 - `models/README.md` — `probe_cyclic` pair verdicts.
-- `zettelkasten/reports/loop-register-2026-08-03.md` — the D-029 delivery obligations this file funds.
+- `zettelkasten/reports/loop-register-2026-08-03.md` — the DEC-overpromise_until_delivered delivery obligations this file funds.

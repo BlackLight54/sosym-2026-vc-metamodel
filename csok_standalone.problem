@@ -168,7 +168,7 @@ class Credential {
     contains Formatted_Credential[1] format
 }
 
-% The shadow predicate common_parent was retired on 2026-08-03 (decision D-045):
+% The shadow predicate common_parent was retired on 2026-08-03 (decision DEC-common_parent_retired):
 % solver-confirmed vacuous under the containment structure of Prop::trace and
 % Claim::source. See vc_metamodel.refinery for the full note.
 

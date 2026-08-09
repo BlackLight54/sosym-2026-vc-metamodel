@@ -1,5 +1,5 @@
 % ============================================================================
-% Acyclicity probe — CONTROL (no cycle)  [Q-014 verification, 2026-08-03]
+% Acyclicity probe — CONTROL (no cycle)  [GAPQ-cyclic_predicate_definition_unshown verification, 2026-08-03]
 % ============================================================================
 % Minimal three-node DCL path a -> b -> c with the full CSL/FSL structure the
 % metamodel requires, so the model concretizes. Establishes that the probe

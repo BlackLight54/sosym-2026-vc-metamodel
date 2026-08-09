@@ -1,6 +1,6 @@
 % ============================================================================
 % Trace-misalignment probe — misaligned claim SOURCE (C2, prop_s)
-% [D-029 evidence, 2026-08-03]
+% [DEC-overpromise_until_delivered evidence, 2026-08-03]
 % ============================================================================
 % Companion of probe_trace_misalign_target.problem for the second
 % trace-consistency propagation rule, prop_s (vc_metamodel.refinery:162).

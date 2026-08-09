@@ -1,5 +1,5 @@
 % ============================================================================
-% CONTROL for the trace-misalignment probes (C1/C2)  [D-029 evidence, 2026-08-03]
+% CONTROL for the trace-misalignment probes (C1/C2)  [DEC-overpromise_until_delivered evidence, 2026-08-03]
 % ============================================================================
 % Aligned three-node skeleton: DCL path a -> b -> c with the CSL claims whose
 % sources and targets trace to exactly the domain entities their Props relate

@@ -278,7 +278,7 @@ run_e3() {
 }
 
 # ──────────────────────────────────────────────────────────
-# ED: Structurally diverse instances (AF02 / Q-007).
+# ED: Structurally diverse instances (AF02 / GAPQ-scalability_deeper_hierarchies).
 # Two families of chained instances (a credential can describe the value of its
 # parent credential): a depth sweep at fixed N=12, and a depth-fixed N-sweep.
 # Measures concretizability (check -k) and, on SAT instances, generation.

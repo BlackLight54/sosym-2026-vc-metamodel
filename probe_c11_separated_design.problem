@@ -13,7 +13,7 @@
 % There is no bundling here and nothing to repair, so `revocation_mismatch`
 % must NOT fire. Expected: `Model is consistent` under `check -k`.
 %
-% Built for the K-003 stress-test finding F1 (2026-08-03): under the
+% Built for the CLM-cross_layer_constraints_as_predicates stress-test finding F1 (2026-08-03): under the
 % pre-restriction `colocated_step`, the alignment disjunct made ANY two
 % credential subjects of one domain subject co-located, so this probe was
 % INCONSISTENT — the predicate flagged the prescribed remedy as the disease.

@@ -110,7 +110,7 @@ The `-k` flag performs a concretizability check that enforces error predicates. 
 
 To see which governance frameworks the conflict actually needs. Removing the
 eIDAS mandate does **not** resolve it: the surviving {privacy, VCDM} pair is
-itself unsatisfiable (see E3 below and vault A-004).
+itself unsatisfiable (see E3 below and vault ART-constraint_sensitivity_variants).
 
 ```bash
 # UNSAT since 2026-08-05 ({privacy, VCDM} is a conflicting pair on its own):
@@ -211,13 +211,13 @@ The evaluation comprises six experiments:
 
 **E3 — Constraint sensitivity:** Systematically enables/disables governance framework combinations (power-set of {eIDAS, Privacy, VCDM} = 8 configurations) at the canonical instance size (N=3). Measures which framework subsets admit a format assignment. Result since the 2026-08-05 per-source encoding: UNSAT at G4 {eIDAS, privacy}, G6 {privacy, VCDM} and G7, SAT elsewhere, so the two minimal conflicting provision sets are the pairs containing the GDPR privacy requirement (`evaluation/README.md` § E3).
 
-**ED — Structurally diverse instances (AF02 / Q-007):** Measures `check -k` and `generate` on *chained* instances (a credential can describe the value of its parent credential), realizing deeper claim hierarchies and multi-subject credentials. A depth sweep at fixed N=12 and a depth-fixed N-sweep test whether the sublinear-in-N scaling of the uniform instances survives structural diversity.
+**ED — Structurally diverse instances (AF02 / GAPQ-scalability_deeper_hierarchies):** Measures `check -k` and `generate` on *chained* instances (a credential can describe the value of its parent credential), realizing deeper claim hierarchies and multi-subject credentials. A depth sweep at fixed N=12 and a depth-fixed N-sweep test whether the sublinear-in-N scaling of the uniform instances survives structural diversity.
 
 ## Key files
 
 - **`vc_metamodel.refinery`** — The three-layer metamodel. Defines all classes, relations, propagation rules, derived predicates, and format capability constraints. This is the primary artifact.
 
-- **`governance_conflict.refinery`** — The governance conflict error predicate (constraint C8). Fires when a credential carries all three governance mandates (eIDAS mandate, privacy requirement, VCDM-conformance mandate) and no single format satisfies them jointly; the three-clause body partitions the failure condition (D-039). It is the credential-granularity diagnostic that names the joint conflict in one atom, and since 2026-08-05 it is no longer the sole carrier of the UNSAT verdict: C5 and C6 alone already make the CSOK instance unsatisfiable. Imports `governance_sources.refinery`.
+- **`governance_conflict.refinery`** — The governance conflict error predicate (constraint C8). Fires when a credential carries all three governance mandates (eIDAS mandate, privacy requirement, VCDM-conformance mandate) and no single format satisfies them jointly; the three-clause body partitions the failure condition (DEC-governance_conflict_triple_gate_and_taxonomy_count). It is the credential-granularity diagnostic that names the joint conflict in one atom, and since 2026-08-05 it is no longer the sole carrier of the UNSAT verdict: C5 and C6 alone already make the CSOK instance unsatisfiable. Imports `governance_sources.refinery`.
 
 - **`governance_sources.refinery`** — C5 (eIDAS/ARF format mandate), C6 (GDPR predicate-proof requirement) and C7 (W3C VCDM conformance) as independent per-source constraints, each gated on its own annotation class: nine `propagation rule` declarations that eliminate the inadmissible format classes, plus one named `error` predicate per source (`eidas_format_violation`, `privacy_format_violation`, `vcdm_format_violation`) so an empty format design space produces an attributable verdict atom. Added 2026-08-05 to replace the syntactic minimality reading of the G0–G7 battery with a measured one. Probe pair: `probe_governance_sources.problem` (eIDAS + privacy, UNSAT) against `probe_governance_sources_control.problem` (eIDAS only, SAT).
 
@@ -233,7 +233,7 @@ The evaluation comprises six experiments:
 
 - **`probe_c11_separated_design.problem` / `probe_c11_separated_design_control.problem`** — Negative probe pair for C11, added 2026-08-05. Both import `csok_instance.refinery` unchanged and mark two claims that already sit in *separate* credentials of the same subject: the first with mismatched cadence, the second with a single cadence. Both are SAT, so the predicate stays silent on the separated-credential design that repairs a C11 bundling error. Before the `colocated_step` chain-link restriction of the same date the first probe was UNSAT, which was the defect the restriction fixes.
 
-- **`probe_common_parent.problem` / `probe_common_parent_control.problem`** — Vacuity probe pair for the retired `common_parent` shadow predicate (D-045). The probe inlines the predicate body as `witness/2` and forces a witness via `error missing_witness() <-> !some_witness()`; it is UNSAT under `generate` (`UnsatisfiableProblemException`), while the identical control without the forcing error generates a model (SAT). This shows the original predicate could never hold: both `Prop::trace` and `Claim::source` are containments, so distinct props force distinct source entities. Verdicts from `generate`, 2026-07-28, reproduced 2026-08-03 after the retirement edit.
+- **`probe_common_parent.problem` / `probe_common_parent_control.problem`** — Vacuity probe pair for the retired `common_parent` shadow predicate (DEC-common_parent_retired). The probe inlines the predicate body as `witness/2` and forces a witness via `error missing_witness() <-> !some_witness()`; it is UNSAT under `generate` (`UnsatisfiableProblemException`), while the identical control without the forcing error generates a model (SAT). This shows the original predicate could never hold: both `Prop::trace` and `Claim::source` are containments, so distinct props force distinct source entities. Verdicts from `generate`, 2026-07-28, reproduced 2026-08-03 after the retirement edit.
 
 - **`probe_cyclic.problem` / `probe_cyclic_control.problem`** — Acyclicity probe pair for the `cyclic` error predicate. The control is a minimal DCL path `a → b → c` (SAT); the probe adds one edge closing a length-two cycle and is UNSAT, reporting `vc_metamodel::cyclic(b)` / `vc_metamodel::cyclic(c)`. Verdicts from `check -k`, 2026-08-03.
 

@@ -304,12 +304,12 @@ def generate_chain_instance(
     governance: list[str] | None = None,
     instance_id: str | None = None,
 ) -> tuple[str, int]:
-    """Generate a structurally diverse instance (AF02 / Q-007).
+    """Generate a structurally diverse instance (AF02 / GAPQ-scalability_deeper_hierarchies).
 
     Where ``generate_instance`` builds a uniform depth-1 star (all N credentials
     describe the single Applicant, one property each), this builds credentials
     arranged in *chains*: a credential can be about the *value* of its parent
-    credential. Two structural phenomena Q-007 flags are realized this way:
+    credential. Two structural phenomena GAPQ-scalability_deeper_hierarchies flags are realized this way:
 
       * Deeper claim hierarchies — a chain of length ``depth`` produces a domain
         path Applicant -> v1 -> v2 -> ... of that length, stressing the
@@ -616,14 +616,14 @@ def main():
         # conflicts with eIDAS and with VCDM conformance independently, so G4
         # {eIDAS, privacy} and G6 {privacy, VCDM} are UNSAT alongside G7. Only the
         # triple conjunction was UNSAT under the single-clause encoding. Verbatim
-        # verdicts: vault A-004 constraint-sensitivity-variants.
+        # verdicts: vault ART-constraint_sensitivity_variants.
         gov = set(gov_list)
         e3_unsat = "privacy" in gov and bool(gov & {"eidas", "vcdm"})
         files_to_generate.append(
             (filename, content, "UNSAT" if e3_unsat else "SAT", "SKIP")
         )
 
-    # --- ED: Structurally diverse instances (AF02 / Q-007) ---
+    # --- ED: Structurally diverse instances (AF02 / GAPQ-scalability_deeper_hierarchies) ---
     diverse = config.get("diverse")
     if diverse:
         gov = ["eidas", "privacy", "vcdm"]

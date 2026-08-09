@@ -1,5 +1,5 @@
 % ============================================================================
-% Acyclicity probe — length-2 cycle  [Q-014 verification, 2026-08-03]
+% Acyclicity probe — length-2 cycle  [GAPQ-cyclic_predicate_definition_unshown verification, 2026-08-03]
 % ============================================================================
 % Identical to probe_cyclic_control.problem (SAT) except for one added DCL
 % edge c -> b (prop p_cb and its CSL/FSL structure), which closes a directed

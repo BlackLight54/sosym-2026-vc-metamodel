@@ -6,7 +6,7 @@
 % format satisfies them jointly.
 %
 % MINIMALITY: SUPERSEDED 2026-08-05. This header previously argued that gating
-% on all three annotations (D-039) makes the triple conjunction minimal,
+% on all three annotations (DEC-governance_conflict_triple_gate_and_taxonomy_count) makes the triple conjunction minimal,
 % because every proper subset (G0-G6) was SAT. That reading was circular: all
 % three clauses below require all three annotation targets at once, so the
 % G0-G6 verdicts were entailed by this predicate's syntax and said nothing
@@ -15,7 +15,7 @@
 % encoding the conflict is NOT minimal at the triple: G4 {eIDAS, privacy} and
 % G6 {privacy, VCDM} are both UNSAT, G5 {eIDAS, VCDM} is SAT. The two minimal
 % conflicting provision sets are the two pairs containing the GDPR privacy
-% requirement. Verbatim verdicts: vault A-004 constraint-sensitivity-variants,
+% requirement. Verbatim verdicts: vault ART-constraint_sensitivity_variants,
 % block "2026-08-05 -- G0-G7 under independent per-source C5/C6/C7".
 %
 % Status (re-exercised 2026-08-05 with refinery-cli check -k, image digest

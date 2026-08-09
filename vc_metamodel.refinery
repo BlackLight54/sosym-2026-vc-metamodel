@@ -199,7 +199,7 @@ class Credential {
 }
 
 % The shadow predicate common_parent (two Props sharing a credential subject)
-% was retired on 2026-08-03 (decision D-045): it was solver-confirmed vacuous.
+% was retired on 2026-08-03 (decision DEC-common_parent_retired): it was solver-confirmed vacuous.
 % Prop::trace and Claim::source are both containments, so distinct Props force
 % distinct Claims force distinct source CredEntities and e1 == e2 can never
 % hold. Vacuity evidence: probe_common_parent.problem (UNSAT under generate)
@@ -271,7 +271,7 @@ pred supports_offline_verification(Formatted_Credential f) <->
 % here, in one line, by a format that acquires the capability.
 % Do not "repair" this to a class disjunction; that would assert a positive
 % capability the snapshot does not support. The A-notes carrying the
-% stipulation are A-001 (declaration) and A-010 (C9 witness record).
+% stipulation are ART-vc_metamodel_refinery (declaration) and ART-anti_pattern_true_positives (C9 witness record).
 pred supports_multi_credential_proof(Formatted_Credential f) <->
     f != f.
 

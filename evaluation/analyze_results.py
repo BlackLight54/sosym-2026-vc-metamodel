@@ -31,7 +31,7 @@ INSTANCES_DIR = SCRIPT_DIR / "instances"
 # Node formula: 9N + 2 for full governance (eidas + privacy + vcdm)
 SCALE_POINTS = [1, 3, 5, 10, 15, 20, 30]
 
-# ED (AF02 / Q-007) diverse instance parameters — must match config.yaml `diverse:`
+# ED (AF02 / GAPQ-scalability_deeper_hierarchies) diverse instance parameters — must match config.yaml `diverse:`
 DIVERSE_DEPTH_N = 12
 DIVERSE_DEPTHS = [1, 2, 3, 4, 6, 12]
 DIVERSE_SCALE_DEPTH = 4
@@ -355,7 +355,7 @@ def generate_timing_summary(results_dir: Path, figures_dir: Path):
 
 
 def generate_diverse_summary(results_dir: Path, figures_dir: Path, instances_dir: Path):
-    """ED (AF02 / Q-007): summarize diverse (chained) instance measurements.
+    """ED (AF02 / GAPQ-scalability_deeper_hierarchies): summarize diverse (chained) instance measurements.
 
     Two tables:
       (a) Depth sweep at fixed N=12 — does chain depth degrade check-k / generate?

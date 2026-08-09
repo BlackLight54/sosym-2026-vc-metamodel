@@ -1,12 +1,12 @@
 % ============================================================================
 % Trace-misalignment probe — misaligned claim TARGET (C1, prop_t)
-% [D-029 evidence, 2026-08-03]
+% [DEC-overpromise_until_delivered evidence, 2026-08-03]
 % ============================================================================
-% The issuance/schema-binding class (vault C-044) is enforced by the two
+% The issuance/schema-binding class (vault CPT-design_error_issuance_schema_binding) is enforced by the two
 % cross-layer trace-consistency propagation rules prop_t (vc_metamodel.refinery:153)
 % and prop_s (vc_metamodel.refinery:162). Propagation rules remove `may` edges
 % rather than raising error atoms, so no delivered instance recorded them
-% firing; the D-029 register carried a true-positive instance for this class as
+% firing; the DEC-overpromise_until_delivered register carried a true-positive instance for this class as
 % an open obligation.
 % This probe forces the rule into a contradiction so the firing is observable:
 % Prop p_ab relates a -> b, its Claim cl_ab is asserted to target cv_b, but

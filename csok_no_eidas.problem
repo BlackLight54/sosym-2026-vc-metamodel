@@ -13,7 +13,7 @@
 % Verdict atoms: governance_sources::privacy_format_violation(IncomeCred,
 % income_format) and governance_sources::vcdm_format_violation(IncomeCred,
 % income_format). This is the CSOK-scenario twin of sensitivity_G6.
-% Verbatim verdicts: vault A-004, block "2026-08-05".
+% Verbatim verdicts: vault ART-constraint_sensitivity_variants, block "2026-08-05".
 
 import vc_metamodel.
 import governance_conflict.
