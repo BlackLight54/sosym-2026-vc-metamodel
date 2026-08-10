@@ -1,11 +1,11 @@
 % ============================================================================
-% CONTROL for the cross_cred_predicate_gap (C9) probe  [D-029 evidence, 2026-08-03]
+% CONTROL for the cross_cred_predicate_gap (C9) probe  [DEC-overpromise_until_delivered evidence, 2026-08-03]
 % ============================================================================
-% Headline 2 (vault C-026 / taxonomy class C-047) is encoded as
+% Headline 2 (vault CPT-cross_credential_predicate_gap_horizontal / taxonomy class CPT-design_error_cross_credential_expressiveness_gap) is encoded as
 %   shadow pred cross_cred_predicate_gap(Credential c1, Credential c2)
 % at vc_metamodel.refinery:324. A shadow predicate is display-only: it never
 % constrains the solver, so no check -k run on any delivered instance can show
-% it firing, and the D-029 register carried "one true-positive violating
+% it firing, and the DEC-overpromise_until_delivered register carried "one true-positive violating
 % instance per anti-pattern" as an open obligation for it.
 %
 % This probe converts the shadow predicate into an enforced error of the same
@@ -17,7 +17,7 @@
 % c_e1 != c_e2 conjunct, kept here as cs1 != cs2.
 %
 % Base: the delivered CSOK instance without governance_conflict, i.e. exactly
-% csok_no_conflict.problem (SAT, verdict recorded in A-004), so any
+% csok_no_conflict.problem (SAT, verdict recorded in ART-constraint_sensitivity_variants), so any
 % inconsistency reported here is attributable to the added error alone.
 % This file is probe_cross_cred_gap.problem with the error declaration
 % commented out (the only difference: `diff` reports the header lines plus the

@@ -1,11 +1,11 @@
 % ============================================================================
 % Constraint C11: status/revocation-propagation mismatch  [EXERCISED 2026-07-28, check -k]
 % ============================================================================
-% Paper C11 / vault C-036 (static-dynamic-revocation-mismatch), the taxonomy
-% instrument for the status/revocation-propagation design-error class (C-045).
+% Paper C11 / vault CPT-static_dynamic_revocation_mismatch (static-dynamic-revocation-mismatch), the taxonomy
+% instrument for the status/revocation-propagation design-error class (CPT-design_error_status_revocation_propagation).
 % Two claims with mismatched revocation lifespans must not share a credential:
 % revoking a dynamic claim would needlessly revoke a co-located static one.
-% Dual of C10 (dependent-claim bundling, C-035), which forces co-location.
+% Dual of C10 (dependent-claim bundling, CPT-dependent_claim_bundling), which forces co-location.
 %
 % Status (exercised 2026-07-28, re-scoped and re-exercised 2026-08-05 with
 % refinery-cli check -k):
@@ -70,7 +70,7 @@ class DynamicRevocation {
 % and again 2026-08-05: the chained instance is `consistent` under the
 % cred_neighbors-only variant, so the alignment step is load-bearing.
 %
-% Re-scoping 2026-08-05 (stress-test K-003 finding F1, solver-confirmed): the
+% Re-scoping 2026-08-05 (stress-test CLM-cross_layer_constraints_as_predicates finding F1, solver-confirmed): the
 % alignment disjunct was previously unrestricted — any two distinct CredEntities
 % tracing the same Entity. That made SIBLING credentials of one subject
 % co-located (all CSOK credential subjects trace `Applicant`), so
@@ -81,7 +81,7 @@ class DynamicRevocation {
 % therefore never step to each other; a parent value stepping to a child root
 % still does. Both conjuncts are positive atoms asserted verbatim in the
 % instances, not negations over unclosed relations.
-% Evidence: probe_c11_separated_design{,_control}.problem; see vault A-013.
+% Evidence: probe_c11_separated_design{,_control}.problem; see vault ART-c11_rescoping_probe_battery.
 pred colocated_step(CredEntity s, CredEntity t) <->
     cred_neighbors(s, t)
   ; s != t,

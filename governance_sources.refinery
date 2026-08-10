@@ -9,7 +9,7 @@
 % governance_conflict.refinery (constraint C8). The G0-G6 satisfiability
 % verdicts were therefore entailed by that conjunction's syntax and carried no
 % information about format availability (mock review 2026-08-03, Mathematician
-% findings 1-3; Adversarial F3; stress-test K-008).
+% findings 1-3; Adversarial F3; stress-test CLM-contradictory_cross_framework_constraints).
 %
 % Each constraint takes two declaration forms, with different jobs:
 %   - propagation (elimination) rules, gated on the annotation, that narrow the
@@ -40,7 +40,7 @@
 % (ARF PID_02 / ARB_01). The non-qualified tier (ARB_01a) additionally admits
 % W3C VCDM. AnonCreds is excluded under both readings, so every verdict below
 % that turns on C5 excluding AnonCreds is invariant under the tier distinction
-% the model cannot currently state (root cause Q-004).
+% the model cannot currently state (root cause GAPQ-attestation_qualification_levels).
 
 import vc_metamodel.
 

@@ -7,11 +7,11 @@
 %     mandate) -> "Inconsistencies found in model:
 %     spec_ambiguity::vcdm_conformance_violation(IncomeCred, income_format):
 %     error." (no scope widening needed). Reproduced unchanged in the
-%     2026-08-03 before/after battery. Verbatim verdict tables: vault A-008
-%     spec-ambiguity-probe / A-004 constraint-sensitivity-variants.
+%     2026-08-03 before/after battery. Verbatim verdict tables: vault ART-spec_ambiguity_probe
+%     spec-ambiguity-probe / ART-constraint_sensitivity_variants.
 %
 % In-model instrument for the specification-ambiguity design-error class
-% (vault C-048). An ambiguous/underspecified profile admits divergent
+% (vault CPT-design_error_specification_ambiguity). An ambiguous/underspecified profile admits divergent
 % conformant readings; C7 pins one reading, and a format that fails it is
 % flagged rather than silently accepted.
 %

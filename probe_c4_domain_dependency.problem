@@ -6,7 +6,7 @@
 % (cross_cred_predicate_gap) could not tell the one credential pair the domain
 % rule actually spans from any other subject-aligned pair. On the delivered CSOK
 % instance C9 reports three pairs; the paper's Headline 2 narrative is about one
-% of them (05_evaluation.md:101). Stress-test K-009 finding F2.
+% of them (05_evaluation.md:101). Stress-test CLM-multilayer_invisibility finding F2.
 %
 % The repair encodes C4 as the uninterpreted relation
 %   pred depends_on(Prop p1, Prop p2).            (vc_metamodel.refinery, DCL)

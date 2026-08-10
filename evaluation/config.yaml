@@ -30,7 +30,7 @@ sensitivity_configs:
 # E3 uses N=3 (CSOK canonical size)
 sensitivity_n: 3
 
-# ED (AF02 / Q-007): structurally diverse instances.
+# ED (AF02 / GAPQ-scalability_deeper_hierarchies): structurally diverse instances.
 # Uniform instances (E1/E2) are a depth-1 star: N credentials all describing the
 # single Applicant. These "diverse" instances chain credentials (a credential can
 # describe the value of its parent credential), realizing deeper claim hierarchies

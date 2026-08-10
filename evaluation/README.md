@@ -99,7 +99,7 @@ Runs `refinery generate` on SAT variants at the same 7 scale points.
 Overlay with E1-SAT times shows the overhead of full generation vs.
 concretizability checking alone.
 
-### ED: Structurally Diverse Instances (AF02 / Q-007)
+### ED: Structurally Diverse Instances (AF02 / GAPQ-scalability_deeper_hierarchies)
 
 **Research question (RQ3):** Does the sublinear-in-N scaling of the uniform
 instances survive when instances are structurally diverse?
@@ -107,7 +107,7 @@ instances survive when instances are structurally diverse?
 The E1/E2 instances are a **uniform depth-1 star**: N credentials each describing
 the single `Applicant` with one property. ED introduces *chained* instances,
 where a credential can describe the *value* of its parent credential. This
-realizes the two phenomena Q-007 flags:
+realizes the two phenomena GAPQ-scalability_deeper_hierarchies flags:
 
 - **Deeper claim hierarchies** — a chain of length `depth` produces a domain path
   `Applicant -> v1 -> v2 -> ...`, stressing the transitive-closure predicates
@@ -126,7 +126,7 @@ Two families:
 - **Depth-fixed N-sweep** at depth=4: the same 7 scale points as E1/E2, SAT and
   UNSAT, chained. Overlays against the uniform E1 curve at matched node counts.
 
-Per the M-013 discipline, the scalability claim wording follows these numbers: it
+Per the MOC-drafting_guardrails discipline, the scalability claim wording follows these numbers: it
 narrows if diverse instances degrade solver performance and never inflates.
 
 ### E3: Constraint Sensitivity Analysis
@@ -163,11 +163,11 @@ C6 and C7 had no independent encoding: enforcement ran only through
 `governance_conflict`, every clause of which requires all three annotation
 targets at once, so G0–G6 were satisfiable by construction and the column
 measured the predicate's syntax rather than format availability (mock
-review 2026-08-03, Mathematician findings 1–3; stress-test K-008). The
+review 2026-08-03, Mathematician findings 1–3; stress-test CLM-contradictory_cross_framework_constraints). The
 current column is measured against `governance_sources.refinery`, which
 encodes each source as its own elimination rules plus a named error
 predicate. Verdicts taken 2026-08-05 with `check -k` (refinery-cli digest
-`sha256:88f1332e9aae...`); verbatim output in vault A-004.
+`sha256:88f1332e9aae...`); verbatim output in vault ART-constraint_sensitivity_variants.
 
 Timings were also re-measured on 2026-08-03 under `check -k` (the E3
 benchmark previously ran plain `check`): 4.16–4.45 s wall clock per
