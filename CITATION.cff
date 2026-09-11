@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this artifact, please cite it as follows."
+type: software
+title: "VC Ecosystem Metamodel — Supplementary Material"
+authors:
+  - family-names: Farkas
+    given-names: Martin
+version: 0.1.0
+date-released: 2026-08-30
+repository-code: https://github.com/BlackLight54/sosym-2026-vc-metamodel
+abstract: >-
+  Three-layer partial graph metamodel for verifiable credential ecosystem design,
+  implemented in Refinery, with cross-layer constraints and a reproducible
+  evaluation harness.
